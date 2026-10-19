@@ -36,8 +36,35 @@ struct OwnedItemView: View {
                 Text(definition.name).font(.title2.bold())
                 LabeledContent("purchase.cost") { Text(item.purchasePrice.formatted(locale: locale)) }
                 Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic")
+                if !item.inspected {
+                    Button("inspection.basic") {
+                        store.perform { try store.commit(InspectionEngine().inspect(itemID: item.id, professionally: false, state: store.snapshot)) }
+                    }.accessibilityIdentifier("basicInspect")
+                } else {
+                    LabeledContent("inspection.condition") { Text(item.condition, format: .number) }
+                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition) }) {
+                    case .success(let estimate):
+                        LabeledContent("inspection.estimatedValue") { Text(estimate.formatted(locale: locale)) }
+                    case .failure:
+                        Text("inspection.valueUnavailable").foregroundStyle(.secondary)
+                    }
+                    Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)
+                    if item.revealedDefects.isEmpty {
+                        Text(item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault")
+                    }
+                }
+                if !item.professionallyInspected {
+                    Section("inspection.professional") {
+                        Text("inspection.professionalDescription")
+                        Text(InspectionEngine().professionalCost.formatted(locale: locale)).bold()
+                        Button("inspection.professionalStart") {
+                            store.perform { try store.commit(InspectionEngine().inspect(itemID: item.id, professionally: true, state: store.snapshot)) }
+                        }.accessibilityIdentifier("professionalInspect")
+                    }
+                }
                 ForEach(item.revealedDefects, id: \.self) { defect in Text(GameText.string(defect.key, locale: locale)) }
             }.navigationTitle("inventory.title")
+                .sensoryFeedback(.success, trigger: item.inspected)
         }
     }
 }

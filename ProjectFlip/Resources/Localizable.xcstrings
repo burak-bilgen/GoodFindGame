@@ -1896,6 +1896,204 @@
           }
         }
       }
+    },
+    "inspection.basic": {
+      "comment": "Inspection/value context: inspection.basic. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspect it myself — free"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendim inceleyeyim — ücretsiz"
+          }
+        }
+      }
+    },
+    "inspection.condition": {
+      "comment": "Inspection/value context: inspection.condition. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspected condition / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme sonrası kondisyon / 100"
+          }
+        }
+      }
+    },
+    "inspection.estimatedValue": {
+      "comment": "Inspection/value context: inspection.estimatedValue. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated value"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahmini değer"
+          }
+        }
+      }
+    },
+    "inspection.estimateWarning": {
+      "comment": "Inspection/value context: inspection.estimateWarning. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An estimate based on what you know. Undiscovered faults can lower the value."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildiğin duruma göre bir tahmin. Keşfedilmemiş kusurlar değeri düşürebilir."
+          }
+        }
+      }
+    },
+    "inspection.professionalClean": {
+      "comment": "Inspection/value context: inspection.professionalClean. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The full inspection found no defects."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsamlı incelemede kusur bulunamadı."
+          }
+        }
+      }
+    },
+    "inspection.noObviousFault": {
+      "comment": "Inspection/value context: inspection.noObviousFault. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No obvious fault found. This basic check may miss hidden issues."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belirgin bir kusur bulunamadı. Temel inceleme gizli sorunları gözden kaçırabilir."
+          }
+        }
+      }
+    },
+    "inspection.professional": {
+      "comment": "Inspection/value context: inspection.professional. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Professional inspection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzman incelemesi"
+          }
+        }
+      }
+    },
+    "inspection.professionalDescription": {
+      "comment": "Inspection/value context: inspection.professionalDescription. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pay with game cash for a thorough condition report."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oyun içi nakitle kapsamlı bir kondisyon raporu al."
+          }
+        }
+      }
+    },
+    "inspection.professionalStart": {
+      "comment": "Inspection/value context: inspection.professionalStart. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pay & inspect"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öde ve incelet"
+          }
+        }
+      }
+    },
+    "listing.referenceValue": {
+      "comment": "Inspection/value context: listing.referenceValue. An estimate must never imply certainty before full inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Typical value in excellent condition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mükemmel kondisyonda tipik değer"
+          }
+        }
+      }
+    },
+    "inspection.valueUnavailable": {
+      "comment": "Visible failure when item valuation cannot be calculated.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An estimate is unavailable for this item."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürün için değer tahmini hesaplanamadı."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

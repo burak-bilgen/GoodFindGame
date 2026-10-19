@@ -13,6 +13,7 @@ struct ListingDetailView: View {
                     Text(definition.name).font(.title.bold())
                     LabeledContent("listing.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
                     LabeledContent("listing.claimedCondition") { Text(listing.claimedCondition, format: .number).monospacedDigit() }
+                    LabeledContent("listing.referenceValue") { Text(definition.baseValue.formatted(locale: locale)) }
                     Text("listing.claimWarning").font(.caption).foregroundStyle(.secondary)
                 }
                 Section("listing.description") {
