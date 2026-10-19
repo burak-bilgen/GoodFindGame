@@ -6,16 +6,19 @@ import OSLog
 final class GameStore {
     private(set) var snapshot: GameSnapshot
     let definitions: [ItemDefinition]
+    let timing: SimulationTiming
     private let repository: SaveRepository
     var errorKey: String?
     private let logger = Logger(subsystem: "ProjectFlip", category: "Save")
 
-    init(repository: SaveRepository, definitions: [ItemDefinition]) throws {
+    init(repository: SaveRepository, definitions: [ItemDefinition], timing: SimulationTiming = .current, now: Date = .now) throws {
         self.repository = repository
+        self.timing = timing
         self.definitions = definitions
         snapshot = try repository.load() ?? GameSnapshot.fresh(definitions: definitions)
         // Never replace an unreadable save with a fresh game.
         if !FileManager.default.fileExists(atPath: repository.url.path) { try repository.save(snapshot) }
+        try catchUp(now: now, showSummary: true)
     }
 
     func definition(for item: ItemInstance) -> ItemDefinition? { definitions.first { $0.id == item.definitionID } }
@@ -40,6 +43,7 @@ final class GameStore {
         var next = snapshot
         if let index = next.conversations.firstIndex(where: { $0.id == value.id }) { next.conversations[index] = value }
         else { next.conversations.append(value) }
+        EventResolver(timing: timing).reconcile(&next)
         try commit(next)
     }
 
@@ -58,7 +62,7 @@ final class GameStore {
 
 extension GameStore {
     func previousTradeCount(with sellerID: SellerID) -> Int {
-        let acquiredIDs = Set(snapshot.player.inventory.map(\.id) + snapshot.playerListings.filter { $0.status == .sold }.map(\.itemID))
+        let acquiredIDs = Set(snapshot.player.inventory.map(\.id) + snapshot.shipments.map { $0.item.id } + snapshot.playerListings.filter { $0.status == .sold }.map(\.itemID))
         return snapshot.market.filter { $0.seller.id == sellerID && acquiredIDs.contains($0.item.id) }.count
     }
 }

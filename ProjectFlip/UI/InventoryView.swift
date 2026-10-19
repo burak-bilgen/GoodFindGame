@@ -5,8 +5,14 @@ struct InventoryView: View {
     @Environment(\.locale) private var locale
     var body: some View {
         List {
-            if store.snapshot.player.inventory.isEmpty {
+            if store.snapshot.player.inventory.isEmpty && !store.snapshot.shipments.contains(where: { $0.status == .pending }) {
                 Text("inventory.empty").foregroundStyle(.secondary)
+            }
+            ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
+                VStack(alignment: .leading, spacing: 8) {
+                    if let definition = store.definition(for: shipment.item) { Text(definition.name).font(.headline) }
+                    DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
+                }.accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
             }
             ForEach(store.snapshot.player.inventory) { item in
                 if let definition = store.definition(for: item) {
@@ -38,7 +44,7 @@ struct OwnedItemView: View {
                 Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic")
                 if !item.inspected {
                     Button("inspection.basic") {
-                        store.perform { try store.commit(InspectionEngine().inspect(itemID: item.id, professionally: false, state: store.snapshot)) }
+                        store.perform { try store.inspect(itemID: item.id, professionally: false) }
                     }.accessibilityIdentifier("basicInspect")
                 } else {
                     LabeledContent("inspection.condition") { Text(item.condition, format: .number) }
@@ -53,12 +59,14 @@ struct OwnedItemView: View {
                         Text(item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault")
                     }
                 }
-                if !item.professionallyInspected {
+                if let job = store.snapshot.inspectionJobs.first(where: { $0.itemID == item.id && $0.status == .pending }) {
+                    DeadlineView(store: store, target: job.completesAt, titleKey: "inspection.pendingReport")
+                } else if !item.professionallyInspected {
                     Section("inspection.professional") {
                         Text("inspection.professionalDescription")
                         Text(InspectionEngine().professionalCost.formatted(locale: locale)).bold()
                         Button("inspection.professionalStart") {
-                            store.perform { try store.commit(InspectionEngine().inspect(itemID: item.id, professionally: true, state: store.snapshot)) }
+                            store.perform { try store.inspect(itemID: item.id, professionally: true) }
                         }.accessibilityIdentifier("professionalInspect")
                     }
                 }

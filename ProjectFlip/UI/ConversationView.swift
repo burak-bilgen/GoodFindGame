@@ -26,22 +26,22 @@ struct ConversationView: View {
                 if !conversation.closed && conversation.agreedPrice == nil && listing.available {
                     Section {
                         Button("question.issues") {
-                            store.perform { try store.updateConversation(NegotiationEngine().askAboutIssues(listing: listing, current: conversation)) }
-                        }.disabled(conversation.askedAboutIssues).accessibilityIdentifier("askIssues")
+                            store.perform { try store.askIssues(listingID: listing.id) }
+                        }.disabled(conversation.askedAboutIssues || conversation.pendingReplyEventID != nil).accessibilityIdentifier("askIssues")
+                        if conversation.pendingReplyEventID != nil {
+                            Label("seller.awaitingReply", systemImage: "clock")
+                        }
                         TextField("offer.amount", text: $amount).keyboardType(.decimalPad).accessibilityIdentifier("offerAmount")
                         Picker("offer.modifier", selection: $modifier) {
                             ForEach(OfferModifier.allCases.filter { $0 != .knownIssues || !conversation.knownDefects.isEmpty }, id: \.self) { modifier in
                                 Text(GameText.string(modifier.key, locale: locale)).tag(modifier)
                             }
                         }
-                        Button("offer.send") { send(listing: listing, conversation: conversation) }.accessibilityIdentifier("sendOffer")
+                        Button("offer.send") { send(listing: listing, conversation: conversation) }.disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("sendOffer")
                         if let counter = conversation.counterPrice {
                             Button("offer.acceptCounter") {
                                 store.perform {
-                                    var next = conversation
-                                    next.agreedPrice = counter; next.counterPrice = nil
-                                    next.append("player.accept", player: true, amount: counter)
-                                    try store.updateConversation(next)
+                                    try store.acceptSellerCounter(listingID: listing.id)
                                 }
                             }
                             Button("offer.halfway") {
@@ -53,9 +53,7 @@ struct ConversationView: View {
                         }
                         Button("offer.walkAway", role: .destructive) {
                             store.perform {
-                                var next = conversation; next.closed = true
-                                next.append("player.walkAway", player: true)
-                                try store.updateConversation(next)
+                                try store.walkAway(listingID: listing.id)
                             }
                         }
                     }
@@ -65,10 +63,13 @@ struct ConversationView: View {
                         Text(price.formatted(locale: locale)).font(.title2.bold())
                         if listing.available && !conversation.closed {
                             Button("purchase.confirm") {
-                                store.perform { try store.commit(PurchaseEngine().buy(listingID: listing.id, state: store.snapshot, now: .now)) }
+                                store.perform { try store.purchase(listingID: listing.id) }
                             }.accessibilityIdentifier("confirmPurchase")
                         }
                     }
+                }
+                if let expiry = conversation.counterExpiresAt, !conversation.closed {
+                    DeadlineView(store: store, target: expiry, titleKey: "offer.expires")
                 }
             }
             .navigationTitle("messages.title")
@@ -80,8 +81,7 @@ struct ConversationView: View {
     private func send(listing: MarketplaceListing, conversation: NegotiationState) {
         store.perform {
             let price = try Money.parse(amount, locale: locale)
-            let next = try NegotiationEngine().offer(price, modifier: modifier, listing: listing, current: conversation, reputation: store.snapshot.player.reputation)
-            try store.updateConversation(next)
+            try store.sendOffer(listingID: listing.id, amount: price, modifier: modifier)
         }
     }
 }

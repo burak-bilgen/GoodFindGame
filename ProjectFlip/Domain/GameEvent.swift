@@ -51,7 +51,7 @@ struct InspectionJob: Codable, Identifiable, Equatable {
     var status: ScheduledStatus = .pending
 }
 
-enum ResolvedEventKind: String, Codable { case sellerReply, shipment, inspection, buyerOffer, offerExpired }
+enum ResolvedEventKind: String, Codable, CaseIterable { case sellerReply, shipment, inspection, buyerOffer, offerExpired }
 struct ResolvedEvent: Codable, Identifiable, Equatable {
     let id: String
     let kind: ResolvedEventKind

@@ -49,3 +49,13 @@ struct SimulationTiming: Sendable {
         return range.lowerBound + (range.upperBound - range.lowerBound) * Double(random.integer(in: 0...10_000)) / 10_000
     }
 }
+
+extension SimulationTiming {
+    /// Let the player finish the first loop before asking for multi-minute return sessions.
+    var firstTrade: Self {
+        Self(sellerReply: min(3, sellerReply.lowerBound)...min(3, sellerReply.upperBound),
+             shipping: min(5, shipping), inspection: min(8, inspection),
+             buyerInterest: min(3, buyerInterest.lowerBound)...min(3, buyerInterest.upperBound),
+             offerLifetime: offerLifetime, buyerArrivalsPerCatchUp: buyerArrivalsPerCatchUp)
+    }
+}

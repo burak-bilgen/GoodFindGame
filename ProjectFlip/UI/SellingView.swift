@@ -15,10 +15,7 @@ struct CreateListingView: View {
                 Text("selling.priceHint").font(.caption).foregroundStyle(.secondary)
                 Button("selling.publish") {
                     store.perform {
-                        var next = try ResaleEngine().create(itemID: itemID, askingPrice: Money.parse(price, locale: locale), state: store.snapshot, definitions: store.definitions, now: .now)
-                        guard let listing = next.playerListings.last else { throw TradingError.unavailable }
-                        next = try BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: store.definitions)
-                        try store.commit(next)
+                        try store.publish(itemID: itemID, askingPrice: Money.parse(price, locale: locale))
                         published = true
                     }
                 }.accessibilityIdentifier("publishListing")
@@ -87,20 +84,23 @@ struct SaleListingView: View {
                         Text(GameText.string("npc.name.\(offer.identityIndex)", locale: locale))
                         Text(offer.amount.formatted(locale: locale)).font(.title2.bold())
                         Button("buyer.accept") {
-                            store.perform { try store.commit(BuyerEngine().accept(listingID: listing.id, state: store.snapshot, now: .now)) }
+                            store.perform { try store.acceptBuyer(listingID: listing.id) }
                         }.accessibilityIdentifier("acceptBuyerOffer")
                         Button("buyer.reject") {
-                            store.perform { try store.commit(BuyerEngine().reject(listingID: listing.id, state: store.snapshot)) }
+                            store.perform { try store.rejectBuyer(listingID: listing.id) }
                         }
                         TextField("buyer.counterAmount", text: $counterAmount).keyboardType(.decimalPad)
                         Button("buyer.sendCounter") {
-                            store.perform { try store.commit(BuyerEngine().counter(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale), state: store.snapshot, now: .now)) }
+                            store.perform { try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale)) }
                         }
                     }
                 } else if listing.status == .active {
                     Text("selling.noOffers")
+                    if let pending = store.snapshot.events.first(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
+                        DeadlineView(store: store, target: pending.resolveAt, titleKey: "buyer.awaitingInterest")
+                    }
                     Button("buyer.find") {
-                        store.perform { try store.commit(BuyerEngine().generateOffer(listingID: listing.id, state: store.snapshot, definitions: store.definitions)) }
+                        store.perform { try store.findBuyer(listingID: listing.id) }
                     }
                 }
                 if listing.status == .active {
@@ -108,9 +108,7 @@ struct SaleListingView: View {
                         TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad)
                         Button("selling.updatePrice") {
                             store.perform {
-                                var next = try BuyerEngine().changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale), state: store.snapshot)
-                                next = try BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: store.definitions)
-                                try store.commit(next)
+                                try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale))
                             }
                         }
                     }

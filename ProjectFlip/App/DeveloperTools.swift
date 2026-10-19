@@ -24,6 +24,7 @@ extension GameStore {
             next.conversations[index].agreedPrice = nil
         }
         next.market += try ListingGenerator().generate(definitions: definitions, seed: next.generation, now: .now)
+        EventResolver(timing: timing).reconcile(&next)
         try commit(next)
     }
 
@@ -32,6 +33,8 @@ extension GameStore {
         var conversation = conversation(for: listing)
         conversation.closed = false
         conversation.agreedPrice = nil
+        conversation.pendingReplyEventID = nil
+        conversation.counterExpiresAt = nil
         conversation.counterPrice = min(listing.askingPrice, try listing.reservationPrice.scaled(byBasisPoints: 11_000))
         conversation.append("seller.counter.0", amount: conversation.counterPrice)
         try updateConversation(conversation)
@@ -43,7 +46,9 @@ extension GameStore {
         if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
             next = try BuyerEngine().reject(listingID: listing.id, state: next)
         }
-        try commit(BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: definitions))
+        next = try BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: definitions)
+        EventResolver(timing: timing).reconcile(&next)
+        try commit(next)
     }
 }
 #endif

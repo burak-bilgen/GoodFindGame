@@ -14,8 +14,9 @@ struct GameSnapshot: Codable, Equatable {
     var inspectionJobs: [InspectionJob] = []
     var lastKnownWallClock: Date?
     var lastSimulationAt: Date?
+    var awayReport: [ResolvedEvent] = []
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -34,6 +35,7 @@ struct GameSnapshot: Codable, Equatable {
         inspectionJobs = try values.decodeIfPresent([InspectionJob].self, forKey: .inspectionJobs) ?? []
         lastKnownWallClock = try values.decodeIfPresent(Date.self, forKey: .lastKnownWallClock)
         lastSimulationAt = try values.decodeIfPresent(Date.self, forKey: .lastSimulationAt)
+        awayReport = try values.decodeIfPresent([ResolvedEvent].self, forKey: .awayReport) ?? []
     }
 
     static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now) throws -> Self {

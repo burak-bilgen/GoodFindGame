@@ -38,7 +38,7 @@ final class ProjectFlipUITests: XCTestCase {
     func testFiveConsecutiveTradesThroughUI() {
         continueAfterFailure = false
         let app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString]
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant"]
         for index in 0..<5 {
             app.launch()
             XCTAssertTrue(app.navigationBars["Market"].waitForExistence(timeout: 10))
@@ -70,11 +70,44 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testTimedTurkishTradeSurvivesRelaunch() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(tr)", "-AppleLocale", "tr_TR", "--uitest-save", UUID().uuidString]
+        app.launch()
+        XCTAssertTrue(app.navigationBars["Pazar"].waitForExistence(timeout: 10))
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["Satıcının yanıtı bekleniyor"].exists)
+        XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 10))
+        tap(app.buttons["confirmPurchase"], in: app)
+        app.tabBars.buttons["Envanter"].tap()
+        XCTAssertTrue(app.otherElements["shipment.item-42-0"].exists || app.staticTexts["Ürünün yolda"].exists)
+        XCTAssertTrue(app.buttons["inventory.item-42-0"].waitForExistence(timeout: 10))
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        tap(app.buttons["professionalInspect"], in: app)
+        XCTAssertTrue(app.staticTexts["Uzman incelemesi sürüyor"].exists)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons["Envanter"].tap()
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        XCTAssertTrue(app.staticTexts["Temel inceleme tamamlandı"].waitForExistence(timeout: 10))
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
+        app.tabBars.buttons["Satışlar"].tap()
+        tap(app.buttons["sale.resale-item-42-0-0"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["Satıldı"].exists)
+    }
+
+    @MainActor
     private func verifyShell(language: String, market: String, inventory: String) {
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US"]
-        app.launchArguments += ["--uitest-save", UUID().uuidString]
+        app.launchArguments += ["--uitest-save", UUID().uuidString, "--uitest-instant"]
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].waitForExistence(timeout: 5))

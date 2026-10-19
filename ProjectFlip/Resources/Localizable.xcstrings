@@ -3150,6 +3150,258 @@
           }
         }
       }
+    },
+    "seller.awaitingReply": {
+      "comment": "Timed gameplay and return summary: seller.awaitingReply. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for the seller’s reply"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının yanıtı bekleniyor"
+          }
+        }
+      }
+    },
+    "offer.expires": {
+      "comment": "Timed gameplay and return summary: offer.expires. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offer expires in"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklifin kalan süresi"
+          }
+        }
+      }
+    },
+    "shipping.inTransit": {
+      "comment": "Timed gameplay and return summary: shipping.inTransit. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your item is on its way"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ürünün yolda"
+          }
+        }
+      }
+    },
+    "inspection.pendingReport": {
+      "comment": "Timed gameplay and return summary: inspection.pendingReport. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert report in progress"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzman incelemesi sürüyor"
+          }
+        }
+      }
+    },
+    "buyer.awaitingInterest": {
+      "comment": "Timed gameplay and return summary: buyer.awaitingInterest. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for buyer interest"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı ilgisi bekleniyor"
+          }
+        }
+      }
+    },
+    "time.unavailable": {
+      "comment": "Timed gameplay and return summary: time.unavailable. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time estimate unavailable"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Süre tahmini gösterilemiyor"
+          }
+        }
+      }
+    },
+    "away.title": {
+      "comment": "Timed gameplay and return summary: away.title. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While you were away"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sen yokken"
+          }
+        }
+      }
+    },
+    "away.sellerReply": {
+      "comment": "Timed gameplay and return summary: away.sellerReply. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller replies"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcı yanıtları"
+          }
+        }
+      }
+    },
+    "away.shipment": {
+      "comment": "Timed gameplay and return summary: away.shipment. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrived items"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teslim edilen ürünler"
+          }
+        }
+      }
+    },
+    "away.inspection": {
+      "comment": "Timed gameplay and return summary: away.inspection. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed inspections"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan incelemeler"
+          }
+        }
+      }
+    },
+    "away.buyerOffer": {
+      "comment": "Timed gameplay and return summary: away.buyerOffer. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer offers"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı teklifleri"
+          }
+        }
+      }
+    },
+    "away.offerExpired": {
+      "comment": "Timed gameplay and return summary: away.offerExpired. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expired offers"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Süresi dolan teklifler"
+          }
+        }
+      }
+    },
+    "away.alreadyHandled": {
+      "comment": "Timed gameplay and return summary: away.alreadyHandled. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This event has already been handled. Check your inventory or trade history."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu olayla ilgili işlem tamamlanmış. Envanterini veya alışveriş geçmişini kontrol et."
+          }
+        }
+      }
+    },
+    "action.done": {
+      "comment": "Timed gameplay and return summary: action.done. Labels accompany locale-formatted times or counts as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamam"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -5,6 +5,7 @@ struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
     @Environment(\.locale) private var locale
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         TabView {
@@ -51,7 +52,22 @@ struct RootView: View {
         } message: {
             Text(GameText.string(store?.errorKey ?? "save.error.write", locale: locale))
         }
+        .sheet(isPresented: Binding(get: { store?.snapshot.awayReport.isEmpty == false }, set: { if !$0 { store?.perform { try store?.acknowledgeAwayReport() } } })) {
+            if let store { WhileAwayView(store: store) }
+        }
         .task { if store == nil { load() } }
+        .task(id: scenePhase) {
+            guard scenePhase == .active else { return }
+            store?.perform { try store?.catchUp(showSummary: true) }
+            while !Task.isCancelled {
+                if store?.errorKey == nil { store?.perform { try store?.processDueEvents() } }
+                do { try await Task.sleep(for: .seconds(1)) }
+                catch { return } // Foreground polling stops when the scene task is cancelled.
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { store?.perform { try store?.catchUp() } }
+        }
         .tint(Color("AccentColor"))
     }
     private func load() {
@@ -63,7 +79,12 @@ struct RootView: View {
                 repository = SaveRepository(url: FileManager.default.temporaryDirectory.appendingPathComponent("UITests/\(id.uuidString).json"))
             }
             #endif
-            store = try GameStore(repository: repository, definitions: SeedContent.load().items)
+            #if DEBUG
+            let timing = arguments.contains("--uitest-instant") ? SimulationTiming.instant : .current
+            #else
+            let timing = SimulationTiming.current
+            #endif
+            store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
             failed = false
         } catch {
             failed = true
