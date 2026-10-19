@@ -75,6 +75,9 @@ struct MarketView: View {
             Section {
                 if query == nil {
                     Text("market.invalidPriceRange").foregroundStyle(Color("LossColor"))
+                } else if listings.isEmpty && !watchedOnly && !store.snapshot.market.contains(where: \.available),
+                          let refresh = store.snapshot.events.first(where: { $0.status == .pending && $0.payload == .marketRefresh }) {
+                    DeadlineView(store: store, target: refresh.resolveAt, titleKey: "market.nextRefresh")
                 } else if listings.isEmpty {
                     ContentUnavailableView(watchedOnly ? "market.watchlistEmpty" : "market.noResults", systemImage: watchedOnly ? "bookmark" : "magnifyingglass")
                 }
@@ -83,7 +86,7 @@ struct MarketView: View {
                         NavigationLink {
                             ListingDetailView(store: store, listingID: listing.id)
                         } label: {
-                            ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id))
+                            ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
                         }
                         .accessibilityIdentifier("listing.\(listing.id.rawValue)")
                     }
@@ -111,6 +114,7 @@ struct ListingCard: View {
     let listing: MarketplaceListing
     let definition: ItemDefinition
     var watched = false
+    var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
     private var nameKey: String { "npc.name.\(listing.seller.identityIndex % 10)" }
     var body: some View {
@@ -121,7 +125,12 @@ struct ListingCard: View {
                 Spacer()
                 if watched { Image(systemName: "bookmark.fill").accessibilityLabel(Text("market.watched")) }
             }
-            if !listing.available { Text("listing.unavailable").font(.subheadline.bold()).foregroundStyle(.secondary) }
+            if !listing.available {
+                Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.subheadline.bold()).foregroundStyle(.secondary)
+            }
+            if lifecycle?.priceDroppedAt != nil {
+                Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption.bold())
+            }
             Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()).foregroundStyle(.primary)
             HStack {
                 Text(GameText.string(nameKey, locale: locale))

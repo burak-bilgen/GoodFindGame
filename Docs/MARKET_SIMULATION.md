@@ -10,4 +10,16 @@ Current demand affects buyer willingness, initial resale attention, estimates ba
 
 Market → trends shows active demand and processed history, scope, signed percentage, reason, start/end and remaining time. Return reports link to the real trend. Market-category local notification plans derive from the actual pending cycle and route to that trend after catch-up. Disabling the category removes those requests through the existing notification synchronizer. This milestone tests the planner and routes; real native notification delivery was previously verified for the shared mechanism, not separately by waiting 12 hours for a market movement.
 
-Competition, listing lifetimes, seller price drops and automatic feed replenishment remain the next market-depth work. The game presentation/polish phase also remains open; these functional screens are not final game art or UI.
+## Listing lifecycle and competition
+
+The first completed sale also unlocks the live feed. Production refreshes every 30 minutes and assigns existing/new listings 2–6 hours of remaining lifetime. DEBUG refreshes every 90 seconds with 5–9 minute remaining lifetimes. The isolated instant UI-test mode keeps stock fixed; the live-feed UI tests use actual DEBUG timers. The onboarding stock remains stable until the first sale.
+
+Every listing's competitor decision, NPC identity, potential purchase time, price-drop amount/time and expiry are booked once from a save/listing seed. Bargain-looking public prices attract more competition. Competitors use claimed condition without hidden defects, so they can misjudge deceptive stock. No fabricated viewer counts are shown. Competitor purchases and expiry close the listing and conversation without changing player money or inventory.
+
+A valid counter/agreed price is honored through its expiry. NPC purchase/retirement events defer until one second afterward. Price drops that conflict with a firm quote are cancelled, rather than changing its amount. Legacy quotes with no timer receive one full persisted offer window before retirement is allowed. Replies invalidated by an earlier known purchase/expiry are excluded from notification plans, including equal-timestamp sequence ordering. Watched price-drop alerts are likewise suppressed if a prior known closure or firm quote prevents the change. Closing events are visible in return reports and archived watched listings; no closing push alerts are scheduled.
+
+Refresh runs once at the end of catch-up, after fixed due work, and refills toward ten active listings. A long absence generates one current batch rather than hundreds of missed batches. Model pools rotate, new prices use current demand, and replenished stock does not get the guaranteed clean discounted starter treatment. Currency and acquired hidden truth remain stable.
+
+System-created archives keep the latest forty closed listings plus all watched, contacted and acquired/financially referenced listings. Corresponding lifecycle records follow that retention. Pending work is retained and settled event history remains capped at 200. User trade/conversation/watch history is intentionally preserved. Unavailable watched cards/details show actual closure reasons; completed NPC buyers use localized name pools. An empty active feed with a pending refresh shows its real countdown.
+
+Days 8–11 market systems are implemented; human economic/fun balancing and broader release QA remain open. The game presentation/polish phase also remains required; these functional screens are not final game art or UI.

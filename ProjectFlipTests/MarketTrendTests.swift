@@ -50,7 +50,11 @@ struct MarketTrendTests {
         #expect(end.outcomes.map(\.kind) == [.marketTrend])
         let later = try resolver.resolve(end.state, now: now.addingTimeInterval(365 * 86_400), definitions: definitions)
         #expect(later.state.marketTrends.count == 2)
-        #expect(later.state.events.count < 10)
+        let trendEvents = later.state.events.filter {
+            switch $0.payload { case .marketCycle, .marketTrendEnded: true; default: false }
+        }
+        #expect(trendEvents.count < 10)
+        #expect(later.state.events.count <= 250)
         #expect(later.state.player.cash == sold.player.cash)
         #expect(later.state.playerListings == sold.playerListings)
         #expect(later.state.events.filter { $0.status == .pending }.allSatisfy { $0.resolveAt > later.clock.effectiveNow })

@@ -20,21 +20,36 @@ struct ListingDetailView: View {
                     }
                     Text("listing.claimWarning").font(.caption).foregroundStyle(.secondary)
                 }
+                if let lifecycle = store.snapshot.marketListingStates.first(where: { $0.id == listing.id }) {
+                    Section {
+                        if listing.available { DeadlineView(store: store, target: lifecycle.expiresAt, titleKey: "listing.expires") }
+                        else { Text(GameText.string(lifecycle.closureReason?.key ?? "listing.unavailable", locale: locale)).bold() }
+                        if lifecycle.priceDroppedAt != nil {
+                            Label("listing.priceDrop", systemImage: "arrow.down.right")
+                            Text(lifecycle.initialAskingPrice.formatted(locale: locale)).strikethrough().foregroundStyle(.secondary)
+                        }
+                        if lifecycle.closureReason == .competitor, let identity = lifecycle.competitorIdentityIndex {
+                            Text(GameText.format("listing.competitorBuyer", locale: locale, GameText.string("npc.name.\(identity)", locale: locale)))
+                        }
+                    }
+                }
                 Section("listing.description") {
                     Text(GameText.string(listing.descriptionIntent, locale: locale))
                 }
                 Section("seller.title") { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)) }
             }
             .safeAreaInset(edge: .bottom) {
-                    NavigationLink {
-                        ConversationView(store: store, listingID: listing.id)
-                    } label: {
-                        Text("offer.start").font(.headline).frame(maxWidth: .infinity).padding()
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .foregroundStyle(colorScheme == .dark ? .black : .white)
-                    .padding().background(.regularMaterial)
-                    .accessibilityIdentifier("openConversation")
+                if listing.available || store.snapshot.conversations.contains(where: { $0.listingID == listing.id }) {
+                        NavigationLink {
+                            ConversationView(store: store, listingID: listing.id)
+                        } label: {
+                            Text(listing.available ? "offer.start" : "messages.title").font(.headline).frame(maxWidth: .infinity).padding()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .foregroundStyle(colorScheme == .dark ? .black : .white)
+                        .accessibilityIdentifier("openConversation")
+                        .padding().background(.regularMaterial)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

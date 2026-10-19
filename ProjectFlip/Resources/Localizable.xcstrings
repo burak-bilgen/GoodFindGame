@@ -4500,6 +4500,240 @@
           }
         }
       }
+    },
+    "listing.status.expired": {
+      "comment": "Actual listing closure after its lifetime ends, subject to a held offer.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing expired"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanın süresi doldu"
+          }
+        }
+      }
+    },
+    "listing.status.competitor": {
+      "comment": "Actual completed NPC purchase. Never a fabricated urgency signal.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bought by another trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir alıcı aldı"
+          }
+        }
+      }
+    },
+    "listing.status.purchased": {
+      "comment": "Archived marketplace listing acquired by the player.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You bought this item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürünü satın aldın"
+          }
+        }
+      }
+    },
+    "listing.status.withdrawn": {
+      "comment": "Seller listing is no longer available; also used after DEBUG market replacement.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing withdrawn"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan kaldırıldı"
+          }
+        }
+      }
+    },
+    "listing.priceDrop": {
+      "comment": "Badge only after an actual simulated seller asking-price reduction.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price drop"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiyat düştü"
+          }
+        }
+      }
+    },
+    "listing.expires": {
+      "comment": "Remaining lifetime of an active marketplace listing; firm quotes can extend it.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing ends in"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanın kalan süresi"
+          }
+        }
+      }
+    },
+    "listing.competitorBuyer": {
+      "comment": "Locale-aware NPC name; shown only after the real simulated purchase.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ completed this purchase."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürünü %@ satın aldı."
+          }
+        }
+      }
+    },
+    "seller.listingTaken": {
+      "comment": "Conversation closure after a real competitor purchase; pending replies are cancelled.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another buyer completed the purchase. This item is no longer available."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ürünü başka bir alıcıya sattım. İlan artık geçerli değil."
+          }
+        }
+      }
+    },
+    "seller.listingExpired": {
+      "comment": "Seller dialogue when the listing lifetime expires, after honoring any held quote.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’ve taken this listing down for now."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ilanı şimdilik kaldırdım."
+          }
+        }
+      }
+    },
+    "away.priceDrop": {
+      "comment": "While-away summary of actual price changes on watched or previously contacted listings.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing price drops"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiyatı düşen ilanlar"
+          }
+        }
+      }
+    },
+    "away.listingClosed": {
+      "comment": "While-away summary of watched/contacted listings sold to NPCs or expired.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listings no longer available"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapanan ilanlar"
+          }
+        }
+      }
+    },
+    "notifications.priceDrop": {
+      "comment": "Actual pending watched-listing price drop: fictional product name and localized reduced asking price. Suppressed if known earlier events invalidate it.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is now %2$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ artık %2$@."
+          }
+        }
+      }
+    },
+    "market.nextRefresh": {
+      "comment": "Countdown shown only when the active feed is empty and a real refresh event is pending.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New listings arrive in"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni ilanların gelmesine kalan süre"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

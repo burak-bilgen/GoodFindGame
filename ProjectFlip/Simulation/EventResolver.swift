@@ -13,7 +13,18 @@ struct EventResolver {
     func resolve(_ state: GameSnapshot, now: Date, definitions: [ItemDefinition]) throws -> EventResolution {
         let clock = try GameClock.read(now: now, lastKnownWallClock: state.lastKnownWallClock, lastSimulationAt: state.lastSimulationAt)
         var next = state
+        // Phase A saves could contain a firm quote without a timer. Give it one full,
+        // persisted window on first catch-up, before allowing any market retirement.
+        for index in next.conversations.indices where !next.conversations[index].closed && next.conversations[index].pendingReplyEventID == nil && next.conversations[index].counterExpiresAt == nil {
+            if next.conversations[index].agreedPrice != nil || next.conversations[index].counterPrice != nil {
+                let expiry = clock.effectiveNow.addingTimeInterval(timing.offerLifetime)
+                next.conversations[index].counterExpiresAt = expiry
+                try next.enqueue(.sellerOfferExpired(listingID: next.conversations[index].listingID, expiresAt: expiry), createdAt: clock.effectiveNow, resolveAt: expiry)
+            }
+        }
         try MarketTrendEngine().prepare(&next, now: clock.effectiveNow, definitions: definitions)
+        if let feed = timing.marketFeed { try MarketFeedEngine(timing: feed).prepare(&next, now: clock.effectiveNow, definitions: definitions) }
+        var needsFeedRefresh = false
         var outcomes: [ResolvedEvent] = []
         var buyerArrivals = 0
         while let index = next.events.indices.filter({ next.events[$0].status == .pending && next.events[$0].resolveAt <= clock.effectiveNow }).min(by: {
@@ -22,6 +33,7 @@ struct EventResolver {
         }) {
             let event = next.events[index]
             next.events[index].status = .completed
+            if case .marketRefresh = event.payload { needsFeedRefresh = timing.marketFeed != nil; continue }
             if event.payload.generatesBuyerInterest {
                 if buyerArrivals >= timing.buyerArrivalsPerCatchUp {
                     next.events[index].status = .cancelled
@@ -31,12 +43,19 @@ struct EventResolver {
                 buyerArrivals += 1
             }
             if let kind = try apply(event, to: &next, definitions: definitions) {
-                outcomes.append(ResolvedEvent(id: event.id, kind: kind, targetID: outcomeTarget(event, state: next), occurredAt: event.resolveAt))
+                let tracked = next.watchedListingIDs.contains(ListingID(event.payload.targetID)) || next.conversations.contains { $0.listingID.rawValue == event.payload.targetID }
+                if ![.priceDrop, .listingClosed].contains(kind) || tracked {
+                    outcomes.append(ResolvedEvent(id: event.id, kind: kind, targetID: outcomeTarget(event, state: next), occurredAt: event.resolveAt))
+                }
             } else {
                 next.events[index].status = .cancelled
             }
         }
+        if needsFeedRefresh, let feed = timing.marketFeed {
+            try MarketFeedEngine(timing: feed).replenish(&next, now: clock.effectiveNow, definitions: definitions)
+        }
         reconcile(&next)
+        MarketFeedEngine.pruneArchive(&next)
         next.lastKnownWallClock = clock.observedNow
         next.lastSimulationAt = clock.effectiveNow
         // Pending work is never pruned. Settled history is bounded; sequence IDs never reset in a save.
@@ -62,12 +81,20 @@ struct EventResolver {
     }
 
     func reconcile(_ state: inout GameSnapshot) {
+        for index in state.marketListingStates.indices where state.marketListingStates[index].closureReason == nil {
+            if state.market.contains(where: { $0.id == state.marketListingStates[index].id && !$0.available }) {
+                state.marketListingStates[index].closureReason = .withdrawn
+            }
+        }
         for index in state.inspectionJobs.indices where state.inspectionJobs[index].status == .pending {
             if !state.player.inventory.contains(where: { $0.id == state.inspectionJobs[index].itemID }) { state.inspectionJobs[index].status = .cancelled }
         }
         for index in state.events.indices where state.events[index].status == .pending {
             let valid: Bool
             switch state.events[index].payload {
+            case .marketRefresh: valid = state.marketFeedStartedAt != nil
+            case .listingExpired(let id), .competitorPurchase(let id), .sellerPriceDrop(let id):
+                valid = state.market.contains { $0.id == id && $0.available } && state.marketListingStates.contains { $0.id == id && $0.closureReason == nil }
             case .marketCycle(let index): valid = state.marketCalendar != nil && index > (state.lastMarketCycle ?? -1)
             case .marketTrendEnded(let id): valid = state.marketTrends.contains { $0.id == id }
             case .sellerReply(let id, _, _):
@@ -104,6 +131,30 @@ struct EventResolver {
 
     private func apply(_ event: GameEvent, to state: inout GameSnapshot, definitions: [ItemDefinition]) throws -> ResolvedEventKind? {
         switch event.payload {
+        case .marketRefresh: return nil // The outer loop refreshes once, after all fixed due work.
+        case .listingExpired(let id), .competitorPurchase(let id):
+            guard state.market.contains(where: { $0.id == id && $0.available }),
+                  let lifecycle = state.marketListingStates.firstIndex(where: { $0.id == id }) else { return nil }
+            if let hold = MarketFeedEngine.holdUntil(listingID: id, at: event.resolveAt, beforeSequence: event.sequence, state: state) {
+                let deferred = hold.addingTimeInterval(1)
+                try state.enqueue(event.payload, createdAt: event.resolveAt, resolveAt: deferred)
+                if case .competitorPurchase = event.payload { state.marketListingStates[lifecycle].competitorPurchaseAt = deferred }
+                else { state.marketListingStates[lifecycle].expiresAt = deferred }
+                return nil
+            }
+            let reason: MarketClosureReason
+            if case .competitorPurchase = event.payload { reason = .competitor } else { reason = .expired }
+            return MarketFeedEngine.close(id, reason: reason, at: event.resolveAt, state: &state) ? .listingClosed : nil
+        case .sellerPriceDrop(let id):
+            guard let listing = state.market.firstIndex(where: { $0.id == id && $0.available }),
+                  let lifecycle = state.marketListingStates.firstIndex(where: { $0.id == id && $0.priceDroppedAt == nil }),
+                  let price = state.marketListingStates[lifecycle].reducedPrice,
+                  price < state.market[listing].askingPrice,
+                  MarketFeedEngine.holdUntil(listingID: id, at: event.resolveAt, beforeSequence: event.sequence, state: state) == nil else { return nil }
+            state.market[listing].askingPrice = price
+            state.market[listing].reservationPrice = min(price, state.market[listing].reservationPrice)
+            state.marketListingStates[lifecycle].priceDroppedAt = event.resolveAt
+            return .priceDrop
         case .marketCycle(let index):
             return try MarketTrendEngine().start(index: index, state: &state) ? .marketTrend : nil
         case .marketTrendEnded(let id):

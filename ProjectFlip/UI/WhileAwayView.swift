@@ -45,7 +45,8 @@ struct WhileAwayView: View {
         if let trend = store.snapshot.marketTrends.first(where: { $0.id == outcome.targetID }) {
             MarketTrendDetailView(store: store, trend: trend)
         } else if store.snapshot.market.contains(where: { $0.id.rawValue == outcome.targetID }) {
-            ConversationView(store: store, listingID: ListingID(outcome.targetID))
+            if [.priceDrop, .listingClosed].contains(outcome.kind) { ListingDetailView(store: store, listingID: ListingID(outcome.targetID)) }
+            else { ConversationView(store: store, listingID: ListingID(outcome.targetID)) }
         } else if store.snapshot.playerListings.contains(where: { $0.id.rawValue == outcome.targetID }) {
             SaleListingView(store: store, listingID: ListingID(outcome.targetID))
         } else if let shipment = store.snapshot.shipments.first(where: { $0.id == outcome.targetID }), store.snapshot.player.inventory.contains(where: { $0.id == shipment.item.id }) {

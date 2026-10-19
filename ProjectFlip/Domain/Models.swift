@@ -67,8 +67,8 @@ struct MarketplaceListing: Codable, Identifiable, Equatable, Sendable {
     let id: ListingID
     let item: ItemInstance
     let seller: SellerProfile
-    let askingPrice: Money
-    let reservationPrice: Money
+    var askingPrice: Money
+    var reservationPrice: Money
     let claimedCondition: Int
     let descriptionIntent: String
     let createdAt: Date

@@ -32,9 +32,10 @@ struct SimulationTiming: Sendable {
     let buyerInterest: ClosedRange<TimeInterval>
     let offerLifetime: TimeInterval
     let buyerArrivalsPerCatchUp: Int
+    var marketFeed: MarketFeedTiming? = nil
 
-    static let production = Self(sellerReply: 120...600, shipping: 300, inspection: 900, buyerInterest: 180...420, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12)
-    static let debug = Self(sellerReply: 2...4, shipping: 4, inspection: 6, buyerInterest: 3...5, offerLifetime: 120, buyerArrivalsPerCatchUp: 12)
+    static let production = Self(sellerReply: 120...600, shipping: 300, inspection: 900, buyerInterest: 180...420, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12, marketFeed: .production)
+    static let debug = Self(sellerReply: 2...4, shipping: 4, inspection: 6, buyerInterest: 3...5, offerLifetime: 120, buyerArrivalsPerCatchUp: 12, marketFeed: .debug)
     static let instant = Self(sellerReply: 0...0, shipping: 0, inspection: 0, buyerInterest: 0...0, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12)
     static var current: Self {
         #if DEBUG
@@ -56,6 +57,6 @@ extension SimulationTiming {
         Self(sellerReply: min(3, sellerReply.lowerBound)...min(3, sellerReply.upperBound),
              shipping: min(5, shipping), inspection: min(8, inspection),
              buyerInterest: min(3, buyerInterest.lowerBound)...min(3, buyerInterest.upperBound),
-             offerLifetime: offerLifetime, buyerArrivalsPerCatchUp: buyerArrivalsPerCatchUp)
+             offerLifetime: offerLifetime, buyerArrivalsPerCatchUp: buyerArrivalsPerCatchUp, marketFeed: marketFeed)
     }
 }

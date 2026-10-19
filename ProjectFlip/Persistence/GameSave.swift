@@ -15,13 +15,15 @@ struct GameSnapshot: Codable, Equatable {
     var lastKnownWallClock: Date?
     var lastSimulationAt: Date?
     var awayReport: [ResolvedEvent] = []
+    var marketFeedStartedAt: Date?
+    var marketListingStates: [MarketListingState] = []
     var marketCalendar: MarketCalendar?
     var lastMarketCycle: Int?
     var marketTrends: [MarketTrend] = []
     var watchedListingIDs: Set<ListingID> = []
     var notificationPreferences = NotificationPreferences()
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -41,6 +43,8 @@ struct GameSnapshot: Codable, Equatable {
         lastKnownWallClock = try values.decodeIfPresent(Date.self, forKey: .lastKnownWallClock)
         lastSimulationAt = try values.decodeIfPresent(Date.self, forKey: .lastSimulationAt)
         awayReport = try values.decodeIfPresent([ResolvedEvent].self, forKey: .awayReport) ?? []
+        marketFeedStartedAt = try values.decodeIfPresent(Date.self, forKey: .marketFeedStartedAt)
+        marketListingStates = try values.decodeIfPresent([MarketListingState].self, forKey: .marketListingStates) ?? []
         marketCalendar = try values.decodeIfPresent(MarketCalendar.self, forKey: .marketCalendar)
         lastMarketCycle = try values.decodeIfPresent(Int.self, forKey: .lastMarketCycle)
         marketTrends = try values.decodeIfPresent([MarketTrend].self, forKey: .marketTrends) ?? []
@@ -70,6 +74,12 @@ struct SaveRepository {
               Set(state.events.map(\.sequence)).count == state.events.count,
               state.events.allSatisfy({ $0.sequence <= state.nextEventSequence && $0.resolveAt >= $0.createdAt }),
               Set(state.player.inventory.map(\.id)).count == state.player.inventory.count else { throw SaveError.invalidSave }
+        guard Set(state.marketListingStates.map(\.id)).count == state.marketListingStates.count,
+              state.marketListingStates.allSatisfy({ lifecycle in
+                  state.market.contains { $0.id == lifecycle.id } && lifecycle.expiresAt.timeIntervalSinceReferenceDate.isFinite &&
+                  lifecycle.initialAskingPrice > .zero &&
+                  (lifecycle.reducedPrice.map({ $0 > .zero && $0 < lifecycle.initialAskingPrice }) ?? true)
+              }) else { throw SaveError.invalidSave }
         if let calendar = state.marketCalendar {
             guard calendar.version == 1, calendar.anchor.timeIntervalSinceReferenceDate.isFinite,
                   !calendar.categories.isEmpty, !calendar.models.isEmpty,

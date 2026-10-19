@@ -58,6 +58,10 @@ struct NotificationRouteView: View {
         NavigationStack {
             Group {
             switch route.kind {
+            case .marketListing:
+                if let target = route.targetID, store.snapshot.market.contains(where: { $0.id.rawValue == target }) {
+                    ListingDetailView(store: store, listingID: ListingID(target))
+                } else { unavailable }
             case .marketTrend:
                 if let trend = store.snapshot.marketTrends.first(where: { $0.id == route.targetID }) {
                     MarketTrendDetailView(store: store, trend: trend)

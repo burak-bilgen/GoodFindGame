@@ -12,6 +12,10 @@ struct ConversationView: View {
             let conversation = store.conversation(for: listing)
             List {
                 Section { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)) }
+                if !listing.available {
+                    let reason = store.snapshot.marketListingStates.first { $0.id == listing.id }?.closureReason
+                    Text(GameText.string(reason?.key ?? "listing.unavailable", locale: locale)).bold()
+                }
                 Section("messages.title") {
                     Text("negotiation.intro").font(.caption).foregroundStyle(.secondary)
                     ForEach(conversation.messages) { message in
