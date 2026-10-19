@@ -3852,6 +3852,60 @@
           }
         }
       }
+    },
+    "debug.time": {
+      "comment": "DEBUG-only virtual time travel. Does not change the device clock.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simulation time"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simülasyon zamanı"
+          }
+        }
+      }
+    },
+    "debug.advance30Minutes": {
+      "comment": "DEBUG-only virtual time travel. Does not change the device clock.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advance 30 minutes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 dakika ilerlet"
+          }
+        }
+      }
+    },
+    "debug.advanceDay": {
+      "comment": "DEBUG-only virtual time travel. Does not change the device clock.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Advance one day"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir gün ilerlet"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

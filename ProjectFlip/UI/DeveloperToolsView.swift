@@ -24,6 +24,10 @@ struct DeveloperToolsView: View {
                 Button("debug.regenerate") { store.perform { try store.debugRegenerateMarket(); selectedListing = "" } }.accessibilityIdentifier("debugRegenerate")
                 Button("debug.reset", role: .destructive) { confirmReset = true }
             }
+            Section("debug.time") {
+                Button("debug.advance30Minutes") { store.perform { try store.debugAdvanceTime(by: 30 * 60) } }.accessibilityIdentifier("debugAdvance30Minutes")
+                Button("debug.advanceDay") { store.perform { try store.debugAdvanceTime(by: 24 * 60 * 60) } }
+            }
             Section("debug.negotiation") {
                 Picker("debug.listing", selection: $selectedListing) {
                     Text("debug.chooseListing").tag("")

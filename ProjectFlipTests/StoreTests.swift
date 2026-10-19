@@ -42,5 +42,28 @@ struct StoreTests {
         #expect(store.snapshot.player.cash == GameBalanceConfig.current.startingCash)
         #expect(store.snapshot.conversations.isEmpty)
     }
+    @MainActor @Test func debugTimeTravelCompletesWorkAndRealClockKeepsAdvancing() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let definitions = try SeedContent.load().items
+        let now = Date.now
+        var state = try GameSnapshot.fresh(definitions: definitions)
+        state.lastKnownWallClock = now
+        state.lastSimulationAt = now
+        state.shipments = [Shipment(id: "debug-delivery", item: state.market[0].item, arrivesAt: now.addingTimeInterval(60))]
+        try state.enqueue(.shipmentArrived(shipmentID: "debug-delivery"), createdAt: now, resolveAt: now.addingTimeInterval(60))
+        let repository = SaveRepository(url: root.appendingPathComponent("save.json"))
+        try repository.save(state)
+        let store = try GameStore(repository: repository, definitions: definitions, now: now)
+        try store.debugAdvanceTime(by: 30 * 60)
+        #expect(store.snapshot.player.inventory.count == 1)
+        #expect(store.snapshot.awayReport.map(\.kind) == [.shipment])
+        let advanced = try #require(store.snapshot.lastSimulationAt)
+        try store.processDueEvents(now: now.addingTimeInterval(2))
+        #expect(store.snapshot.lastSimulationAt == advanced)
+        try store.catchUp(now: now.addingTimeInterval(3))
+        #expect(store.snapshot.lastSimulationAt == advanced.addingTimeInterval(1))
+        #expect(throws: EventQueueError.self) { try store.debugAdvanceTime(by: -1) }
+    }
     #endif
 }

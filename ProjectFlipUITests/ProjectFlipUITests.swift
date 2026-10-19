@@ -170,6 +170,27 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testDebugTimeTravelReturnSummaryCanBeAcknowledged() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        app.tabBars.buttons["Profile"].tap()
+        tap(app.buttons["developerTools"], in: app)
+        tap(app.buttons["debugAdvance30Minutes"], in: app)
+        XCTAssertTrue(app.navigationBars["While you were away"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Expired offers"].exists)
+        app.buttons["Done"].tap()
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.navigationBars["Market"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.navigationBars["While you were away"].exists)
+    }
+
+    @MainActor
     private func verifyShell(language: String, market: String, inventory: String) {
         continueAfterFailure = false
         let app = XCUIApplication()

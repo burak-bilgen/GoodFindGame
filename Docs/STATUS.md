@@ -1,8 +1,8 @@
 # Milestones
 
-Current: Section 48 steps 1–11 are implemented, including event-backed local notifications, five category settings, cancellation/rescheduling and exact-object routing. Human fun/retention testing and the remainder of V1 are still required.
+Current: Section 48 is implemented through step 12, including DEBUG virtual time travel, event-backed local notifications, five category settings, cancellation/rescheduling and exact-object routing. Human fun/retention testing and the remainder of V1 are still required.
 
-Next highest priority: Section 48 step 12 — DEBUG time travel, then Days 8–11 market depth (trends, competition, expiry, watchlist and remaining feed controls). Continue the full master backlog.
+Next highest priority: Days 8–11 market depth (trends, competition, listing expiry, watchlist and remaining feed controls). Follow the full master backlog afterward; the goal is the full V1, not just this milestone.
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
@@ -51,3 +51,5 @@ Phase A resolves interactions immediately. Shipping, delayed replies/inspection,
 2026-10-20: Section 48 steps 4–9 integrated. Gameplay commands catch up first, reserve paid goods in transit, defer expert reveals and buyer/seller messages, and persist before publishing. First-trade timers are accelerated; later Release timers use minutes and DEBUG timers seconds. Current verification: 37 unit tests and the real-timer Turkish purchase→delivery→paid inspection→relaunch→sale UI flow pass; existing English/Turkish fast trade regressions also pass. Release build succeeds without Swift warnings. 185 localization keys pass completeness/format checks. No notifications are scheduled yet; that is the next milestone.
 
 2026-10-20: Section 48 steps 10–11 complete. Five category preferences, contextual native permission, event-derived TR/EN notifications, revision-safe synchronization and typed object routes are implemented. 43 unit tests pass. Real iOS notification delivery/tap routing and persisted category/cold-route UI tests pass; the native banner was visually inspected. Fixed an actual UIKit crash by finishing notification delegate completions on the main actor; see NOTIFICATIONS.md. Release build succeeds, 210 localization keys pass checks, and test/debug route hooks are absent from the release binary. No temporary debug instrumentation remains.
+
+2026-10-20: Section 48 step 12 complete. DEBUG controls advance virtual time by 30 minutes or one day without changing the device clock. Forty-four unit tests pass, including time travel followed by recovery to the real clock. A UI test advances through an actual offer expiry, acknowledges the persisted while-away report, relaunches and verifies it does not repeat. Release builds pass and exclude these controls. Localization checks pass for 213 keys. Section 48 is complete; broad device/retention/release QA and later feature phases remain.

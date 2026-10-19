@@ -28,6 +28,13 @@ extension GameStore {
         try commit(next)
     }
 
+    func debugAdvanceTime(by seconds: TimeInterval) throws {
+        guard seconds.isFinite, seconds > 0 else { throw EventQueueError.invalidTimestamp }
+        let observedNow = Date.now
+        let anchor = max(observedNow, snapshot.lastKnownWallClock ?? observedNow)
+        try catchUp(now: anchor.addingTimeInterval(seconds), showSummary: true)
+    }
+
     func debugForceSellerResponse(listingID: ListingID) throws {
         guard let listing = snapshot.market.first(where: { $0.id == listingID && $0.available }) else { throw TradingError.unavailable }
         var conversation = conversation(for: listing)
