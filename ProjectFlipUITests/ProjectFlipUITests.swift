@@ -35,6 +35,41 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testFiveConsecutiveTradesThroughUI() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString]
+        for index in 0..<5 {
+            app.launch()
+            XCTAssertTrue(app.navigationBars["Market"].waitForExistence(timeout: 10))
+            tap(app.buttons["listing.listing-42-\(index)"], in: app)
+            tap(app.buttons["openConversation"], in: app)
+            tap(app.buttons["askIssues"], in: app)
+            tap(app.buttons["sendOffer"], in: app)
+            tap(app.buttons["confirmPurchase"], in: app)
+            app.tabBars.buttons["Inventory"].tap()
+            tap(app.buttons["inventory.item-42-\(index)"], in: app)
+            tap(app.buttons["basicInspect"], in: app)
+            tap(app.buttons["createListing"], in: app)
+            tap(app.buttons["publishListing"], in: app)
+            app.tabBars.buttons["Selling"].tap()
+            tap(app.buttons["sale.resale-item-42-\(index)-\(index)"], in: app)
+            tap(app.buttons["acceptBuyerOffer"], in: app)
+            tap(app.buttons["Trade breakdown"], in: app)
+            XCTAssertTrue(app.staticTexts["Net profit / loss"].exists)
+            let attachment = XCTAttachment(screenshot: app.screenshot())
+            attachment.name = "Trade \(index + 1) cost and profit breakdown"
+            attachment.lifetime = .keepAlways
+            add(attachment)
+            app.terminate()
+        }
+        app.launch()
+        app.tabBars.buttons["Profile"].tap()
+        tap(app.buttons["openTradeHistory"], in: app)
+        XCTAssertTrue(app.staticTexts["5 completed trades"].exists)
+    }
+
+    @MainActor
     private func verifyShell(language: String, market: String, inventory: String) {
         continueAfterFailure = false
         let app = XCUIApplication()

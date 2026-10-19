@@ -38,4 +38,16 @@ struct GenerationTests {
         #expect(try before == PricingEngine.fairValue(of: item, definition: definition))
         #expect(try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: 11_000) > before)
     }
+    @Test func uninformedSellersCanDemandMoreThanFaultyItemIsWorth() throws {
+        let definitions = try SeedContent.load().items
+        var riskyMinimums = 0
+        for seed in 0..<100 {
+            let listings = try ListingGenerator().generate(definitions: definitions, seed: UInt64(seed), now: .distantPast)
+            for (listing, definition) in zip(listings, definitions) where listing.seller.knowledge < 40 && !listing.item.hiddenDefects.isEmpty {
+                if listing.reservationPrice > (try PricingEngine.fairValue(of: listing.item, definition: definition)) { riskyMinimums += 1 }
+            }
+        }
+        #expect(riskyMinimums > 0)
+    }
+
 }

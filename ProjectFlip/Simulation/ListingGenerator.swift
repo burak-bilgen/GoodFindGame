@@ -21,12 +21,14 @@ struct ListingGenerator {
             let defects: [Defect] = index > 0 && random.integer(in: 0...99) < 45 ? [definition.possibleDefects[random.integer(in: 0...(definition.possibleDefects.count - 1))]] : []
             let condition = random.integer(in: 55...98)
             let item = ItemInstance(id: ItemID("item-\(seed)-\(index)"), definitionID: definition.id, condition: condition, hiddenDefects: defects)
-            let fair = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: marketBasisPoints)
-            // Imperfect seller knowledge determines an opinion, rather than revealing truth.
-            let perceived = try PricingEngine.fairValue(of: ItemInstance(id: item.id, definitionID: item.definitionID, condition: condition, hiddenDefects: honesty < 40 || knowledge < 40 ? [] : defects), definition: definition, marketBasisPoints: marketBasisPoints)
+            let cleanValue = try PricingEngine.fairValue(of: ItemInstance(id: item.id, definitionID: item.definitionID, condition: condition, hiddenDefects: []), definition: definition, marketBasisPoints: marketBasisPoints)
+            let trueValue = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: marketBasisPoints)
+            // Belief and presentation differ: an uninformed seller cannot price an unknown fault.
+            let sellerBelief = knowledge < 40 ? cleanValue : trueValue
+            let perceived = honesty < 40 ? cleanValue : sellerBelief
             let bias = index == 0 ? 8_500 : random.integer(in: 8_000...13_000) - urgency * 15 + (archetype == .stubborn ? 2_000 : 0)
             let asking = try perceived.scaled(byBasisPoints: Int64(bias))
-            let reservation = min(asking, try fair.scaled(byBasisPoints: Int64(8_000 - urgency * 20)))
+            let reservation = min(asking, try sellerBelief.scaled(byBasisPoints: Int64(8_000 - urgency * 20)))
             return MarketplaceListing(id: ListingID("listing-\(seed)-\(index)"), item: item, seller: seller, askingPrice: asking, reservationPrice: reservation, claimedCondition: honesty < 40 ? min(100, condition + 18) : condition, descriptionIntent: honesty < 40 ? "listing.description.evasive" : (knowledge < 40 ? "listing.description.uncertain" : "listing.description.careful"), createdAt: now.addingTimeInterval(-TimeInterval(index * 180)))
         }
     }
