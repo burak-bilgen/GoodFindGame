@@ -1,5 +1,6 @@
 """Validate catalog completeness before committing localized content."""
 import json
+import re
 from pathlib import Path
 
 catalog = Path(__file__).resolve().parents[1] / "ProjectFlip/Resources/Localizable.xcstrings"
@@ -17,6 +18,11 @@ for key, entry in data["strings"].items():
         errors.append(f"{key}: missing translator context")
     for language in ("en", "tr"):
         translations = list(units(entry.get("localizations", {}).get(language, {})))
+        reference_units = list(units(entry.get("localizations", {}).get("en", {})))
+        reference = sorted(re.findall(r"%(?:[0-9]+\$)?(?:lld|ld|d|@|f)", reference_units[0]["value"])) if reference_units else []
+        for unit in translations:
+            if sorted(re.findall(r"%(?:[0-9]+\$)?(?:lld|ld|d|@|f)", unit.get("value", ""))) != reference:
+                errors.append(f"{key}: mismatched {language} format arguments")
         if not translations or any(unit.get("state") != "translated" or not unit.get("value") or unit.get("value") == key for unit in translations):
             errors.append(f"{key}: missing {language} translation")
 if errors:

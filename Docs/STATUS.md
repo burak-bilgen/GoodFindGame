@@ -1,5 +1,17 @@
 # Milestones
 
+Current: Section 47 Tasks 1–12 are implemented. The Phase A trading loop is playable; this is not a finished V1 release.
+
+Next highest priority: playtest at least five trades and evaluate the brief’s fun/kill criteria. Improve weak decisions before starting Phase B offline event resolution. Automated correctness does not establish enjoyment.
+
+Final verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
+
+Localization: 168 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+
+Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
+
+## Milestone verification history
+
 Task 1 complete: self-contained Git project, iOS 17+ portrait iPhone, localized five-tab shell, unit/UI test targets and localization completeness check.
 
 Section 47 is the exact First 72 Hours backlog. Auctions are stretch only after all required MVP systems, tests, localization and polish are healthy; otherwise V1.1. The supplemental engineering/localization requirements override conflicting passages in the original brief.
@@ -27,3 +39,7 @@ Task 9 complete: inspected inventory can be listed at an exact localized asking 
 Task 10 complete: six buyer archetypes, budget-based proposals/counters/withdrawal, rejection, price revision and exactly-once sale settlement. Sold listings retain immutable item/cost facts. Seventeen unit tests and TR/EN buy→inspect→list→buyer acceptance→relaunch flows pass. Next: Task 11 profit/loss ledger.
 
 Task 11 complete: persistent settlement facts feed transaction history and itemized profit/loss receipts, including all inspection/repair costs. Nineteen unit tests pass, including five consecutive trades with save/reload, both gains and losses, and reconciliation of cash movement to net results. TR/EN UI tests complete a full trade and reopen its history after relaunch. Next: Task 12 DEBUG balancing tools.
+
+Task 12 complete: DEBUG save reset/cash/market regeneration/hidden truth/forced seller and buyer responses, centralized balances, additional localization QA and large-type testing. Final review fixed stale seller-history text, varied buyer personalities deterministically, and removed the six-buyer exhaustion soft lock with a regression test. Reset preserves the original atomic-write behavior; market regeneration retires stale negotiations. See README for the playable loop and developer tools.
+
+Phase A resolves interactions immediately. Shipping, delayed replies/inspection, offline event catch-up, notifications, progression, Game Center, monetization and later content have not been implemented. Auctions remain strict stretch scope after required MVP systems and polish are healthy; otherwise V1.1.

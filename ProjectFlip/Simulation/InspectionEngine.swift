@@ -2,7 +2,7 @@ import Foundation
 
 struct InspectionEngine {
     let professionalCost: Money
-    init(professionalCost: Money = Money(minorUnits: 15_000)) { self.professionalCost = professionalCost }
+    init(professionalCost: Money = GameBalanceConfig.current.professionalInspectionCost) { self.professionalCost = professionalCost }
 
     func inspect(itemID: ItemID, professionally: Bool, state: GameSnapshot) throws -> GameSnapshot {
         guard let index = state.player.inventory.firstIndex(where: { $0.id == itemID }) else { throw TradingError.unavailable }

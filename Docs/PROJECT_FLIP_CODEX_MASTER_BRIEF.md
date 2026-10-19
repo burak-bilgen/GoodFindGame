@@ -474,7 +474,7 @@ Money is no longer the only goal.
 ## Day 6
 
 Unlock:
-- auctions or limited timed market events,
+- limited timed market events (auctions are a conditional stretch goal only),
 - Game Center introduction after the player understands the core economy.
 
 Do not show Game Center as onboarding friction on first launch.
@@ -1139,7 +1139,7 @@ This is intended for TikTok/Reels/X/Discord organic sharing.
 
 Not required for the 3-day vertical slice.
 
-Target for later MVP if schedule allows.
+Stretch only after the core loop, offline event system, progression, Game Center, monetization, testing, localization and polish are healthy and time remains. Otherwise defer auctions to V1.1.
 
 Auction behavior:
 - visible current bid,

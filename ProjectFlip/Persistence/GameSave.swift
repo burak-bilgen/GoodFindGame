@@ -22,8 +22,8 @@ struct GameSnapshot: Codable, Equatable {
         playerListings = try values.decodeIfPresent([PlayerListing].self, forKey: .playerListings) ?? []
     }
 
-    static func fresh(definitions: [ItemDefinition], seed: UInt64 = 42, now: Date = .now) throws -> Self {
-        Self(schemaVersion: 1, player: PlayerState(cash: Money(minorUnits: 2_000_000)), market: try ListingGenerator().generate(definitions: definitions, seed: seed, now: now), generation: seed)
+    static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now) throws -> Self {
+        Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: definitions, seed: seed, now: now), generation: seed)
     }
 }
 

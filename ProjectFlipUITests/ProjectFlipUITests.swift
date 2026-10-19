@@ -2,13 +2,36 @@ import XCTest
 
 final class ProjectFlipUITests: XCTestCase {
     @MainActor
-    func testEnglishShell() {
+    func testFirstTradeEnglish() {
         verifyShell(language: "en", market: "Market", inventory: "Inventory")
     }
 
     @MainActor
-    func testTurkishShell() {
+    func testFirstTradeTurkish() {
         verifyShell(language: "tr", market: "Pazar", inventory: "Envanter")
+    }
+
+    @MainActor
+    func testLargeTurkishTextAndDeveloperTools() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(tr)", "-AppleLocale", "tr_TR", "--uitest-save", UUID().uuidString, "--uitest-large-type"]
+        app.launch()
+        XCTAssertTrue(app.navigationBars["Pazar"].waitForExistence(timeout: 10))
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = "Turkish accessibility-size listing"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        app.tabBars.buttons["Profil"].tap()
+        tap(app.buttons["developerTools"], in: app)
+        tap(app.buttons["debugAddCash"], in: app)
+        tap(app.buttons["debugRegenerate"], in: app)
+        app.tabBars.buttons["Pazar"].tap()
+        app.navigationBars.buttons.firstMatch.tap()
+        tap(app.buttons["listing.listing-43-0"], in: app)
+        XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
     }
 
     @MainActor

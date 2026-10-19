@@ -52,7 +52,7 @@ struct RootView: View {
             Text(GameText.string(store?.errorKey ?? "save.error.write", locale: locale))
         }
         .task { if store == nil { load() } }
-        .tint(Color(red: 0.19, green: 0.36, blue: 0.43))
+        .tint(Color("AccentColor"))
     }
     private func load() {
         do {

@@ -55,3 +55,10 @@ final class GameStore {
     }
 
 }
+
+extension GameStore {
+    func previousTradeCount(with sellerID: SellerID) -> Int {
+        let acquiredIDs = Set(snapshot.player.inventory.map(\.id) + snapshot.playerListings.filter { $0.status == .sold }.map(\.itemID))
+        return snapshot.market.filter { $0.seller.id == sellerID && acquiredIDs.contains($0.item.id) }.count
+    }
+}

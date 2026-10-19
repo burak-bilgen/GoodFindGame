@@ -34,4 +34,18 @@ struct BuyerTests {
         let withdrawn = try BuyerEngine().counter(listingID: id, amount: offer.willingness.scaled(byBasisPoints: 20_000), state: state, now: .now)
         #expect(withdrawn.playerListings[0].offers.last?.status == .withdrawn)
     }
+    @Test func rejectingEveryArchetypeDoesNotPermanentlyLockInventory() throws {
+        var state = try Self.offeredState()
+        let originalCash = state.player.cash
+        let id = state.playerListings[0].id
+        let definitions = try SeedContent.load().items
+        for _ in 0..<8 {
+            state = try BuyerEngine().reject(listingID: id, state: state)
+            state = try BuyerEngine().generateOffer(listingID: id, state: state, definitions: definitions)
+        }
+        #expect(state.playerListings[0].offers.last?.status == .pending)
+        #expect(state.player.cash == originalCash)
+        #expect(state.player.inventory.count == 1)
+    }
+
 }

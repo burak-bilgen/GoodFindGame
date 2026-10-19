@@ -8,15 +8,17 @@ struct BuyerEngine {
         guard let item = state.player.inventory.first(where: { $0.id == listing.itemID }), let definition = definitions.first(where: { $0.id == item.definitionID }) else { throw TradingError.unavailable }
         let fair = try PricingEngine.fairValue(of: item, definition: definition)
         // Implausible prices attract no buyer. Price revision can restore interest.
-        guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)), listing.offers.count < 6 else { return state }
-        let archetype = BuyerArchetype.allCases[listing.offers.count % BuyerArchetype.allCases.count]
+        guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)) else { return state }
+        let offset = state.playerListings.first?.id == listing.id ? 0 : Int(SeededRandom.seed(for: item.id.rawValue) % UInt64(BuyerArchetype.allCases.count))
+        let archetype = BuyerArchetype.allCases[(listing.offers.count + offset) % BuyerArchetype.allCases.count]
+        let variant = (Int(SeededRandom.seed(for: item.id.rawValue) % 2) + listing.offers.count) % 2
         let reputationFactor = Int64(10_000 + (state.player.reputation - 50) * 10)
         let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints).scaled(byBasisPoints: reputationFactor)
         let proposed = min(try listing.askingPrice.scaled(byBasisPoints: 9_500), budget)
         var next = state
         next.playerListings[index].offers.append(BuyerOffer(id: OfferID("\(listing.id.rawValue)-buyer-\(listing.offers.count)"), archetype: archetype, identityIndex: (listing.offers.count + 3) % 10, willingness: budget, amount: proposed))
         next.playerListings[index].itemSnapshot = item
-        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.offer.\(listing.offers.count % 2)", fromPlayer: false, amount: proposed))
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.offer.\(variant)", fromPlayer: false, amount: proposed))
         next.playerListings[index].views += 3
         return next
     }
@@ -38,7 +40,7 @@ struct BuyerEngine {
     }
 
     func counter(listingID: ListingID, amount: Money, state: GameSnapshot, now: Date) throws -> GameSnapshot {
-        guard amount > .zero, amount.minorUnits <= 1_000_000_000_000 else { throw TradingError.invalidAmount }
+        guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         let index = try activeIndex(listingID, in: state)
         guard let offerIndex = state.playerListings[index].offers.indices.last,
               [.pending, .countered].contains(state.playerListings[index].offers[offerIndex].status) else { throw TradingError.closed }
@@ -55,7 +57,7 @@ struct BuyerEngine {
     }
 
     func changePrice(listingID: ListingID, amount: Money, state: GameSnapshot) throws -> GameSnapshot {
-        guard amount > .zero, amount.minorUnits <= 1_000_000_000_000 else { throw TradingError.invalidAmount }
+        guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         let index = try activeIndex(listingID, in: state)
         var next = state
         next.playerListings[index].askingPrice = amount

@@ -61,6 +61,9 @@ struct ListingCard: View {
                 Spacer()
                 Text(listing.createdAt, style: .relative)
             }.font(.caption).foregroundStyle(.secondary)
+            Text("seller.rating \((Decimal(listing.seller.ratingTenths) / 10).formatted(.number.locale(locale)))").font(.caption)
+            Text("seller.trades \(listing.seller.tradeCount)").font(.caption)
+            Text(GameText.string("npc.city.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption).foregroundStyle(.secondary)
             Text("listing.hint.inspect").font(.caption).foregroundStyle(.secondary)
         }.padding(.vertical, 8)
     }

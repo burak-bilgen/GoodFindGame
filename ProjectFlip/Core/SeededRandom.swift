@@ -1,5 +1,8 @@
 /// SplitMix64; explicit seed and state make content generation reproducible.
 struct SeededRandom: Sendable {
+    static func seed(for identifier: String) -> UInt64 {
+        identifier.utf8.reduce(14_695_981_039_346_656_037) { ($0 ^ UInt64($1)) &* 1_099_511_628_211 }
+    }
     private var state: UInt64
     init(seed: UInt64) { state = seed }
     mutating func next() -> UInt64 {

@@ -9,6 +9,9 @@ struct ProfileView: View {
             LabeledContent("wallet.cash") { Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit() }
             LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number) }
             NavigationLink("trade.history") { TradeHistoryView(store: store) }.accessibilityIdentifier("openTradeHistory")
+            #if DEBUG
+            NavigationLink("debug.title") { DeveloperToolsView(store: store) }.accessibilityIdentifier("developerTools")
+            #endif
         }.navigationTitle("profile.title")
     }
 }
@@ -49,7 +52,7 @@ struct ProfitAmount: View {
     @Environment(\.locale) private var locale
     var body: some View {
         Label(amount.formatted(locale: locale), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
-            .foregroundStyle(amount >= .zero ? .teal : .red).monospacedDigit()
+            .foregroundStyle(amount >= .zero ? Color("AccentColor") : Color("LossColor")).monospacedDigit()
     }
 }
 

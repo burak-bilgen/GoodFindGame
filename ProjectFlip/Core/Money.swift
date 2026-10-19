@@ -53,7 +53,7 @@ extension Money {
         let minor = fraction.isEmpty ? 0 : (Int64(fraction) ?? 0) * (fraction.count == 1 ? 10 : 1)
         let (units, overflow) = whole.multipliedReportingOverflow(by: 100)
         let (value, extraOverflow) = units.addingReportingOverflow(minor)
-        guard !overflow, !extraOverflow, value > 0, value <= 1_000_000_000_000 else { throw TradingError.invalidAmount }
+        guard !overflow, !extraOverflow, value > 0, value <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         return Self(minorUnits: value)
     }
 

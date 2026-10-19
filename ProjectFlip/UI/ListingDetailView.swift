@@ -4,6 +4,7 @@ struct ListingDetailView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
@@ -19,7 +20,7 @@ struct ListingDetailView: View {
                 Section("listing.description") {
                     Text(GameText.string(listing.descriptionIntent, locale: locale))
                 }
-                Section("seller.title") { SellerSummary(seller: listing.seller) }
+                Section("seller.title") { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)) }
             }
             .safeAreaInset(edge: .bottom) {
                     NavigationLink {
@@ -28,6 +29,7 @@ struct ListingDetailView: View {
                         Text("offer.start").font(.headline).frame(maxWidth: .infinity).padding()
                     }
                     .buttonStyle(.borderedProminent)
+                    .foregroundStyle(colorScheme == .dark ? .black : .white)
                     .padding().background(.regularMaterial)
                     .accessibilityIdentifier("openConversation")
             }
@@ -41,6 +43,7 @@ struct ListingDetailView: View {
 
 struct SellerSummary: View {
     let seller: SellerProfile
+    var playerTradeCount = 0
     @Environment(\.locale) private var locale
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -48,7 +51,11 @@ struct SellerSummary: View {
             Text("seller.rating \((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)))")
             Text("seller.trades \(seller.tradeCount)")
             Text(GameText.string("npc.city.\(seller.identityIndex % 10)", locale: locale)).foregroundStyle(.secondary)
-            Text("seller.history.empty").font(.caption).foregroundStyle(.secondary)
+            if playerTradeCount == 0 {
+                Text("seller.history.empty").font(.caption).foregroundStyle(.secondary)
+            } else {
+                Text("seller.history.trades \(playerTradeCount)").font(.caption).foregroundStyle(.secondary)
+            }
         }
     }
 }

@@ -2784,6 +2784,318 @@
           }
         }
       }
+    },
+    "debug.title": {
+      "comment": "DEBUG developer controls: debug.title. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer tools"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirici araçları"
+          }
+        }
+      }
+    },
+    "debug.economy": {
+      "comment": "DEBUG developer controls: debug.economy. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save & economy"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıt ve ekonomi"
+          }
+        }
+      }
+    },
+    "debug.addCash": {
+      "comment": "DEBUG developer controls: debug.addCash. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add cash"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nakit ekle"
+          }
+        }
+      }
+    },
+    "debug.regenerate": {
+      "comment": "DEBUG developer controls: debug.regenerate. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenerate market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazarı yeniden oluştur"
+          }
+        }
+      }
+    },
+    "debug.reset": {
+      "comment": "DEBUG developer controls: debug.reset. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset save"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydı sıfırla"
+          }
+        }
+      }
+    },
+    "debug.negotiation": {
+      "comment": "DEBUG developer controls: debug.negotiation. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Response controls"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yanıt kontrolleri"
+          }
+        }
+      }
+    },
+    "debug.listing": {
+      "comment": "DEBUG developer controls: debug.listing. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazar ilanı"
+          }
+        }
+      }
+    },
+    "debug.chooseListing": {
+      "comment": "DEBUG developer controls: debug.chooseListing. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir ilan seç"
+          }
+        }
+      }
+    },
+    "debug.forceSeller": {
+      "comment": "DEBUG developer controls: debug.forceSeller. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force seller counteroffer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcı karşı teklifini zorla"
+          }
+        }
+      }
+    },
+    "debug.forceBuyer": {
+      "comment": "DEBUG developer controls: debug.forceBuyer. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Force next buyer offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonraki alıcı teklifini zorla"
+          }
+        }
+      }
+    },
+    "debug.showTruth": {
+      "comment": "DEBUG developer controls: debug.showTruth. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal hidden item truth"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli ürün bilgilerini göster"
+          }
+        }
+      }
+    },
+    "debug.resetConfirm": {
+      "comment": "DEBUG developer controls: debug.resetConfirm. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset all progress in this save?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kayıttaki tüm ilerleme sıfırlansın mı?"
+          }
+        }
+      }
+    },
+    "action.cancel": {
+      "comment": "DEBUG developer controls: action.cancel. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vazgeç"
+          }
+        }
+      }
+    },
+    "debug.condition %lld": {
+      "comment": "DEBUG developer controls: debug.condition %lld. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "True condition: %lld / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçek kondisyon: %lld / 100"
+          }
+        }
+      }
+    },
+    "debug.noDefects": {
+      "comment": "DEBUG developer controls: debug.noDefects. This screen is absent from release builds.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hidden defects"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli kusur yok"
+          }
+        }
+      }
+    },
+    "seller.history.trades %lld": {
+      "comment": "Player purchases from this particular seller, retained after resale. Distinct from total NPC trade count.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "You’ve completed %lld trade with this seller."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "You’ve completed %lld trades with this seller."
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Bu satıcıyla %lld alışveriş yaptın."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Bu satıcıyla %lld alışveriş yaptın."
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "version": "1.0"

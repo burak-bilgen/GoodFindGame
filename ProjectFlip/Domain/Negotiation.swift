@@ -39,7 +39,7 @@ struct NegotiationEngine {
     func offer(_ amount: Money, modifier: OfferModifier, listing: MarketplaceListing, current: NegotiationState, reputation: Int) throws -> NegotiationState {
         guard listing.available else { throw TradingError.unavailable }
         guard !current.closed, current.agreedPrice == nil else { throw TradingError.closed }
-        guard amount > .zero, amount.minorUnits <= 1_000_000_000_000 else { throw TradingError.invalidAmount }
+        guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         var next = current
         let variant = (listing.seller.identityIndex + current.offers.count) % 2
         next.append("player.offer", player: true, amount: amount)

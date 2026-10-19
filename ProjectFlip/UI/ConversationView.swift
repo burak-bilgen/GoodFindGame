@@ -11,7 +11,7 @@ struct ConversationView: View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }) {
             let conversation = store.conversation(for: listing)
             List {
-                Section { SellerSummary(seller: listing.seller) }
+                Section { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)) }
                 Section("messages.title") {
                     Text("negotiation.intro").font(.caption).foregroundStyle(.secondary)
                     ForEach(conversation.messages) { message in
