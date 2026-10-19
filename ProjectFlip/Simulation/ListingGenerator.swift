@@ -9,9 +9,10 @@ struct PricingEngine {
 }
 
 struct ListingGenerator {
-    func generate(definitions: [ItemDefinition], seed: UInt64, now: Date, marketBasisPoints: Int64 = 10_000) throws -> [MarketplaceListing] {
+    func generate(definitions: [ItemDefinition], seed: UInt64, now: Date, marketBasisPoints: Int64 = 10_000, market: GameSnapshot? = nil) throws -> [MarketplaceListing] {
         var random = SeededRandom(seed: seed)
         return try definitions.enumerated().map { index, definition in
+            let marketBasisPoints = try market?.marketMultiplier(for: definition, at: now) ?? marketBasisPoints
             let archetype = SellerArchetype.allCases[index % SellerArchetype.allCases.count]
             let knowledge = archetype == .clueless ? 20 : (archetype == .professional ? 95 : random.integer(in: 35...80))
             let honesty = archetype == .manipulative ? 15 : random.integer(in: 65...100)

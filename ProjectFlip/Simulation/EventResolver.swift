@@ -13,6 +13,7 @@ struct EventResolver {
     func resolve(_ state: GameSnapshot, now: Date, definitions: [ItemDefinition]) throws -> EventResolution {
         let clock = try GameClock.read(now: now, lastKnownWallClock: state.lastKnownWallClock, lastSimulationAt: state.lastSimulationAt)
         var next = state
+        try MarketTrendEngine().prepare(&next, now: clock.effectiveNow, definitions: definitions)
         var outcomes: [ResolvedEvent] = []
         var buyerArrivals = 0
         while let index = next.events.indices.filter({ next.events[$0].status == .pending && next.events[$0].resolveAt <= clock.effectiveNow }).min(by: {
@@ -30,7 +31,7 @@ struct EventResolver {
                 buyerArrivals += 1
             }
             if let kind = try apply(event, to: &next, definitions: definitions) {
-                outcomes.append(ResolvedEvent(id: event.id, kind: kind, targetID: event.payload.targetID, occurredAt: event.resolveAt))
+                outcomes.append(ResolvedEvent(id: event.id, kind: kind, targetID: outcomeTarget(event, state: next), occurredAt: event.resolveAt))
             } else {
                 next.events[index].status = .cancelled
             }
@@ -50,7 +51,7 @@ struct EventResolver {
               !state.events.contains(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listingID.rawValue }) else { return }
         let seed = SeededRandom.seed(for: "\(state.simulationID)-\(state.nextEventSequence)-\(listingID.rawValue)")
         let due = now.addingTimeInterval(max(minimumDelay, timing.delay(in: timing.buyerInterest, seed: seed)))
-        let generated = try BuyerEngine().generateOffer(listingID: listingID, state: state, definitions: definitions)
+        let generated = try BuyerEngine().generateOffer(listingID: listingID, state: state, definitions: definitions, now: due)
         if let candidate = generated.playerListings.first(where: { $0.id == listingID }), candidate.offers.count > listing.offers.count,
            let offer = candidate.offers.last, let message = candidate.messages.last {
             try state.enqueue(.buyerOffer(listingID: listingID, expectedOfferCount: listing.offers.count, offer: offer, intent: message.intent, expiresAt: due.addingTimeInterval(timing.offerLifetime)), createdAt: now, resolveAt: due)
@@ -67,6 +68,8 @@ struct EventResolver {
         for index in state.events.indices where state.events[index].status == .pending {
             let valid: Bool
             switch state.events[index].payload {
+            case .marketCycle(let index): valid = state.marketCalendar != nil && index > (state.lastMarketCycle ?? -1)
+            case .marketTrendEnded(let id): valid = state.marketTrends.contains { $0.id == id }
             case .sellerReply(let id, _, _):
                 valid = state.market.contains { $0.id == id && $0.available } && state.conversations.contains { $0.listingID == id && !$0.closed && $0.pendingReplyEventID == state.events[index].id }
             case .sellerOfferExpired(let id, let expiresAt):
@@ -92,8 +95,19 @@ struct EventResolver {
         }
     }
 
+    private func outcomeTarget(_ event: GameEvent, state: GameSnapshot) -> String {
+        if case .marketCycle(let index) = event.payload, let calendar = state.marketCalendar {
+            return "trend-\(calendar.seed)-\(index)"
+        }
+        return event.payload.targetID
+    }
+
     private func apply(_ event: GameEvent, to state: inout GameSnapshot, definitions: [ItemDefinition]) throws -> ResolvedEventKind? {
         switch event.payload {
+        case .marketCycle(let index):
+            return try MarketTrendEngine().start(index: index, state: &state) ? .marketTrend : nil
+        case .marketTrendEnded(let id):
+            return state.marketTrends.contains { $0.id == id } ? .marketTrend : nil
         case .sellerReply(let id, var reply, let expiresAt):
             guard state.market.contains(where: { $0.id == id && $0.available }),
                   let index = state.conversations.firstIndex(where: { $0.listingID == id && !$0.closed && $0.pendingReplyEventID == event.id }) else { return nil }

@@ -23,7 +23,7 @@ extension GameStore {
             next.conversations[index].counterPrice = nil
             next.conversations[index].agreedPrice = nil
         }
-        next.market += try ListingGenerator().generate(definitions: definitions, seed: next.generation, now: .now)
+        next.market += try ListingGenerator().generate(definitions: definitions, seed: next.generation, now: next.lastSimulationAt ?? .now, market: next)
         EventResolver(timing: timing).reconcile(&next)
         try commit(next)
     }

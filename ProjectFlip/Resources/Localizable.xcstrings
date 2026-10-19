@@ -4194,6 +4194,312 @@
           }
         }
       }
+    },
+    "trend.title": {
+      "comment": "Navigation entry and title for temporary market demand events.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market trends"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piyasa eğilimleri"
+          }
+        }
+      }
+    },
+    "trend.heading": {
+      "comment": "Headline on the market trends screen.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read the market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piyasanın nabzını tut"
+          }
+        }
+      }
+    },
+    "trend.explanation": {
+      "comment": "Explains bounded demand effects without promising a guaranteed sale price.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demand shifts affect value estimates and new offers. Condition still matters, and existing offers keep their agreed price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talep değiştikçe değer tahminleri ve yeni teklifler de değişir. Ürünün durumu hâlâ önemlidir; verilmiş tekliflerin fiyatı korunur."
+          }
+        }
+      }
+    },
+    "trend.unlock": {
+      "comment": "Trends unlock after the first completed player resale; core trade remains available.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete your first sale to start following market trends."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk satışını tamamla, piyasa eğilimlerini takip etmeye başla."
+          }
+        }
+      }
+    },
+    "trend.stable": {
+      "comment": "Neutral interval between temporary trends, not a promise that item prices cannot vary.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No demand shift is active right now. Keep an eye on the market."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şu anda etkin bir talep değişimi yok. Piyasayı takipte kal."
+          }
+        }
+      }
+    },
+    "trend.scopeUnavailable": {
+      "comment": "Fallback for a model removed from a future content pack.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archived product"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arşivlenmiş ürün"
+          }
+        }
+      }
+    },
+    "trend.active": {
+      "comment": "Temporary market trend is within its start/end dates.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devam ediyor"
+          }
+        }
+      }
+    },
+    "trend.ended": {
+      "comment": "Historical market trend no longer affects valuations.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ended"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sona erdi"
+          }
+        }
+      }
+    },
+    "trend.starts": {
+      "comment": "Local date and time when this market trend starts.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Started"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç"
+          }
+        }
+      }
+    },
+    "trend.ends": {
+      "comment": "Local date and time when this market trend ends, also shown for history.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ends"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitiş"
+          }
+        }
+      }
+    },
+    "trend.remaining": {
+      "comment": "Countdown until a temporary market trend expires.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalan süre"
+          }
+        }
+      }
+    },
+    "trend.reason.creatorSpotlight": {
+      "comment": "Reason for a positive model-specific trend; no real celebrity or brand.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A fictional creator’s showcase has collectors looking for this model."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurgusal bir içerik üreticisi bu modeli tanıtınca koleksiyoncuların ilgisi arttı."
+          }
+        }
+      }
+    },
+    "trend.reason.newModelLaunch": {
+      "comment": "Reason for a negative model-specific trend.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new fictional model has shifted demand away from this one."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir kurgusal model çıkınca bu modele olan talep azaldı."
+          }
+        }
+      }
+    },
+    "trend.reason.seasonalDemand": {
+      "comment": "Reason for a positive category-wide demand trend.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seasonal interest is bringing more buyers to this category."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevsimsel ilgi bu kategoriye daha çok alıcı çekiyor."
+          }
+        }
+      }
+    },
+    "trend.reason.coolingDemand": {
+      "comment": "Reason for a negative temporary category demand trend.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer interest in this category has eased for now."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcıların bu kategoriye ilgisi şimdilik azaldı."
+          }
+        }
+      }
+    },
+    "away.marketTrend": {
+      "comment": "Return-report group for trend starts and ends; links to the actual historical trend.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market movements"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piyasa hareketleri"
+          }
+        }
+      }
+    },
+    "notifications.marketTrend": {
+      "comment": "Actual scheduled market trend: scope, signed locale-formatted percentage, localized reason. Category can be disabled.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: %2$@ demand shift. %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@: talep değişimi %2$@. %3$@"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -236,7 +236,13 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
-    private func verifyShell(language: String, market: String, inventory: String) {
+    func testMarketTrendsEnglish() { verifyShell(language: "en", market: "Market", inventory: "Inventory", followTrends: true) }
+
+    @MainActor
+    func testMarketTrendsTurkish() { verifyShell(language: "tr", market: "Pazar", inventory: "Envanter", followTrends: true) }
+
+    @MainActor
+    private func verifyShell(language: String, market: String, inventory: String, followTrends: Bool = false) {
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US"]
@@ -270,6 +276,27 @@ final class ProjectFlipUITests: XCTestCase {
         app.tabBars.buttons[language == "tr" ? "Profil" : "Profile"].tap()
         app.buttons["openTradeHistory"].tap()
         XCTAssertTrue(app.buttons["trade.resale-item-42-0-0"].waitForExistence(timeout: 5))
+        if followTrends {
+            app.navigationBars.buttons.firstMatch.tap()
+            tap(app.buttons["developerTools"], in: app)
+            tap(app.buttons["debugAdvanceDay"], in: app)
+            XCTAssertTrue(app.navigationBars[language == "tr" ? "Sen yokken" : "While you were away"].waitForExistence(timeout: 5))
+            tap(app.buttons[language == "tr" ? "Tamam" : "Done"], in: app)
+            app.tabBars.buttons[market].tap()
+            tap(app.buttons["openMarketTrends"], in: app)
+            let trend = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "marketTrend.")).firstMatch
+            tap(trend, in: app)
+            XCTAssertTrue(app.staticTexts[language == "tr" ? "Devam ediyor" : "Active"].waitForExistence(timeout: 5))
+            XCTAssertTrue(app.staticTexts[language == "tr" ? "Kalan süre" : "Time remaining"].exists)
+            let screenshot = XCTAttachment(screenshot: app.screenshot())
+            screenshot.name = "Actual market trend: \(language)"
+            screenshot.lifetime = .keepAlways
+            add(screenshot)
+            app.terminate()
+            app.launch()
+            tap(app.buttons["openMarketTrends"], in: app)
+            XCTAssertTrue(app.staticTexts[language == "tr" ? "Devam ediyor" : "Active"].waitForExistence(timeout: 5))
+        }
     }
     @MainActor
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {

@@ -11,13 +11,14 @@ struct NotificationPreferences: Codable, Equatable {
 }
 
 struct GameRoute: Codable, Hashable, Identifiable, Sendable {
-    enum Kind: String, Codable, Sendable { case conversation, inventory, sale, notificationSettings, unavailable }
+    enum Kind: String, Codable, Sendable { case conversation, inventory, sale, marketTrend, notificationSettings, unavailable }
     let kind: Kind
     let targetID: String?
     var id: String { "\(kind.rawValue)-\(targetID ?? "")" }
     static func conversation(_ id: ListingID) -> Self { Self(kind: .conversation, targetID: id.rawValue) }
     static func inventory(_ id: ItemID) -> Self { Self(kind: .inventory, targetID: id.rawValue) }
     static func sale(_ id: ListingID) -> Self { Self(kind: .sale, targetID: id.rawValue) }
+    static func trend(_ id: String) -> Self { Self(kind: .marketTrend, targetID: id) }
     static let settings = Self(kind: .notificationSettings, targetID: nil)
     static let unavailable = Self(kind: .unavailable, targetID: nil)
 
@@ -28,7 +29,7 @@ struct GameRoute: Codable, Hashable, Identifiable, Sendable {
         guard value.utf8.count < 2_048 else { throw RouteError.invalid }
         let route = try JSONDecoder().decode(Self.self, from: Data(value.utf8))
         switch route.kind {
-        case .conversation, .inventory, .sale:
+        case .conversation, .inventory, .sale, .marketTrend:
             guard let target = route.targetID, !target.isEmpty, target.utf8.count <= 512 else { throw RouteError.invalid }
         case .notificationSettings, .unavailable: break
         }
@@ -60,6 +61,14 @@ struct NotificationPlanner {
             let body: String
             let route: GameRoute
             switch event.payload {
+            case .marketCycle(let index):
+                guard let calendar = state.marketCalendar else { continue }
+                let trend = try calendar.trend(at: index)
+                category = .market
+                body = GameText.format("notifications.marketTrend", locale: locale,
+                                       trend.scope.displayName(definitions: definitions, locale: locale),
+                                       trend.formattedChange(locale: locale), GameText.string(trend.reason.key, locale: locale))
+                route = .trend(trend.id)
             case .sellerReply(let id, let reply, let expiresAt):
                 guard let listing = state.market.first(where: { $0.id == id }) else { continue }
                 category = .offers
@@ -88,7 +97,7 @@ struct NotificationPlanner {
                 let expiry = projected(expiresAt).formatted(.dateTime.hour().minute().locale(locale))
                 body = GameText.format("notifications.buyerOffer", locale: locale, offer.amount.formatted(locale: locale), expiry)
                 route = .sale(id)
-            case .sellerOfferExpired, .buyerOfferExpired, .buyerInterest:
+            case .sellerOfferExpired, .buyerOfferExpired, .buyerInterest, .marketTrendEnded:
                 continue
             }
             guard state.notificationPreferences.enabledCategories.contains(category) else { continue }

@@ -6,7 +6,7 @@ struct ResaleEngine {
         guard let item = state.player.inventory.first(where: { $0.id == itemID }), let definition = definitions.first(where: { $0.id == item.definitionID }) else { throw TradingError.unavailable }
         guard item.inspected else { throw TradingError.inspectFirst }
         guard !state.playerListings.contains(where: { $0.itemID == itemID && $0.status == .active }) else { throw TradingError.alreadyDone }
-        let fair = try PricingEngine.fairValue(of: item, definition: definition)
+        let fair = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: state.marketMultiplier(for: definition, at: now))
         // Phase A resolves initial attention immediately. These persisted counters come from the price model.
         let (scaled, overflow) = askingPrice.minorUnits.multipliedReportingOverflow(by: 10_000)
         guard !overflow, fair > .zero else { throw TradingError.invalidAmount }

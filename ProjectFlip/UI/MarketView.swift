@@ -93,6 +93,11 @@ struct MarketView: View {
         .listStyle(.insetGrouped)
         .navigationTitle("market.title")
         .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink { MarketTrendsView(store: store) } label: {
+                    Label("trend.title", systemImage: "chart.line.uptrend.xyaxis")
+                }.accessibilityIdentifier("openMarketTrends")
+            }
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
                 Button("action.done") { priceInputFocused = false }

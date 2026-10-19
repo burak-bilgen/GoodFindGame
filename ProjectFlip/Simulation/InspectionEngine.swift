@@ -32,8 +32,8 @@ struct InspectionEngine {
         return next
     }
 
-    func estimatedValue(item: ItemInstance, definition: ItemDefinition) throws -> Money {
+    func estimatedValue(item: ItemInstance, definition: ItemDefinition, marketBasisPoints: Int64 = 10_000) throws -> Money {
         let known = ItemInstance(id: item.id, definitionID: item.definitionID, condition: item.condition, hiddenDefects: item.revealedDefects)
-        return try PricingEngine.fairValue(of: known, definition: definition)
+        return try PricingEngine.fairValue(of: known, definition: definition, marketBasisPoints: marketBasisPoints)
     }
 }

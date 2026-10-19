@@ -23,7 +23,7 @@ struct CreateListingView: View {
         }.navigationTitle("selling.create")
             .onAppear {
                 if price.isEmpty, let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
-                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition) }) {
+                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                     case .success(let estimate): price = estimate.inputText(locale: locale)
                     case .failure: store.errorKey = "inspection.valueUnavailable"
                     }

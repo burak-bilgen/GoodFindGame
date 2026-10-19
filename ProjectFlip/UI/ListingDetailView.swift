@@ -14,7 +14,10 @@ struct ListingDetailView: View {
                     Text(definition.name).font(.title.bold())
                     LabeledContent("listing.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
                     LabeledContent("listing.claimedCondition") { Text(listing.claimedCondition, format: .number).monospacedDigit() }
-                    LabeledContent("listing.referenceValue") { Text(definition.baseValue.formatted(locale: locale)) }
+                    switch Result(catching: { try definition.baseValue.scaled(byBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
+                    case .success(let reference): LabeledContent("listing.referenceValue") { Text(reference.formatted(locale: locale)) }
+                    case .failure: Text("inspection.valueUnavailable")
+                    }
                     Text("listing.claimWarning").font(.caption).foregroundStyle(.secondary)
                 }
                 Section("listing.description") {

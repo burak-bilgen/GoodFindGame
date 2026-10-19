@@ -42,7 +42,9 @@ struct WhileAwayView: View {
     }
 
     @ViewBuilder private func destination(_ outcome: ResolvedEvent) -> some View {
-        if store.snapshot.market.contains(where: { $0.id.rawValue == outcome.targetID }) {
+        if let trend = store.snapshot.marketTrends.first(where: { $0.id == outcome.targetID }) {
+            MarketTrendDetailView(store: store, trend: trend)
+        } else if store.snapshot.market.contains(where: { $0.id.rawValue == outcome.targetID }) {
             ConversationView(store: store, listingID: ListingID(outcome.targetID))
         } else if store.snapshot.playerListings.contains(where: { $0.id.rawValue == outcome.targetID }) {
             SaleListingView(store: store, listingID: ListingID(outcome.targetID))

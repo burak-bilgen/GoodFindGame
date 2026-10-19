@@ -1,12 +1,12 @@
 import Foundation
 
 struct BuyerEngine {
-    func generateOffer(listingID: ListingID, state: GameSnapshot, definitions: [ItemDefinition]) throws -> GameSnapshot {
+    func generateOffer(listingID: ListingID, state: GameSnapshot, definitions: [ItemDefinition], now: Date? = nil) throws -> GameSnapshot {
         let index = try activeIndex(listingID, in: state)
         let listing = state.playerListings[index]
         guard !listing.offers.contains(where: { $0.status == .pending || $0.status == .countered }) else { throw TradingError.alreadyDone }
         guard let item = state.player.inventory.first(where: { $0.id == listing.itemID }), let definition = definitions.first(where: { $0.id == item.definitionID }) else { throw TradingError.unavailable }
-        let fair = try PricingEngine.fairValue(of: item, definition: definition)
+        let fair = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: state.marketMultiplier(for: definition, at: now))
         // Implausible prices attract no buyer. Price revision can restore interest.
         guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)) else { return state }
         let offset = state.playerListings.first?.id == listing.id ? 0 : Int(SeededRandom.seed(for: item.id.rawValue) % UInt64(BuyerArchetype.allCases.count))

@@ -10,11 +10,14 @@ enum GameEventPayload: Codable, Equatable {
     case buyerOffer(listingID: ListingID, expectedOfferCount: Int, offer: BuyerOffer, intent: String, expiresAt: Date)
     case buyerOfferExpired(listingID: ListingID, offerID: OfferID)
     case buyerInterest(listingID: ListingID)
+    case marketCycle(index: Int)
+    case marketTrendEnded(trendID: String)
 
     var targetID: String {
         switch self {
         case .sellerReply(let id, _, _), .sellerOfferExpired(let id, _), .buyerOffer(let id, _, _, _, _), .buyerOfferExpired(let id, _), .buyerInterest(let id): id.rawValue
-        case .shipmentArrived(let id), .inspectionCompleted(let id): id
+        case .shipmentArrived(let id), .inspectionCompleted(let id), .marketTrendEnded(let id): id
+        case .marketCycle(let index): "market-cycle-\(index)"
         }
     }
 
@@ -51,7 +54,7 @@ struct InspectionJob: Codable, Identifiable, Equatable {
     var status: ScheduledStatus = .pending
 }
 
-enum ResolvedEventKind: String, Codable, CaseIterable { case sellerReply, shipment, inspection, buyerOffer, offerExpired }
+enum ResolvedEventKind: String, Codable, CaseIterable { case sellerReply, shipment, inspection, buyerOffer, offerExpired, marketTrend }
 struct ResolvedEvent: Codable, Identifiable, Equatable {
     let id: String
     let kind: ResolvedEventKind

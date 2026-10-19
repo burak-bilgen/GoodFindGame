@@ -26,7 +26,7 @@ struct DeveloperToolsView: View {
             }
             Section("debug.time") {
                 Button("debug.advance30Minutes") { store.perform { try store.debugAdvanceTime(by: 30 * 60) } }.accessibilityIdentifier("debugAdvance30Minutes")
-                Button("debug.advanceDay") { store.perform { try store.debugAdvanceTime(by: 24 * 60 * 60) } }
+                Button("debug.advanceDay") { store.perform { try store.debugAdvanceTime(by: 24 * 60 * 60) } }.accessibilityIdentifier("debugAdvanceDay")
             }
             Section("debug.negotiation") {
                 Picker("debug.listing", selection: $selectedListing) {
@@ -62,7 +62,7 @@ struct DeveloperToolsView: View {
             if let definition = store.definition(for: item) {
                 Text(definition.name).bold()
                 Text("debug.condition \(item.condition)")
-                switch Result(catching: { try PricingEngine.fairValue(of: item, definition: definition) }) {
+                switch Result(catching: { try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                 case .success(let value): Text(value.formatted(locale: locale))
                 case .failure: Text("inspection.valueUnavailable")
                 }

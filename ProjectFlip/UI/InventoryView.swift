@@ -48,7 +48,7 @@ struct OwnedItemView: View {
                     }.accessibilityIdentifier("basicInspect")
                 } else {
                     LabeledContent("inspection.condition") { Text(item.condition, format: .number) }
-                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition) }) {
+                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                     case .success(let estimate):
                         LabeledContent("inspection.estimatedValue") { Text(estimate.formatted(locale: locale)) }
                     case .failure:
