@@ -42,7 +42,7 @@ struct RootView: View {
             }
             .tabItem { Label("selling.title", systemImage: "tag") }
             NavigationStack {
-                Text("profile.intro").padding().navigationTitle("profile.title")
+                if let store { ProfileView(store: store) }
             }
             .tabItem { Label("profile.title", systemImage: "person.crop.circle") }
         }

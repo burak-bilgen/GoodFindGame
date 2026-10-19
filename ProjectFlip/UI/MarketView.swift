@@ -20,7 +20,7 @@ struct MarketView: View {
                     HStack {
                         Text("wallet.cash")
                         Spacer()
-                        Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold()
+                        Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold().contentTransition(.numericText())
                     }.padding(.top, 8)
                 }.padding(.vertical, 10)
             }

@@ -43,6 +43,9 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         app.tabBars.buttons[inventory].tap()
         XCTAssertTrue(app.staticTexts[language == "tr" ? "İlk ürününü pazarda bul." : "Find your first item in the market."].waitForExistence(timeout: 5))
+        app.tabBars.buttons[language == "tr" ? "Profil" : "Profile"].tap()
+        app.buttons["openTradeHistory"].tap()
+        XCTAssertTrue(app.buttons["trade.resale-item-42-0-0"].waitForExistence(timeout: 5))
     }
     @MainActor
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {

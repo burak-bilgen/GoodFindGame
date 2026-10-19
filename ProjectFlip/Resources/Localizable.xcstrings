@@ -2544,6 +2544,246 @@
           }
         }
       }
+    },
+    "profile.inventoryCapacity": {
+      "comment": "Financial ledger: profile.inventoryCapacity. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inventory capacity"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envanter kapasitesi"
+          }
+        }
+      }
+    },
+    "trade.history": {
+      "comment": "Financial ledger: trade.history. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trade history"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alışveriş geçmişi"
+          }
+        }
+      }
+    },
+    "trade.totalRealized": {
+      "comment": "Financial ledger: trade.totalRealized. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Realized profit / loss"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçekleşen kâr / zarar"
+          }
+        }
+      }
+    },
+    "trade.unavailable": {
+      "comment": "Financial ledger: trade.unavailable. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This trade’s records couldn’t be read. Your save has been preserved."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu alışverişin kayıtları okunamadı. Oyun kaydın korundu."
+          }
+        }
+      }
+    },
+    "trade.inspectionCost": {
+      "comment": "Financial ledger: trade.inspectionCost. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspection costs"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme maliyeti"
+          }
+        }
+      }
+    },
+    "trade.repairCost": {
+      "comment": "Financial ledger: trade.repairCost. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repair costs"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onarım maliyeti"
+          }
+        }
+      }
+    },
+    "trade.totalCost": {
+      "comment": "Financial ledger: trade.totalCost. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total cost"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toplam maliyet"
+          }
+        }
+      }
+    },
+    "trade.soldFor": {
+      "comment": "Financial ledger: trade.soldFor. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sale proceeds"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satış tutarı"
+          }
+        }
+      }
+    },
+    "trade.netProfit": {
+      "comment": "Financial ledger: trade.netProfit. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Net profit / loss"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Net kâr / zarar"
+          }
+        }
+      }
+    },
+    "trade.receipt": {
+      "comment": "Financial ledger: trade.receipt. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trade breakdown"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alışveriş dökümü"
+          }
+        }
+      }
+    },
+    "trade.explanation": {
+      "comment": "Financial ledger: trade.explanation. Realized results count completed sales only.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Net result = sale proceeds − acquisition − inspection − repairs. Condition, asking price and the buyer’s valuation affect the sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Net sonuç = satış tutarı − alış maliyeti − inceleme − onarım. Kondisyon, ilan fiyatı ve alıcının biçtiği değer satış tutarını etkiler."
+          }
+        }
+      }
+    },
+    "trade.count %lld": {
+      "comment": "Number of completed player sales in the ledger.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld completed trade"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld completed trades"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld tamamlanan alışveriş"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld tamamlanan alışveriş"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "version": "1.0"

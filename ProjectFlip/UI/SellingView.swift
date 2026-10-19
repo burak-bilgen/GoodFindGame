@@ -76,6 +76,12 @@ struct SaleListingView: View {
                 }
                 if listing.status == .sold {
                     Label("selling.sold", systemImage: "checkmark.seal.fill").accessibilityIdentifier("saleCompleted")
+                    switch Result(catching: { try TradeRecord(listing: listing) }) {
+                    case .success(let record):
+                        LabeledContent("trade.netProfit") { ProfitAmount(amount: record.netProfit) }
+                        NavigationLink("trade.receipt") { TradeReceiptView(record: record) }
+                    case .failure: Text("trade.unavailable")
+                    }
                 } else if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
                     Section("buyer.title") {
                         Text(GameText.string("npc.name.\(offer.identityIndex)", locale: locale))
