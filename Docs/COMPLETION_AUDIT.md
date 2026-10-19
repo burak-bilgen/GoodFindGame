@@ -5,8 +5,8 @@ The objective remains the full master brief plus engineering/localization requir
 | Requirement group | Current evidence | Remaining proof/work |
 | --- | --- | --- |
 | Original iPhone/iOS 17+ identity, dependency-light SwiftUI | Committed project; simulator Debug/Release builds; original seed content/art | Physical-device validation; final name clearance before shipping |
-| Phase A trading, stable hidden truth, exact currency, saves | Domain/unit tests; localized UI first trade/history; atomic save-failure test | Five-trade UI evaluation and ongoing gameplay tuning |
-| Deterministic offline event queue and clocks | Not implemented | Persisted events; chronological/exactly-once catch-up; delayed replies, shipping, inspection and buyer interest; backward/large-forward clock handling; DEBUG time travel |
+| Phase A trading, stable hidden truth, exact currency, saves | Domain/unit tests; localized UI first trade/history; atomic save-failure test | Five-trade UI evaluation passed; ongoing gameplay/human enjoyment tuning remains |
+| Deterministic offline event queue and clocks | Foundation implemented; 9 event/clock tests plus existing regressions | Wire persisted chronological/exactly-once resolution into live actions and foreground catch-up; delayed replies, shipping, inspection and buyer interest; DEBUG time travel |
 | Notifications and routes | Not implemented | Contextual opt-in; five category settings; actual scheduled outcomes; cancellation/deduplication; exact-object deep links; TR/EN text tests |
 | Market depth | Basic feed and pricing only | Search, price/category/watched filters, watchlist, trends, competition, listing expiry and coherent refresh |
 | Content/category knowledge | Ten gaming definitions and five defects | Three categories; 45–60 definitions; 20–30 defects; camera/retro clues; knowledge progression; economically meaningful timed repair |

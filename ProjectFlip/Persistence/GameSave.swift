@@ -7,8 +7,15 @@ struct GameSnapshot: Codable, Equatable {
     var generation: UInt64
     var conversations: [NegotiationState] = []
     var playerListings: [PlayerListing] = []
+    var simulationID = UUID().uuidString
+    var nextEventSequence: UInt64 = 0
+    var events: [GameEvent] = []
+    var shipments: [Shipment] = []
+    var inspectionJobs: [InspectionJob] = []
+    var lastKnownWallClock: Date?
+    var lastSimulationAt: Date?
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -20,6 +27,13 @@ struct GameSnapshot: Codable, Equatable {
         generation = try values.decode(UInt64.self, forKey: .generation)
         conversations = try values.decodeIfPresent([NegotiationState].self, forKey: .conversations) ?? []
         playerListings = try values.decodeIfPresent([PlayerListing].self, forKey: .playerListings) ?? []
+        simulationID = try values.decodeIfPresent(String.self, forKey: .simulationID) ?? "legacy-\(generation)"
+        nextEventSequence = try values.decodeIfPresent(UInt64.self, forKey: .nextEventSequence) ?? 0
+        events = try values.decodeIfPresent([GameEvent].self, forKey: .events) ?? []
+        shipments = try values.decodeIfPresent([Shipment].self, forKey: .shipments) ?? []
+        inspectionJobs = try values.decodeIfPresent([InspectionJob].self, forKey: .inspectionJobs) ?? []
+        lastKnownWallClock = try values.decodeIfPresent(Date.self, forKey: .lastKnownWallClock)
+        lastSimulationAt = try values.decodeIfPresent(Date.self, forKey: .lastSimulationAt)
     }
 
     static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now) throws -> Self {
@@ -39,7 +53,11 @@ struct SaveRepository {
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         let state = try JSONDecoder().decode(GameSnapshot.self, from: Data(contentsOf: url))
         guard state.schemaVersion == 1, state.player.cash >= .zero,
-              Set(state.market.map(\.id)).count == state.market.count else { throw SaveError.invalidSave }
+              Set(state.market.map(\.id)).count == state.market.count,
+              Set(state.events.map(\.id)).count == state.events.count,
+              Set(state.events.map(\.sequence)).count == state.events.count,
+              state.events.allSatisfy({ $0.sequence <= state.nextEventSequence && $0.resolveAt >= $0.createdAt }),
+              Set(state.player.inventory.map(\.id)).count == state.player.inventory.count else { throw SaveError.invalidSave }
         return state
     }
 

@@ -3096,6 +3096,60 @@
           }
         }
       }
+    },
+    "seller.offerExpired": {
+      "comment": "Persisted simulation outcome: seller.offerExpired. This is a real elapsed offer expiry, not invented urgency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That offer has expired. The seller is no longer holding that price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklifin süresi doldu. Satıcı artık bu fiyatı bekletmiyor."
+          }
+        }
+      }
+    },
+    "buyer.expired": {
+      "comment": "Persisted simulation outcome: buyer.expired. This is a real elapsed offer expiry, not invented urgency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The buyer moved on. This offer has expired."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı vazgeçti. Bu teklifin süresi doldu."
+          }
+        }
+      }
+    },
+    "seller.replyUnavailable": {
+      "comment": "System message when a pending seller response becomes obsolete, for example because its listing disappeared.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This conversation is no longer active."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu konuşma artık etkin değil."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

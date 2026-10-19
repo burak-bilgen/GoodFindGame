@@ -1,8 +1,8 @@
 # Milestones
 
-Current: Section 47 Tasks 1–12 are implemented. The Phase A trading loop is playable; this is not a finished V1 release.
+Current: Phase A has been mechanically evaluated and Section 48 steps 1–3 (persisted events, clock and deterministic resolver) are implemented. The UI still resolves interactions immediately until the next integration milestone. This is not a finished V1 release.
 
-Next highest priority: playtest at least five trades and evaluate the brief’s fun/kill criteria. Improve weak decisions before starting Phase B offline event resolution. Automated correctness does not establish enjoyment.
+Next highest priority: Section 48 steps 4–9 — connect timed seller replies, shipping, professional inspection and buyer offers to gameplay commands, then foreground catch-up and the while-away summary. Human fun/retention testing remains necessary.
 
 Final verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
@@ -45,3 +45,5 @@ Task 12 complete: DEBUG save reset/cash/market regeneration/hidden truth/forced 
 Phase A resolves interactions immediately. Shipping, delayed replies/inspection, offline event catch-up, notifications, progression, Game Center, monetization and later content have not been implemented. Auctions remain strict stretch scope after required MVP systems and polish are healthy; otherwise V1.1.
 
 2026-10-20: Phase A mechanics evaluation completed. Twenty-three unit tests and a five-consecutive-trade UI test pass; receipt inspection confirms gains and losses. Corrected seller reservation pricing to use seller belief rather than hidden omniscient truth. See PHASE_A_EVALUATION.md. Proceeding to Section 48's offline event foundation under the user's full-project execution instruction; human fun/retention validation remains a release requirement.
+
+2026-10-20: Section 48 foundation complete. Queue/job serialization, stable event identity/seeds, chronological chained resolution, expiry/cancellation, bounded buyer generation, history pruning and normalized clock recovery are covered by 32 passing unit tests. All four UI regressions (TR/EN first trade, five-trade UI evaluation, large Turkish text/developer tools) passed after the persisted queue additions. Final clock/cancellation refinements were rebuilt and unit-tested. Localization completeness/format checks pass for 171 keys. This milestone deliberately does not claim that the app's user actions are asynchronous yet; see OFFLINE_SIMULATION.md for the integration contract.
