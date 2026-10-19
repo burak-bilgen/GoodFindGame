@@ -30,7 +30,7 @@ struct ConversationView: View {
                         }.disabled(conversation.askedAboutIssues).accessibilityIdentifier("askIssues")
                         TextField("offer.amount", text: $amount).keyboardType(.decimalPad).accessibilityIdentifier("offerAmount")
                         Picker("offer.modifier", selection: $modifier) {
-                            ForEach(OfferModifier.allCases, id: \.self) { modifier in
+                            ForEach(OfferModifier.allCases.filter { $0 != .knownIssues || !conversation.knownDefects.isEmpty }, id: \.self) { modifier in
                                 Text(GameText.string(modifier.key, locale: locale)).tag(modifier)
                             }
                         }
@@ -63,6 +63,11 @@ struct ConversationView: View {
                     Section {
                         Text("offer.agreed")
                         Text(price.formatted(locale: locale)).font(.title2.bold())
+                        if listing.available && !conversation.closed {
+                            Button("purchase.confirm") {
+                                store.perform { try store.commit(PurchaseEngine().buy(listingID: listing.id, state: store.snapshot, now: .now)) }
+                            }.accessibilityIdentifier("confirmPurchase")
+                        }
                     }
                 }
             }

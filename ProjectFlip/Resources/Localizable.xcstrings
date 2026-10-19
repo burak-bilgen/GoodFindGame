@@ -1806,6 +1806,96 @@
           }
         }
       }
+    },
+    "purchase.confirm": {
+      "comment": "Purchase/inventory state: purchase.confirm.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm purchase"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satın almayı onayla"
+          }
+        }
+      }
+    },
+    "purchase.completed": {
+      "comment": "Purchase/inventory state: purchase.completed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase complete. Your item is in Inventory."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satın alma tamamlandı. Ürünün envanterinde."
+          }
+        }
+      }
+    },
+    "purchase.cost": {
+      "comment": "Purchase/inventory state: purchase.cost.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acquisition cost"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alış maliyeti"
+          }
+        }
+      }
+    },
+    "inspection.pendingBasic": {
+      "comment": "Purchase/inventory state: inspection.pendingBasic.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not inspected yet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz incelenmedi"
+          }
+        }
+      }
+    },
+    "inspection.basicComplete": {
+      "comment": "Purchase/inventory state: inspection.basicComplete.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Basic inspection complete"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temel inceleme tamamlandı"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

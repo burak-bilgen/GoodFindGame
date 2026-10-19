@@ -34,8 +34,7 @@ struct RootView: View {
             }
             .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }
             NavigationStack {
-                ContentUnavailableView("inventory.title", systemImage: "shippingbox", description: Text("inventory.empty"))
-                    .navigationTitle("inventory.title")
+                if let store { InventoryView(store: store) }
             }
             .tabItem { Label("inventory.title", systemImage: "shippingbox") }
             NavigationStack {
@@ -58,7 +57,14 @@ struct RootView: View {
     }
     private func load() {
         do {
-            store = try GameStore(repository: .application(), definitions: SeedContent.load().items)
+            var repository = try SaveRepository.application()
+            #if DEBUG
+            let arguments = ProcessInfo.processInfo.arguments
+            if let index = arguments.firstIndex(of: "--uitest-save"), arguments.indices.contains(index + 1), let id = UUID(uuidString: arguments[index + 1]) {
+                repository = SaveRepository(url: FileManager.default.temporaryDirectory.appendingPathComponent("UITests/\(id.uuidString).json"))
+            }
+            #endif
+            store = try GameStore(repository: repository, definitions: SeedContent.load().items)
             failed = false
         } catch {
             failed = true
