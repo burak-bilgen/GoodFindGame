@@ -74,6 +74,13 @@ struct ConversationView: View {
             }
             .navigationTitle("messages.title")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if store.hasExperiencedAsyncEvent && !store.snapshot.notificationPreferences.permissionPrompted && LocalNotificationService.shared.authorization != .allowed && LocalNotificationService.shared.authorization != .denied {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink { NotificationSettingsView(store: store) } label: { Label("notifications.enable", systemImage: "bell.badge").labelStyle(.iconOnly) }
+                    }
+                }
+            }
             .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale) } }
         }
     }

@@ -103,6 +103,73 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testNotificationCategoriesPersistAndRouteOpensExactConversation() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        app.tabBars.buttons["Profile"].tap()
+        tap(app.buttons["notificationSettings"], in: app)
+        if app.buttons["enableNotifications"].exists { XCTAssertFalse(app.buttons["enableNotifications"].isEnabled) }
+        let category = app.switches["notificationCategory.offers"]
+        XCTAssertTrue(category.waitForExistence(timeout: 5))
+        category.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        let switchedOff = XCTNSPredicateExpectation(predicate: NSPredicate(format: "value == %@", "0"), object: category)
+        XCTAssertEqual(XCTWaiter.wait(for: [switchedOff], timeout: 3), .completed)
+        XCTAssertEqual(category.value as? String, "0")
+        app.tabBars.buttons["Market"].tap()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        app.terminate()
+        app.launchArguments += ["--uitest-route", "{\"kind\":\"conversation\",\"targetID\":\"listing-42-0\"}"]
+        app.launch()
+        XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 10))
+        tap(app.buttons["closeNotificationDestination"], in: app)
+        app.tabBars.buttons["Profile"].tap()
+        tap(app.buttons["notificationSettings"], in: app)
+        XCTAssertEqual(app.switches["notificationCategory.offers"].value as? String, "0")
+    }
+
+    @MainActor
+    func testNativeNotificationDeliveryAndTapRouting() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["askIssues"], in: app)
+        app.tabBars.buttons["Profile"].tap()
+        tap(app.buttons["notificationSettings"], in: app)
+        if app.buttons["enableNotifications"].exists {
+            app.buttons["enableNotifications"].tap()
+            let alert = XCUIApplication(bundleIdentifier: "com.apple.springboard").alerts.firstMatch
+            XCTAssertTrue(alert.waitForExistence(timeout: 5))
+            let allow = alert.buttons.matching(NSPredicate(format: "label IN %@", ["Allow", "İzin Ver", "İzin ver"])).firstMatch
+            XCTAssertTrue(allow.exists, "Permission buttons: \(alert.buttons.allElementsBoundByIndex.map(\.label))")
+            allow.tap()
+        }
+        XCTAssertTrue(app.staticTexts["Notifications are enabled."].waitForExistence(timeout: 5))
+        app.tabBars.buttons["Messages"].tap()
+        tap(app.buttons["Veltri Arc 2"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        XCUIDevice.shared.press(.home)
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let body = springboard.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Alex accepted")).firstMatch
+        XCTAssertTrue(body.waitForExistence(timeout: 15))
+        let attachment = XCTAttachment(screenshot: springboard.screenshot())
+        attachment.name = "Actual scheduled iOS notification"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        body.tap()
+        XCTAssertTrue(app.buttons["closeNotificationDestination"].waitForExistence(timeout: 10))
+        for _ in 0..<4 where !app.buttons["confirmPurchase"].exists { app.swipeUp() }
+        XCTAssertTrue(app.buttons["confirmPurchase"].exists)
+        XCTAssertTrue(app.navigationBars["Messages"].exists)
+    }
+
+    @MainActor
     private func verifyShell(language: String, market: String, inventory: String) {
         continueAfterFailure = false
         let app = XCUIApplication()

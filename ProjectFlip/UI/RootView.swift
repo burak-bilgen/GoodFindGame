@@ -4,6 +4,9 @@ import OSLog
 struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
+    @State private var notificationService = LocalNotificationService.shared
+    @State private var inbox = NotificationInbox.shared
+    @State private var notificationRoute: GameRoute?
     @Environment(\.locale) private var locale
     @Environment(\.scenePhase) private var scenePhase
 
@@ -52,13 +55,30 @@ struct RootView: View {
         } message: {
             Text(GameText.string(store?.errorKey ?? "save.error.write", locale: locale))
         }
-        .sheet(isPresented: Binding(get: { store?.snapshot.awayReport.isEmpty == false }, set: { if !$0 { store?.perform { try store?.acknowledgeAwayReport() } } })) {
-            if let store { WhileAwayView(store: store) }
+        .sheet(item: Binding(get: {
+            if let notificationRoute { return AppPresentation.notification(notificationRoute) }
+            if store?.snapshot.awayReport.isEmpty == false { return AppPresentation.away }
+            return nil
+        }, set: { value in
+            if value == nil {
+                if notificationRoute != nil { notificationRoute = nil }
+                else { store?.perform { try store?.acknowledgeAwayReport() } }
+            }
+        })) { presentation in
+            if let store {
+                switch presentation {
+                case .away: WhileAwayView(store: store)
+                case .notification(let route): NotificationRouteView(store: store, route: route)
+                }
+            }
         }
+        .onChange(of: inbox.pending) { _, _ in consumeNotificationRoute() }
+        .onChange(of: locale.identifier) { _, _ in configureNotifications() }
         .task { if store == nil { load() } }
         .task(id: scenePhase) {
             guard scenePhase == .active else { return }
             store?.perform { try store?.catchUp(showSummary: true) }
+            configureNotifications()
             while !Task.isCancelled {
                 if store?.errorKey == nil { store?.perform { try store?.processDueEvents() } }
                 do { try await Task.sleep(for: .seconds(1)) }
@@ -86,6 +106,11 @@ struct RootView: View {
             #endif
             store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
             failed = false
+            configureNotifications()
+            #if DEBUG
+            if let index = arguments.firstIndex(of: "--uitest-route"), arguments.indices.contains(index + 1) { inbox.receive(arguments[index + 1]) }
+            #endif
+            consumeNotificationRoute()
         } catch {
             failed = true
             #if DEBUG
@@ -93,4 +118,19 @@ struct RootView: View {
             #endif
         }
     }
+    private func configureNotifications() {
+        guard let store else { return }
+        let definitions = store.definitions
+        let service = notificationService
+        let locale = locale
+        store.onSnapshotCommitted = { state in service.requestSync(state: state, definitions: definitions, locale: locale) }
+        service.requestSync(state: store.snapshot, definitions: definitions, locale: locale)
+    }
+
+    private func consumeNotificationRoute() {
+        guard store != nil, let route = inbox.pending else { return }
+        notificationRoute = route
+        inbox.pending = nil
+    }
+
 }

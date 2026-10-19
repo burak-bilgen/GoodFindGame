@@ -9,6 +9,7 @@ final class GameStore {
     let timing: SimulationTiming
     private let repository: SaveRepository
     var errorKey: String?
+    @ObservationIgnored var onSnapshotCommitted: ((GameSnapshot) -> Void)?
     private let logger = Logger(subsystem: "ProjectFlip", category: "Save")
 
     init(repository: SaveRepository, definitions: [ItemDefinition], timing: SimulationTiming = .current, now: Date = .now) throws {
@@ -28,6 +29,7 @@ final class GameStore {
         do {
             try repository.save(next)
             snapshot = next
+            onSnapshotCommitted?(next)
         } catch {
             #if DEBUG
             logger.error("Save failed: \(String(describing: error), privacy: .public)")
@@ -64,5 +66,20 @@ extension GameStore {
     func previousTradeCount(with sellerID: SellerID) -> Int {
         let acquiredIDs = Set(snapshot.player.inventory.map(\.id) + snapshot.shipments.map { $0.item.id } + snapshot.playerListings.filter { $0.status == .sold }.map(\.itemID))
         return snapshot.market.filter { $0.seller.id == sellerID && acquiredIDs.contains($0.item.id) }.count
+    }
+}
+
+extension GameStore {
+    var hasExperiencedAsyncEvent: Bool { !snapshot.events.isEmpty || !snapshot.shipments.isEmpty || !snapshot.inspectionJobs.isEmpty }
+    func setNotificationCategory(_ category: LocalNotificationCategory, enabled: Bool) throws {
+        var next = snapshot
+        if enabled { next.notificationPreferences.enabledCategories.insert(category) }
+        else { next.notificationPreferences.enabledCategories.remove(category) }
+        try commit(next)
+    }
+    func markNotificationPrompted() throws {
+        var next = snapshot
+        next.notificationPreferences.permissionPrompted = true
+        try commit(next)
     }
 }

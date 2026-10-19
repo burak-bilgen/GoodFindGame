@@ -1826,19 +1826,19 @@
       }
     },
     "purchase.completed": {
-      "comment": "Purchase/inventory state: purchase.completed.",
+      "comment": "Purchase confirmation, valid both during delivery and after arrival. Do not claim the item has arrived before its shipment resolves.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Purchase complete. Your item is in Inventory."
+            "value": "Purchase confirmed. Track delivery in Inventory."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satın alma tamamlandı. Ürünün envanterinde."
+            "value": "Satın alma onaylandı. Teslimat durumunu envanterinden takip edebilirsin."
           }
         }
       }
@@ -3399,6 +3399,456 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tamam"
+          }
+        }
+      }
+    },
+    "notifications.title": {
+      "comment": "Local notifications: notifications.title. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project Flip"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project Flip"
+          }
+        }
+      }
+    },
+    "notifications.settings": {
+      "comment": "Local notifications: notifications.settings. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimler"
+          }
+        }
+      }
+    },
+    "notifications.enable": {
+      "comment": "Local notifications: notifications.enable. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable notifications"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimleri aç"
+          }
+        }
+      }
+    },
+    "notifications.explanation": {
+      "comment": "Local notifications: notifications.explanation. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Want to know when sellers reply and offers arrive? We only send alerts for events in your market."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcı yanıtlarından ve gelen tekliflerden haberdar olmak ister misin? Yalnızca pazarında gerçekleşen olayları bildiririz."
+          }
+        }
+      }
+    },
+    "notifications.afterFirstEvent": {
+      "comment": "Local notifications: notifications.afterFirstEvent. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start a conversation or delivery first, then decide whether to enable alerts."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce bir konuşma ya da teslimat başlat, ardından bildirimleri açıp açmayacağına karar ver."
+          }
+        }
+      }
+    },
+    "notifications.later": {
+      "comment": "Local notifications: notifications.later. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maybe later"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belki sonra"
+          }
+        }
+      }
+    },
+    "notifications.openSettings": {
+      "comment": "Local notifications: notifications.openSettings. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open notification settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirim ayarlarını aç"
+          }
+        }
+      }
+    },
+    "notifications.categories": {
+      "comment": "Local notifications: notifications.categories. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to notify me about"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hangi olaylar bildirilsin?"
+          }
+        }
+      }
+    },
+    "notifications.category.offers": {
+      "comment": "Local notifications: notifications.category.offers. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offers & negotiations"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklifler ve pazarlıklar"
+          }
+        }
+      }
+    },
+    "notifications.category.logistics": {
+      "comment": "Local notifications: notifications.category.logistics. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shipping & inspections"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teslimat ve incelemeler"
+          }
+        }
+      }
+    },
+    "notifications.category.auctions": {
+      "comment": "Local notifications: notifications.category.auctions. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auctions"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık artırmalar"
+          }
+        }
+      }
+    },
+    "notifications.category.market": {
+      "comment": "Local notifications: notifications.category.market. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market events"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piyasa olayları"
+          }
+        }
+      }
+    },
+    "notifications.category.requests": {
+      "comment": "Local notifications: notifications.category.requests. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Client requests"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Müşteri istekleri"
+          }
+        }
+      }
+    },
+    "notifications.status.unknown": {
+      "comment": "Local notifications: notifications.status.unknown. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking notification permission…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirim izni kontrol ediliyor…"
+          }
+        }
+      }
+    },
+    "notifications.status.notDetermined": {
+      "comment": "Local notifications: notifications.status.notDetermined. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are optional."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimler isteğe bağlıdır."
+          }
+        }
+      }
+    },
+    "notifications.status.denied": {
+      "comment": "Local notifications: notifications.status.denied. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are off in system settings. The game still works normally."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimler sistem ayarlarında kapalı. Oynamaya devam edebilirsin."
+          }
+        }
+      }
+    },
+    "notifications.status.allowed": {
+      "comment": "Local notifications: notifications.status.allowed. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are enabled."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildirimler açık."
+          }
+        }
+      }
+    },
+    "notifications.error": {
+      "comment": "Local notifications: notifications.error. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Some alerts couldn’t be scheduled. Your game is saved. Try again when convenient."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bazı bildirimler planlanamadı. Oyunun kaydedildi. Uygun olduğunda tekrar deneyebilirsin."
+          }
+        }
+      }
+    },
+    "notifications.sellerCounter": {
+      "comment": "Local notifications: notifications.sellerCounter. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ countered: %2$@. Expires at %3$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ karşı teklif verdi: %2$@. Son saat: %3$@."
+          }
+        }
+      }
+    },
+    "notifications.sellerAccepted": {
+      "comment": "Local notifications: notifications.sellerAccepted. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ accepted %2$@. The price is held until %3$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@ teklifini kabul etti. Bu fiyat %3$@ saatine kadar geçerli."
+          }
+        }
+      }
+    },
+    "notifications.sellerReply": {
+      "comment": "Local notifications: notifications.sellerReply. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ replied to your message."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mesajını yanıtladı."
+          }
+        }
+      }
+    },
+    "notifications.shipment": {
+      "comment": "Local notifications: notifications.shipment. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has arrived. Ready for a closer look?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ teslim edildi. Daha yakından incelemeye hazır mısın?"
+          }
+        }
+      }
+    },
+    "notifications.inspection": {
+      "comment": "Local notifications: notifications.inspection. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your %@ inspection report is ready."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ için inceleme raporun hazır."
+          }
+        }
+      }
+    },
+    "notifications.buyerOffer": {
+      "comment": "Local notifications: notifications.buyerOffer. Positional placeholders are complete seller/item names, formatted game money and local expiry time. Never imply a real-world marketplace.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New buyer offer: %1$@. Expires at %2$@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni alıcı teklifi: %1$@. Son saat: %2$@."
+          }
+        }
+      }
+    },
+    "action.close": {
+      "comment": "Close a notification destination sheet and return to the current game tab.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
           }
         }
       }

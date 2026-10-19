@@ -6,8 +6,8 @@ The objective remains the full master brief plus engineering/localization requir
 | --- | --- | --- |
 | Original iPhone/iOS 17+ identity, dependency-light SwiftUI | Committed project; simulator Debug/Release builds; original seed content/art | Physical-device validation; final name clearance before shipping |
 | Phase A trading, stable hidden truth, exact currency, saves | Domain/unit tests; localized UI first trade/history; atomic save-failure test | Five-trade UI evaluation passed; ongoing gameplay/human enjoyment tuning remains |
-| Deterministic offline event queue and clocks | Live event integration implemented; 37 unit tests and timed Turkish relaunch UI test | Notifications/routing and DEBUG time travel; continue broad device/clock/background validation |
-| Notifications and routes | Not implemented | Contextual opt-in; five category settings; actual scheduled outcomes; cancellation/deduplication; exact-object deep links; TR/EN text tests |
+| Deterministic offline event queue and clocks | Live event integration implemented; 37 unit tests and timed Turkish relaunch UI test | DEBUG time travel; continue broad device/clock/background validation |
+| Notifications and routes | Implemented; 43 unit tests, actual native delivery/tap UI test and category/cold-route UI test | Extend event sources as later systems arrive; broader device, denied-permission and background validation before release |
 | Market depth | Basic feed and pricing only | Search, price/category/watched filters, watchlist, trends, competition, listing expiry and coherent refresh |
 | Content/category knowledge | Ten gaming definitions and five defects | Three categories; 45–60 definitions; 20–30 defects; camera/retro clues; knowledge progression; economically meaningful timed repair |
 | Progression/ethics | Fixed reputation and inventory capacity only | Category/capacity unlocks; truthful disclosure/disputes; reputation effects; collections/rare variants; client requests; bankruptcy recovery |
