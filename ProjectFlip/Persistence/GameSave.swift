@@ -22,8 +22,9 @@ struct GameSnapshot: Codable, Equatable {
     var marketTrends: [MarketTrend] = []
     var watchedListingIDs: Set<ListingID> = []
     var notificationPreferences = NotificationPreferences()
+    var inspectionKnowledge = InspectionKnowledge()
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -49,6 +50,7 @@ struct GameSnapshot: Codable, Equatable {
         lastMarketCycle = try values.decodeIfPresent(Int.self, forKey: .lastMarketCycle)
         marketTrends = try values.decodeIfPresent([MarketTrend].self, forKey: .marketTrends) ?? []
         watchedListingIDs = try values.decodeIfPresent(Set<ListingID>.self, forKey: .watchedListingIDs) ?? []
+        inspectionKnowledge = try values.decodeIfPresent(InspectionKnowledge.self, forKey: .inspectionKnowledge) ?? InspectionKnowledge()
         notificationPreferences = try values.decodeIfPresent(NotificationPreferences.self, forKey: .notificationPreferences) ?? NotificationPreferences()
     }
 
@@ -80,6 +82,7 @@ struct SaveRepository {
                   lifecycle.initialAskingPrice > .zero &&
                   (lifecycle.reducedPrice.map({ $0 > .zero && $0 < lifecycle.initialAskingPrice }) ?? true)
               }) else { throw SaveError.invalidSave }
+        try state.inspectionKnowledge.validate()
         if let calendar = state.marketCalendar {
             try calendar.validate()
             guard (state.lastMarketCycle ?? -1) >= -1, (state.lastMarketCycle ?? -1) < Int.max - 1 else { throw SaveError.invalidSave }

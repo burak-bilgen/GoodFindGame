@@ -187,9 +187,8 @@ struct EventResolver {
         case .inspectionCompleted(let id):
             guard let index = state.inspectionJobs.firstIndex(where: { $0.id == id && $0.status == .pending }),
                   let item = state.player.inventory.firstIndex(where: { $0.id == state.inspectionJobs[index].itemID }) else { return nil }
-            state.player.inventory[item].professionallyInspected = true
-            state.player.inventory[item].inspected = true
-            state.player.inventory[item].revealedDefects = state.player.inventory[item].hiddenDefects
+            let category = definitions.first { $0.id == state.player.inventory[item].definitionID }?.category
+            InspectionEngine().completeProfessional(itemID: state.player.inventory[item].id, category: category, state: &state)
             state.inspectionJobs[index].status = .completed
             return .inspection
         case .buyerOffer(let id, let expected, let offer, let intent, let expiresAt):

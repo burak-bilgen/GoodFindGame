@@ -42,11 +42,12 @@ struct OwnedItemView: View {
                 Text(definition.name).font(.title2.bold())
                 LabeledContent("purchase.cost") { Text(item.purchasePrice.formatted(locale: locale)) }
                 Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic")
-                if !item.inspected {
-                    Button("inspection.basic") {
+                if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
+                    Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
                         store.perform { try store.inspect(itemID: item.id, professionally: false) }
                     }.accessibilityIdentifier("basicInspect")
-                } else {
+                }
+                if item.inspected {
                     LabeledContent("inspection.condition") { Text(item.condition, format: .number) }
                     switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                     case .success(let estimate):
@@ -69,6 +70,11 @@ struct OwnedItemView: View {
                             store.perform { try store.inspect(itemID: item.id, professionally: true) }
                         }.accessibilityIdentifier("professionalInspect")
                     }
+                }
+                Section("knowledge.title") {
+                    KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: definition.category)
+                    Text("knowledge.inspectionLimit").font(.caption).foregroundStyle(.secondary)
+                    NavigationLink("knowledge.open") { KnowledgeView(store: store) }
                 }
                 ForEach(item.revealedDefects, id: \.self) { defect in Text(GameText.string(defect.key, locale: locale)) }
                 if item.inspected && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {

@@ -31,8 +31,10 @@ struct SimulationActions {
         return next
     }
 
-    func inspect(itemID: ItemID, professionally: Bool, state: GameSnapshot, now: Date) throws -> GameSnapshot {
-        if !professionally { return try InspectionEngine().inspect(itemID: itemID, professionally: false, state: state) }
+    func inspect(itemID: ItemID, professionally: Bool, state: GameSnapshot, now: Date, definitions: [ItemDefinition]) throws -> GameSnapshot {
+        guard let item = state.player.inventory.first(where: { $0.id == itemID }),
+              let category = definitions.first(where: { $0.id == item.definitionID })?.category else { throw TradingError.unavailable }
+        if !professionally { return try InspectionEngine().inspect(itemID: itemID, professionally: false, state: state, category: category) }
         var next = try InspectionEngine().chargeProfessional(itemID: itemID, state: state)
         let due = now.addingTimeInterval(timing(for: state).inspection)
         let job = InspectionJob(id: "inspection-\(itemID.rawValue)", itemID: itemID, completesAt: due, cost: InspectionEngine().professionalCost)

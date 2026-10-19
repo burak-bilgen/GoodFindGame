@@ -64,7 +64,10 @@ extension GameStore {
         try transact { try actions.purchase(listingID: listingID, state: $0, now: $1) }
     }
     func inspect(itemID: ItemID, professionally: Bool) throws {
-        try transact { try actions.inspect(itemID: itemID, professionally: professionally, state: $0, now: $1) }
+        try transact { try actions.inspect(itemID: itemID, professionally: professionally, state: $0, now: $1, definitions: definitions) }
+    }
+    func buyInspectionTools(for category: ItemCategory) throws {
+        try transact { state, _ in try InspectionEngine().buyTools(for: category, state: state) }
     }
     func publish(itemID: ItemID, askingPrice: Money) throws {
         try transact { try actions.publish(itemID: itemID, askingPrice: askingPrice, state: $0, definitions: definitions, now: $1) }

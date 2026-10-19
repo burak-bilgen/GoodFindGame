@@ -36,11 +36,11 @@ struct TimedActionTests {
         let definitions = try SeedContent.load().items
         let original = try ResaleTests.inspectedState()
         let item = original.player.inventory[0]
-        let state = try SimulationActions(timing: .debug).inspect(itemID: item.id, professionally: true, state: original, now: now)
+        let state = try SimulationActions(timing: .debug).inspect(itemID: item.id, professionally: true, state: original, now: now, definitions: definitions)
         #expect(!state.player.inventory[0].professionallyInspected)
         #expect(state.player.inventory[0].revealedDefects == item.revealedDefects)
         #expect(state.inspectionJobs[0].status == .pending)
-        #expect(throws: TradingError.self) { try SimulationActions(timing: .debug).inspect(itemID: item.id, professionally: true, state: state, now: now) }
+        #expect(throws: TradingError.self) { try SimulationActions(timing: .debug).inspect(itemID: item.id, professionally: true, state: state, now: now, definitions: definitions) }
         let completed = try EventResolver(timing: .debug).resolve(state, now: now.addingTimeInterval(10), definitions: definitions).state
         #expect(completed.player.inventory[0].professionallyInspected)
         #expect(completed.player.cash == state.player.cash)

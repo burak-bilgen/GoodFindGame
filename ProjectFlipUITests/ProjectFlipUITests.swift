@@ -2,6 +2,58 @@ import XCTest
 
 final class ProjectFlipUITests: XCTestCase {
     @MainActor
+    func testKnowledgeEnglish() { verifyKnowledge(language: "en") }
+
+    @MainActor
+    func testKnowledgeTurkish() { verifyKnowledge(language: "tr") }
+
+    @MainActor
+    private func verifyKnowledge(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        app.tabBars.buttons[turkish ? "Profil" : "Profile"].tap()
+        tap(app.buttons["openKnowledge"], in: app)
+        tap(app.buttons["buyTools.cameras"], in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["toolsOwned.cameras"].firstMatch.exists)
+        XCTAssertFalse(app.buttons["buyTools.cameras"].exists)
+        app.navigationBars.buttons.firstMatch.tap()
+        app.tabBars.buttons[turkish ? "Pazar" : "Market"].tap()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        app.tabBars.buttons[turkish ? "Profil" : "Profile"].tap()
+        tap(app.buttons["openKnowledge"], in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["knowledgePoints.gaming"].firstMatch.label.contains("1"))
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = "\(language) category learning and permanent tools"
+        attachment.lifetime = .keepAlways
+        add(attachment)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Profil" : "Profile"].tap()
+        tap(app.buttons["openKnowledge"], in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["knowledgePoints.gaming"].firstMatch.label.contains("1"))
+        let owned = app.descendants(matching: .any)["toolsOwned.cameras"].firstMatch
+        for _ in 0..<5 {
+            if owned.exists { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(owned.exists)
+        XCTAssertFalse(app.buttons["buyTools.cameras"].exists)
+        let restored = XCTAttachment(screenshot: app.screenshot())
+        restored.name = "\(language) restored camera kit"
+        restored.lifetime = .keepAlways
+        add(restored)
+    }
+
+    @MainActor
     func testFirstTradeEnglish() {
         verifyShell(language: "en", market: "Market", inventory: "Inventory")
     }

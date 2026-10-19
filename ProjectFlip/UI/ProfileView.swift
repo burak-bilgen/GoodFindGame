@@ -8,6 +8,7 @@ struct ProfileView: View {
             Text("profile.intro").font(.headline)
             LabeledContent("wallet.cash") { Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit() }
             LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number) }
+            NavigationLink("knowledge.title") { KnowledgeView(store: store) }.accessibilityIdentifier("openKnowledge")
             NavigationLink("trade.history") { TradeHistoryView(store: store) }.accessibilityIdentifier("openTradeHistory")
             NavigationLink("notifications.settings") { NotificationSettingsView(store: store) }.accessibilityIdentifier("notificationSettings")
             #if DEBUG

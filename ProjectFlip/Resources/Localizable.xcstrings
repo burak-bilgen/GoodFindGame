@@ -5112,6 +5112,366 @@
           }
         }
       }
+    },
+    "knowledge.title": {
+      "comment": "Navigation title for category learning and diagnostic tools.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Category expertise"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategori bilgisi"
+          }
+        }
+      }
+    },
+    "knowledge.open": {
+      "comment": "Link from owned item to category expertise screen.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Knowledge and tools"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilgi ve araçlar"
+          }
+        }
+      }
+    },
+    "knowledge.explanation": {
+      "comment": "Explains independent category progression and repeat-inspection protection; numbers are experience points.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Learn by inspecting different items: +1 experience for your first self-inspection, +2 when an expert report arrives. Levels unlock at 3, 8 and 16 experience in each category. Rechecking the same item gives no extra experience."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farklı ürünleri inceleyerek öğren: ilk ücretsiz incelemende +1, uzman raporu geldiğinde +2 deneyim kazanırsın. Her kategoride 3, 8 ve 16 deneyimde seviye atlarsın. Aynı ürünü tekrar kontrol etmek deneyim kazandırmaz."
+          }
+        }
+      }
+    },
+    "knowledge.level": {
+      "comment": "Label for category expertise rank.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Knowledge"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilgi düzeyi"
+          }
+        }
+      }
+    },
+    "knowledge.experience": {
+      "comment": "Experience point count, not money.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experience"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deneyim"
+          }
+        }
+      }
+    },
+    "knowledge.level.0": {
+      "comment": "Expertise rank, below 3 points.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novice"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acemi"
+          }
+        }
+      }
+    },
+    "knowledge.level.1": {
+      "comment": "Expertise rank at 3 points.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practiced"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deneyimli"
+          }
+        }
+      }
+    },
+    "knowledge.level.2": {
+      "comment": "Expertise rank at 8 points.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skilled"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yetkin"
+          }
+        }
+      }
+    },
+    "knowledge.level.3": {
+      "comment": "Expertise rank at 16 points.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzman"
+          }
+        }
+      }
+    },
+    "knowledge.clues.gaming": {
+      "comment": "Gaming inspection guide; does not assert that this item has any defect.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listen for fan noise and check ports. Diagnosing drift, heat or battery wear needs practice and tools. Storage and wireless faults take more experience."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fan sesini dinle, bağlantı noktalarına bak. Analog kaymasını, ısınmayı ve pil aşınmasını saptamak için deneyim ve araç gerekir. Depolama ve kablosuz bağlantı arızalarını anlamak daha fazla bilgi ister."
+          }
+        }
+      }
+    },
+    "knowledge.clues.cameras": {
+      "comment": "Camera inspection guide; does not reveal actual hidden defects.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start with lens scratches. Battery tests need practice; autofocus and shutter wear need deeper knowledge. Sensor, fungus and stabilization checks need expert knowledge and tools."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce lens çiziklerine bak. Pil testi deneyim, otomatik odaklama ve perde aşınması daha fazla bilgi gerektirir. Sensör, mantar ve sabitleme kontrolü için uzman bilgisi ve araç gerekir."
+          }
+        }
+      }
+    },
+    "knowledge.clues.retro": {
+      "comment": "Retro inspection guide; not a statement of actual item authenticity.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check the box, labels, manual and missing pieces first. Replacement parts need closer testing. Region checks need experience; counterfeit boards need expert knowledge and tools."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce kutuyu, etiketleri, kılavuzu ve eksik parçaları kontrol et. Değişmiş parçalar daha ayrıntılı test ister. Bölge kontrolü deneyim, sahte devre kartını tanımak ise uzman bilgisi ve araç gerektirir."
+          }
+        }
+      }
+    },
+    "knowledge.tools.gaming": {
+      "comment": "Explains permanent electronics diagnostic kit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Electronics kit: controller tester, load tester and port probes. A permanent purchase for this category; knowledge is still required."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elektronik seti: kontrolcü ve yük test cihazı, bağlantı probları. Bu kategori için kalıcıdır; bilgi gereksinimini kaldırmaz."
+          }
+        }
+      }
+    },
+    "knowledge.tools.cameras": {
+      "comment": "Explains permanent camera diagnostic kit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera kit: test chart, sensor light and battery tester. A permanent purchase for this category; knowledge is still required."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraf seti: test kartı, sensör ışığı ve pil test cihazı. Bu kategori için kalıcıdır; bilgi gereksinimini kaldırmaz."
+          }
+        }
+      }
+    },
+    "knowledge.tools.retro": {
+      "comment": "Explains permanent collectible diagnostic kit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collector kit: magnifier, board probes and region tester. A permanent purchase for this category; knowledge is still required."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyoncu seti: büyüteç, devre probları ve bölge test cihazı. Bu kategori için kalıcıdır; bilgi gereksinimini kaldırmaz."
+          }
+        }
+      }
+    },
+    "knowledge.toolsOwned": {
+      "comment": "Permanent diagnostic kit already purchased.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diagnostic kit owned"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme setin hazır"
+          }
+        }
+      }
+    },
+    "knowledge.toolCost": {
+      "comment": "In-game cash cost for permanent category diagnostic tools.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-time kit price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tek seferlik set ücreti"
+          }
+        }
+      }
+    },
+    "knowledge.buyTools": {
+      "comment": "Spends displayed in-game currency on a permanent category kit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy diagnostic kit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme setini al"
+          }
+        }
+      }
+    },
+    "knowledge.reinspect": {
+      "comment": "Free inspection after improved category capability; awards no extra experience.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recheck with new skills / tools"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bilgi ve araçlarla tekrar incele"
+          }
+        }
+      }
+    },
+    "knowledge.inspectionLimit": {
+      "comment": "Limits on free inspection; no claim that unrevealed faults exist.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Self-inspection can miss faults. New knowledge or tools let you recheck for free; an expert report is more thorough."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretsiz incelemede bazı kusurlar gözden kaçabilir. Bilgin arttığında veya araç aldığında ücretsiz tekrar bakabilirsin. Uzman raporu daha kapsamlıdır."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
