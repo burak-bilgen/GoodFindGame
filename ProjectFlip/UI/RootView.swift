@@ -1,11 +1,23 @@
 import SwiftUI
+import OSLog
 
 struct RootView: View {
+    @State private var store: GameStore?
+    @State private var failed = false
+
     var body: some View {
         TabView {
             NavigationStack {
-                ContentUnavailableView("market.title", systemImage: "sparkle.magnifyingglass", description: Text("market.empty"))
-                    .navigationTitle("market.title")
+                if let store {
+                    MarketView(store: store)
+                } else if failed {
+                    ContentUnavailableView {
+                        Label("save.error.title", systemImage: "exclamationmark.triangle")
+                    } description: { Text("save.error.load") } actions: {
+                        Button("action.retry", action: load)
+                    }
+                } else { ProgressView() }
+
             }
             .tabItem { Label("market.title", systemImage: "square.grid.2x2") }
             NavigationStack {
@@ -28,6 +40,18 @@ struct RootView: View {
             }
             .tabItem { Label("profile.title", systemImage: "person.crop.circle") }
         }
+        .task { if store == nil { load() } }
         .tint(Color(red: 0.19, green: 0.36, blue: 0.43))
+    }
+    private func load() {
+        do {
+            store = try GameStore(repository: .application(), definitions: SeedContent.load().items)
+            failed = false
+        } catch {
+            failed = true
+            #if DEBUG
+            Logger(subsystem: "ProjectFlip", category: "Load").error("Load failed: \(String(describing: error), privacy: .public)")
+            #endif
+        }
     }
 }

@@ -18,6 +18,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US"]
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].waitForExistence(timeout: 5))
         app.tabBars.buttons[inventory].tap()
         XCTAssertTrue(app.navigationBars[inventory].exists)
     }

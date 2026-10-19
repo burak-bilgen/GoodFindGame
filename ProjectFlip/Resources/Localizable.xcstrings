@@ -180,6 +180,366 @@
           }
         }
       }
+    },
+    "market.heading": {
+      "comment": "Market shell: market.heading.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spot the overlooked."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözden kaçanı keşfet."
+          }
+        }
+      }
+    },
+    "market.subtitle": {
+      "comment": "Market shell: market.subtitle.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look closer. Ask questions. Make your move."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dikkatli bak. Soru sor. Fırsatı değerlendir."
+          }
+        }
+      }
+    },
+    "wallet.cash": {
+      "comment": "Market shell: wallet.cash.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Available cash"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılabilir nakit"
+          }
+        }
+      }
+    },
+    "category.gaming": {
+      "comment": "Market shell: category.gaming.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaming & electronics"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oyun ve elektronik"
+          }
+        }
+      }
+    },
+    "market.newest": {
+      "comment": "Market shell: market.newest.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Newest first"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce en yeniler"
+          }
+        }
+      }
+    },
+    "listing.title": {
+      "comment": "Market shell: listing.title.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan"
+          }
+        }
+      }
+    },
+    "listing.hint.inspect": {
+      "comment": "Market shell: listing.hint.inspect.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condition is a claim. Look for clues."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kondisyon bir iddiadır. İpuçlarını değerlendir."
+          }
+        }
+      }
+    },
+    "save.error.title": {
+      "comment": "Market shell: save.error.title.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your save needs attention"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıt dosyası açılamadı"
+          }
+        }
+      }
+    },
+    "save.error.load": {
+      "comment": "Market shell: save.error.load.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn’t load your game. Your existing save has been kept. Try again."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oyunun yüklenemedi. Mevcut kaydın korundu. Tekrar dene."
+          }
+        }
+      }
+    },
+    "action.retry": {
+      "comment": "Market shell: action.retry.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekrar dene"
+          }
+        }
+      }
+    },
+    "npc.name.0": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alex"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deniz"
+          }
+        }
+      }
+    },
+    "npc.name.1": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jordan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ece"
+          }
+        }
+      }
+    },
+    "npc.name.2": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sam"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mert"
+          }
+        }
+      }
+    },
+    "npc.name.3": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morgan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selin"
+          }
+        }
+      }
+    },
+    "npc.name.4": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casey"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can"
+          }
+        }
+      }
+    },
+    "npc.name.5": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riley"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derya"
+          }
+        }
+      }
+    },
+    "npc.name.6": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taylor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emre"
+          }
+        }
+      }
+    },
+    "npc.name.7": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jamie"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aslı"
+          }
+        }
+      }
+    },
+    "npc.name.8": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Robin"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cem"
+          }
+        }
+      }
+    },
+    "npc.name.9": {
+      "comment": "Locale-specific NPC display name, stable identity index.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drew"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İpek"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
