@@ -33,6 +33,8 @@ final class ProjectFlipUITests: XCTestCase {
         app.buttons["inventory.item-42-0"].tap()
         tap(app.buttons["basicInspect"], in: app)
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
         app.terminate()
         app.launch()
         app.tabBars.buttons[inventory].tap()

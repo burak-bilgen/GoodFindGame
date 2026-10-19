@@ -38,8 +38,7 @@ struct RootView: View {
             }
             .tabItem { Label("inventory.title", systemImage: "shippingbox") }
             NavigationStack {
-                ContentUnavailableView("selling.title", systemImage: "tag", description: Text("selling.empty"))
-                    .navigationTitle("selling.title")
+                if let store { SellingView(store: store) }
             }
             .tabItem { Label("selling.title", systemImage: "tag") }
             NavigationStack {

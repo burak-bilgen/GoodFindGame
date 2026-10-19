@@ -2094,6 +2094,222 @@
           }
         }
       }
+    },
+    "selling.create": {
+      "comment": "Player resale flow: selling.create. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create resale listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satış ilanı oluştur"
+          }
+        }
+      }
+    },
+    "selling.alreadyListed": {
+      "comment": "Player resale flow: selling.alreadyListed. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This item is listed for sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürün satışta."
+          }
+        }
+      }
+    },
+    "selling.asking": {
+      "comment": "Player resale flow: selling.asking. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your asking price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fiyatın"
+          }
+        }
+      }
+    },
+    "selling.publish": {
+      "comment": "Player resale flow: selling.publish. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publish listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanı yayınla"
+          }
+        }
+      }
+    },
+    "selling.live": {
+      "comment": "Player resale flow: selling.live. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your listing is live"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanın yayında"
+          }
+        }
+      }
+    },
+    "selling.noOffers": {
+      "comment": "Player resale flow: selling.noOffers. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No buyer offers yet."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz alıcı teklifi yok."
+          }
+        }
+      }
+    },
+    "selling.views": {
+      "comment": "Player resale flow: selling.views. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Views"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görüntülenme"
+          }
+        }
+      }
+    },
+    "selling.favorites": {
+      "comment": "Player resale flow: selling.favorites. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorites"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoriler"
+          }
+        }
+      }
+    },
+    "selling.active": {
+      "comment": "Player resale flow: selling.active. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayında"
+          }
+        }
+      }
+    },
+    "selling.sold": {
+      "comment": "Player resale flow: selling.sold. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sold"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıldı"
+          }
+        }
+      }
+    },
+    "selling.cancelled": {
+      "comment": "Player resale flow: selling.cancelled. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancelled"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İptal edildi"
+          }
+        }
+      }
+    },
+    "selling.priceHint": {
+      "comment": "Player resale flow: selling.priceHint. All money is game currency.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A higher price can mean fewer interested buyers. Compare your price with what you learned during inspection."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüksek fiyat daha az alıcı ilgisi getirebilir. Fiyatını incelemede öğrendiklerinle karşılaştır."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

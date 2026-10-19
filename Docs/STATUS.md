@@ -21,3 +21,5 @@ Task 6 complete: numeric offers, exact localized amount parsing, deterministic a
 Task 7 complete: agreed purchases debit cash and add inventory in one saved transition. Capacity/funds and duplicate guards preserve item truth. Thirteen unit tests and both localized purchase→inventory→relaunch flows pass. UI tests use dedicated temporary saves. Next: Task 8 inspections.
 
 Task 8 complete: free limited basic inspection, paid full inspection, stable defect reveals and visible valuation estimates/failure states. Model reference values support informed initial buying decisions. Fourteen unit tests pass; TR/EN UI purchase→inspection→relaunch flows pass. Final display-error handling also rebuilt and unit-tested. Next: Task 9 player resale listings.
+
+Task 9 complete: inspected inventory can be listed at an exact localized asking price; duplicate active listings are prevented and initial views/favorites are generated from price competitiveness. Fifteen unit tests pass and both UI flows publish a resale listing and preserve inventory across relaunch. Next: Task 10 NPC buyer offers and settlement.

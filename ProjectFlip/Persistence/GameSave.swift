@@ -6,8 +6,9 @@ struct GameSnapshot: Codable, Equatable {
     var market: [MarketplaceListing]
     var generation: UInt64
     var conversations: [NegotiationState] = []
+    var playerListings: [PlayerListing] = []
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -18,6 +19,7 @@ struct GameSnapshot: Codable, Equatable {
         market = try values.decode([MarketplaceListing].self, forKey: .market)
         generation = try values.decode(UInt64.self, forKey: .generation)
         conversations = try values.decodeIfPresent([NegotiationState].self, forKey: .conversations) ?? []
+        playerListings = try values.decodeIfPresent([PlayerListing].self, forKey: .playerListings) ?? []
     }
 
     static func fresh(definitions: [ItemDefinition], seed: UInt64 = 42, now: Date = .now) throws -> Self {

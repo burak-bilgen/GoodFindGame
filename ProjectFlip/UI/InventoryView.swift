@@ -63,6 +63,12 @@ struct OwnedItemView: View {
                     }
                 }
                 ForEach(item.revealedDefects, id: \.self) { defect in Text(GameText.string(defect.key, locale: locale)) }
+                if item.inspected && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                    NavigationLink("selling.create") { CreateListingView(store: store, itemID: item.id) }
+                        .accessibilityIdentifier("createListing")
+                } else if store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                    Text("selling.alreadyListed").foregroundStyle(.secondary)
+                }
             }.navigationTitle("inventory.title")
                 .sensoryFeedback(.success, trigger: item.inspected)
         }
