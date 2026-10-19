@@ -15,9 +15,10 @@ struct GameSnapshot: Codable, Equatable {
     var lastKnownWallClock: Date?
     var lastSimulationAt: Date?
     var awayReport: [ResolvedEvent] = []
+    var watchedListingIDs: Set<ListingID> = []
     var notificationPreferences = NotificationPreferences()
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -37,6 +38,7 @@ struct GameSnapshot: Codable, Equatable {
         lastKnownWallClock = try values.decodeIfPresent(Date.self, forKey: .lastKnownWallClock)
         lastSimulationAt = try values.decodeIfPresent(Date.self, forKey: .lastSimulationAt)
         awayReport = try values.decodeIfPresent([ResolvedEvent].self, forKey: .awayReport) ?? []
+        watchedListingIDs = try values.decodeIfPresent(Set<ListingID>.self, forKey: .watchedListingIDs) ?? []
         notificationPreferences = try values.decodeIfPresent(NotificationPreferences.self, forKey: .notificationPreferences) ?? NotificationPreferences()
     }
 

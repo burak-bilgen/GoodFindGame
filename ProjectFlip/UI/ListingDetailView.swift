@@ -33,6 +33,16 @@ struct ListingDetailView: View {
                     .padding().background(.regularMaterial)
                     .accessibilityIdentifier("openConversation")
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    let watched = store.snapshot.watchedListingIDs.contains(listing.id)
+                    Button {
+                        store.perform { try store.toggleWatch(listingID: listing.id) }
+                    } label: {
+                        Label(watched ? "market.unwatch" : "market.watch", systemImage: watched ? "bookmark.fill" : "bookmark")
+                    }.accessibilityIdentifier("toggleWatch")
+                }
+            }
             .navigationTitle("listing.title")
             .navigationBarTitleDisplayMode(.inline)
         } else {

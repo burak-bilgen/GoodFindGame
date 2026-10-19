@@ -83,3 +83,13 @@ extension GameStore {
         try commit(next)
     }
 }
+
+extension GameStore {
+    func toggleWatch(listingID: ListingID) throws {
+        guard snapshot.market.contains(where: { $0.id == listingID }) else { throw TradingError.unavailable }
+        var next = snapshot
+        if next.watchedListingIDs.contains(listingID) { next.watchedListingIDs.remove(listingID) }
+        else { next.watchedListingIDs.insert(listingID) }
+        try commit(next)
+    }
+}

@@ -191,6 +191,51 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testWatchlistAndFiltersEnglish() { verifyMarketControls(language: "en") }
+
+    @MainActor
+    func testWatchlistAndFiltersTurkish() { verifyMarketControls(language: "tr") }
+
+    @MainActor
+    private func verifyMarketControls(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        let market = turkish ? "Pazar" : "Market"
+        XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        app.buttons["toggleWatch"].tap()
+        XCTAssertTrue(app.buttons[turkish ? "İzlemeyi bırak" : "Stop watching"].exists)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
+        app.switches["watchedOnly"].switches.firstMatch.tap()
+        XCTAssertTrue(app.buttons["listing.listing-42-0"].exists)
+        let removed = NSPredicate(format: "exists == false")
+        expectation(for: removed, evaluatedWith: app.buttons["listing.listing-42-1"])
+        waitForExpectations(timeout: 5)
+        tap(app.buttons["marketFilters"], in: app)
+        let maximum = app.textFields["maximumPrice"]
+        tap(maximum, in: app)
+        maximum.typeText("0")
+        tap(app.buttons[turkish ? "Tamam" : "Done"], in: app)
+        XCTAssertTrue(app.staticTexts[turkish ? "Bu filtrelere uyan izlenen ilan yok." : "No watched listings match these filters."].exists)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Localized market filters: \(language)"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.buttons[turkish ? "Filtreleri temizle" : "Clear filters"].tap()
+        app.swipeDown()
+        let search = app.searchFields.firstMatch
+        tap(search, in: app)
+        search.typeText("no-such-model")
+        XCTAssertTrue(app.staticTexts[turkish ? "Bu filtrelere uyan ilan yok." : "No listings match these filters."].waitForExistence(timeout: 3))
+    }
+
+    @MainActor
     private func verifyShell(language: String, market: String, inventory: String) {
         continueAfterFailure = false
         let app = XCUIApplication()

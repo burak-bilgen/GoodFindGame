@@ -15,6 +15,8 @@ See Docs for requirements and milestone status. Localization uses semantic keys 
 
 Browse Market, compare the asking price with the model reference and seller claims, open a listing, ask about issues and send an offer. Accept a counter or negotiate, then confirm purchase. In Inventory, inspect the item and create a resale listing. Open Selling to accept, reject or counter a buyer. Profile → Trade history explains the result. A basic inspection is free; a professional inspection uses game cash.
 
+Market supports fictional product-name search, category and localized price filters, newest/oldest sorting and a persistent watchlist. Bookmark a listing from its detail screen; watched listings remain visible when unavailable.
+
 The first category has ten fictional definitions. English uses neutral credits (¤); Turkish uses ₺ without changing simulation amounts. Seller questions/offers, delivery, professional inspection and buyer interest now use persisted timers. DEBUG timers are seconds; production timers are minutes, with an accelerated first trade. Launch/foreground catch-up resolves the world and shows a grouped report until acknowledged. UI tests explicitly opt into instant timing through the same queue. Local notifications now use persisted events, contextual opt-in, per-category settings and exact-object routing. No ads, Game Center or backend are present yet.
 
 DEBUG builds expose Developer tools under Profile for save reset, cash, market regeneration, hidden truth, forced responses and virtual time travel. Release builds exclude that screen and its actions. UI tests use isolated saves. No signing team or personal Xcode data is committed.

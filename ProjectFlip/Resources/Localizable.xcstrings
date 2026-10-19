@@ -3906,6 +3906,294 @@
           }
         }
       }
+    },
+    "market.watchedOnly": {
+      "comment": "Feed switch; includes unavailable listings the player has bookmarked.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watchlist"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzleme listesi"
+          }
+        }
+      }
+    },
+    "market.watched": {
+      "comment": "Accessibility label for a bookmarked marketplace listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watched"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzleniyor"
+          }
+        }
+      }
+    },
+    "market.watch": {
+      "comment": "Bookmark action on listing detail.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watch listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzlemeye al"
+          }
+        }
+      }
+    },
+    "market.unwatch": {
+      "comment": "Remove marketplace bookmark.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop watching"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzlemeyi bırak"
+          }
+        }
+      }
+    },
+    "market.filters": {
+      "comment": "Expandable marketplace filter controls.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filters"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreler"
+          }
+        }
+      }
+    },
+    "market.category": {
+      "comment": "Marketplace category picker label.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Category"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategori"
+          }
+        }
+      }
+    },
+    "market.allCategories": {
+      "comment": "Unrestricted marketplace category selection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All categories"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm kategoriler"
+          }
+        }
+      }
+    },
+    "market.minimumPrice": {
+      "comment": "Optional inclusive asking-price lower bound; localized decimal input.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimum price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En düşük fiyat"
+          }
+        }
+      }
+    },
+    "market.maximumPrice": {
+      "comment": "Optional inclusive asking-price upper bound; localized decimal input.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En yüksek fiyat"
+          }
+        }
+      }
+    },
+    "market.clearFilters": {
+      "comment": "Reset search, price, category, watchlist and sort controls.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear filters"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtreleri temizle"
+          }
+        }
+      }
+    },
+    "market.invalidPriceRange": {
+      "comment": "Inline error for invalid or inverted price filters.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter valid prices with the minimum no higher than the maximum."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçerli fiyatlar gir. En düşük fiyat, en yüksek fiyatı aşmamalı."
+          }
+        }
+      }
+    },
+    "market.watchlistEmpty": {
+      "comment": "Empty filtered watchlist; bookmarks may exist outside the filters.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No watched listings match these filters."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu filtrelere uyan izlenen ilan yok."
+          }
+        }
+      }
+    },
+    "market.noResults": {
+      "comment": "Empty marketplace search/filter results.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No listings match these filters."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu filtrelere uyan ilan yok."
+          }
+        }
+      }
+    },
+    "market.search": {
+      "comment": "Searches fictional brand/model names, not hidden item facts.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search product names"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ürün adı ara"
+          }
+        }
+      }
+    },
+    "market.expanded": {
+      "comment": "VoiceOver state of the expandable market filter controls.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expanded"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık"
+          }
+        }
+      }
+    },
+    "market.collapsed": {
+      "comment": "VoiceOver state of the expandable market filter controls.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collapsed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapalı"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
