@@ -7,7 +7,10 @@ struct MarketTrendEngine {
         if state.marketCalendar == nil && state.playerListings.contains(where: { $0.status == .sold }) {
             state.marketCalendar = MarketCalendar(anchor: now, seed: SeededRandom.seed(for: state.simulationID), definitions: definitions)
         }
-        guard let calendar = state.marketCalendar else { return }
+        guard var calendar = state.marketCalendar else { return }
+        let currentCycle = max(state.lastMarketCycle ?? -1, try calendar.latestStartedIndex(at: now) ?? -1)
+        try calendar.includeNewContent(definitions, after: currentCycle)
+        state.marketCalendar = calendar
         guard (state.lastMarketCycle ?? -1) < Int.max - 1 else { throw SaveError.invalidSave }
         let target = max((state.lastMarketCycle ?? -1) + 1, try calendar.latestStartedIndex(at: now) ?? 0)
         var hasTarget = false

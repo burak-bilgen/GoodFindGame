@@ -14,7 +14,7 @@ struct DomainTests {
 
     @Test func seedAndHiddenTruthRoundTrip() throws {
         let seed = try SeedContent.load()
-        #expect(seed.items.count == 10)
+        #expect(seed.items.count == 50)
         let item = ItemInstance(id: ItemID("sample"), definitionID: seed.items[0].id, condition: 63, hiddenDefects: [.drift])
         let state = PlayerState(cash: Money(minorUnits: 2_000_000), inventory: [item])
         #expect(try JSONDecoder().decode(PlayerState.self, from: JSONEncoder().encode(state)) == state)

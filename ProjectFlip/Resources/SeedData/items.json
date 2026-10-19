@@ -66,7 +66,7 @@
       },
       "possibleDefects": [
         "damagedPort",
-        "noisyFan"
+        "wirelessFault"
       ],
       "artSymbol": "headphones"
     },
@@ -139,6 +139,596 @@
         "damagedPort"
       ],
       "artSymbol": "display"
+    },
+    {
+      "id": "gaming-10",
+      "brand": "Veltri",
+      "model": "Glide S",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 290000
+      },
+      "possibleDefects": [
+        "drift",
+        "batteryWear"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-11",
+      "brand": "Nuvoro",
+      "model": "Trace 80",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 560000
+      },
+      "possibleDefects": [
+        "screenBurnIn",
+        "damagedPort"
+      ],
+      "artSymbol": "display"
+    },
+    {
+      "id": "gaming-12",
+      "brand": "Veltri",
+      "model": "Relay",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 190000
+      },
+      "possibleDefects": [
+        "wirelessFault",
+        "overheating"
+      ],
+      "artSymbol": "hifispeaker"
+    },
+    {
+      "id": "gaming-13",
+      "brand": "Nuvoro",
+      "model": "Wisp",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 330000
+      },
+      "possibleDefects": [
+        "batteryWear",
+        "wirelessFault"
+      ],
+      "artSymbol": "headphones"
+    },
+    {
+      "id": "gaming-14",
+      "brand": "Veltri",
+      "model": "Breeze",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 720000
+      },
+      "possibleDefects": [
+        "noisyFan",
+        "storageFailure"
+      ],
+      "artSymbol": "desktopcomputer"
+    },
+    {
+      "id": "gaming-15",
+      "brand": "Nuvoro",
+      "model": "Coda",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 380000
+      },
+      "possibleDefects": [
+        "screenBurnIn",
+        "batteryWear"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-16",
+      "brand": "Veltri",
+      "model": "Stave",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 260000
+      },
+      "possibleDefects": [
+        "storageFailure",
+        "damagedPort"
+      ],
+      "artSymbol": "externaldrive"
+    },
+    {
+      "id": "gaming-17",
+      "brand": "Nuvoro",
+      "model": "Driftwood",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 480000
+      },
+      "possibleDefects": [
+        "drift",
+        "wirelessFault"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-18",
+      "brand": "Veltri",
+      "model": "Arc Desk",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 850000
+      },
+      "possibleDefects": [
+        "overheating",
+        "noisyFan"
+      ],
+      "artSymbol": "desktopcomputer"
+    },
+    {
+      "id": "gaming-19",
+      "brand": "Nuvoro",
+      "model": "Trace Studio",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 1150000
+      },
+      "possibleDefects": [
+        "screenBurnIn",
+        "damagedPort"
+      ],
+      "artSymbol": "display"
+    },
+    {
+      "id": "cameras-0",
+      "brand": "Ilyven",
+      "model": "Luma 3",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 490000
+      },
+      "possibleDefects": [
+        "shutterWear",
+        "sensorDamage",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "cameras-1",
+      "brand": "Orvessa",
+      "model": "Roam 2",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 340000
+      },
+      "possibleDefects": [
+        "lensScratch",
+        "autofocusFault",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera.fill"
+    },
+    {
+      "id": "cameras-2",
+      "brand": "Ilyven",
+      "model": "Luma 8",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 980000
+      },
+      "possibleDefects": [
+        "sensorDamage",
+        "shutterWear",
+        "stabilizationFault"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "cameras-3",
+      "brand": "Orvessa",
+      "model": "Crest 7",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 1220000
+      },
+      "possibleDefects": [
+        "sensorDamage",
+        "autofocusFault",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera.fill"
+    },
+    {
+      "id": "cameras-4",
+      "brand": "Ilyven",
+      "model": "Field S",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 610000
+      },
+      "possibleDefects": [
+        "shutterWear",
+        "lensFungus",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "cameras-5",
+      "brand": "Orvessa",
+      "model": "Studio R",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 1680000
+      },
+      "possibleDefects": [
+        "sensorDamage",
+        "apertureStuck",
+        "stabilizationFault"
+      ],
+      "artSymbol": "camera.fill"
+    },
+    {
+      "id": "cameras-6",
+      "brand": "Ilyven",
+      "model": "Dawn 4",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 420000
+      },
+      "possibleDefects": [
+        "lensScratch",
+        "shutterWear",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "cameras-7",
+      "brand": "Orvessa",
+      "model": "Roam Pocket",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 270000
+      },
+      "possibleDefects": [
+        "lensScratch",
+        "autofocusFault",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera.fill"
+    },
+    {
+      "id": "cameras-8",
+      "brand": "Ilyven",
+      "model": "Focal 35",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 320000
+      },
+      "possibleDefects": [
+        "lensFungus",
+        "lensScratch",
+        "apertureStuck"
+      ],
+      "artSymbol": "camera.aperture"
+    },
+    {
+      "id": "cameras-9",
+      "brand": "Orvessa",
+      "model": "Focal 80",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 570000
+      },
+      "possibleDefects": [
+        "autofocusFault",
+        "stabilizationFault",
+        "lensScratch"
+      ],
+      "artSymbol": "camera.aperture"
+    },
+    {
+      "id": "cameras-10",
+      "brand": "Ilyven",
+      "model": "Focal 24",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 240000
+      },
+      "possibleDefects": [
+        "lensFungus",
+        "apertureStuck",
+        "lensScratch"
+      ],
+      "artSymbol": "camera.aperture"
+    },
+    {
+      "id": "cameras-11",
+      "brand": "Orvessa",
+      "model": "Field Zoom",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 760000
+      },
+      "possibleDefects": [
+        "stabilizationFault",
+        "autofocusFault",
+        "lensFungus"
+      ],
+      "artSymbol": "camera.aperture"
+    },
+    {
+      "id": "cameras-12",
+      "brand": "Ilyven",
+      "model": "Crest Mono",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 870000
+      },
+      "possibleDefects": [
+        "sensorDamage",
+        "shutterWear",
+        "cameraBatteryWear"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "cameras-13",
+      "brand": "Orvessa",
+      "model": "Dawn Travel",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 530000
+      },
+      "possibleDefects": [
+        "lensScratch",
+        "cameraBatteryWear",
+        "autofocusFault"
+      ],
+      "artSymbol": "camera.fill"
+    },
+    {
+      "id": "cameras-14",
+      "brand": "Ilyven",
+      "model": "Luma Studio",
+      "category": "cameras",
+      "baseValue": {
+        "minorUnits": 1490000
+      },
+      "possibleDefects": [
+        "shutterWear",
+        "sensorDamage",
+        "stabilizationFault"
+      ],
+      "artSymbol": "camera"
+    },
+    {
+      "id": "retro-0",
+      "brand": "Yoriva",
+      "model": "Chapter 8",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 260000
+      },
+      "possibleDefects": [
+        "replacementParts",
+        "regionMismatch",
+        "corrosion"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "retro-1",
+      "brand": "Talune",
+      "model": "Ember Pocket",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 390000
+      },
+      "possibleDefects": [
+        "replacementParts",
+        "labelDamage",
+        "corrosion"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "retro-2",
+      "brand": "Yoriva",
+      "model": "Chapter 16",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 620000
+      },
+      "possibleDefects": [
+        "counterfeitBoard",
+        "regionMismatch",
+        "boxWear"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "retro-3",
+      "brand": "Talune",
+      "model": "Tile Runner",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 170000
+      },
+      "possibleDefects": [
+        "missingManual",
+        "labelDamage",
+        "counterfeitBoard"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-4",
+      "brand": "Yoriva",
+      "model": "Cloud Caravan",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 240000
+      },
+      "possibleDefects": [
+        "missingManual",
+        "regionMismatch",
+        "boxWear"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-5",
+      "brand": "Talune",
+      "model": "Silver Orchard",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 440000
+      },
+      "possibleDefects": [
+        "incompleteSet",
+        "replacementParts",
+        "boxWear"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-6",
+      "brand": "Yoriva",
+      "model": "Lullaby Tape",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 150000
+      },
+      "possibleDefects": [
+        "labelDamage",
+        "boxWear",
+        "incompleteSet"
+      ],
+      "artSymbol": "radio"
+    },
+    {
+      "id": "retro-7",
+      "brand": "Talune",
+      "model": "Daylight Volume",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 210000
+      },
+      "possibleDefects": [
+        "missingManual",
+        "labelDamage",
+        "boxWear"
+      ],
+      "artSymbol": "opticaldisc"
+    },
+    {
+      "id": "retro-8",
+      "brand": "Yoriva",
+      "model": "Chapter Color",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 780000
+      },
+      "possibleDefects": [
+        "replacementParts",
+        "corrosion",
+        "regionMismatch"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "retro-9",
+      "brand": "Talune",
+      "model": "Ember Desk",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 540000
+      },
+      "possibleDefects": [
+        "counterfeitBoard",
+        "corrosion",
+        "replacementParts"
+      ],
+      "artSymbol": "tv"
+    },
+    {
+      "id": "retro-10",
+      "brand": "Yoriva",
+      "model": "Harbor Tales",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 310000
+      },
+      "possibleDefects": [
+        "missingManual",
+        "incompleteSet",
+        "boxWear"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-11",
+      "brand": "Talune",
+      "model": "Clockwork Garden",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 680000
+      },
+      "possibleDefects": [
+        "counterfeitBoard",
+        "incompleteSet",
+        "labelDamage"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-12",
+      "brand": "Yoriva",
+      "model": "Chapter Archive",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 980000
+      },
+      "possibleDefects": [
+        "replacementParts",
+        "regionMismatch",
+        "boxWear"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "retro-13",
+      "brand": "Talune",
+      "model": "Paper Lantern Set",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 520000
+      },
+      "possibleDefects": [
+        "incompleteSet",
+        "labelDamage",
+        "missingManual"
+      ],
+      "artSymbol": "rectangle.stack"
+    },
+    {
+      "id": "retro-14",
+      "brand": "Yoriva",
+      "model": "Ember Heritage",
+      "category": "retro",
+      "baseValue": {
+        "minorUnits": 1230000
+      },
+      "possibleDefects": [
+        "counterfeitBoard",
+        "replacementParts",
+        "corrosion"
+      ],
+      "artSymbol": "gamecontroller"
     }
   ]
 }

@@ -4734,6 +4734,384 @@
           }
         }
       }
+    },
+    "category.cameras": {
+      "comment": "Category includes fictional cameras and interchangeable lenses.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cameras"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraf makineleri"
+          }
+        }
+      }
+    },
+    "category.retro": {
+      "comment": "Category includes fictional vintage devices, boxed games and collectible media.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retro & collectibles"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retro ve koleksiyon"
+          }
+        }
+      }
+    },
+    "defect.batteryWear": {
+      "comment": "Gaming/electronics rechargeable battery has reduced capacity.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn battery"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıpranmış pil"
+          }
+        }
+      }
+    },
+    "defect.screenBurnIn": {
+      "comment": "Persistent image retention on a display; not a surface scratch.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screen burn-in"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekran yanığı"
+          }
+        }
+      }
+    },
+    "defect.wirelessFault": {
+      "comment": "Gaming/electronics wireless connection drops or fails.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unstable wireless connection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kararsız kablosuz bağlantı"
+          }
+        }
+      }
+    },
+    "defect.sensorDamage": {
+      "comment": "Camera sensor damage can substantially reduce image quality and value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damaged image sensor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görüntü sensörü hasarlı"
+          }
+        }
+      }
+    },
+    "defect.lensFungus": {
+      "comment": "Camera lens internal fungal growth; separate from surface scratches.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fungus inside the lens"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lens içinde mantar"
+          }
+        }
+      }
+    },
+    "defect.lensScratch": {
+      "comment": "Optical surface damage, not cosmetic wear on the lens body.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scratched lens element"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lens camında çizik"
+          }
+        }
+      }
+    },
+    "defect.autofocusFault": {
+      "comment": "Camera/lens autofocus does not reliably acquire focus.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autofocus fault"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik netleme arızası"
+          }
+        }
+      }
+    },
+    "defect.shutterWear": {
+      "comment": "Mechanical shutter wear; high shutter count is a clue, not proof by itself.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heavily worn shutter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deklanşör mekanizması yıpranmış"
+          }
+        }
+      }
+    },
+    "defect.apertureStuck": {
+      "comment": "Lens aperture cannot adjust reliably.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sticking aperture blades"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diyafram yaprakları takılıyor"
+          }
+        }
+      }
+    },
+    "defect.stabilizationFault": {
+      "comment": "Camera or lens stabilization system is faulty.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Image stabilization fault"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görüntü sabitleme arızası"
+          }
+        }
+      }
+    },
+    "defect.cameraBatteryWear": {
+      "comment": "Camera-specific rechargeable battery has reduced capacity.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn camera battery"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğraf makinesi pili yıpranmış"
+          }
+        }
+      }
+    },
+    "defect.replacementParts": {
+      "comment": "Retro item works with replacement parts, reducing collector value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non-original replacement parts"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal olmayan değişen parçalar"
+          }
+        }
+      }
+    },
+    "defect.missingManual": {
+      "comment": "Retro collector completeness defect; not ordinary electronic damage.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original manual missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal kılavuz eksik"
+          }
+        }
+      }
+    },
+    "defect.boxWear": {
+      "comment": "Retro packaging condition affects collector value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damaged original packaging"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal kutu yıpranmış"
+          }
+        }
+      }
+    },
+    "defect.regionMismatch": {
+      "comment": "Retro regional compatibility affects demand; specific regions will be shown by item clues.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incompatible region version"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bölge uyumu sorunu"
+          }
+        }
+      }
+    },
+    "defect.counterfeitBoard": {
+      "comment": "Retro authenticity defect; distinct from legitimate replacement components.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non-authentic circuit board"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devre kartı orijinal değil"
+          }
+        }
+      }
+    },
+    "defect.labelDamage": {
+      "comment": "Retro authenticity/completeness clue: original label is damaged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damaged original label"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal etiket hasarlı"
+          }
+        }
+      }
+    },
+    "defect.corrosion": {
+      "comment": "Retro electrical contacts are corroded.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corroded contacts"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bağlantı uçlarında korozyon"
+          }
+        }
+      }
+    },
+    "defect.incompleteSet": {
+      "comment": "Retro item is missing components of its original set.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incomplete collectible set"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyon setinin parçaları eksik"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

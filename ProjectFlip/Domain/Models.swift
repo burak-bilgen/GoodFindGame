@@ -15,9 +15,34 @@ typealias SellerID = EntityID<SellerTag>
 typealias ListingID = EntityID<ListingTag>
 typealias OfferID = EntityID<OfferTag>
 
-enum ItemCategory: String, Codable, CaseIterable, Sendable { case gaming }
+enum ItemCategory: String, Codable, CaseIterable, Sendable { case gaming, cameras, retro }
 enum Defect: String, Codable, CaseIterable, Sendable {
-    case drift, overheating, noisyFan, damagedPort, storageFailure
+    case drift, overheating, noisyFan, damagedPort, storageFailure, batteryWear, screenBurnIn, wirelessFault
+    case sensorDamage, lensFungus, lensScratch, autofocusFault, shutterWear, apertureStuck, stabilizationFault, cameraBatteryWear
+    case replacementParts, missingManual, boxWear, regionMismatch, counterfeitBoard, labelDamage, corrosion, incompleteSet
+
+    var category: ItemCategory {
+        switch self {
+        case .drift, .overheating, .noisyFan, .damagedPort, .storageFailure, .batteryWear, .screenBurnIn, .wirelessFault: .gaming
+        case .sensorDamage, .lensFungus, .lensScratch, .autofocusFault, .shutterWear, .apertureStuck, .stabilizationFault, .cameraBatteryWear: .cameras
+        case .replacementParts, .missingManual, .boxWear, .regionMismatch, .counterfeitBoard, .labelDamage, .corrosion, .incompleteSet: .retro
+        }
+    }
+    var valuePenaltyBasisPoints: Int64 {
+        switch self {
+        case .drift, .overheating, .noisyFan, .damagedPort, .storageFailure, .shutterWear: 3_000
+        case .batteryWear, .cameraBatteryWear, .missingManual: 1_200
+        case .screenBurnIn, .apertureStuck, .stabilizationFault, .incompleteSet: 2_500
+        case .wirelessFault: 1_800
+        case .sensorDamage: 4_500
+        case .lensFungus, .corrosion: 3_500
+        case .lensScratch, .replacementParts: 2_000
+        case .autofocusFault: 2_800
+        case .boxWear: 1_000
+        case .regionMismatch, .labelDamage: 1_500
+        case .counterfeitBoard: 6_000
+        }
+    }
     var key: String { "defect.\(rawValue)" }
 }
 
@@ -95,9 +120,19 @@ struct SeedContent: Codable, Sendable {
     static func load(bundle: Bundle = .main) throws -> SeedContent {
         guard let url = bundle.url(forResource: "items", withExtension: "json") else { throw ContentError.missingSeed }
         let result = try JSONDecoder().decode(Self.self, from: Data(contentsOf: url))
-        guard result.items.count == 10, Set(result.items.map(\.id)).count == 10,
-              result.items.allSatisfy({ $0.baseValue > .zero && !$0.possibleDefects.isEmpty }) else { throw ContentError.invalidSeed }
+        try result.validate()
         return result
+    }
+    func validate() throws {
+        guard items.count >= 45, Set(items.map(\.id)).count == items.count,
+              Set(items.map(\.name)).count == items.count,
+              ItemCategory.allCases.allSatisfy({ category in items.contains { $0.category == category } }),
+              items.allSatisfy({ item in
+                  !item.id.isEmpty && !item.brand.isEmpty && !item.model.isEmpty && !item.artSymbol.isEmpty &&
+                  item.baseValue > .zero && item.baseValue <= GameBalanceConfig.current.maximumTransactionAmount &&
+                  !item.possibleDefects.isEmpty && Set(item.possibleDefects).count == item.possibleDefects.count &&
+                  item.possibleDefects.allSatisfy { $0.category == item.category }
+              }) else { throw ContentError.invalidSeed }
     }
 }
 enum ContentError: Error { case missingSeed, invalidSeed }

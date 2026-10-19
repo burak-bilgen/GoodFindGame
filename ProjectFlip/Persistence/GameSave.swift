@@ -53,7 +53,7 @@ struct GameSnapshot: Codable, Equatable {
     }
 
     static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now) throws -> Self {
-        Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: definitions, seed: seed, now: now), generation: seed)
+        Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now), generation: seed)
     }
 }
 
@@ -81,11 +81,8 @@ struct SaveRepository {
                   (lifecycle.reducedPrice.map({ $0 > .zero && $0 < lifecycle.initialAskingPrice }) ?? true)
               }) else { throw SaveError.invalidSave }
         if let calendar = state.marketCalendar {
-            guard calendar.version == 1, calendar.anchor.timeIntervalSinceReferenceDate.isFinite,
-                  !calendar.categories.isEmpty, !calendar.models.isEmpty,
-                  Set(calendar.categories).count == calendar.categories.count,
-                  Set(calendar.models).count == calendar.models.count,
-                  (state.lastMarketCycle ?? -1) >= -1, (state.lastMarketCycle ?? -1) < Int.max - 1 else { throw SaveError.invalidSave }
+            try calendar.validate()
+            guard (state.lastMarketCycle ?? -1) >= -1, (state.lastMarketCycle ?? -1) < Int.max - 1 else { throw SaveError.invalidSave }
         } else if state.lastMarketCycle != nil || !state.marketTrends.isEmpty { throw SaveError.invalidSave }
         guard Set(state.marketTrends.map(\.id)).count == state.marketTrends.count,
               state.marketTrends.allSatisfy({ $0.startsAt < $0.endsAt && (500...1_200).contains($0.changeBasisPoints.magnitude) }) else { throw SaveError.invalidSave }

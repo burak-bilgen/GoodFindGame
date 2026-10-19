@@ -12,6 +12,7 @@ struct ListingDetailView: View {
                 Section {
                     DeviceArt(symbol: definition.artSymbol).frame(height: 210)
                     Text(definition.name).font(.title.bold())
+                    LabeledContent("market.category") { Text(GameText.string("category.\(definition.category.rawValue)", locale: locale)).accessibilityIdentifier("listingCategoryName") }
                     LabeledContent("listing.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
                     LabeledContent("listing.claimedCondition") { Text(listing.claimedCondition, format: .number).monospacedDigit() }
                     switch Result(catching: { try definition.baseValue.scaled(byBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {

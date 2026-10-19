@@ -55,7 +55,7 @@ struct MarketView: View {
                         ForEach(ItemCategory.allCases, id: \.self) { value in
                             Text(GameText.string("category.\(value.rawValue)", locale: locale)).tag(Optional(value))
                         }
-                    }
+                    }.accessibilityIdentifier("marketCategory")
                     VStack(alignment: .leading, spacing: 6) {
                         Text("market.minimumPrice").font(.caption).foregroundStyle(.secondary)
                         TextField("market.minimumPrice", text: $minimumPrice).keyboardType(.decimalPad).focused($priceInputFocused)

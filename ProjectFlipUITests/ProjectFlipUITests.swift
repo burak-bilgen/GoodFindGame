@@ -242,6 +242,51 @@ final class ProjectFlipUITests: XCTestCase {
     func testMarketTrendsTurkish() { verifyShell(language: "tr", market: "Pazar", inventory: "Envanter", followTrends: true) }
 
     @MainActor
+    func testNewCategoriesEnglish() { verifyNewCategories(language: "en") }
+
+    @MainActor
+    func testNewCategoriesTurkish() { verifyNewCategories(language: "tr") }
+
+    @MainActor
+    private func verifyNewCategories(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 10))
+        tap(app.buttons["marketFilters"], in: app)
+        tap(app.buttons["marketCategory"], in: app)
+        app.buttons[turkish ? "Fotoğraf makineleri" : "Cameras"].tap()
+        tap(app.buttons["listing.listing-42-5"], in: app)
+        XCTAssertTrue(app.staticTexts["Ilyven Luma 3"].exists)
+        XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["listingCategoryName"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["listingCategoryName"].label.contains(turkish ? "Fotoğraf makineleri" : "Cameras"))
+        tap(app.buttons["toggleWatch"], in: app)
+        app.navigationBars.buttons.firstMatch.tap()
+        app.swipeDown()
+        tap(app.buttons["marketCategory"], in: app)
+        app.buttons[turkish ? "Retro ve koleksiyon" : "Retro & collectibles"].tap()
+        tap(app.buttons["listing.listing-42-8"], in: app)
+        XCTAssertTrue(app.staticTexts["Yoriva Chapter 8"].exists)
+        XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["listingCategoryName"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["listingCategoryName"].label.contains(turkish ? "Retro ve koleksiyon" : "Retro & collectibles"))
+        tap(app.buttons["toggleWatch"], in: app)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Retro category listing: \(language)"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.terminate()
+        app.launch()
+        app.switches["watchedOnly"].switches.firstMatch.tap()
+        tap(app.buttons["listing.listing-42-5"], in: app)
+        XCTAssertTrue(app.staticTexts["Ilyven Luma 3"].exists)
+    }
+
+    @MainActor
     func testLiveMarketFeedEnglish() { verifyShell(language: "en", market: "Market", inventory: "Inventory", followFeed: true) }
 
     @MainActor
