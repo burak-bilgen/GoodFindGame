@@ -996,6 +996,816 @@
           }
         }
       }
+    },
+    "error.title": {
+      "comment": "Negotiation intent: error.title. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t complete that"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem tamamlanamadı"
+          }
+        }
+      }
+    },
+    "action.ok": {
+      "comment": "Negotiation intent: action.ok. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamam"
+          }
+        }
+      }
+    },
+    "save.error.write": {
+      "comment": "Negotiation intent: save.error.write. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your change couldn’t be saved. Nothing was charged. Please try again."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değişiklik kaydedilemedi. Bakiyenden düşülmedi. Lütfen tekrar dene."
+          }
+        }
+      }
+    },
+    "error.invalidAmount": {
+      "comment": "Negotiation intent: error.invalidAmount. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a positive amount with up to two decimal places."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En fazla iki ondalık basamakla sıfırdan büyük bir tutar gir."
+          }
+        }
+      }
+    },
+    "error.unavailable": {
+      "comment": "Negotiation intent: error.unavailable. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This listing is no longer available."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ilan artık mevcut değil."
+          }
+        }
+      }
+    },
+    "error.closed": {
+      "comment": "Negotiation intent: error.closed. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This negotiation has ended."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu pazarlık sona erdi."
+          }
+        }
+      }
+    },
+    "error.insufficientCash": {
+      "comment": "Negotiation intent: error.insufficientCash. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You don’t have enough available cash."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılabilir nakdin yeterli değil."
+          }
+        }
+      }
+    },
+    "error.inventoryFull": {
+      "comment": "Negotiation intent: error.inventoryFull. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your inventory is full. Sell an item to make room."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envanterin dolu. Yer açmak için bir ürün sat."
+          }
+        }
+      }
+    },
+    "error.inspectFirst": {
+      "comment": "Negotiation intent: error.inspectFirst. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspect this item before listing it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan vermeden önce ürünü incele."
+          }
+        }
+      }
+    },
+    "error.alreadyDone": {
+      "comment": "Negotiation intent: error.alreadyDone. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That action has already been completed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işlem zaten tamamlandı."
+          }
+        }
+      }
+    },
+    "question.issues": {
+      "comment": "Negotiation intent: question.issues. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any issues I should know about?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilmem gereken bir sorunu var mı?"
+          }
+        }
+      }
+    },
+    "offer.amount": {
+      "comment": "Negotiation intent: offer.amount. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offer amount"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklif tutarı"
+          }
+        }
+      }
+    },
+    "offer.modifier": {
+      "comment": "Negotiation intent: offer.modifier. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your approach"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yaklaşımın"
+          }
+        }
+      }
+    },
+    "offer.send": {
+      "comment": "Negotiation intent: offer.send. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklif gönder"
+          }
+        }
+      }
+    },
+    "offer.acceptCounter": {
+      "comment": "Negotiation intent: offer.acceptCounter. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accept counteroffer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşı teklifi kabul et"
+          }
+        }
+      }
+    },
+    "offer.halfway": {
+      "comment": "Negotiation intent: offer.halfway. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meet halfway"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ortada buluşalım"
+          }
+        }
+      }
+    },
+    "offer.walkAway": {
+      "comment": "Negotiation intent: offer.walkAway. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walk away"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazarlıktan çekil"
+          }
+        }
+      }
+    },
+    "offer.agreed": {
+      "comment": "Negotiation intent: offer.agreed. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price agreed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiyatta anlaştınız"
+          }
+        }
+      }
+    },
+    "modifier.none": {
+      "comment": "Negotiation intent: modifier.none. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just the offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sadece teklif"
+          }
+        }
+      }
+    },
+    "modifier.buyToday": {
+      "comment": "Negotiation intent: modifier.buyToday. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can pick it up today."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bugün gelip alabilirim."
+          }
+        }
+      }
+    },
+    "modifier.knownIssues": {
+      "comment": "Negotiation intent: modifier.knownIssues. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The known issue affects my offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildiğimiz sorun teklifimi etkiliyor."
+          }
+        }
+      }
+    },
+    "player.offer": {
+      "comment": "Negotiation intent: player.offer. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Here’s my offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklifim bu."
+          }
+        }
+      }
+    },
+    "player.question": {
+      "comment": "Negotiation intent: player.question. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any issues I should know about?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilmem gereken bir sorunu var mı?"
+          }
+        }
+      }
+    },
+    "player.accept": {
+      "comment": "Negotiation intent: player.accept. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That works for me."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamam, anlaştık."
+          }
+        }
+      }
+    },
+    "player.walkAway": {
+      "comment": "Negotiation intent: player.walkAway. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’ll pass. Good luck with the sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ben almayayım. Hayırlı satışlar."
+          }
+        }
+      }
+    },
+    "seller.accept.0": {
+      "comment": "Negotiation intent: seller.accept.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deal. It’s yours at that price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamdır, bu fiyata senin olsun."
+          }
+        }
+      }
+    },
+    "seller.accept.1": {
+      "comment": "Negotiation intent: seller.accept.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can do that. Let’s wrap this up."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olur, anlaşalım o zaman."
+          }
+        }
+      }
+    },
+    "seller.counter.0": {
+      "comment": "Negotiation intent: seller.counter.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bit low for me. Here’s where I can meet you."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biraz düşük kaldı. Benim inebileceğim fiyat bu."
+          }
+        }
+      }
+    },
+    "seller.counter.1": {
+      "comment": "Negotiation intent: seller.counter.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could you come up to this?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şu fiyata çıkabilir misin?"
+          }
+        }
+      }
+    },
+    "seller.reject.0": {
+      "comment": "Negotiation intent: seller.reject.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That’s too far off. I’ll pass."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O kadar düşemem, kusura bakma."
+          }
+        }
+      }
+    },
+    "seller.reject.1": {
+      "comment": "Negotiation intent: seller.reject.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’m looking for a serious offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciddi bir teklif bekliyorum."
+          }
+        }
+      }
+    },
+    "seller.closed": {
+      "comment": "Negotiation intent: seller.closed. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We’re too far apart. I’m ending this conversation."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anlaşamayacağız gibi. Pazarlığı burada bitirelim."
+          }
+        }
+      }
+    },
+    "seller.evasive.0": {
+      "comment": "Negotiation intent: seller.evasive.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It looks fine to me. You can see the photos."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bana göre bir şeyi yok. Fotoğraflarda görünüyor zaten."
+          }
+        }
+      }
+    },
+    "seller.evasive.1": {
+      "comment": "Negotiation intent: seller.evasive.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At this price, I’d rather keep things simple."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu fiyata bu kadar detaya girmeyelim."
+          }
+        }
+      }
+    },
+    "seller.uncertain.0": {
+      "comment": "Negotiation intent: seller.uncertain.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I haven’t tested everything. It’s been sitting in a drawer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her şeyini denemedim. Uzun süredir çekmecede duruyordu."
+          }
+        }
+      }
+    },
+    "seller.uncertain.1": {
+      "comment": "Negotiation intent: seller.uncertain.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Honestly, I’m not sure what to check on these."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açıkçası bunlarda neye bakılır pek bilmiyorum."
+          }
+        }
+      }
+    },
+    "seller.defect.0": {
+      "comment": "Negotiation intent: seller.defect.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is one thing you should know about."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilmen gereken bir sorun var."
+          }
+        }
+      }
+    },
+    "seller.defect.1": {
+      "comment": "Negotiation intent: seller.defect.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I noticed this issue while using it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanırken şu sorunu fark ettim."
+          }
+        }
+      }
+    },
+    "seller.clean.0": {
+      "comment": "Negotiation intent: seller.clean.0. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing I’ve noticed in regular use."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düzenli kullanımda bir sorun fark etmedim."
+          }
+        }
+      }
+    },
+    "seller.clean.1": {
+      "comment": "Negotiation intent: seller.clean.1. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It’s been working for me, but you’re welcome to inspect it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bende çalışıyor ama yine de incelemeni öneririm."
+          }
+        }
+      }
+    },
+    "defect.drift": {
+      "comment": "Negotiation intent: defect.drift. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controller drift"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrolcü kayması"
+          }
+        }
+      }
+    },
+    "defect.overheating": {
+      "comment": "Negotiation intent: defect.overheating. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overheating"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aşırı ısınma"
+          }
+        }
+      }
+    },
+    "defect.noisyFan": {
+      "comment": "Negotiation intent: defect.noisyFan. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noisy fan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gürültülü fan"
+          }
+        }
+      }
+    },
+    "defect.damagedPort": {
+      "comment": "Negotiation intent: defect.damagedPort. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damaged port"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasarlı bağlantı noktası"
+          }
+        }
+      }
+    },
+    "defect.storageFailure": {
+      "comment": "Negotiation intent: defect.storageFailure. Write naturally for the locale; amounts and defect names appear as separate UI fields.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Storage failure"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depolama arızası"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

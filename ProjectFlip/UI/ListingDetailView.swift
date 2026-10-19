@@ -22,10 +22,7 @@ struct ListingDetailView: View {
             }
             .safeAreaInset(edge: .bottom) {
                     NavigationLink {
-                        VStack(spacing: 16) {
-                            SellerSummary(seller: listing.seller)
-                            Text("negotiation.intro")
-                        }.padding().navigationTitle("messages.title")
+                        ConversationView(store: store, listingID: listing.id)
                     } label: {
                         Text("offer.start").font(.headline).frame(maxWidth: .infinity).padding()
                     }

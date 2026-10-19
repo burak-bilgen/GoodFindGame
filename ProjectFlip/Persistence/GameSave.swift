@@ -5,6 +5,20 @@ struct GameSnapshot: Codable, Equatable {
     var player: PlayerState
     var market: [MarketplaceListing]
     var generation: UInt64
+    var conversations: [NegotiationState] = []
+
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations }
+    init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
+        self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
+    }
+    init(from decoder: any Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        schemaVersion = try values.decode(Int.self, forKey: .schemaVersion)
+        player = try values.decode(PlayerState.self, forKey: .player)
+        market = try values.decode([MarketplaceListing].self, forKey: .market)
+        generation = try values.decode(UInt64.self, forKey: .generation)
+        conversations = try values.decodeIfPresent([NegotiationState].self, forKey: .conversations) ?? []
+    }
 
     static func fresh(definitions: [ItemDefinition], seed: UInt64 = 42, now: Date = .now) throws -> Self {
         Self(schemaVersion: 1, player: PlayerState(cash: Money(minorUnits: 2_000_000)), market: try ListingGenerator().generate(definitions: definitions, seed: seed, now: now), generation: seed)

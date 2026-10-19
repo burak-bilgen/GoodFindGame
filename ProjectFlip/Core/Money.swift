@@ -40,3 +40,25 @@ struct Money: Codable, Hashable, Comparable, Sendable {
 }
 
 enum MoneyError: Error { case overflow }
+
+extension Money {
+    static func parse(_ text: String, locale: Locale) throws -> Self {
+        let separator = locale.decimalSeparator ?? "."
+        let pieces = text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: separator)
+        guard pieces.count <= 2, let wholeText = pieces.first, !wholeText.isEmpty,
+              pieces.allSatisfy({ $0.allSatisfy({ $0.isASCII && $0.isNumber }) }),
+              let whole = Int64(wholeText), whole >= 0 else { throw TradingError.invalidAmount }
+        let fraction = pieces.count == 2 ? pieces[1] : ""
+        guard fraction.count <= 2, pieces.count == 1 || !fraction.isEmpty else { throw TradingError.invalidAmount }
+        let minor = fraction.isEmpty ? 0 : (Int64(fraction) ?? 0) * (fraction.count == 1 ? 10 : 1)
+        let (units, overflow) = whole.multipliedReportingOverflow(by: 100)
+        let (value, extraOverflow) = units.addingReportingOverflow(minor)
+        guard !overflow, !extraOverflow, value > 0, value <= 1_000_000_000_000 else { throw TradingError.invalidAmount }
+        return Self(minorUnits: value)
+    }
+
+    func inputText(locale: Locale) -> String {
+        let fraction = minorUnits % 100
+        return "\(minorUnits / 100)\(locale.decimalSeparator ?? ".")\(fraction < 10 ? "0" : "")\(fraction)"
+    }
+}

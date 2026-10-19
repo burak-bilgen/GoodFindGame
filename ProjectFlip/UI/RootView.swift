@@ -4,6 +4,7 @@ import OSLog
 struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
+    @Environment(\.locale) private var locale
 
     var body: some View {
         TabView {
@@ -21,8 +22,15 @@ struct RootView: View {
             }
             .tabItem { Label("market.title", systemImage: "square.grid.2x2") }
             NavigationStack {
-                ContentUnavailableView("messages.title", systemImage: "bubble.left.and.bubble.right", description: Text("messages.empty"))
-                    .navigationTitle("messages.title")
+                if let store {
+                    List(store.snapshot.conversations) { conversation in
+                        NavigationLink {
+                            ConversationView(store: store, listingID: conversation.listingID)
+                        } label: {
+                            if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) { Text(definition.name) }
+                        }
+                    }.navigationTitle("messages.title")
+                }
             }
             .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }
             NavigationStack {
@@ -39,6 +47,11 @@ struct RootView: View {
                 Text("profile.intro").padding().navigationTitle("profile.title")
             }
             .tabItem { Label("profile.title", systemImage: "person.crop.circle") }
+        }
+        .alert("error.title", isPresented: Binding(get: { store?.errorKey != nil }, set: { if !$0 { store?.errorKey = nil } })) {
+            Button("action.ok") { store?.errorKey = nil }
+        } message: {
+            Text(GameText.string(store?.errorKey ?? "save.error.write", locale: locale))
         }
         .task { if store == nil { load() } }
         .tint(Color(red: 0.19, green: 0.36, blue: 0.43))
