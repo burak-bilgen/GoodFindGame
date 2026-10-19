@@ -7,3 +7,5 @@ Section 47 is the exact First 72 Hours backlog. Auctions are stretch only after 
 Next: Task 2 — seed domain model. Do not introduce Phase B features before the vertical slice is playable and evaluated.
 
 Validation: simulator build and tests passed on iPhone 18 Pro (iOS 27.2), including English/Turkish shell navigation and bundled translation checks. Built plist confirms iOS 17 minimum, iPhone only and portrait. Localization catalog check passed. No Swift compiler warnings; Xcode emits an App Intents metadata warning for targets without App Intents.
+
+Task 2 complete: exact integer Money with overflow checks, typed IDs, serializable domain models and ten original gaming/electronics definitions. Seed validation, stable hidden-truth serialization and TR/EN currency formatting tests pass. Global display uses neutral credits (¤); Turkish uses ₺ without changing economic amounts. Simulator service recovery and a nonparallel retry resolved the initial test-runner connection failure. Next: Task 3 deterministic listing generator.

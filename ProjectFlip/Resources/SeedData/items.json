@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "id": "gaming-0",
+      "brand": "Veltri",
+      "model": "Arc 2",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 320000
+      },
+      "possibleDefects": [
+        "drift",
+        "damagedPort"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-1",
+      "brand": "Nuvoro",
+      "model": "Arc 4",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 780000
+      },
+      "possibleDefects": [
+        "overheating",
+        "storageFailure"
+      ],
+      "artSymbol": "gamecontroller.fill"
+    },
+    {
+      "id": "gaming-2",
+      "brand": "Veltri",
+      "model": "Pebble",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 240000
+      },
+      "possibleDefects": [
+        "drift",
+        "damagedPort"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-3",
+      "brand": "Nuvoro",
+      "model": "Vista",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 520000
+      },
+      "possibleDefects": [
+        "damagedPort",
+        "overheating"
+      ],
+      "artSymbol": "display"
+    },
+    {
+      "id": "gaming-4",
+      "brand": "Veltri",
+      "model": "Echo",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 160000
+      },
+      "possibleDefects": [
+        "damagedPort",
+        "noisyFan"
+      ],
+      "artSymbol": "headphones"
+    },
+    {
+      "id": "gaming-5",
+      "brand": "Nuvoro",
+      "model": "Pulse",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 210000
+      },
+      "possibleDefects": [
+        "damagedPort",
+        "overheating"
+      ],
+      "artSymbol": "hifispeaker"
+    },
+    {
+      "id": "gaming-6",
+      "brand": "Veltri",
+      "model": "Dock 3",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 180000
+      },
+      "possibleDefects": [
+        "storageFailure",
+        "damagedPort"
+      ],
+      "artSymbol": "externaldrive"
+    },
+    {
+      "id": "gaming-7",
+      "brand": "Nuvoro",
+      "model": "Cove",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 640000
+      },
+      "possibleDefects": [
+        "noisyFan",
+        "storageFailure"
+      ],
+      "artSymbol": "desktopcomputer"
+    },
+    {
+      "id": "gaming-8",
+      "brand": "Veltri",
+      "model": "Arc Mini",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 410000
+      },
+      "possibleDefects": [
+        "drift",
+        "overheating"
+      ],
+      "artSymbol": "gamecontroller"
+    },
+    {
+      "id": "gaming-9",
+      "brand": "Nuvoro",
+      "model": "Vista Pro",
+      "category": "gaming",
+      "baseValue": {
+        "minorUnits": 920000
+      },
+      "possibleDefects": [
+        "overheating",
+        "damagedPort"
+      ],
+      "artSymbol": "display"
+    }
+  ]
+}
