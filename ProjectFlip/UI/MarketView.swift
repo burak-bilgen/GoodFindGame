@@ -32,12 +32,7 @@ struct MarketView: View {
                 ForEach(listings) { listing in
                     if let definition = store.definition(for: listing.item) {
                         NavigationLink {
-                            // Task 5 replaces this destination with the complete listing detail.
-                            VStack(spacing: 20) {
-                                DeviceArt(symbol: definition.artSymbol).frame(height: 180)
-                                Text(definition.name).font(.title.bold())
-                                Text(listing.askingPrice.formatted(locale: locale)).font(.title2)
-                            }.padding().navigationTitle("listing.title")
+                            ListingDetailView(store: store, listingID: listing.id)
                         } label: {
                             ListingCard(listing: listing, definition: definition)
                         }
@@ -62,7 +57,7 @@ struct ListingCard: View {
             Text(definition.name).font(.headline)
             Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()).foregroundStyle(.primary)
             HStack {
-                Text(LocalizedStringKey(nameKey))
+                Text(GameText.string(nameKey, locale: locale))
                 Spacer()
                 Text(listing.createdAt, style: .relative)
             }.font(.caption).foregroundStyle(.secondary)

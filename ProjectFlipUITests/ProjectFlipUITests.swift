@@ -19,6 +19,10 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].waitForExistence(timeout: 5))
+        app.buttons["listing.listing-42-0"].tap()
+        XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
+        app.buttons["openConversation"].tap()
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].exists)
         app.tabBars.buttons[inventory].tap()
         XCTAssertTrue(app.navigationBars[inventory].exists)
     }

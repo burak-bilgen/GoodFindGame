@@ -540,6 +540,462 @@
           }
         }
       }
+    },
+    "listing.asking": {
+      "comment": "Listing/seller context: listing.asking.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asking price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fiyatı"
+          }
+        }
+      }
+    },
+    "listing.claimedCondition": {
+      "comment": "Listing/seller context: listing.claimedCondition.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller’s condition score / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının kondisyon puanı / 100"
+          }
+        }
+      }
+    },
+    "listing.claimWarning": {
+      "comment": "Listing/seller context: listing.claimWarning.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller claims may be incomplete. Inspection can reveal more."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının bilgisi eksik olabilir. İnceleme daha fazlasını ortaya çıkarabilir."
+          }
+        }
+      }
+    },
+    "listing.description": {
+      "comment": "Listing/seller context: listing.description.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From the seller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının açıklaması"
+          }
+        }
+      }
+    },
+    "listing.description.careful": {
+      "comment": "Listing/seller context: listing.description.careful.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Used regularly. Happy to answer questions before you decide."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düzenli kullandım. Karar vermeden önce aklına takılanları sorabilirsin."
+          }
+        }
+      }
+    },
+    "listing.description.uncertain": {
+      "comment": "Listing/seller context: listing.description.uncertain.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearing out some old gear. I don’t know much about this one."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evdeki eski eşyaları elden çıkarıyorum. Bu üründen pek anlamıyorum."
+          }
+        }
+      }
+    },
+    "listing.description.evasive": {
+      "comment": "Listing/seller context: listing.description.evasive.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks great. Priced to move, so please keep questions brief."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görüntüsü gayet iyi. Fiyatı uygun tuttum, çok soru sormadan alacak olan yazsın."
+          }
+        }
+      }
+    },
+    "seller.title": {
+      "comment": "Listing/seller context: seller.title.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcı"
+          }
+        }
+      }
+    },
+    "seller.rating %@": {
+      "comment": "Listing/seller context: seller.rating %@. Placeholder %@ is a locale-formatted rating.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rated %@ out of 5"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puanı: %@ / 5"
+          }
+        }
+      }
+    },
+    "seller.history.empty": {
+      "comment": "Listing/seller context: seller.history.empty.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You haven’t traded with this seller yet."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu satıcıyla henüz alışveriş yapmadın."
+          }
+        }
+      }
+    },
+    "offer.start": {
+      "comment": "Listing/seller context: offer.start.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message & make an offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesaj gönder ve teklif ver"
+          }
+        }
+      }
+    },
+    "negotiation.intro": {
+      "comment": "Listing/seller context: negotiation.intro.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask about the item before committing your cash."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paranı bağlamadan önce ürün hakkında bilgi al."
+          }
+        }
+      }
+    },
+    "listing.unavailable": {
+      "comment": "Listing/seller context: listing.unavailable.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing unavailable"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan artık mevcut değil"
+          }
+        }
+      }
+    },
+    "npc.city.0": {
+      "comment": "Listing/seller context: npc.city.0.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portland"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kadıköy"
+          }
+        }
+      }
+    },
+    "npc.city.1": {
+      "comment": "Listing/seller context: npc.city.1.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Austin"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çankaya"
+          }
+        }
+      }
+    },
+    "npc.city.2": {
+      "comment": "Listing/seller context: npc.city.2.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seattle"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşıyaka"
+          }
+        }
+      }
+    },
+    "npc.city.3": {
+      "comment": "Listing/seller context: npc.city.3.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denver"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nilüfer"
+          }
+        }
+      }
+    },
+    "npc.city.4": {
+      "comment": "Listing/seller context: npc.city.4.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boston"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konak"
+          }
+        }
+      }
+    },
+    "npc.city.5": {
+      "comment": "Listing/seller context: npc.city.5.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chicago"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beşiktaş"
+          }
+        }
+      }
+    },
+    "npc.city.6": {
+      "comment": "Listing/seller context: npc.city.6.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phoenix"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muratpaşa"
+          }
+        }
+      }
+    },
+    "npc.city.7": {
+      "comment": "Listing/seller context: npc.city.7.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atlanta"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tepebaşı"
+          }
+        }
+      }
+    },
+    "npc.city.8": {
+      "comment": "Listing/seller context: npc.city.8.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "San Diego"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bornova"
+          }
+        }
+      }
+    },
+    "npc.city.9": {
+      "comment": "Listing/seller context: npc.city.9.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raleigh"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üsküdar"
+          }
+        }
+      }
+    },
+    "seller.trades %lld": {
+      "comment": "Number of prior NPC marketplace trades. The integer is localized by SwiftUI.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld completed trade"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld completed trades"
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld tamamlanan alışveriş"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld tamamlanan alışveriş"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "version": "1.0"
