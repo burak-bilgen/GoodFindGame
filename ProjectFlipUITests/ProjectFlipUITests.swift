@@ -35,10 +35,14 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
         tap(app.buttons["createListing"], in: app)
         tap(app.buttons["publishListing"], in: app)
+        app.tabBars.buttons[language == "tr" ? "Satışlar" : "Selling"].tap()
+        app.buttons["sale.resale-item-42-0-0"].tap()
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.otherElements["saleCompleted"].exists || app.staticTexts[language == "tr" ? "Satıldı" : "Sold"].exists)
         app.terminate()
         app.launch()
         app.tabBars.buttons[inventory].tap()
-        XCTAssertTrue(app.buttons["inventory.item-42-0"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "İlk ürününü pazarda bul." : "Find your first item in the market."].waitForExistence(timeout: 5))
     }
     @MainActor
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {

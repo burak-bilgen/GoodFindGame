@@ -23,3 +23,5 @@ Task 7 complete: agreed purchases debit cash and add inventory in one saved tran
 Task 8 complete: free limited basic inspection, paid full inspection, stable defect reveals and visible valuation estimates/failure states. Model reference values support informed initial buying decisions. Fourteen unit tests pass; TR/EN UI purchase→inspection→relaunch flows pass. Final display-error handling also rebuilt and unit-tested. Next: Task 9 player resale listings.
 
 Task 9 complete: inspected inventory can be listed at an exact localized asking price; duplicate active listings are prevented and initial views/favorites are generated from price competitiveness. Fifteen unit tests pass and both UI flows publish a resale listing and preserve inventory across relaunch. Next: Task 10 NPC buyer offers and settlement.
+
+Task 10 complete: six buyer archetypes, budget-based proposals/counters/withdrawal, rejection, price revision and exactly-once sale settlement. Sold listings retain immutable item/cost facts. Seventeen unit tests and TR/EN buy→inspect→list→buyer acceptance→relaunch flows pass. Next: Task 11 profit/loss ledger.

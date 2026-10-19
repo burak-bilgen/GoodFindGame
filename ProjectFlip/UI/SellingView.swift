@@ -15,7 +15,10 @@ struct CreateListingView: View {
                 Text("selling.priceHint").font(.caption).foregroundStyle(.secondary)
                 Button("selling.publish") {
                     store.perform {
-                        try store.commit(ResaleEngine().create(itemID: itemID, askingPrice: Money.parse(price, locale: locale), state: store.snapshot, definitions: store.definitions, now: .now))
+                        var next = try ResaleEngine().create(itemID: itemID, askingPrice: Money.parse(price, locale: locale), state: store.snapshot, definitions: store.definitions, now: .now)
+                        guard let listing = next.playerListings.last else { throw TradingError.unavailable }
+                        next = try BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: store.definitions)
+                        try store.commit(next)
                         published = true
                     }
                 }.accessibilityIdentifier("publishListing")
@@ -43,7 +46,7 @@ struct SellingView: View {
                     SaleListingView(store: store, listingID: listing.id)
                 } label: {
                     VStack(alignment: .leading, spacing: 8) {
-                        if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }), let definition = store.definition(for: item) { Text(definition.name).font(.headline) }
+                        if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) { Text(definition.name).font(.headline) }
                         Text(listing.askingPrice.formatted(locale: locale))
                         Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.caption)
                     }
@@ -57,14 +60,58 @@ struct SaleListingView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @State private var counterAmount = ""
+    @State private var newPrice = ""
     var body: some View {
         if let listing = store.snapshot.playerListings.first(where: { $0.id == listingID }) {
             List {
                 LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale)) }
                 LabeledContent("selling.views") { Text(listing.views, format: .number) }
                 LabeledContent("selling.favorites") { Text(listing.favorites, format: .number) }
-                Text("selling.noOffers")
+                ForEach(listing.messages) { message in
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(GameText.string(message.intent, locale: locale))
+                        if let amount = message.amount { Text(amount.formatted(locale: locale)).bold() }
+                    }
+                }
+                if listing.status == .sold {
+                    Label("selling.sold", systemImage: "checkmark.seal.fill").accessibilityIdentifier("saleCompleted")
+                } else if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
+                    Section("buyer.title") {
+                        Text(GameText.string("npc.name.\(offer.identityIndex)", locale: locale))
+                        Text(offer.amount.formatted(locale: locale)).font(.title2.bold())
+                        Button("buyer.accept") {
+                            store.perform { try store.commit(BuyerEngine().accept(listingID: listing.id, state: store.snapshot, now: .now)) }
+                        }.accessibilityIdentifier("acceptBuyerOffer")
+                        Button("buyer.reject") {
+                            store.perform { try store.commit(BuyerEngine().reject(listingID: listing.id, state: store.snapshot)) }
+                        }
+                        TextField("buyer.counterAmount", text: $counterAmount).keyboardType(.decimalPad)
+                        Button("buyer.sendCounter") {
+                            store.perform { try store.commit(BuyerEngine().counter(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale), state: store.snapshot, now: .now)) }
+                        }
+                    }
+                } else if listing.status == .active {
+                    Text("selling.noOffers")
+                    Button("buyer.find") {
+                        store.perform { try store.commit(BuyerEngine().generateOffer(listingID: listing.id, state: store.snapshot, definitions: store.definitions)) }
+                    }
+                }
+                if listing.status == .active {
+                    Section("selling.asking") {
+                        TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad)
+                        Button("selling.updatePrice") {
+                            store.perform {
+                                var next = try BuyerEngine().changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale), state: store.snapshot)
+                                next = try BuyerEngine().generateOffer(listingID: listing.id, state: next, definitions: store.definitions)
+                                try store.commit(next)
+                            }
+                        }
+                    }
+                }
             }.navigationTitle("selling.title")
+                .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
+                .sensoryFeedback(.success, trigger: listing.status == .sold)
         }
     }
 }

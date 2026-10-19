@@ -2310,6 +2310,240 @@
           }
         }
       }
+    },
+    "buyer.title": {
+      "comment": "Buyer negotiation: buyer.title. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı teklifi"
+          }
+        }
+      }
+    },
+    "buyer.accept": {
+      "comment": "Buyer negotiation: buyer.accept. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accept & sell"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kabul et ve sat"
+          }
+        }
+      }
+    },
+    "buyer.reject": {
+      "comment": "Buyer negotiation: buyer.reject. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reject offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teklifi reddet"
+          }
+        }
+      }
+    },
+    "buyer.counterAmount": {
+      "comment": "Buyer negotiation: buyer.counterAmount. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your counteroffer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşı teklifin"
+          }
+        }
+      }
+    },
+    "buyer.sendCounter": {
+      "comment": "Buyer negotiation: buyer.sendCounter. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send counteroffer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşı teklif gönder"
+          }
+        }
+      }
+    },
+    "buyer.find": {
+      "comment": "Buyer negotiation: buyer.find. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find another buyer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka alıcı bul"
+          }
+        }
+      }
+    },
+    "selling.updatePrice": {
+      "comment": "Buyer negotiation: selling.updatePrice. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update asking price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fiyatını güncelle"
+          }
+        }
+      }
+    },
+    "buyer.offer.0": {
+      "comment": "Buyer negotiation: buyer.offer.0. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’ve looked at the condition. Would you take this?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kondisyonuna baktım. Bu fiyata verir misin?"
+          }
+        }
+      }
+    },
+    "buyer.offer.1": {
+      "comment": "Buyer negotiation: buyer.offer.1. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’m interested. Here’s what I can offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgimi çekti. Verebileceğim tutar bu."
+          }
+        }
+      }
+    },
+    "buyer.counter": {
+      "comment": "Buyer negotiation: buyer.counter. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That’s a little high. This is my limit."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biraz yüksek oldu. En fazla bu kadar çıkabilirim."
+          }
+        }
+      }
+    },
+    "buyer.withdraw": {
+      "comment": "Buyer negotiation: buyer.withdraw. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanks, but I’ll keep looking."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teşekkürler, ben biraz daha bakayım."
+          }
+        }
+      }
+    },
+    "buyer.accepted": {
+      "comment": "Buyer negotiation: buyer.accepted. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deal. Payment sent."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anlaştık, ödemeyi gönderdim."
+          }
+        }
+      }
+    },
+    "player.rejectBuyer": {
+      "comment": "Buyer negotiation: player.rejectBuyer. Localize marketplace tone independently.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I’ll wait for a better offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha iyi bir teklif bekleyeceğim."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
