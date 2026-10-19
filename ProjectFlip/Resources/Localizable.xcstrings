@@ -1,0 +1,186 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "market.title": {
+      "comment": "Primary marketplace tab and navigation title.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazar"
+          }
+        }
+      }
+    },
+    "market.empty": {
+      "comment": "Empty market placeholder before listings are available.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your next discovery starts here."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni keşiflerin burada başlıyor."
+          }
+        }
+      }
+    },
+    "messages.title": {
+      "comment": "Negotiation conversations tab.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesajlar"
+          }
+        }
+      }
+    },
+    "messages.empty": {
+      "comment": "Empty conversation list.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your conversations with sellers and buyers appear here."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı ve satıcılarla konuşmaların burada görünür."
+          }
+        }
+      }
+    },
+    "inventory.title": {
+      "comment": "Player-owned items tab.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inventory"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envanter"
+          }
+        }
+      }
+    },
+    "inventory.empty": {
+      "comment": "Empty player inventory.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find your first item in the market."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk ürününü pazarda bul."
+          }
+        }
+      }
+    },
+    "selling.title": {
+      "comment": "Player resale listings tab.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selling"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satışlar"
+          }
+        }
+      }
+    },
+    "selling.empty": {
+      "comment": "Empty resale listing screen.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List an item from your inventory to start selling."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satışa başlamak için envanterinden bir ürünü ilana koy."
+          }
+        }
+      }
+    },
+    "profile.title": {
+      "comment": "Player profile tab.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profile"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
+          }
+        }
+      }
+    },
+    "profile.intro": {
+      "comment": "Trader profile introductory flavor copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every deal tells a story. Make yours count."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her alışverişin bir hikâyesi var. Seninkini yaz."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
