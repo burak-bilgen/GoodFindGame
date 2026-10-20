@@ -7362,6 +7362,420 @@
           }
         }
       }
+    },
+    "game.unknown": {
+      "comment": "State of an uninspected item before buying.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still unknown"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz bilinmiyor"
+          }
+        }
+      }
+    },
+    "game.truth": {
+      "comment": "Mystery panel in a listing. No hidden condition information is disclosed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The truth is inside."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçeği eline alınca göreceksin."
+          }
+        }
+      }
+    },
+    "game.truthHint": {
+      "comment": "Short guidance distinguishing seller claims from actual inspection.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask the seller. Inspect after delivery. The risk is yours to read."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcıya sor. Teslim alınca incele. Riski tartmak sana kalmış."
+          }
+        }
+      }
+    },
+    "game.conditionUnknown": {
+      "comment": "Unknown fact label before acquisition.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actual condition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçek durum"
+          }
+        }
+      }
+    },
+    "game.faultUnknown": {
+      "comment": "Unknown fact label before inspection; does not imply any fault exists.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hidden faults"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizli kusurlar"
+          }
+        }
+      }
+    },
+    "game.dealClosed": {
+      "comment": "Purchase commitment hero heading.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEAL CLOSED"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ANLAŞMA TAMAM"
+          }
+        }
+      }
+    },
+    "game.boughtFor": {
+      "comment": "Actual committed purchase amount.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bought for"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alış fiyatı"
+          }
+        }
+      }
+    },
+    "game.purchaseRisk": {
+      "comment": "Anticipation immediately after purchase, not a promise of good condition.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yours now. What will the inspection reveal?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artık senin. Bakalım incelemede ne çıkacak?"
+          }
+        }
+      }
+    },
+    "game.diagnostic": {
+      "comment": "Inspection progress label.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHECKING THE EVIDENCE"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İPUÇLARI İNCELENİYOR"
+          }
+        }
+      }
+    },
+    "game.step.condition": {
+      "comment": "First inspection stage.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exterior"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dış durum"
+          }
+        }
+      }
+    },
+    "game.step.findings": {
+      "comment": "Second inspection stage.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Findings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulgular"
+          }
+        }
+      }
+    },
+    "game.step.value": {
+      "comment": "Third inspection stage.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Value"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değer"
+          }
+        }
+      }
+    },
+    "game.repairChoice": {
+      "comment": "Repair decision framing; makes no guarantee of profitability.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A little more invested. A better return?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biraz daha masraf. Daha iyi kazanç mı?"
+          }
+        }
+      }
+    },
+    "game.sellingStage": {
+      "comment": "Resale price setting hero eyebrow.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR NEXT MOVE"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SIRADAKİ HAMLEN"
+          }
+        }
+      }
+    },
+    "game.price.fast": {
+      "comment": "Editable lower asking price suggestion; not guaranteed timing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move it quickly"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hızlı sat"
+          }
+        }
+      }
+    },
+    "game.price.balanced": {
+      "comment": "Editable asking price suggestion around the uncertain estimate.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test the market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazarı yokla"
+          }
+        }
+      }
+    },
+    "game.price.patient": {
+      "comment": "Editable higher asking price suggestion; no optimal price is revealed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aim higher"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüksekten dene"
+          }
+        }
+      }
+    },
+    "game.price.hint": {
+      "comment": "Uncertain pricing guidance; does not describe a guaranteed simulation outcome.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lower ask may bring faster interest. A higher ask needs patience. Nothing is guaranteed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düşük fiyat ilgiyi hızlandırabilir. Yüksek fiyat sabır ister. Satışın garantisi yok."
+          }
+        }
+      }
+    },
+    "game.return": {
+      "comment": "Offline return hero eyebrow.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "THE WORLD KEPT MOVING"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PAZAR HİÇ DURMADI"
+          }
+        }
+      }
+    },
+    "game.returnHint": {
+      "comment": "Return summary guidance, each row opens its actual destination.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your next move is waiting below."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıradaki hamlen aşağıda seni bekliyor."
+          }
+        }
+      }
+    },
+    "game.workbench": {
+      "comment": "Inventory display header.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ON YOUR WORKBENCH"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TEZGAHINDA"
+          }
+        }
+      }
+    },
+    "game.inbox": {
+      "comment": "Message inbox header.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AT THE BARGAINING TABLE"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PAZARLIK MASASINDA"
+          }
+        }
+      }
+    },
+    "game.stall": {
+      "comment": "Player listings display header.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR SHOP WINDOW"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VİTRİNİN"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

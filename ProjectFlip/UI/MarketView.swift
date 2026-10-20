@@ -5,6 +5,7 @@ struct MarketView: View {
     @Environment(\.locale) private var locale
     @GameReduceMotion private var reduceMotion
     @FocusState private var priceInputFocused: Bool
+    @Environment(\.dynamicTypeSize) private var typeSize
     @State private var filtersExpanded = false
     @State private var category: ItemCategory?
     @State private var newestFirst = true
@@ -29,16 +30,25 @@ struct MarketView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 14) {
-                VStack(alignment: .leading, spacing: 12) {
-                    GameEyebrow(key: "hunt.eyebrow")
-                    Text("market.heading").font(.system(.title2, design: .rounded, weight: .heavy))
-                    Text("market.subtitle").font(.subheadline).foregroundStyle(.secondary)
-                    HStack {
-                        Text("wallet.cash").font(.caption)
-                        Spacer()
-                        Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold().contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
+                HStack(alignment: .center, spacing: 14) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("hunt.eyebrow").font(.caption2.weight(.heavy)).tracking(2).foregroundStyle(GameStyle.amber)
+                        Text("market.heading").font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
+                        Text("market.subtitle").font(.caption).foregroundStyle(.white.opacity(0.76))
                     }
-                }.gameCard()
+                    Spacer(minLength: 0)
+                    Image(systemName: "viewfinder").font(.system(size: 38, weight: .light)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                }
+                .padding(18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(LinearGradient(colors: [Color(red: 0.16, green: 0.26, blue: 0.32), GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 22))
+                HStack(spacing: 8) {
+                    Image(systemName: "banknote.fill").foregroundStyle(GameStyle.gain)
+                    Text("wallet.cash").font(.caption).foregroundStyle(.secondary)
+                    Spacer()
+                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit()
+                        .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
+                }.padding(.horizontal, 4)
                 FirstTradePrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
@@ -64,7 +74,7 @@ struct MarketView: View {
                             category = nil; minimumPrice = ""; maximumPrice = ""; search = ""; newestFirst = true; watchedOnly = false
                         }
                     }
-                }.gameCard()
+                }.padding(.horizontal, 4)
                 if query == nil {
                     Text("market.invalidPriceRange").foregroundStyle(GameStyle.loss)
                 } else if listings.isEmpty && !watchedOnly && !store.snapshot.market.contains(where: \.available),
@@ -73,13 +83,15 @@ struct MarketView: View {
                 } else if listings.isEmpty {
                     ContentUnavailableView(watchedOnly ? "market.watchlistEmpty" : "market.noResults", systemImage: watchedOnly ? "bookmark" : "magnifyingglass")
                 }
-                ForEach(listings) { listing in
-                    if let definition = store.definition(for: listing.item) {
-                        NavigationLink {
-                            ListingDetailView(store: store, listingID: listing.id)
-                        } label: {
-                            ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
-                        }.buttonStyle(.plain).accessibilityIdentifier("listing.\(listing.id.rawValue)")
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12, alignment: .top), count: typeSize.isAccessibilitySize ? 1 : 2), alignment: .leading, spacing: 16) {
+                    ForEach(listings) { listing in
+                        if let definition = store.definition(for: listing.item) {
+                            NavigationLink {
+                                ListingDetailView(store: store, listingID: listing.id)
+                            } label: {
+                                ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
+                            }.buttonStyle(.plain).accessibilityIdentifier("listing.\(listing.id.rawValue)")
+                        }
                     }
                 }
             }.padding(16)
@@ -111,45 +123,50 @@ struct ListingCard: View {
     @GameReduceMotion private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            if typeSize.isAccessibilitySize {
-                VStack(alignment: .leading, spacing: 12) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 140)
-                    summary
+        VStack(alignment: .leading, spacing: 10) {
+            DeviceArt(symbol: definition.artSymbol, identity: definition.id)
+                .frame(height: typeSize.isAccessibilitySize ? 170 : 130)
+                .overlay(alignment: .topTrailing) {
+                    if watched {
+                        Image(systemName: "bookmark.fill").font(.caption).foregroundStyle(GameStyle.ink)
+                            .padding(8).background(GameStyle.amber, in: Circle()).padding(8)
+                            .accessibilityLabel(Text("market.watched"))
+                    }
                 }
-            } else {
-                HStack(alignment: .center, spacing: 14) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 112, height: 112)
-                    summary
+            VStack(alignment: .leading, spacing: 7) {
+                Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
+                    .font(.caption2.weight(.bold)).foregroundStyle(GameStyle.category(definition.category))
+                    .lineLimit(typeSize.isAccessibilitySize ? nil : 1)
+                Text(definition.name).font(.system(.headline, design: .rounded, weight: .heavy))
+                    .foregroundStyle(.primary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+                    .frame(minHeight: typeSize.isAccessibilitySize ? 0 : 42, alignment: .topLeading)
+                Text(listing.askingPrice.formatted(locale: locale))
+                    .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.primary)
+                    .lineLimit(1).minimumScaleFactor(0.65)
+                    .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
+                if lifecycle?.priceDroppedAt != nil {
+                    Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption2.bold()).foregroundStyle(GameStyle.gain)
+                    if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale)).strikethrough().font(.caption2).foregroundStyle(.secondary) }
                 }
-            }
-            HStack(alignment: .firstTextBaseline) {
-                Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption.weight(.semibold))
-                Spacer()
-                Text(listing.createdAt, style: .relative).font(.caption).foregroundStyle(.secondary)
-                if watched { Image(systemName: "bookmark.fill").accessibilityLabel(Text("market.watched")) }
-            }
-            Text(GameText.string(listing.descriptionIntent, locale: locale))
-                .font(.caption).foregroundStyle(.secondary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
-        }.gameCard()
-    }
-    private var summary: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
-                .font(.caption2.weight(.bold)).foregroundStyle(GameStyle.category(definition.category))
-            Text(definition.name).font(.headline).foregroundStyle(.primary).fixedSize(horizontal: false, vertical: true)
-            if lifecycle?.priceDroppedAt != nil {
-                Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption.weight(.bold)).foregroundStyle(GameStyle.gain)
-                if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale)).strikethrough().font(.caption).foregroundStyle(.secondary) }
-            }
-            Text(listing.askingPrice.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
-                .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
-            Text(GameText.string(listing.claimedCondition >= 85 ? "listing.claim.excellent" : listing.claimedCondition >= 70 ? "listing.claim.good" : "listing.claim.worn", locale: locale))
-                .font(.caption2).foregroundStyle(.secondary)
-            if !listing.available {
-                Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
-            }
-        }.frame(maxWidth: .infinity, alignment: .leading)
+                Text(GameText.string(listing.descriptionIntent, locale: locale))
+                    .font(.caption).foregroundStyle(.secondary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+                    .frame(minHeight: typeSize.isAccessibilitySize ? 0 : 32, alignment: .topLeading)
+                Divider()
+                HStack(spacing: 6) {
+                    TraderPortrait(identity: listing.seller.identityIndex, size: 24)
+                    Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption2.weight(.semibold)).foregroundStyle(.primary)
+                    Spacer(minLength: 0)
+                }
+                Text(listing.createdAt, style: .relative).font(.caption2).foregroundStyle(.secondary)
+                if !listing.available {
+                    Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
+                }
+            }.padding(.horizontal, 3)
+        }
+        .padding(10)
+        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24))
+        .overlay(RoundedRectangle(cornerRadius: 24).strokeBorder(.primary.opacity(0.10), lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: 24).fill(GameStyle.ink.opacity(0.15)).offset(y: 4))
     }
 }
 

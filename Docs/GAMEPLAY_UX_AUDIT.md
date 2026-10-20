@@ -76,3 +76,39 @@ clue and a purchase margin that supports repair or an as-is sale. This is one
 introductory lesson, not a new category rule; later stock's random stream and
 saved item truth remain unchanged. The initial generic repeat-trade UI was not
 accepted as sufficient evidence for this first-experience requirement.
+
+## Second visual acceptance pass — 20 October 2026
+
+The implementation at `26874d3` already preserves the full loop, localization,
+inspection pacing, repairs and result routing. Its captured screens still read
+as a utility: the warm page, repeated white rectangles, small device thumbnails
+and restrained receipt do not establish enough visual distinction between
+browsing, risk, discovery and reward. Preserve the domain and improve presentation.
+
+Ranked remaining problems:
+
+1. Market chrome occupies too much of the first viewport; the hunt starts below
+   a search bar, introductory panel and oversized watchlist panel.
+2. Repeated horizontal rows feel like a catalog. Use collectible display cards,
+   more prominent original art and multiple simultaneous opportunities.
+3. Product silhouettes sit on flat pastel swatches. Give the existing original
+   vectors a lit display stage and physical depth without implying hidden truth.
+4. Price, claim and unknown information blend together in listing detail. Make
+   the price dominant, seller evidence explicit and unresolved condition visible.
+5. Generic person icons weaken seller/buyer identity. Give NPCs stable original
+   portraits derived from public identity, with no fabricated traits or ratings.
+6. Purchase confirmation disappears into dialogue history. Keep a commitment
+   panel with the actual purchase amount and uncertainty alongside delivery.
+7. Inspection and repair share ordinary information-card styling. Use numbered
+   diagnostic stages, visible reveal progress and a distinct service decision.
+8. Settlement is a white invoice. Put the signed result first, use a medal and
+   contextual color, and retain the real costs and next-hunt action.
+9. Inventory, messages, selling and away summaries retain native table styling.
+   Carry the same surfaces, product displays and hierarchy through those areas.
+
+Direction: an original after-hours trader's workbench. Ink-blue display stages,
+warm paper, amber action buttons, restrained category light, tactile card edges,
+compact display typography and high-contrast signed outcomes. Decorative geometry
+must never encode rarity, condition or value that the player has not earned.
+No new simulation scope; no architecture rewrite. Existing `26874d3` is the clean
+checkpoint. The pre-existing root brief deletion is excluded from this work.
