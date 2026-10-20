@@ -66,3 +66,13 @@ The Xcode project diff is mostly editor formatting. No new category/tool work.
 Correctness, localized screenshot review and a complete UI journey are required.
 Fun remains a qualitative hypothesis until the owner plays several unscripted
 trades. Do not claim that automated coverage proves curiosity or retention.
+
+## Acceptance review correction
+
+The original clean starter disclosed its exact condition before buying and had
+no fault, so inspection could not reveal a meaningful new fact. Fresh saves now
+use one existing beginner-detectable port fault, an explicit untested-connections
+clue and a purchase margin that supports repair or an as-is sale. This is one
+introductory lesson, not a new category rule; later stock's random stream and
+saved item truth remain unchanged. The initial generic repeat-trade UI was not
+accepted as sufficient evidence for this first-experience requirement.

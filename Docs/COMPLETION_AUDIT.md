@@ -1,5 +1,7 @@
 # V1 completion audit
 
+Current milestone override (20 October 2026): the gameplay-feel handoff pauses the broader feature backlog. Category fidelity, progression, Game Center and monetization stay paused until the core loop is enjoyable. The rows below are historical long-term tracking, not authorization to expand this milestone. See GAMEPLAY_UX_AUDIT.md.
+
 The objective remains the full master brief plus engineering/localization requirements. A finished Phase A is not a finished project. Evidence must cover each system, including failures, persistence and localized runtime behavior.
 
 | Requirement group | Current evidence | Remaining proof/work |
