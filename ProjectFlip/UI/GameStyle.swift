@@ -7,9 +7,9 @@ enum GameStyle {
     static let loss = Color("LossColor")
     static func category(_ category: ItemCategory) -> Color {
         switch category {
-        case .gaming: Color(red: 0.24, green: 0.47, blue: 0.48)
-        case .cameras: Color(red: 0.56, green: 0.36, blue: 0.22)
-        case .retro: Color(red: 0.44, green: 0.35, blue: 0.60)
+        case .gaming: Color("GamingCategory")
+        case .cameras: Color("CameraCategory")
+        case .retro: Color("RetroCategory")
         }
     }
 }
@@ -58,5 +58,17 @@ extension EnvironmentValues {
     var returnToHunt: @MainActor () -> Void {
         get { self[HuntActionKey.self] }
         set { self[HuntActionKey.self] = newValue }
+    }
+}
+
+/// Platform preference with a DEBUG-only override for the same animation paths in QA.
+@propertyWrapper struct GameReduceMotion: DynamicProperty {
+    @Environment(\.accessibilityReduceMotion) private var platformValue
+    var wrappedValue: Bool {
+        #if DEBUG
+        platformValue || ProcessInfo.processInfo.arguments.contains("--uitest-reduce-motion")
+        #else
+        platformValue
+        #endif
     }
 }

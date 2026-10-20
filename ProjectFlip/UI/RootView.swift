@@ -4,6 +4,8 @@ import OSLog
 struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
+    @State private var selectedTab = 0
+    @State private var marketRoot = UUID()
     @State private var notificationService = LocalNotificationService.shared
     @State private var inbox = NotificationInbox.shared
     @State private var notificationRoute: GameRoute?
@@ -11,7 +13,7 @@ struct RootView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationStack {
                 if let store {
                     MarketView(store: store)
@@ -24,31 +26,55 @@ struct RootView: View {
                 } else { ProgressView() }
 
             }
-            .tabItem { Label("market.title", systemImage: "square.grid.2x2") }
+            .id(marketRoot)
+            .tabItem { Label("market.title", systemImage: "square.grid.2x2") }.tag(0)
             NavigationStack {
                 if let store {
                     List(store.snapshot.conversations) { conversation in
                         NavigationLink {
                             ConversationView(store: store, listingID: conversation.listingID)
                         } label: {
-                            if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) { Text(definition.name) }
-                        }
-                    }.navigationTitle("messages.title")
+                            if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
+                                HStack(spacing: 12) {
+                                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 64, height: 72)
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text(definition.name).font(.headline)
+                                        Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
+                                        if conversation.pendingReplyEventID != nil {
+                                            Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
+                                        } else if let last = conversation.messages.last {
+                                            Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                                            if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                        }
+                                    }
+                                }
+                            }
+                        }.accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
+                    }.gameScreen().navigationTitle("messages.title")
                 }
             }
-            .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }
+            .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }.tag(1)
             NavigationStack {
                 if let store { InventoryView(store: store) }
             }
-            .tabItem { Label("inventory.title", systemImage: "shippingbox") }
+            .tabItem { Label("inventory.title", systemImage: "shippingbox") }.tag(2)
             NavigationStack {
                 if let store { SellingView(store: store) }
             }
-            .tabItem { Label("selling.title", systemImage: "tag") }
+            .tabItem { Label("selling.title", systemImage: "tag") }.tag(3)
             NavigationStack {
                 if let store { ProfileView(store: store) }
             }
-            .tabItem { Label("profile.title", systemImage: "person.crop.circle") }
+            .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
+        }
+        .environment(\.returnToHunt, {
+            notificationRoute = nil
+            store?.perform { try store?.acknowledgeAwayReport() }
+            marketRoot = UUID()
+            selectedTab = 0
+        })
+        .onChange(of: store?.snapshot.playerListings.reduce(0, { $0 + $1.offers.count })) { old, new in
+            if let old, let new, new > old { GameFeel.play(.offer) }
         }
         .alert("error.title", isPresented: Binding(get: { store?.errorKey != nil }, set: { if !$0 { store?.errorKey = nil } })) {
             Button("action.ok") { store?.errorKey = nil }

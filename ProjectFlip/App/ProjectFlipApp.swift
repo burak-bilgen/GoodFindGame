@@ -7,9 +7,9 @@ struct ProjectFlipApp: App {
         WindowGroup {
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("--uitest-large-type") {
-                RootView().dynamicTypeSize(.accessibility3)
+                RootView().dynamicTypeSize(.accessibility3).modifier(TestPresentation())
             } else {
-                RootView()
+                RootView().modifier(TestPresentation())
             }
             #else
             RootView()
@@ -17,3 +17,12 @@ struct ProjectFlipApp: App {
         }
     }
 }
+
+#if DEBUG
+/// Presentation overrides for simulator QA; production always uses platform settings.
+private struct TestPresentation: ViewModifier {
+    func body(content: Content) -> some View {
+        content.preferredColorScheme(ProcessInfo.processInfo.arguments.contains("--uitest-dark") ? .dark : nil)
+    }
+}
+#endif

@@ -4,7 +4,6 @@ struct ListingDetailView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
-    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {

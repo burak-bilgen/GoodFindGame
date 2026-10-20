@@ -10,6 +10,7 @@ struct ItemFactsView: View {
             List {
                 if let definition = store.definition(for: item) { Text(definition.name).font(.headline) }
                 Text("facts.explanation").foregroundStyle(.secondary)
+                if !(item.repairedDefects ?? []).isEmpty { Text("facts.originalReport").font(.subheadline).foregroundStyle(GameStyle.gain) }
                 if let facts = item.facts {
                     ForEach(facts.values) { fact in
                         VStack(alignment: .leading, spacing: 6) {

@@ -4,7 +4,7 @@ struct ConversationView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @GameReduceMotion private var reduceMotion
     @State private var amount = ""
     @State private var modifier: OfferModifier = .none
     @FocusState private var editing: Bool

@@ -270,7 +270,7 @@ final class ProjectFlipUITests: XCTestCase {
         }
         XCTAssertTrue(app.staticTexts["Notifications are enabled."].waitForExistence(timeout: 5))
         app.tabBars.buttons["Messages"].tap()
-        tap(app.buttons["Veltri Arc 2"], in: app)
+        tap(app.buttons["conversation.listing-42-0"], in: app)
         tap(app.buttons["sendOffer"], in: app)
         XCUIDevice.shared.press(.home)
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
@@ -330,7 +330,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.terminate()
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
-        app.switches["watchedOnly"].switches.firstMatch.tap()
+        app.switches["watchedOnly"].coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
         XCTAssertTrue(app.buttons["listing.listing-42-0"].exists)
         let removed = NSPredicate(format: "exists == false")
         expectation(for: removed, evaluatedWith: app.buttons["listing.listing-42-1"])
@@ -399,7 +399,7 @@ final class ProjectFlipUITests: XCTestCase {
         add(screenshot)
         app.terminate()
         app.launch()
-        app.switches["watchedOnly"].switches.firstMatch.tap()
+        app.switches["watchedOnly"].coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
         tap(app.buttons["listing.listing-42-5"], in: app)
         XCTAssertTrue(app.staticTexts["Ilyven Luma 3"].exists)
     }
@@ -476,7 +476,7 @@ final class ProjectFlipUITests: XCTestCase {
             app.terminate()
             app.launch()
             XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
-            app.switches["watchedOnly"].switches.firstMatch.tap()
+            app.switches["watchedOnly"].coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
             tap(app.buttons["listing.listing-42-1"], in: app)
             XCTAssertFalse(app.buttons["openConversation"].exists)
             let expired = app.staticTexts[language == "tr" ? "İlanın süresi doldu" : "Listing expired"]

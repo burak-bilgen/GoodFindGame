@@ -3,7 +3,7 @@ import SwiftUI
 struct MarketView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @GameReduceMotion private var reduceMotion
     @FocusState private var priceInputFocused: Bool
     @State private var filtersExpanded = false
     @State private var category: ItemCategory?
@@ -44,7 +44,7 @@ struct MarketView: View {
                     HStack {
                         Toggle("market.watchedOnly", isOn: $watchedOnly).accessibilityIdentifier("watchedOnly")
                         Button { filtersExpanded.toggle() } label: {
-                            Label("market.filters", systemImage: "slider.horizontal.3").labelStyle(.iconOnly).padding(10)
+                            Label("market.filters", systemImage: "slider.horizontal.3").labelStyle(.iconOnly).frame(minWidth: 44, minHeight: 44)
                         }.accessibilityIdentifier("marketFilters")
                             .accessibilityValue(Text(filtersExpanded ? "market.expanded" : "market.collapsed"))
                     }
@@ -108,7 +108,7 @@ struct ListingCard: View {
     var watched = false
     var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @GameReduceMotion private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -144,6 +144,8 @@ struct ListingCard: View {
             }
             Text(listing.askingPrice.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
                 .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
+            Text(GameText.string(listing.claimedCondition >= 85 ? "listing.claim.excellent" : listing.claimedCondition >= 70 ? "listing.claim.good" : "listing.claim.worn", locale: locale))
+                .font(.caption2).foregroundStyle(.secondary)
             if !listing.available {
                 Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
             }
