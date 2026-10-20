@@ -26,55 +26,46 @@ struct MarketView: View {
     }
 
     var body: some View {
-        List {
-            Section {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("market.heading").font(.largeTitle.bold())
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: 12) {
+                    GameEyebrow(key: "hunt.eyebrow")
+                    Text("market.heading").font(.system(.largeTitle, design: .rounded, weight: .heavy))
                     Text("market.subtitle").font(.subheadline).foregroundStyle(.secondary)
                     HStack {
-                        Text("wallet.cash")
+                        Text("wallet.cash").font(.caption)
                         Spacer()
                         Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold().contentTransition(.numericText())
-                    }.padding(.top, 8)
-                }.padding(.vertical, 10)
-            }
-            Section {
-                Toggle("market.watchedOnly", isOn: $watchedOnly).accessibilityIdentifier("watchedOnly")
-                Button { filtersExpanded.toggle() } label: {
+                    }
+                }.gameCard()
+                FirstTradePrompt(store: store)
+                VStack(alignment: .leading, spacing: 12) {
                     HStack {
-                        Text("market.filters")
-                        Spacer()
-                        Image(systemName: filtersExpanded ? "chevron.up" : "chevron.down").accessibilityHidden(true)
+                        Toggle("market.watchedOnly", isOn: $watchedOnly).accessibilityIdentifier("watchedOnly")
+                        Button { filtersExpanded.toggle() } label: {
+                            Label("market.filters", systemImage: "slider.horizontal.3").labelStyle(.iconOnly).padding(10)
+                        }.accessibilityIdentifier("marketFilters")
+                            .accessibilityValue(Text(filtersExpanded ? "market.expanded" : "market.collapsed"))
                     }
-                }
-                .accessibilityIdentifier("marketFilters")
-                .accessibilityValue(Text(filtersExpanded ? "market.expanded" : "market.collapsed"))
-                if filtersExpanded {
-                    Picker("market.category", selection: $category) {
-                        Text("market.allCategories").tag(Optional<ItemCategory>.none)
-                        ForEach(ItemCategory.allCases, id: \.self) { value in
-                            Text(GameText.string("category.\(value.rawValue)", locale: locale)).tag(Optional(value))
+                    if filtersExpanded {
+                        Picker("market.category", selection: $category) {
+                            Text("market.allCategories").tag(Optional<ItemCategory>.none)
+                            ForEach(ItemCategory.allCases, id: \.self) { value in
+                                Text(GameText.string("category.\(value.rawValue)", locale: locale)).tag(Optional(value))
+                            }
+                        }.accessibilityIdentifier("marketCategory")
+                        TextField("market.minimumPrice", text: $minimumPrice).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("minimumPrice")
+                        TextField("market.maximumPrice", text: $maximumPrice).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("maximumPrice")
+                        Toggle("market.newest", isOn: $newestFirst)
+                    }
+                    if filtersExpanded || listings.isEmpty {
+                        Button("market.clearFilters") {
+                            category = nil; minimumPrice = ""; maximumPrice = ""; search = ""; newestFirst = true; watchedOnly = false
                         }
-                    }.accessibilityIdentifier("marketCategory")
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("market.minimumPrice").font(.caption).foregroundStyle(.secondary)
-                        TextField("market.minimumPrice", text: $minimumPrice).keyboardType(.decimalPad).focused($priceInputFocused)
-                            .accessibilityIdentifier("minimumPrice")
                     }
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("market.maximumPrice").font(.caption).foregroundStyle(.secondary)
-                        TextField("market.maximumPrice", text: $maximumPrice).keyboardType(.decimalPad).focused($priceInputFocused)
-                            .accessibilityIdentifier("maximumPrice")
-                    }
-                    Toggle("market.newest", isOn: $newestFirst)
-                    Button("market.clearFilters") {
-                        category = nil; minimumPrice = ""; maximumPrice = ""; search = ""; newestFirst = true; watchedOnly = false
-                    }
-                }
-            }
-            Section {
+                }.gameCard()
                 if query == nil {
-                    Text("market.invalidPriceRange").foregroundStyle(Color("LossColor"))
+                    Text("market.invalidPriceRange").foregroundStyle(GameStyle.loss)
                 } else if listings.isEmpty && !watchedOnly && !store.snapshot.market.contains(where: \.available),
                           let refresh = store.snapshot.events.first(where: { $0.status == .pending && $0.payload == .marketRefresh }) {
                     DeadlineView(store: store, target: refresh.resolveAt, titleKey: "market.nextRefresh")
@@ -87,14 +78,14 @@ struct MarketView: View {
                             ListingDetailView(store: store, listingID: listing.id)
                         } label: {
                             ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
-                        }
-                        .accessibilityIdentifier("listing.\(listing.id.rawValue)")
+                        }.buttonStyle(.plain).accessibilityIdentifier("listing.\(listing.id.rawValue)")
                     }
                 }
-            }
+            }.padding(16)
         }
-        .listStyle(.insetGrouped)
+        .gameScreen()
         .navigationTitle("market.title")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink { MarketTrendsView(store: store) } label: {
@@ -116,44 +107,65 @@ struct ListingCard: View {
     var watched = false
     var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
-    private var nameKey: String { "npc.name.\(listing.seller.identityIndex % 10)" }
+    @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            DeviceArt(symbol: definition.artSymbol).frame(height: 130)
-            HStack(alignment: .top) {
-                Text(definition.name).font(.headline)
+        VStack(alignment: .leading, spacing: 12) {
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: 14) {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 112, height: 112)
+                    summary
+                }
+                VStack(alignment: .leading, spacing: 12) {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 140)
+                    summary
+                }
+            }
+            HStack(alignment: .firstTextBaseline) {
+                Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption.weight(.semibold))
                 Spacer()
+                Text(listing.createdAt, style: .relative).font(.caption).foregroundStyle(.secondary)
                 if watched { Image(systemName: "bookmark.fill").accessibilityLabel(Text("market.watched")) }
             }
-            if !listing.available {
-                Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.subheadline.bold()).foregroundStyle(.secondary)
-            }
+            Text(GameText.string(listing.descriptionIntent, locale: locale))
+                .font(.caption).foregroundStyle(.secondary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+        }.gameCard()
+    }
+    private var summary: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
+                .font(.caption2.weight(.bold)).foregroundStyle(GameStyle.category(definition.category))
+            Text(definition.name).font(.headline).foregroundStyle(.primary).fixedSize(horizontal: false, vertical: true)
             if lifecycle?.priceDroppedAt != nil {
-                Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption.bold())
+                Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption.weight(.bold)).foregroundStyle(GameStyle.gain)
+                if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale)).strikethrough().font(.caption).foregroundStyle(.secondary) }
             }
-            Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()).foregroundStyle(.primary)
-            HStack {
-                Text(GameText.string(nameKey, locale: locale))
-                Spacer()
-                Text(listing.createdAt, style: .relative)
-            }.font(.caption).foregroundStyle(.secondary)
-            Text("seller.rating \((Decimal(listing.seller.ratingTenths) / 10).formatted(.number.locale(locale)))").font(.caption)
-            Text("seller.trades \(listing.seller.tradeCount)").font(.caption)
-            Text(GameText.string("npc.city.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption).foregroundStyle(.secondary)
-            Text("listing.hint.inspect").font(.caption).foregroundStyle(.secondary)
-        }.padding(.vertical, 8)
+            Text(listing.askingPrice.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
+            if !listing.available {
+                Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
+            }
+        }.frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-/// Original geometric placeholder device art; no third-party product silhouettes or photos.
-struct DeviceArt: View {
-    let symbol: String
+struct FirstTradePrompt: View {
+    let store: GameStore
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(Color(red: 0.85, green: 0.91, blue: 0.90))
-            RoundedRectangle(cornerRadius: 24).fill(Color(red: 0.16, green: 0.26, blue: 0.32))
-                .frame(width: 160, height: 90).rotationEffect(.degrees(-7))
-            Image(systemName: symbol).font(.system(size: 42)).foregroundStyle(.white)
-        }.accessibilityHidden(true)
+        if !store.snapshot.playerListings.contains(where: { $0.status == .sold }) {
+            if let sale = store.snapshot.playerListings.first(where: { $0.status == .active }) {
+                NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
+                    Label("hunt.followSale", systemImage: "tag.fill")
+                }.buttonStyle(GameButton())
+            } else if let item = store.snapshot.player.inventory.first {
+                NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
+                    Label(item.inspected ? "hunt.sell" : "hunt.inspect", systemImage: "shippingbox.fill")
+                }.buttonStyle(GameButton())
+            } else if store.snapshot.shipments.contains(where: { $0.status == .pending }) {
+                NavigationLink { InventoryView(store: store) } label: {
+                    Label("hunt.delivery", systemImage: "shippingbox")
+                }.buttonStyle(GameButton())
+            } else {
+                Label("hunt.first", systemImage: "sparkle.magnifyingglass").font(.subheadline).foregroundStyle(.secondary)
+            }
+        }
     }
 }

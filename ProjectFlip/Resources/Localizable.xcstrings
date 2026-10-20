@@ -6246,6 +6246,125 @@
           }
         }
       }
+    },
+    "hunt.eyebrow": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "THE NEXT FIND"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SIRADAKİ KEŞİF"
+          }
+        }
+      }
+    },
+    "hunt.first": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find something overlooked. Ask the seller before you commit."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözden kaçan bir fırsat bul. Almadan önce satıcıya sor."
+          }
+        }
+      }
+    },
+    "hunt.followSale": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See how your listing is doing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanına gelen ilgiyi gör"
+          }
+        }
+      }
+    },
+    "hunt.sell": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set your price and put it on the market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiyatını belirle, satışa çıkar"
+          }
+        }
+      }
+    },
+    "hunt.inspect": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your item is here. What did you really buy?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ürünün geldi. Bakalım ne almışsın?"
+          }
+        }
+      }
+    },
+    "hunt.delivery": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow your delivery"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kargonu takip et"
+          }
+        }
+      }
+    },
+    "hunt.next": {
+      "comment": "Trading journey prompt; concise invitation to the next playable action.",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hunt for the next find"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir fırsat ara"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
