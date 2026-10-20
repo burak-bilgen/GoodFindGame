@@ -22,7 +22,8 @@ struct ListingGenerator {
             // First listing is an approachable onboarding trade; others retain full risk.
             let defects: [Defect] = (!starterFriendly || index > 0) && random.integer(in: 0...99) < 45 ? [definition.possibleDefects[random.integer(in: 0...(definition.possibleDefects.count - 1))]] : []
             let condition = random.integer(in: 55...98)
-            let item = ItemInstance(id: ItemID("item-\(seed)-\(index)"), definitionID: definition.id, condition: condition, hiddenDefects: defects)
+            var item = ItemInstance(id: ItemID("item-\(seed)-\(index)"), definitionID: definition.id, condition: condition, hiddenDefects: defects)
+            item.facts = ItemFacts.generate(for: item, definition: definition)
             let cleanValue = try PricingEngine.fairValue(of: ItemInstance(id: item.id, definitionID: item.definitionID, condition: condition, hiddenDefects: []), definition: definition, marketBasisPoints: marketBasisPoints)
             let trueValue = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: marketBasisPoints)
             // Belief and presentation differ: an uninformed seller cannot price an unknown fault.

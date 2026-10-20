@@ -82,6 +82,8 @@ struct SaveRepository {
                   lifecycle.initialAskingPrice > .zero &&
                   (lifecycle.reducedPrice.map({ $0 > .zero && $0 < lifecycle.initialAskingPrice }) ?? true)
               }) else { throw SaveError.invalidSave }
+        let items = state.market.map(\.item) + state.player.inventory + state.shipments.map(\.item) + state.playerListings.compactMap(\.itemSnapshot)
+        for item in items { try item.validateFacts() }
         try state.inspectionKnowledge.validate()
         if let calendar = state.marketCalendar {
             try calendar.validate()

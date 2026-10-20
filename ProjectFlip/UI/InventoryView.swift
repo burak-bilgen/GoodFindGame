@@ -71,6 +71,8 @@ struct OwnedItemView: View {
                         }.accessibilityIdentifier("professionalInspect")
                     }
                 }
+                NavigationLink("facts.title") { ItemFactsView(store: store, itemID: item.id) }
+                    .accessibilityIdentifier("openItemFacts")
                 Section("knowledge.title") {
                     KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: definition.category)
                     Text("knowledge.inspectionLimit").font(.caption).foregroundStyle(.secondary)

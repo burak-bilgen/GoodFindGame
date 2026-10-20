@@ -69,6 +69,8 @@ struct ItemInstance: Codable, Identifiable, Equatable, Sendable {
     var inspectionCost: Money = .zero
     var repairCost: Money = .zero
     var acquiredAt: Date?
+    var facts: ItemFacts?
+    var revealedFactKeys: Set<ItemFactKey>?
 }
 
 enum SellerArchetype: String, Codable, CaseIterable, Sendable {

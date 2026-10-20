@@ -20,6 +20,7 @@ struct InspectionEngine {
             !item.revealedDefects.contains($0) && $0.detectable(condition: item.condition, level: level, hasTools: knowledge.tools.contains(category))
         }.prefix(1 + level)
         next.player.inventory[index].revealedDefects += recognizable
+        next.player.inventory[index].revealFacts(knowledge: knowledge, professionally: false)
         next.player.inventory[index].inspected = true
         next.inspectionKnowledge.selfInspectionCapabilities[itemID.rawValue] = knowledge.capability(in: category)
         if !item.inspected { next.inspectionKnowledge.learn(1, in: category) }
@@ -32,6 +33,7 @@ struct InspectionEngine {
         state.player.inventory[index].professionallyInspected = true
         state.player.inventory[index].inspected = true
         state.player.inventory[index].revealedDefects = state.player.inventory[index].hiddenDefects
+        state.player.inventory[index].revealFacts(knowledge: state.inspectionKnowledge, professionally: true)
         if let category { state.inspectionKnowledge.learn(2, in: category) }
     }
 

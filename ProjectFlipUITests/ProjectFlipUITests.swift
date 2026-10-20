@@ -2,6 +2,72 @@ import XCTest
 
 final class ProjectFlipUITests: XCTestCase {
     @MainActor
+    func testCameraFindingsEnglish() { verifyItemFindings(language: "en", retro: false) }
+    @MainActor
+    func testCameraFindingsTurkish() { verifyItemFindings(language: "tr", retro: false) }
+    @MainActor
+    func testRetroFindingsEnglish() { verifyItemFindings(language: "en", retro: true) }
+    @MainActor
+    func testRetroFindingsTurkish() { verifyItemFindings(language: "tr", retro: true) }
+
+    @MainActor
+    private func verifyItemFindings(language: String, retro: Bool) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        let slot = retro ? 8 : 5
+        let key = retro ? "authenticity" : "shutterCount"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-\(slot)"], in: app)
+        XCTAssertFalse(app.descendants(matching: .any)["factValue.\(key)"].firstMatch.exists)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+        tap(app.buttons["inventory.item-42-\(slot)"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["openItemFacts"], in: app)
+        let locked = app.descendants(matching: .any)["factLocked.\(key)"].firstMatch
+        for _ in 0..<8 {
+            if locked.exists && locked.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(locked.exists)
+        XCTAssertFalse(app.descendants(matching: .any)["factValue.\(key)"].firstMatch.exists)
+        app.navigationBars.buttons.firstMatch.tap()
+        app.swipeDown()
+        app.swipeDown()
+        tap(app.buttons["professionalInspect"], in: app)
+        tap(app.buttons["openItemFacts"], in: app)
+        let measured = app.descendants(matching: .any)["factValue.\(key)"].firstMatch
+        for _ in 0..<8 {
+            if measured.exists && measured.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(measured.exists)
+        XCTAssertFalse(locked.exists)
+        let savedValue = measured.label
+        XCTAssertFalse(savedValue.isEmpty)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "\(language) \(retro ? "retro" : "camera") expert findings"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+        tap(app.buttons["inventory.item-42-\(slot)"], in: app)
+        tap(app.buttons["openItemFacts"], in: app)
+        for _ in 0..<8 {
+            if measured.exists && measured.isHittable { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(measured.exists)
+        XCTAssertEqual(measured.label, savedValue)
+    }
+
+    @MainActor
     func testKnowledgeEnglish() { verifyKnowledge(language: "en") }
 
     @MainActor
@@ -354,8 +420,10 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].waitForExistence(timeout: 5))
+        capture("market: \(language)", app: app)
         app.buttons["listing.listing-42-0"].tap()
         XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
+        capture("listing: \(language)", app: app)
         app.buttons["openConversation"].tap()
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].exists)
         tap(app.buttons["askIssues"], in: app)
@@ -363,7 +431,9 @@ final class ProjectFlipUITests: XCTestCase {
             expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: app.buttons["sendOffer"])
             waitForExpectations(timeout: 10)
         }
+        capture("seller conversation: \(language)", app: app)
         tap(app.buttons["sendOffer"], in: app)
+        capture("agreed offer: \(language)", app: app)
         tap(app.buttons["confirmPurchase"], in: app)
         app.tabBars.buttons[inventory].tap()
         XCTAssertTrue(app.navigationBars[inventory].exists)
@@ -371,13 +441,17 @@ final class ProjectFlipUITests: XCTestCase {
         app.buttons["inventory.item-42-0"].tap()
         tap(app.buttons["basicInspect"], in: app)
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
+        capture("inspection: \(language)", app: app)
         tap(app.buttons["createListing"], in: app)
+        capture("resale price: \(language)", app: app)
         tap(app.buttons["publishListing"], in: app)
         app.tabBars.buttons[language == "tr" ? "Satışlar" : "Selling"].tap()
         app.buttons["sale.resale-item-42-0-0"].tap()
         if followFeed { XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10)) }
+        capture("buyer offer: \(language)", app: app)
         tap(app.buttons["acceptBuyerOffer"], in: app)
         XCTAssertTrue(app.otherElements["saleCompleted"].exists || app.staticTexts[language == "tr" ? "Satıldı" : "Sold"].exists)
+        capture("trade result: \(language)", app: app)
         app.terminate()
         app.launch()
         app.tabBars.buttons[inventory].tap()
@@ -436,6 +510,14 @@ final class ProjectFlipUITests: XCTestCase {
             XCTAssertTrue(app.staticTexts[language == "tr" ? "Devam ediyor" : "Active"].waitForExistence(timeout: 5))
         }
     }
+    @MainActor
+    private func capture(_ name: String, app: XCUIApplication) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
     @MainActor
     private func tap(_ element: XCUIElement, in app: XCUIApplication) {
         for _ in 0..<8 {

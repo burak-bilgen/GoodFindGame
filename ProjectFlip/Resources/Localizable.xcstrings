@@ -5472,6 +5472,780 @@
           }
         }
       }
+    },
+    "facts.title": {
+      "comment": "Owned-item measurements and category evidence screen title.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspection findings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme bulguları"
+          }
+        }
+      }
+    },
+    "facts.explanation": {
+      "comment": "Explains unknown measurements and ways to reveal them without claiming a fault exists.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These findings belong to this physical item. A locked field has not been checked; it does not mean the item passed. Improve your category knowledge and tools, then recheck, or order an expert report."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu bulgular elindeki ürüne aittir. Kilitli alan henüz kontrol edilmemiştir; ürünün sorunsuz olduğu anlamına gelmez. Kategori bilgini ve araçlarını geliştirip tekrar incele veya uzman raporu iste."
+          }
+        }
+      }
+    },
+    "facts.notChecked": {
+      "comment": "Unknown fact value, never a healthy result.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not checked"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrol edilmedi"
+          }
+        }
+      }
+    },
+    "facts.requiresBasic": {
+      "comment": "Requirement for visible item evidence.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revealed by a free self-inspection."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretsiz incelemeyle öğrenilir."
+          }
+        }
+      }
+    },
+    "facts.requiresSkills": {
+      "comment": "One argument: localized expertise rank. Turkish rank precedes düzeyinde.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requires %@ knowledge and the category kit, or an expert report."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ düzeyinde kategori bilgisi ve inceleme seti ya da uzman raporu gerekir."
+          }
+        }
+      }
+    },
+    "facts.legacyUnavailable": {
+      "comment": "Legacy item without facts; explicitly does not invent historical measurements.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This older item has no recorded measurements. Its saved condition and defect history are still available; measurements will appear on newly generated items."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu eski ürün için ölçüm kaydı bulunmuyor. Kayıtlı kondisyon ve kusur geçmişi korunuyor; yeni oluşturulan ürünlerde ölçüm verileri bulunacak."
+          }
+        }
+      }
+    },
+    "facts.regionGuide": {
+      "comment": "Fictional collectible compatibility regions, unrelated to real country or user locale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This market uses Region A. Region B items may need compatible equipment; region-free items work across both."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu pazarda A bölgesi kullanılır. B bölgesi ürünleri uyumlu ekipman gerektirebilir; bölge bağımsız ürünler her ikisinde de çalışır."
+          }
+        }
+      }
+    },
+    "facts.valueGuide": {
+      "comment": "Clarifies economic meaning of evidence without exposing true value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Measurements explain condition; they do not guarantee a selling price. Confirmed faults are also included in the defect summary and your estimate."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ölçümler ürünün durumunu açıklar; satış fiyatı garantisi vermez. Doğrulanan kusurlar, kusur özetine ve tahmini değere de yansır."
+          }
+        }
+      }
+    },
+    "facts.score": {
+      "comment": "One argument: localized integer cosmetic score out of 100.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ / 100"
+          }
+        }
+      }
+    },
+    "facts.field.cosmeticScore": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosmetic condition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kozmetik kondisyon"
+          }
+        }
+      }
+    },
+    "facts.field.shutterCount": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shutter count"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perde sayısı"
+          }
+        }
+      }
+    },
+    "facts.field.batteryHealth": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Battery health"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pil sağlığı"
+          }
+        }
+      }
+    },
+    "facts.field.optics": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optical inspection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optik inceleme"
+          }
+        }
+      }
+    },
+    "facts.field.sensor": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sensor test"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sensör testi"
+          }
+        }
+      }
+    },
+    "facts.field.autofocus": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autofocus test"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatik odaklama testi"
+          }
+        }
+      }
+    },
+    "facts.field.aperture": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aperture test"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diyafram testi"
+          }
+        }
+      }
+    },
+    "facts.field.stabilization": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stabilization test"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sabitleme testi"
+          }
+        }
+      }
+    },
+    "facts.field.region": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compatibility region"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyumluluk bölgesi"
+          }
+        }
+      }
+    },
+    "facts.field.completeness": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completeness"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksiksizlik"
+          }
+        }
+      }
+    },
+    "facts.field.packaging": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Packaging"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kutu durumu"
+          }
+        }
+      }
+    },
+    "facts.field.originalParts": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parts originality"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parça özgünlüğü"
+          }
+        }
+      }
+    },
+    "facts.field.authenticity": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Authenticity"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Özgünlük"
+          }
+        }
+      }
+    },
+    "facts.field.edition": {
+      "comment": "Inspection field label; only relevant fields are generated for each category/model.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm"
+          }
+        }
+      }
+    },
+    "facts.term.passed": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sorun saptanmadı"
+          }
+        }
+      }
+    },
+    "facts.term.failed": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fault detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusur saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.clear": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No scratches or fungus detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çizik veya mantar saptanmadı"
+          }
+        }
+      }
+    },
+    "facts.term.scratched": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scratches detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çizik saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.fungus": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fungus detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantar saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.scratchedAndFungus": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scratches and fungus detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çizik ve mantar saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.regionA": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region A"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bölgesi"
+          }
+        }
+      }
+    },
+    "facts.term.regionB": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region B"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "B bölgesi"
+          }
+        }
+      }
+    },
+    "facts.term.regionFree": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region free"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bölge bağımsız"
+          }
+        }
+      }
+    },
+    "facts.term.complete": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete with manual"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kılavuzuyla eksiksiz"
+          }
+        }
+      }
+    },
+    "facts.term.missingManual": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kılavuz eksik"
+          }
+        }
+      }
+    },
+    "facts.term.missingPieces": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Components missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parçalar eksik"
+          }
+        }
+      }
+    },
+    "facts.term.missingManualAndPieces": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manual and components missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kılavuz ve parçalar eksik"
+          }
+        }
+      }
+    },
+    "facts.term.originalBox": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original box"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Özgün kutu"
+          }
+        }
+      }
+    },
+    "facts.term.wornOriginalBox": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn original box"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıpranmış özgün kutu"
+          }
+        }
+      }
+    },
+    "facts.term.originalParts": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original parts"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Özgün parçalar"
+          }
+        }
+      }
+    },
+    "facts.term.replacedParts": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replacement parts detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değişmiş parçalar saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.authentic": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Özgün ürün"
+          }
+        }
+      }
+    },
+    "facts.term.reproduction": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reproduction board detected"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sahte devre kartı saptandı"
+          }
+        }
+      }
+    },
+    "facts.term.standardEdition": {
+      "comment": "Confirmed item-specific inspection result. Never used as an unchecked assumption.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard edition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standart sürüm"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
