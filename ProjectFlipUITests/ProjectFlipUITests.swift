@@ -174,7 +174,12 @@ final class ProjectFlipUITests: XCTestCase {
             tap(app.buttons["sale.resale-item-42-\(index)-\(index)"], in: app)
             tap(app.buttons["acceptBuyerOffer"], in: app)
             tap(app.buttons["Trade breakdown"], in: app)
-            XCTAssertTrue(app.staticTexts["Net profit / loss"].exists)
+            XCTAssertTrue(app.staticTexts["tradePayoff"].waitForExistence(timeout: 5))
+            tap(app.buttons["Where the margin went"], in: app)
+            for prefix in ["Acquisition cost,", "Inspection costs,", "Repair costs,", "Total cost,"] {
+                let row = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", prefix)).firstMatch
+                XCTAssertTrue(row.waitForExistence(timeout: 5))
+            }
             let attachment = XCTAttachment(screenshot: app.screenshot())
             attachment.name = "Trade \(index + 1) cost and profit breakdown"
             attachment.lifetime = .keepAlways
@@ -511,7 +516,121 @@ final class ProjectFlipUITests: XCTestCase {
         }
     }
     @MainActor
+    func testConnectedTradeEnglish() { connectedTrade(language: "en") }
+    @MainActor
+    func testConnectedTradeTurkish() { connectedTrade(language: "tr", repairStarter: true) }
+
+    @MainActor
+    func testReducedMotionDarkTradeEnglish() {
+        connectedTrade(language: "en", flags: ["--uitest-reduce-motion", "--uitest-dark"], repairStarter: true)
+    }
+
+    @MainActor
+    private func connectedTrade(language: String, flags: [String] = [], repairStarter: Bool = false) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString] + flags
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["askIssues"], in: app)
+        let send = app.buttons["sendOffer"]
+        expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: send)
+        waitForExpectations(timeout: 10)
+        let field = app.textFields["offerAmount"]
+        tap(field, in: app)
+        let value = field.value as? String ?? ""
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count) + "1600")
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(send, in: app)
+        XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 10))
+        capture("seller counter: \(language)", app: app)
+        tap(app.buttons["acceptSellerCounter"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        XCTAssertTrue(app.buttons["continueToItem"].waitForExistence(timeout: 10))
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        XCTAssertTrue(app.staticTexts[turkish ? "Temel inceleme tamamlandı" : "Basic inspection complete"].waitForExistence(timeout: 5))
+        capture("connected inspection: \(language)", app: app)
+        if repairStarter {
+            let repair = app.buttons["repair.damagedPort"]
+            for _ in 0..<8 {
+                if repair.exists && repair.isHittable { break }
+                app.swipeUp()
+            }
+            capture("repair quote: \(language)", app: app)
+            tap(repair, in: app)
+            XCTAssertFalse(app.buttons["repair.damagedPort"].exists)
+            capture("starter repaired: \(language)", app: app)
+        }
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
+        tap(app.buttons[turkish ? "Karşı teklif gönder" : "Send counteroffer"].firstMatch, in: app)
+        tap(app.buttons["sendBuyerCounter"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+        capture("buyer counter: \(language)", app: app)
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+        capture("connected payoff: \(language)", app: app)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["listing.listing-42-1"].exists)
+        capture("next hunt: \(language)", app: app)
+    }
+
+    @MainActor
+    func testRepairAndLossEnglish() { repairAndLoss(language: "en") }
+    @MainActor
+    func testRepairAndLossTurkish() { repairAndLoss(language: "tr") }
+
+    @MainActor
+    private func repairAndLoss(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-2"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["askIssues"], in: app)
+        capture("risk clue: \(language)", app: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+        tap(app.buttons["inventory.item-42-2"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["professionalInspect"], in: app)
+        XCTAssertTrue(app.buttons["repair.drift"].waitForExistence(timeout: 5))
+        tap(app.buttons["repair.drift"], in: app)
+        XCTAssertFalse(app.buttons["repair.drift"].exists)
+        capture("repaired: \(language)", app: app)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+        tap(app.buttons["inventory.item-42-2"], in: app)
+        XCTAssertFalse(app.buttons["repair.drift"].exists)
+        tap(app.buttons["createListing"], in: app)
+        let asking = app.textFields["askingPrice"]
+        tap(asking, in: app)
+        let current = asking.value as? String ?? ""
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: current.count) + "100")
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].label.contains("-"))
+        capture("loss lesson: \(language)", app: app)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
+    }
+
+    @MainActor
     private func capture(_ name: String, app: XCUIApplication) {
+        // Allow the deliberately short game transitions to settle before visual QA.
+        RunLoop.current.run(until: Date().addingTimeInterval(0.5))
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = name
         attachment.lifetime = .keepAlways

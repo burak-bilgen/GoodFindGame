@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @AppStorage("gameSoundEnabled") private var sounds = false
     var body: some View {
         List {
             Text("profile.intro").font(.headline)
@@ -11,6 +12,8 @@ struct ProfileView: View {
             NavigationLink("knowledge.title") { KnowledgeView(store: store) }.accessibilityIdentifier("openKnowledge")
             NavigationLink("trade.history") { TradeHistoryView(store: store) }.accessibilityIdentifier("openTradeHistory")
             NavigationLink("notifications.settings") { NotificationSettingsView(store: store) }.accessibilityIdentifier("notificationSettings")
+            Toggle("feel.sounds", isOn: $sounds)
+            Text("feel.soundsHint").font(.caption).foregroundStyle(.secondary)
             #if DEBUG
             NavigationLink("debug.title") { DeveloperToolsView(store: store) }.accessibilityIdentifier("developerTools")
             #endif
@@ -53,7 +56,7 @@ struct ProfitAmount: View {
     let amount: Money
     @Environment(\.locale) private var locale
     var body: some View {
-        Label(amount.formatted(locale: locale), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
+        Label(amount.formatted(locale: locale, signed: true), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
             .foregroundStyle(amount >= .zero ? Color("AccentColor") : Color("LossColor")).monospacedDigit()
     }
 }
@@ -62,14 +65,20 @@ struct TradeReceiptView: View {
     let record: TradeRecord
     @Environment(\.locale) private var locale
     var body: some View {
-        List {
-            LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale)) }
-            LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale)) }
-            LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale)) }
-            LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale)) }
-            LabeledContent("trade.soldFor") { Text(record.soldFor.formatted(locale: locale)) }
-            LabeledContent("trade.netProfit") { ProfitAmount(amount: record.netProfit) }
-            Text("trade.explanation").font(.caption).foregroundStyle(.secondary)
-        }.navigationTitle("trade.receipt")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                TradePayoff(record: record)
+                DisclosureGroup("result.costs") {
+                    VStack(spacing: 12) {
+                        LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale)) }
+                        LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale)) }
+                        LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale)) }
+                        LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale)) }
+                        Text("trade.explanation").font(.caption).foregroundStyle(.secondary)
+                    }.padding(.top, 12)
+                }.gameCard()
+                HuntButton()
+            }.padding(16)
+        }.gameScreen().navigationTitle("trade.receipt").navigationBarTitleDisplayMode(.inline)
     }
 }

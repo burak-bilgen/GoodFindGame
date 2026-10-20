@@ -28,13 +28,14 @@ struct Money: Codable, Hashable, Comparable, Sendable {
         return Money(minorUnits: product / 10_000)
     }
 
-    func formatted(locale: Locale) -> String {
+    func formatted(locale: Locale, signed: Bool = false) -> String {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.numberStyle = .currency
         // Stable neutral credits globally until regional economy tables exist.
         formatter.currencyCode = locale.language.languageCode?.identifier == "tr" ? "TRY" : "XXX"
         formatter.currencySymbol = locale.language.languageCode?.identifier == "tr" ? "₺" : "¤"
+        if signed && minorUnits > 0 { formatter.positivePrefix = "+" + formatter.positivePrefix }
         return formatter.string(from: NSDecimalNumber(decimal: Decimal(minorUnits) / 100)) ?? NSDecimalNumber(value: minorUnits).stringValue
     }
 }

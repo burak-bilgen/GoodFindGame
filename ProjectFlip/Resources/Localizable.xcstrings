@@ -7344,6 +7344,24 @@
           }
         }
       }
+    },
+    "result.afterCosts": {
+      "comment": "Clarifies that the large result already subtracts purchase, inspection and repair costs; shown when service costs exist.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After all costs"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm masraflar sonrası"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

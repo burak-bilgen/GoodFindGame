@@ -23,15 +23,15 @@ struct WhileAwayView: View {
                 ForEach(ResolvedEventKind.allCases, id: \.self) { kind in
                     let outcomes = store.snapshot.awayReport.filter { $0.kind == kind }
                     if !outcomes.isEmpty {
-                        NavigationLink {
-                            List(outcomes) { outcome in
+                        Section(GameText.string("away.\(kind.rawValue)", locale: locale)) {
+                            ForEach(outcomes) { outcome in
                                 NavigationLink { destination(outcome) } label: {
-                                    Text(GameText.string("away.\(kind.rawValue)", locale: locale))
-                                    Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale))
-                                }
-                            }.navigationTitle(GameText.string("away.\(kind.rawValue)", locale: locale))
-                        } label: {
-                            LabeledContent { Text(outcomes.count, format: .number) } label: { Text(GameText.string("away.\(kind.rawValue)", locale: locale)) }
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text(eventName(outcome)).font(.headline)
+                                        Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale)).font(.caption).foregroundStyle(.secondary)
+                                    }
+                                }.accessibilityIdentifier("awayEvent.\(outcome.id)")
+                            }
                         }
                     }
                 }
@@ -39,6 +39,17 @@ struct WhileAwayView: View {
             .navigationTitle("away.title")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("action.done") { store.perform { try store.acknowledgeAwayReport() } } } }
         }
+    }
+
+    private func eventName(_ event: ResolvedEvent) -> String {
+        if let listing = store.snapshot.market.first(where: { $0.id.rawValue == event.targetID }), let definition = store.definition(for: listing.item) { return definition.name }
+        if let listing = store.snapshot.playerListings.first(where: { $0.id.rawValue == event.targetID }),
+           let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot,
+           let definition = store.definition(for: item) { return definition.name }
+        if let shipment = store.snapshot.shipments.first(where: { $0.id == event.targetID }), let definition = store.definition(for: shipment.item) { return definition.name }
+        if let job = store.snapshot.inspectionJobs.first(where: { $0.id == event.targetID }),
+           let item = store.snapshot.player.inventory.first(where: { $0.id == job.itemID }), let definition = store.definition(for: item) { return definition.name }
+        return GameText.string("away.\(event.kind.rawValue)", locale: locale)
     }
 
     @ViewBuilder private func destination(_ outcome: ResolvedEvent) -> some View {
