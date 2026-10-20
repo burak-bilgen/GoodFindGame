@@ -140,6 +140,9 @@ extension ItemInstance {
     }
 
     func validateFacts() throws {
+        guard Set(repairedDefects ?? []).count == (repairedDefects ?? []).count,
+              Set(repairedDefects ?? []).isSubset(of: Set(revealedDefects)),
+              Set(repairedDefects ?? []).isSubset(of: Set(hiddenDefects)) else { throw SaveError.invalidSave }
         try facts?.validate()
         guard knownFactKeys.isSubset(of: Set(facts?.values.map(\.key) ?? [])) else { throw SaveError.invalidSave }
     }

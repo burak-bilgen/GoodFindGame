@@ -6249,7 +6249,7 @@
     },
     "hunt.eyebrow": {
       "comment": "Trading journey prompt; concise invitation to the next playable action.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6280,7 +6280,8 @@
             "value": "İlanına gelen ilgiyi gör"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "hunt.sell": {
       "comment": "Trading journey prompt; concise invitation to the next playable action.",
@@ -6297,7 +6298,8 @@
             "value": "Fiyatını belirle, satışa çıkar"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "hunt.inspect": {
       "comment": "Trading journey prompt; concise invitation to the next playable action.",
@@ -6314,7 +6316,8 @@
             "value": "Ürünün geldi. Bakalım ne almışsın?"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "hunt.delivery": {
       "comment": "Trading journey prompt; concise invitation to the next playable action.",
@@ -6331,7 +6334,8 @@
             "value": "Kargonu takip et"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "hunt.next": {
       "comment": "Trading journey prompt; concise invitation to the next playable action.",
@@ -6348,7 +6352,8 @@
             "value": "Yeni bir fırsat ara"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "buyer.activity": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6365,7 +6370,8 @@
             "value": "Pazardan gelen ilgi"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "buyer.net": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6382,7 +6388,8 @@
             "value": "Kabul edersen sonucun"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "buyer.new": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6399,7 +6406,8 @@
             "value": "TEKLİF GELDİ"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "facts.originalReport": {
       "comment": "Inspection facts are preserved after repair; current service status is on the item screen.",
@@ -6416,7 +6424,8 @@
             "value": "Bunlar ilk incelemenin bulguları. Onarılan sorunlar ürün ekranında işaretlidir."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "feel.sounds": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6433,7 +6442,8 @@
             "value": "Oyun sesleri"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "feel.soundsHint": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6450,7 +6460,8 @@
             "value": "Yanıtlar, keşifler ve tamamlanan alım satımlar için kısa sesler. Sessiz modda çalmaz."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "journey.bought": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6467,7 +6478,8 @@
             "value": "Artık senin. Bakalım nasıl çıkacak."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "journey.commit": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6484,7 +6496,8 @@
             "value": "Fiyatta anlaştınız. Ürünün durumu hâlâ bir risk."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "listing.referenceCaution": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6501,11 +6514,12 @@
             "value": "Bu, sorunsuz bir ürünün referans fiyatı. Bu ilanın gerçek değerini garanti etmez."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "offer.counterHeading": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6536,7 +6550,8 @@
             "value": "Biraz indirim iste"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "offer.testWaters": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6553,7 +6568,8 @@
             "value": "Düşükten başla"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "offer.tryLess": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6570,7 +6586,8 @@
             "value": "İlan fiyatı sadece başlangıç. Acaba ne kadar iner?"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.action": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6587,7 +6604,8 @@
             "value": "Bu sorunu onar"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.asIs": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6604,7 +6622,8 @@
             "value": "Olduğu gibi sat"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.cost": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6621,7 +6640,8 @@
             "value": "Onarım ücreti"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.immediate": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6638,7 +6658,8 @@
             "value": "Anında onarım. Tahminler satış garantisi değildir."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.recovery": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6655,7 +6676,8 @@
             "value": "Tahmini değer artışı"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "repair.title": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6672,7 +6694,8 @@
             "value": "Tamire değer mi?"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "result.costs": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6689,11 +6712,12 @@
             "value": "Kârı etkileyen harcamalar"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "result.even": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6711,7 +6735,7 @@
     },
     "result.lesson.costs": {
       "comment": "Post-trade learning; shown only when supported by settled amounts.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6729,7 +6753,7 @@
     },
     "result.lesson.even": {
       "comment": "Post-trade learning; shown only when supported by settled amounts.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6747,7 +6771,7 @@
     },
     "result.lesson.fault": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6765,7 +6789,7 @@
     },
     "result.lesson.price": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6783,7 +6807,7 @@
     },
     "result.lesson.win": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6801,7 +6825,7 @@
     },
     "result.loss": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6812,7 +6836,7 @@
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "ZOR ALIŞVERİŞ"
+            "value": "ZARARINA GİTTİ"
           }
         }
       }
@@ -6832,11 +6856,12 @@
             "value": "Yatırımının getirisi"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "result.route": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6854,7 +6879,7 @@
     },
     "result.win": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6865,7 +6890,7 @@
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "İYİ ALIM SATIM"
+            "value": "GÜZEL KÂR"
           }
         }
       }
@@ -6885,7 +6910,8 @@
             "value": "Görebildiğin durum bu."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "reveal.continue": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6902,7 +6928,8 @@
             "value": "Sıradaki bulguyu gör"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "reveal.details": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6919,11 +6946,12 @@
             "value": "Ayrıntılar ve uzmanlık"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "reveal.estimate": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6941,7 +6969,7 @@
     },
     "reveal.heading": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -6952,7 +6980,7 @@
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "GERÇEKLE YÜZLEŞME"
+            "value": "BAKALIM NE ÇIKTI"
           }
         }
       }
@@ -6972,7 +7000,8 @@
             "value": "Onarıldı"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "seller.mood.firm": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -6989,7 +7018,8 @@
             "value": "Fiyatında ısrar ediyor."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "seller.mood.last": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -7006,7 +7036,8 @@
             "value": "Biraz daha zorlarsan vazgeçebilir."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "seller.mood.open": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -7023,11 +7054,12 @@
             "value": "Pazarlığa açık görünüyor."
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "seller.voice.casual": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7045,7 +7077,7 @@
     },
     "seller.voice.clueless": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7063,7 +7095,7 @@
     },
     "seller.voice.collector": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7081,7 +7113,7 @@
     },
     "seller.voice.friendly": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7099,7 +7131,7 @@
     },
     "seller.voice.manipulative": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7117,7 +7149,7 @@
     },
     "seller.voice.professional": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7135,7 +7167,7 @@
     },
     "seller.voice.stubborn": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7153,7 +7185,7 @@
     },
     "seller.voice.urgent": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
-      "extractionState": "stale",
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -7184,7 +7216,8 @@
             "value": "Yayındaki ilanını gör"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "selling.invested": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -7201,7 +7234,8 @@
             "value": "Toplam harcaman"
           }
         }
-      }
+      },
+      "extractionState": "manual"
     },
     "selling.stakes": {
       "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
@@ -7216,6 +7250,97 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yüksek fiyat pazarlık payı bırakır ama alıcılar vazgeçebilir."
+          }
+        }
+      },
+      "extractionState": "manual"
+    },
+    "listing.claim.excellent": {
+      "comment": "A summary of the public seller condition claim, never the hidden true condition. This is not a deal rating.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller’s claim: excellent"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcıya göre: çok iyi"
+          }
+        }
+      }
+    },
+    "listing.claim.good": {
+      "comment": "A summary of the public seller condition claim, never the hidden true condition. This is not a deal rating.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller’s claim: good"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcıya göre: iyi"
+          }
+        }
+      }
+    },
+    "listing.claim.worn": {
+      "comment": "A summary of the public seller condition claim, never the hidden true condition. This is not a deal rating.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller’s claim: worn"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcıya göre: yıpranmış"
+          }
+        }
+      }
+    },
+    "listing.description.starter": {
+      "comment": "Only the fresh-save introductory listing. Fairly hints at one existing port defect without confirming it.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It powers on. I haven’t checked all the connections lately."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açılıyor ama bağlantılarını uzun zamandır denemedim."
+          }
+        }
+      }
+    },
+    "inspection.repairedClear": {
+      "comment": "Current item state after service. Do not claim that the original inspection found no faults.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All known faults are repaired. The original inspection report is kept below."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinen sorunların tümü onarıldı. İlk inceleme raporu aşağıda duruyor."
           }
         }
       }

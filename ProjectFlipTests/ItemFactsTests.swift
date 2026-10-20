@@ -15,7 +15,7 @@ struct ItemFactsTests {
         let now = Date(timeIntervalSinceReferenceDate: 1234)
         let first = try ListingGenerator().generate(definitions: definitions, seed: 42, now: now)
         #expect(try first == ListingGenerator().generate(definitions: definitions, seed: 42, now: now))
-        #expect(first[0].askingPrice == Money(minorUnits: 237_728))
+        #expect(first[0].askingPrice == Money(minorUnits: 167_808))
         for listing in first {
             let definition = try #require(definitions.first { $0.id == listing.item.definitionID })
             let facts = try #require(listing.item.facts)

@@ -69,6 +69,9 @@ extension GameStore {
     func buyInspectionTools(for category: ItemCategory) throws {
         try transact { state, _ in try InspectionEngine().buyTools(for: category, state: state) }
     }
+    func repair(itemID: ItemID, defect: Defect) throws {
+        try transact { state, _ in try RepairEngine().repair(itemID: itemID, defect: defect, state: state, definitions: definitions) }
+    }
     func publish(itemID: ItemID, askingPrice: Money) throws {
         try transact { try actions.publish(itemID: itemID, askingPrice: askingPrice, state: $0, definitions: definitions, now: $1) }
     }

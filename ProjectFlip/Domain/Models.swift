@@ -69,6 +69,9 @@ struct ItemInstance: Codable, Identifiable, Equatable, Sendable {
     var inspectionCost: Money = .zero
     var repairCost: Money = .zero
     var acquiredAt: Date?
+    var repairedDefects: [Defect]?
+    var activeDefects: [Defect] { hiddenDefects.filter { !(repairedDefects ?? []).contains($0) } }
+    var knownActiveDefects: [Defect] { revealedDefects.filter { !(repairedDefects ?? []).contains($0) } }
     var facts: ItemFacts?
     var revealedFactKeys: Set<ItemFactKey>?
 }

@@ -16,6 +16,9 @@ errors = []
 for key, entry in data["strings"].items():
     if not entry.get("comment"):
         errors.append(f"{key}: missing translator context")
+    # GameText resolves semantic intents dynamically; automatic extraction cannot see them.
+    if entry.get("extractionState") != "manual":
+        errors.append(f"{key}: use manual extraction so dynamic gameplay copy cannot become stale")
     for language in ("en", "tr"):
         translations = list(units(entry.get("localizations", {}).get(language, {})))
         reference_units = list(units(entry.get("localizations", {}).get("en", {})))
