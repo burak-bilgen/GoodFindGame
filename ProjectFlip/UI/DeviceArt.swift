@@ -24,7 +24,7 @@ struct DeviceArt: View {
             context.fill(Path(ellipseIn: CGRect(x: -83, y: 43, width: 166, height: 18)), with: .color(.black.opacity(0.12)))
             context.rotate(by: .degrees(-8))
             if category == .cameras {
-                if symbol.contains("camera") {
+                if !symbol.contains("aperture") {
                     rect(-76, -38, 152, 90, 15, GameStyle.ink)
                     rect(-58, -55, 42, 20, 6, GameStyle.ink)
                     rect(-75, -13, 150, 45, 3, shell)
@@ -39,18 +39,36 @@ struct DeviceArt: View {
                     circle(0, -38, 27, accent); circle(-6, -43, 11, .white.opacity(0.25))
                 }
             } else if category == .retro {
+                if symbol == "opticaldisc" {
+                    circle(0, 0, 58, shell); circle(0, 0, 43, accent); circle(0, 0, 12, GameStyle.ink)
+                    rect(-38, -30, 40, 7, 3, .white.opacity(0.5))
+                } else if symbol == "gamecontroller" || symbol == "tv" {
+                    rect(-62, -60, 124, 122, 14, shell)
+                    rect(-51, -49, 102, 65, 6, GameStyle.ink); rect(-43, -41, 86, 49, 2, accent)
+                    rect(-42, 26, 10, 28, 2, GameStyle.ink); rect(-51, 35, 28, 10, 2, GameStyle.ink)
+                    circle(30, 40, 7, GameStyle.ink); circle(46, 30, 7, GameStyle.ink)
+                } else {
                 rect(-65, -54, 130, 112, 10, GameStyle.ink)
                 rect(-58, -47, 116, 77, 5, shell)
                 rect(-41, -30, 82, 44, 3, accent)
                 circle(0, -8, 14, .white.opacity(0.4))
                 for line in 0..<5 { rect(CGFloat(line*18)-41, 39, 10, 14, 2, shell) }
                 rect(-21, -58, 42, 8, 2, GameStyle.ink)
+                }
+            } else if symbol.contains("hifispeaker") || symbol.contains("externaldrive") {
+                rect(-47, -58, 94, 119, 13, shell)
+                if symbol.contains("hifispeaker") {
+                    circle(0, -24, 17, GameStyle.ink); circle(0, 25, 29, GameStyle.ink); circle(0, 25, 15, accent)
+                } else {
+                    rect(-33, -41, 66, 7, 2, GameStyle.ink); rect(-33, -26, 66, 7, 2, GameStyle.ink)
+                    circle(24, 40, 4, accent)
+                }
             } else if symbol.contains("headphone") {
                 let arc = Path { p in p.addArc(center: CGPoint(x: 0, y: 3), radius: 49, startAngle: .degrees(180), endAngle: .degrees(0), clockwise: false) }
                 context.stroke(arc, with: .color(GameStyle.ink), style: StrokeStyle(lineWidth: 18, lineCap: .round))
                 rect(-63, -3, 32, 63, 14, shell); rect(31, -3, 32, 63, 14, shell)
                 rect(-35, 3, 9, 50, 4, GameStyle.ink); rect(26, 3, 9, 50, 4, GameStyle.ink)
-            } else if variation == 1 || symbol.contains("display") || symbol.contains("desktop") {
+            } else if symbol.contains("display") || symbol.contains("desktop") {
                 rect(-72, -52, 144, 98, 11, shell)
                 rect(-62, -42, 124, 71, 5, GameStyle.ink)
                 rect(-49, -28, 48, 5, 2, accent); rect(-49, -16, 77, 4, 2, accent.opacity(0.5))

@@ -3,6 +3,7 @@ import SwiftUI
 struct MarketView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @FocusState private var priceInputFocused: Bool
     @State private var filtersExpanded = false
     @State private var category: ItemCategory?
@@ -30,12 +31,12 @@ struct MarketView: View {
             LazyVStack(alignment: .leading, spacing: 14) {
                 VStack(alignment: .leading, spacing: 12) {
                     GameEyebrow(key: "hunt.eyebrow")
-                    Text("market.heading").font(.system(.largeTitle, design: .rounded, weight: .heavy))
+                    Text("market.heading").font(.system(.title2, design: .rounded, weight: .heavy))
                     Text("market.subtitle").font(.subheadline).foregroundStyle(.secondary)
                     HStack {
                         Text("wallet.cash").font(.caption)
                         Spacer()
-                        Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold().contentTransition(.numericText())
+                        Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit().bold().contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
                     }
                 }.gameCard()
                 FirstTradePrompt(store: store)
@@ -107,16 +108,18 @@ struct ListingCard: View {
     var watched = false
     var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .center, spacing: 14) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 112, height: 112)
-                    summary
-                }
+            if typeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: 12) {
                     DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 140)
+                    summary
+                }
+            } else {
+                HStack(alignment: .center, spacing: 14) {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 112, height: 112)
                     summary
                 }
             }
@@ -140,6 +143,7 @@ struct ListingCard: View {
                 if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale)).strikethrough().font(.caption).foregroundStyle(.secondary) }
             }
             Text(listing.askingPrice.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
+                .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
             if !listing.available {
                 Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
             }
@@ -163,8 +167,6 @@ struct FirstTradePrompt: View {
                 NavigationLink { InventoryView(store: store) } label: {
                     Label("hunt.delivery", systemImage: "shippingbox")
                 }.buttonStyle(GameButton())
-            } else {
-                Label("hunt.first", systemImage: "sparkle.magnifyingglass").font(.subheadline).foregroundStyle(.secondary)
             }
         }
     }

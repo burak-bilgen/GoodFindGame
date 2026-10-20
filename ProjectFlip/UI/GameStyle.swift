@@ -21,15 +21,24 @@ extension View {
             .overlay(RoundedRectangle(cornerRadius: 20).stroke(.primary.opacity(0.06), lineWidth: 1))
     }
     func gameScreen() -> some View {
-        scrollContentBackground(.hidden).background(Color(uiColor: .systemGroupedBackground))
+        modifier(GameScreenStyle())
+    }
+}
+
+private struct GameScreenStyle: ViewModifier {
+    @Environment(\.colorScheme) private var scheme
+    func body(content: Content) -> some View {
+        content.scrollContentBackground(.hidden)
+            .background(scheme == .dark ? Color(uiColor: .systemGroupedBackground) : Color(red: 0.97, green: 0.96, blue: 0.93))
     }
 }
 
 struct GameButton: ButtonStyle {
+    @Environment(\.isEnabled) private var enabled
     func makeBody(configuration: Configuration) -> some View {
         configuration.label.font(.headline).frame(maxWidth: .infinity).padding(.vertical, 14).padding(.horizontal, 12)
             .foregroundStyle(Color(uiColor: .systemBackground))
-            .background(Color("AccentColor").opacity(configuration.isPressed ? 0.75 : 1), in: RoundedRectangle(cornerRadius: 16))
+            .background(Color("AccentColor").opacity(!enabled ? 0.4 : configuration.isPressed ? 0.75 : 1), in: RoundedRectangle(cornerRadius: 16))
     }
 }
 
