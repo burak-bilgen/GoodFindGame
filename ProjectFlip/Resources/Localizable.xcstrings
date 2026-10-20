@@ -7776,6 +7776,24 @@
           }
         }
       }
+    },
+    "game.conversationHistory": {
+      "comment": "Optional dialogue history after a purchase or listing closure.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversation history"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konuşma geçmişi"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

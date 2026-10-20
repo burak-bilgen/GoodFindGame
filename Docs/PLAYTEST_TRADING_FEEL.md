@@ -149,3 +149,12 @@ The product question remains qualitative: after a profitable trade, and after an
 understandable loss, does a human choose to open another listing? Passing the
 regressions establishes a coherent, working journey; human repeat-trade sessions
 can further validate that feeling before resuming the paused backlog.
+
+## Visual acceptance follow-up — 20–21 October 2026
+
+A second audit found the working loop still too close to a utility application.
+The follow-up keeps the same simulation and saved truth while turning the market
+into a collectible display, distinguishing unknown information, focusing the
+purchase commitment, emphasizing repair and resale decisions, and leading the
+result with its payoff. See VISUAL_POLISH_QA.md for the current evidence and
+commercial-shipment limits. Marketplace checkpoint: `cd55b03`.

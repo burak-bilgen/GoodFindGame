@@ -19,23 +19,41 @@ struct WhileAwayView: View {
     @Environment(\.locale) private var locale
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(ResolvedEventKind.allCases, id: \.self) { kind in
-                    let outcomes = store.snapshot.awayReport.filter { $0.kind == kind }
-                    if !outcomes.isEmpty {
-                        Section(GameText.string("away.\(kind.rawValue)", locale: locale)) {
-                            ForEach(outcomes) { outcome in
-                                NavigationLink { destination(outcome) } label: {
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        Text(eventName(outcome)).font(.headline)
-                                        Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale)).font(.caption).foregroundStyle(.secondary)
-                                    }
-                                }.accessibilityIdentifier("awayEvent.\(outcome.id)")
-                            }
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 18) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Image(systemName: "moon.stars.fill").font(.largeTitle).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                        Text("game.return").font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
+                        Text("game.returnHint").font(.subheadline).foregroundStyle(.white.opacity(0.75))
+                    }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
+                        .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 22))
+                    ForEach(ResolvedEventKind.allCases, id: \.self) { kind in
+                        let outcomes = store.snapshot.awayReport.filter { $0.kind == kind }
+                        if !outcomes.isEmpty {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Text(GameText.string("away.\(kind.rawValue)", locale: locale)).font(.headline)
+                                    Spacer()
+                                    Text(outcomes.count, format: .number).font(.headline.monospacedDigit()).foregroundStyle(GameStyle.gain)
+                                }
+                                ForEach(outcomes) { outcome in
+                                    NavigationLink { destination(outcome) } label: {
+                                        HStack(spacing: 12) {
+                                            Image(systemName: "arrow.up.right").font(.headline).foregroundStyle(GameStyle.gain)
+                                            VStack(alignment: .leading, spacing: 6) {
+                                                Text(eventName(outcome)).font(.subheadline.bold()).foregroundStyle(.primary)
+                                                Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale)).font(.caption).foregroundStyle(.secondary)
+                                            }
+                                            Spacer()
+                                            Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(.secondary)
+                                        }.padding(.vertical, 6)
+                                    }.buttonStyle(.plain).accessibilityIdentifier("awayEvent.\(outcome.id)")
+                                }
+                            }.gameCard()
                         }
                     }
-                }
-            }
+                }.padding(16)
+            }.gameScreen()
             .navigationTitle("away.title")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("action.done") { store.perform { try store.acknowledgeAwayReport() } } } }
         }

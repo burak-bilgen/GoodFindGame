@@ -30,26 +30,31 @@ struct RootView: View {
             .tabItem { Label("market.title", systemImage: "square.grid.2x2") }.tag(0)
             NavigationStack {
                 if let store {
-                    List(store.snapshot.conversations) { conversation in
-                        NavigationLink {
-                            ConversationView(store: store, listingID: conversation.listingID)
-                        } label: {
-                            if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
-                                HStack(spacing: 12) {
-                                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 64, height: 72)
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        Text(definition.name).font(.headline)
-                                        Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
-                                        if conversation.pendingReplyEventID != nil {
-                                            Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
-                                        } else if let last = conversation.messages.last {
-                                            Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
-                                            if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
-                                        }
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 16) {
+                            GameEyebrow(key: "game.inbox")
+                            ForEach(store.snapshot.conversations) { conversation in
+                                NavigationLink {
+                                    ConversationView(store: store, listingID: conversation.listingID)
+                                } label: {
+                                    if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
+                                        HStack(spacing: 12) {
+                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 64, height: 72)
+                                            VStack(alignment: .leading, spacing: 6) {
+                                                Text(definition.name).font(.headline)
+                                                Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
+                                                if conversation.pendingReplyEventID != nil {
+                                                    Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
+                                                } else if let last = conversation.messages.last {
+                                                    Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                                                    if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                }
+                                            }
+                                        }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
                                     }
-                                }
+                                }.buttonStyle(.plain).accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
                             }
-                        }.accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
+                        }.padding(16)
                     }.gameScreen().navigationTitle("messages.title")
                 }
             }
@@ -114,6 +119,7 @@ struct RootView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase != .active { store?.perform { try store?.catchUp() } }
         }
+        .font(.system(.body, design: .rounded))
         .tint(Color("AccentColor"))
     }
     private func load() {

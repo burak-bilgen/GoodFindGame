@@ -4,6 +4,7 @@ struct ListingDetailView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
@@ -44,9 +45,10 @@ struct ListingDetailView: View {
                                 Text("game.unknown").font(.caption).foregroundStyle(GameStyle.amber)
                             }
                         }
-                        HStack(alignment: .top, spacing: 12) {
-                            mysteryStat("game.conditionUnknown")
-                            mysteryStat("game.faultUnknown")
+                        if typeSize.isAccessibilitySize {
+                            VStack(spacing: 12) { unknownStats }
+                        } else {
+                            HStack(alignment: .top, spacing: 12) { unknownStats }
                         }
                         Text("game.truthHint").font(.caption).foregroundStyle(.white.opacity(0.78))
                     }.padding(18).frame(maxWidth: .infinity, alignment: .leading)
@@ -92,6 +94,12 @@ struct ListingDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
         } else {
             ContentUnavailableView("listing.unavailable", systemImage: "tag.slash")
+        }
+    }
+    private var unknownStats: some View {
+        Group {
+            mysteryStat("game.conditionUnknown")
+            mysteryStat("game.faultUnknown")
         }
     }
     private func mysteryStat(_ key: String) -> some View {

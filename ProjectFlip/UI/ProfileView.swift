@@ -17,7 +17,7 @@ struct ProfileView: View {
             #if DEBUG
             NavigationLink("debug.title") { DeveloperToolsView(store: store) }.accessibilityIdentifier("developerTools")
             #endif
-        }.navigationTitle("profile.title")
+        }.gameScreen().navigationTitle("profile.title")
     }
 }
 
@@ -48,7 +48,7 @@ struct TradeHistoryView: View {
             case .failure:
                 Text("trade.unavailable")
             }
-        }.navigationTitle("trade.history")
+        }.gameScreen().navigationTitle("trade.history")
     }
 }
 

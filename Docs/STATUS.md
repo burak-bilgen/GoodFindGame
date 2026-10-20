@@ -6,7 +6,7 @@ Priority: prove that one completed trade makes the player want another listing. 
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
-Current localization: 405 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Current localization: 429 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
 
 Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
 
@@ -75,3 +75,16 @@ including five expanded receipts. Debug/Release builds succeed; 405 TR/EN
 semantic keys pass validation. See PLAYTEST_TRADING_FEEL.md for commit checkpoints,
 actual screen review and simulator/physical-device limits. The paused backlog
 stays paused; human enjoyment and retention have not been measured.
+
+
+2026-10-21: Visual acceptance follow-up implemented on the existing trading-feel
+checkpoint. Collectible market cards, lit original artwork, stable NPC portraits,
+explicit unknowns, visible purchase commitment, diagnostic progress, compact price
+and offer decisions, trophy/signed payoff and contextual return cards share an
+ink/amber/paper presentation. No simulation, balance or save changes. Verification:
+79 domain tests; all 27 UI scenarios; three final connected journeys after the
+purchase-fallback correction; and an additional return-summary capture all pass.
+Debug and Release builds succeed; 429 Turkish/English keys pass validation. Current
+screens and baseline comparisons: ../../Artifacts/VisualPolish-2026-10-20/gallery.html.
+See VISUAL_POLISH_QA.md for the ranked follow-up, story review and remaining
+physical-device/minimum-runtime/human-retention validation.

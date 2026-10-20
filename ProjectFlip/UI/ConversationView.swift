@@ -17,7 +17,7 @@ struct ConversationView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 10) {
                             HStack {
-                                Image(systemName: "person.crop.circle.fill").font(.largeTitle).foregroundStyle(GameStyle.gain)
+                                TraderPortrait(identity: listing.seller.identityIndex, size: 54)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.headline)
                                     if let definition = store.definition(for: listing.item) { Text(definition.name).font(.subheadline).foregroundStyle(.secondary) }
@@ -33,9 +33,27 @@ struct ConversationView: View {
                         }.gameCard()
                         if !listing.available {
                             let reason = store.snapshot.marketListingStates.first { $0.id == listing.id }?.closureReason
-                            Text(GameText.string(reason?.key ?? "listing.unavailable", locale: locale)).font(.headline)
-                            if store.snapshot.shipments.contains(where: { $0.item.id == listing.item.id }) || store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id }) {
-                                Label("journey.bought", systemImage: "checkmark.seal.fill").foregroundStyle(GameStyle.gain)
+                            let acquired = store.snapshot.shipments.contains(where: { $0.item.id == listing.item.id }) || store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id })
+                            if !acquired && reason != .purchased {
+                                Text(GameText.string(reason?.key ?? "listing.unavailable", locale: locale)).font(.headline)
+                            }
+                            if acquired {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    HStack {
+                                        Text("game.dealClosed").font(.caption.weight(.black)).tracking(2)
+                                        Spacer()
+                                        Image(systemName: "checkmark.seal.fill").font(.title).accessibilityHidden(true)
+                                    }.foregroundStyle(GameStyle.amber)
+                                    if let definition = store.definition(for: listing.item) {
+                                        Text(definition.name).font(.title2.bold()).foregroundStyle(.white)
+                                    }
+                                    Text("game.boughtFor").font(.caption).foregroundStyle(.white.opacity(0.75))
+                                    if let price = conversation.agreedPrice {
+                                        Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).foregroundStyle(.white)
+                                    }
+                                    Text("game.purchaseRisk").font(.subheadline).foregroundStyle(.white.opacity(0.8))
+                                }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 22)).id("purchaseCommitment")
                                 if store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id }) {
                                     NavigationLink { OwnedItemView(store: store, itemID: listing.item.id) } label: { Text("hunt.inspect") }.buttonStyle(GameButton()).accessibilityIdentifier("continueToItem")
                                 } else {
@@ -44,9 +62,17 @@ struct ConversationView: View {
                             }
                         }
                         if conversation.messages.isEmpty { Text("negotiation.intro").font(.subheadline).foregroundStyle(.secondary) }
-                        ForEach(conversation.messages) { message in
-                            DialogueBubble(message: message).id(message.id)
-                                .transition(reduceMotion ? .opacity : .move(edge: message.fromPlayer ? .trailing : .leading).combined(with: .opacity))
+                        if listing.available {
+                            ForEach(conversation.messages) { message in
+                                DialogueBubble(message: message).id(message.id)
+                                    .transition(reduceMotion ? .opacity : .move(edge: message.fromPlayer ? .trailing : .leading).combined(with: .opacity))
+                            }
+                        } else {
+                            DisclosureGroup("game.conversationHistory") {
+                                VStack(spacing: 12) {
+                                    ForEach(conversation.messages) { DialogueBubble(message: $0) }
+                                }.padding(.top, 12)
+                            }.gameCard()
                         }
                         if conversation.pendingReplyEventID != nil {
                             Label("seller.awaitingReply", systemImage: "ellipsis.bubble.fill").font(.subheadline).foregroundStyle(.secondary).padding(12)
@@ -95,7 +121,7 @@ struct ConversationView: View {
                             }.gameCard().id("composer")
                         } else if let price = conversation.agreedPrice, listing.available && !conversation.closed {
                             VStack(alignment: .leading, spacing: 12) {
-                                Label("offer.agreed", systemImage: "checkmark.seal.fill").foregroundStyle(GameStyle.gain)
+                                GameStamp(key: "offer.agreed", symbol: "checkmark.seal.fill")
                                 Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy))
                                 Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
                                 Button("purchase.confirm") {
@@ -112,7 +138,10 @@ struct ConversationView: View {
                 .onChange(of: conversation.messages.last?.id) { _, _ in
                     if let last = conversation.messages.last, !last.fromPlayer {
                         GameFeel.play(conversation.agreedPrice == nil ? .reply : .accepted)
-                        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo(last.id, anchor: .center) }
+                        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
+                            if last.intent == "purchase.completed" { proxy.scrollTo("purchaseCommitment", anchor: .top) }
+                            else { proxy.scrollTo(last.id, anchor: .center) }
+                        }
                     }
                 }
             }
@@ -136,7 +165,11 @@ struct DialogueBubble: View {
                 Text(GameText.string(message.intent, locale: locale))
                 if let amount = message.amount { Text(amount.formatted(locale: locale)).font(.title3.bold()).monospacedDigit() }
                 if let defect = message.defect { Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill").font(.subheadline.bold()).foregroundStyle(GameStyle.loss) }
-            }.padding(14).background(message.fromPlayer ? GameStyle.gain.opacity(0.14) : Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18))
+            }.padding(16)
+                .background(message.fromPlayer ? GameStyle.gain.opacity(0.16) : Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18))
+                .overlay(alignment: message.fromPlayer ? .trailing : .leading) {
+                    Capsule().fill(message.fromPlayer ? GameStyle.gain : GameStyle.amber).frame(width: 3).padding(.vertical, 14)
+                }
             if !message.fromPlayer { Spacer(minLength: 32) }
         }.accessibilityElement(children: .combine)
     }

@@ -4,34 +4,37 @@ struct InventoryView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
     var body: some View {
-        List {
-            if store.snapshot.player.inventory.isEmpty && !store.snapshot.shipments.contains(where: { $0.status == .pending }) {
-                Text("inventory.empty").foregroundStyle(.secondary)
-                HuntButton()
-            }
-            ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
-                VStack(alignment: .leading, spacing: 8) {
-                    if let definition = store.definition(for: shipment.item) {
-                        DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 140)
-                        Text(definition.name).font(.headline)
-                    }
-                    DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
-                }.accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
-            }
-            ForEach(store.snapshot.player.inventory) { item in
-                if let definition = store.definition(for: item) {
-                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
-                        HStack(spacing: 14) {
-                            DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 90, height: 90)
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(definition.name).font(.headline)
-                                Text(item.purchasePrice.formatted(locale: locale)).foregroundStyle(.secondary)
-                                Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.caption)
-                            }
-                        }
-                    }.accessibilityIdentifier("inventory.\(item.id.rawValue)")
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 16) {
+                GameEyebrow(key: "game.workbench")
+                if store.snapshot.player.inventory.isEmpty && !store.snapshot.shipments.contains(where: { $0.status == .pending }) {
+                    Text("inventory.empty").foregroundStyle(.secondary)
+                    HuntButton()
                 }
-            }
+                ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
+                    VStack(alignment: .leading, spacing: 8) {
+                        if let definition = store.definition(for: shipment.item) {
+                            DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 140)
+                            Text(definition.name).font(.headline)
+                        }
+                        DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
+                    }.gameCard(accent: GameStyle.gain).accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
+                }
+                ForEach(store.snapshot.player.inventory) { item in
+                    if let definition = store.definition(for: item) {
+                        NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
+                            HStack(spacing: 14) {
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 90, height: 90)
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(definition.name).font(.headline)
+                                    Text(item.purchasePrice.formatted(locale: locale)).foregroundStyle(.secondary)
+                                    Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.caption)
+                                }
+                            }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
+                        }.buttonStyle(.plain).accessibilityIdentifier("inventory.\(item.id.rawValue)")
+                    }
+                }
+            }.padding(16)
         }.gameScreen().navigationTitle("inventory.title")
     }
 }
@@ -101,7 +104,21 @@ struct InspectionReveal: View {
     @State private var step = 0
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            GameEyebrow(key: "reveal.heading")
+            HStack {
+                GameEyebrow(key: "reveal.heading")
+                Spacer()
+                Image(systemName: "viewfinder").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+            }
+            HStack(alignment: .top, spacing: 8) {
+                ForEach(0..<3) { index in
+                    VStack(alignment: .leading, spacing: 6) {
+                        Capsule().fill(step > index ? GameStyle.gain : Color.secondary.opacity(0.15)).frame(height: 4)
+                        Text(GameText.string(["game.step.condition", "game.step.findings", "game.step.value"][index], locale: locale))
+                            .font(.caption2.bold()).foregroundStyle(step > index ? .primary : .secondary)
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }.accessibilityElement(children: .ignore).accessibilityLabel(Text("game.diagnostic"))
+                .accessibilityValue(Text(min(step, 3), format: .number))
             Group {
                 LabeledContent("inspection.condition") { Text(item.condition, format: .number).font(.system(.largeTitle, design: .rounded, weight: .heavy)).accessibilityIdentifier("inspectionCondition") }
                 Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
@@ -132,7 +149,7 @@ struct InspectionReveal: View {
             }.opacity(step >= 3 ? 1 : 0).accessibilityHidden(step < 3)
             Button("reveal.continue") { step = 3 }.font(.subheadline.bold()).accessibilityIdentifier("skipReveal")
                 .opacity(step < 3 ? 1 : 0).allowsHitTesting(step < 3).accessibilityHidden(step >= 3)
-        }.gameCard()
+        }.gameCard(accent: step >= 2 ? (item.knownActiveDefects.isEmpty ? GameStyle.gain : GameStyle.loss) : nil)
         .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: step)
         .task(id: "\(item.id.rawValue)-\(item.professionallyInspected)") {
             let presentationKey = "inspectionPresented-\(store.snapshot.simulationID)-\(item.id.rawValue)-\(item.professionallyInspected)"
@@ -160,15 +177,19 @@ struct RepairDecision: View {
     @Environment(\.locale) private var locale
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("repair.title").font(.title3.bold())
-            Text(GameText.string(defect.key, locale: locale)).font(.headline)
+            HStack {
+                GameStamp(key: "repair.title", symbol: "wrench.and.screwdriver.fill")
+                Spacer()
+            }
+            Text(GameText.string(defect.key, locale: locale)).font(.title3.bold())
+            Text("game.repairChoice").font(.subheadline).foregroundStyle(.secondary)
             switch Result(catching: { try RepairQuote(item: item, definition: definition, defect: defect, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let quote):
                 LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale)).bold() }
                 LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale)) }
                 Text("repair.immediate").font(.caption).foregroundStyle(.secondary)
                 Button("repair.action") { store.perform { try store.repair(itemID: item.id, defect: defect); GameFeel.play(.accepted) } }
-                    .buttonStyle(.bordered).accessibilityIdentifier("repair.\(defect.rawValue)")
+                    .buttonStyle(GameButton()).accessibilityIdentifier("repair.\(defect.rawValue)")
             case .failure: Text("inspection.valueUnavailable")
             }
         }.gameCard()

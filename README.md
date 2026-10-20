@@ -11,7 +11,7 @@ xcodebuild -project ProjectFlip.xcodeproj -scheme ProjectFlip -destination 'plat
 
 See Docs for requirements and milestone status. Localization uses semantic keys in a String Catalog; English and Turkish are first-class languages. Keep simulation independent of UI and locale.
 
-Current priority is the trading-feel milestone: marketplace discovery, seller reading, inspection, repair decisions and payoff. Category fidelity, progression, Game Center and monetization remain paused. See [the ranked UX audit](Docs/GAMEPLAY_UX_AUDIT.md) and [playtest evidence](Docs/PLAYTEST_TRADING_FEEL.md).
+Current priority is the trading-feel milestone: marketplace discovery, seller reading, inspection, repair decisions and payoff. Category fidelity, progression, Game Center and monetization remain paused. See [the ranked UX audit](Docs/GAMEPLAY_UX_AUDIT.md), [playtest evidence](Docs/PLAYTEST_TRADING_FEEL.md) and [the visual acceptance follow-up](Docs/VISUAL_POLISH_QA.md).
 
 ## Play the vertical slice
 
