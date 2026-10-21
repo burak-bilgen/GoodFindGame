@@ -108,117 +108,151 @@ struct SaleListingView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.dynamicTypeSize) private var typeSize
     @GameReduceMotion private var reduceMotion
     @State private var counterAmount = ""
+    @State private var counterComposerExpanded = false
     @State private var newPrice = ""
     @FocusState private var editing: Bool
     var body: some View {
         if let listing = store.snapshot.playerListings.first(where: { $0.id == listingID }) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    if listing.status != .sold, let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
-                        HStack(spacing: 14) {
-                            DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 80, height: 80)
-                            Text(definition.name).font(.system(.title2, design: .rounded, weight: .heavy))
-                        }
-                    }
-                    if listing.status == .sold {
-                        Label("selling.sold", systemImage: "checkmark.seal.fill").foregroundStyle(GameStyle.gain).accessibilityIdentifier("saleCompleted")
-                        switch Result(catching: { try TradeRecord(listing: listing) }) {
-                        case .success(let record):
-                            TradePayoff(record: record, item: listing.itemSnapshot)
-                            if let item = listing.itemSnapshot, let definition = store.definition(for: item) {
-                                HStack(spacing: 14) {
-                                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 88, height: 75)
-                                    Text(definition.name).font(.title3.bold())
-                                }
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        if listing.status != .sold, let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
+                            HStack(spacing: 14) {
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 80, height: 80)
+                                Text(definition.name).font(.system(.title2, design: .rounded, weight: .heavy))
                             }
-                            HuntButton()
-                            NavigationLink("trade.receipt") { TradeReceiptView(record: record) }
-                        case .failure: Text("trade.unavailable")
                         }
-                    } else {
-                        LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
-                        if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
-                            VStack(alignment: .leading, spacing: 14) {
-                                GameStamp(key: "buyer.new", symbol: "bolt.fill")
-                                HStack(spacing: 10) {
-                                    TraderPortrait(identity: offer.identityIndex)
-                                    Text(GameText.string("npc.name.\(offer.identityIndex % 10)", locale: locale)).font(.headline)
-                                }
-                                Text(offer.amount.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
-                                if let message = listing.messages.last { Text(GameText.string(message.intent, locale: locale)).font(.subheadline) }
-                                if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
-                                    switch Result(catching: { try offer.amount.subtracting(item.purchasePrice).subtracting(item.inspectionCost).subtracting(item.repairCost) }) {
-                                    case .success(let net): LabeledContent("buyer.net") { ProfitAmount(amount: net).bold() }
-                                    case .failure: Text("trade.unavailable")
+                        if listing.status == .sold {
+                            Label("selling.sold", systemImage: "checkmark.seal.fill").foregroundStyle(GameStyle.gain).accessibilityIdentifier("saleCompleted")
+                            switch Result(catching: { try TradeRecord(listing: listing) }) {
+                            case .success(let record):
+                                TradePayoff(record: record, item: listing.itemSnapshot).id("saleOutcome")
+                                if let item = listing.itemSnapshot, let definition = store.definition(for: item) {
+                                    HStack(spacing: 14) {
+                                        DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 88, height: 75)
+                                        Text(definition.name).font(.title3.bold())
                                     }
                                 }
-                                if let expiry = store.snapshot.events.first(where: { event in
-                                    guard event.status == .pending else { return false }
-                                    if case .buyerOfferExpired(let id, let offerID) = event.payload { return id == listing.id && offerID == offer.id }
-                                    return false
-                                }) { DeadlineView(store: store, target: expiry.resolveAt, titleKey: "offer.expires") }
-                                Button("buyer.accept") { store.perform { try store.acceptBuyer(listingID: listing.id) } }.buttonStyle(GameButton()).accessibilityIdentifier("acceptBuyerOffer")
-                                DisclosureGroup("buyer.sendCounter") {
-                                    VStack(spacing: 12) {
-                                        TextField("buyer.counterAmount", text: $counterAmount).keyboardType(.decimalPad).focused($editing).textFieldStyle(.roundedBorder).accessibilityIdentifier("buyerCounterAmount")
-                                        Button("buyer.sendCounter") {
-                                            editing = false
-                                            store.perform {
-                                                try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale))
-                                                GameFeel.play(.submitted)
+                                HuntButton()
+                                NavigationLink("trade.receipt") { TradeReceiptView(record: record) }
+                            case .failure: Text("trade.unavailable")
+                            }
+                        } else {
+                            LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
+                            if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
+                                VStack(alignment: .leading, spacing: 14) {
+                                    GameStamp(key: offer.status == .countered ? "buyer.counterHeading" : "buyer.new", symbol: offer.status == .countered ? "arrow.left.arrow.right" : "bolt.fill").id("buyerDecision")
+                                    HStack(spacing: 10) {
+                                        TraderPortrait(identity: offer.identityIndex)
+                                        Text(GameText.string("npc.name.\(offer.identityIndex % 10)", locale: locale)).font(.headline)
+                                    }
+                                    GameEyebrow(key: "buyer.offeredPrice")
+                                    Text(offer.amount.formatted(locale: locale)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
+                                    if let message = listing.messages.last { Text(GameText.string(message.intent, locale: locale)).font(.subheadline) }
+                                    if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
+                                        switch Result(catching: { try offer.amount.subtracting(item.purchasePrice).subtracting(item.inspectionCost).subtracting(item.repairCost) }) {
+                                        case .success(let net):
+                                            if typeSize.isAccessibilitySize {
+                                                VStack(alignment: .leading, spacing: 8) {
+                                                    Text("buyer.net")
+                                                    ProfitAmount(amount: net).bold().lineLimit(1).minimumScaleFactor(0.5)
+                                                }
+                                            } else {
+                                                LabeledContent("buyer.net") { ProfitAmount(amount: net).bold() }
                                             }
-                                        }.buttonStyle(.bordered).accessibilityIdentifier("sendBuyerCounter")
-                                    }.padding(.top, 10)
-                                }
-                                Button("buyer.reject", role: .destructive) { store.perform { try store.rejectBuyer(listingID: listing.id) } }
-                            }.gameCard(accent: GameStyle.gain)
-                        } else if listing.status == .active {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("selling.noOffers").font(.headline)
-                                if let last = listing.messages.last, ["buyer.withdraw", "buyer.expired"].contains(last.intent) {
-                                    Text(GameText.string(last.intent, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
-                                }
-                                if let pending = store.snapshot.events.first(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
-                                    DeadlineView(store: store, target: pending.resolveAt, titleKey: "buyer.awaitingInterest")
-                                }
-                                Button("buyer.find") { store.perform { try store.findBuyer(listingID: listing.id) } }
-                            }.gameCard()
-                        }
-                        DisclosureGroup("buyer.activity") {
-                            VStack(alignment: .leading, spacing: 12) {
-                                LabeledContent("selling.views") { Text(listing.views, format: .number) }
-                                LabeledContent("selling.favorites") { Text(listing.favorites, format: .number) }
-                                ForEach(listing.messages) { DialogueBubble(message: $0) }
-                            }.padding(.top, 12)
-                        }.gameCard()
-                        if listing.status == .active {
-                            DisclosureGroup("selling.updatePrice") {
-                                VStack(spacing: 12) {
-                                    TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(.roundedBorder)
-                                    Button("selling.updatePrice") { store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale)) } }
+                                        case .failure: Text("trade.unavailable")
+                                        }
+                                    }
+                                    if let expiry = store.snapshot.events.first(where: { event in
+                                        guard event.status == .pending else { return false }
+                                        if case .buyerOfferExpired(let id, let offerID) = event.payload { return id == listing.id && offerID == offer.id }
+                                        return false
+                                    }) { DeadlineView(store: store, target: expiry.resolveAt, titleKey: "offer.expires") }
+                                    Button("buyer.accept") { store.perform { try store.acceptBuyer(listingID: listing.id) } }.buttonStyle(GameButton()).accessibilityIdentifier("acceptBuyerOffer")
+                                    Text(offer.status == .countered ? "buyer.pushAgainRisk" : "buyer.pushRisk")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                    DisclosureGroup("buyer.sendCounter", isExpanded: $counterComposerExpanded) {
+                                        VStack(alignment: .leading, spacing: 12) {
+                                            Text("buyer.counterAmount").font(.subheadline.weight(.semibold))
+                                            TextField("buyer.counterAmount", text: $counterAmount).keyboardType(.decimalPad).focused($editing)
+                                                .font(.system(.title2, design: .rounded, weight: .bold)).textFieldStyle(.plain)
+                                                .padding(12).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
+                                                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.gain.opacity(0.35), lineWidth: 1))
+                                                .accessibilityIdentifier("buyerCounterAmount")
+                                            Text("buyer.counterCommitment").font(.caption).foregroundStyle(.secondary)
+                                            Button("buyer.sendCounter") {
+                                                editing = false
+                                                store.perform {
+                                                    try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale))
+                                                    GameFeel.play(.submitted)
+                                                }
+                                            }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("sendBuyerCounter")
+                                        }.padding(.top, 10)
+                                    }
+                                    Button("buyer.reject", role: .destructive) { store.perform { try store.rejectBuyer(listingID: listing.id) } }
+                                }.gameCard(accent: GameStyle.gain)
+                            } else if listing.status == .active {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    GameStamp(key: "selling.live", symbol: "antenna.radiowaves.left.and.right")
+                                    Text("selling.noOffers").font(.headline)
+                                    if let last = listing.messages.last, ["buyer.withdraw", "buyer.expired"].contains(last.intent) {
+                                        Text(GameText.string(last.intent, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                                    }
+                                    if let pending = store.snapshot.events.first(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
+                                        DeadlineView(store: store, target: pending.resolveAt, titleKey: "buyer.awaitingInterest")
+                                    } else {
+                                        Button("buyer.find") { store.perform { try store.findBuyer(listingID: listing.id) } }
+                                            .buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("findAnotherBuyer")
+                                    }
+                                    Text("selling.keepHunting").font(.subheadline).foregroundStyle(.secondary)
+                                    HuntButton()
+                                }.gameCard()
+                            }
+                            DisclosureGroup("buyer.activity") {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    LabeledContent("selling.views") { Text(listing.views, format: .number) }
+                                    LabeledContent("selling.favorites") { Text(listing.favorites, format: .number) }
+                                    ForEach(listing.messages) { DialogueBubble(message: $0) }
                                 }.padding(.top, 12)
                             }.gameCard()
+                            if listing.status == .active {
+                                DisclosureGroup("selling.updatePrice") {
+                                    VStack(spacing: 12) {
+                                        TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(.roundedBorder).accessibilityIdentifier("salePrice")
+                                        Button("selling.updatePrice") {
+                                            editing = false
+                                            store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale)) }
+                                        }.accessibilityIdentifier("updateSalePrice")
+                                    }.padding(.top, 12)
+                                }.gameCard()
+                            }
+                        }
+                    }.padding(16)
+                        .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: listing.status)
+                        .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: listing.messages.count)
+                }.gameScreen().navigationTitle("selling.title").navigationBarTitleDisplayMode(.inline)
+                    .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
+                    .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
+                    .onChange(of: listing.messages.last?.id) { _, _ in
+                        counterComposerExpanded = false
+                        if listing.messages.last?.intent == "buyer.counter" {
+                            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo("buyerDecision", anchor: .top) }
+                        }
+                        if let last = listing.messages.last, ["buyer.counter", "buyer.withdraw", "buyer.expired"].contains(last.intent) { GameFeel.play(.reply) }
+                    }
+                    .onChange(of: listing.status) { _, status in
+                        if status == .sold {
+                            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo("saleOutcome", anchor: .top) }
+                            switch Result(catching: { try TradeRecord(listing: listing) }) {
+                            case .success(let record): GameFeel.play(record.netProfit >= .zero ? .profit : .loss)
+                            case .failure: break // The unavailable-result message remains visible in the view.
+                            }
                         }
                     }
-                }.padding(16)
-                    .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: listing.status)
-                    .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: listing.messages.count)
-            }.gameScreen().navigationTitle("selling.title").navigationBarTitleDisplayMode(.inline)
-                .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
-                .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
-                .onChange(of: listing.messages.last?.id) { _, _ in
-                    if let last = listing.messages.last, ["buyer.counter", "buyer.withdraw", "buyer.expired"].contains(last.intent) { GameFeel.play(.reply) }
-                }
-                .onChange(of: listing.status) { _, status in
-                    if status == .sold {
-                        switch Result(catching: { try TradeRecord(listing: listing) }) {
-                        case .success(let record): GameFeel.play(record.netProfit >= .zero ? .profit : .loss)
-                        case .failure: break // The unavailable-result message remains visible in the view.
-                        }
-                    }
-                }
+            }
         }
     }
 }

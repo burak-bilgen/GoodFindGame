@@ -593,14 +593,119 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons[turkish ? "Karşı teklif gönder" : "Send counteroffer"].firstMatch, in: app)
         tap(app.buttons["sendBuyerCounter"], in: app)
         XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+        XCTAssertTrue(app.staticTexts["buyerOfferAmount"].isHittable)
         capture("buyer counter: \(language)", app: app)
         tap(app.buttons["acceptBuyerOffer"], in: app)
-        XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].isHittable)
         capture("connected payoff: \(language)", app: app)
         tap(app.buttons["returnToHunt"], in: app)
         XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["listing.listing-42-1"].exists)
         capture("next hunt: \(language)", app: app)
+    }
+
+    @MainActor
+    func testBuyerCounterDecisionEnglish() { buyerCounterDecision(language: "en") }
+    @MainActor
+    func testBuyerCounterDecisionTurkish() { buyerCounterDecision(language: "tr") }
+
+    @MainActor
+    private func buyerCounterDecision(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        let amount = app.staticTexts["buyerOfferAmount"]
+        let originalOffer = amount.label
+        XCTAssertFalse(app.textFields["buyerCounterAmount"].exists)
+        capture("buyer first offer: \(language)", app: app)
+        tap(app.buttons[turkish ? "Karşı teklif gönder" : "Send counteroffer"].firstMatch, in: app)
+        XCTAssertTrue(app.textFields["buyerCounterAmount"].exists)
+        XCTAssertTrue(app.staticTexts[turkish ? "Kabul ederse ürün karşı teklif ettiğin fiyattan satılır." : "If they accept, the item sells at your counteroffer."].exists)
+        app.swipeUp()
+        capture("buyer counter commitment: \(language)", app: app)
+        tap(app.buttons["sendBuyerCounter"], in: app)
+        XCTAssertTrue(app.staticTexts[turkish ? "Alıcıdan karşı teklif" : "Buyer counteroffer"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.textFields["buyerCounterAmount"].exists)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+        XCTAssertTrue(app.staticTexts[turkish ? "Alıcı sınırını söyledi. Zorlarsan satış kaçabilir." : "They’ve named their limit. Pushing again could lose the sale."].exists)
+        let counter = amount.label
+        XCTAssertFalse(counter.isEmpty)
+        capture("buyer limit decision: \(language)", app: app)
+        app.terminate()
+        app.launch()
+        tap(app.buttons["marketBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts[turkish ? "Alıcıdan karşı teklif" : "Buyer counteroffer"].exists)
+        XCTAssertEqual(amount.label, counter)
+        XCTAssertFalse(app.textFields["buyerCounterAmount"].exists)
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
+        XCTAssertFalse(originalOffer.isEmpty)
+    }
+
+    @MainActor
+    func testLiveListingCanKeepHuntingEnglish() { liveListingCanKeepHunting(language: "en") }
+    @MainActor
+    func testLiveListingCanKeepHuntingTurkish() { liveListingCanKeepHunting(language: "tr") }
+
+    @MainActor
+    private func liveListingCanKeepHunting(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["createListing"], in: app)
+        let asking = app.textFields["askingPrice"]
+        let sensiblePrice = asking.value as? String ?? ""
+        tap(asking, in: app)
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: sensiblePrice.count) + "99999")
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertTrue(app.staticTexts[turkish ? "Henüz alıcı teklifi yok." : "No buyer offers yet."].exists)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        XCTAssertFalse(app.buttons["findAnotherBuyer"].exists)
+        capture("live listing waiting: \(language)", app: app)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Satışlar" : "Selling"].tap()
+        tap(app.buttons["sale.resale-item-42-0-0"], in: app)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        tap(app.buttons[turkish ? "İlan fiyatını güncelle" : "Update asking price"].firstMatch, in: app)
+        let revision = app.textFields["salePrice"]
+        tap(revision, in: app)
+        let old = revision.value as? String ?? ""
+        revision.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + sensiblePrice)
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["updateSalePrice"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
+        capture("buyer after price revision: \(language)", app: app)
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
     }
 
     @MainActor

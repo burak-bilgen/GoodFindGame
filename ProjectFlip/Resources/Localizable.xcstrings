@@ -7992,6 +7992,114 @@
           }
         }
       }
+    },
+    "buyer.counterHeading": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer counteroffer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcıdan karşı teklif"
+          }
+        }
+      }
+    },
+    "buyer.offeredPrice": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer offers"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcının teklifi"
+          }
+        }
+      }
+    },
+    "buyer.pushRisk": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countering could earn more, but the buyer may walk."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşı teklifle daha çok kazanabilirsin ama alıcı vazgeçebilir."
+          }
+        }
+      }
+    },
+    "buyer.pushAgainRisk": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They’ve named their limit. Pushing again could lose the sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı sınırını söyledi. Zorlarsan satış kaçabilir."
+          }
+        }
+      }
+    },
+    "buyer.counterCommitment": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If they accept, the item sells at your counteroffer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kabul ederse ürün karşı teklif ettiğin fiyattan satılır."
+          }
+        }
+      }
+    },
+    "selling.keepHunting": {
+      "comment": "Existing buyer negotiation and waiting presentation. Describe only the visible offer/reply; do not imply guaranteed interest or reveal a hidden buyer budget.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your listing stays live while you hunt another deal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sen yeni fırsatlar ararken ilanın yayında kalır."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -239,3 +239,36 @@ dark, larger-text, pending, payoff and loss captures are in
 without truncation; accessibility content scrolls rather than being shrunk.
 The previously recorded nonfatal SwiftUI invalid-frame warning remains. Existing
 simulator-only and human-enjoyment validation limits still apply.
+
+## Buyer decision and waiting follow-up — 21 October 2026
+
+A pending buyer offer and a buyer counteroffer now have distinct presentation.
+Buyer identity, offered price, conditional net result and expiry remain visible;
+accepting is primary, and further bargaining is deliberate. The editor explains
+that acceptance completes the sale at the player's counter. Risk copy describes
+possible withdrawal using only the existing dialogue/state, never hidden budgets.
+Replies collapse the editor. A screen review caught the buyer response staying
+above the viewport at large text sizes; replies now focus the offer and settlement
+focuses the payoff. UI checks require both amounts to be actually visible.
+
+Waiting listings expose a continuation to the market while remaining live. The
+redundant search action is omitted while an interest event is already scheduled;
+legacy/no-event states retain it. Tests overprice a listing, hunt elsewhere,
+relaunch, revise the ask and settle an actual offer. No view counts, favorites,
+interest promises, economic rules, timing or persistence behavior are invented.
+
+Final verification: 86 domain tests and eight affected UI journeys pass together:
+EN/TR buyer counter decisions with relaunch, EN/TR waiting/repricing journeys,
+connected EN/TR trades, English dark/reduced-motion trade and larger Turkish trade.
+Debug and Release builds succeed; 446 semantic keys validate in Turkish/English.
+The screen evidence and large-text before/after focus comparison are stored in
+../../Artifacts/BuyerDecision-2026-10-21/gallery.html. The zero-second waiting
+captures use existing instant QA timing; production timers are unchanged.
+Known nonfatal SwiftUI frame warnings and simulator/human-playtest limits remain.
+
+Final screenshot review also found a decimal amount wrapping in the horizontal
+conditional-result row at accessibility text size. That row now stacks its label
+above a single-line amount at those sizes. English normal and Turkish larger-text
+full trades passed again after this last layout change, as did the Release build.
+The gallery uses the updated captures; currency-layout-summary.json records the
+two follow-up UI runs separately from the broader 94-test verification summary.
