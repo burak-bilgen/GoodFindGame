@@ -10,7 +10,8 @@ struct ListingDetailView: View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(height: 210)
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(height: 210)
+                    Text("art.sellerPresentation").font(.caption).foregroundStyle(.secondary)
                     VStack(alignment: .leading, spacing: 10) {
                         Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")

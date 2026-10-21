@@ -8190,6 +8190,42 @@
           }
         }
       }
+    },
+    "art.sellerPresentation": {
+      "comment": "Product artwork evidence context; does not certify seller claims.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller presentation · actual condition unverified"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının sunumu · gerçek durum doğrulanmadı"
+          }
+        }
+      }
+    },
+    "art.inspected": {
+      "comment": "Product artwork evidence context; does not certify seller claims.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observed condition · only discovered issues shown"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenen durum · yalnızca bulunan kusurlar gösterilir"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

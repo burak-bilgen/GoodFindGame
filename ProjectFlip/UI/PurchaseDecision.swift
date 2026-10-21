@@ -18,7 +18,7 @@ struct PurchaseDecision: View {
             GameStamp(key: "offer.agreed", symbol: "checkmark.seal.fill")
             if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
                 HStack(spacing: 12) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 64, height: 64)
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
                     Text(definition.name).font(.system(.headline, design: .rounded, weight: .heavy))
                 }
             }

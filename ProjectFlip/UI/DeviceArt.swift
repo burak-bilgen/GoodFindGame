@@ -1,9 +1,10 @@
 import SwiftUI
 
-/// Original vector toy-like still lifes. Identity controls palette, never hidden condition.
+/// Layered fictional product still lifes: material, depth, and evidence-limited wear.
 struct DeviceArt: View {
     let symbol: String
     var identity: String = "gaming-0"
+    var appearance: ItemAppearance?
     private var category: ItemCategory {
         identity.hasPrefix("cameras") ? .cameras : identity.hasPrefix("retro") ? .retro : .gaming
     }
@@ -17,14 +18,18 @@ struct DeviceArt: View {
             let shell = [Color(red: 0.90, green: 0.80, blue: 0.60), Color(red: 0.65, green: 0.77, blue: 0.77), Color(red: 0.82, green: 0.65, blue: 0.60), Color(red: 0.72, green: 0.68, blue: 0.82)][variation]
             func rect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ radius: CGFloat, _ color: Color) {
                 let shape = Path(roundedRect: CGRect(x: x, y: y, width: w, height: h), cornerRadius: radius)
+                context.fill(Path(roundedRect: CGRect(x: x+4, y: y+7, width: w, height: h), cornerRadius: radius), with: .color(.black.opacity(0.65)))
                 context.fill(shape, with: .linearGradient(Gradient(colors: [color, color.opacity(0.78)]), startPoint: CGPoint(x: x, y: y), endPoint: CGPoint(x: x+w, y: y+h)))
-                context.stroke(shape, with: .color(.white.opacity(0.16)), lineWidth: 0.8)
+                context.stroke(shape, with: .linearGradient(Gradient(colors: [.white.opacity(0.6), .white.opacity(0.04)]), startPoint: CGPoint(x: x, y: y), endPoint: CGPoint(x: x+w, y: y+h)), lineWidth: 1)
+                context.stroke(Path { p in p.move(to: CGPoint(x: x+radius, y: y+2)); p.addLine(to: CGPoint(x: x+w-radius, y: y+2)) }, with: .color(.white.opacity(0.24)), lineWidth: 0.7)
             }
             func circle(_ x: CGFloat, _ y: CGFloat, _ r: CGFloat, _ color: Color) {
                 context.fill(Path(ellipseIn: CGRect(x: x-r, y: y-r, width: r*2, height: r*2)), with: .color(color))
             }
             context.fill(Path(ellipseIn: CGRect(x: -83, y: 43, width: 166, height: 18)), with: .color(.black.opacity(0.45)))
-            context.rotate(by: .degrees(Double([-10, 7, -5, 12][variation])))
+            context.rotate(by: .degrees(-6))
+            // A consistent shallow three-quarter view, with a separate side/material layer.
+            context.concatenate(CGAffineTransform(a: 1, b: 0.10, c: -0.12, d: 0.88, tx: 0, ty: 0))
             if category == .cameras {
                 if !symbol.contains("aperture") {
                     rect(-76, -38, 152, 90, 15, GameStyle.ink)
@@ -32,7 +37,13 @@ struct DeviceArt: View {
                     rect(-75, -13, 150, 45, 3, shell)
                     rect(48, -34, 18, 9, 3, .white.opacity(0.7))
                     circle(4, 6, 43, GameStyle.ink); circle(4, 6, 33, accent)
-                    circle(4, 6, 24, GameStyle.ink); circle(-3, -2, 9, .white.opacity(0.25))
+                    circle(4, 6, 27, GameStyle.ink)
+                    for radius in [22.0, 18.0, 13.0] {
+                        context.stroke(Path(ellipseIn: CGRect(x: 4-radius, y: 6-radius, width: radius*2, height: radius*2)), with: .color(accent.opacity(0.25)), lineWidth: 1.5)
+                    }
+                    circle(-3, -2, 8, .white.opacity(0.25))
+                    rect(51, -15, 15, 54, 5, GameStyle.ink.opacity(0.65))
+                    for y in 0..<6 { rect(53, CGFloat(y*7)-11, 11, 1, 0.5, shell.opacity(0.5)) }
                     rect(-66, -31, 19, 12, 3, .white.opacity(0.65))
                 } else {
                     rect(-51, -53, 102, 111, 15, GameStyle.ink)
@@ -63,6 +74,14 @@ struct DeviceArt: View {
                 for line in 0..<5 { rect(CGFloat(line*18)-41, 39, 10, 14, 2, shell) }
                 rect(-21, -58, 42, 8, 2, GameStyle.ink)
                 }
+            } else if symbol.contains("gamecontroller") && identity != "gaming-0" && variation % 2 == 0 {
+                rect(-91, -43, 182, 93, 21, shell)
+                rect(-58, -34, 116, 69, 9, GameStyle.ink)
+                rect(-49, -27, 98, 53, 4, accent.opacity(0.45))
+                rect(-78, -11, 7, 26, 2, GameStyle.ink); rect(-87, -2, 25, 7, 2, GameStyle.ink)
+                circle(73, -8, 4, GameStyle.ink); circle(81, 3, 4, GameStyle.ink)
+                circle(65, 3, 4, GameStyle.ink); circle(73, 14, 4, GameStyle.ink)
+                rect(-24, 40, 48, 2, 1, GameStyle.ink)
             } else if symbol.contains("hifispeaker") || symbol.contains("externaldrive") {
                 rect(-47, -58, 94, 119, 13, shell)
                 if symbol.contains("hifispeaker") {
@@ -95,12 +114,47 @@ struct DeviceArt: View {
                     p.addLine(to: CGPoint(x: -32, y: 22)); p.addQuadCurve(to: CGPoint(x: -79, y: 48), control: CGPoint(x: -63, y: 66))
                     p.addCurve(to: CGPoint(x: -52, y: -35), control1: CGPoint(x: -100, y: 60), control2: CGPoint(x: -78, y: -25)); p.closeSubpath()
                 }
-                context.fill(body, with: .color(shell))
+                var side = context
+                side.translateBy(x: 4, y: 7)
+                side.fill(body, with: .color(.black.opacity(0.75)))
+                context.fill(body, with: .linearGradient(Gradient(colors: [shell, shell.opacity(0.65)]), startPoint: CGPoint(x: -65, y: -45), endPoint: CGPoint(x: 75, y: 55)))
+                context.stroke(body, with: .color(.white.opacity(0.42)), lineWidth: 1.2)
                 rect(-51, -17, 10, 32, 2, GameStyle.ink); rect(-62, -6, 32, 10, 2, GameStyle.ink)
                 circle(45, -14, 7, accent); circle(58, 0, 7, GameStyle.ink)
                 circle(32, 0, 7, GameStyle.ink); circle(45, 14, 7, accent)
                 circle(-17, 20, 11, GameStyle.ink); circle(15, 20, 11, GameStyle.ink)
                 rect(-11, -21, 22, 5, 2, .white.opacity(0.7))
+            }
+            if let appearance {
+                var random = SeededRandom(seed: SeededRandom.seed(for: "surface-" + appearance.identity))
+                let count = switch appearance.wear { case .excellent, .unverified: 0; case .good: 3; case .fair: 10; case .poor: 22 }
+                for _ in 0..<count {
+                    let x = CGFloat(random.integer(in: -45...45)), y = CGFloat(random.integer(in: -28...25))
+                    let length = CGFloat(random.integer(in: 3...13))
+                    let scratch = Path { p in p.move(to: CGPoint(x: x, y: y)); p.addLine(to: CGPoint(x: x+length, y: y-2)) }
+                    context.stroke(scratch, with: .color(.black.opacity(0.45)), lineWidth: appearance.wear == .poor ? 1.7 : 0.9)
+                    var highlight = context; highlight.translateBy(x: 0, y: 1)
+                    highlight.stroke(scratch, with: .color(.white.opacity(0.35)), lineWidth: 0.5)
+                }
+                if appearance.visibleFindings.contains(.lensFungus) {
+                    for i in 0..<7 {
+                        let x = CGFloat(i*5)-16
+                        context.stroke(Path { p in p.move(to: CGPoint(x: x, y: -8)); p.addLine(to: CGPoint(x: x+4, y: 8)); p.addLine(to: CGPoint(x: x-3, y: 12)) }, with: .color(.white.opacity(0.65)), lineWidth: 0.8)
+                    }
+                }
+                if appearance.visibleFindings.contains(.lensScratch) || appearance.visibleFindings.contains(.labelDamage) {
+                    context.stroke(Path { p in p.move(to: CGPoint(x: -15, y: -12)); p.addLine(to: CGPoint(x: 17, y: 14)); p.addLine(to: CGPoint(x: 20, y: 22)) }, with: .color(.white.opacity(0.75)), lineWidth: 1.5)
+                }
+                if appearance.visibleFindings.contains(.damagedPort) {
+                    rect(-7, 26, 14, 5, 1, .black)
+                    context.stroke(Path { p in p.move(to: CGPoint(x: -8, y: 25)); p.addLine(to: CGPoint(x: -4, y: 28)); p.addLine(to: CGPoint(x: 1, y: 25)) }, with: .color(shell), lineWidth: 1)
+                }
+                if appearance.visibleFindings.contains(.boxWear) || appearance.visibleFindings.contains(.corrosion) {
+                    for _ in 0..<12 { circle(CGFloat(random.integer(in: -45...45)), CGFloat(random.integer(in: 25...40)), 1.2, .brown.opacity(0.65)) }
+                }
+                if appearance.visibleFindings.contains(.incompleteSet) {
+                    rect(49, 29, 20, 13, 2, GameStyle.ink)
+                }
             }
         }
         .background {

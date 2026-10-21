@@ -123,7 +123,7 @@ struct ListingCard: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            DeviceArt(symbol: definition.artSymbol, identity: definition.id)
+            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing))
                 .frame(height: typeSize.isAccessibilitySize ? 170 : 130)
                 .overlay(alignment: .topTrailing) {
                     if watched {
