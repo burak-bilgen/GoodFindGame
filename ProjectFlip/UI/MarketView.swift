@@ -49,6 +49,7 @@ struct MarketView: View {
                     Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit().accessibilityIdentifier("marketCash")
                         .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
                 }.padding(.horizontal, 4)
+                OpenTradesView(store: store)
                 TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
@@ -174,7 +175,7 @@ struct TradeContinuationPrompt: View {
     let store: GameStore
     var body: some View {
         if let sale = store.snapshot.playerListings.reversed().first(where: { listing in
-            listing.status == .active && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
+            listing.status == .active && !store.snapshot.hasBuyerReply(for: listing.id) && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
         }), let offer = sale.offers.last {
             NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                 HStack(spacing: 12) {

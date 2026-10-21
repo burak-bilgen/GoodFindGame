@@ -33,7 +33,7 @@ enum OfferModifier: String, Codable, CaseIterable {
 }
 
 enum TradingError: String, Error {
-    case invalidAmount, unavailable, closed, insufficientCash, inventoryFull, inspectFirst, alreadyDone
+    case invalidAmount, unavailable, closed, insufficientCash, inventoryFull, inspectFirst, alreadyDone, replyWindowTooShort
     var key: String { "error.\(rawValue)" }
 }
 

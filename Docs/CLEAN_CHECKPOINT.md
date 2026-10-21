@@ -1,5 +1,9 @@
 # Clean checkpoint and human gameplay validation — 21 October 2026
 
+Historical checkpoint e38f821. The owner subsequently authorized the scoped
+[living-marketplace follow-up](LIVING_MARKETPLACE.md); its current verification
+supersedes the pacing and feature state recorded here.
+
 This checkpoint stabilizes the existing trading game. The broader V1 backlog
 remains paused. Human enjoyment, fairness, pacing and repeat-play retention are
 questions for the next playtest, not conclusions from automated tests.

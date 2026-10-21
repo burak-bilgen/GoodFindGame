@@ -22,8 +22,9 @@ struct PurchaseDecision: View {
                     Text(definition.name).font(.system(.headline, design: .rounded, weight: .heavy))
                 }
             }
-            Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy))
+            Text(price.formatted(locale: locale)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
                 .lineLimit(1).minimumScaleFactor(0.5)
+            Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(.secondary)
             Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
             VStack(alignment: .leading, spacing: 6) {
                 Text(hasCash ? "purchase.cashAfter" : "purchase.cashNeeded").font(.caption).foregroundStyle(.secondary)

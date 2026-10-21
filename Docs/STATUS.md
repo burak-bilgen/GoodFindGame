@@ -1,6 +1,6 @@
 # Project status
 
-Current milestone: **Clean checkpoint + real gameplay validation** (21 October 2026).
+Current milestone: **Living marketplace UX/game-feel follow-up**, authorized by the owner after the clean checkpoint (21 October 2026).
 Broader V1 feature work remains paused. Do not resume progression expansion,
 collections, rare variants, client requests, bankruptcy recovery, category unlocks,
 Game Center, monetization or analytics infrastructure before human observations
@@ -18,9 +18,15 @@ The main requirements remain in PROJECT_FLIP_CODEX_MASTER_BRIEF.md and
 ENGINEERING_AND_LOCALIZATION_REQUIREMENTS.md under this directory. The obsolete
 root brief has been removed; the corrected Docs brief is preserved.
 
-Checkpoint verification is recorded in CLEAN_CHECKPOINT.md. Automated checks and
+The previous clean checkpoint is recorded in CLEAN_CHECKPOINT.md. Current scoped
+work and verification are recorded in LIVING_MARKETPLACE.md. Automated checks and
 simulator captures do not establish human enjoyment or retention. Physical-device,
 iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
+
+Current scoped validation (22 October 2026): Debug/Release builds pass; 107 unit
+and 53 UI tests pass with zero recorded runtime warnings. All 489 EN/TR keys
+validate. A production-paced UI journey confirms four parallel trade processes
+while browsing continues. See LIVING_MARKETPLACE.md for evidence and limitations.
 
 ## Historical milestone verification
 

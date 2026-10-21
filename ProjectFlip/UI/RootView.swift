@@ -14,7 +14,7 @@ struct RootView: View {
 
     private var waitingBuyerCount: Int {
         store?.snapshot.playerListings.filter { listing in
-            listing.status == .active && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
+            listing.status == .active && store?.snapshot.hasBuyerReply(for: listing.id) != true && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
         }.count ?? 0
     }
 
@@ -52,7 +52,7 @@ struct RootView: View {
                                 } label: {
                                     if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
                                         HStack(spacing: 12) {
-                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id).frame(width: 64, height: 72)
+                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 72)
                                             VStack(alignment: .leading, spacing: 6) {
                                                 Text(definition.name).font(.headline)
                                                 Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
@@ -153,7 +153,8 @@ struct RootView: View {
             }
             #endif
             #if DEBUG
-            let timing = arguments.contains("--uitest-instant") ? SimulationTiming.instant : .current
+            let isolated = arguments.firstIndex(of: "--uitest-save").map { arguments.indices.contains($0 + 1) && UUID(uuidString: arguments[$0 + 1]) != nil } ?? false
+            let timing: SimulationTiming = isolated && arguments.contains("--uitest-instant") ? .instant : isolated && !arguments.contains("--uitest-production-timing") ? .debug : .current
             #else
             let timing = SimulationTiming.current
             #endif

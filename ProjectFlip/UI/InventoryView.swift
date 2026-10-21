@@ -14,17 +14,19 @@ struct InventoryView: View {
                 ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
                     VStack(alignment: .leading, spacing: 8) {
                         if let definition = store.definition(for: shipment.item) {
-                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(shipment.item)).frame(height: 140)
+                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: shipment.item)).frame(height: 140)
                             Text(definition.name).font(.headline)
                         }
+                        Text("living.standardDelivery").font(.caption).foregroundStyle(.secondary)
                         DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
+                        HuntButton()
                     }.gameCard(accent: GameStyle.gain).accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
                 }
                 ForEach(store.snapshot.player.inventory) { item in
                     if let definition = store.definition(for: item) {
                         NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
                             HStack(spacing: 14) {
-                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 90, height: 90)
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 90, height: 90)
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(definition.name).font(.headline)
                                     Text(item.purchasePrice.formatted(locale: locale)).foregroundStyle(.secondary)
@@ -48,7 +50,7 @@ struct OwnedItemView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !item.inspected {
-                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item, showFindings: false)).frame(height: 170)
+                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(height: 170)
                     }
                     Text(definition.name).font(.system(.title, design: .rounded, weight: .heavy))
                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(.secondary)
@@ -150,8 +152,8 @@ struct InspectionReveal: View {
                 Divider()
                 GameEyebrow(key: "reveal.estimate")
                 Text("inspection.estimatedValue").font(.subheadline)
-                switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                case .success(let estimate): Text(estimate.formatted(locale: locale)).font(.system(.title, design: .rounded, weight: .bold)).contentTransition(.numericText())
+                switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
+                case .success(let estimate): ValueRangeView(estimate: estimate)
                 case .failure: Text("inspection.valueUnavailable")
                 }
                 Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)

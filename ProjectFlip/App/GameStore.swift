@@ -24,6 +24,12 @@ final class GameStore {
 
     func definition(for item: ItemInstance) -> ItemDefinition? { definitions.first { $0.id == item.definitionID } }
 
+    /// Keep the seller's picture until inspection replaces it with earned evidence.
+    func appearance(for item: ItemInstance) -> ItemAppearance {
+        if item.inspected { return .owned(item) }
+        return snapshot.market.first(where: { $0.item.id == item.id }).map(ItemAppearance.advertised) ?? .owned(item)
+    }
+
     /// Write first, publish second: disk failures cannot grant unpersisted purchases.
     func commit(_ next: GameSnapshot) throws {
         do {

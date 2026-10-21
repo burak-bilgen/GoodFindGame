@@ -17,7 +17,7 @@ struct ListingDetailView: View {
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
                         Text(definition.name).font(.system(.title, design: .rounded, weight: .heavy))
                         HStack(alignment: .firstTextBaseline) {
-                            Text(listing.askingPrice.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
+                            Text(listing.askingPrice.formatted(locale: locale)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
                             Spacer(minLength: 0)
                             Image(systemName: "tag.fill").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
                         }
@@ -61,7 +61,8 @@ struct ListingDetailView: View {
                     DisclosureGroup("listing.referenceValue") {
                         VStack(alignment: .leading, spacing: 8) {
                             switch Result(catching: { try definition.baseValue.scaled(byBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                            case .success(let reference): Text(reference.formatted(locale: locale)).font(.title2.bold())
+                            case .success(let reference):
+                                if let range = try? ValueEstimate(center: reference, spread: 3_000) { ValueRangeView(estimate: range) }
                             case .failure: Text("inspection.valueUnavailable")
                             }
                             Text("listing.referenceCaution").font(.caption).foregroundStyle(.secondary)

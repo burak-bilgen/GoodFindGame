@@ -98,6 +98,7 @@ struct ConversationView: View {
                         }
                         if conversation.pendingReplyEventID != nil {
                             Label("seller.awaitingReply", systemImage: "ellipsis.bubble.fill").font(.subheadline).foregroundStyle(.secondary).padding(12)
+                            HuntButton()
                         }
                         if !conversation.closed && conversation.agreedPrice == nil && listing.available {
                             VStack(alignment: .leading, spacing: 14) {

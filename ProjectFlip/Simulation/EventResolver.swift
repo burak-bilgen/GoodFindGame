@@ -24,6 +24,19 @@ struct EventResolver {
         }
         try MarketTrendEngine().prepare(&next, now: clock.effectiveNow, definitions: definitions)
         if let feed = timing.marketFeed { try MarketFeedEngine(timing: feed).prepare(&next, now: clock.effectiveNow, definitions: definitions) }
+        for index in next.playerListings.indices where next.playerListings[index].status == .active {
+            if next.playerListings[index].expiresAt == nil {
+                // Untimed legacy listings get a full new window, never a retroactive expiration.
+                let heldUntil = next.events.filter { $0.status == .pending && $0.payload.targetID == next.playerListings[index].id.rawValue }.map(\.resolveAt).max() ?? clock.effectiveNow
+                next.playerListings[index].expiresAt = max(clock.effectiveNow.addingTimeInterval(45 * 60), heldUntil)
+            }
+            let listing = next.playerListings[index]
+            try ensureListingExpiry(listing, state: &next, now: clock.effectiveNow)
+            if (listing.expiresAt ?? .distantPast) > clock.effectiveNow,
+               !listing.offers.contains(where: { [.pending, .countered].contains($0.status) }) {
+                try scheduleBuyer(listingID: listing.id, state: &next, definitions: definitions, now: clock.effectiveNow)
+            }
+        }
         var needsFeedRefresh = false
         var outcomes: [ResolvedEvent] = []
         var buyerArrivals = 0
@@ -48,7 +61,10 @@ struct EventResolver {
                     outcomes.append(ResolvedEvent(id: event.id, kind: kind, targetID: outcomeTarget(event, state: next), occurredAt: event.resolveAt))
                 }
             } else {
-                next.events[index].status = .cancelled
+                if case .listingAttention(let id, _, _) = event.payload,
+                   next.playerListings.contains(where: { $0.id == id && $0.status == .active }) {
+                    // Successful silent attention updates are completed, not cancelled reports.
+                } else { next.events[index].status = .cancelled }
             }
         }
         if needsFeedRefresh, let feed = timing.marketFeed {
@@ -68,16 +84,37 @@ struct EventResolver {
         guard let listing = state.playerListings.first(where: { $0.id == listingID && $0.status == .active }),
               !listing.offers.contains(where: { [.pending, .countered].contains($0.status) }),
               !state.events.contains(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listingID.rawValue }) else { return }
+        guard !state.hasBuyerReply(for: listingID), let item = state.player.inventory.first(where: { $0.id == listing.itemID }), let definition = definitions.first(where: { $0.id == item.definitionID }) else { return }
+        try ensureListingExpiry(listing, state: &state, now: now)
+        let end = listing.expiresAt ?? now.addingTimeInterval(45 * 60)
+        guard now < end else { return }
         let seed = SeededRandom.seed(for: "\(state.simulationID)-\(state.nextEventSequence)-\(listingID.rawValue)")
-        let due = now.addingTimeInterval(max(minimumDelay, timing.delay(in: timing.buyerInterest, seed: seed)))
-        let generated = try BuyerEngine().generateOffer(listingID: listingID, state: state, definitions: definitions, now: due)
+        let attention = try ListingAttention(listing: listing, item: item, definition: definition, state: state, at: now, seed: seed)
+        let introductory = state.playerListings.first?.id == listingID && listing.offers.isEmpty
+        let delay = timing.delay(in: timing.buyerInterest, seed: seed) * (introductory ? 1 : attention.delayFactor)
+        let due = now.addingTimeInterval(max(minimumDelay, delay))
+        guard due < end else { return }
+        // Two real persisted observations precede each possible offer. They also resolve offline.
+        for stage in 1...2 {
+            let views = stage == 1 ? attention.views / 2 : attention.views - attention.views / 2
+            let favorites = stage == 1 ? 0 : min(views, attention.favorites)
+            try state.enqueue(.listingAttention(listingID: listingID, views: views, favorites: favorites), createdAt: now, resolveAt: now.addingTimeInterval(max(0, due.timeIntervalSince(now)) * Double(stage) / 3))
+        }
+        var random = SeededRandom(seed: seed)
+        let qualifies = introductory || random.integer(in: 0...99) < attention.offerChance
+        let generated = qualifies ? try BuyerEngine().generateOffer(listingID: listingID, state: state, definitions: definitions, now: due) : state
         if let candidate = generated.playerListings.first(where: { $0.id == listingID }), candidate.offers.count > listing.offers.count,
            let offer = candidate.offers.last, let message = candidate.messages.last {
-            try state.enqueue(.buyerOffer(listingID: listingID, expectedOfferCount: listing.offers.count, offer: offer, intent: message.intent, expiresAt: due.addingTimeInterval(timing.offerLifetime)), createdAt: now, resolveAt: due)
+            try state.enqueue(.buyerOffer(listingID: listingID, expectedOfferCount: listing.offers.count, offer: offer, intent: message.intent, expiresAt: min(end, due.addingTimeInterval(timing.offerLifetime))), createdAt: now, resolveAt: due)
         } else {
-            // No invented offer notification: overpriced listings only get an unannounced interest retry.
             try state.enqueue(.buyerInterest(listingID: listingID), createdAt: now, resolveAt: due)
         }
+    }
+
+    private func ensureListingExpiry(_ listing: PlayerListing, state: inout GameSnapshot, now: Date) throws {
+        guard let end = listing.expiresAt,
+              !state.events.contains(where: { $0.status == .pending && $0.payload == .playerListingExpired(listingID: listing.id) }) else { return }
+        try state.enqueue(.playerListingExpired(listingID: listing.id), createdAt: min(now, end), resolveAt: end)
     }
 
     func reconcile(_ state: inout GameSnapshot) {
@@ -105,6 +142,10 @@ struct EventResolver {
             case .inspectionCompleted(let id): valid = state.inspectionJobs.contains { $0.id == id && $0.status == .pending }
             case .buyerOffer(let id, let expected, _, _, _):
                 valid = state.playerListings.contains { $0.id == id && $0.status == .active && $0.offers.count == expected && !$0.offers.contains(where: { [.pending, .countered].contains($0.status) }) }
+            case .listingAttention(let id, _, _), .playerListingExpired(let id):
+                valid = state.playerListings.contains { $0.id == id && $0.status == .active }
+            case .buyerReply(let id, let offerID, _, let attempts):
+                valid = state.playerListings.contains { $0.id == id && $0.status == .active && $0.offers.last.map { $0.id == offerID && [.pending, .countered].contains($0.status) && $0.counterAttempts == attempts } == true }
             case .buyerInterest(let id): valid = state.playerListings.contains { $0.id == id && $0.status == .active }
             case .buyerOfferExpired(let id, let offerID):
                 valid = state.playerListings.contains { $0.id == id && $0.status == .active && $0.offers.contains(where: { $0.id == offerID && [.pending, .countered].contains($0.status) }) }
@@ -208,6 +249,28 @@ struct EventResolver {
             state.playerListings[index].messages.append(DialogueMessage(id: "\(id.rawValue)-\(state.playerListings[index].messages.count)", intent: "buyer.expired", fromPlayer: false))
             try scheduleBuyer(listingID: id, state: &state, definitions: definitions, now: event.resolveAt)
             return .offerExpired
+        case .listingAttention(let id, let views, let favorites):
+            guard let index = state.playerListings.firstIndex(where: { $0.id == id && $0.status == .active }) else { return nil }
+            state.playerListings[index].views = min(1_000_000_000, state.playerListings[index].views + max(0, views))
+            state.playerListings[index].favorites = min(state.playerListings[index].views, state.playerListings[index].favorites + max(0, favorites))
+            return nil
+        case .playerListingExpired(let id):
+            guard let index = state.playerListings.firstIndex(where: { $0.id == id && $0.status == .active }) else { return nil }
+            state.playerListings[index].status = .expired
+            for offer in state.playerListings[index].offers.indices where [.pending, .countered].contains(state.playerListings[index].offers[offer].status) {
+                state.playerListings[index].offers[offer].status = .withdrawn
+            }
+            state.playerListings[index].messages.append(DialogueMessage(id: "\(id.rawValue)-expired", intent: "selling.expired", fromPlayer: false))
+            return .saleClosed
+        case .buyerReply(let id, let offerID, let amount, let attempts):
+            guard let listing = state.playerListings.first(where: { $0.id == id && $0.status == .active }), let offer = listing.offers.last,
+                  offer.id == offerID, [.pending, .countered].contains(offer.status), offer.counterAttempts == attempts else { return nil }
+            state = try BuyerEngine().counter(listingID: id, amount: amount, state: state, now: event.resolveAt)
+            if let reply = state.playerListings.first(where: { $0.id == id && $0.status == .active })?.offers.last, [.pending, .countered].contains(reply.status) {
+                let end = min(listing.expiresAt ?? .distantFuture, event.resolveAt.addingTimeInterval(timing.offerLifetime))
+                try state.enqueue(.buyerOfferExpired(listingID: id, offerID: offerID), createdAt: event.resolveAt, resolveAt: end)
+            } else { try scheduleBuyer(listingID: id, state: &state, definitions: definitions, now: event.resolveAt) }
+            return .buyerOffer
         case .buyerInterest(let id):
             guard state.playerListings.contains(where: { $0.id == id && $0.status == .active }) else { return nil }
             try scheduleBuyer(listingID: id, state: &state, definitions: definitions, now: event.resolveAt, minimumDelay: 1)

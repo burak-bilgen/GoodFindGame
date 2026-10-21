@@ -1,6 +1,6 @@
 import Foundation
 
-enum PlayerListingStatus: String, Codable { case active, sold, cancelled }
+enum PlayerListingStatus: String, Codable { case active, sold, cancelled, expired }
 struct PlayerListing: Codable, Identifiable, Equatable {
     let id: ListingID
     let itemID: ItemID
@@ -14,7 +14,8 @@ struct PlayerListing: Codable, Identifiable, Equatable {
     var itemSnapshot: ItemInstance?
     var soldPrice: Money?
     var soldAt: Date?
-    enum CodingKeys: String, CodingKey { case id, itemID, askingPrice, createdAt, status, views, favorites, offers, messages, itemSnapshot, soldPrice, soldAt }
+    var expiresAt: Date?
+    enum CodingKeys: String, CodingKey { case id, itemID, askingPrice, createdAt, status, views, favorites, offers, messages, itemSnapshot, soldPrice, soldAt, expiresAt }
 }
 
 extension PlayerListing {
@@ -32,5 +33,6 @@ extension PlayerListing {
         itemSnapshot = try values.decodeIfPresent(ItemInstance.self, forKey: .itemSnapshot)
         soldPrice = try values.decodeIfPresent(Money.self, forKey: .soldPrice)
         soldAt = try values.decodeIfPresent(Date.self, forKey: .soldAt)
+        expiresAt = try values.decodeIfPresent(Date.self, forKey: .expiresAt)
     }
 }

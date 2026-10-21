@@ -82,18 +82,44 @@ extension GameStore {
         try transact { try actions.changePrice(listingID: listingID, amount: amount, state: $0, definitions: definitions, now: $1) }
     }
     func acceptBuyer(listingID: ListingID) throws {
-        try transact { try BuyerEngine().accept(listingID: listingID, state: $0, now: $1) }
+        try transact { state, now in
+            guard !state.hasBuyerReply(for: listingID) else { throw TradingError.alreadyDone }
+            return try BuyerEngine().accept(listingID: listingID, state: state, now: now)
+        }
     }
     func rejectBuyer(listingID: ListingID) throws {
         try transact { state, now in
+            guard !state.hasBuyerReply(for: listingID) else { throw TradingError.alreadyDone }
             let next = try BuyerEngine().reject(listingID: listingID, state: state)
             return try actions.findBuyer(listingID: listingID, state: next, definitions: definitions, now: now)
         }
     }
     func counterBuyer(listingID: ListingID, amount: Money) throws {
         try transact { state, now in
-            let next = try BuyerEngine().counter(listingID: listingID, amount: amount, state: state, now: now)
-            return try actions.findBuyer(listingID: listingID, state: next, definitions: definitions, now: now)
+            guard !state.hasBuyerReply(for: listingID),
+                  let listing = state.playerListings.first(where: { $0.id == listingID && $0.status == .active }),
+                  let offer = listing.offers.last, [.pending, .countered].contains(offer.status) else { throw TradingError.closed }
+            guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
+            var next = state
+            for index in next.events.indices where next.events[index].status == .pending {
+                if case .buyerOfferExpired(let id, let offerID) = next.events[index].payload, id == listingID, offerID == offer.id { next.events[index].status = .cancelled }
+            }
+            let pace = actions.timing(for: state)
+            let seed = SeededRandom.seed(for: "counter-\(state.simulationID)-\(state.nextEventSequence)")
+            let due = now.addingTimeInterval(pace.delay(in: pace.sellerReply, seed: seed))
+            guard due < (listing.expiresAt ?? .distantFuture) else { throw TradingError.replyWindowTooShort }
+            try next.enqueue(.buyerReply(listingID: listingID, offerID: offer.id, amount: amount, expectedAttempts: offer.counterAttempts), createdAt: now, resolveAt: due)
+            return next
+        }
+    }
+
+    func withdrawListing(listingID: ListingID) throws {
+        try transact { state, _ in
+            guard let index = state.playerListings.firstIndex(where: { $0.id == listingID && $0.status == .active }) else { throw TradingError.closed }
+            var next = state
+            next.playerListings[index].status = .cancelled
+            for offer in next.playerListings[index].offers.indices where [.pending, .countered].contains(next.playerListings[index].offers[offer].status) { next.playerListings[index].offers[offer].status = .withdrawn }
+            return next
         }
     }
 }

@@ -7,8 +7,9 @@ working behavior; the answers below must come from a person playing freely.
 ## Prepare
 
 - Record the checkpoint commit, device/iOS, language, build configuration and
-  session start/end time. Use a normal Release build for realistic pacing:
-  DEBUG has accelerated timers, and UI tests explicitly use isolated/instant saves.
+  session start/end time. Normal Debug and Release builds now share production
+  pacing; Release keeps developer tools out of the player interface. Isolated UI
+  tests explicitly opt into accelerated/instant timing and are not pacing evidence.
 - Use a fresh save for a first-session evaluation. Keep a continuing save for
   return sessions. A fresh install on a dedicated test device is suitable; do not
   erase someone else's save. DEBUG Profile → Developer tools offers a confirmed
@@ -25,11 +26,14 @@ sessions, then decide whether you actually want another. Ask questions, bargain,
 hold or sell as-is as you wish. A loss is a useful observation, not a failed test.
 Do not require every scenario or teach a strategy in the first session.
 
-After the accelerated introduction, normal Release pacing is 2–10 minutes for a
-seller reply, five minutes for delivery, 15 minutes for an expert inspection and
-3–7 minutes for buyer interest. Plan short return sessions as well as continuous
-play. Record whether these waits help or hurt; do not use DEBUG timing to decide
-whether production is too slow.
+After the accelerated introduction, seller replies vary with urgency and take
+minutes. Standard delivery takes roughly 3–7 minutes and is included in the agreed
+price; expert inspection takes 15 minutes. Attention develops over time, with
+price and audience affecting pace and no guaranteed buyer. Buyer counter replies
+are also delayed. A sale listing has a 45-minute window and can end without a
+sale; revising the price does not reset that window. Plan short return sessions
+as well as continuous play. Record whether these waits help or hurt; do not use
+accelerated test launches to decide whether normal play is too slow.
 
 At a natural seller reply, delivery, expert inspection or buyer wait, leave the app
 and return later. If you consented to notifications, try returning through one
@@ -49,6 +53,9 @@ can be explored in later sessions without changing the economy or forcing outcom
 | Seller rejection or walk-away | | |
 | Buyer lowball, counter or withdrawal | | |
 | Repeated browsing and multiple completed trades | | |
+| Several pending trade processes at once | | |
+| Traffic/favorites without an offer; expiry, repricing or withdrawal | | |
+| Seller picture versus earned inspection evidence | | |
 | Offline return and catch-up report | | |
 | Actual notification return | | |
 
@@ -73,6 +80,10 @@ observed” is a valid answer; do not replace it with an automated-test conclusi
 14. Were notifications useful or annoying?
 15. Did returning after being offline feel exciting?
 16. Did the game still feel like a game after several trades?
+17. Could you keep making useful decisions while another trade was pending?
+18. Did views, favorites and buyer interest feel believable and responsive to price?
+19. Did the uncertain price range help your judgment without solving the decision?
+20. Did the listing picture and inspection picture communicate condition clearly?
 
 ## Record only what is needed
 

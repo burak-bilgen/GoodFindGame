@@ -109,7 +109,35 @@ struct NotificationPlanner {
                 let expiry = projected(expiresAt).formatted(.dateTime.hour().minute().locale(locale))
                 body = GameText.format("notifications.buyerOffer", locale: locale, offer.amount.formatted(locale: locale), expiry)
                 route = .sale(id)
-            case .sellerOfferExpired, .buyerOfferExpired, .buyerInterest, .marketTrendEnded, .marketRefresh, .listingExpired, .competitorPurchase:
+            case .buyerReply(let id, _, _, _):
+                category = .offers
+                body = GameText.string("living.buyerReplyNotification", locale: locale)
+                route = .sale(id)
+            case .playerListingExpired(let id):
+                // A committed accepting reply will settle this listing before its window ends.
+                let settlesEarlier = state.events.contains { reply in
+                    guard reply.status == .pending, reply.resolveAt < event.resolveAt,
+                          case .buyerReply(let target, let offerID, let amount, _) = reply.payload, target == id,
+                          let offer = state.playerListings.first(where: { $0.id == id })?.offers.last else { return false }
+                    return offer.id == offerID && amount <= offer.willingness
+                }
+                if settlesEarlier { continue }
+                guard let listing = state.playerListings.first(where: { $0.id == id }), let item = state.player.inventory.first(where: { $0.id == listing.itemID }), let name = itemName(item) else { continue }
+                category = .offers
+                body = GameText.format("living.expiredNotification", locale: locale, name)
+                route = .sale(id)
+            case .listingExpired(let id), .competitorPurchase(let id):
+                guard state.watchedListingIDs.contains(id),
+                      state.marketListingStates.contains(where: { $0.id == id && $0.closureReason == nil }),
+                      MarketFeedEngine.remainsAvailable(listingID: id, at: event.resolveAt, sequence: event.sequence, state: state),
+                      MarketFeedEngine.holdUntil(listingID: id, at: event.resolveAt, beforeSequence: event.sequence, state: state) == nil,
+                      let listing = state.market.first(where: { $0.id == id }), let name = itemName(listing.item) else { continue }
+                category = .market
+                let key: String
+                if case .competitorPurchase = event.payload { key = "living.watchedSold" } else { key = "living.watchedExpired" }
+                body = GameText.format(key, locale: locale, name)
+                route = .listing(id)
+            case .listingAttention, .sellerOfferExpired, .buyerOfferExpired, .buyerInterest, .marketTrendEnded, .marketRefresh:
                 continue
             }
             guard state.notificationPreferences.enabledCategories.contains(category) else { continue }

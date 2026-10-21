@@ -82,6 +82,15 @@ struct SaveRepository {
                   lifecycle.initialAskingPrice > .zero &&
                   (lifecycle.reducedPrice.map({ $0 > .zero && $0 < lifecycle.initialAskingPrice }) ?? true)
               }) else { throw SaveError.invalidSave }
+        guard state.playerListings.allSatisfy({ $0.views >= 0 && $0.views <= 1_000_000_000 && $0.favorites >= 0 && $0.favorites <= $0.views && ($0.expiresAt?.timeIntervalSinceReferenceDate.isFinite ?? true) }) else { throw SaveError.invalidSave }
+        for event in state.events {
+            if case .listingAttention(_, let views, let favorites) = event.payload {
+                guard (0...1_000).contains(views), (0...views).contains(favorites) else { throw SaveError.invalidSave }
+            }
+            if case .buyerReply(_, let offerID, let amount, let attempts) = event.payload {
+                guard !offerID.rawValue.isEmpty, amount > .zero, amount <= GameBalanceConfig.current.maximumTransactionAmount, (0...2).contains(attempts) else { throw SaveError.invalidSave }
+            }
+        }
         let items = state.market.map(\.item) + state.player.inventory + state.shipments.map(\.item) + state.playerListings.compactMap(\.itemSnapshot)
         for item in items { try item.validateFacts() }
         try state.inspectionKnowledge.validate()

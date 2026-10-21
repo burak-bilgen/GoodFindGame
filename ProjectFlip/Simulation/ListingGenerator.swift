@@ -33,7 +33,23 @@ struct ListingGenerator {
             // Belief and presentation differ: an uninformed seller cannot price an unknown fault.
             let sellerBelief = knowledge < 40 ? cleanValue : trueValue
             let perceived = honesty < 40 ? cleanValue : sellerBelief
-            let bias = starterLesson ? 6_000 : starterFriendly && index == 0 ? 8_500 : random.integer(in: 8_000...13_000) - urgency * 15 + (archetype == .stubborn ? 2_000 : 0)
+            let bias: Int
+            if starterLesson { bias = 6_000 }
+            else if starterFriendly && index == 0 { bias = 8_500 }
+            else {
+                let roll = random.integer(in: 8_000...13_000) - 8_000
+                let range: (Int, Int) = switch archetype {
+                case .clueless: (5_500, 13_500)
+                case .urgent: (7_500, 10_000)
+                case .professional: (9_700, 11_800)
+                case .stubborn: (12_000, 17_000)
+                case .collector: (11_000, 15_000)
+                case .manipulative: (6_000, 12_500)
+                case .friendly: (8_000, 10_500)
+                case .casual: (8_000, 12_500)
+                }
+                bias = range.0 + roll * (range.1 - range.0) / 5_000
+            }
             let asking = try perceived.scaled(byBasisPoints: Int64(bias))
             let reservation = min(asking, try sellerBelief.scaled(byBasisPoints: Int64(8_000 - urgency * 20)))
             return MarketplaceListing(id: ListingID("listing-\(seed)-\(index)"), item: item, seller: seller, askingPrice: asking, reservationPrice: reservation, claimedCondition: honesty < 40 ? min(100, condition + 18) : condition, descriptionIntent: starterLesson ? "listing.description.starter" : honesty < 40 ? "listing.description.evasive" : (knowledge < 40 ? "listing.description.uncertain" : "listing.description.careful"), createdAt: now.addingTimeInterval(-TimeInterval(index * 180)))

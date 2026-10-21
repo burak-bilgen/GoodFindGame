@@ -8,14 +8,14 @@ struct SimulationActions {
         let current = conversation(listing, in: state)
         guard current.pendingReplyEventID == nil else { throw TradingError.alreadyDone }
         let reply = try NegotiationEngine().offer(amount, modifier: modifier, listing: listing, current: current, reputation: state.player.reputation)
-        return try bookReply(reply, current: current, state: state, now: now)
+        return try bookReply(reply, current: current, state: state, now: now, seller: listing.seller)
     }
 
     func question(listingID: ListingID, state: GameSnapshot, now: Date) throws -> GameSnapshot {
         let listing = try listing(listingID, in: state)
         let current = conversation(listing, in: state)
         guard current.pendingReplyEventID == nil else { throw TradingError.alreadyDone }
-        return try bookReply(NegotiationEngine().askAboutIssues(listing: listing, current: current), current: current, state: state, now: now)
+        return try bookReply(NegotiationEngine().askAboutIssues(listing: listing, current: current), current: current, state: state, now: now, seller: listing.seller)
     }
 
     func purchase(listingID: ListingID, state: GameSnapshot, now: Date) throws -> GameSnapshot {
@@ -24,7 +24,9 @@ struct SimulationActions {
         var next = try PurchaseEngine().buy(listingID: listingID, state: state, now: now)
         guard let item = next.player.inventory.first(where: { $0.id == listing.item.id }) else { throw TradingError.unavailable }
         next.player.inventory.removeAll { $0.id == item.id }
-        let due = now.addingTimeInterval(timing(for: state).shipping)
+        let delivery = timing(for: state).shipping
+        let spread = state.playerListings.contains { $0.status == .sold } ? 0.6 + Double(SeededRandom.seed(for: "delivery-" + item.id.rawValue) % 81) / 100 : 1
+        let due = now.addingTimeInterval(delivery * spread)
         let shipment = Shipment(id: "shipment-\(item.id.rawValue)", item: item, arrivesAt: due)
         next.shipments.append(shipment)
         try next.enqueue(.shipmentArrived(shipmentID: shipment.id), createdAt: now, resolveAt: due)
@@ -90,11 +92,12 @@ struct SimulationActions {
         state.playerListings.contains { $0.status == .sold } ? timing : timing.firstTrade
     }
 
-    private func bookReply(_ reply: NegotiationState, current: NegotiationState, state: GameSnapshot, now: Date) throws -> GameSnapshot {
+    private func bookReply(_ reply: NegotiationState, current: NegotiationState, state: GameSnapshot, now: Date, seller: SellerProfile) throws -> GameSnapshot {
         var next = state
         let timing = timing(for: state)
         let seed = SeededRandom.seed(for: "\(state.simulationID)-\(state.nextEventSequence)-seller")
-        let due = now.addingTimeInterval(timing.delay(in: timing.sellerReply, seed: seed))
+        let urgency = state.playerListings.contains { $0.status == .sold } ? max(0.35, 1.25 - Double(seller.urgency) / 125) : 1
+        let due = now.addingTimeInterval(timing.delay(in: timing.sellerReply, seed: seed) * urgency)
         let event = try next.enqueue(.sellerReply(listingID: reply.listingID, reply: reply, expiresAt: due.addingTimeInterval(timing.offerLifetime)), createdAt: now, resolveAt: due)
         var pending = current
         pending.pendingReplyEventID = event.id

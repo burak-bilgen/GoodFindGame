@@ -79,6 +79,8 @@ struct MarketTrendTests {
         let shifted = try BuyerEngine().generateOffer(listingID: id, state: listed, definitions: definitions, now: trend.startsAt)
         #expect(baseline.playerListings[0].offers[0].willingness != shifted.playerListings[0].offers[0].willingness)
         var upcoming = listed
+        // Keep this fixture live across the demand boundary being tested.
+        upcoming.playerListings[0].expiresAt = trend.startsAt.addingTimeInterval(45 * 60)
         try EventResolver(timing: .production).scheduleBuyer(listingID: id, state: &upcoming, definitions: definitions, now: trend.startsAt.addingTimeInterval(-1))
         let scheduled = try #require(upcoming.events.last)
         guard case .buyerOffer(_, _, let planned, _, _) = scheduled.payload else { Issue.record("Expected a real precomputed buyer offer"); return }
@@ -94,7 +96,9 @@ struct MarketTrendTests {
         var future = baseline
         future.lastKnownWallClock = now; future.lastSimulationAt = now
         let resolved = try EventResolver(timing: .production).resolve(future, now: trend.startsAt, definitions: definitions)
-        #expect(resolved.state.playerListings[0].offers == baseline.playerListings[0].offers)
+        #expect(resolved.state.playerListings[0].offers.map(\.amount) == baseline.playerListings[0].offers.map(\.amount))
+        #expect(resolved.state.playerListings[0].offers.map(\.willingness) == baseline.playerListings[0].offers.map(\.willingness))
+        #expect(resolved.state.playerListings[0].status == .expired)
         #expect(try GameRoute.decode(GameRoute.trend(trend.id).encoded()) == .trend(trend.id))
     }
 

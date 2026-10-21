@@ -622,7 +622,8 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
         tap(app.buttons[turkish ? "Karşı teklif gönder" : "Send counteroffer"].firstMatch, in: app)
         tap(app.buttons["sendBuyerCounter"], in: app)
-        XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+        expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: app.buttons["acceptBuyerOffer"])
+        waitForExpectations(timeout: 10)
         XCTAssertTrue(app.staticTexts["buyerOfferAmount"].isHittable)
         capture("buyer counter: \(language)", app: app)
         tap(app.buttons["acceptBuyerOffer"], in: app)
@@ -652,13 +653,30 @@ final class ProjectFlipUITests: XCTestCase {
                                "--uitest-save", UUID().uuidString, "--uitest-instant"]
         app.launch()
         let initialCash = app.staticTexts["marketCash"].label
+        func amount(_ label: String) -> Decimal {
+            let locale = Locale(identifier: turkish ? "tr_TR" : "en_US")
+            let ungrouped = label.replacingOccurrences(of: locale.groupingSeparator ?? ",", with: "")
+                .replacingOccurrences(of: locale.decimalSeparator ?? ".", with: ".")
+            return Decimal(string: ungrouped.filter { $0.isNumber || $0 == "." || $0 == "-" }, locale: Locale(identifier: "en_US_POSIX")) ?? -1
+        }
+        func cashLabel() -> String {
+            for _ in 0..<10 {
+                if app.staticTexts["marketCash"].exists && app.staticTexts["marketCash"].isHittable { break }
+                app.swipeDown()
+            }
+            return app.staticTexts["marketCash"].label
+        }
         if spendFirst {
-            // Three actual purchases leave 570.85; no money or save fixture is injected.
-            for slot in [1, 3, 5] {
+            tap(app.buttons["listing.listing-42-0"], in: app)
+            let targetCost = amount(app.staticTexts["listingAskingAmount"].label)
+            app.navigationBars.buttons.firstMatch.tap()
+            // Spend through actual affordable deals; seller prices may evolve independently of this test.
+            for slot in [1, 3, 5, 4, 6, 2, 7, 8, 9] {
+                if amount(cashLabel()) < targetCost { break }
                 tap(app.buttons["listing.listing-42-\(slot)"], in: app)
                 tap(app.buttons["openConversation"], in: app)
                 tap(app.buttons["sendOffer"], in: app)
-                tap(app.buttons["confirmPurchase"], in: app)
+                if app.buttons["confirmPurchase"].isEnabled { tap(app.buttons["confirmPurchase"], in: app) }
                 app.navigationBars.buttons.firstMatch.tap()
                 app.navigationBars.buttons.firstMatch.tap()
             }
@@ -667,14 +685,18 @@ final class ProjectFlipUITests: XCTestCase {
                 app.swipeDown()
             }
         }
+        let cashBeforeDecision = cashLabel()
         tap(app.buttons["listing.listing-42-0"], in: app)
         tap(app.buttons["openConversation"], in: app)
         tap(app.buttons["sendOffer"], in: app)
         XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].isHittable)
         XCTAssertEqual(app.buttons["confirmPurchase"].isEnabled, !spendFirst)
-        let expected = spendFirst ? (turkish ? "1.107,23" : "1,107.23") : (turkish ? "18.321,92" : "18,321.92")
-        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].label.contains(expected))
+        let cost = amount(app.staticTexts["purchaseAgreedAmount"].label)
+        let cash = amount(cashBeforeDecision)
+        XCTAssertGreaterThan(cost, 0)
+        XCTAssertGreaterThanOrEqual(cash, 0)
+        XCTAssertEqual(amount(app.staticTexts["purchaseBudgetAmount"].label), spendFirst ? cost - cash : cash - cost)
         if spendFirst {
             XCTAssertTrue(app.staticTexts[turkish ? "Kullanılabilir nakdin yeterli değil." : "You don’t have enough available cash."].exists)
         }
@@ -682,8 +704,8 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["declinePurchase"], in: app)
         XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
         let unchangedCash = app.staticTexts["marketCash"].label
-        if spendFirst { XCTAssertTrue(unchangedCash.contains(turkish ? "570,85" : "570.85")) }
-        else { XCTAssertEqual(unchangedCash, initialCash) }
+        XCTAssertEqual(unchangedCash, cashBeforeDecision)
+        if !spendFirst { XCTAssertEqual(unchangedCash, initialCash) }
         app.terminate()
         app.launch()
         XCTAssertEqual(app.staticTexts["marketCash"].label, unchangedCash)
@@ -692,6 +714,61 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertFalse(app.buttons["confirmPurchase"].exists)
         XCTAssertFalse(app.buttons["continueToItem"].exists)
         XCTAssertFalse(app.buttons["followDelivery"].exists)
+    }
+
+    @MainActor
+    func testListingCanExpireRelistAndWithdrawEnglish() { listingLifecycle(language: "en") }
+    @MainActor
+    func testListingCanExpireRelistAndWithdrawTurkish() { listingLifecycle(language: "tr") }
+
+    @MainActor
+    private func listingLifecycle(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["createListing"], in: app)
+        let price = app.textFields["askingPrice"]
+        tap(price, in: app)
+        price.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: (price.value as? String ?? "").count) + "999999")
+        app.navigationBars.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        XCTAssertTrue(app.otherElements["listingAttention"].exists || app.descendants(matching: .any)["listingAttention"].firstMatch.exists)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.otherElements["openTrades"].exists || app.descendants(matching: .any)["openTrades"].firstMatch.exists)
+        tap(app.buttons["listing.listing-42-1"], in: app)
+        XCTAssertTrue(app.buttons["openConversation"].exists)
+        app.tabBars.buttons[turkish ? "Profil" : "Profile"].tap()
+        tap(app.buttons["developerTools"], in: app)
+        tap(app.buttons["debugAdvanceDay"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Sen yokken" : "While you were away"].waitForExistence(timeout: 5))
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        app.tabBars.buttons[turkish ? "Satışlar" : "Selling"].tap()
+        tap(app.buttons["sale.resale-item-42-0-0"], in: app)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        tap(app.buttons["relistItem"], in: app)
+        capture("expired item ready to relist: \(language)", app: app)
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        tap(app.buttons["withdrawListing"], in: app)
+        XCTAssertTrue(app.buttons["relistItem"].exists)
+        capture("withdrawn listing retains item: \(language)", app: app)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Satışlar" : "Selling"].tap()
+        tap(app.buttons["sale.resale-item-42-0-1"], in: app)
+        XCTAssertTrue(app.buttons["relistItem"].exists)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
     }
 
     @MainActor
@@ -1087,6 +1164,107 @@ final class ProjectFlipUITests: XCTestCase {
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+    }
+
+    /// Real production pacing, with only the intended first-trade compression.
+    /// No cash grants, forced outcomes, instant timing or virtual clock are used.
+    @MainActor
+    func testConcurrentProductionTradesKeepTheHuntOpen() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-production-timing"]
+        app.launch()
+        @MainActor func marketRoot() {
+            app.tabBars.buttons["Market"].tap()
+            for _ in 0..<6 {
+                if app.navigationBars["Market"].exists { break }
+                app.navigationBars.buttons.firstMatch.tap()
+            }
+            XCTAssertTrue(app.navigationBars["Market"].exists)
+            for _ in 0..<8 {
+                if app.staticTexts["marketCash"].exists && app.staticTexts["marketCash"].isHittable { break }
+                app.swipeDown()
+            }
+        }
+        @MainActor func agreement(_ slot: Int) {
+            marketRoot()
+            tap(app.buttons["listing.listing-42-\(slot)"], in: app)
+            tap(app.buttons["openConversation"], in: app)
+            tap(app.buttons["sendOffer"], in: app)
+            XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 10))
+        }
+        @MainActor func buy(_ slot: Int, inspect: Bool) {
+            agreement(slot)
+            XCTAssertTrue(app.buttons["confirmPurchase"].isEnabled)
+            tap(app.buttons["confirmPurchase"], in: app)
+            XCTAssertTrue(app.buttons["continueToItem"].waitForExistence(timeout: 10))
+            tap(app.buttons["continueToItem"], in: app)
+            if inspect { tap(app.buttons["basicInspect"], in: app) }
+        }
+        @MainActor func inventoryRoot() {
+            app.tabBars.buttons["Inventory"].tap()
+            for _ in 0..<6 {
+                if app.buttons["inventory.item-42-1"].exists && app.buttons["inventory.item-42-1"].isHittable { break }
+                app.navigationBars.buttons.firstMatch.tap()
+            }
+            XCTAssertTrue(app.buttons["inventory.item-42-1"].exists)
+        }
+        // Several goods can be acquired while the introductory loop is still compressed.
+        buy(0, inspect: true)
+        buy(1, inspect: false)
+        buy(3, inspect: true)
+        agreement(4) // Keep a genuine agreed quote; buy it after the first sale.
+        inventoryRoot()
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+        // New work now uses actual production minutes, not the accelerated test configuration.
+        app.tabBars.buttons["Messages"].tap()
+        tap(app.buttons["conversation.listing-42-4"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        XCTAssertFalse(app.buttons["continueToItem"].exists)
+        inventoryRoot()
+        XCTAssertTrue(app.descendants(matching: .any)["shipment.item-42-4"].firstMatch.exists)
+        XCTAssertFalse(app.buttons["inventory.item-42-4"].exists)
+        tap(app.buttons["inventory.item-42-1"], in: app)
+        tap(app.buttons["professionalInspect"], in: app)
+        inventoryRoot()
+        tap(app.buttons["inventory.item-42-3"], in: app)
+        tap(app.buttons["createListing"], in: app)
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
+        capture("production sale awaiting genuine interest", app: app)
+        marketRoot()
+        tap(app.buttons["listing.listing-42-2"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        marketRoot()
+        @MainActor func expectLoop(_ label: String) {
+            let button = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
+            if !button.exists {
+                let strip = app.descendants(matching: .any)["openTrades"].firstMatch
+                if strip.scrollViews.firstMatch.exists { strip.scrollViews.firstMatch.swipeLeft() }
+                else { strip.swipeLeft() }
+            }
+            XCTAssertTrue(button.exists)
+        }
+        let labels = ["Seller replies pending", "In transit", "Expert reports pending", "Live sale listings"]
+        for label in labels { expectLoop(label) }
+        capture("four concurrent production trade loops", app: app)
+        tap(app.buttons["listing.listing-42-5"], in: app)
+        XCTAssertTrue(app.buttons["openConversation"].exists)
+        capture("still hunting with four processes pending", app: app)
+        app.terminate()
+        app.launch()
+        if !app.navigationBars["Market"].waitForExistence(timeout: 10), app.navigationBars["While you were away"].exists { app.buttons["Done"].tap() }
+        XCTAssertTrue(app.navigationBars["Market"].exists)
+        for label in ["Expert reports pending", "Live sale listings"] { expectLoop(label) }
     }
 
     @MainActor

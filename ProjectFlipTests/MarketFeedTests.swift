@@ -31,8 +31,9 @@ struct MarketFeedTests {
         let listing = initial.market[0]
         let state = try actions.offer(listingID: listing.id, amount: listing.askingPrice, modifier: .none, state: initial, now: now)
         let plan = try NotificationPlanner().makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now)
-        #expect(plan.count == 1)
-        #expect(plan[0].route == .listing(listing.id)) // Actual price drop precedes the competing purchase.
+        #expect(plan.count == 2)
+        #expect(plan.allSatisfy { $0.route == .listing(listing.id) })
+        #expect(plan[0].fireAt < plan[1].fireAt) // Price drop, then the genuine competing purchase.
         #expect(!plan.contains { $0.route == .conversation(listing.id) })
         let result = try EventResolver(timing: .instant).resolve(state, now: now.addingTimeInterval(101), definitions: definitions)
         #expect(!result.state.market[0].available)
@@ -43,11 +44,13 @@ struct MarketFeedTests {
         #expect(result.state.conversations[0].messages.last?.intent == "seller.listingTaken")
         #expect(result.outcomes.map(\.kind) == [.priceDrop, .listingClosed])
         #expect(try EventResolver(timing: .instant).resolve(result.state, now: now.addingTimeInterval(101), definitions: definitions).outcomes.isEmpty)
-        initial = try scheduled(competitor: 60)
+        let response = try #require(state.events.first { if case .sellerReply = $0.payload { return true }; return false })
+        let responseDelay = response.resolveAt.timeIntervalSince(now)
+        initial = try scheduled(competitor: responseDelay)
         initial.playerListings = state.playerListings
         let sameTime = try actions.offer(listingID: initial.market[0].id, amount: initial.market[0].askingPrice, modifier: .none, state: initial, now: now)
         #expect(try !NotificationPlanner().makePlan(state: sameTime, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).contains { $0.route == .conversation(listing.id) })
-        let tie = try EventResolver(timing: .instant).resolve(sameTime, now: now.addingTimeInterval(60), definitions: definitions)
+        let tie = try EventResolver(timing: .instant).resolve(sameTime, now: now.addingTimeInterval(responseDelay), definitions: definitions)
         #expect(tie.state.marketListingStates[0].closureReason == .competitor)
         #expect(tie.state.conversations[0].agreedPrice == nil)
     }
@@ -79,7 +82,8 @@ struct MarketFeedTests {
         let planner = NotificationPlanner()
         let en = try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now)
         let tr = try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "tr_TR"), now: now)
-        #expect(en.count == 1 && tr.count == 1 && en[0].body != tr[0].body)
+        #expect(en.count == 2 && tr.count == 2 && en[0].body != tr[0].body)
+        #expect(en[1].body.contains("expired") && tr[1].body.contains("sona erdi"))
         #expect(tr[0].body.contains("₺"))
         state.watchedListingIDs = []
         #expect(try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).isEmpty)
@@ -87,7 +91,9 @@ struct MarketFeedTests {
         state.notificationPreferences.enabledCategories.remove(.market)
         #expect(try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).isEmpty)
         state = try scheduled(competitor: 60, expiry: 10, drop: 20)
-        #expect(try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).isEmpty)
+        let earlyClosure = try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now)
+        #expect(earlyClosure.count == 1)
+        #expect(state.events.contains { $0.id == earlyClosure[0].id && $0.payload == .listingExpired(listingID: state.market[0].id) })
         let ended = try EventResolver(timing: .instant).resolve(state, now: now.addingTimeInterval(100), definitions: definitions)
         #expect(ended.state.marketListingStates[0].closureReason == .expired)
         #expect(ended.state.marketListingStates[0].priceDroppedAt == nil)

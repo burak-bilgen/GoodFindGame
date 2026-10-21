@@ -37,13 +37,8 @@ struct SimulationTiming: Sendable {
     static let production = Self(sellerReply: 120...600, shipping: 300, inspection: 900, buyerInterest: 180...420, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12, marketFeed: .production)
     static let debug = Self(sellerReply: 2...4, shipping: 4, inspection: 6, buyerInterest: 3...5, offerLifetime: 120, buyerArrivalsPerCatchUp: 12, marketFeed: .debug)
     static let instant = Self(sellerReply: 0...0, shipping: 0, inspection: 0, buyerInterest: 0...0, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12)
-    static var current: Self {
-        #if DEBUG
-        debug
-        #else
-        production
-        #endif
-    }
+    /// Human play uses the same pacing in Debug and Release; tests opt in explicitly.
+    static var current: Self { production }
 
     func delay(in range: ClosedRange<TimeInterval>, seed: UInt64) -> TimeInterval {
         var random = SeededRandom(seed: seed)

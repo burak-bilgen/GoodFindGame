@@ -1,0 +1,91 @@
+import SwiftUI
+
+struct ValueRangeView: View {
+    let estimate: ValueEstimate
+    @Environment(\.locale) private var locale
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 6) {
+                Text(estimate.lower.formatted(locale: locale)).fixedSize()
+                Text(verbatim: "–")
+                Text(estimate.upper.formatted(locale: locale)).fixedSize()
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(estimate.lower.formatted(locale: locale)).fixedSize()
+                Text(verbatim: "–")
+                Text(estimate.upper.formatted(locale: locale)).fixedSize()
+            }
+        }.font(.system(.title3, design: .rounded, weight: .bold)).monospacedDigit()
+            .accessibilityElement(children: .ignore).accessibilityLabel(Text(estimate.formatted(locale: locale)))
+    }
+}
+
+struct MarketAudienceView: View {
+    let store: GameStore
+    let definition: ItemDefinition
+    @Environment(\.locale) private var locale
+    var body: some View {
+        let demand = try? store.snapshot.marketMultiplier(for: definition)
+        VStack(alignment: .leading, spacing: 6) {
+            if let demand {
+                Label(GameText.string(demand > 10_000 ? "living.demandRising" : demand < 10_000 ? "living.demandCooling" : "living.demandSteady", locale: locale), systemImage: "chart.line.uptrend.xyaxis")
+            } else { Text("inspection.valueUnavailable") }
+            Text(GameText.string("living.audience.\(definition.category.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary)
+        }
+    }
+}
+
+/// Counts actual pending work; no forecast offers or hidden liquidity score reach the player.
+struct OpenTradesView: View {
+    let store: GameStore
+    @Environment(\.locale) private var locale
+    var body: some View {
+        let sellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID != nil }
+        let shipping = store.snapshot.shipments.filter { $0.status == .pending }
+        let inspections = store.snapshot.inspectionJobs.filter { $0.status == .pending }
+        let sales = store.snapshot.playerListings.filter { $0.status == .active }
+        if !sellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("living.inMotion").font(.caption.bold()).foregroundStyle(.secondary)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 14) {
+                if let seller = sellers.first {
+                    NavigationLink { ConversationView(store: store, listingID: seller.listingID) } label: {
+                        Label(GameText.format("living.sellers", locale: locale, Int64(sellers.count)), systemImage: "bubble.left.and.bubble.right")
+                    }
+                }
+                if !shipping.isEmpty {
+                    NavigationLink { InventoryView(store: store) } label: {
+                        Label(GameText.format("living.shipping", locale: locale, Int64(shipping.count)), systemImage: "shippingbox")
+                    }
+                }
+                if let inspection = inspections.first {
+                    NavigationLink { OwnedItemView(store: store, itemID: inspection.itemID) } label: {
+                        Label(GameText.format("living.inspections", locale: locale, Int64(inspections.count)), systemImage: "viewfinder")
+                    }
+                }
+                if !sales.isEmpty {
+                    NavigationLink { SellingView(store: store) } label: {
+                        Label(GameText.format("living.sales", locale: locale, Int64(sales.count)), systemImage: "tag")
+                    }
+                }
+                    }
+                }
+            }.font(.caption).padding(.vertical, 4).accessibilityIdentifier("openTrades")
+        }
+    }
+}
+
+struct AskingResultView: View {
+    let item: ItemInstance
+    let askingPrice: String
+    @Environment(\.locale) private var locale
+    var body: some View {
+        if let ask = try? Money.parse(askingPrice, locale: locale), let total = try? item.purchasePrice.adding(item.inspectionCost).adding(item.repairCost), let result = try? ask.subtracting(total) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("living.ifSoldAtAsk").font(.caption).foregroundStyle(.secondary)
+                ProfitAmount(amount: result).bold()
+            }.accessibilityHint(Text("living.notGuaranteed"))
+        }
+    }
+}

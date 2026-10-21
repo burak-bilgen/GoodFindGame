@@ -10,6 +10,9 @@ enum GameEventPayload: Codable, Equatable {
     case buyerOffer(listingID: ListingID, expectedOfferCount: Int, offer: BuyerOffer, intent: String, expiresAt: Date)
     case buyerOfferExpired(listingID: ListingID, offerID: OfferID)
     case buyerInterest(listingID: ListingID)
+    case listingAttention(listingID: ListingID, views: Int, favorites: Int)
+    case playerListingExpired(listingID: ListingID)
+    case buyerReply(listingID: ListingID, offerID: OfferID, amount: Money, expectedAttempts: Int)
     case marketRefresh
     case listingExpired(listingID: ListingID)
     case competitorPurchase(listingID: ListingID)
@@ -20,6 +23,7 @@ enum GameEventPayload: Codable, Equatable {
     var targetID: String {
         switch self {
         case .sellerReply(let id, _, _), .sellerOfferExpired(let id, _), .buyerOffer(let id, _, _, _, _), .buyerOfferExpired(let id, _), .buyerInterest(let id): id.rawValue
+        case .listingAttention(let id, _, _), .playerListingExpired(let id), .buyerReply(let id, _, _, _): id.rawValue
         case .shipmentArrived(let id), .inspectionCompleted(let id), .marketTrendEnded(let id): id
         case .marketRefresh: "market-refresh"
         case .listingExpired(let id), .competitorPurchase(let id), .sellerPriceDrop(let id): id.rawValue
@@ -60,7 +64,7 @@ struct InspectionJob: Codable, Identifiable, Equatable {
     var status: ScheduledStatus = .pending
 }
 
-enum ResolvedEventKind: String, Codable, CaseIterable { case sellerReply, shipment, inspection, buyerOffer, offerExpired, marketTrend, priceDrop, listingClosed }
+enum ResolvedEventKind: String, Codable, CaseIterable { case sellerReply, shipment, inspection, buyerOffer, offerExpired, marketTrend, priceDrop, listingClosed, saleClosed }
 struct ResolvedEvent: Codable, Identifiable, Equatable {
     let id: String
     let kind: ResolvedEventKind
@@ -81,5 +85,15 @@ extension GameSnapshot {
         let event = GameEvent(id: id, sequence: nextEventSequence, createdAt: createdAt, resolveAt: resolveAt, payload: payload, seed: SeededRandom.seed(for: id))
         events.append(event)
         return event
+    }
+}
+
+extension GameSnapshot {
+    func hasBuyerReply(for id: ListingID) -> Bool {
+        events.contains { event in
+            guard event.status == .pending else { return false }
+            if case .buyerReply(let target, _, _, _) = event.payload { return target == id }
+            return false
+        }
     }
 }

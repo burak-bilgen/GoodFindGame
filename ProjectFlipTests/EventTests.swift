@@ -58,7 +58,8 @@ struct EventTests {
         let result = try resolver.resolve(state, now: now.addingTimeInterval(365 * 86_400), definitions: definitions)
         #expect(result.state.playerListings[0].offers.count <= SimulationTiming.debug.buyerArrivalsPerCatchUp)
         #expect(result.state.player.cash == cash)
-        #expect(result.state.events.contains { $0.status == .pending && $0.resolveAt > result.clock.effectiveNow })
+        #expect(result.state.playerListings[0].status == .expired)
+        #expect(!result.state.events.contains { $0.status == .pending && $0.payload.generatesBuyerInterest })
         #expect(result.clock.largeForwardJump)
     }
 

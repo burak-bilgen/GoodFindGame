@@ -29,6 +29,7 @@ struct CreateListingView: View {
                             .padding(14).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
                             .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(GameStyle.gain.opacity(0.4), lineWidth: 1))
                             .accessibilityIdentifier("askingPrice")
+                        AskingResultView(item: item, askingPrice: price)
                         PriceSuggestions(store: store, item: item, definition: definition, price: $price)
                         Text("game.price.hint").font(.caption).foregroundStyle(.secondary)
                         Button("selling.publish") {
@@ -46,8 +47,8 @@ struct CreateListingView: View {
             .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
             .onAppear {
                 if price.isEmpty, let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
-                    switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                    case .success(let estimate): price = estimate.inputText(locale: locale)
+                    switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
+                    case .success(let estimate): price = estimate.midpoint.inputText(locale: locale)
                     case .failure: store.errorKey = "inspection.valueUnavailable"
                     }
                 }
@@ -66,11 +67,15 @@ struct InvestmentContext: View {
             case .success(let invested): LabeledContent("selling.invested") { Text(invested.formatted(locale: locale)).bold().foregroundStyle(.primary) }
             case .failure: Text("trade.unavailable")
             }
-            switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-            case .success(let estimate): LabeledContent("inspection.estimatedValue") { Text(estimate.formatted(locale: locale)).bold().foregroundStyle(.primary) }
+            switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
+            case .success(let estimate):
+                Text("living.estimateRange").font(.caption).foregroundStyle(.secondary)
+                ValueRangeView(estimate: estimate)
             case .failure: Text("inspection.valueUnavailable")
             }
             Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)
+            MarketAudienceView(store: store, definition: definition)
+
         }.gameCard()
     }
 }
@@ -142,14 +147,27 @@ struct SaleListingView: View {
                             }
                         } else {
                             LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
+                            HStack {
+                                Label(listing.views.formatted(.number.locale(locale)), systemImage: "eye")
+                                Text("selling.views").font(.caption)
+                                Spacer()
+                                Label(listing.favorites.formatted(.number.locale(locale)), systemImage: "heart")
+                                Text("selling.favorites").font(.caption)
+                            }.font(.subheadline).accessibilityIdentifier("listingAttention")
+                            if listing.views == 0 && listing.status == .active { Text("living.justListed").font(.caption).foregroundStyle(.secondary) }
+                            let awaitingReply = store.snapshot.hasBuyerReply(for: listing.id)
                             if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
                                 VStack(alignment: .leading, spacing: 14) {
-                                    GameStamp(key: offer.status == .countered ? "buyer.counterHeading" : "buyer.new", symbol: offer.status == .countered ? "arrow.left.arrow.right" : "bolt.fill").id("buyerDecision")
+                                    GameStamp(key: awaitingReply ? "living.replyPending" : offer.status == .countered ? "buyer.counterHeading" : "buyer.new", symbol: awaitingReply ? "clock" : offer.status == .countered ? "arrow.left.arrow.right" : "bolt.fill").id("buyerDecision")
+                                    if awaitingReply {
+                                        Text("living.buyerConsidering").font(.caption).foregroundStyle(.secondary)
+                                        HuntButton()
+                                    }
                                     HStack(spacing: 10) {
                                         TraderPortrait(identity: offer.identityIndex)
                                         Text(GameText.string("npc.name.\(offer.identityIndex % 10)", locale: locale)).font(.headline)
                                     }
-                                    GameEyebrow(key: "buyer.offeredPrice")
+                                    GameEyebrow(key: awaitingReply ? "living.previousOffer" : "buyer.offeredPrice")
                                     Text(offer.amount.formatted(locale: locale)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
                                     if let message = listing.messages.last { Text(GameText.string(message.intent, locale: locale)).font(.subheadline) }
                                     if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
@@ -171,7 +189,7 @@ struct SaleListingView: View {
                                         if case .buyerOfferExpired(let id, let offerID) = event.payload { return id == listing.id && offerID == offer.id }
                                         return false
                                     }) { DeadlineView(store: store, target: expiry.resolveAt, titleKey: "offer.expires") }
-                                    Button("buyer.accept") { store.perform { try store.acceptBuyer(listingID: listing.id) } }.buttonStyle(GameButton()).accessibilityIdentifier("acceptBuyerOffer")
+                                    Button("buyer.accept") { store.perform { try store.acceptBuyer(listingID: listing.id) } }.buttonStyle(GameButton()).disabled(awaitingReply).accessibilityIdentifier("acceptBuyerOffer")
                                     Text(offer.status == .countered ? "buyer.pushAgainRisk" : "buyer.pushRisk")
                                         .font(.caption).foregroundStyle(.secondary)
                                     DisclosureGroup("buyer.sendCounter", isExpanded: $counterComposerExpanded) {
@@ -187,12 +205,13 @@ struct SaleListingView: View {
                                                 editing = false
                                                 store.perform {
                                                     try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale))
+                                                    counterComposerExpanded = false
                                                     GameFeel.play(.submitted)
                                                 }
                                             }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("sendBuyerCounter")
                                         }.padding(.top, 10)
-                                    }
-                                    Button("buyer.reject", role: .destructive) { store.perform { try store.rejectBuyer(listingID: listing.id) } }
+                                    }.disabled(awaitingReply)
+                                    Button("buyer.reject", role: .destructive) { store.perform { try store.rejectBuyer(listingID: listing.id) } }.disabled(awaitingReply).accessibilityIdentifier("rejectBuyerOffer")
                                 }.gameCard(accent: GameStyle.gain)
                             } else if listing.status == .active {
                                 VStack(alignment: .leading, spacing: 12) {
@@ -201,8 +220,8 @@ struct SaleListingView: View {
                                     if let last = listing.messages.last, ["buyer.withdraw", "buyer.expired"].contains(last.intent) {
                                         Text(GameText.string(last.intent, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
                                     }
-                                    if let pending = store.snapshot.events.first(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
-                                        DeadlineView(store: store, target: pending.resolveAt, titleKey: "buyer.awaitingInterest")
+                                    if store.snapshot.events.contains(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
+                                        Text("living.interestUncertain").font(.subheadline).foregroundStyle(.secondary)
                                     } else {
                                         Button("buyer.find") { store.perform { try store.findBuyer(listingID: listing.id) } }
                                             .buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("findAnotherBuyer")
@@ -211,8 +230,13 @@ struct SaleListingView: View {
                                     HuntButton()
                                 }.gameCard()
                             }
+                            if listing.status == .expired || listing.status == .cancelled {
+                                Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.headline)
+                                NavigationLink { CreateListingView(store: store, itemID: listing.itemID) } label: { Text("living.relist") }.buttonStyle(GameButton()).accessibilityIdentifier("relistItem")
+                            }
                             DisclosureGroup("buyer.activity") {
                                 VStack(alignment: .leading, spacing: 12) {
+                                    if let end = listing.expiresAt, listing.status == .active { DeadlineView(store: store, target: end, titleKey: "living.listingEnds") }
                                     LabeledContent("selling.views") { Text(listing.views, format: .number) }
                                     LabeledContent("selling.favorites") { Text(listing.favorites, format: .number) }
                                     ForEach(listing.messages) { DialogueBubble(message: $0) }
@@ -228,6 +252,7 @@ struct SaleListingView: View {
                                         }.accessibilityIdentifier("updateSalePrice")
                                     }.padding(.top, 12)
                                 }.gameCard()
+                                Button("living.withdraw", role: .destructive) { store.perform { try store.withdrawListing(listingID: listing.id) } }.accessibilityIdentifier("withdrawListing")
                             }
                         }
                     }.padding(16)
@@ -315,7 +340,7 @@ private struct PriceSuggestions: View {
     @Environment(\.locale) private var locale
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
-        switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
+        switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
         case .success(let estimate):
             if typeSize.isAccessibilitySize {
                 VStack(spacing: 8) { choices(estimate) }
@@ -325,9 +350,10 @@ private struct PriceSuggestions: View {
         case .failure: EmptyView() // The adjacent investment panel reports unavailable estimates.
         }
     }
-    @ViewBuilder private func choices(_ estimate: Money) -> some View {
+    @ViewBuilder private func choices(_ estimate: ValueEstimate) -> some View {
         ForEach(0..<3) { index in
-            if let suggested = try? estimate.scaled(byBasisPoints: [9_000, 10_000, 11_000][index]) {
+            let suggested = [estimate.lower, estimate.midpoint, estimate.upper][index]
+            Group {
                 Button {
                     price = suggested.inputText(locale: locale)
                 } label: {

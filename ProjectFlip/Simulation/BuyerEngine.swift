@@ -9,16 +9,26 @@ struct BuyerEngine {
         let fair = try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: state.marketMultiplier(for: definition, at: now))
         // Implausible prices attract no buyer. Price revision can restore interest.
         guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)) else { return state }
-        let offset = state.playerListings.first?.id == listing.id ? 0 : Int(SeededRandom.seed(for: item.id.rawValue) % UInt64(BuyerArchetype.allCases.count))
-        let archetype = BuyerArchetype.allCases[(listing.offers.count + offset) % BuyerArchetype.allCases.count]
-        let variant = (Int(SeededRandom.seed(for: item.id.rawValue) % 2) + listing.offers.count) % 2
+        let introduction = state.playerListings.first?.id == listing.id && listing.offers.isEmpty
+        var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-\(state.simulationID)-\(listing.id.rawValue)-\(listing.offers.count)-\(state.nextEventSequence)"))
+        let archetype = introduction ? BuyerArchetype.cautious : BuyerArchetype.allCases[random.integer(in: 0...(BuyerArchetype.allCases.count - 1))]
         let reputationFactor = Int64(10_000 + (state.player.reputation - 50) * 10)
-        let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints).scaled(byBasisPoints: reputationFactor)
-        let proposed = min(try listing.askingPrice.scaled(byBasisPoints: 9_500), budget)
+        let premium: Int64 = archetype == .collector && item.condition >= 90 ? 1_100 : 0
+        let variation = introduction ? 0 : Int64(random.integer(in: -500...900))
+        let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints + variation + premium).scaled(byBasisPoints: reputationFactor)
+        let opening: ClosedRange<Int> = switch archetype {
+        case .lowballer: 5_000...7_000
+        case .bargainHunter: 7_000...8_500
+        case .reseller: 7_800...9_200
+        case .cautious: 9_000...9_700
+        case .impatient: 9_700...10_300
+        case .collector: 9_300...10_300
+        }
+        let proposed = min(try listing.askingPrice.scaled(byBasisPoints: introduction ? 9_500 : Int64(random.integer(in: opening))), budget)
         var next = state
         next.playerListings[index].offers.append(BuyerOffer(id: OfferID("\(listing.id.rawValue)-buyer-\(listing.offers.count)"), archetype: archetype, identityIndex: (listing.offers.count + 3) % 10, willingness: budget, amount: proposed))
         next.playerListings[index].itemSnapshot = item
-        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.offer.\(variant)", fromPlayer: false, amount: proposed))
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.offer.\(archetype.rawValue)", fromPlayer: false, amount: proposed))
         next.playerListings[index].views += 3
         return next
     }

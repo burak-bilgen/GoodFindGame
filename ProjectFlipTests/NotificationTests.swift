@@ -53,7 +53,9 @@ struct NotificationTests {
         let original = try ResaleTests.inspectedState()
         let state = try SimulationActions(timing: .debug).publish(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 1_000_000_000), state: original, definitions: definitions, now: now)
         #expect(state.playerListings[0].offers.isEmpty)
-        #expect(try NotificationPlanner().makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).isEmpty)
+        let plan = try NotificationPlanner().makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now)
+        #expect(plan.count == 1)
+        #expect(state.events.contains { $0.id == plan[0].id && $0.payload == .playerListingExpired(listingID: state.playerListings[0].id) })
     }
 
     @Test func routeRoundTripRejectsMissingOrUnknownTargets() throws {

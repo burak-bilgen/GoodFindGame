@@ -1940,13 +1940,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Estimated value"
+            "value": "Estimated market range"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tahmini değer"
+            "value": "Tahmini piyasa aralığı"
           }
         }
       }
@@ -3338,13 +3338,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Buyer offers"
+            "value": "Buyer activity"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alıcı teklifleri"
+            "value": "Alıcı hareketleri"
           }
         }
       }
@@ -7622,13 +7622,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Move it quickly"
+            "value": "Lower ask"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hızlı sat"
+            "value": "Daha düşük fiyat"
           }
         }
       }
@@ -7640,13 +7640,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Test the market"
+            "value": "Middle ask"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pazarı yokla"
+            "value": "Orta fiyat"
           }
         }
       }
@@ -7658,13 +7658,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aim higher"
+            "value": "Higher ask"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yüksekten dene"
+            "value": "Daha yüksek fiyat"
           }
         }
       }
@@ -8223,6 +8223,654 @@
           "stringUnit": {
             "state": "translated",
             "value": "İncelenen durum · yalnızca bulunan kusurlar gösterilir"
+          }
+        }
+      }
+    },
+    "living.buyerReplyNotification": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A buyer has replied to your counteroffer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir alıcı karşı teklifini yanıtladı."
+          }
+        }
+      }
+    },
+    "living.expiredNotification": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your listing for %1$@ expired. Review the price or relist."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ilanın sona erdi. Fiyatı gözden geçir veya yeniden yayınla."
+          }
+        }
+      }
+    },
+    "selling.expired": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing expired · item remains yours"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan sona erdi · ürün hâlâ senin"
+          }
+        }
+      }
+    },
+    "away.saleClosed": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ended sale listings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sona eren satış ilanları"
+          }
+        }
+      }
+    },
+    "living.estimateRange": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated market range"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahmini piyasa aralığı"
+          }
+        }
+      }
+    },
+    "living.ifSoldAtAsk": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potential result if sold at asking"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fiyatından satılırsa olası sonuç"
+          }
+        }
+      }
+    },
+    "living.notGuaranteed": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After your recorded costs. This is not a promised sale or realized profit."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı giderlerin çıkarıldıktan sonra. Satış veya gerçekleşmiş kâr garantisi değildir."
+          }
+        }
+      }
+    },
+    "living.demandRising": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demand is rising"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talep artıyor"
+          }
+        }
+      }
+    },
+    "living.demandCooling": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demand is cooling"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talep düşüyor"
+          }
+        }
+      }
+    },
+    "living.demandSteady": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No active demand shift"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkin talep değişimi yok"
+          }
+        }
+      }
+    },
+    "living.audience.gaming": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyday electronics audience; asking price still matters."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gündelik elektronik alıcıları; ilan fiyatı yine belirleyici."
+          }
+        }
+      }
+    },
+    "living.audience.cameras": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A specialist audience; a higher value can take longer to realize."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzmanlık isteyen bir pazar; yüksek değerde satış daha uzun sürebilir."
+          }
+        }
+      }
+    },
+    "living.audience.retro": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collector audience; interest can be uneven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyoncu pazarı; ilgi düzensiz olabilir."
+          }
+        }
+      }
+    },
+    "living.justListed": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just listed · attention has not arrived yet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni yayınlandı · henüz ilgi gelmedi"
+          }
+        }
+      }
+    },
+    "living.buyerConsidering": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer is considering your counteroffer. Keep hunting."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı karşı teklifini değerlendiriyor. Fırsat aramaya devam et."
+          }
+        }
+      }
+    },
+    "living.interestUncertain": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interest develops over time. An offer is not guaranteed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlgi zamanla oluşur. Teklif geleceği garanti değildir."
+          }
+        }
+      }
+    },
+    "living.relist": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review and relist"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözden geçir ve yeniden yayınla"
+          }
+        }
+      }
+    },
+    "living.listingEnds": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listing window remaining"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan için kalan süre"
+          }
+        }
+      }
+    },
+    "living.withdraw": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Withdraw listing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanı yayından kaldır"
+          }
+        }
+      }
+    },
+    "living.standardDelivery": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standard delivery · included in the agreed price"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standart teslimat · anlaşılan fiyata dahil"
+          }
+        }
+      }
+    },
+    "living.inMotion": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IN MOTION · KEEP HUNTING"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEVAM EDİYOR · FIRSAT ARA"
+          }
+        }
+      }
+    },
+    "living.sellers": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller replies pending · %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beklenen satıcı yanıtı · %lld"
+          }
+        }
+      }
+    },
+    "living.shipping": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In transit · %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yolda · %lld"
+          }
+        }
+      }
+    },
+    "living.inspections": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert reports pending · %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beklenen uzman raporu · %lld"
+          }
+        }
+      }
+    },
+    "living.sales": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live sale listings · %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yayındaki satış ilanı · %lld"
+          }
+        }
+      }
+    },
+    "buyer.offer.cautious": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have a few things to check, but I could offer this."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birkaç şeyi kontrol etmem gerekiyor ama teklifim bu."
+          }
+        }
+      }
+    },
+    "buyer.offer.bargainHunter": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I am comparing a few listings. Could this work?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birkaç ilanı karşılaştırıyorum. Bu rakam olur mu?"
+          }
+        }
+      }
+    },
+    "buyer.offer.collector": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This would fit my collection. Here is my offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürün koleksiyonuma uyar. Teklifim bu."
+          }
+        }
+      }
+    },
+    "buyer.offer.impatient": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I can close quickly if we agree on this."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu rakamda anlaşırsak hızlıca alabilirim."
+          }
+        }
+      }
+    },
+    "buyer.offer.reseller": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I need some room for my own costs. This is my offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendi giderlerim için pay bırakmam gerekiyor. Teklifim bu."
+          }
+        }
+      }
+    },
+    "buyer.offer.lowballer": {
+      "comment": "Living marketplace: actual saved state or uncertain public appraisal. No guaranteed buyer or hidden value.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Would you take this? I can pay now."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu rakam olur mu? Hemen ödeyebilirim."
+          }
+        }
+      }
+    },
+    "living.replyPending": {
+      "comment": "Buyer counter reply is actually queued; the amount displayed is the existing prior offer, not a new response.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for buyer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcıdan yanıt bekleniyor"
+          }
+        }
+      }
+    },
+    "living.previousOffer": {
+      "comment": "Buyer counter reply is actually queued; the amount displayed is the existing prior offer, not a new response.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous offer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önceki teklif"
+          }
+        }
+      }
+    },
+    "error.replyWindowTooShort": {
+      "comment": "A live offer remains acceptable, but not enough listing time remains for the delayed buyer counter reply. Do not say the deal is already closed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is not enough time for a counter reply. You can still accept the current offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karşı teklif yanıtı için yeterli süre kalmadı. Mevcut teklifi hâlâ kabul edebilirsin."
+          }
+        }
+      }
+    },
+    "living.watchedSold": {
+      "comment": "Genuine watched marketplace closure; do not forecast while a firm quote defers it or another earlier closure invalidates it.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another trader bought the %1$@ you were watching."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzlediğin %1$@ ürününü başka bir tüccar aldı."
+          }
+        }
+      }
+    },
+    "living.watchedExpired": {
+      "comment": "Genuine watched marketplace closure; do not forecast while a firm quote defers it or another earlier closure invalidates it.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The watched listing for %1$@ expired."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzlediğin %1$@ ilanı sona erdi."
           }
         }
       }
