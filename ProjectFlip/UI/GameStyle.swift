@@ -52,15 +52,16 @@ private struct GameScreenStyle: ViewModifier {
 }
 
 struct GameButton: ButtonStyle {
+    var secondary = false
     @Environment(\.isEnabled) private var enabled
     @GameReduceMotion private var reduceMotion
     func makeBody(configuration: Configuration) -> some View {
         configuration.label.font(.system(.headline, design: .rounded, weight: .heavy))
             .frame(maxWidth: .infinity).padding(.vertical, 16).padding(.horizontal, 12)
-            .foregroundStyle(GameStyle.ink)
-            .background(LinearGradient(colors: [GameStyle.amber, Color(red: 0.98, green: 0.60, blue: 0.23)], startPoint: .top, endPoint: .bottom), in: RoundedRectangle(cornerRadius: 17))
-            .overlay(RoundedRectangle(cornerRadius: 17).strokeBorder(.white.opacity(0.35), lineWidth: 1))
-            .background(RoundedRectangle(cornerRadius: 17).fill(Color(red: 0.56, green: 0.28, blue: 0.08)).offset(y: configuration.isPressed ? 1 : 4))
+            .foregroundStyle(secondary ? Color.primary : GameStyle.ink)
+            .background(LinearGradient(colors: secondary ? [Color.primary.opacity(0.05), Color.primary.opacity(0.08)] : [GameStyle.amber, Color(red: 0.98, green: 0.60, blue: 0.23)], startPoint: .top, endPoint: .bottom), in: RoundedRectangle(cornerRadius: 17))
+            .overlay(RoundedRectangle(cornerRadius: 17).strokeBorder(secondary ? Color.primary.opacity(0.22) : .white.opacity(0.35), lineWidth: 1))
+            .background(RoundedRectangle(cornerRadius: 17).fill(secondary ? Color.primary.opacity(0.12) : Color(red: 0.56, green: 0.28, blue: 0.08)).offset(y: configuration.isPressed ? 1 : 4))
             .opacity(enabled ? 1 : 0.45)
             .offset(y: configuration.isPressed ? 2 : 0)
             .animation(reduceMotion ? nil : .easeOut(duration: 0.12), value: configuration.isPressed)

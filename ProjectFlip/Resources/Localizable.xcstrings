@@ -7902,6 +7902,96 @@
           }
         }
       }
+    },
+    "repair.marginEstimate": {
+      "comment": "Repair decision: compares estimated value recovered minus service cost with selling as-is. This is not total trade profit or a guaranteed sale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated difference vs. selling as-is"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olduğu gibi satışa göre tahmini fark"
+          }
+        }
+      }
+    },
+    "repair.marginPositive": {
+      "comment": "Repair decision: compares estimated value recovered minus service cost with selling as-is. This is not total trade profit or a guaranteed sale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The added value may cover the repair and leave more margin."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değer artışı onarımı karşılayıp kazanç payını artırabilir."
+          }
+        }
+      }
+    },
+    "repair.marginNegative": {
+      "comment": "Repair decision: compares estimated value recovered minus service cost with selling as-is. This is not total trade profit or a guaranteed sale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The repair may cost more than the value it adds."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onarım, katacağı değerden daha pahalıya gelebilir."
+          }
+        }
+      }
+    },
+    "repair.marginEven": {
+      "comment": "Repair decision: compares estimated value recovered minus service cost with selling as-is. This is not total trade profit or a guaranteed sale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The estimated value added only covers the repair bill."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahmini değer artışı yalnızca onarım ücretini karşılıyor."
+          }
+        }
+      }
+    },
+    "repair.awaitInspection": {
+      "comment": "Repair decision: compares estimated value recovered minus service cost with selling as-is. This is not total trade profit or a guaranteed sale.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repair is available when the expert inspection finishes."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzman incelemesi bitince onarım yapabilirsin."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -526,6 +526,11 @@ final class ProjectFlipUITests: XCTestCase {
     func testConnectedTradeTurkish() { connectedTrade(language: "tr", repairStarter: true) }
 
     @MainActor
+    func testLargeTurkishRepairTrade() {
+        connectedTrade(language: "tr", flags: ["--uitest-large-type", "--uitest-reduce-motion"], repairStarter: true)
+    }
+
+    @MainActor
     func testReducedMotionDarkTradeEnglish() {
         connectedTrade(language: "en", flags: ["--uitest-reduce-motion", "--uitest-dark"], repairStarter: true)
     }
@@ -566,6 +571,9 @@ final class ProjectFlipUITests: XCTestCase {
                 if repair.exists && repair.isHittable { break }
                 app.swipeUp()
             }
+            XCTAssertTrue(app.staticTexts["repairMargin.damagedPort"].label.contains("+"))
+            XCTAssertTrue(app.staticTexts[turkish ? "Değer artışı onarımı karşılayıp kazanç payını artırabilir." : "The added value may cover the repair and leave more margin."].exists)
+            XCTAssertTrue(app.buttons["createListing"].exists)
             capture("repair quote: \(language)", app: app)
             tap(repair, in: app)
             XCTAssertFalse(app.buttons["repair.damagedPort"].exists)
@@ -593,6 +601,43 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["listing.listing-42-1"].exists)
         capture("next hunt: \(language)", app: app)
+    }
+
+    @MainActor
+    func testRepairWaitsForExpertEnglish() { repairWaitsForExpert(language: "en") }
+    @MainActor
+    func testRepairWaitsForExpertTurkish() { repairWaitsForExpert(language: "tr") }
+
+    @MainActor
+    private func repairWaitsForExpert(language: String) {
+        continueAfterFailure = false
+        let turkish = language == "tr"
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-reduce-motion"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 10))
+        tap(app.buttons["confirmPurchase"], in: app)
+        XCTAssertTrue(app.buttons["continueToItem"].waitForExistence(timeout: 10))
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        tap(app.buttons["professionalInspect"], in: app)
+        let repair = app.buttons["repair.damagedPort"]
+        XCTAssertTrue(repair.exists)
+        XCTAssertFalse(repair.isEnabled)
+        XCTAssertTrue(app.staticTexts[turkish ? "Uzman incelemesi bitince onarım yapabilirsin." : "Repair is available when the expert inspection finishes."].exists)
+        capture("repair waiting for expert: \(language)", app: app)
+        expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: repair)
+        waitForExpectations(timeout: 12)
+        XCTAssertTrue(app.staticTexts["repairMargin.damagedPort"].label.contains("+"))
+        capture("repair available after expert: \(language)", app: app)
+        tap(repair, in: app)
+        XCTAssertFalse(repair.exists)
+        tap(app.buttons["createListing"], in: app)
+        XCTAssertTrue(app.textFields["askingPrice"].exists)
     }
 
     @MainActor

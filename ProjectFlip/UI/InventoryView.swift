@@ -64,7 +64,7 @@ struct OwnedItemView: View {
                             }
                             NavigationLink { CreateListingView(store: store, itemID: item.id) } label: {
                                 Text(item.knownActiveDefects.isEmpty ? "selling.create" : "repair.asIs")
-                            }.buttonStyle(GameButton()).accessibilityIdentifier("createListing")
+                            }.buttonStyle(GameButton(secondary: !item.knownActiveDefects.isEmpty)).accessibilityIdentifier("createListing")
                         } else if let sale = store.snapshot.playerListings.first(where: { $0.itemID == item.id && $0.status == .active }) {
                             NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                                 Label("selling.follow", systemImage: "tag.fill")
@@ -183,6 +183,9 @@ struct RepairDecision: View {
     let definition: ItemDefinition
     let defect: Defect
     @Environment(\.locale) private var locale
+    private var awaitingInspection: Bool {
+        store.snapshot.inspectionJobs.contains { $0.itemID == item.id && $0.status == .pending }
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -193,11 +196,29 @@ struct RepairDecision: View {
             Text("game.repairChoice").font(.subheadline).foregroundStyle(.secondary)
             switch Result(catching: { try RepairQuote(item: item, definition: definition, defect: defect, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let quote):
-                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale)).bold() }
-                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale)) }
+                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale)).bold().foregroundStyle(.primary) }
+                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale, signed: true)).foregroundStyle(.primary) }
+                if let difference = try? quote.estimatedRecovery.subtracting(quote.cost) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("repair.marginEstimate").font(.subheadline.weight(.semibold))
+                        Text(difference.formatted(locale: locale, signed: true))
+                            .font(.system(.largeTitle, design: .rounded, weight: .heavy)).monospacedDigit()
+                            .foregroundStyle(difference < .zero ? GameStyle.loss : GameStyle.gain)
+                            .accessibilityIdentifier("repairMargin.\(defect.rawValue)")
+                        Text(difference > .zero ? "repair.marginPositive" : difference < .zero ? "repair.marginNegative" : "repair.marginEven")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }.frame(maxWidth: .infinity, alignment: .leading).padding(12)
+                        .background(.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
+                }
                 Text("repair.immediate").font(.caption).foregroundStyle(.secondary)
                 Button("repair.action") { store.perform { try store.repair(itemID: item.id, defect: defect); GameFeel.play(.accepted) } }
                     .buttonStyle(GameButton()).accessibilityIdentifier("repair.\(defect.rawValue)")
+                    .disabled(awaitingInspection || store.snapshot.player.cash < quote.cost)
+                if awaitingInspection {
+                    Label("repair.awaitInspection", systemImage: "hourglass").font(.caption).foregroundStyle(.secondary)
+                } else if store.snapshot.player.cash < quote.cost {
+                    Label("error.insufficientCash", systemImage: "wallet.bifold").font(.caption).foregroundStyle(.secondary)
+                }
             case .failure: Text("inspection.valueUnavailable")
             }
         }.gameCard()

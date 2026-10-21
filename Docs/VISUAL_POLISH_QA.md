@@ -214,3 +214,28 @@ captures and the machine-readable final summary are stored outside Git in
 archived under `debug-repro/` and depends on instrumentation no longer present.
 No economy, simulation, category, inspection capability or game-save schema change
 is included. Physical-device and minimum-runtime limits remain unchanged.
+
+## Repair choice follow-up — 21 October 2026
+
+The player can now compare the service bill with estimated recovered value and a
+large signed difference relative to selling as-is. Positive, negative and break-even
+copy describes the estimate; no exact sale, total trade profit or hidden fault is
+claimed. The starter comparison is +154.68 after a 684.36 bill and 839.04 estimated
+recovery. It is deliberately distinct from the eventual realized trade payoff.
+
+The as-is alternative uses a secondary tactile button. Actual pending expert jobs
+and insufficient cash disable repair with a reason instead of accepting a doomed
+tap. The existing service guards and all simulation behavior are preserved.
+
+86 unit tests and six affected UI scenarios pass; an additional full Turkish repair
+trade at accessibility size passes. Both timed inspection scenarios passed again
+after the capture scroll position was corrected. The tests assert repair is blocked
+while pending, unlocks on report completion, charges successfully, then continues
+to resale. Existing economic tests cover worthwhile and uneconomical services;
+negative quotes and low-cash blocking were not separately captured in this pass.
+Debug and Release builds succeed; 440 localization keys validate. Actual EN/TR,
+dark, larger-text, pending, payoff and loss captures are in
+../../Artifacts/RepairChoice-2026-10-21/gallery.html. Reviewed comparison text wraps
+without truncation; accessibility content scrolls rather than being shrunk.
+The previously recorded nonfatal SwiftUI invalid-frame warning remains. Existing
+simulator-only and human-enjoyment validation limits still apply.

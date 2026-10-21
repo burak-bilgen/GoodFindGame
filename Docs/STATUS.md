@@ -6,7 +6,7 @@ Priority: prove that one completed trade makes the player want another listing. 
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
-Current localization: 435 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Current localization: 440 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
 
 Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
 
@@ -117,3 +117,12 @@ A deterministic diagnostic loop reproduced the replay twice and passed after the
 fix. Final checks: 86 unit tests + 8 affected UI scenarios, 94 passed; Debug and
 Release builds succeed; 435 localization keys validate. Temporary diagnostics are
 removed. See VISUAL_POLISH_QA.md and Artifacts/InspectionRead-2026-10-21.
+
+2026-10-21: Repair decisions now compare actual service cost and estimated recovered
+value, highlighting their signed estimated difference relative to selling as-is.
+Copy distinguishes possible extra margin from realized trade profit. The as-is
+action has a secondary tactile treatment; pending expert reports and insufficient
+cash explain disabled repair. Existing economy, timing and save logic are unchanged.
+Debug/Release builds, 86 unit tests, 7 affected UI journeys and 440 localization
+keys pass. EN/TR pending-report scenarios passed again after capture positioning
+was corrected. Screen evidence: ../../Artifacts/RepairChoice-2026-10-21/gallery.html.
