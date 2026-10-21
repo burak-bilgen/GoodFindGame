@@ -596,6 +596,45 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testCounterDecisionEnglish() { counterDecision(language: "en") }
+
+    @MainActor
+    func testCounterDecisionTurkish() { counterDecision(language: "tr") }
+
+    @MainActor
+    private func counterDecision(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        let field = app.textFields["offerAmount"]
+        tap(field, in: app)
+        let initial = field.value as? String ?? ""
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: initial.count) + "1600")
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["sendOffer"], in: app)
+        XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 5))
+        XCTAssertFalse(field.exists)
+        capture("seller decision: \(language)", app: app)
+        tap(app.buttons[turkish ? "Pazarlığa devam et" : "Keep bargaining"], in: app)
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        let previous = field.value as? String
+        tap(app.buttons["offerHalfway"], in: app)
+        XCTAssertNotEqual(field.value as? String, previous)
+        XCTAssertFalse(app.buttons["confirmPurchase"].exists)
+        capture("editable seller reply: \(language)", app: app)
+        tap(app.buttons["sendOffer"], in: app)
+        XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 5))
+        XCTAssertFalse(field.exists)
+        tap(app.buttons["acceptSellerCounter"], in: app)
+        XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 5))
+    }
+
+    @MainActor
     func testTradeContinuationEnglish() { tradeContinuation(language: "en") }
 
     @MainActor

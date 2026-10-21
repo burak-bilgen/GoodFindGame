@@ -7,6 +7,7 @@ struct ConversationView: View {
     @GameReduceMotion private var reduceMotion
     @State private var amount = ""
     @State private var modifier: OfferModifier = .none
+    @State private var counterComposerExpanded = false
     @FocusState private var editing: Bool
 
     var body: some View {
@@ -100,44 +101,38 @@ struct ConversationView: View {
                         }
                         if !conversation.closed && conversation.agreedPrice == nil && listing.available {
                             VStack(alignment: .leading, spacing: 14) {
-                                Button("question.issues") { store.perform { try store.askIssues(listingID: listing.id) } }
-                                    .disabled(conversation.askedAboutIssues || conversation.pendingReplyEventID != nil).accessibilityIdentifier("askIssues")
+                                if !conversation.askedAboutIssues {
+                                    Button("question.issues") { store.perform { try store.askIssues(listingID: listing.id) } }
+                                        .disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("askIssues")
+                                }
                                 if let counter = conversation.counterPrice {
                                     GameEyebrow(key: "offer.counterHeading")
-                                    Text(counter.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .bold)).contentTransition(.numericText())
+                                    Text(counter.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
                                     Button("offer.acceptCounter") { store.perform { try store.acceptSellerCounter(listingID: listing.id) } }
-                                        .buttonStyle(GameButton()).accessibilityIdentifier("acceptSellerCounter")
-                                    Button("offer.halfway") {
-                                        store.perform {
-                                            let last = conversation.offers.last?.amount ?? .zero
-                                            amount = try counter.adding(last).scaled(byBasisPoints: 5_000).inputText(locale: locale)
-                                        }
+                                        .buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("acceptSellerCounter")
+                                    Text("offer.pushRisk").font(.caption).foregroundStyle(.secondary)
+                                    DisclosureGroup("offer.keepBargaining", isExpanded: $counterComposerExpanded) {
+                                        VStack(alignment: .leading, spacing: 14) {
+                                            Button("offer.halfway") {
+                                                store.perform {
+                                                    let last = conversation.offers.last?.amount ?? counter
+                                                    amount = try counter.adding(last).scaled(byBasisPoints: 5_000).inputText(locale: locale)
+                                                }
+                                            }.buttonStyle(.bordered).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("offerHalfway")
+                                            offerEntry(listing: listing, conversation: conversation)
+                                        }.padding(.top, 12)
                                     }
-                                } else if conversation.offers.isEmpty {
-                                    Text("offer.tryLess").font(.caption).foregroundStyle(.secondary)
-                                    HStack {
-                                        Button("offer.testWaters") { setOffer(listing.askingPrice, factor: 8_500) }
-                                        Spacer()
-                                        Button("offer.smallDiscount") { setOffer(listing.askingPrice, factor: 9_500) }
-                                    }.buttonStyle(.bordered)
-                                }
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text("offer.amount").font(.caption).foregroundStyle(.secondary)
-                                    TextField("offer.amount", text: $amount).keyboardType(.decimalPad).focused($editing)
-                                        .font(.title2.bold()).textFieldStyle(.roundedBorder).accessibilityIdentifier("offerAmount")
-                                }
-                                Picker("offer.modifier", selection: $modifier) {
-                                    ForEach(OfferModifier.allCases.filter { $0 != .knownIssues || !conversation.knownDefects.isEmpty }, id: \.self) { value in
-                                        Text(GameText.string(value.key, locale: locale)).tag(value)
+                                } else {
+                                    if conversation.offers.isEmpty {
+                                        Text("offer.tryLess").font(.caption).foregroundStyle(.secondary)
+                                        HStack {
+                                            Button("offer.testWaters") { setOffer(listing.askingPrice, factor: 8_500) }
+                                            Spacer()
+                                            Button("offer.smallDiscount") { setOffer(listing.askingPrice, factor: 9_500) }
+                                        }.buttonStyle(.bordered)
                                     }
+                                    offerEntry(listing: listing, conversation: conversation)
                                 }
-                                Button("offer.send") {
-                                    editing = false
-                                    store.perform {
-                                        try store.sendOffer(listingID: listing.id, amount: Money.parse(amount, locale: locale), modifier: modifier)
-                                        GameFeel.play(.submitted)
-                                    }
-                                }.buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("sendOffer")
                                 Button("offer.walkAway", role: .destructive) { store.perform { try store.walkAway(listingID: listing.id) } }.font(.subheadline)
                             }.gameCard().id("composer")
                         } else if let price = conversation.agreedPrice, listing.available && !conversation.closed {
@@ -159,6 +154,7 @@ struct ConversationView: View {
                 .onChange(of: conversation.messages.last?.id) { _, _ in
                     if let last = conversation.messages.last, !last.fromPlayer {
                         GameFeel.play(conversation.agreedPrice == nil ? .reply : .accepted)
+                        if last.intent.hasPrefix("seller.counter.") { counterComposerExpanded = false }
                         withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
                             if last.intent == "purchase.completed" { proxy.scrollTo("purchaseCommitment", anchor: .top) }
                             else { proxy.scrollTo(last.id, anchor: .center) }
@@ -169,6 +165,30 @@ struct ConversationView: View {
             .navigationTitle("messages.title").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
             .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale) } }
+        }
+    }
+    private func offerEntry(listing: MarketplaceListing, conversation: NegotiationState) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("offer.amount").font(.caption).foregroundStyle(.secondary)
+                TextField("offer.amount", text: $amount).keyboardType(.decimalPad).focused($editing)
+                    .font(.system(.title2, design: .rounded, weight: .heavy)).textFieldStyle(.plain)
+                    .padding(14).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
+                    .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(GameStyle.gain.opacity(0.4), lineWidth: 1))
+                    .accessibilityIdentifier("offerAmount")
+            }
+            Picker("offer.modifier", selection: $modifier) {
+                ForEach(OfferModifier.allCases.filter { $0 != .knownIssues || !conversation.knownDefects.isEmpty }, id: \.self) { value in
+                    Text(GameText.string(value.key, locale: locale)).tag(value)
+                }
+            }
+            Button("offer.send") {
+                editing = false
+                store.perform {
+                    try store.sendOffer(listingID: listing.id, amount: Money.parse(amount, locale: locale), modifier: modifier)
+                    GameFeel.play(.submitted)
+                }
+            }.buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("sendOffer")
         }
     }
     private func setOffer(_ asking: Money, factor: Int64) {

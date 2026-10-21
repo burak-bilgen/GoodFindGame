@@ -163,3 +163,23 @@ unmodified captures and result summaries are available in
 `../../Artifacts/TradeContinuation-2026-10-21/gallery.html`. Both locales' waiting
 buyer, empty inbox, settled inbox and completed conversation were visually
 reviewed. Physical-device and iOS 17 runtime limits remain unchanged.
+
+
+## Counteroffer as a decision — 21 October 2026
+
+The seller's counteroffer now leads with its amount and accept action. Continuing
+to bargain is a secondary disclosure with a short qualitative patience warning.
+The revealed reply contains an editable amount, the existing pitch choices and
+a separate send action. Halfway remains an edit, not a submission. After a new
+seller counter arrives, the reply editor closes so the player makes the choice
+again. Questions already asked remain in dialogue history instead of occupying
+the composer as disabled buttons. No negotiation, deadline or pricing rules change.
+
+Five affected UI scenarios pass: new counter-choice English/Turkish flows verify
+the hidden editor, explicit opening, halfway draft change, separate submission,
+return to a counter decision and acceptance; existing connected English/Turkish
+and reduced-motion dark trades verify the complete loop. Debug and Release builds
+and 435-key localization checks pass. Both collapsed counter panels and the
+editable reply were visually reviewed. Original-resolution captures and the
+result summary are stored outside Git in
+`../../Artifacts/CounterChoice-2026-10-21/gallery.html`.

@@ -7866,6 +7866,42 @@
           }
         }
       }
+    },
+    "offer.keepBargaining": {
+      "comment": "Secondary action reveals an editable response to a real seller counteroffer; it sends nothing by itself.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep bargaining"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazarlığa devam et"
+          }
+        }
+      }
+    },
+    "offer.pushRisk": {
+      "comment": "Qualitative negotiation risk; does not promise rejection or expose a private reservation price.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pushing harder can test their patience."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üstelemek satıcının sabrını zorlayabilir."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
