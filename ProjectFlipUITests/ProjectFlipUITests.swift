@@ -878,6 +878,72 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testKnownFaultLossEnglish() { lossEvidence(language: "en", known: true) }
+    @MainActor
+    func testKnownFaultLossTurkish() { lossEvidence(language: "tr", known: true) }
+    @MainActor
+    func testUnknownFaultLossEnglish() { lossEvidence(language: "en", known: false) }
+    @MainActor
+    func testUnknownFaultLossTurkish() { lossEvidence(language: "tr", known: false) }
+
+    @MainActor
+    func testRepairCostLossEnglish() { lossEvidence(language: "en", known: true, repair: true) }
+    @MainActor
+    func testRepairCostLossTurkish() { lossEvidence(language: "tr", known: true, repair: true) }
+
+    @MainActor
+    private func lossEvidence(language: String, known: Bool, repair: Bool = false) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        let scenario = repair ? "repair cost" : known ? "known" : "unknown"
+        let shownFault = known && !repair
+        let slot = known ? 0 : 2
+        let fault = known ? "damagedPort" : "drift"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-\(slot)"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        XCTAssertEqual(app.buttons["repair.\(fault)"].exists, known)
+        if repair { tap(app.buttons["repair.\(fault)"], in: app) }
+        tap(app.buttons["createListing"], in: app)
+        let asking = app.textFields["askingPrice"]
+        tap(asking, in: app)
+        let old = asking.value as? String ?? ""
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + (repair ? "2200" : "100"))
+        app.buttons[turkish ? "Tamam" : "Done"].tap()
+        tap(app.buttons["publishListing"], in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        tap(app.buttons["acceptBuyerOffer"], in: app)
+        XCTAssertTrue(app.staticTexts["tradePayoff"].label.contains("-"))
+        capture("loss evidence immediate \(scenario): \(language)", app: app)
+        XCTAssertEqual(app.staticTexts["tradeDefect.\(fault)"].exists, shownFault)
+        let lesson = app.staticTexts["tradeLesson"].label
+        if repair {
+            XCTAssertEqual(lesson, turkish ? "Satış, alış fiyatını karşıladı ama onarım ücreti kârı eritti." : "The sale covered the purchase, but the repair bill used up the margin.")
+        }
+        tap(app.buttons[turkish ? "Alışveriş dökümü" : "Trade breakdown"], in: app)
+        XCTAssertEqual(app.staticTexts["tradeLesson"].label, lesson)
+        XCTAssertEqual(app.staticTexts["tradeDefect.\(fault)"].exists, shownFault)
+        capture("loss evidence receipt \(scenario): \(language)", app: app)
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons[turkish ? "Profil" : "Profile"].tap()
+        tap(app.buttons["openTradeHistory"], in: app)
+        tap(app.buttons["trade.resale-item-42-\(slot)-0"], in: app)
+        XCTAssertEqual(app.staticTexts["tradeLesson"].label, lesson)
+        XCTAssertEqual(app.staticTexts["tradeDefect.\(fault)"].exists, shownFault)
+        capture("loss evidence history \(scenario): \(language)", app: app)
+        tap(app.buttons["returnToHunt"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
+    }
+
+    @MainActor
     func testRepairAndLossEnglish() { repairAndLoss(language: "en") }
     @MainActor
     func testRepairAndLossTurkish() { repairAndLoss(language: "tr") }

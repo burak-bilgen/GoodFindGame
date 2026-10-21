@@ -37,7 +37,7 @@ struct TradeHistoryView: View {
                     }
                 }
                 ForEach(records) { record in
-                    NavigationLink { TradeReceiptView(record: record) } label: {
+                    NavigationLink { TradeReceiptView(record: record, item: store.snapshot.playerListings.first(where: { $0.id == record.id })?.itemSnapshot) } label: {
                         VStack(alignment: .leading, spacing: 8) {
                             if let definition = store.definitions.first(where: { $0.id == record.definitionID }) { Text(definition.name).font(.headline) }
                             ProfitAmount(amount: record.netProfit)
@@ -63,11 +63,12 @@ struct ProfitAmount: View {
 
 struct TradeReceiptView: View {
     let record: TradeRecord
+    var item: ItemInstance?
     @Environment(\.locale) private var locale
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                TradePayoff(record: record)
+                TradePayoff(record: record, item: item)
                 DisclosureGroup("result.costs") {
                     VStack(spacing: 12) {
                         LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale)) }

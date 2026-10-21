@@ -272,3 +272,36 @@ above a single-line amount at those sizes. English normal and Turkish larger-tex
 full trades passed again after this last layout change, as did the Release build.
 The gallery uses the updated captures; currency-layout-summary.json records the
 two follow-up UI runs separately from the broader 94-test verification summary.
+
+## Trustworthy loss debrief — 21 October 2026
+
+A loss must teach what the actual trade supports. The payoff previously read all
+active hidden faults, naming defects a novice had never discovered. The receipt
+also lacked item context, so opening the same result or returning through history
+changed its advice. A behavior-preserving extraction of the existing interpretation
+made a minimized regression fail three assertions twice (0.018/0.020 seconds).
+Original playable EN journeys independently failed on the unwanted defect and the
+changed receipt lesson. The saved snapshots retained the correct revealed lists.
+
+The small TradeOutcomePresentation value now reads only known, unrepaired faults;
+receipts and history receive the existing settled item snapshot. Both original UI
+repros passed after these independent corrections. Known issues are labeled as
+knowledge at sale; the lesson suggests weighing repair cost and possible recovery
+without asserting that a fault caused a particular low sale. Costs that erased
+an otherwise positive margin are described as inspection, repair, or both according
+to actual charges. The additional service regression first failed on the two
+single-service cases before the corresponding classification fix.
+
+Final verification: 92 unit tests in 23 suites and ten UI journeys passed together,
+102 tests with zero failures/skips. The six EN/TR known, unknown and repair-cost
+journeys compare immediate result, receipt and reopened history; existing localized
+repair/loss and connected/reduced-motion dark wins remain green. Debug and Release
+builds succeed; 449 localization keys validate. Unmodified screens were reviewed in
+both languages; complete amounts, advice, known-issue labels and next-hunt actions
+fit the affected standard-size layouts. No hidden truth, balance, integer-money,
+timer or game-save implementation changed. No temporary runtime probes remain.
+
+Screens, red/green diagnosis and result summaries:
+../../Artifacts/OutcomeEvidence-2026-10-21/. Existing simulator-only, human-playtest
+and nonfatal SwiftUI frame-warning limits remain; the pass does not establish
+commercial conversion or enjoyment.

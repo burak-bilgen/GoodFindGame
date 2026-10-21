@@ -6,7 +6,7 @@ Priority: prove that one completed trade makes the player want another listing. 
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
-Current localization: 446 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Current localization: 449 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
 
 Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
 
@@ -139,3 +139,14 @@ localization keys validate. Captures and the large-text focus comparison are in
 The final accessibility layout stacks the conditional-result label above its
 amount to keep the currency together. Normal English and larger Turkish full
 trades passed again after that adjustment; the latest Release build also passes.
+
+2026-10-21: Loss debriefs now use earned inspection evidence and actual service
+charges. Fixed undiscovered faults being named at payoff and the same trade's
+lesson changing in receipts/history because settled item context was omitted.
+Known issues are labeled as knowledge at sale; copy avoids an unproven sole cause.
+Inspection-only, repair-only and combined service losses name the actual fees.
+The original repro failed repeatedly, then passed after the targeted evidence and
+context corrections. Final: 92 unit tests + 10 affected UI journeys (102 passed),
+Debug/Release builds and 449 localization keys pass. No economy, truth, timing or
+save-format changes. Captures and causal diagnosis:
+../../Artifacts/OutcomeEvidence-2026-10-21/gallery.html.

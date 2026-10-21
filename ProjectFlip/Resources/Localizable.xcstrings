@@ -6770,19 +6770,19 @@
       }
     },
     "result.lesson.fault": {
-      "comment": "Core trade gameplay copy. Preserve conversational tone and economic uncertainty; no guaranteed deals.",
+      "comment": "Settled-trade lesson. Name only discovered, unrepaired issues or actual charged services; do not disclose hidden faults or assert an unproven cause of the loss.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The item’s faults reduced what buyers would pay. Ask about issues and weigh the inspection before your next purchase."
+            "value": "The item sold with known faults. On the next deal, weigh the repair bill against the value it might recover."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Üründeki sorunlar alıcıların ödeyeceği tutarı düşürdü. Bir dahaki alışında sorunları sor, inceleme sonucunu hesaba kat."
+            "value": "Ürünü bilinen sorunlarıyla sattın. Bir sonraki fırsatta onarım ücretini, kazandırabileceği değerle karşılaştır."
           }
         }
       }
@@ -8097,6 +8097,60 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sen yeni fırsatlar ararken ilanın yayında kalır."
+          }
+        }
+      }
+    },
+    "result.knownIssues": {
+      "comment": "Settled-trade lesson. Name only discovered, unrepaired issues or actual charged services; do not disclose hidden faults or assert an unproven cause of the loss.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Known issues at sale"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satışta bilinen sorunlar"
+          }
+        }
+      }
+    },
+    "result.lesson.inspection": {
+      "comment": "Settled-trade lesson. Name only discovered, unrepaired issues or actual charged services; do not disclose hidden faults or assert an unproven cause of the loss.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sale covered the purchase, but the inspection fee used up the margin."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satış, alış fiyatını karşıladı ama inceleme ücreti kârı eritti."
+          }
+        }
+      }
+    },
+    "result.lesson.repair": {
+      "comment": "Settled-trade lesson. Name only discovered, unrepaired issues or actual charged services; do not disclose hidden faults or assert an unproven cause of the loss.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The sale covered the purchase, but the repair bill used up the margin."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satış, alış fiyatını karşıladı ama onarım ücreti kârı eritti."
           }
         }
       }

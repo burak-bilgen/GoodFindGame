@@ -137,7 +137,7 @@ struct SaleListingView: View {
                                     }
                                 }
                                 HuntButton()
-                                NavigationLink("trade.receipt") { TradeReceiptView(record: record) }
+                                NavigationLink("trade.receipt") { TradeReceiptView(record: record, item: listing.itemSnapshot) }
                             case .failure: Text("trade.unavailable")
                             }
                         } else {
@@ -264,12 +264,7 @@ struct TradePayoff: View {
     @GameReduceMotion private var reduceMotion
     @ScaledMetric(relativeTo: .largeTitle) private var payoffSize = 46
     @State private var appeared = false
-    private var lessonKey: String {
-        if record.netProfit > .zero { return "result.lesson.win" }
-        if record.netProfit == .zero { return "result.lesson.even" }
-        if record.soldFor >= record.acquiredFor { return "result.lesson.costs" }
-        return item?.activeDefects.isEmpty == false ? "result.lesson.fault" : "result.lesson.price"
-    }
+    private var outcome: TradeOutcomePresentation { TradeOutcomePresentation(record: record, item: item) }
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
@@ -293,10 +288,15 @@ struct TradePayoff: View {
                     Text((Decimal(record.netProfit.minorUnits) / Decimal(record.totalCost.minorUnits)).formatted(.percent.precision(.fractionLength(1)).locale(locale))).bold()
                 }.font(.subheadline)
             }
-            Text(GameText.string(lessonKey, locale: locale))
+            Text(GameText.string(outcome.lessonKey, locale: locale))
+                .accessibilityIdentifier("tradeLesson")
                 .font(.subheadline).foregroundStyle(.white.opacity(0.74))
-            if record.netProfit < .zero, let item {
-                ForEach(item.activeDefects, id: \.self) { defect in Text(GameText.string(defect.key, locale: locale)).font(.caption.bold()).foregroundStyle(Color(red: 1, green: 0.57, blue: 0.53)) }
+            if record.netProfit < .zero && !outcome.defects.isEmpty {
+                Text("result.knownIssues").font(.caption.weight(.semibold)).foregroundStyle(.white.opacity(0.74))
+                ForEach(outcome.defects, id: \.self) { defect in
+                    Text(GameText.string(defect.key, locale: locale)).font(.caption.bold())
+                        .foregroundStyle(Color(red: 1, green: 0.57, blue: 0.53)).accessibilityIdentifier("tradeDefect.\(defect.rawValue)")
+                }
             }
         }
         .padding(22).frame(maxWidth: .infinity, alignment: .leading).foregroundStyle(.white)
