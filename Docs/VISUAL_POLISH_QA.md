@@ -124,3 +124,42 @@ from these commits. The paused feature backlog remains paused.
 This is a qualitative presentation review, not evidence of commercial conversion
 or repeat-play retention. Commercial shipment also requires physical-device and
 minimum-runtime validation beyond this simulator session.
+
+
+## Continuing a trade from any core area — 21 October 2026
+
+The next pass closes gaps exposed by following the same item across screens.
+An already-listed inventory item now links to its actual live sale instead of
+showing an inert “already listed” note. The seller conversation links to that
+same sale while active, and to its settled result after resale. Completed shipment
+history no longer sends a sold item back toward delivery. Inspected goods use
+review language rather than repeating the initial unknown-condition prompt.
+
+A market continuation card now surfaces a real pending/countered buyer offer,
+including after the introductory trade. It shows the product, proposed amount
+and the buyer's stable portrait and opens the exact live listing. The Selling
+tab badge counts active listings awaiting a buyer decision. These are actionable
+states, not invented unread-message counts; sold or withdrawn offers do not count.
+No simulation, save schema, timers, pricing or buyer behavior changes are involved.
+
+Two localized continuation scenarios each complete two trades. They save/relaunch
+before following an offer from the market, open the second sale from inventory
+and seller conversation, settle it, then reopen the historical conversation and
+verify it reaches the actual result rather than delivery or missing inventory.
+The existing connected English/Turkish and dark/reduced-motion journeys remain
+in the affected-flow check. Captures and final results are recorded separately
+from the earlier broad 27-scenario run.
+
+Inbox summaries now follow the resale state too: active items show the live sale
+or waiting buyer, and completed items show “Sold” plus the actual settled sale
+amount instead of retaining the old delivery instruction. An empty inbox invites
+the player to investigate a listing and returns directly to the hunt. Both
+localized continuation tests exercise this entry route and the saved sold preview.
+
+Verification: the five affected UI journeys passed, followed by both strengthened
+localized continuation scenarios after the inbox changes. Debug/testing and
+Release builds pass; 433 semantic keys pass Turkish/English validation. Fourteen
+unmodified captures and result summaries are available in
+`../../Artifacts/TradeContinuation-2026-10-21/gallery.html`. Both locales' waiting
+buyer, empty inbox, settled inbox and completed conversation were visually
+reviewed. Physical-device and iOS 17 runtime limits remain unchanged.

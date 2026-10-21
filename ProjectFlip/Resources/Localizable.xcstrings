@@ -56,19 +56,19 @@
       }
     },
     "messages.empty": {
-      "comment": "Empty conversation list.",
+      "comment": "Empty seller inbox: invite the player to investigate a listing; buyer negotiations remain on the live sale.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your conversations with sellers and buyers appear here."
+            "value": "Open a listing. Talk to the seller. One clue can change the deal."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alıcı ve satıcılarla konuşmaların burada görünür."
+            "value": "Bir ilanı aç, satıcıyla konuş. Tek bir ipucu pazarlığı değiştirebilir."
           }
         }
       }
@@ -7791,6 +7791,78 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konuşma geçmişi"
+          }
+        }
+      }
+    },
+    "journey.offerWaiting": {
+      "comment": "An actual pending or countered buyer offer, including after the first trade; not an unread-message claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A buyer is waiting"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı yanıt bekliyor"
+          }
+        }
+      }
+    },
+    "journey.tradeFinished": {
+      "comment": "Closed seller conversation after the acquired item was resold.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This trade is complete. Revisit the result or hunt for your next find."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu alışveriş tamamlandı. Sonucuna göz at ya da yeni bir fırsat ara."
+          }
+        }
+      }
+    },
+    "journey.inspectedOwned": {
+      "comment": "Previously inspected acquired item; avoids implying condition is still wholly unknown.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The inspection is in. Your next move is yours."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme tamam. Sıradaki hamle senin."
+          }
+        }
+      }
+    },
+    "journey.reviewItem": {
+      "comment": "Return from the seller conversation to an inspected owned item.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review your item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ürününe göz at"
           }
         }
       }

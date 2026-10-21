@@ -6,7 +6,7 @@ Priority: prove that one completed trade makes the player want another listing. 
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
-Current localization: 429 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Current localization: 433 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
 
 Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
 
@@ -88,3 +88,12 @@ Debug and Release builds succeed; 429 Turkish/English keys pass validation. Curr
 screens and baseline comparisons: ../../Artifacts/VisualPolish-2026-10-20/gallery.html.
 See VISUAL_POLISH_QA.md for the ranked follow-up, story review and remaining
 physical-device/minimum-runtime/human-retention validation.
+
+2026-10-21: Continued trade navigation now follows the item's saved state. Actual
+buyer offers remain visible on the market after the introduction and badge the
+Selling tab. Listed inventory and seller conversations open the live sale;
+completed conversations open the actual result. Inbox previews reflect live/sold
+status, with an investigation prompt when empty. Five affected UI journeys pass;
+EN/TR two-trade/relaunch scenarios pass again after inbox refinements. Debug and
+Release builds and 433-key localization checks pass. No economy, timing, save or
+category changes. See VISUAL_POLISH_QA.md and the continuation capture gallery.

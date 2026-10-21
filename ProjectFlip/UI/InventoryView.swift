@@ -65,7 +65,11 @@ struct OwnedItemView: View {
                             NavigationLink { CreateListingView(store: store, itemID: item.id) } label: {
                                 Text(item.knownActiveDefects.isEmpty ? "selling.create" : "repair.asIs")
                             }.buttonStyle(GameButton()).accessibilityIdentifier("createListing")
-                        } else { Text("selling.alreadyListed").foregroundStyle(.secondary) }
+                        } else if let sale = store.snapshot.playerListings.first(where: { $0.itemID == item.id && $0.status == .active }) {
+                            NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
+                                Label("selling.follow", systemImage: "tag.fill")
+                            }.buttonStyle(GameButton()).accessibilityIdentifier("continueOwnedSale")
+                        }
                     }
                     if let job = store.snapshot.inspectionJobs.first(where: { $0.itemID == item.id && $0.status == .pending }) {
                         DeadlineView(store: store, target: job.completesAt, titleKey: "inspection.pendingReport")

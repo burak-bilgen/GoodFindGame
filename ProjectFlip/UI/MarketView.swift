@@ -49,7 +49,7 @@ struct MarketView: View {
                     Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit()
                         .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
                 }.padding(.horizontal, 4)
-                FirstTradePrompt(store: store)
+                TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         Toggle("market.watchedOnly", isOn: $watchedOnly).accessibilityIdentifier("watchedOnly")
@@ -170,10 +170,28 @@ struct ListingCard: View {
     }
 }
 
-struct FirstTradePrompt: View {
+struct TradeContinuationPrompt: View {
+    @Environment(\.locale) private var locale
     let store: GameStore
     var body: some View {
-        if !store.snapshot.playerListings.contains(where: { $0.status == .sold }) {
+        if let sale = store.snapshot.playerListings.reversed().first(where: { listing in
+            listing.status == .active && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
+        }), let offer = sale.offers.last {
+            NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
+                HStack(spacing: 12) {
+                    TraderPortrait(identity: offer.identityIndex, size: 48)
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("journey.offerWaiting").font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                        if let item = store.snapshot.player.inventory.first(where: { $0.id == sale.itemID }), let definition = store.definition(for: item) {
+                            Text(definition.name).font(.headline).foregroundStyle(.primary)
+                        }
+                        Text(offer.amount.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "arrow.up.right").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+                }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.gain)
+            }.buttonStyle(.plain).accessibilityIdentifier("marketBuyerOffer")
+        } else if !store.snapshot.playerListings.contains(where: { $0.status == .sold }) {
             if let sale = store.snapshot.playerListings.first(where: { $0.status == .active }) {
                 NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                     Label("hunt.followSale", systemImage: "tag.fill")

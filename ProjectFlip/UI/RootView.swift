@@ -12,6 +12,12 @@ struct RootView: View {
     @Environment(\.locale) private var locale
     @Environment(\.scenePhase) private var scenePhase
 
+    private var waitingBuyerCount: Int {
+        store?.snapshot.playerListings.filter { listing in
+            listing.status == .active && listing.offers.last.map { [.pending, .countered].contains($0.status) } == true
+        }.count ?? 0
+    }
+
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
@@ -33,6 +39,13 @@ struct RootView: View {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 16) {
                             GameEyebrow(key: "game.inbox")
+                            if store.snapshot.conversations.isEmpty {
+                                VStack(alignment: .leading, spacing: 16) {
+                                    Image(systemName: "bubble.left.and.bubble.right.fill").font(.largeTitle).foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+                                    Text("messages.empty").font(.title3.bold())
+                                    HuntButton()
+                                }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
+                            }
                             ForEach(store.snapshot.conversations) { conversation in
                                 NavigationLink {
                                     ConversationView(store: store, listingID: conversation.listingID)
@@ -43,7 +56,15 @@ struct RootView: View {
                                             VStack(alignment: .leading, spacing: 6) {
                                                 Text(definition.name).font(.headline)
                                                 Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
-                                                if conversation.pendingReplyEventID != nil {
+                                                if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
+                                                    if resale.status == .sold {
+                                                        Label("selling.sold", systemImage: "checkmark.seal.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                                                        if let amount = resale.soldPrice { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                    } else {
+                                                        Label(resale.offers.last.map { [.pending, .countered].contains($0.status) } == true ? "journey.offerWaiting" : "selling.live", systemImage: "tag.fill")
+                                                            .font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                                                    }
+                                                } else if conversation.pendingReplyEventID != nil {
                                                     Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
                                                 } else if let last = conversation.messages.last {
                                                     Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
@@ -66,7 +87,7 @@ struct RootView: View {
             NavigationStack {
                 if let store { SellingView(store: store) }
             }
-            .tabItem { Label("selling.title", systemImage: "tag") }.tag(3)
+            .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
             NavigationStack {
                 if let store { ProfileView(store: store) }
             }

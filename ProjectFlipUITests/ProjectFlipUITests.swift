@@ -596,6 +596,73 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testTradeContinuationEnglish() { tradeContinuation(language: "en") }
+
+    @MainActor
+    func testTradeContinuationTurkish() { tradeContinuation(language: "tr") }
+
+    @MainActor
+    private func tradeContinuation(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        app.tabBars.buttons[turkish ? "Mesajlar" : "Messages"].tap()
+        XCTAssertTrue(app.staticTexts[turkish ? "Bir ilanı aç, satıcıyla konuş. Tek bir ipucu pazarlığı değiştirebilir." : "Open a listing. Talk to the seller. One clue can change the deal."].waitForExistence(timeout: 5))
+        capture("empty inbox: \(language)", app: app)
+        tap(app.buttons["returnToHunt"], in: app)
+        for slot in 0...1 {
+            tap(app.buttons["listing.listing-42-\(slot)"], in: app)
+            tap(app.buttons["openConversation"], in: app)
+            tap(app.buttons["sendOffer"], in: app)
+            tap(app.buttons["confirmPurchase"], in: app)
+            app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+            tap(app.buttons["inventory.item-42-\(slot)"], in: app)
+            tap(app.buttons["basicInspect"], in: app)
+            tap(app.buttons["createListing"], in: app)
+            tap(app.buttons["publishListing"], in: app)
+            app.terminate()
+            app.launch()
+            XCTAssertTrue(app.buttons["marketBuyerOffer"].waitForExistence(timeout: 5))
+            capture("waiting buyer trade \(slot + 1): \(language)", app: app)
+            tap(app.buttons["marketBuyerOffer"], in: app)
+            XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+            if slot == 1 {
+                app.tabBars.buttons[turkish ? "Envanter" : "Inventory"].tap()
+                tap(app.buttons["inventory.item-42-\(slot)"], in: app)
+                tap(app.buttons["continueOwnedSale"], in: app)
+                XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+                app.tabBars.buttons[turkish ? "Mesajlar" : "Messages"].tap()
+                tap(app.buttons["conversation.listing-42-\(slot)"], in: app)
+                XCTAssertFalse(app.buttons["followDelivery"].exists)
+                tap(app.buttons["continueConversationSale"], in: app)
+                XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
+            }
+            tap(app.buttons["acceptBuyerOffer"], in: app)
+            XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+            app.terminate()
+            app.launch()
+            XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
+            XCTAssertFalse(app.buttons["marketBuyerOffer"].exists)
+            app.tabBars.buttons[turkish ? "Mesajlar" : "Messages"].tap()
+            let archivedRow = app.buttons["conversation.listing-42-\(slot)"]
+            XCTAssertTrue(archivedRow.staticTexts[turkish ? "Satıldı" : "Sold"].exists)
+            capture("completed inbox: \(language)", app: app)
+            tap(archivedRow, in: app)
+            XCTAssertTrue(app.buttons["continueToTrade"].exists)
+            XCTAssertFalse(app.buttons["followDelivery"].exists)
+            XCTAssertFalse(app.buttons["continueToItem"].exists)
+            capture("settled conversation trade \(slot + 1): \(language)", app: app)
+            tap(app.buttons["continueToTrade"], in: app)
+            XCTAssertTrue(app.staticTexts["tradePayoff"].exists)
+            tap(app.buttons["returnToHunt"], in: app)
+            XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
+        }
+    }
+
+    @MainActor
     func testRepairAndLossEnglish() { repairAndLoss(language: "en") }
     @MainActor
     func testRepairAndLossTurkish() { repairAndLoss(language: "tr") }

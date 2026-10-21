@@ -12,6 +12,10 @@ struct ConversationView: View {
     var body: some View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }) {
             let conversation = store.conversation(for: listing)
+            let ownedItem = store.snapshot.player.inventory.first { $0.id == listing.item.id }
+            let pendingShipment = store.snapshot.shipments.first { $0.item.id == listing.item.id && $0.status == .pending }
+            let completedSale = store.snapshot.playerListings.last { $0.itemID == listing.item.id && $0.status == .sold }
+            let activeSale = store.snapshot.playerListings.first { $0.itemID == listing.item.id && $0.status == .active }
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -34,10 +38,19 @@ struct ConversationView: View {
                         if !listing.available {
                             let reason = store.snapshot.marketListingStates.first { $0.id == listing.id }?.closureReason
                             let acquired = store.snapshot.shipments.contains(where: { $0.item.id == listing.item.id }) || store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id })
-                            if !acquired && reason != .purchased {
+                            if let sale = completedSale {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    GameStamp(key: "selling.sold", symbol: "checkmark.seal.fill")
+                                    if let definition = store.definition(for: listing.item) { Text(definition.name).font(.title2.bold()) }
+                                    Text("journey.tradeFinished").font(.subheadline).foregroundStyle(.secondary)
+                                    NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
+                                        Label("trade.receipt", systemImage: "arrow.up.right")
+                                    }.buttonStyle(GameButton()).accessibilityIdentifier("continueToTrade")
+                                }.gameCard()
+                            } else if !acquired && reason != .purchased {
                                 Text(GameText.string(reason?.key ?? "listing.unavailable", locale: locale)).font(.headline)
                             }
-                            if acquired {
+                            if acquired && completedSale == nil {
                                 VStack(alignment: .leading, spacing: 12) {
                                     HStack {
                                         Text("game.dealClosed").font(.caption.weight(.black)).tracking(2)
@@ -51,13 +64,21 @@ struct ConversationView: View {
                                     if let price = conversation.agreedPrice {
                                         Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).foregroundStyle(.white)
                                     }
-                                    Text("game.purchaseRisk").font(.subheadline).foregroundStyle(.white.opacity(0.8))
+                                    Text(ownedItem?.inspected == true ? "journey.inspectedOwned" : "game.purchaseRisk").font(.subheadline).foregroundStyle(.white.opacity(0.8))
                                 }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
                                     .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 22)).id("purchaseCommitment")
-                                if store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id }) {
-                                    NavigationLink { OwnedItemView(store: store, itemID: listing.item.id) } label: { Text("hunt.inspect") }.buttonStyle(GameButton()).accessibilityIdentifier("continueToItem")
+                                if let sale = activeSale {
+                                    NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: { Text("selling.follow") }
+                                        .buttonStyle(GameButton()).accessibilityIdentifier("continueConversationSale")
+                                } else if let item = ownedItem {
+                                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
+                                        Text(item.inspected ? "journey.reviewItem" : "hunt.inspect")
+                                    }.buttonStyle(GameButton()).accessibilityIdentifier("continueToItem")
+                                } else if pendingShipment != nil {
+                                    NavigationLink { InventoryView(store: store) } label: { Text("hunt.delivery") }
+                                        .buttonStyle(GameButton()).accessibilityIdentifier("followDelivery")
                                 } else {
-                                    NavigationLink { InventoryView(store: store) } label: { Text("hunt.delivery") }.buttonStyle(GameButton()).accessibilityIdentifier("followDelivery")
+                                    HuntButton()
                                 }
                             }
                         }
