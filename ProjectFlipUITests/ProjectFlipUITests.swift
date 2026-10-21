@@ -596,6 +596,32 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
     @MainActor
+    func testInspectionReportReopensWithoutChangingTruth() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        app.tabBars.buttons["Inventory"].tap()
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        let condition = app.staticTexts["inspectionCondition"]
+        XCTAssertTrue(condition.waitForExistence(timeout: 5))
+        RunLoop.current.run(until: Date().addingTimeInterval(2))
+        let knownCondition = condition.label
+        tap(app.buttons["openItemFacts"], in: app)
+        app.navigationBars.buttons.firstMatch.tap()
+        RunLoop.current.run(until: Date().addingTimeInterval(2))
+        XCTAssertEqual(condition.label, knownCondition)
+        XCTAssertFalse(app.buttons["skipReveal"].exists)
+        capture("reopened inspection report: en", app: app)
+    }
+
+    @MainActor
     func testCounterDecisionEnglish() { counterDecision(language: "en") }
 
     @MainActor

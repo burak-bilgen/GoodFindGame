@@ -43,7 +43,6 @@ struct OwnedItemView: View {
     let store: GameStore
     let itemID: ItemID
     @Environment(\.locale) private var locale
-    @State private var newReveal = false
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
             ScrollView {
@@ -53,11 +52,12 @@ struct OwnedItemView: View {
                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(.secondary)
                     if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
                         Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
-                            store.perform { try store.inspect(itemID: item.id, professionally: false); newReveal = true }
+                            store.perform { try store.inspect(itemID: item.id, professionally: false) }
                         }.buttonStyle(GameButton()).accessibilityIdentifier("basicInspect")
                     }
                     if item.inspected {
-                        InspectionReveal(store: store, item: item, definition: definition, animateReveal: newReveal)
+                        InspectionReveal(store: store, item: item, definition: definition)
+                            .id(InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID).taskID)
                         if !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
                             ForEach(item.knownActiveDefects, id: \.self) { defect in
                                 RepairDecision(store: store, item: item, definition: definition, defect: defect)
@@ -93,7 +93,6 @@ struct OwnedItemView: View {
                     }.gameCard()
                 }.padding(16)
             }.gameScreen().navigationTitle("inventory.title").navigationBarTitleDisplayMode(.inline)
-                .onChange(of: item.professionallyInspected) { _, inspected in if inspected { newReveal = true } }
         }
     }
 }
@@ -102,10 +101,12 @@ struct InspectionReveal: View {
     let store: GameStore
     let item: ItemInstance
     let definition: ItemDefinition
-    var animateReveal = false
     @Environment(\.locale) private var locale
     @GameReduceMotion private var reduceMotion
     @State private var step = 0
+    private var presentation: InspectionReportPresentation {
+        InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID)
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -151,16 +152,18 @@ struct InspectionReveal: View {
                 }
                 Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)
             }.opacity(step >= 3 ? 1 : 0).accessibilityHidden(step < 3)
-            Button("reveal.continue") { step = 3 }.font(.subheadline.bold()).accessibilityIdentifier("skipReveal")
+            Button("reveal.continue") { step = 3; presentation.markRead(in: .standard) }.font(.subheadline.bold()).accessibilityIdentifier("skipReveal")
                 .opacity(step < 3 ? 1 : 0).allowsHitTesting(step < 3).accessibilityHidden(step >= 3)
         }.gameCard(accent: step >= 2 ? (item.knownActiveDefects.isEmpty ? GameStyle.gain : GameStyle.loss) : nil)
         .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: step)
-        .task(id: "\(item.id.rawValue)-\(item.professionallyInspected)") {
-            let presentationKey = "inspectionPresented-\(store.snapshot.simulationID)-\(item.id.rawValue)-\(item.professionallyInspected)"
-            let unread = !UserDefaults.standard.bool(forKey: presentationKey)
-            guard (animateReveal || unread) && !reduceMotion && !UIAccessibility.isVoiceOverRunning else {
-                step = 3
-                UserDefaults.standard.set(true, forKey: presentationKey)
+        .task(id: presentation.taskID) {
+            let report = presentation
+            let unread = report.needsReveal(in: .standard)
+            guard unread && !reduceMotion && !UIAccessibility.isVoiceOverRunning else {
+                var transaction = Transaction(animation: nil)
+                transaction.disablesAnimations = true
+                withTransaction(transaction) { step = 3 }
+                report.markRead(in: .standard)
                 return
             }
             step = 1; GameFeel.play(.reveal)
@@ -168,7 +171,8 @@ struct InspectionReveal: View {
                 do { try await Task.sleep(for: .milliseconds(650)) } catch { return }
                 if step < next { step = next; if next == 2 && !item.knownActiveDefects.isEmpty { GameFeel.play(.defect) } }
             }
-            UserDefaults.standard.set(true, forKey: presentationKey)
+            guard !Task.isCancelled else { return }
+            report.markRead(in: .standard)
         }
     }
 }

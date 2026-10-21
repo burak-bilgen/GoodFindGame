@@ -183,3 +183,34 @@ and 435-key localization checks pass. Both collapsed counter panels and the
 editable reply were visually reviewed. Original-resolution captures and the
 result summary are stored outside Git in
 `../../Artifacts/CounterChoice-2026-10-21/gallery.html`.
+
+## Inspection reveal memory — 21 October 2026
+
+A targeted navigation repro found that returning from item facts could replay a
+completed inspection. The parent view retained `newReveal = true`, which overrode
+the report's existing read marker. Temporary animation-start logging reproduced
+an unread start followed by a read-report start twice. Changing only that override
+stopped the replay with the same inspection→facts→back interaction. The item's
+condition remained unchanged throughout; this was presentation state, not rerolled
+truth or a save failure.
+
+The retained trigger is removed. Presentation memory now identifies the report
+using only revealed defects/fact keys and its basic/professional tier. Read
+reports open immediately; new earned evidence gets a distinct reveal. Repairs
+and evidence ordering do not replay an old report. Legacy read flags are respected
+and acquire revision metadata when opened. Skip acknowledges the report immediately,
+and a cancelled reveal does not acknowledge an unfinished report. The reserved
+reveal layout remains, avoiding the earlier moving-link regression.
+
+The memory seam first reproduced missing new-evidence reveals with three failed
+expectations; all seven memory tests pass after the fix. Final verification:
+**86 unit tests and eight affected UI journeys, 94 passed with zero failures**.
+UI coverage includes the real navigation return, paid camera/retro reports in both
+languages, connected Turkish/English trades, repair and reduced-motion dark play.
+Debug/testing and Release builds succeed; all 435 localization keys validate.
+Temporary logging is removed from the app. Diagnostic evidence, unmodified screen
+captures and the machine-readable final summary are stored outside Git in
+`../../Artifacts/InspectionRead-2026-10-21/`. The diagnostic harness is clearly
+archived under `debug-repro/` and depends on instrumentation no longer present.
+No economy, simulation, category, inspection capability or game-save schema change
+is included. Physical-device and minimum-runtime limits remain unchanged.

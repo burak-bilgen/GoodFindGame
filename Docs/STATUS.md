@@ -107,3 +107,13 @@ integer-money calculations are preserved. Five affected UI journeys pass (new
 EN/TR counter-choice scenarios plus connected EN/TR and reduced-motion dark
 trades). Debug/Release builds and 435-key localization validation pass. Captures:
 ../../Artifacts/CounterChoice-2026-10-21/gallery.html.
+
+2026-10-21: Fixed completed inspections replaying on return from item facts. The
+retained reveal request overrode a read marker; it is removed. Report presentation
+now follows known evidence/tier revisions, preserving legacy read flags while
+allowing newly earned findings to reveal. Skip acknowledges immediately; repair
+and reordering do not replay an old report. No hidden truth or game-save changes.
+A deterministic diagnostic loop reproduced the replay twice and passed after the
+fix. Final checks: 86 unit tests + 8 affected UI scenarios, 94 passed; Debug and
+Release builds succeed; 435 localization keys validate. Temporary diagnostics are
+removed. See VISUAL_POLISH_QA.md and Artifacts/InspectionRead-2026-10-21.
