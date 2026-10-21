@@ -6,7 +6,7 @@ Priority: prove that one completed trade makes the player want another listing. 
 
 Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
 
-Current localization: 449 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Current localization: 451 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
 
 Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
 
@@ -150,3 +150,14 @@ context corrections. Final: 92 unit tests + 10 affected UI journeys (102 passed)
 Debug/Release builds and 449 localization keys pass. No economy, truth, timing or
 save-format changes. Captures and causal diagnosis:
 ../../Artifacts/OutcomeEvidence-2026-10-21/gallery.html.
+
+2026-10-21: The agreed purchase decision now keeps the original item preview,
+price, unresolved-condition warning and remaining cash together. Insufficient
+funds show the exact shortfall; existing cash and occupied/incoming-space limits
+disable purchase with explanations. An explicit walk-away uses the existing game
+action and returns to the hunt without spending; declined deals remain closed
+after relaunch. Agreement brings this decision into view for either seller replies
+or accepted counters. Verification: 92 unit tests + eight affected UI journeys
+(100 passed); four layout/journey checks passed again after the final item preview;
+Debug/Release builds and 451 localization keys pass. No new economy/save/timer
+systems. Captures: ../../Artifacts/PurchaseCommitment-2026-10-21/gallery.html.

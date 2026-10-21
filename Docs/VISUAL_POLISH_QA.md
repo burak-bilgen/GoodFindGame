@@ -305,3 +305,34 @@ Screens, red/green diagnosis and result summaries:
 ../../Artifacts/OutcomeEvidence-2026-10-21/. Existing simulator-only, human-playtest
 and nonfatal SwiftUI frame-warning limits remain; the pass does not establish
 commercial conversion or enjoyment.
+
+## Purchase commitment and cash context — 21 October 2026
+
+The agreed-price card now identifies the actual item, shows its agreed price and
+unresolved-condition warning, and previews available cash after buying. If the
+wallet is short, the same panel shows the exact additional cash required. The
+existing cash and occupied/incoming-slot limits explain disabled purchase. The
+player can explicitly walk away after agreeing, using the existing negotiation
+action and returning directly to the hunt. Nothing is reserved or debited by a
+preview; future inspection/repair expenses are not included in that cash figure.
+Agreement scrolls to the decision for either an NPC reply or player acceptance of
+a counter, while completed purchases retain the separate deal-closed moment.
+
+The first capture review showed item context had scrolled above the budget card;
+a compact original item preview now keeps the bet tied to the specific find.
+Normal EN, shortfall TR, dark EN and larger Turkish screens were reviewed. Currency
+amounts stay together; accessibility content can scroll rather than shrink prose.
+
+Verification: 92 unit tests and eight affected UI journeys passed together, 100
+checks with zero failures/skips. EN/TR preview/decline checks prove no spending and
+persisted closure after relaunch. Cash-limit checks make three actual purchases,
+leaving 570.85; the next 1,678.08 buy shows a 1,107.23 shortfall and remains disabled.
+Full localized, dark/reduced-motion and larger Turkish trades pass. After the final
+item preview, four representative journeys passed again with the latest Release
+build. The full-inventory UI state is not separately captured; existing purchase
+capacity checks remain in the unit suite. Debug/Release builds succeed and 451
+localization keys validate. No simulation, balance, money, save or timer changes.
+
+Screens and both result summaries are in
+../../Artifacts/PurchaseCommitment-2026-10-21/gallery.html. Existing Simulator,
+physical-feedback, human-enjoyment and nonfatal SwiftUI frame-warning limits apply.

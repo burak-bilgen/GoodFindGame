@@ -8154,6 +8154,42 @@
           }
         }
       }
+    },
+    "purchase.cashAfter": {
+      "comment": "Before purchase: preview of available cash minus the agreed price, or the exact shortfall. No money has moved yet; future inspection/repair expenses are not included.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cash left after buying"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıştan sonra kalacak nakit"
+          }
+        }
+      }
+    },
+    "purchase.cashNeeded": {
+      "comment": "Before purchase: preview of available cash minus the agreed price, or the exact shortfall. No money has moved yet; future inspection/repair expenses are not included.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More cash needed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gereken ek nakit"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

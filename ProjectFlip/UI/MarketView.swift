@@ -46,7 +46,7 @@ struct MarketView: View {
                     Image(systemName: "banknote.fill").foregroundStyle(GameStyle.gain)
                     Text("wallet.cash").font(.caption).foregroundStyle(.secondary)
                     Spacer()
-                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit()
+                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit().accessibilityIdentifier("marketCash")
                         .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
                 }.padding(.horizontal, 4)
                 TradeContinuationPrompt(store: store)

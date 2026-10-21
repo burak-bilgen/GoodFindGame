@@ -557,6 +557,8 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 10))
         capture("seller counter: \(language)", app: app)
         tap(app.buttons["acceptSellerCounter"], in: app)
+        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].isHittable)
+        capture("purchase cash decision: \(language)", app: app)
         tap(app.buttons["confirmPurchase"], in: app)
         XCTAssertTrue(app.buttons["continueToItem"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts[turkish ? "İlan artık mevcut değil" : "Listing unavailable"].exists)
@@ -602,6 +604,66 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["listing.listing-42-1"].exists)
         capture("next hunt: \(language)", app: app)
+    }
+
+    @MainActor
+    func testPurchaseBudgetEnglish() { purchaseBudget(language: "en", spendFirst: false) }
+    @MainActor
+    func testPurchaseBudgetTurkish() { purchaseBudget(language: "tr", spendFirst: false) }
+    @MainActor
+    func testPurchaseCashLimitEnglish() { purchaseBudget(language: "en", spendFirst: true) }
+    @MainActor
+    func testPurchaseCashLimitTurkish() { purchaseBudget(language: "tr", spendFirst: true) }
+
+    @MainActor
+    private func purchaseBudget(language: String, spendFirst: Bool) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        let turkish = language == "tr"
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        let initialCash = app.staticTexts["marketCash"].label
+        if spendFirst {
+            // Three actual purchases leave 570.85; no money or save fixture is injected.
+            for slot in [1, 3, 5] {
+                tap(app.buttons["listing.listing-42-\(slot)"], in: app)
+                tap(app.buttons["openConversation"], in: app)
+                tap(app.buttons["sendOffer"], in: app)
+                tap(app.buttons["confirmPurchase"], in: app)
+                app.navigationBars.buttons.firstMatch.tap()
+                app.navigationBars.buttons.firstMatch.tap()
+            }
+            for _ in 0..<5 {
+                if app.buttons["listing.listing-42-0"].isHittable { break }
+                app.swipeDown()
+            }
+        }
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        XCTAssertTrue(app.buttons["confirmPurchase"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].isHittable)
+        XCTAssertEqual(app.buttons["confirmPurchase"].isEnabled, !spendFirst)
+        let expected = spendFirst ? (turkish ? "1.107,23" : "1,107.23") : (turkish ? "18.321,92" : "18,321.92")
+        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].label.contains(expected))
+        if spendFirst {
+            XCTAssertTrue(app.staticTexts[turkish ? "Kullanılabilir nakdin yeterli değil." : "You don’t have enough available cash."].exists)
+        }
+        capture("purchase budget \(spendFirst ? "shortfall" : "preview"): \(language)", app: app)
+        tap(app.buttons["declinePurchase"], in: app)
+        XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].exists)
+        let unchangedCash = app.staticTexts["marketCash"].label
+        if spendFirst { XCTAssertTrue(unchangedCash.contains(turkish ? "570,85" : "570.85")) }
+        else { XCTAssertEqual(unchangedCash, initialCash) }
+        app.terminate()
+        app.launch()
+        XCTAssertEqual(app.staticTexts["marketCash"].label, unchangedCash)
+        app.tabBars.buttons[turkish ? "Mesajlar" : "Messages"].tap()
+        tap(app.buttons["conversation.listing-42-0"], in: app)
+        XCTAssertFalse(app.buttons["confirmPurchase"].exists)
+        XCTAssertFalse(app.buttons["continueToItem"].exists)
+        XCTAssertFalse(app.buttons["followDelivery"].exists)
     }
 
     @MainActor

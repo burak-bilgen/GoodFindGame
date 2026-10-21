@@ -136,14 +136,7 @@ struct ConversationView: View {
                                 Button("offer.walkAway", role: .destructive) { store.perform { try store.walkAway(listingID: listing.id) } }.font(.subheadline)
                             }.gameCard().id("composer")
                         } else if let price = conversation.agreedPrice, listing.available && !conversation.closed {
-                            VStack(alignment: .leading, spacing: 12) {
-                                GameStamp(key: "offer.agreed", symbol: "checkmark.seal.fill")
-                                Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy))
-                                Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
-                                Button("purchase.confirm") {
-                                    store.perform { try store.purchase(listingID: listing.id); GameFeel.play(.purchase) }
-                                }.buttonStyle(GameButton()).accessibilityIdentifier("confirmPurchase")
-                            }.gameCard()
+                            PurchaseDecision(store: store, listingID: listing.id, price: price).id("purchaseDecision")
                         }
                         if let expiry = conversation.counterExpiresAt, !conversation.closed {
                             DeadlineView(store: store, target: expiry, titleKey: "offer.expires")
@@ -152,12 +145,15 @@ struct ConversationView: View {
                     .animation(reduceMotion ? nil : .easeOut(duration: 0.22), value: conversation.messages.count)
                 }.gameScreen()
                 .onChange(of: conversation.messages.last?.id) { _, _ in
-                    if let last = conversation.messages.last, !last.fromPlayer {
-                        GameFeel.play(conversation.agreedPrice == nil ? .reply : .accepted)
-                        if last.intent.hasPrefix("seller.counter.") { counterComposerExpanded = false }
+                    if let last = conversation.messages.last {
+                        if !last.fromPlayer {
+                            GameFeel.play(conversation.agreedPrice == nil ? .reply : .accepted)
+                            if last.intent.hasPrefix("seller.counter.") { counterComposerExpanded = false }
+                        }
                         withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
                             if last.intent == "purchase.completed" { proxy.scrollTo("purchaseCommitment", anchor: .top) }
-                            else { proxy.scrollTo(last.id, anchor: .center) }
+                            else if conversation.agreedPrice != nil && listing.available { proxy.scrollTo("purchaseDecision", anchor: .top) }
+                            else if !last.fromPlayer { proxy.scrollTo(last.id, anchor: .center) }
                         }
                     }
                 }
