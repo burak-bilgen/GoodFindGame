@@ -1,5 +1,8 @@
 # Visual acceptance follow-up
 
+Historical presentation evidence from the passes below. See [the later clean
+checkpoint](CLEAN_CHECKPOINT.md) for current build/test and runtime-warning status.
+
 This pass builds on `26874d3`; it does not restart the game. The existing 79-test
 simulation, integer money, saved item truth, timers, repairs, ledger, notification
 routing and localization system are preserved.

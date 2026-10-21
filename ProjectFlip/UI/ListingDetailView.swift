@@ -104,7 +104,7 @@ struct ListingDetailView: View {
     }
     private func mysteryStat(_ key: String) -> some View {
         HStack(alignment: .top, spacing: 8) {
-            Text("?").font(.system(.title, design: .rounded, weight: .black)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+            Text(verbatim: "?").font(.system(.title, design: .rounded, weight: .black)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
             Text(GameText.string(key, locale: locale)).font(.caption.bold()).foregroundStyle(.white)
         }.frame(maxWidth: .infinity, alignment: .leading).padding(12)
             .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 12))

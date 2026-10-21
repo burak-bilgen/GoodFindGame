@@ -314,6 +314,34 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertFalse(app.navigationBars["While you were away"].exists)
     }
 
+    /// Keep the real keyboard presentation path in the runtime-warning checkpoint.
+    @MainActor
+    func testMarketPriceKeyboardCanReopen() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US",
+                               "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        app.launch()
+        app.buttons["marketFilters"].tap()
+        let maximum = app.textFields["maximumPrice"]
+        XCTAssertTrue(maximum.waitForExistence(timeout: 5))
+        for _ in 0..<2 {
+            maximum.tap()
+            XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
+            maximum.typeText("9")
+            let done = app.navigationBars.buttons["Done"]
+            XCTAssertTrue(done.waitForExistence(timeout: 5))
+            done.tap()
+            expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: app.keyboards.firstMatch)
+            waitForExpectations(timeout: 5)
+        }
+        XCTAssertEqual(maximum.value as? String, "99")
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Price filters after repeated keyboard dismissal"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
     @MainActor
     func testWatchlistAndFiltersEnglish() { verifyMarketControls(language: "en") }
 

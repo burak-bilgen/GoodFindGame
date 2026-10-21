@@ -1,16 +1,32 @@
-# Milestones
+# Project status
 
-Current: gameplay and UX polish of the existing trading loop. The 20 October 2026 handoff pauses simulation expansion, category depth, new tools/progression, Game Center and monetization. See GAMEPLAY_UX_AUDIT.md for the ranked audit and PLAYTEST_TRADING_FEEL.md for the evidence and remaining human acceptance work.
+Current milestone: **Clean checkpoint + real gameplay validation** (21 October 2026).
+Broader V1 feature work remains paused. Do not resume progression expansion,
+collections, rare variants, client requests, bankruptcy recovery, category unlocks,
+Game Center, monetization or analytics infrastructure before human observations
+justify the next decision.
 
-Priority: prove that one completed trade makes the player want another listing. Preserve existing content and domain systems. Refine discovery, seller reading, inspection reveals, repair-or-sell decisions, buyer anticipation and trade payoff. The new repair option is immediate service, deliberately without a new timer subsystem.
+The existing English/Turkish trading loop includes marketplace discovery, seller
+negotiation, purchase/delivery, knowledge-limited inspection, optional immediate
+repair, resale, buyer negotiation, signed results and transaction history. Saved
+market changes, offline catch-up and notification routes are implemented. Category
+facts are already implemented; timed repairs and broader progression are not.
 
-Historical Phase A verification: 22 unit tests in 11 suites and all 3 UI tests pass on iPhone 18 Pro / iOS 27.2 Simulator. UI tests cover full trading/history in Turkish and English plus accessibility-size Turkish layout and developer controls. Debug test builds and a separate Release build succeed with the iOS 17 deployment target. No physical-device or iOS 17 runtime test has been performed; that runtime is not installed.
+See [the human playtest guide](HUMAN_PLAYTEST.md) for an unassisted session and
+observation sheet, and [the V1 audit](COMPLETION_AUDIT.md) for the paused backlog.
+The main requirements remain in PROJECT_FLIP_CODEX_MASTER_BRIEF.md and
+ENGINEERING_AND_LOCALIZATION_REQUIREMENTS.md under this directory. The obsolete
+root brief has been removed; the corrected Docs brief is preserved.
 
-Current localization: 451 semantic keys have Turkish/English translations, context notes, matching format arguments and plural variants where needed. Dynamic gameplay keys use manual extraction so Xcode cannot mark them stale. Large Turkish listing layout was visually inspected. Light/dark accent and loss colors meet at least 6.64:1 against their intended white/black backgrounds. Full App Store localization/VoiceOver/device QA remains part of later polish.
+Checkpoint verification is recorded in CLEAN_CHECKPOINT.md. Automated checks and
+simulator captures do not establish human enjoyment or retention. Physical-device,
+iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
 
-Release verification: DEBUG tools and isolated-test launch flags are absent from the compiled release binary. No signing team, credentials, personal Xcode data or build products are committed. Xcode emits its App Intents metadata-extraction warning because the app has no App Intents dependency; there are no Swift compiler warnings. The save-failure unit test intentionally logs its simulated disk error.
+## Historical milestone verification
 
-## Milestone verification history
+The entries below describe their dated checkpoints, including earlier incomplete
+states and test counts. Their “next” notes are historical, not the current backlog.
+The current milestone above overrides them.
 
 Task 1 complete: self-contained Git project, iOS 17+ portrait iPhone, localized five-tab shell, unit/UI test targets and localization completeness check.
 
@@ -161,3 +177,17 @@ or accepted counters. Verification: 92 unit tests + eight affected UI journeys
 (100 passed); four layout/journey checks passed again after the final item preview;
 Debug/Release builds and 451 localization keys pass. No new economy/save/timer
 systems. Captures: ../../Artifacts/PurchaseCommitment-2026-10-21/gallery.html.
+
+
+2026-10-21: Clean checkpoint and human-playtest preparation complete. Decorative
+question-mark extraction fixed; 451 English/Turkish keys validate after builds.
+The original pending opaque icon and renderer are retained; the obsolete root
+brief is removed and the corrected Docs brief is unchanged. Keyboard-accessory
+Done toolbars reproduced the invalid-frame warning; moving dismissal to the
+navigation bar resolves it. Full verification: 92 unit tests and all 50 UI
+scenarios pass, with zero failures/skips and zero recorded UI runtime warnings.
+Debug/Release simulator builds pass. Normal Release launches were visually
+reviewed in English/Turkish, retaining the existing save. HUMAN_PLAYTEST.md
+provides the free-play protocol and observation sheet using existing tools only.
+See CLEAN_CHECKPOINT.md for evidence and remaining physical-device/minimum-runtime,
+audio/haptic, accessibility and human enjoyment limits. Broader V1 work stays paused.

@@ -6,12 +6,18 @@ Open `ProjectFlip.xcodeproj`. Requires Xcode with Swift 6 support; deployment ta
 
 ```sh
 python3 Scripts/check_localization.py
-xcodebuild -project ProjectFlip.xcodeproj -scheme ProjectFlip -destination 'platform=iOS Simulator,name=iPhone 18 Pro' -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
+xcodebuild -project ProjectFlip.xcodeproj -scheme ProjectFlip -destination 'platform=iOS Simulator,name=iPhone 18 Pro' -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO -resultBundlePath /tmp/ProjectFlip-checkpoint.xcresult test
+python3 Scripts/check_test_result.py /tmp/ProjectFlip-checkpoint.xcresult
 ```
+
+Use an unused result-bundle path for each run. The result check rejects recorded
+runtime warnings even when XCTest reports a passing interaction.
+
+Current milestone: clean checkpoint and real human gameplay validation. See [the checkpoint record](Docs/CLEAN_CHECKPOINT.md) and [the human playtest guide](Docs/HUMAN_PLAYTEST.md). Broader V1 feature work remains paused.
 
 See Docs for requirements and milestone status. Localization uses semantic keys in a String Catalog; English and Turkish are first-class languages. Keep simulation independent of UI and locale.
 
-Current priority is the trading-feel milestone: marketplace discovery, seller reading, inspection, repair decisions and payoff. Category fidelity, progression, Game Center and monetization remain paused. See [the ranked UX audit](Docs/GAMEPLAY_UX_AUDIT.md), [playtest evidence](Docs/PLAYTEST_TRADING_FEEL.md) and [the visual acceptance follow-up](Docs/VISUAL_POLISH_QA.md).
+The playable loop covers marketplace discovery, seller reading, inspection, repair decisions and payoff. Category fidelity, progression, Game Center and monetization remain paused. See [the ranked UX audit](Docs/GAMEPLAY_UX_AUDIT.md), [playtest evidence](Docs/PLAYTEST_TRADING_FEEL.md) and [the visual acceptance follow-up](Docs/VISUAL_POLISH_QA.md).
 
 ## Play the vertical slice
 

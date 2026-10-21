@@ -43,7 +43,7 @@ struct CreateListingView: View {
                 }
             }.padding(16)
         }.gameScreen().navigationTitle("selling.create").navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
+            .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
             .onAppear {
                 if price.isEmpty, let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
                     switch Result(catching: { try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
@@ -234,7 +234,7 @@ struct SaleListingView: View {
                         .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: listing.status)
                         .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: listing.messages.count)
                 }.gameScreen().navigationTitle("selling.title").navigationBarTitleDisplayMode(.inline)
-                    .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
+                    .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
                     .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
                     .onChange(of: listing.messages.last?.id) { _, _ in
                         counterComposerExpanded = false

@@ -14,4 +14,4 @@ Existing saves decode absent optional fields. Old items retain their exact condi
 
 The localized findings screen is reached from an owned item. Native verification covers camera and retro purchase → self-check with locked advanced field → expert completion → actual field value → relaunch with the same value, in both languages. Numerical/category findings, tool/rank limits, old-item compatibility, exact original starter price, unchanged valuation and invalid-save rejection also have domain tests. Final evidence is recorded in STATUS.md.
 
-Timed repairs, rare editions/collections, broader progression, human economy validation and the final game interface/art remain required work.
+Category facts and the current visual trading loop are implemented. Timed repairs, rare editions/collections and broader progression remain paused. Human economy and repeat-play validation are the current priority; see HUMAN_PLAYTEST.md.

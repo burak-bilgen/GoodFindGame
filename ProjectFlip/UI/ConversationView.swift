@@ -159,7 +159,7 @@ struct ConversationView: View {
                 }
             }
             .navigationTitle("messages.title").navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("action.done") { editing = false } } }
+            .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
             .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale) } }
         }
     }

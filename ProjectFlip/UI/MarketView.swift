@@ -105,9 +105,8 @@ struct MarketView: View {
                     Label("trend.title", systemImage: "chart.line.uptrend.xyaxis")
                 }.accessibilityIdentifier("openMarketTrends")
             }
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("action.done") { priceInputFocused = false }
+            ToolbarItem(placement: .topBarTrailing) {
+                if priceInputFocused { Button("action.done") { priceInputFocused = false } }
             }
         }
         .searchable(text: $search, prompt: "market.search")

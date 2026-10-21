@@ -1,4 +1,4 @@
-/// Phase A uses immediate interactions. Phase B will add debug/production event timings here.
+/// Shared economic constants; event pacing lives in SimulationTiming.
 struct GameBalanceConfig: Sendable {
     let startingCash: Money
     let inventorySlots: Int
