@@ -58,4 +58,23 @@ extension GameStore {
         try commit(next)
     }
 }
+extension GameStore {
+    /// Isolated UI tests only; uses the real purchase, inspection and settlement engines.
+    func debugSeedCompetitionOnboarding() throws {
+        var next = snapshot
+        let now = Date.now
+        for listing in Array(next.market.prefix(3)) {
+            var agreement = NegotiationState(listingID: listing.id, patience: 100)
+            agreement.agreedPrice = listing.askingPrice
+            next.conversations.append(agreement)
+            next = try PurchaseEngine().buy(listingID: listing.id, state: next, now: now)
+            next = try InspectionEngine().inspect(itemID: listing.item.id, professionally: false, state: next)
+            next = try ResaleEngine().create(itemID: listing.item.id, askingPrice: listing.askingPrice, state: next, definitions: definitions, now: now)
+            guard let id = next.playerListings.last?.id else { throw TradingError.unavailable }
+            next = try BuyerEngine().generateOffer(listingID: id, state: next, definitions: definitions)
+            next = try BuyerEngine().accept(listingID: id, state: next, now: now)
+        }
+        try commit(next)
+    }
+}
 #endif

@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ProfileView: View {
     let store: GameStore
+    var competition: CompetitionStore? = nil
+    var retryCompetition: () -> Void = {}
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
     @AppStorage("gameSoundEnabled") private var sounds = false
@@ -27,6 +29,12 @@ struct ProfileView: View {
                     Divider().overlay(GameStyle.line)
                     LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
                 }.gameCard()
+                if let competition {
+                    NavigationLink { CompetitionView(career: store, competition: competition) } label: { GameMenuRow(titleKey: "competition.title", symbol: "trophy.fill") }.buttonStyle(.plain).accessibilityIdentifier("openCompetition")
+                } else {
+                    Button(action: retryCompetition) { GameMenuRow(titleKey: "competition.title", symbol: "arrow.clockwise") }.buttonStyle(.plain)
+                    Text("competition.error").font(.caption)
+                }
                 NavigationLink { TraderCareerView(store: store) } label: { GameMenuRow(titleKey: "career.title", symbol: "seal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openCareer")
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("profileClients")
                 NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain).accessibilityIdentifier("openCollections")

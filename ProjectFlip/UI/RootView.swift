@@ -4,6 +4,7 @@ import OSLog
 struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
+    @State private var competition: CompetitionStore?
     @State private var selectedTab = 0
     @State private var keyboardVisible = false
     @State private var marketRoot = UUID()
@@ -25,7 +26,7 @@ struct RootView: View {
             TabView(selection: $selectedTab) {
                 NavigationStack {
                     if let store {
-                        MarketView(store: store)
+                        MarketView(store: store, competition: competition)
                     } else if failed {
                         ContentUnavailableView {
                             Label("save.error.title", systemImage: "exclamationmark.triangle")
@@ -93,7 +94,7 @@ struct RootView: View {
                 }
                 .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
                 NavigationStack {
-                    if let store { ProfileView(store: store) }
+                    if let store { ProfileView(store: store, competition: competition, retryCompetition: loadCompetition) }
                 }
                 .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
             }
@@ -135,6 +136,9 @@ struct RootView: View {
                 }
             }
         }
+        .onChange(of: GameCenterService.shared.networkGeneration) { _, _ in
+            if let competition, GameCenterService.shared.playerID != nil { Task { await competition.sync(using: GameCenterService.shared) } }
+        }
         .onChange(of: inbox.pending) { _, _ in consumeNotificationRoute() }
         .onChange(of: locale.identifier) { _, _ in configureNotifications() }
         .task { if store == nil { load() } }
@@ -142,6 +146,8 @@ struct RootView: View {
             guard scenePhase == .active else { return }
             store?.perform { try store?.catchUp(showSummary: true) }
             configureNotifications()
+            if let store { competition?.observeCareer(store.snapshot) }
+            if GameCenterService.shared.playerID != nil, let competition { Task { await competition.sync(using: GameCenterService.shared) } }
             while !Task.isCancelled {
                 if store?.errorKey == nil { store?.perform { try store?.processDueEvents() } }
                 do { try await Task.sleep(for: .seconds(1)) }
@@ -170,13 +176,16 @@ struct RootView: View {
             let timing = SimulationTiming.current
             #endif
             #if DEBUG
+            let competitionFixture = isolated && arguments.contains("--uitest-competition-fixture") && !FileManager.default.fileExists(atPath: repository.url.path)
             let recoveryFixture = isolated && arguments.contains("--uitest-recovery-fixture") && !FileManager.default.fileExists(atPath: repository.url.path)
             #endif
             store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
             #if DEBUG
+            if competitionFixture { try store?.debugSeedCompetitionOnboarding() }
             if recoveryFixture, let store { var fixture = store.snapshot; fixture.player.cash = .zero; try store.commit(fixture) }
             #endif
             failed = false
+            loadCompetition()
             configureNotifications()
             #if DEBUG
             if let index = arguments.firstIndex(of: "--uitest-route"), arguments.indices.contains(index + 1) { inbox.receive(arguments[index + 1]) }
@@ -189,12 +198,32 @@ struct RootView: View {
             #endif
         }
     }
+    private func loadCompetition() {
+        guard let store else { return }
+        do {
+            var repository = try SaveRepository.application()
+            #if DEBUG
+            let arguments = ProcessInfo.processInfo.arguments
+            if let index = arguments.firstIndex(of: "--uitest-save"), arguments.indices.contains(index + 1), let id = UUID(uuidString: arguments[index + 1]) {
+                repository = SaveRepository(url: FileManager.default.temporaryDirectory.appendingPathComponent("UITests/\(id.uuidString).json"))
+            }
+            #endif
+            let root = repository.url.deletingLastPathComponent().appendingPathComponent(repository.url.deletingPathExtension().lastPathComponent + "-competition")
+            competition = try CompetitionStore(root: root, definitions: store.definitions)
+            competition?.observeCareer(store.snapshot)
+            configureNotifications()
+        } catch { GameCenterService.shared.debugFailure(error) }
+    }
     private func configureNotifications() {
         guard let store else { return }
         let definitions = store.definitions
         let service = notificationService
         let locale = locale
-        store.onSnapshotCommitted = { state in service.requestSync(state: state, definitions: definitions, locale: locale) }
+        let competition = competition
+        store.onSnapshotCommitted = { state in
+            service.requestSync(state: state, definitions: definitions, locale: locale)
+            competition?.observeCareer(state)
+        }
         service.requestSync(state: store.snapshot, definitions: definitions, locale: locale)
     }
 

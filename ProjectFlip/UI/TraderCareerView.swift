@@ -41,8 +41,10 @@ struct TraderCareerView: View {
                         Text(GameText.format("career.trust", locale: locale, store.snapshot.player.reputation)).font(.subheadline)
                     }
                 }.gameCard(accent: GameStyle.amber)
+                if store.competitionPeriod == nil {
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("careerClients")
                 NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain)
+                }
                 Text("career.principle").font(.subheadline).foregroundStyle(.secondary)
                 ForEach(CareerTier.allCases, id: \.self) { tier in
                     let earned = store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue >= tier.rawValue

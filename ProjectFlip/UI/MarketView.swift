@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MarketView: View {
     let store: GameStore
+    var competition: CompetitionStore? = nil
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
@@ -38,13 +39,23 @@ struct MarketView: View {
                 }.padding(14).background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
                 TradingDeskHeader(store: store)
-                if store.snapshot.economyMigrationNotice {
+                if store.snapshot.economyMigrationNotice || store.snapshot.sharedMarketMigrationNotice {
                     NavigationLink { MarketSettingsView(store: store) } label: {
                         GameMenuRow(titleKey: "region.migrationTitle", symbol: "info.circle.fill")
                     }.buttonStyle(.plain).accessibilityIdentifier("economyMigrationNotice")
                 }
+                if store.competitionPeriod == nil, let competition,
+                   ((try? TradeLedger.records(from: store.snapshot).filter { $0.kind == .market || $0.kind == .client }.count) ?? 0) >= 3,
+                   competition.saved.runs.isEmpty {
+                    NavigationLink { CompetitionView(career: store, competition: competition) } label: {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Label("competition.weekly", systemImage: "trophy.fill").font(.headline)
+                            Text("competition.invite").font(.subheadline)
+                        }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
+                    }.buttonStyle(.plain)
+                }
                 CareerHuntPrompt(store: store)
-                if store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil {
+                if store.competitionPeriod == nil && (store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil) {
                     NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("marketRecovery")
                 }
                 OpenTradesView(store: store)

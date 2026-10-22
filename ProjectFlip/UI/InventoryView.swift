@@ -59,7 +59,7 @@ struct OwnedItemView: View {
                         Text("recovery.consigned").font(.headline).foregroundStyle(GameStyle.amber)
                         if item.inspected { NavigationLink("recovery.finish") { RecoveryDeskView(store: store) }.buttonStyle(GameButton()) }
                     }
-                    if item.inspected && CollectionDefinition.all.contains(where: { $0.models.contains(item.definitionID) }) {
+                    if store.competitionPeriod == nil && item.inspected && CollectionDefinition.all.contains(where: { $0.models.contains(item.definitionID) }) {
                         Button(store.snapshot.collections.displayed.contains(item.id) ? "collections.release" : "collections.display") {
                             store.perform {
                                 let completed = store.snapshot.collections.completedBefore.count
