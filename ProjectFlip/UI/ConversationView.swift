@@ -204,11 +204,11 @@ struct DialogueBubble: View {
                 if let amount = message.amount { Text(amount.formatted(locale: locale)).font(.title3.bold()).monospacedDigit() }
                 if let defect = message.defect { Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill").font(.subheadline.bold()).foregroundStyle(GameStyle.loss) }
             }.padding(16)
-                .background(message.fromPlayer ? GameStyle.gain.opacity(0.16) : Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 18))
+                .background(message.fromPlayer ? GameStyle.gain.opacity(0.16) : GameStyle.panel, in: RoundedRectangle(cornerRadius: 18))
                 .overlay(alignment: message.fromPlayer ? .trailing : .leading) {
                     Capsule().fill(message.fromPlayer ? GameStyle.gain : GameStyle.amber).frame(width: 3).padding(.vertical, 14)
                 }
             if !message.fromPlayer { Spacer(minLength: 32) }
-        }.accessibilityElement(children: .combine)
+        }.accessibilityElement(children: .combine).gameEntrance()
     }
 }

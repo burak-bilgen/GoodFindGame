@@ -9,7 +9,7 @@ struct DeveloperToolsView: View {
     @State private var selectedListing = ""
 
     var body: some View {
-        Form {
+        GameForm {
             Section("debug.economy") {
                 Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit()
                 Button {
@@ -50,6 +50,7 @@ struct DeveloperToolsView: View {
                 }
             }
         }
+        .gameScreen()
         .navigationTitle("debug.title")
         .confirmationDialog("debug.resetConfirm", isPresented: $confirmReset, titleVisibility: .visible) {
             Button("debug.reset", role: .destructive) { store.perform { try store.debugReset(); selectedListing = "" } }

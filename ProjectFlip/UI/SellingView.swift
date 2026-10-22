@@ -86,7 +86,7 @@ struct SellingView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
-                GameEyebrow(key: "game.stall")
+                GameStageBanner(titleKey: "selling.title", eyebrowKey: "game.stall", symbol: "tag.fill")
                 if store.snapshot.playerListings.isEmpty { Text("selling.empty").foregroundStyle(.secondary) }
                 ForEach(store.snapshot.playerListings.reversed()) { listing in
                     NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: {
@@ -245,7 +245,7 @@ struct SaleListingView: View {
                             if listing.status == .active {
                                 DisclosureGroup("selling.updatePrice") {
                                     VStack(spacing: 12) {
-                                        TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(.roundedBorder).accessibilityIdentifier("salePrice")
+                                        TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(GamePriceFieldStyle()).accessibilityIdentifier("salePrice")
                                         Button("selling.updatePrice") {
                                             editing = false
                                             store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale)) }
@@ -325,8 +325,9 @@ struct TradePayoff: View {
             }
         }
         .padding(22).frame(maxWidth: .infinity, alignment: .leading).foregroundStyle(.white)
-        .background(LinearGradient(colors: [Color(red: 0.13, green: 0.23, blue: 0.28), GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 26))
+        .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 26))
         .overlay(RoundedRectangle(cornerRadius: 26).strokeBorder(GameStyle.amber.opacity(0.35), lineWidth: 1))
+        .overlay { if record.netProfit != .zero { GamePayoffBurst(positive: record.netProfit > .zero) } }
         .onAppear { withAnimation(reduceMotion ? nil : .easeOut(duration: 0.4)) { appeared = true } }
     }
 }

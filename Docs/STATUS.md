@@ -1,15 +1,15 @@
 # Project status
 
-Current milestone: **Game-style visual direction and animation pass** (22 October 2026). The owner reported uniform staged photographs, arbitrary names and clipped titles, then requested full photos without side bands. SELLER_PHOTO_CORRECTION.md records this correction; PRODUCT_ART.md preserves the original art checkpoint. The later feedback that trading feels too random/frustrating remains unresolved.
+Current milestone: **Authorized trading-fairness, game-theme and animation implementation completed; ready for human playtesting** (22 October 2026). FAIR_TRADING.md records the behavioral corrections. GAME_INTERFACE.md records the central night-market theme, animation pass, all-screen audit, currency correction and verification. Human acceptance of fairness, pace, visual style and enjoyment remains open.
 
 ## Ordered work queue
 
 1. **Done:** varied seller photos, concise EN/TR product names and square photo frames with the complete product visible; affected screens verified in both languages and large text.
 2. **Done:** audio-thread warning reproduced and corrected; Debug/Release builds pass. Final checkpoint run: 117 unit + seven focused UI tests, zero failures/skips/runtime warnings. Exact commit is available in Git history for this report.
 3. **Implemented; human acceptance open:** first-counter coin-flip withdrawal removed, final offers explained, seller fatigue no longer raises a previously acceptable price, price/attention cliffs smoothed and normal response times shortened. All 121 unit + five affected UI tests pass with zero runtime warnings; Debug/Release pass. See FAIR_TRADING.md. Unscripted fairness/pace acceptance remains open.
-4. **In progress — final queued milestone:** redesign the interface's visual direction so it feels like a mobile game. Rework colors, backgrounds, surfaces, typography, screen composition and feedback around the existing trading loop. Include a cohesive animation pass: screen/card entrance, tab transitions, button presses, real incoming messages/offers, pending-process motion, inspection reveals and profit/loss feedback. Honor Reduce Motion, keep controls stable under taps, and animate real state without inventing activity or revealing hidden truth. Review an actual cohesive visual direction before applying it across screens. This is not authorization for additional gameplay/progression systems.
+4. **Implemented; human acceptance open:** central game theme across main screens, native lists/forms, sheets and launch appearance; custom navigation dock; shared panel/input/button styles; radar, pending indicators, entry fades, status/tab feedback, inspection motion and payoff particles. Reduce Motion is honored. English now displays $, Turkish ₺. See GAME_INTERFACE.md. No further feature milestone is authorized.
 
-The owner explicitly placed the interface redesign at the end of this queue on 22 October 2026. Finish the current photo/layout correction and technical checkpoint first.
+The owner explicitly placed the interface redesign at the end of this queue on 22 October 2026. The implementation queue is complete; the next decision should come from actual human observations.
 Broader V1 feature work remains paused. Do not resume progression expansion,
 collections, rare variants, client requests, bankruptcy recovery, category unlocks,
 Game Center, monetization or analytics infrastructure before human observations
@@ -32,13 +32,13 @@ work and verification are recorded in LIVING_MARKETPLACE.md. Automated checks an
 simulator captures do not establish human enjoyment or retention. Physical-device,
 iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
 
-Current scoped validation (22 October 2026): Debug/Release builds pass; all 117
-unit tests and seven affected UI journeys pass, with zero failures/skips/recorded
-runtime warnings. All 539 EN/TR keys validate. SELLER_PHOTO_CORRECTION.md records
-the correction, known limits and authoritative evidence. The full 53-case UI suite
-last passed at the preceding behavior checkpoint; it was not rerun in full for
-this presentation/audio correction. The normal Release simulator build launches
-with the existing save. Human difficulty and enjoyment acceptance remain open.
+Current scoped validation (22 October 2026): Debug/Release builds pass; all 121
+unit tests and 55 distinct UI tests have passing outcomes across full-suite shards
+and recorded targeted follow-ups, with zero skipped cases or runtime warnings.
+All 540 EN/TR keys validate. GAME_INTERFACE.md explains the early test-harness
+failures and successful retries without claiming the initial full bundles were
+single green runs. The main brief remains byte-for-byte intact. Human difficulty,
+pace, visual-style and enjoyment acceptance remain open.
 
 ## Historical milestone verification
 

@@ -5,7 +5,7 @@ struct KnowledgeView: View {
     @Environment(\.locale) private var locale
 
     var body: some View {
-        List {
+        GameList {
             Text("knowledge.explanation").foregroundStyle(.secondary)
             ForEach(ItemCategory.allCases, id: \.self) { category in
                 Section(GameText.string("category.\(category.rawValue)", locale: locale)) {
@@ -23,7 +23,7 @@ struct KnowledgeView: View {
                     }
                 }
             }
-        }.navigationTitle("knowledge.title")
+        }.gameScreen().navigationTitle("knowledge.title")
     }
 }
 

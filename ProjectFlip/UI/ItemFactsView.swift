@@ -7,7 +7,7 @@ struct ItemFactsView: View {
 
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }) {
-            List {
+            GameList {
                 if let definition = store.definition(for: item) { Text(definition.displayName(locale: locale)).font(.headline) }
                 Text("facts.explanation").foregroundStyle(.secondary)
                 if !(item.repairedDefects ?? []).isEmpty { Text("facts.originalReport").font(.subheadline).foregroundStyle(GameStyle.gain) }
@@ -33,7 +33,7 @@ struct ItemFactsView: View {
                     Text("facts.legacyUnavailable")
                 }
                 Text("facts.valueGuide").font(.caption).foregroundStyle(.secondary)
-            }.navigationTitle("facts.title")
+            }.gameScreen().navigationTitle("facts.title")
         } else {
             ContentUnavailableView("listing.unavailable", systemImage: "shippingbox")
         }

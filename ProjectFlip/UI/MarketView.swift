@@ -30,6 +30,12 @@ struct MarketView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 14) {
+                HStack(spacing: 10) {
+                    Image(systemName: "magnifyingglass").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+                    TextField("market.search", text: $search).textInputAutocapitalization(.never).autocorrectionDisabled()
+                        .accessibilityIdentifier("marketSearch")
+                }.padding(14).background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 12))
+                    .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
                 HStack(alignment: .center, spacing: 14) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("hunt.eyebrow").font(.caption2.weight(.heavy)).tracking(2).foregroundStyle(GameStyle.amber)
@@ -37,18 +43,22 @@ struct MarketView: View {
                         Text("market.subtitle").font(.caption).foregroundStyle(.white.opacity(0.76))
                     }
                     Spacer(minLength: 0)
-                    Image(systemName: "viewfinder").font(.system(size: 38, weight: .light)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                    GameScanner()
                 }
                 .padding(18)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(LinearGradient(colors: [Color(red: 0.16, green: 0.26, blue: 0.32), GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 22))
-                HStack(spacing: 8) {
-                    Image(systemName: "banknote.fill").foregroundStyle(GameStyle.gain)
-                    Text("wallet.cash").font(.caption).foregroundStyle(.secondary)
-                    Spacer()
-                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy)).monospacedDigit().accessibilityIdentifier("marketCash")
-                        .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
-                }.padding(.horizontal, 4)
+                .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 22))
+                HStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "banknote.fill").font(.title2).foregroundStyle(GameStyle.amber)
+                        .padding(12).background(GameStyle.amber.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
+                        Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .black)).monospacedDigit().accessibilityIdentifier("marketCash")
+                            .lineLimit(1).minimumScaleFactor(0.5)
+                            .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
+                    }
+                    Spacer(minLength: 0)
+                }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
                 OpenTradesView(store: store)
                 TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
@@ -66,8 +76,8 @@ struct MarketView: View {
                                 Text(GameText.string("category.\(value.rawValue)", locale: locale)).tag(Optional(value))
                             }
                         }.accessibilityIdentifier("marketCategory")
-                        TextField("market.minimumPrice", text: $minimumPrice).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("minimumPrice")
-                        TextField("market.maximumPrice", text: $maximumPrice).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("maximumPrice")
+                        TextField("market.minimumPrice", text: $minimumPrice).textFieldStyle(GamePriceFieldStyle()).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("minimumPrice")
+                        TextField("market.maximumPrice", text: $maximumPrice).textFieldStyle(GamePriceFieldStyle()).keyboardType(.decimalPad).focused($priceInputFocused).accessibilityIdentifier("maximumPrice")
                         Toggle("market.newest", isOn: $newestFirst)
                     }
                     if filtersExpanded || listings.isEmpty {
@@ -110,7 +120,6 @@ struct MarketView: View {
                 if priceInputFocused { Button("action.done") { priceInputFocused = false } }
             }
         }
-        .searchable(text: $search, prompt: "market.search")
     }
 }
 
@@ -166,9 +175,10 @@ struct ListingCard: View {
             }.padding(.horizontal, 3)
         }
         .padding(10)
-        .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 24))
-        .overlay(RoundedRectangle(cornerRadius: 24).strokeBorder(.primary.opacity(0.10), lineWidth: 1))
-        .background(RoundedRectangle(cornerRadius: 24).fill(GameStyle.ink.opacity(0.15)).offset(y: 4))
+        .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.panel], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 18))
+        .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(GameStyle.category(definition.category).opacity(0.6), lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: 18).fill(.black.opacity(0.5)).offset(y: 5))
+        .gameEntrance()
     }
 }
 

@@ -9,7 +9,7 @@ struct NotificationSettingsView: View {
     @State private var requesting = false
 
     var body: some View {
-        Form {
+        GameForm {
             Section {
                 Text("notifications.explanation")
                 Text(GameText.string("notifications.status.\(service.authorization.rawValue)", locale: locale))
@@ -45,6 +45,7 @@ struct NotificationSettingsView: View {
                 }
             }
         }
+        .gameScreen()
         .navigationTitle("notifications.settings")
         .task { service.requestSync(state: store.snapshot, definitions: store.definitions, locale: locale) }
     }
@@ -79,6 +80,7 @@ struct NotificationRouteView: View {
             case .unavailable: unavailable
             }
             }
+            .gameScreen()
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("action.close") { dismiss() }.accessibilityIdentifier("closeNotificationDestination") } }
         }
     }
@@ -86,7 +88,8 @@ struct NotificationRouteView: View {
         VStack(spacing: 20) {
             Text("away.alreadyHandled")
             NavigationLink("trade.history") { TradeHistoryView(store: store) }
-        }.padding().navigationTitle("notifications.settings")
+        }.padding().frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .gameScreen().navigationTitle("notifications.settings")
     }
 }
 

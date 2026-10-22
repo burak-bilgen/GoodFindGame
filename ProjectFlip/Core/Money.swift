@@ -32,9 +32,9 @@ struct Money: Codable, Hashable, Comparable, Sendable {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.numberStyle = .currency
-        // Stable neutral credits globally until regional economy tables exist.
-        formatter.currencyCode = locale.language.languageCode?.identifier == "tr" ? "TRY" : "XXX"
-        formatter.currencySymbol = locale.language.languageCode?.identifier == "tr" ? "₺" : "¤"
+        // Display the owner's chosen language currency without changing saved units.
+        formatter.currencyCode = locale.language.languageCode?.identifier == "tr" ? "TRY" : "USD"
+        formatter.currencySymbol = locale.language.languageCode?.identifier == "tr" ? "₺" : "$"
         if signed && minorUnits > 0 { formatter.positivePrefix = "+" + formatter.positivePrefix }
         return formatter.string(from: NSDecimalNumber(decimal: Decimal(minorUnits) / 100)) ?? NSDecimalNumber(value: minorUnits).stringValue
     }

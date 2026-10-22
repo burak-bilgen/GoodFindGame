@@ -46,7 +46,10 @@ struct OpenTradesView: View {
         let sales = store.snapshot.playerListings.filter { $0.status == .active }
         if !sellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                Text("living.inMotion").font(.caption.bold()).foregroundStyle(.secondary)
+                HStack(spacing: 8) {
+                    GameActivityLights()
+                    Text("living.inMotion").font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                }
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 14) {
                 if let seller = sellers.first {

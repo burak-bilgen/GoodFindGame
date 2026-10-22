@@ -5,6 +5,7 @@ struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
     @State private var selectedTab = 0
+    @State private var keyboardVisible = false
     @State private var marketRoot = UUID()
     @State private var notificationService = LocalNotificationService.shared
     @State private var inbox = NotificationInbox.shared
@@ -19,80 +20,87 @@ struct RootView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            NavigationStack {
-                if let store {
-                    MarketView(store: store)
-                } else if failed {
-                    ContentUnavailableView {
-                        Label("save.error.title", systemImage: "exclamationmark.triangle")
-                    } description: { Text("save.error.load") } actions: {
-                        Button("action.retry", action: load)
-                    }
-                } else { ProgressView() }
+        VStack(spacing: 0) {
+            TabView(selection: $selectedTab) {
+                NavigationStack {
+                    if let store {
+                        MarketView(store: store)
+                    } else if failed {
+                        ContentUnavailableView {
+                            Label("save.error.title", systemImage: "exclamationmark.triangle")
+                        } description: { Text("save.error.load") } actions: {
+                            Button("action.retry", action: load)
+                        }
+                    } else { ProgressView() }
 
-            }
-            .id(marketRoot)
-            .tabItem { Label("market.title", systemImage: "square.grid.2x2") }.tag(0)
-            NavigationStack {
-                if let store {
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 16) {
-                            GameEyebrow(key: "game.inbox")
-                            if store.snapshot.conversations.isEmpty {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    Image(systemName: "bubble.left.and.bubble.right.fill").font(.largeTitle).foregroundStyle(GameStyle.gain).accessibilityHidden(true)
-                                    Text("messages.empty").font(.title3.bold())
-                                    HuntButton()
-                                }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
-                            }
-                            ForEach(store.snapshot.conversations) { conversation in
-                                NavigationLink {
-                                    ConversationView(store: store, listingID: conversation.listingID)
-                                } label: {
-                                    if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
-                                        HStack(spacing: 12) {
-                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
-                                            VStack(alignment: .leading, spacing: 6) {
-                                                Text(definition.displayName(locale: locale)).font(.headline)
-                                                Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
-                                                if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
-                                                    if resale.status == .sold {
-                                                        Label("selling.sold", systemImage: "checkmark.seal.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                                        if let amount = resale.soldPrice { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
-                                                    } else {
-                                                        Label(resale.offers.last.map { [.pending, .countered].contains($0.status) } == true ? "journey.offerWaiting" : "selling.live", systemImage: "tag.fill")
-                                                            .font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                                    }
-                                                } else if conversation.pendingReplyEventID != nil {
-                                                    Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
-                                                } else if let last = conversation.messages.last {
-                                                    Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
-                                                    if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
-                                                }
-                                            }
-                                        }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
-                                    }
-                                }.buttonStyle(.plain).accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
-                            }
-                        }.padding(16)
-                    }.gameScreen().navigationTitle("messages.title")
                 }
+                .id(marketRoot)
+                .tabItem { Label("market.title", systemImage: "square.grid.2x2") }.tag(0)
+                NavigationStack {
+                    if let store {
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 16) {
+                                GameStageBanner(titleKey: "messages.title", eyebrowKey: "game.inbox", symbol: "bubble.left.and.bubble.right.fill")
+                                if store.snapshot.conversations.isEmpty {
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        Image(systemName: "bubble.left.and.bubble.right.fill").font(.largeTitle).foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+                                        Text("messages.empty").font(.title3.bold())
+                                        HuntButton()
+                                    }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
+                                }
+                                ForEach(store.snapshot.conversations) { conversation in
+                                    NavigationLink {
+                                        ConversationView(store: store, listingID: conversation.listingID)
+                                    } label: {
+                                        if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
+                                            HStack(spacing: 12) {
+                                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
+                                                VStack(alignment: .leading, spacing: 6) {
+                                                    Text(definition.displayName(locale: locale)).font(.headline)
+                                                    Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
+                                                    if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
+                                                        if resale.status == .sold {
+                                                            Label("selling.sold", systemImage: "checkmark.seal.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                                                            if let amount = resale.soldPrice { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                        } else {
+                                                            Label(resale.offers.last.map { [.pending, .countered].contains($0.status) } == true ? "journey.offerWaiting" : "selling.live", systemImage: "tag.fill")
+                                                                .font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                                                        }
+                                                    } else if conversation.pendingReplyEventID != nil {
+                                                        Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
+                                                    } else if let last = conversation.messages.last {
+                                                        Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                                                        if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                    }
+                                                }
+                                            }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
+                                        }
+                                    }.buttonStyle(.plain).accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
+                                }
+                            }.padding(16)
+                        }.gameScreen().navigationTitle("messages.title")
+                    }
+                }
+                .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }.tag(1)
+                NavigationStack {
+                    if let store { InventoryView(store: store) }
+                }
+                .tabItem { Label("inventory.title", systemImage: "shippingbox") }.tag(2)
+                NavigationStack {
+                    if let store { SellingView(store: store) }
+                }
+                .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
+                NavigationStack {
+                    if let store { ProfileView(store: store) }
+                }
+                .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
             }
-            .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }.tag(1)
-            NavigationStack {
-                if let store { InventoryView(store: store) }
-            }
-            .tabItem { Label("inventory.title", systemImage: "shippingbox") }.tag(2)
-            NavigationStack {
-                if let store { SellingView(store: store) }
-            }
-            .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
-            NavigationStack {
-                if let store { ProfileView(store: store) }
-            }
-            .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
+            .toolbar(.hidden, for: .tabBar)
+            if !keyboardVisible { GameDock(selection: $selectedTab, waitingBuyers: waitingBuyerCount) }
         }
+        .background(GameStyle.ink)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in keyboardVisible = true }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in keyboardVisible = false }
         .environment(\.returnToHunt, {
             notificationRoute = nil
             store?.perform { try store?.acknowledgeAwayReport() }
@@ -141,7 +149,6 @@ struct RootView: View {
             if phase != .active { store?.perform { try store?.catchUp() } }
         }
         .font(.system(.body, design: .rounded))
-        .tint(Color("AccentColor"))
     }
     private func load() {
         do {

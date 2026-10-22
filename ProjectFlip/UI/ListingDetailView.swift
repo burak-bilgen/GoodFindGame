@@ -79,7 +79,7 @@ struct ListingDetailView: View {
                         }
                         .buttonStyle(GameButton())
                         .accessibilityIdentifier("openConversation")
-                        .padding().background(.regularMaterial)
+                        .padding().background(GameStyle.ink.opacity(0.98))
                 }
             }
             .toolbar {

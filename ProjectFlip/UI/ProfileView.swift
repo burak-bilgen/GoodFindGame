@@ -5,18 +5,29 @@ struct ProfileView: View {
     @Environment(\.locale) private var locale
     @AppStorage("gameSoundEnabled") private var sounds = false
     var body: some View {
-        List {
-            Text("profile.intro").font(.headline)
-            LabeledContent("wallet.cash") { Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit() }
-            LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number) }
-            NavigationLink("knowledge.title") { KnowledgeView(store: store) }.accessibilityIdentifier("openKnowledge")
-            NavigationLink("trade.history") { TradeHistoryView(store: store) }.accessibilityIdentifier("openTradeHistory")
-            NavigationLink("notifications.settings") { NotificationSettingsView(store: store) }.accessibilityIdentifier("notificationSettings")
-            Toggle("feel.sounds", isOn: $sounds)
-            Text("feel.soundsHint").font(.caption).foregroundStyle(.secondary)
-            #if DEBUG
-            NavigationLink("debug.title") { DeveloperToolsView(store: store) }.accessibilityIdentifier("developerTools")
-            #endif
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(spacing: 16) {
+                    Image(systemName: "person.crop.square.fill").font(.system(size: 44)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                    Text("profile.intro").font(.system(.title3, design: .rounded, weight: .heavy))
+                }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
+                VStack(alignment: .leading, spacing: 14) {
+                    Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
+                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
+                    Divider().overlay(GameStyle.line)
+                    LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
+                }.gameCard()
+                NavigationLink { KnowledgeView(store: store) } label: { GameMenuRow(titleKey: "knowledge.title", symbol: "wrench.and.screwdriver.fill") }.buttonStyle(.plain).accessibilityIdentifier("openKnowledge")
+                NavigationLink { TradeHistoryView(store: store) } label: { GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openTradeHistory")
+                NavigationLink { NotificationSettingsView(store: store) } label: { GameMenuRow(titleKey: "notifications.settings", symbol: "bell.badge.fill") }.buttonStyle(.plain).accessibilityIdentifier("notificationSettings")
+                VStack(alignment: .leading, spacing: 10) {
+                    Toggle("feel.sounds", isOn: $sounds)
+                    Text("feel.soundsHint").font(.caption).foregroundStyle(.secondary)
+                }.gameCard()
+                #if DEBUG
+                NavigationLink { DeveloperToolsView(store: store) } label: { GameMenuRow(titleKey: "debug.title", symbol: "hammer.fill") }.buttonStyle(.plain).accessibilityIdentifier("developerTools")
+                #endif
+            }.padding(16)
         }.gameScreen().navigationTitle("profile.title")
     }
 }
@@ -25,7 +36,7 @@ struct TradeHistoryView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
     var body: some View {
-        List {
+        GameList {
             switch Result(catching: { try TradeLedger.records(from: store.snapshot) }) {
             case .success(let records):
                 Section {

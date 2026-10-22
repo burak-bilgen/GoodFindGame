@@ -7,7 +7,10 @@ struct DeadlineView: View {
     @Environment(\.locale) private var locale
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(GameText.string(titleKey, locale: locale))
+            HStack(spacing: 8) {
+                GameActivityLights()
+                Text(GameText.string(titleKey, locale: locale))
+            }
             if let projected = store.projectedDeadline(target) { Text(projected, style: .timer).monospacedDigit() }
             else { Text("time.unavailable") }
         }.font(.subheadline).foregroundStyle(.secondary)

@@ -6,7 +6,7 @@ struct InventoryView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
-                GameEyebrow(key: "game.workbench")
+                GameStageBanner(titleKey: "inventory.title", eyebrowKey: "game.workbench", symbol: "shippingbox.fill", color: GameStyle.amber)
                 if store.snapshot.player.inventory.isEmpty && !store.snapshot.shipments.contains(where: { $0.status == .pending }) {
                     Text("inventory.empty").foregroundStyle(.secondary)
                     HuntButton()
@@ -116,7 +116,14 @@ struct InspectionReveal: View {
             HStack {
                 GameEyebrow(key: "reveal.heading")
                 Spacer()
-                Image(systemName: "viewfinder").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
+                Group {
+                    if step < 3 { GameScanner(size: 44) }
+                    else {
+                        Image(systemName: item.knownActiveDefects.isEmpty ? "checkmark.seal.fill" : "exclamationmark.triangle.fill")
+                            .font(.title2).foregroundStyle(item.knownActiveDefects.isEmpty ? GameStyle.gain : GameStyle.loss)
+                            .frame(width: 44, height: 44)
+                    }
+                }.accessibilityHidden(true)
             }
             HStack(alignment: .top, spacing: 8) {
                 ForEach(0..<3) { index in

@@ -5,7 +5,7 @@ struct MarketTrendsView: View {
     @Environment(\.locale) private var locale
     private var now: Date { store.snapshot.lastSimulationAt ?? .now }
     var body: some View {
-        List {
+        GameList {
             Section {
                 Label("trend.heading", systemImage: "chart.line.uptrend.xyaxis").font(.title2.bold())
                 Text("trend.explanation").foregroundStyle(.secondary)
@@ -29,7 +29,7 @@ struct MarketTrendsView: View {
                     }.accessibilityIdentifier("marketTrend.\(trend.id)")
                 }
             }
-        }.navigationTitle("trend.title")
+        }.gameScreen().navigationTitle("trend.title")
     }
 }
 
@@ -38,7 +38,7 @@ struct MarketTrendDetailView: View {
     let trend: MarketTrend
     @Environment(\.locale) private var locale
     var body: some View {
-        List {
+        GameList {
             Section {
                 Text(trend.scope.displayName(definitions: store.definitions, locale: locale)).font(.title2.bold())
                 Text(trend.formattedChange(locale: locale)).font(.largeTitle.bold())
@@ -53,6 +53,6 @@ struct MarketTrendDetailView: View {
                 }
             }
             Text("trend.explanation").foregroundStyle(.secondary)
-        }.navigationTitle("trend.title")
+        }.gameScreen().navigationTitle("trend.title")
     }
 }
