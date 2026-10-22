@@ -9,7 +9,7 @@ struct ProfileView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 16) {
-                    Image(systemName: "person.crop.square.fill").font(.system(size: 44)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                    TraderPortrait(identity: 0, size: 64)
                     Text("profile.intro").font(.system(.title3, design: .rounded, weight: .heavy))
                 }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
                 VStack(alignment: .leading, spacing: 14) {

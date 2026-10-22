@@ -297,6 +297,17 @@ struct TradePayoff: View {
     private var outcome: TradeOutcomePresentation { TradeOutcomePresentation(record: record, item: item) }
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            if let item, let definition = try? SeedContent.load().items.first(where: { $0.id == item.definitionID }) {
+                HStack(spacing: 14) {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 90, height: 90)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(definition.displayName(locale: locale)).font(.headline)
+                        Label("journey.tradeFinished", systemImage: "tag.fill").font(.caption.bold()).foregroundStyle(GameStyle.amber)
+                    }
+                    Spacer(minLength: 0)
+                    DealSeal(successful: record.netProfit >= .zero)
+                }
+            }
             HStack(spacing: 12) {
                 Image(systemName: record.netProfit > .zero ? "trophy.fill" : record.netProfit < .zero ? "arrow.uturn.down.circle.fill" : "equal.circle.fill")
                     .font(.system(size: 30, weight: .bold)).foregroundStyle(GameStyle.amber)

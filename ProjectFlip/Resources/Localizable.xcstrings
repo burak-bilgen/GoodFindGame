@@ -10674,6 +10674,42 @@
           }
         }
       }
+    },
+    "desk.headline": {
+      "comment": "Trading-world hunt header, concise game voice.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find the overlooked."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözden kaçanı bul."
+          }
+        }
+      }
+    },
+    "desk.subtitle": {
+      "comment": "Trading-world hunt header, concise game voice.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read the seller. Back your judgment."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcıyı oku. Kararının arkasında dur."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

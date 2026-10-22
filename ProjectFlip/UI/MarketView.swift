@@ -37,29 +37,7 @@ struct MarketView: View {
                         .accessibilityIdentifier("marketSearch")
                 }.padding(14).background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
-                HStack(alignment: .center, spacing: 14) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("hunt.eyebrow").font(.caption2.weight(.heavy)).tracking(2).foregroundStyle(GameStyle.amber)
-                        Text("market.heading").font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
-                        Text("market.subtitle").font(.caption).foregroundStyle(.white.opacity(0.76))
-                    }
-                    Spacer(minLength: 0)
-                    GameScanner()
-                }
-                .padding(18)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 22))
-                HStack(alignment: .center, spacing: 12) {
-                    Image(systemName: "banknote.fill").font(.title2).foregroundStyle(GameStyle.amber)
-                        .padding(12).background(GameStyle.amber.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
-                        Text(store.snapshot.player.cash.formatted(locale: locale, market: market)).font(.system(.title2, design: .rounded, weight: .black)).monospacedDigit().accessibilityIdentifier("marketCash")
-                            .lineLimit(1).minimumScaleFactor(0.5)
-                            .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
-                    }
-                    Spacer(minLength: 0)
-                }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
+                TradingDeskHeader(store: store)
                 OpenTradesView(store: store)
                 TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
