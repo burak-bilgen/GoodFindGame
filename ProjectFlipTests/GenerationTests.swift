@@ -92,4 +92,16 @@ struct GenerationTests {
         #expect(riskyMinimums > 0)
     }
 
+    @Test func liveStockIncludesGenuinelyWornObjectsWithoutChangingTheIntroduction() throws {
+        let definition = try SeedContent.load().items[0]
+        var scores: [Int] = []
+        for seed in 0..<100 {
+            scores.append(try ListingGenerator().generate(definitions: [definition], seed: UInt64(seed), now: .distantPast, starterFriendly: false, variedSellers: true)[0].item.condition)
+        }
+        #expect(scores.contains { $0 < 55 })
+        #expect(scores.contains { $0 >= 90 })
+        let first = try GameSnapshot.fresh(definitions: SeedContent.load().items).market[0]
+        #expect(first.askingPrice == Money(minorUnits: 3_670))
+    }
+
 }

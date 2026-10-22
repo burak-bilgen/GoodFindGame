@@ -12,7 +12,7 @@ Clean reference bands in canonical dollars: budget 15–150; mainstream 80–400
 
 Calibration anchors are first-party seller listings, not fictional brands copying actual hardware: [B&H used monitors](https://www.bhphotovideo.com/c/used/1795304) and [MPB used older mainstream camera bodies](https://www.mpb.com/en-us/product/canon-eos-70d), checked 22 October 2026. They support the order of magnitude of ordinary used goods; these are not a live feed or a promise of real resale prices. Vista's clean base is $120; clean regional base in Turkey is $144 equivalent / ₺5,760. A high seller ask is a seller's claim, not a certified valuation.
 
-The starter wallet is $1,000 canonical. Expert report $7.50; kits $17.50/$25/$20; base repair labor $4 plus defect-dependent service. These remain game tuning, subject to human evaluation. Estimates remain knowledge-limited and rounded outward to $5 canonical steps; price displays round to whole display units. Editors preserve cents internally to avoid silently changing a standing agreement. Appraisal is never a guaranteed sale price.
+The starter wallet is $1,000 canonical. Expert report $7.50; kits $17.50/$25/$20; base repair labor $4 plus defect-dependent service. These remain game tuning, subject to human evaluation. Estimates remain knowledge-limited and rounded outward to $5 canonical steps; reference price displays round to whole display units. Wallets, firm commitments and receipts retain two decimal places. Editors preserve cents internally to avoid silently changing a standing agreement. Appraisal is never a guaranteed sale price.
 
 ## Legacy saves
 
@@ -23,3 +23,5 @@ Pre-configuration saves are backed up adjacent to the original as `.pre-economy-
 Baseline 121 units pass. The absurd-monitor regression was red at 520,000 cents against a 30,000-cent bound (`/tmp/FlipMilestone-price-red.xcresult`). Region tests exercise 10,000 actual generated listings and buyer budgets across both profiles, currency round trips, bounds, invalid condition and overflow. Existing repair tests verify no duplicate charge/repeated restoration. Prior fixed-price fixtures were rebased to meaningful values so their behavioral assertions still exercise a plausible listing; no buyer/traffic safeguards were removed to make tests pass.
 
 Lightweight price memory is deferred until enough comparable observations exist. If added, it must show only the player's actual completed transactions for the model (range and sample count). It will never label synthetic theoretical prices as recent completed market sales. No external market feed or analytics service is added.
+
+Final QA keeps actual wallet/commitment/cost figures at cent precision where exact reconciliation matters. Player appraisals/reference ranges stay outward-rounded and uncertain. New live arrivals use an independent wear stream spanning 30–98, making poor/fair/good/excellent art reachable without changing introductory draws or existing saved truth.

@@ -30,7 +30,10 @@ struct ListingGenerator {
             let defects: [Defect] = starterLesson ? [.damagedPort] :
                 (!starterFriendly || index > 0) && random.integer(in: 0...99) < 45 ? [definition.possibleDefects[random.integer(in: 0...(definition.possibleDefects.count - 1))]] : []
             let rolledCondition = random.integer(in: 55...98)
-            let condition = starterLesson ? min(79, rolledCondition) : rolledCondition
+            var wearRandom = SeededRandom(seed: SeededRandom.seed(for: "wear-v2-\(seed)-\(definition.id)"))
+            // New live arrivals can be visibly battered. Preserve initial-stock
+            // and lesson draws; existing saved truth is never regenerated.
+            let condition = starterLesson ? min(79, rolledCondition) : variedSellers ? wearRandom.integer(in: 30...98) : rolledCondition
             var item = ItemInstance(id: ItemID("item-\(seed)-\(index)"), definitionID: definition.id, condition: condition, hiddenDefects: defects)
             item.facts = ItemFacts.generate(for: item, definition: definition)
             let cleanValue = try PricingEngine.fairValue(of: ItemInstance(id: item.id, definitionID: item.definitionID, condition: condition, hiddenDefects: []), definition: definition, marketBasisPoints: marketBasisPoints)

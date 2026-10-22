@@ -23,7 +23,7 @@ struct PurchaseDecision: View {
                     Text(definition.displayName(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy))
                 }
             }
-            Text(price.formatted(locale: locale, market: market)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
+            Text(price.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
                 .lineLimit(1).minimumScaleFactor(0.5)
             Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(.secondary)
             Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
@@ -33,7 +33,7 @@ struct PurchaseDecision: View {
                     hasCash ? try store.snapshot.player.cash.subtracting(price) : try price.subtracting(store.snapshot.player.cash)
                 }) {
                 case .success(let difference):
-                    Text(difference.formatted(locale: locale, market: market)).font(.system(.title3, design: .rounded, weight: .bold))
+                    Text(difference.formatted(locale: locale, market: market, precise: true)).font(.system(.title3, design: .rounded, weight: .bold))
                         .foregroundStyle(hasCash ? Color.primary : GameStyle.loss)
                         .lineLimit(1).minimumScaleFactor(0.5).accessibilityIdentifier("purchaseBudgetAmount")
                 case .failure: Text("trade.unavailable")

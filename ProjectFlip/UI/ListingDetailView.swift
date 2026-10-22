@@ -18,7 +18,7 @@ struct ListingDetailView: View {
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
                         Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
                         HStack(alignment: .firstTextBaseline) {
-                            Text(listing.askingPrice.formatted(locale: locale, market: market)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
+                            Text(listing.askingPrice.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
                             Spacer(minLength: 0)
                             Image(systemName: "tag.fill").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
                         }
