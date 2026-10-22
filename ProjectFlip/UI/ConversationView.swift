@@ -25,7 +25,7 @@ struct ConversationView: View {
                                 TraderPortrait(identity: listing.seller.identityIndex, size: 54)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.headline)
-                                    if let definition = store.definition(for: listing.item) { Text(definition.name).font(.subheadline).foregroundStyle(.secondary) }
+                                    if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.subheadline).foregroundStyle(.secondary) }
                                 }
                                 Spacer()
                             }
@@ -42,7 +42,7 @@ struct ConversationView: View {
                             if let sale = completedSale {
                                 VStack(alignment: .leading, spacing: 12) {
                                     GameStamp(key: "selling.sold", symbol: "checkmark.seal.fill")
-                                    if let definition = store.definition(for: listing.item) { Text(definition.name).font(.title2.bold()) }
+                                    if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.title2.bold()) }
                                     Text("journey.tradeFinished").font(.subheadline).foregroundStyle(.secondary)
                                     NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                                         Label("trade.receipt", systemImage: "arrow.up.right")
@@ -59,7 +59,7 @@ struct ConversationView: View {
                                         Image(systemName: "checkmark.seal.fill").font(.title).accessibilityHidden(true)
                                     }.foregroundStyle(GameStyle.amber)
                                     if let definition = store.definition(for: listing.item) {
-                                        Text(definition.name).font(.title2.bold()).foregroundStyle(.white)
+                                        Text(definition.displayName(locale: locale)).font(.title2.bold()).foregroundStyle(.white)
                                     }
                                     Text("game.boughtFor").font(.caption).foregroundStyle(.white.opacity(0.75))
                                     if let price = conversation.agreedPrice {

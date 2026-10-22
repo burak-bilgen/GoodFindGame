@@ -30,7 +30,17 @@ enum ProductPhoto {
         }
     }
 
-    static func asset(family: String, wear: ItemAppearance.Wear) -> String {
+    static func sceneCount(family: String) -> Int {
+        ["controller", "camera", "handheld"].contains(family) ? 2 : 1
+    }
+
+    /// The item's public identity keeps its seller setting stable through purchase
+    /// and inspection. Condition and hidden faults never choose the setting.
+    static func scene(family: String, identity: String) -> Int {
+        Int(SeededRandom.seed(for: identity) % UInt64(sceneCount(family: family)))
+    }
+
+    static func asset(family: String, wear: ItemAppearance.Wear, scene: Int = 0) -> String {
         // An uninspected item has no earned condition. Its neutral image never
         // reads hidden faults; normal purchases retain the seller's claimed image.
         let condition: String = switch wear {
@@ -39,6 +49,7 @@ enum ProductPhoto {
         case .fair: "fair"
         case .poor: "poor"
         }
-        return "Product-\(family)-\(condition)"
+        let setting = scene == 1 && sceneCount(family: family) > 1 ? "-alt" : ""
+        return "Product-\(family)\(setting)-\(condition)"
     }
 }

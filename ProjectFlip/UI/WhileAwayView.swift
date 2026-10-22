@@ -60,13 +60,13 @@ struct WhileAwayView: View {
     }
 
     private func eventName(_ event: ResolvedEvent) -> String {
-        if let listing = store.snapshot.market.first(where: { $0.id.rawValue == event.targetID }), let definition = store.definition(for: listing.item) { return definition.name }
+        if let listing = store.snapshot.market.first(where: { $0.id.rawValue == event.targetID }), let definition = store.definition(for: listing.item) { return definition.displayName(locale: locale) }
         if let listing = store.snapshot.playerListings.first(where: { $0.id.rawValue == event.targetID }),
            let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot,
-           let definition = store.definition(for: item) { return definition.name }
-        if let shipment = store.snapshot.shipments.first(where: { $0.id == event.targetID }), let definition = store.definition(for: shipment.item) { return definition.name }
+           let definition = store.definition(for: item) { return definition.displayName(locale: locale) }
+        if let shipment = store.snapshot.shipments.first(where: { $0.id == event.targetID }), let definition = store.definition(for: shipment.item) { return definition.displayName(locale: locale) }
         if let job = store.snapshot.inspectionJobs.first(where: { $0.id == event.targetID }),
-           let item = store.snapshot.player.inventory.first(where: { $0.id == job.itemID }), let definition = store.definition(for: item) { return definition.name }
+           let item = store.snapshot.player.inventory.first(where: { $0.id == job.itemID }), let definition = store.definition(for: item) { return definition.displayName(locale: locale) }
         return GameText.string("away.\(event.kind.rawValue)", locale: locale)
     }
 

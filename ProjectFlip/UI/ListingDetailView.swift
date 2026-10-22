@@ -10,12 +10,12 @@ struct ListingDetailView: View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(height: 210)
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).aspectRatio(1, contentMode: .fit)
                     Text("art.sellerPresentation").font(.caption).foregroundStyle(.secondary)
                     VStack(alignment: .leading, spacing: 10) {
                         Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
-                        Text(definition.name).font(.system(.title, design: .rounded, weight: .heavy))
+                        Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
                         HStack(alignment: .firstTextBaseline) {
                             Text(listing.askingPrice.formatted(locale: locale)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
                             Spacer(minLength: 0)

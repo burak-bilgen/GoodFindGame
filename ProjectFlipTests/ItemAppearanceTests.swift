@@ -9,6 +9,11 @@ struct ItemAppearanceTests {
         let other = MarketplaceListing(id: listing.id, item: differentTruth, seller: listing.seller, askingPrice: listing.askingPrice, reservationPrice: listing.reservationPrice, claimedCondition: listing.claimedCondition, descriptionIntent: listing.descriptionIntent, createdAt: listing.createdAt)
         #expect(ItemAppearance.advertised(listing) == .advertised(other))
         #expect(ItemAppearance.advertised(listing).visibleFindings.isEmpty)
+        let before = ItemAppearance.advertised(listing)
+        var inspected = listing.item
+        inspected.inspected = true
+        let after = ItemAppearance.owned(inspected)
+        #expect(ProductPhoto.scene(family: "controller", identity: before.identity) == ProductPhoto.scene(family: "controller", identity: after.identity))
     }
 
     @Test func wearAndVisibleFaultsFollowEarnedEvidenceAndRepair() {

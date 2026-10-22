@@ -1,6 +1,6 @@
 # Category content
 
-The V1 catalog contains 50 fictional definitions: 20 gaming/electronics, 15 cameras/lenses and 15 retro/collectibles. Twenty-four typed defects cover eight per category. Names are consistent across locales; category, defect and interface copy uses the Turkish/English String Catalog. Product/brand names remain development fiction and require final release clearance.
+The V1 catalog contains 50 fictional definitions: 20 gaming/electronics, 15 cameras/lenses and 15 retro/collectibles. Twenty-four typed defects cover eight per category. Fictional model identities stay consistent across locales. Player-facing display names use a short model plus localized product type from the Turkish/English String Catalog; legacy seed names remain searchable for saved-game continuity. Product/brand names remain development fiction and require final release clearance.
 
 Catalog validation rejects duplicate IDs/names, missing categories, empty/invalid prices or defect pools, duplicate defects and cross-category defect assignments. The loader supports future additions without requiring an exact count; launch tests enforce the current 50-definition/24-defect scope and complete coverage.
 

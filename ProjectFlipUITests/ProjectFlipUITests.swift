@@ -121,7 +121,7 @@ final class ProjectFlipUITests: XCTestCase {
 
     @MainActor
     func testFirstTradeEnglish() {
-        verifyShell(language: "en", market: "Market", inventory: "Inventory")
+        verifyShell(language: "en", market: "Market", inventory: "Inventory", enableSounds: true)
     }
 
     @MainActor
@@ -136,6 +136,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launchArguments = ["-AppleLanguages", "(tr)", "-AppleLocale", "tr_TR", "--uitest-save", UUID().uuidString, "--uitest-large-type"]
         app.launch()
         XCTAssertTrue(app.navigationBars["Pazar"].waitForExistence(timeout: 10))
+        capture("Turkish accessibility-size marketplace titles", app: app)
         tap(app.buttons["listing.listing-42-0"], in: app)
         XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
         let attachment = XCTAttachment(screenshot: app.screenshot())
@@ -411,8 +412,9 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["marketFilters"], in: app)
         tap(app.buttons["marketCategory"], in: app)
         app.buttons[turkish ? "Fotoğraf makineleri" : "Cameras"].tap()
+        capture("Camera marketplace names: \(language)", app: app)
         tap(app.buttons["listing.listing-42-5"], in: app)
-        XCTAssertTrue(app.staticTexts["Ilyven Luma 3"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Luma 3 Fotoğraf Makinesi" : "Luma 3 Camera"].exists)
         XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["listingCategoryName"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["listingCategoryName"].label.contains(turkish ? "Fotoğraf makineleri" : "Cameras"))
@@ -422,7 +424,7 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["marketCategory"], in: app)
         app.buttons[turkish ? "Retro ve koleksiyon" : "Retro & collectibles"].tap()
         tap(app.buttons["listing.listing-42-8"], in: app)
-        XCTAssertTrue(app.staticTexts["Yoriva Chapter 8"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Chapter 8 El Konsolu" : "Chapter 8 Handheld"].exists)
         XCTAssertTrue(app.buttons["openConversation"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["listingCategoryName"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["listingCategoryName"].label.contains(turkish ? "Retro ve koleksiyon" : "Retro & collectibles"))
@@ -435,7 +437,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         app.switches["watchedOnly"].coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
         tap(app.buttons["listing.listing-42-5"], in: app)
-        XCTAssertTrue(app.staticTexts["Ilyven Luma 3"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Luma 3 Fotoğraf Makinesi" : "Luma 3 Camera"].exists)
     }
 
     @MainActor
@@ -445,11 +447,13 @@ final class ProjectFlipUITests: XCTestCase {
     func testLiveMarketFeedTurkish() { verifyShell(language: "tr", market: "Pazar", inventory: "Envanter", followFeed: true) }
 
     @MainActor
-    private func verifyShell(language: String, market: String, inventory: String, followTrends: Bool = false, followFeed: Bool = false) {
+    private func verifyShell(language: String, market: String, inventory: String, followTrends: Bool = false, followFeed: Bool = false, enableSounds: Bool = false) {
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US"]
         app.launchArguments += ["--uitest-save", UUID().uuidString]
+        // Exercise the real sound-on path even on a simulator with default preferences.
+        if enableSounds { app.launchArguments += ["-gameSoundEnabled", "YES"] }
         if !followFeed { app.launchArguments += ["--uitest-instant"] }
         app.launch()
         XCTAssertTrue(app.navigationBars[market].waitForExistence(timeout: 10))

@@ -3,6 +3,20 @@ import Testing
 @testable import ProjectFlip
 
 struct MarketQueryTests {
+    @Test func visibleLocalizedProductNamesAndLegacyNamesBothRemainSearchable() throws {
+        let definitions = try SeedContent.load().items
+        let state = try GameSnapshot.fresh(definitions: definitions)
+        let listing = state.market[0]
+        let definition = try #require(definitions.first { $0.id == listing.item.definitionID })
+        for language in ["en", "tr"] {
+            let locale = Locale(identifier: language)
+            let name = definition.displayName(locale: locale)
+            #expect(definitions.allSatisfy { $0.displayName(locale: locale) != "…" })
+            #expect(MarketQuery(search: name).results(in: state, definitions: definitions, locale: locale).contains { $0.id == listing.id })
+            #expect(MarketQuery(search: definition.name).results(in: state, definitions: definitions, locale: locale).contains { $0.id == listing.id })
+        }
+    }
+
     @Test func publicFiltersCombineAndWatchedUnavailableItemsRemainVisible() throws {
         let definitions = try SeedContent.load().items
         var state = try GameSnapshot.fresh(definitions: definitions)

@@ -18,7 +18,7 @@ struct MarketQuery {
                   category == nil || definition.category == category,
                   minimumPrice.map({ listing.askingPrice >= $0 }) ?? true,
                   maximumPrice.map({ listing.askingPrice <= $0 }) ?? true else { return false }
-            return query.isEmpty || definition.name.range(of: query, options: [.caseInsensitive, .diacriticInsensitive], locale: locale) != nil
+            return query.isEmpty || [definition.displayName(locale: locale), definition.name].contains { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive], locale: locale) != nil }
         }.sorted {
             if $0.createdAt == $1.createdAt { return $0.id.rawValue < $1.id.rawValue }
             return newestFirst ? $0.createdAt > $1.createdAt : $0.createdAt < $1.createdAt

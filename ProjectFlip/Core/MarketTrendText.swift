@@ -4,7 +4,7 @@ extension MarketTrendScope {
     func displayName(definitions: [ItemDefinition], locale: Locale) -> String {
         switch self {
         case .category(let category): GameText.string("category.\(category.rawValue)", locale: locale)
-        case .model(let id): definitions.first { $0.id == id }?.name ?? GameText.string("trend.scopeUnavailable", locale: locale)
+        case .model(let id): definitions.first { $0.id == id }?.displayName(locale: locale) ?? GameText.string("trend.scopeUnavailable", locale: locale)
         }
     }
 }

@@ -9,14 +9,16 @@ struct ProductPhotoTests {
             try #require(ProductPhoto.family(identity: definition.id, symbol: definition.artSymbol))
         })
         for family in families {
-            var encoded: Set<Data> = []
-            for wear in [ItemAppearance.Wear.excellent, .good, .fair, .poor] {
-                let name = ProductPhoto.asset(family: family, wear: wear)
-                let image = try #require(UIImage(named: name), "Missing packaged photograph: \(name)")
-                #expect(image.size.width >= 500 && image.size.height >= 500)
-                encoded.insert(try #require(image.pngData()))
+            for scene in 0..<ProductPhoto.sceneCount(family: family) {
+                var encoded: Set<Data> = []
+                for wear in [ItemAppearance.Wear.excellent, .good, .fair, .poor] {
+                    let name = ProductPhoto.asset(family: family, wear: wear, scene: scene)
+                    let image = try #require(UIImage(named: name), "Missing packaged photograph: \(name)")
+                    #expect(image.size.width >= 500 && image.size.height >= 500)
+                    encoded.insert(try #require(image.pngData()))
+                }
+                #expect(encoded.count == 4, "Cosmetic conditions must have distinct photographs")
             }
-            #expect(encoded.count == 4, "Cosmetic conditions must have distinct photographs")
         }
     }
 

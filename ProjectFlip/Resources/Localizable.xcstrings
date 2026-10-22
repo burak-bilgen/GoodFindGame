@@ -8874,6 +8874,906 @@
           }
         }
       }
+    },
+    "product.name.gaming-0": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Wireless Controller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Kablosuz Kontrolcü"
+          }
+        }
+      }
+    },
+    "product.name.gaming-1": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Home Console"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Ev Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.gaming-2": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pebble Mini Controller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pebble Mini Kontrolcü"
+          }
+        }
+      }
+    },
+    "product.name.gaming-3": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista Monitor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista Monitör"
+          }
+        }
+      }
+    },
+    "product.name.gaming-4": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Echo Gaming Headset"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Echo Oyuncu Kulaklığı"
+          }
+        }
+      }
+    },
+    "product.name.gaming-5": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulse Desktop Speaker"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulse Masaüstü Hoparlör"
+          }
+        }
+      }
+    },
+    "product.name.gaming-6": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock Portable Drive"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dock Taşınabilir Disk"
+          }
+        }
+      }
+    },
+    "product.name.gaming-7": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cove Mini PC"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cove Mini Bilgisayar"
+          }
+        }
+      }
+    },
+    "product.name.gaming-8": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Mini Controller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Mini Kontrolcü"
+          }
+        }
+      }
+    },
+    "product.name.gaming-9": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista Pro Monitor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista Pro Monitör"
+          }
+        }
+      }
+    },
+    "product.name.gaming-10": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glide Gamepad"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glide Oyun Kolu"
+          }
+        }
+      }
+    },
+    "product.name.gaming-11": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trace Studio Monitor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trace Stüdyo Monitörü"
+          }
+        }
+      }
+    },
+    "product.name.gaming-12": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relay Compact Speaker"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relay Kompakt Hoparlör"
+          }
+        }
+      }
+    },
+    "product.name.gaming-13": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wisp Wireless Headset"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wisp Kablosuz Kulaklık"
+          }
+        }
+      }
+    },
+    "product.name.gaming-14": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breeze Mini PC"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breeze Mini Bilgisayar"
+          }
+        }
+      }
+    },
+    "product.name.gaming-15": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coda Handheld Console"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coda El Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.gaming-16": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stave Slim Drive"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stave İnce Taşınabilir Disk"
+          }
+        }
+      }
+    },
+    "product.name.gaming-17": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Travel Controller"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Seyahat Kontrolcüsü"
+          }
+        }
+      }
+    },
+    "product.name.gaming-18": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Gaming PC"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arc Oyuncu Bilgisayarı"
+          }
+        }
+      }
+    },
+    "product.name.gaming-19": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trace Pro Monitor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trace Pro Monitör"
+          }
+        }
+      }
+    },
+    "product.name.cameras-0": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma 3 Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma 3 Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-1": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roam Compact Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roam Kompakt Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-2": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma 8 Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma 8 Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-3": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crest Mirrorless Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crest Aynasız Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-4": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Field Outdoor Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Field Dış Mekân Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-5": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Studio Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Studio Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-6": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dawn Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dawn Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-7": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roam Pocket Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roam Cep Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-8": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Standard Lens"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Standart Lens"
+          }
+        }
+      }
+    },
+    "product.name.cameras-9": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Portrait Lens"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Portre Lensi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-10": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Wide Lens"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Geniş Açı Lens"
+          }
+        }
+      }
+    },
+    "product.name.cameras-11": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Field Zoom Lens"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Field Zoom Lens"
+          }
+        }
+      }
+    },
+    "product.name.cameras-12": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crest Mono Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crest Mono Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-13": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dawn Travel Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dawn Seyahat Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.cameras-14": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma Studio Camera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luma Studio Fotoğraf Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.retro-0": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter 8 Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter 8 El Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.retro-1": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Pocket Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Cep Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.retro-2": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter 16 Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter 16 El Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.retro-3": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tile Runner Game"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tile Runner Oyunu"
+          }
+        }
+      }
+    },
+    "product.name.retro-4": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cloud Caravan Game"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cloud Caravan Oyunu"
+          }
+        }
+      }
+    },
+    "product.name.retro-5": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silver Orchard Game"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silver Orchard Oyunu"
+          }
+        }
+      }
+    },
+    "product.name.retro-6": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lullaby Cassette Player"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lullaby Kasetçalar"
+          }
+        }
+      }
+    },
+    "product.name.retro-7": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daylight Game Disc"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daylight Oyun Diski"
+          }
+        }
+      }
+    },
+    "product.name.retro-8": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Color Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Color El Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.retro-9": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Desktop Console"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Masaüstü Konsol"
+          }
+        }
+      }
+    },
+    "product.name.retro-10": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harbor Tales Game"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harbor Tales Oyunu"
+          }
+        }
+      }
+    },
+    "product.name.retro-11": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clockwork Garden Game"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clockwork Garden Oyunu"
+          }
+        }
+      }
+    },
+    "product.name.retro-12": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Archive Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Archive El Konsolu"
+          }
+        }
+      }
+    },
+    "product.name.retro-13": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paper Lantern Game Set"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paper Lantern Oyun Seti"
+          }
+        }
+      }
+    },
+    "product.name.retro-14": {
+      "comment": "Player-facing product title: a short model family plus recognizable product type. No invented specification or condition claim.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Heritage Handheld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ember Heritage El Konsolu"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

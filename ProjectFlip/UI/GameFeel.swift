@@ -5,7 +5,7 @@ import UIKit
 /// All sounds are short original synthesized tones. Ambient audio respects silent mode.
 @MainActor enum GameFeel {
     enum Cue { case submitted, reply, accepted, purchase, offer, reveal, defect, profit, loss }
-    private static var player: AVAudioPlayer?
+    private static let audio = FeedbackAudio()
     static func play(_ cue: Cue) {
         guard UIApplication.shared.applicationState == .active else { return }
         let notification = UINotificationFeedbackGenerator()
@@ -25,12 +25,30 @@ import UIKit
         case .defect, .loss: [330, 247]
         case .profit: [523, 659, 1047]
         }
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-            player = try AVAudioPlayer(data: wave(notes))
-            player?.volume = 0.20
-            player?.play()
-        } catch { Logger(subsystem: "ProjectFlip", category: "Audio").error("Feedback unavailable: \(String(describing: error), privacy: .public)") }
+        audio.play(notes)
+    }
+
+}
+
+/// Every access to the session configuration and player is serialized on this
+/// queue. Audio setup and sample synthesis must never block the UI thread.
+private final class FeedbackAudio: @unchecked Sendable {
+    private let queue = DispatchQueue(label: "ProjectFlip.feedbackAudio", qos: .userInitiated)
+    private var player: AVAudioPlayer?
+    private var configured = false
+
+    func play(_ notes: [Double]) {
+        queue.async { [self] in
+            do {
+                if !configured {
+                    try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+                    configured = true
+                }
+                player = try AVAudioPlayer(data: Self.wave(notes))
+                player?.volume = 0.20
+                player?.play()
+            } catch { Logger(subsystem: "ProjectFlip", category: "Audio").error("Feedback unavailable: \(String(describing: error), privacy: .public)") }
+        }
     }
     private static func wave(_ notes: [Double]) -> Data {
         let rate = 22_050

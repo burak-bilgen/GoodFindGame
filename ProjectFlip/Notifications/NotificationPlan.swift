@@ -54,7 +54,7 @@ struct NotificationPlanner {
         EventResolver().reconcile(&state)
         let clock = try GameClock.read(now: now, lastKnownWallClock: state.lastKnownWallClock, lastSimulationAt: state.lastSimulationAt)
         let title = GameText.string("notifications.title", locale: locale)
-        func itemName(_ item: ItemInstance) -> String? { definitions.first { $0.id == item.definitionID }?.name }
+        func itemName(_ item: ItemInstance) -> String? { definitions.first { $0.id == item.definitionID }?.displayName(locale: locale) }
         func projected(_ date: Date) -> Date { now.addingTimeInterval(max(0, date.timeIntervalSince(clock.effectiveNow))) }
         var result: [LocalNotificationSpec] = []
         for event in state.events.sorted(by: { $0.resolveAt == $1.resolveAt ? $0.sequence < $1.sequence : $0.resolveAt < $1.resolveAt }) where event.status == .pending && event.resolveAt > clock.effectiveNow {

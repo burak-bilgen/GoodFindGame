@@ -14,8 +14,8 @@ struct InventoryView: View {
                 ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
                     VStack(alignment: .leading, spacing: 8) {
                         if let definition = store.definition(for: shipment.item) {
-                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: shipment.item)).frame(height: 140)
-                            Text(definition.name).font(.headline)
+                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: shipment.item)).aspectRatio(1, contentMode: .fit)
+                            Text(definition.displayName(locale: locale)).font(.headline)
                         }
                         Text("living.standardDelivery").font(.caption).foregroundStyle(.secondary)
                         DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
@@ -28,7 +28,7 @@ struct InventoryView: View {
                             HStack(spacing: 14) {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 90, height: 90)
                                 VStack(alignment: .leading, spacing: 8) {
-                                    Text(definition.name).font(.headline)
+                                    Text(definition.displayName(locale: locale)).font(.headline)
                                     Text(item.purchasePrice.formatted(locale: locale)).foregroundStyle(.secondary)
                                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.caption)
                                 }
@@ -50,9 +50,9 @@ struct OwnedItemView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !item.inspected {
-                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(height: 170)
+                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).aspectRatio(1, contentMode: .fit)
                     }
-                    Text(definition.name).font(.system(.title, design: .rounded, weight: .heavy))
+                    Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(.secondary)
                     if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
                         Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
@@ -133,7 +133,7 @@ struct InspectionReveal: View {
                 Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
-                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(height: 120)
+                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
                 Text("art.inspected").font(.caption).foregroundStyle(.secondary)
                 if item.knownActiveDefects.isEmpty {
                     Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")

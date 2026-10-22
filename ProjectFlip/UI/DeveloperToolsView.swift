@@ -32,7 +32,7 @@ struct DeveloperToolsView: View {
                 Picker("debug.listing", selection: $selectedListing) {
                     Text("debug.chooseListing").tag("")
                     ForEach(store.snapshot.market.filter(\.available)) { listing in
-                        Text(store.definition(for: listing.item)?.name ?? listing.id.rawValue).tag(listing.id.rawValue)
+                        Text(store.definition(for: listing.item)?.displayName(locale: locale) ?? listing.id.rawValue).tag(listing.id.rawValue)
                     }
                 }
                 Button("debug.forceSeller") {
@@ -60,7 +60,7 @@ struct DeveloperToolsView: View {
     private func truth(for item: ItemInstance) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             if let definition = store.definition(for: item) {
-                Text(definition.name).bold()
+                Text(definition.displayName(locale: locale)).bold()
                 Text("debug.condition \(item.condition)")
                 switch Result(catching: { try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                 case .success(let value): Text(value.formatted(locale: locale))

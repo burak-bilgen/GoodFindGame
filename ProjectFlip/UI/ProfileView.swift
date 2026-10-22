@@ -39,7 +39,7 @@ struct TradeHistoryView: View {
                 ForEach(records) { record in
                     NavigationLink { TradeReceiptView(record: record, item: store.snapshot.playerListings.first(where: { $0.id == record.id })?.itemSnapshot) } label: {
                         VStack(alignment: .leading, spacing: 8) {
-                            if let definition = store.definitions.first(where: { $0.id == record.definitionID }) { Text(definition.name).font(.headline) }
+                            if let definition = store.definitions.first(where: { $0.id == record.definitionID }) { Text(definition.displayName(locale: locale)).font(.headline) }
                             ProfitAmount(amount: record.netProfit)
                             Text(record.soldAt, format: .dateTime.day().month().year().locale(locale)).font(.caption).foregroundStyle(.secondary)
                         }

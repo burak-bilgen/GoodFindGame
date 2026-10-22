@@ -1,6 +1,15 @@
 # Project status
 
-Current milestone: **Trading challenge tuning from human feedback** (22 October 2026). The owner reported several predictable/easy trading decisions. See TRADING_CHALLENGE.md for reproduction and verification; PRODUCT_ART.md records the committed photography and icon checkpoint.
+Current milestone: **Seller photo and product-name correction from human feedback** (22 October 2026). The owner reported uniform staged photographs, arbitrary names and clipped titles, then requested full photos without side bands. SELLER_PHOTO_CORRECTION.md records this correction; PRODUCT_ART.md preserves the original art checkpoint. The later feedback that trading feels too random/frustrating remains unresolved.
+
+## Ordered work queue
+
+1. **Done:** varied seller photos, concise EN/TR product names and square photo frames with the complete product visible; affected screens verified in both languages and large text.
+2. **Done:** audio-thread warning reproduced and corrected; Debug/Release builds pass. Final checkpoint run: 117 unit + seven focused UI tests, zero failures/skips/runtime warnings. Exact commit is available in Git history for this report.
+3. **Next, still open:** address the human report that repeated trading now feels too random/frustrating across several areas: buyer responses, seller concessions and waiting/attention. Reproduce the unfair cases before tuning; retain meaningful readable risk and existing offline/notification consistency. Human acceptance remains necessary.
+4. **Last — queued by the owner, not started:** redesign the interface's visual direction so it feels like a mobile game. Rework colors, backgrounds, surfaces, typography, screen composition and feedback around the existing trading loop. Review an actual cohesive visual direction before applying it across screens. This is not authorization for additional gameplay/progression systems.
+
+The owner explicitly placed the interface redesign at the end of this queue on 22 October 2026. Finish the current photo/layout correction and technical checkpoint first.
 Broader V1 feature work remains paused. Do not resume progression expansion,
 collections, rare variants, client requests, bankruptcy recovery, category unlocks,
 Game Center, monetization or analytics infrastructure before human observations
@@ -23,12 +32,13 @@ work and verification are recorded in LIVING_MARKETPLACE.md. Automated checks an
 simulator captures do not establish human enjoyment or retention. Physical-device,
 iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
 
-Current scoped validation (22 October 2026): Debug/Release builds pass; 115 unit
-and all 53 UI tests pass with zero recorded runtime warnings. All 489 EN/TR keys
-validate. TRADING_CHALLENGE.md records the observed issue, red/green samples and
-full verification. The refill follow-up passes all 116 units plus four affected
-UI journeys; new arrivals now vary seller profiles. Human difficulty and enjoyment
-acceptance remain open.
+Current scoped validation (22 October 2026): Debug/Release builds pass; all 117
+unit tests and seven affected UI journeys pass, with zero failures/skips/recorded
+runtime warnings. All 539 EN/TR keys validate. SELLER_PHOTO_CORRECTION.md records
+the correction, known limits and authoritative evidence. The full 53-case UI suite
+last passed at the preceding behavior checkpoint; it was not rerun in full for
+this presentation/audio correction. The normal Release simulator build launches
+with the existing save. Human difficulty and enjoyment acceptance remain open.
 
 ## Historical milestone verification
 

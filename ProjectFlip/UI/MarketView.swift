@@ -125,7 +125,7 @@ struct ListingCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing))
-                .frame(height: typeSize.isAccessibilitySize ? 170 : 130)
+                .aspectRatio(1, contentMode: .fit)
                 .overlay(alignment: .topTrailing) {
                     if watched {
                         Image(systemName: "bookmark.fill").font(.caption).foregroundStyle(GameStyle.ink)
@@ -137,8 +137,10 @@ struct ListingCard: View {
                 Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                     .font(.caption2.weight(.bold)).foregroundStyle(GameStyle.category(definition.category))
                     .lineLimit(typeSize.isAccessibilitySize ? nil : 1)
-                Text(definition.name).font(.system(.headline, design: .rounded, weight: .heavy))
-                    .foregroundStyle(.primary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+                Text(definition.displayName(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy))
+                    .foregroundStyle(.primary).lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(minHeight: typeSize.isAccessibilitySize ? 0 : 42, alignment: .topLeading)
                 Text(listing.askingPrice.formatted(locale: locale))
                     .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.primary)
@@ -183,7 +185,7 @@ struct TradeContinuationPrompt: View {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("journey.offerWaiting").font(.caption.bold()).foregroundStyle(GameStyle.gain)
                         if let item = store.snapshot.player.inventory.first(where: { $0.id == sale.itemID }), let definition = store.definition(for: item) {
-                            Text(definition.name).font(.headline).foregroundStyle(.primary)
+                            Text(definition.displayName(locale: locale)).font(.headline).foregroundStyle(.primary)
                         }
                         Text(offer.amount.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
                     }

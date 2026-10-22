@@ -52,9 +52,9 @@ struct RootView: View {
                                 } label: {
                                     if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
                                         HStack(spacing: 12) {
-                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 72)
+                                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
                                             VStack(alignment: .leading, spacing: 6) {
-                                                Text(definition.name).font(.headline)
+                                                Text(definition.displayName(locale: locale)).font(.headline)
                                                 Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
                                                 if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
                                                     if resale.status == .sold {

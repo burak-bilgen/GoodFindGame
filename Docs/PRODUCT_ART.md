@@ -1,5 +1,10 @@
 # Generated marketplace photography
 
+The latest owner-requested correction is recorded in SELLER_PHOTO_CORRECTION.md.
+It replaces the uniform desk settings, adds stable alternate scenes, localizes
+short product-type names and uses square edge-to-edge photo frames. The following
+sections describe the original photography checkpoint for provenance.
+
 22 October 2026. The owner explicitly requested generated realistic product
 imagery and replacement of the app icon. This visual follow-up does not authorize
 broader progression or monetization work. The original clean checkpoint and

@@ -8,21 +8,12 @@ struct DeviceArt: View {
 
     var body: some View {
         if let family = ProductPhoto.family(identity: identity, symbol: symbol) {
-            GeometryReader { geometry in
-                let photo = ProductPhoto.asset(family: family, wear: appearance?.wear ?? .unverified)
-                ZStack {
-                    // Extend the photograph's lighting into wide frames while
-                    // keeping tall products and their controls fully visible.
-                    Image(photo).resizable().scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .blur(radius: 18)
-                    Image(photo).resizable().scaledToFit()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
+            let scene = ProductPhoto.scene(family: family, identity: appearance?.identity ?? identity)
+            let photo = ProductPhoto.asset(family: family, wear: appearance?.wear ?? .unverified, scene: scene)
+            Image(photo).resizable()
+                .aspectRatio(1, contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
-            }
-            .accessibilityHidden(true)
+                .accessibilityHidden(true)
         } else {
             IllustratedDeviceArt(symbol: symbol, identity: identity, appearance: appearance)
         }

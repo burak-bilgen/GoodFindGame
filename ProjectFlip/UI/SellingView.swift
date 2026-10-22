@@ -18,7 +18,7 @@ struct CreateListingView: View {
                         DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 96, height: 96)
                         VStack(alignment: .leading, spacing: 8) {
                             GameEyebrow(key: "game.sellingStage")
-                            Text(definition.name).font(.system(.title2, design: .rounded, weight: .heavy))
+                            Text(definition.displayName(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy))
                         }
                     }
                     InvestmentContext(store: store, item: item, definition: definition)
@@ -92,9 +92,9 @@ struct SellingView: View {
                     NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: {
                         HStack(spacing: 12) {
                             if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
-                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 90)
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 80)
                                 VStack(alignment: .leading, spacing: 8) {
-                                    Text(definition.name).font(.headline)
+                                    Text(definition.displayName(locale: locale)).font(.headline)
                                     Text(listing.askingPrice.formatted(locale: locale)).bold()
                                     if listing.status == .active && listing.offers.contains(where: { [.pending, .countered].contains($0.status) }) {
                                         Label("buyer.new", systemImage: "bubble.left.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
@@ -127,7 +127,7 @@ struct SaleListingView: View {
                         if listing.status != .sold, let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
                             HStack(spacing: 14) {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 80)
-                                Text(definition.name).font(.system(.title2, design: .rounded, weight: .heavy))
+                                Text(definition.displayName(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy))
                             }
                         }
                         if listing.status == .sold {
@@ -137,8 +137,8 @@ struct SaleListingView: View {
                                 TradePayoff(record: record, item: listing.itemSnapshot).id("saleOutcome")
                                 if let item = listing.itemSnapshot, let definition = store.definition(for: item) {
                                     HStack(spacing: 14) {
-                                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 88, height: 75)
-                                        Text(definition.name).font(.title3.bold())
+                                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 88, height: 88)
+                                        Text(definition.displayName(locale: locale)).font(.title3.bold())
                                     }
                                 }
                                 HuntButton()
