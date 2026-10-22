@@ -28,3 +28,15 @@ struct ItemAppearanceTests {
         #expect(ItemAppearance.owned(item).visibleFindings.isEmpty)
     }
 }
+
+extension ItemAppearanceTests {
+    @Test func photographyComesFromSellerNotHiddenTruth() throws {
+        let listing = try GameSnapshot.fresh(definitions: SeedContent.load().items).market[0]
+        #expect(ItemAppearance.advertised(listing).photoStyle == .casual)
+        var item = listing.item
+        item.inspected = true
+        item.revealedDefects = [.damagedPort]
+        #expect(ItemAppearance.owned(item).photoStyle == .inspection)
+        #expect(ItemAppearance.owned(item).visibleFindings == [.damagedPort])
+    }
+}

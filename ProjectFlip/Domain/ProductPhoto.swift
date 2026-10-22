@@ -30,8 +30,13 @@ enum ProductPhoto {
         }
     }
 
+    static func dedicatedMaster(for identity: String) -> String? {
+        dedicatedModels.contains(identity) ? "model-" + identity : nil
+    }
+    static let dedicatedModels: Set<String> = ["retro-0", "retro-2", "retro-8", "cameras-0", "cameras-8", "cameras-9", "cameras-10"]
+
     static func sceneCount(family: String) -> Int {
-        ["controller", "camera", "handheld"].contains(family) ? 2 : 1
+        ["camera", "handheld"].contains(family) ? 2 : 1
     }
 
     /// The item's public identity keeps its seller setting stable through purchase

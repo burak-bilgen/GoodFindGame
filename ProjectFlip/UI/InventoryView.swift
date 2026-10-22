@@ -111,6 +111,7 @@ struct InspectionReveal: View {
     @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @State private var step = 0
+    @State private var sellerPhoto = false
     private var presentation: InspectionReportPresentation {
         InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID)
     }
@@ -143,7 +144,17 @@ struct InspectionReveal: View {
                 Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
-                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
+                if let listing = store.snapshot.market.first(where: { $0.item.id == item.id }) {
+                    Picker("art.compare", selection: $sellerPhoto) {
+                        Text("art.sellerPresentation").tag(true)
+                        Text("art.inspected").tag(false)
+                    }.pickerStyle(.segmented).accessibilityIdentifier("inspectionPhotoComparison")
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: sellerPhoto ? .advertised(listing) : .owned(item))
+                        .aspectRatio(1, contentMode: .fit)
+                        .animation(reduceMotion ? nil : .easeInOut(duration: 0.25), value: sellerPhoto)
+                } else {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
+                }
                 Text("art.inspected").font(.caption).foregroundStyle(.secondary)
                 if item.knownActiveDefects.isEmpty {
                     Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")

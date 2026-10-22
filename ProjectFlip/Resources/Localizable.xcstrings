@@ -10656,6 +10656,24 @@
           }
         }
       }
+    },
+    "art.compare": {
+      "comment": "Switch between seller claims and earned inspection appearance.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo comparison"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğrafları karşılaştır"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

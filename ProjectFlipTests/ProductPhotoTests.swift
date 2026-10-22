@@ -8,7 +8,7 @@ struct ProductPhotoTests {
         let families = try Set(definitions.map { definition in
             try #require(ProductPhoto.family(identity: definition.id, symbol: definition.artSymbol))
         })
-        for family in families {
+        for family in families.union(ProductPhoto.dedicatedModels.map { "model-" + $0 }) {
             for scene in 0..<ProductPhoto.sceneCount(family: family) {
                 var encoded: Set<Data> = []
                 for wear in [ItemAppearance.Wear.excellent, .good, .fair, .poor] {

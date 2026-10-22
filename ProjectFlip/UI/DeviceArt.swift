@@ -5,13 +5,34 @@ struct DeviceArt: View {
     let symbol: String
     var identity: String = "gaming-0"
     var appearance: ItemAppearance?
+    @Environment(\.locale) private var locale
 
     var body: some View {
         if let family = ProductPhoto.family(identity: identity, symbol: symbol) {
             let scene = ProductPhoto.scene(family: family, identity: appearance?.identity ?? identity)
-            let photo = ProductPhoto.asset(family: family, wear: appearance?.wear ?? .unverified, scene: scene)
+            let master = ProductPhoto.dedicatedMaster(for: identity) ?? family
+            let photo = ProductPhoto.asset(family: master, wear: appearance?.wear ?? .unverified, scene: master == family ? scene : 0)
             Image(photo).resizable()
                 .aspectRatio(1, contentMode: .fit)
+                .rotationEffect(.degrees(appearance?.photoStyle == .careless ? 1 : appearance?.photoStyle == .evasive ? -1.5 : 0))
+                .saturation(appearance?.photoStyle == .careless ? 0.82 : 1)
+                .overlay { if appearance?.photoStyle == .casual { Color.orange.opacity(0.035).allowsHitTesting(false) } }
+                .overlay(alignment: .topLeading) {
+                    if appearance?.photoStyle == .professional {
+                        Image(systemName: "camera.viewfinder").font(.caption).padding(7).background(.black.opacity(0.55), in: Circle()).padding(8)
+                    }
+                }
+                .overlay(alignment: .bottomLeading) {
+                    if let appearance, !appearance.visibleFindings.isEmpty {
+                        VStack(alignment: .leading, spacing: 3) {
+                            ForEach(Array(appearance.visibleFindings).sorted { $0.rawValue < $1.rawValue }, id: \.self) { finding in
+                                Label(GameText.string(finding.key, locale: locale), systemImage: "viewfinder")
+                                    .font(.caption2.bold()).padding(.horizontal, 7).padding(.vertical, 4)
+                                    .background(.black.opacity(0.8), in: RoundedRectangle(cornerRadius: 5))
+                            }
+                        }.foregroundStyle(GameStyle.amber).padding(8)
+                    }
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .accessibilityHidden(true)
         } else {
