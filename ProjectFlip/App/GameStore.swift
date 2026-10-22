@@ -6,14 +6,17 @@ import OSLog
 final class GameStore {
     private(set) var snapshot: GameSnapshot
     let definitions: [ItemDefinition]
+    let competitionPeriod: WeeklyPeriod?
+    @ObservationIgnored var competitionCanCommit: (() -> Bool)?
     let timing: SimulationTiming
     private let repository: SaveRepository
     var errorKey: String?
     @ObservationIgnored var onSnapshotCommitted: ((GameSnapshot) -> Void)?
     private let logger = Logger(subsystem: "ProjectFlip", category: "Save")
 
-    init(repository: SaveRepository, definitions: [ItemDefinition], timing: SimulationTiming = .current, now: Date = .now) throws {
+    init(repository: SaveRepository, definitions: [ItemDefinition], timing: SimulationTiming = .current, now: Date = .now, competitionPeriod: WeeklyPeriod? = nil) throws {
         self.repository = repository
+        self.competitionPeriod = competitionPeriod
         self.timing = timing
         self.definitions = definitions
         snapshot = try repository.load() ?? GameSnapshot.fresh(definitions: definitions, marketConfiguration: .initial(locale: .current))
@@ -33,6 +36,12 @@ final class GameStore {
     /// Write first, publish second: disk failures cannot grant unpersisted purchases.
     func commit(_ next: GameSnapshot) throws {
         do {
+            if let period = competitionPeriod {
+                guard period.contains(.now), competitionCanCommit?() ?? true,
+                      next.marketConfiguration.region == .unitedStates,
+                      next.recovery.sequence == 0, next.recovery.commissionsEarned == .zero,
+                      next.clients == ClientProgress(), next.collections == CollectionProgress() else { throw TradingError.unavailable }
+            }
             var finalized = next
             CareerEngine.refresh(&finalized)
             try repository.save(finalized)

@@ -4,6 +4,7 @@ extension GameStore {
     private var actions: SimulationActions { SimulationActions(timing: timing) }
 
     private func transact(now: Date = .now, _ action: (GameSnapshot, Date) throws -> GameSnapshot) throws {
+        if let period = competitionPeriod, !period.contains(now) { throw TradingError.unavailable }
         let resolver = EventResolver(timing: timing)
         let caughtUp = try resolver.resolve(snapshot, now: now, definitions: definitions)
         var next: GameSnapshot
@@ -18,6 +19,7 @@ extension GameStore {
     }
 
     func catchUp(now: Date = .now, showSummary: Bool = false) throws {
+        if let period = competitionPeriod, !period.contains(now) { return }
         let result = try EventResolver(timing: timing).resolve(snapshot, now: now, definitions: definitions)
         var next = result.state
         if showSummary && result.clock.elapsed >= 30 {
