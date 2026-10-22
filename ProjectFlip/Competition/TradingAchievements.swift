@@ -30,7 +30,7 @@ enum AchievementEngine {
         add(.trustedTrader, state.career.creditedItems.count, 10)
         add(.specialist, ItemCategory.allCases.map { state.inspectionKnowledge.level(in: $0) }.max() ?? 0, 3)
         add(.bigLeague, state.career.tier(knowledge: state.inspectionKnowledge) == .trusted ? 1 : 0)
-        add(.comeback, state.recovery.commissionsEarned > .zero && state.player.cash >= RecoveryEngine.capitalFloor ? 1 : 0)
+        add(.comeback, state.recovery.recovered == true || (state.recovery.commissionsEarned > .zero && state.player.cash >= RecoveryEngine.capitalFloor) ? 1 : 0)
         let models = Set(trades.filter { $0.netProfit > .zero }.map(\.definitionID))
         add(.versatile, models.count, 5)
         return result

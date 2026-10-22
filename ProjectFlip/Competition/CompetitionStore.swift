@@ -42,6 +42,7 @@ final class CompetitionStore {
     private let root: URL
     private let definitions: [ItemDefinition]
     private var syncing = false
+    private var rankPlayerID: String?
     private var observedCareer: GameSnapshot?
 
     init(root: URL, definitions: [ItemDefinition]) throws {
@@ -76,16 +77,21 @@ final class CompetitionStore {
             observedCareer = career
         }
     }
-    func start(now: Date = .now, playerID: String? = nil) throws {
+    func start(now: Date = .now, playerID: String? = nil, currency: GameCurrency = .usd) throws {
         try refresh(now: now)
         let period = WeeklyPeriod.containing(now)
         try period.validate()
-        if run(for: period) != nil { try open(period, now: now); return }
+        if run(for: period) != nil {
+            try open(period, now: now)
+            try setDisplayCurrency(currency)
+            return
+        }
         let repository = repository(for: period)
         // An interrupted metadata write may leave a valid challenge file; never reroll it.
         if !FileManager.default.fileExists(atPath: repository.url.path) {
             var state = try GameSnapshot.fresh(definitions: definitions, seed: period.seed, now: now, marketConfiguration: .us)
             state.player.cash = TraderScore.bankroll
+            state.marketConfiguration.currency = currency
             state.simulationID = period.id
             try repository.save(state)
         }
@@ -94,6 +100,10 @@ final class CompetitionStore {
         try persist(next)
         try open(period, now: now)
         CompetitionAnalytics.record(.started)
+    }
+    private func setDisplayCurrency(_ currency: GameCurrency) throws {
+        guard let store = weeklyStore, store.snapshot.marketConfiguration.currency != currency else { return }
+        var state = store.snapshot; state.marketConfiguration.currency = currency; try store.commit(state)
     }
     private func open(_ period: WeeklyPeriod, now: Date) throws {
         guard let run = run(for: period), !run.finalized, period.contains(now) else { weeklyStore = nil; return }
@@ -139,6 +149,9 @@ final class CompetitionStore {
     }
     /// Meaningful checkpoints are the sale count and explicit finalization, never every timer tick.
     func sync(using service: any CompetitionService, now: Date = .now) async {
+        if rankPlayerID != service.playerID {
+            ranks = CompetitionRanks(); ranksUnavailable = false; rankPlayerID = service.playerID
+        }
         guard !syncing, let player = service.playerID else { syncKey = "competition.offline"; return }
         syncing = true
         defer { syncing = false }

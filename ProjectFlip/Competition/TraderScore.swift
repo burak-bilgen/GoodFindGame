@@ -33,7 +33,7 @@ enum TraderScore {
     }
 
     static func calculate(_ state: GameSnapshot, period: WeeklyPeriod) throws -> Int64 {
-        guard state.marketConfiguration.region == .unitedStates,
+        guard state.simulationID == period.id, state.marketConfiguration.region == .unitedStates,
               state.player.cash >= .zero, state.player.cash.minorUnits <= 100_000_000_000_000,
               state.recovery.sequence == 0, state.recovery.commissionsEarned == .zero,
               state.collections.displayed.isEmpty,

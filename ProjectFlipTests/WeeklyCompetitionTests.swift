@@ -5,6 +5,7 @@ import Testing
 @MainActor struct WeeklyCompetitionTests {
     static func soldState(now: Date, definitions: [ItemDefinition]) throws -> GameSnapshot {
         var state = try GameSnapshot.fresh(definitions: definitions, seed: WeeklyPeriod.containing(now).seed, now: now)
+        state.simulationID = WeeklyPeriod.containing(now).id
         let listing = state.market[0]
         var agreement = NegotiationState(listingID: listing.id, patience: 100)
         agreement.agreedPrice = listing.askingPrice

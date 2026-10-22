@@ -24,6 +24,10 @@ struct RecoveryTests {
             #expect(jobs <= 5)
         }
         #expect(jobs == 5 && state.player.cash == RecoveryEngine.capitalFloor)
+        #expect(state.recovery.recovered == true)
+        // Eligibility must survive later spending, even if the companion journal was unavailable.
+        state.player.cash = .zero
+        #expect(try AchievementEngine.progress(state)[.comeback] == 100)
         #expect(try TradeLedger.totalProfit(TradeLedger.records(from: state)) == RecoveryEngine.capitalFloor)
         try RecoveryEngine.validate(state)
     }

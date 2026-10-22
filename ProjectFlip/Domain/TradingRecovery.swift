@@ -3,6 +3,7 @@ import Foundation
 struct RecoveryProgress: Codable, Equatable {
     var itemID: ItemID?
     var sequence: UInt64 = 0
+    var recovered: Bool?
     var commissionsEarned = Money.zero
 }
 
@@ -33,6 +34,7 @@ enum RecoveryEngine {
         next.player.inventory.removeAll { $0.id == id }; next.recovery.itemID = nil
         next.player.cash = try next.player.cash.adding(amount)
         next.recovery.commissionsEarned = try next.recovery.commissionsEarned.adding(amount)
+        if next.player.cash >= capitalFloor { next.recovery.recovered = true }
         var record = PlayerListing(id: ListingID("commission-\(id.rawValue)"), itemID: id, askingPrice: max(Money(minorUnits: 1), amount), createdAt: now, views: 0, favorites: 0)
         record.status = .sold; record.itemSnapshot = item; record.soldPrice = amount; record.soldAt = now; record.saleKind = .consignment
         next.playerListings.append(record)

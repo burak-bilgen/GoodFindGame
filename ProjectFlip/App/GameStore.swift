@@ -37,7 +37,7 @@ final class GameStore {
     func commit(_ next: GameSnapshot) throws {
         do {
             if let period = competitionPeriod {
-                guard period.contains(.now), competitionCanCommit?() ?? true,
+                guard period.contains(.now), competitionCanCommit?() ?? true, next.simulationID == period.id,
                       next.marketConfiguration.region == .unitedStates,
                       next.recovery.sequence == 0, next.recovery.commissionsEarned == .zero,
                       next.clients == ClientProgress(), next.collections == CollectionProgress() else { throw TradingError.unavailable }
