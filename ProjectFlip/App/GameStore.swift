@@ -33,9 +33,11 @@ final class GameStore {
     /// Write first, publish second: disk failures cannot grant unpersisted purchases.
     func commit(_ next: GameSnapshot) throws {
         do {
-            try repository.save(next)
-            snapshot = next
-            onSnapshotCommitted?(next)
+            var finalized = next
+            CareerEngine.refresh(&finalized)
+            try repository.save(finalized)
+            snapshot = finalized
+            onSnapshotCommitted?(finalized)
         } catch {
             #if DEBUG
             logger.error("Save failed: \(String(describing: error), privacy: .public)")

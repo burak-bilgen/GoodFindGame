@@ -38,6 +38,7 @@ struct MarketView: View {
                 }.padding(14).background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
                 TradingDeskHeader(store: store)
+                CareerHuntPrompt(store: store)
                 OpenTradesView(store: store)
                 TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {
@@ -79,7 +80,7 @@ struct MarketView: View {
                             NavigationLink {
                                 ListingDetailView(store: store, listingID: listing.id)
                             } label: {
-                                ListingCard(listing: listing, definition: definition, watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
+                                ListingCard(listing: listing, definition: definition, requiredCareer: CareerEngine.canAccess(definition, state: store.snapshot) ? nil : CareerEngine.requiredTier(for: definition), watched: store.snapshot.watchedListingIDs.contains(listing.id), lifecycle: store.snapshot.marketListingStates.first { $0.id == listing.id })
                             }.buttonStyle(.plain).accessibilityIdentifier("listing.\(listing.id.rawValue)")
                         }
                     }
@@ -105,6 +106,7 @@ struct MarketView: View {
 struct ListingCard: View {
     let listing: MarketplaceListing
     let definition: ItemDefinition
+    var requiredCareer: CareerTier?
     var watched = false
     var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
@@ -123,6 +125,7 @@ struct ListingCard: View {
                     }
                 }
             VStack(alignment: .leading, spacing: 7) {
+                if let requiredCareer { Label(GameText.string(requiredCareer.key, locale: locale), systemImage: "lock.fill").font(.caption2.bold()).foregroundStyle(GameStyle.amber) }
                 Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                     .font(.caption2.weight(.bold)).foregroundStyle(GameStyle.category(definition.category))
                     .lineLimit(typeSize.isAccessibilitySize ? nil : 1)

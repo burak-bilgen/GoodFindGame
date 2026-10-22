@@ -104,7 +104,7 @@ struct KnowledgeTests {
         knowledge.experience["retro"] = -1
         #expect(throws: SaveError.self) { try knowledge.validate() }
         knowledge.experience = [:]
-        knowledge.selfInspectionCapabilities["item"] = 8
+        knowledge.selfInspectionCapabilities["item"] = 9
         #expect(throws: SaveError.self) { try knowledge.validate() }
         var invalid = try state(category: .gaming, defects: [])
         invalid.inspectionKnowledge = knowledge

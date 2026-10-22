@@ -18,9 +18,12 @@ struct SimulationActions {
         return try bookReply(NegotiationEngine().askAboutIssues(listing: listing, current: current), current: current, state: state, now: now, seller: listing.seller)
     }
 
+    private func stateDefinition(_ id: String) -> ItemDefinition? { try? SeedContent.load().items.first { $0.id == id } }
+
     func purchase(listingID: ListingID, state: GameSnapshot, now: Date) throws -> GameSnapshot {
         guard state.player.inventory.count + state.shipments.filter({ $0.status == .pending }).count < state.player.inventoryCapacity else { throw TradingError.inventoryFull }
         let listing = try listing(listingID, in: state)
+        guard let definition = stateDefinition(listing.item.definitionID), CareerEngine.canAccess(definition, state: state) else { throw TradingError.marketLocked }
         var next = try PurchaseEngine().buy(listingID: listingID, state: state, now: now)
         guard let item = next.player.inventory.first(where: { $0.id == listing.item.id }) else { throw TradingError.unavailable }
         next.player.inventory.removeAll { $0.id == item.id }

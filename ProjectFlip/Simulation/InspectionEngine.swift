@@ -24,6 +24,7 @@ struct InspectionEngine {
         next.player.inventory[index].inspected = true
         next.inspectionKnowledge.selfInspectionCapabilities[itemID.rawValue] = knowledge.capability(in: category)
         if !item.inspected { next.inspectionKnowledge.learn(1, in: category) }
+        next.inspectionKnowledge.record(next.player.inventory[index], category: category)
         return next
     }
 
@@ -34,7 +35,7 @@ struct InspectionEngine {
         state.player.inventory[index].inspected = true
         state.player.inventory[index].revealedDefects = state.player.inventory[index].hiddenDefects
         state.player.inventory[index].revealFacts(knowledge: state.inspectionKnowledge, professionally: true)
-        if let category { state.inspectionKnowledge.learn(2, in: category) }
+        if let category { state.inspectionKnowledge.learn(2, in: category); state.inspectionKnowledge.record(state.player.inventory[index], category: category) }
     }
 
     func buyTools(for category: ItemCategory, state: GameSnapshot) throws -> GameSnapshot {

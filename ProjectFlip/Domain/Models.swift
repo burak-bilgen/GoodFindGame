@@ -118,7 +118,7 @@ struct Offer: Codable, Identifiable, Equatable, Sendable {
 struct PlayerState: Codable, Equatable, Sendable {
     var cash: Money
     var inventory: [ItemInstance] = []
-    var reputation = 50
+    var reputation = 0
     var inventoryCapacity = 8
 }
 

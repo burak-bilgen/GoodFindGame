@@ -63,7 +63,7 @@ struct ListingDetailView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             switch Result(catching: { try definition.baseValue.scaled(byBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
                             case .success(let reference):
-                                if let range = try? ValueEstimate(center: reference, spread: 3_000) { ValueRangeView(estimate: range) }
+                                if let range = try? ValueEstimate(center: reference, spread: Int64(max(1_800, 3_000 - store.snapshot.inspectionKnowledge.level(in: definition.category) * 300))) { ValueRangeView(estimate: range) }
                             case .failure: Text("inspection.valueUnavailable")
                             }
                             Text("listing.referenceCaution").font(.caption).foregroundStyle(.secondary)

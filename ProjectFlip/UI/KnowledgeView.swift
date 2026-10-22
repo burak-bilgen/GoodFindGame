@@ -38,6 +38,8 @@ struct KnowledgeSummary: View {
         LabeledContent("knowledge.level") {
             Text(GameText.string("knowledge.level.\(knowledge.level(in: category))", locale: locale))
         }
+        Text(GameText.format("knowledge.casebook", locale: locale, knowledge.modelCount(in: category), knowledge.diagnosticCount(in: category))).font(.caption).foregroundStyle(.secondary)
+        Text("knowledge.endorsement").font(.caption).foregroundStyle(.secondary)
         LabeledContent("knowledge.experience") { Text(knowledge.points(in: category), format: .number).accessibilityIdentifier("knowledgePoints.\(category.rawValue)") }
     }
 }

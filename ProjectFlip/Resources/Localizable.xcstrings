@@ -10710,6 +10710,402 @@
           }
         }
       }
+    },
+    "career.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trader career"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüccarlık kariyeri"
+          }
+        }
+      }
+    },
+    "career.passport": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR NAME IN THE MARKET"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PAZARDAKİ İMZAN"
+          }
+        }
+      }
+    },
+    "career.tier.0": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Independent Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bağımsız Tüccar"
+          }
+        }
+      }
+    },
+    "career.tier.1": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Known Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanınan Tüccar"
+          }
+        }
+      }
+    },
+    "career.tier.2": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Specialist Dealer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzman Satıcı"
+          }
+        }
+      }
+    },
+    "career.tier.3": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted Dealer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenilir Satıcı"
+          }
+        }
+      }
+    },
+    "career.trust": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trust: %lld / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güven: %lld / 100"
+          }
+        }
+      }
+    },
+    "career.nextHunt": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build a name. Choose your next ambition."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adını duyur. Sıradaki hedefini seç."
+          }
+        }
+      }
+    },
+    "career.principle": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trust opens doors. It does not raise your prices or guarantee profits. A documented loss still counts as experience."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güven kapıları açar. Fiyatlarını yükseltmez, kârı garantilemez. Kayıtlı bir zarar da deneyimdir."
+          }
+        }
+      }
+    },
+    "career.requirement.0": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start with a small bankroll and learn to read ordinary listings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Küçük bir sermayeyle başla, sıradan ilanları okumayı öğren."
+          }
+        }
+      }
+    },
+    "career.requirement.1": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete 3 inspected trades, or supply your first recurring client."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenmiş 3 ürün sat ya da ilk devamlı müşterinin talebini karşıla."
+          }
+        }
+      }
+    },
+    "career.requirement.2": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete 8 inspected trades and reach rank 2 in a category."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenmiş 8 ürün sat ve bir kategoride 2. seviyeye ulaş."
+          }
+        }
+      }
+    },
+    "career.requirement.3": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete 16 inspected trades, reach rank 3, and fulfill 3 client requests. Or complete 24 inspected trades at rank 3."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenmiş 16 ürün sat, 3. seviyeye ulaş ve 3 müşteri talebini karşıla. Alternatif olarak 3. seviyede incelenmiş 24 ürün sat."
+          }
+        }
+      }
+    },
+    "career.access.0": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Local affordable goods. All categories are open to learning."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygun fiyatlı yerel ürünler. Her kategoriyi öğrenebilirsin."
+          }
+        }
+      }
+    },
+    "career.access.1": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enthusiast equipment and more demanding sourcing briefs."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meraklılara özel ekipman ve daha ayrıntılı ürün talepleri."
+          }
+        }
+      }
+    },
+    "career.access.2": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium equipment, full-report commissions and specialist recognition."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üst düzey ekipman, uzman raporu isteyen işler ve uzmanlık itibarı."
+          }
+        }
+      }
+    },
+    "career.access.3": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted status and the final private client commissions."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenilir satıcı unvanı ve müşterilerin son özel işleri."
+          }
+        }
+      }
+    },
+    "career.record": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld documented trades · %lld client requests fulfilled"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld kayıtlı satış · %lld karşılanan müşteri talebi"
+          }
+        }
+      }
+    },
+    "error.marketLocked": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build your career to access this market. See Trader career for the requirements."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu pazara erişmek için kariyerini geliştir. Gereklilikler Tüccarlık kariyeri ekranında."
+          }
+        }
+      }
+    },
+    "knowledge.level.4": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endorsed Specialist"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yetkin Uzman"
+          }
+        }
+      }
+    },
+    "knowledge.casebook": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld models studied · %lld fault types understood"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld incelenen model · %lld tanınan kusur türü"
+          }
+        }
+      }
+    },
+    "knowledge.endorsement": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After rank 3: study 6 different models and diagnose 3 fault types for specialist recognition and more confident estimates."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3. seviyeden sonra: uzmanlık onayı ve daha güvenli tahminler için 6 farklı model incele, 3 kusur türünü tanı."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
