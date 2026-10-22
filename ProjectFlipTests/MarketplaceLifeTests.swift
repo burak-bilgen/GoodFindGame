@@ -193,7 +193,6 @@ extension MarketplaceLifeTests {
 
 extension MarketplaceLifeTests {
     @Test func introductionIsFastButRepeatAcquisitionWaitsMinutes() throws {
-        let definitions = try SeedContent.load().items
         let first = try PurchaseTests.agreedState()
         let firstBought = try SimulationActions(timing: .production).purchase(listingID: first.market[0].id, state: first, now: now)
         #expect(firstBought.player.inventory.isEmpty)

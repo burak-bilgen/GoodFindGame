@@ -1,7 +1,37 @@
 import SwiftUI
 
-/// Layered fictional product still lifes: material, depth, and evidence-limited wear.
+/// Photograph selection receives claims or earned appearance, never item truth.
 struct DeviceArt: View {
+    let symbol: String
+    var identity: String = "gaming-0"
+    var appearance: ItemAppearance?
+
+    var body: some View {
+        if let family = ProductPhoto.family(identity: identity, symbol: symbol) {
+            GeometryReader { geometry in
+                let photo = ProductPhoto.asset(family: family, wear: appearance?.wear ?? .unverified)
+                ZStack {
+                    // Extend the photograph's lighting into wide frames while
+                    // keeping tall products and their controls fully visible.
+                    Image(photo).resizable().scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .blur(radius: 18)
+                    Image(photo).resizable().scaledToFit()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+            }
+            .accessibilityHidden(true)
+        } else {
+            IllustratedDeviceArt(symbol: symbol, identity: identity, appearance: appearance)
+        }
+    }
+}
+
+
+/// Layered fictional product still lifes: material, depth, and evidence-limited wear.
+private struct IllustratedDeviceArt: View {
     let symbol: String
     var identity: String = "gaming-0"
     var appearance: ItemAppearance?

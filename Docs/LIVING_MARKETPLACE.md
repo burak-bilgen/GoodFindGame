@@ -1,5 +1,10 @@
 # Living marketplace — scoped game-feel follow-up
 
+Historical behavior checkpoint. The subsequent generated-photography and icon
+replacement is recorded in PRODUCT_ART.md; it supersedes the illustration-only
+visual state described here. The simulation validation below remains dated
+evidence for its own checkpoint.
+
 The owner's additional playable-experience direction authorizes condition-aware
 art, believable asynchronous pacing, price-sensitive attention, uncertain value
 presentation and parallel trade management. Broader progression, rare variants,

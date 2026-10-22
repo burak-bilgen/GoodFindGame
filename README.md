@@ -13,7 +13,7 @@ python3 Scripts/check_test_result.py /tmp/ProjectFlip-checkpoint.xcresult
 Use an unused result-bundle path for each run. The result check rejects recorded
 runtime warnings even when XCTest reports a passing interaction.
 
-Current milestone: the scoped living-marketplace UX/game-feel follow-up. See [the implementation and verification record](Docs/LIVING_MARKETPLACE.md), [the preceding clean checkpoint](Docs/CLEAN_CHECKPOINT.md), and [the human playtest guide](Docs/HUMAN_PLAYTEST.md). Broader V1 feature work remains paused.
+Current milestone: generated marketplace product photography and a new app icon, following the scoped living-marketplace UX/game-feel checkpoint. See [the art direction and asset record](Docs/PRODUCT_ART.md). See [the implementation and verification record](Docs/LIVING_MARKETPLACE.md), [the preceding clean checkpoint](Docs/CLEAN_CHECKPOINT.md), and [the human playtest guide](Docs/HUMAN_PLAYTEST.md). Broader V1 feature work remains paused.
 
 See Docs for requirements and milestone status. Localization uses semantic keys in a String Catalog; English and Turkish are first-class languages. Keep simulation independent of UI and locale.
 

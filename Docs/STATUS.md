@@ -1,6 +1,6 @@
 # Project status
 
-Current milestone: **Living marketplace UX/game-feel follow-up**, authorized by the owner after the clean checkpoint (21 October 2026).
+Current milestone: **Generated product photography and app-icon replacement** (22 October 2026), following the authorized living-marketplace UX/game-feel checkpoint. See PRODUCT_ART.md for the current art record.
 Broader V1 feature work remains paused. Do not resume progression expansion,
 collections, rare variants, client requests, bankruptcy recovery, category unlocks,
 Game Center, monetization or analytics infrastructure before human observations
