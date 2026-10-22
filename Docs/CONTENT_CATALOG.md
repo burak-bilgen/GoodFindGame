@@ -1,3 +1,5 @@
+> Historical implementation checkpoint. Current career, rank-four case-based endorsement, price bands, client chains and collections are documented in [TRADER_CAREER.md](TRADER_CAREER.md) and [REGIONAL_ECONOMY.md](REGIONAL_ECONOMY.md). Earlier “paused/next” statements and prices below describe their dated checkpoint.
+
 # Category content
 
 The V1 catalog contains 50 fictional definitions: 20 gaming/electronics, 15 cameras/lenses and 15 retro/collectibles. Twenty-four typed defects cover eight per category. Fictional model identities stay consistent across locales. Player-facing display names use a short model plus localized product type from the Turkish/English String Catalog; legacy seed names remain searchable for saved-game continuity. Product/brand names remain development fiction and require final release clearance.

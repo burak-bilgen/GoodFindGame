@@ -1,3 +1,5 @@
+> Historical implementation checkpoint. Current career, rank-four case-based endorsement, price bands, client chains and collections are documented in [TRADER_CAREER.md](TRADER_CAREER.md) and [REGIONAL_ECONOMY.md](REGIONAL_ECONOMY.md). Earlier “paused/next” statements and prices below describe their dated checkpoint.
+
 # Category expertise and diagnostic tools
 
 Master brief sections 15–16 require free inspection limited by category knowledge, defect obviousness and tool access. This implements those limits; category-specific numeric attributes and repair services remain separate unfinished requirements.

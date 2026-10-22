@@ -21,3 +21,7 @@ G. Run TR/EN journeys, regional economy simulations, layout/accessibility/screen
 Market region is selected on a new save from locale and then immutable in V1; display currency can change without repricing inventory. Language changes only text. A different regional market requires a separate new game rather than an arbitrage switch. Internal rates are fictional versioned balance, never current FX advice. Lightweight market memory uses only actual completed sales, otherwise says insufficient history. No invented recent-sales analytics.
 
 Game Center, ads/payments, auctions, backend, new categories and rare-variant expansion remain deferred.
+
+## Delivery checkpoint — 22 October 2026
+
+The ordered implementation phases are complete in separate commits. See [QA and remaining human acceptance](CREDIBLE_GAME_QA.md), [current status](STATUS.md), and [working name recommendation](PRODUCT_NAMING.md). Recent-sale history remains deferred, native animation required no third-party framework, and production naming is unchanged pending review.

@@ -1,44 +1,24 @@
 # Project status
 
-Current milestone: **Authorized trading-fairness, game-theme and animation implementation completed; ready for human playtesting** (22 October 2026). FAIR_TRADING.md records the behavioral corrections. GAME_INTERFACE.md records the central night-market theme, animation pass, all-screen audit, currency correction and verification. Human acceptance of fairness, pace, visual style and enjoyment remains open.
+Current milestone: **Credible trading game implementation completed; human acceptance remains open** (22 October 2026). The latest owner instruction authorizes the economy, art, game-feel, progression and identity milestone and supersedes the earlier pause. See [the implementation audit/plan](CREDIBLE_GAME_MILESTONE.md) and [verification report](CREDIBLE_GAME_QA.md).
 
-## Ordered work queue
+## Current delivered scope
 
-1. **Done:** varied seller photos, concise EN/TR product names and square photo frames with the complete product visible; affected screens verified in both languages and large text.
-2. **Done:** audio-thread warning reproduced and corrected; Debug/Release builds pass. Final checkpoint run: 117 unit + seven focused UI tests, zero failures/skips/runtime warnings. Exact commit is available in Git history for this report.
-3. **Implemented; human acceptance open:** first-counter coin-flip withdrawal removed, final offers explained, seller fatigue no longer raises a previously acceptable price, price/attention cliffs smoothed and normal response times shortened. All 121 unit + five affected UI tests pass with zero runtime warnings; Debug/Release pass. See FAIR_TRADING.md. Unscripted fairness/pace acceptance remains open.
-4. **Implemented; human acceptance open:** central game theme across main screens, native lists/forms, sheets and launch appearance; custom navigation dock; shared panel/input/button styles; radar, pending indicators, entry fades, status/tab feedback, inspection motion and payoff particles. Reduce Motion is honored. English now displays $, Turkish ₺. See GAME_INTERFACE.md. No further feature milestone is authorized.
+- Fifty economically tiered fictional products; canonical USD-cent accounting, independent US/Turkey regional profiles, pinned internal FX and saved USD/TRY display settings. Language does not change an existing save's market. Legacy saves are backed up before explicit one-time rebasing.
+- Seven model-specific four-condition artwork masters and improved controller/monitor families; evidence-aware seller versus inspection presentation. Most other models still share family art.
+- A custom trading-world shell, finite native motion, coordinated opt-in sound/haptics and item-focused results with large-text layouts. No animation dependency added.
+- Four career-access stages without reputation profit multipliers; slower case-based specialist endorsement; two recurring clients with three connected requests each; two owned collections and personal hunts; bounded low-cash consignment recovery and loss-realizing liquidation.
+- Ten naming candidates screened, top three and **Findrove** recommended as a working brand. [Naming research and preliminary identity](PRODUCT_NAMING.md). Production name, icon, bundle identifiers and save location remain Project Flip until review. Name/domain/social/legal clearance remains pending.
 
-The owner explicitly placed the interface redesign at the end of this queue on 22 October 2026. The implementation queue is complete; the next decision should come from actual human observations.
-Broader V1 feature work remains paused. Do not resume progression expansion,
-collections, rare variants, client requests, bankruptcy recovery, category unlocks,
-Game Center, monetization or analytics infrastructure before human observations
-justify the next decision.
+## Verification and remaining acceptance
 
-The existing English/Turkish trading loop includes marketplace discovery, seller
-negotiation, purchase/delivery, knowledge-limited inspection, optional immediate
-repair, resale, buyer negotiation, signed results and transaction history. Saved
-market changes, offline catch-up and notification routes are implemented. Category
-facts are already implemented; timed repairs and broader progression are not.
+Debug and Release simulator builds pass. All 138 unit tests and 63 distinct UI tests have passing outcomes across full UI batches and targeted correction runs; these are not represented as one uninterrupted green full-suite bundle. The full run exposed a large Turkish trade-result layout failure; the corrected layout passed the unchanged assertion. [The QA report](CREDIBLE_GAME_QA.md) records results, simulations, follow-ups and screenshot evidence.
 
-See [the human playtest guide](HUMAN_PLAYTEST.md) for an unassisted session and
-observation sheet, and [the V1 audit](COMPLETION_AUDIT.md) for the paused backlog.
-The main requirements remain in PROJECT_FLIP_CODEX_MASTER_BRIEF.md and
-ENGINEERING_AND_LOCALIZATION_REQUIREMENTS.md under this directory. The obsolete
-root brief has been removed; the corrected Docs brief is preserved.
+Economy simulations cover US/USD and Turkey/TRY with exact ledger reconciliation and both losing and evidence-aware strategies. Automated accounting and UI checks do not establish enjoyment or retention. Physical-device sound/haptics, iOS 17 runtime, comprehensive VoiceOver and unscripted human pacing/visual acceptance remain open. Most models need unique art before a claim of fifty distinct product masters. The finite first-career content is not months of measured retention.
 
-The previous clean checkpoint is recorded in CLEAN_CHECKPOINT.md. Current scoped
-work and verification are recorded in LIVING_MARKETPLACE.md. Automated checks and
-simulator captures do not establish human enjoyment or retention. Physical-device,
-iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
+Still deferred: Game Center, leaderboards, ads, paid currency, subscriptions, auctions, multiplayer/backend, major rare-variant expansion and additional categories. Recent-sale history is deferred until useful comparable simulation samples exist. Do not fabricate analytics.
 
-Current scoped validation (22 October 2026): Debug/Release builds pass; all 121
-unit tests and 55 distinct UI tests have passing outcomes across full-suite shards
-and recorded targeted follow-ups, with zero skipped cases or runtime warnings.
-All 540 EN/TR keys validate. GAME_INTERFACE.md explains the early test-harness
-failures and successful retries without claiming the initial full bundles were
-single green runs. The main brief remains byte-for-byte intact. Human difficulty,
-pace, visual-style and enjoyment acceptance remain open.
+The earlier [human playtest guide](HUMAN_PLAYTEST.md) remains useful for unassisted observation, but its old cash values and pre-progression scope are historical. Use the current in-game economy and QA report. The main requirements remain in PROJECT_FLIP_CODEX_MASTER_BRIEF.md and ENGINEERING_AND_LOCALIZATION_REQUIREMENTS.md; this milestone is documented separately without rewriting those briefs.
 
 ## Historical milestone verification
 
