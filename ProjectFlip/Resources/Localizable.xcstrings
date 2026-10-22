@@ -12366,6 +12366,1320 @@
           }
         }
       }
+    },
+    "competition.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Competition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekabet"
+          }
+        }
+      }
+    },
+    "competition.weekly": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly Flip"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haftanın Al-Satı"
+          }
+        }
+      }
+    },
+    "competition.leaderboard": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haftanın Tüccarı"
+          }
+        }
+      }
+    },
+    "competition.offline": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play offline. Connect to compare scores."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çevrimdışı oyna. Puanları karşılaştırmak için bağlan."
+          }
+        }
+      }
+    },
+    "competition.connecting": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecting to Game Center…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Center’a bağlanılıyor…"
+          }
+        }
+      }
+    },
+    "competition.connected": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connected to Game Center"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Center’a bağlı"
+          }
+        }
+      }
+    },
+    "competition.signInSettings": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to Game Center in Settings, then return here."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar’dan Game Center’a giriş yapıp buraya dön."
+          }
+        }
+      }
+    },
+    "competition.connect": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect to Game Center"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Center’a bağlan"
+          }
+        }
+      }
+    },
+    "competition.fairness": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyone starts with $1,000, the same US market and fresh expertise. Your career wealth stays in your career."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herkes 1.000 $ sermaye, aynı ABD pazarı ve sıfır uzmanlıkla başlar. Kariyer birikimin kariyerinde kalır."
+          }
+        }
+      }
+    },
+    "competition.start": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start this week’s challenge"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu haftanın mücadelesine başla"
+          }
+        }
+      }
+    },
+    "competition.resume": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return to Weekly Flip"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haftanın Al-Satı’na dön"
+          }
+        }
+      }
+    },
+    "competition.finish": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finalize my result"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonucumu kesinleştir"
+          }
+        }
+      }
+    },
+    "competition.finishHint": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finalizing ends your trading for this week. Unsold items earn no score. You can submit your result while this week is still open."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonucunu kesinleştirince bu haftaki al-satın sona erer. Satılmayan ürünler puan kazandırmaz. Hafta bitmeden sonucunu sıralamaya gönderebilirsin."
+          }
+        }
+      }
+    },
+    "competition.confirmFinish": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish this week?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu haftayı bitir?"
+          }
+        }
+      }
+    },
+    "competition.cancel": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep trading"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al-sata devam et"
+          }
+        }
+      }
+    },
+    "competition.score": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TraderScore"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüccar Puanı"
+          }
+        }
+      }
+    },
+    "competition.scoreRules": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score v1: net realized profit relative to the starting bankroll, portfolio return, and a capped bonus for inspected profitable trades across different models. Losses reduce profit. Repeated models earn no extra quality bonus. Maximum: 1,000,000."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puan v1: başlangıç sermayesine göre gerçekleşen net kâr, toplam yatırım getirisi ve farklı modellerdeki incelenmiş kârlı satışlar için sınırlı ek puan. Zararlar kârdan düşer. Aynı modeli tekrar satmak ek kalite puanı kazandırmaz. Üst sınır: 1.000.000."
+          }
+        }
+      }
+    },
+    "competition.globalRank": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "World rank"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dünya sırası"
+          }
+        }
+      }
+    },
+    "competition.friendsRank": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Among friends"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arkadaşların arasında"
+          }
+        }
+      }
+    },
+    "competition.unranked": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not ranked yet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz sıralamada değilsin"
+          }
+        }
+      }
+    },
+    "competition.ranksUnavailable": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rank is unavailable. Your local progress is safe."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıralama şu an alınamıyor. Cihazındaki ilerlemen güvende."
+          }
+        }
+      }
+    },
+    "competition.timeLeft": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time remaining"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalan süre"
+          }
+        }
+      }
+    },
+    "competition.bankroll": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Challenge cash"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mücadele nakdi"
+          }
+        }
+      }
+    },
+    "competition.profit": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Realized profit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçekleşen kâr"
+          }
+        }
+      }
+    },
+    "competition.trades": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed trades"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan al-satlar"
+          }
+        }
+      }
+    },
+    "competition.achievements": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achievements"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başarımlar"
+          }
+        }
+      }
+    },
+    "competition.global": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "World leaderboard"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dünya sıralaması"
+          }
+        }
+      }
+    },
+    "competition.friends": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Friends leaderboard"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arkadaş sıralaması"
+          }
+        }
+      }
+    },
+    "competition.submit": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Submit / sync"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönder / eşitle"
+          }
+        }
+      }
+    },
+    "competition.saved": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved on this device"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda kayıtlı"
+          }
+        }
+      }
+    },
+    "competition.synced": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Result submitted"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonuç gönderildi"
+          }
+        }
+      }
+    },
+    "competition.pending": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting to submit. Reconnect before this week ends."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderilmeyi bekliyor. Hafta bitmeden yeniden bağlan."
+          }
+        }
+      }
+    },
+    "competition.expired": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week ended. Result kept on this device."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hafta sona erdi. Sonuç bu cihazda saklandı."
+          }
+        }
+      }
+    },
+    "competition.error": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Competition could not be saved. Try again; your career is safe."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekabet kaydı yapılamadı. Tekrar dene; kariyer kaydın güvende."
+          }
+        }
+      }
+    },
+    "competition.finalized": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week’s result is final"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu haftanın sonucu kesinleşti"
+          }
+        }
+      }
+    },
+    "competition.previous": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous results"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önceki sonuçlar"
+          }
+        }
+      }
+    },
+    "competition.finisher": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Challenge Finisher"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mücadele Tamamlayıcısı"
+          }
+        }
+      }
+    },
+    "competition.prestige": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A badge to remember your week. No cash or trading bonuses."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu haftanın hatırası bir rozet. Nakit ya da al-sat avantajı sağlamaz."
+          }
+        }
+      }
+    },
+    "competition.introLocked": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete three career trades to enter your first weekly challenge."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk haftalık mücadelene katılmak için kariyerinde üç al-sat tamamla."
+          }
+        }
+      }
+    },
+    "competition.invite": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A fresh challenge awaits. Everyone starts equal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni bir mücadele seni bekliyor. Herkes eşit başlıyor."
+          }
+        }
+      }
+    },
+    "competition.challengeContext": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly Flip · Separate bankroll"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haftanın Al-Satı · Ayrı sermaye"
+          }
+        }
+      }
+    },
+    "competition.market": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hunt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fırsat ara"
+          }
+        }
+      }
+    },
+    "competition.inventory": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your finds"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buldukların"
+          }
+        }
+      }
+    },
+    "competition.selling": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your sales"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satışların"
+          }
+        }
+      }
+    },
+    "competition.back": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to Competition"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekabete dön"
+          }
+        }
+      }
+    },
+    "competition.integrity": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline, device-based competition. Scores are checked locally; this is not a server-verified contest."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çevrimdışı, cihaz tabanlı rekabet. Puanlar cihazda denetlenir; sonuçlar sunucu tarafından doğrulanmaz."
+          }
+        }
+      }
+    },
+    "competition.accountMismatch": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This result belongs to another Game Center account. Switch back to submit it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sonuç başka bir Game Center hesabına ait. Göndermek için o hesaba dön."
+          }
+        }
+      }
+    },
+    "competition.clock": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The device clock changed. Rankings are paused for this run; you can keep playing offline."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cihazın saati değişti. Bu mücadelede sıralama gönderimi durduruldu; çevrimdışı oynamaya devam edebilirsin."
+          }
+        }
+      }
+    },
+    "competition.earned": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Earned"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kazanıldı"
+          }
+        }
+      }
+    },
+    "achievement.firstFlip.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First Flip"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk Kârlı Satış"
+          }
+        }
+      }
+    },
+    "achievement.firstFlip.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete your first profitable trade."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk kârlı al-satını tamamla."
+          }
+        }
+      }
+    },
+    "achievement.naturalTrader.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Natural Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doğuştan Tüccar"
+          }
+        }
+      }
+    },
+    "achievement.naturalTrader.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Earn at least 100% return on a trade costing $10 or more."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En az 10 $ maliyetli bir al-satta %100 veya daha fazla getiri kazan."
+          }
+        }
+      }
+    },
+    "achievement.thatHurt.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That Hurt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Biraz Acıttı"
+          }
+        }
+      }
+    },
+    "achievement.thatHurt.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lose at least $10 on a trade costing $50 or more."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En az 50 $ maliyetli bir al-satta en az 10 $ zarar et."
+          }
+        }
+      }
+    },
+    "achievement.detective.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detective"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dedektif"
+          }
+        }
+      }
+    },
+    "achievement.detective.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discover a hidden defect in five different listings before buying."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beş farklı ilanda satın almadan önce gizli bir kusur öğren."
+          }
+        }
+      }
+    },
+    "achievement.negotiator.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Negotiator"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazarlık Ustası"
+          }
+        }
+      }
+    },
+    "achievement.negotiator.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy an item for at least 20% below the seller’s asking price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir ürünü satıcının ilan fiyatından en az %20 ucuza al."
+          }
+        }
+      }
+    },
+    "achievement.collector.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collector"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyoncu"
+          }
+        }
+      }
+    },
+    "achievement.collector.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete your first collection."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk koleksiyonunu tamamla."
+          }
+        }
+      }
+    },
+    "achievement.trustedTrader.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trusted Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenilir Tüccar"
+          }
+        }
+      }
+    },
+    "achievement.trustedTrader.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete ten inspected trades in your career."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kariyerinde incelemesini yaptığın on ürünü sat."
+          }
+        }
+      }
+    },
+    "achievement.specialist.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Specialist"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşin Uzmanı"
+          }
+        }
+      }
+    },
+    "achievement.specialist.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reach expertise level 3 in one category."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir kategoride 3. uzmanlık seviyesine ulaş."
+          }
+        }
+      }
+    },
+    "achievement.bigLeague.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Big League"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büyük Lig"
+          }
+        }
+      }
+    },
+    "achievement.bigLeague.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reach the highest career stage."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En yüksek kariyer aşamasına ulaş."
+          }
+        }
+      }
+    },
+    "achievement.comeback.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comeback"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Ayağa Kalk"
+          }
+        }
+      }
+    },
+    "achievement.comeback.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use recovery commissions and rebuild your cash to $75."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toparlanma işlerinden gelir kazanarak nakdini yeniden 75 $ seviyesine çıkar."
+          }
+        }
+      }
+    },
+    "achievement.versatile.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versatile Trader"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çok Yönlü Tüccar"
+          }
+        }
+      }
+    },
+    "achievement.versatile.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profit from five different product models."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beş farklı ürün modelini kârla sat."
+          }
+        }
+      }
+    },
+    "achievement.weeklyFinisher.title": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Challenge Finisher"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mücadele Tamamlayıcısı"
+          }
+        }
+      }
+    },
+    "achievement.weeklyFinisher.detail": {
+      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finalize a weekly challenge with at least one completed trade."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En az bir al-sat tamamladığın haftalık mücadelenin sonucunu kesinleştir."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
