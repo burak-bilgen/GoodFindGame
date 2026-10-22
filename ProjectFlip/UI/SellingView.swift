@@ -245,11 +245,15 @@ struct SaleListingView: View {
                                 DisclosureGroup("selling.updatePrice") {
                                     VStack(spacing: 12) {
                                         TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(GamePriceFieldStyle()).accessibilityIdentifier("salePrice")
+                                            .task {
+                                                await Task.yield()
+                                                proxy.scrollTo("salePriceEditor", anchor: .center)
+                                            }
                                         Button("selling.updatePrice") {
                                             editing = false
                                             store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale, market: market)) }
                                         }.accessibilityIdentifier("updateSalePrice")
-                                    }.padding(.top, 12)
+                                    }.padding(.top, 12).id("salePriceEditor")
                                 }.gameCard()
                                 Button("living.withdraw", role: .destructive) { store.perform { try store.withdrawListing(listingID: listing.id) } }.accessibilityIdentifier("withdrawListing")
                             }
