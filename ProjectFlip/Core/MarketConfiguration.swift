@@ -6,27 +6,19 @@ enum GameCurrency: String, Codable, CaseIterable, Sendable {
     var basisPointsPerUSD: Int64 { self == .usd ? 10_000 : 400_000 }
 }
 
-enum MarketRegion: String, Codable, CaseIterable, Sendable {
-    case unitedStates, turkey
-    var currency: GameCurrency { self == .turkey ? .tryLira : .usd }
-    func categoryBasisPoints(_ category: ItemCategory) -> Int64 {
-        guard self == .turkey else { return 10_000 }
-        switch category { case .gaming: return 12_000; case .cameras: return 13_500; case .retro: return 11_000 }
-    }
-    func supplyBasisPoints(_ category: ItemCategory) -> Int64 {
-        self == .turkey && category == .retro ? 10_500 : 10_000
-    }
-}
+/// Legacy save tag only. All current games use one shared market.
+enum MarketRegion: String, Codable, CaseIterable, Sendable { case unitedStates, turkey }
 
 struct MarketConfiguration: Codable, Equatable, Sendable {
-    var version = 1
+    var version = 2
     let region: MarketRegion
     var currency: GameCurrency
     static let us = Self(region: .unitedStates, currency: .usd)
-    static let turkey = Self(region: .turkey, currency: .tryLira)
-    static func initial(locale: Locale) -> Self { locale.region?.identifier == "TR" ? .turkey : .us }
+    // Compatibility spelling for callers; this selects TRY presentation, not a second economy.
+    static let turkey = Self(region: .unitedStates, currency: .tryLira)
+    static func initial(locale: Locale) -> Self { locale.language.languageCode?.identifier == "tr" ? .turkey : .us }
     func multiplier(for category: ItemCategory) -> Int64 {
-        region.categoryBasisPoints(category) * region.supplyBasisPoints(category) / 10_000
+        10_000 // Locale, display currency and the legacy region tag never reprice goods.
     }
     func display(_ value: Money) throws -> Money { try value.scaled(byBasisPoints: currency.basisPointsPerUSD) }
     func canonical(_ value: Money) throws -> Money {
@@ -34,7 +26,7 @@ struct MarketConfiguration: Codable, Equatable, Sendable {
         guard !overflow else { throw MoneyError.overflow }
         return Money(minorUnits: scaled / currency.basisPointsPerUSD)
     }
-    func validate() throws { guard version == 1 else { throw SaveError.invalidSave } }
+    func validate() throws { guard version == 2, region == .unitedStates else { throw SaveError.invalidSave } }
 }
 
 enum ValueTier: String, Codable, CaseIterable, Sendable {

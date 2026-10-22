@@ -9794,73 +9794,37 @@
       }
     },
     "region.title": {
-      "comment": "Market configuration and explicit economy migration.",
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Market & currency"
+            "value": "Currency & language"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pazar ve para birimi"
-          }
-        }
-      }
-    },
-    "region.unitedStates": {
-      "comment": "Market configuration and explicit economy migration.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "United States market"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amerika Birleşik Devletleri pazarı"
-          }
-        }
-      }
-    },
-    "region.turkey": {
-      "comment": "Market configuration and explicit economy migration.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turkey market"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Türkiye pazarı"
+            "value": "Para birimi ve dil"
           }
         }
       }
     },
     "region.fixed": {
-      "comment": "Market configuration and explicit economy migration.",
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your market is saved with this career. Language and display currency never change its prices. Start a separate career to use a different market."
+            "value": "One marketplace for every language. Currency changes how prices are displayed; it never changes value, supply or difficulty. Language follows your iPhone’s app language setting."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pazarın bu kariyere bağlıdır. Dil ve gösterim para birimi pazar fiyatlarını değiştirmez. Farklı bir pazar için ayrı kariyer gerekir."
+            "value": "Her dilde aynı pazar. Para birimi yalnızca fiyatların gösterimini değiştirir; değeri, ürün arzını veya zorluğu etkilemez. Oyun dili iPhone’daki uygulama dili ayarını izler."
           }
         }
       }
@@ -9933,726 +9897,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eski krediler 20:1 oranında temel değere dönüştürüldü. Nakit, maliyetler ve bekleyen teklifler birlikte çevrildi. Ürün değerleri artık gerçekçi fiyat aralıklarını kullanıyor. Önceki kaydın yedeklendi."
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.0": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alex"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alex"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.1": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jordan"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jordan"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.2": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sam"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sam"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.3": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morgan"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morgan"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.4": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Casey"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Casey"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.5": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riley"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Riley"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.6": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taylor"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taylor"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.7": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jamie"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jamie"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.8": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Robin"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Robin"
-          }
-        }
-      }
-    },
-    "people.unitedStates.name.9": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drew"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drew"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.0": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Portland"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Portland"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.1": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Austin"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Austin"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.2": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seattle"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seattle"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.3": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Denver"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Denver"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.4": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boston"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boston"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.5": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chicago"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chicago"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.6": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Phoenix"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Phoenix"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.7": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atlanta"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atlanta"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.8": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "San Diego"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "San Diego"
-          }
-        }
-      }
-    },
-    "people.unitedStates.city.9": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Raleigh"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Raleigh"
-          }
-        }
-      }
-    },
-    "people.turkey.name.0": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deniz"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deniz"
-          }
-        }
-      }
-    },
-    "people.turkey.name.1": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ece"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ece"
-          }
-        }
-      }
-    },
-    "people.turkey.name.2": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mert"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mert"
-          }
-        }
-      }
-    },
-    "people.turkey.name.3": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selin"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Selin"
-          }
-        }
-      }
-    },
-    "people.turkey.name.4": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Can"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Can"
-          }
-        }
-      }
-    },
-    "people.turkey.name.5": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Derya"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Derya"
-          }
-        }
-      }
-    },
-    "people.turkey.name.6": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emre"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Emre"
-          }
-        }
-      }
-    },
-    "people.turkey.name.7": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aslı"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aslı"
-          }
-        }
-      }
-    },
-    "people.turkey.name.8": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cem"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cem"
-          }
-        }
-      }
-    },
-    "people.turkey.name.9": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İpek"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "İpek"
-          }
-        }
-      }
-    },
-    "people.turkey.city.0": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kadıköy"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kadıköy"
-          }
-        }
-      }
-    },
-    "people.turkey.city.1": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Çankaya"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Çankaya"
-          }
-        }
-      }
-    },
-    "people.turkey.city.2": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Karşıyaka"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Karşıyaka"
-          }
-        }
-      }
-    },
-    "people.turkey.city.3": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nilüfer"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nilüfer"
-          }
-        }
-      }
-    },
-    "people.turkey.city.4": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konak"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konak"
-          }
-        }
-      }
-    },
-    "people.turkey.city.5": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beşiktaş"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beşiktaş"
-          }
-        }
-      }
-    },
-    "people.turkey.city.6": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Muratpaşa"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Muratpaşa"
-          }
-        }
-      }
-    },
-    "people.turkey.city.7": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tepebaşı"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tepebaşı"
-          }
-        }
-      }
-    },
-    "people.turkey.city.8": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bornova"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bornova"
-          }
-        }
-      }
-    },
-    "people.turkey.city.9": {
-      "comment": "Persistent regional marketplace identity, independent of display language.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Üsküdar"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Üsküdar"
           }
         }
       }
@@ -12512,19 +11756,19 @@
       }
     },
     "competition.fairness": {
-      "comment": "Competition V1: optional social play, isolated weekly economy and gameplay achievement copy.",
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Everyone starts with $1,000, the same US market and fresh expertise. Your career wealth stays in your career."
+            "value": "Everyone starts with $1,000 of value, the same market and fresh expertise. Display currency changes the numbers you see, not your buying power. Your career wealth stays in your career."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Herkes 1.000 $ sermaye, aynı ABD pazarı ve sıfır uzmanlıkla başlar. Kariyer birikimin kariyerinde kalır."
+            "value": "Herkes 1.000 $ değerinde sermaye, aynı pazar ve sıfır uzmanlıkla başlar. Gösterim para birimi yalnızca gördüğün rakamları değiştirir, alım gücünü değil. Kariyer birikimin kariyerinde kalır."
           }
         }
       }
@@ -13677,6 +12921,402 @@
           "stringUnit": {
             "state": "translated",
             "value": "En az bir al-sat tamamladığın haftalık mücadelenin sonucunu kesinleştir."
+          }
+        }
+      }
+    },
+    "people.name.0": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alex"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deniz"
+          }
+        }
+      }
+    },
+    "people.city.0": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Old Town"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eski Çarşı"
+          }
+        }
+      }
+    },
+    "people.name.1": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jordan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ece"
+          }
+        }
+      }
+    },
+    "people.city.1": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riverside"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dereboyu"
+          }
+        }
+      }
+    },
+    "people.name.2": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sam"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mert"
+          }
+        }
+      }
+    },
+    "people.city.2": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "North Quarter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuzey Mahallesi"
+          }
+        }
+      }
+    },
+    "people.name.3": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morgan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selin"
+          }
+        }
+      }
+    },
+    "people.city.3": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Station District"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstasyon Mahallesi"
+          }
+        }
+      }
+    },
+    "people.name.4": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Casey"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can"
+          }
+        }
+      }
+    },
+    "people.city.4": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harbor Quarter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liman Mahallesi"
+          }
+        }
+      }
+    },
+    "people.name.5": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riley"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derya"
+          }
+        }
+      }
+    },
+    "people.city.5": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maple Square"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çınar Meydanı"
+          }
+        }
+      }
+    },
+    "people.name.6": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taylor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emre"
+          }
+        }
+      }
+    },
+    "people.city.6": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "West End"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batı Mahallesi"
+          }
+        }
+      }
+    },
+    "people.name.7": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jamie"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aslı"
+          }
+        }
+      }
+    },
+    "people.city.7": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilltop"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tepebaşı"
+          }
+        }
+      }
+    },
+    "people.name.8": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Robin"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cem"
+          }
+        }
+      }
+    },
+    "people.city.8": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workshop Row"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atölyeler Sokağı"
+          }
+        }
+      }
+    },
+    "people.name.9": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drew"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İpek"
+          }
+        }
+      }
+    },
+    "people.city.9": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Central Arcade"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merkez Pasajı"
+          }
+        }
+      }
+    },
+    "region.shared": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shared market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ortak pazar"
+          }
+        }
+      }
+    },
+    "region.sharedMigration": {
+      "comment": "Shared fictional marketplace. Language changes presentation only; stable identity indices and economic outcomes remain unchanged.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your career now uses the shared market. Your cash, items, costs and existing quotes are unchanged. New listings use the same pricing rules for everyone. Your previous save was backed up."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kariyerin artık ortak pazarı kullanıyor. Nakdin, ürünlerin, maliyetlerin ve mevcut tekliflerin korundu. Yeni ilanlarda herkes için aynı fiyat kuralları geçerli. Önceki kaydın yedeklendi."
           }
         }
       }

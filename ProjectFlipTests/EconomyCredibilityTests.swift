@@ -12,18 +12,18 @@ struct EconomyCredibilityTests {
 }
 
 extension EconomyCredibilityTests {
-    @Test func regionAndDisplayCurrencyAreDifferentAndLanguageCannotReprice() throws {
+    @Test func displayCurrencyAndLanguageCannotRepriceSharedMarket() throws {
         let value = Money(minorUnits: 30_000)
         #expect(try MarketConfiguration.turkey.display(value) == Money(minorUnits: 1_200_000))
         #expect(try Money.parse("12000", locale: Locale(identifier: "en_US"), market: .turkey) == value)
         #expect(value.formatted(locale: Locale(identifier: "en_US"), market: .turkey).contains("12,000"))
         #expect(value.formatted(locale: Locale(identifier: "tr_TR"), market: .us).contains("300"))
-        #expect(MarketConfiguration.turkey.multiplier(for: .cameras) != MarketConfiguration.turkey.multiplier(for: .gaming))
+        #expect(ItemCategory.allCases.allSatisfy { MarketConfiguration.turkey.multiplier(for: $0) == MarketConfiguration.us.multiplier(for: $0) })
         #expect(throws: MoneyError.self) { try MarketConfiguration.turkey.display(Money(minorUnits: .max)) }
         #expect(throws: TradingError.self) { try Money.parse("0.01", locale: Locale(identifier: "en_US"), market: .turkey) }
     }
 
-    @Test func bothRegionalEconomiesStayPlausibleAcrossTenThousandListings() throws {
+    @Test func sharedEconomyStaysPlausibleAcrossTenThousandListingsInBothCurrencies() throws {
         let definitions = try SeedContent.load().items
         var checked = 0
         for config in [MarketConfiguration.us, .turkey] {

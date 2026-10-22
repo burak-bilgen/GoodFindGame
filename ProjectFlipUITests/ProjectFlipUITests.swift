@@ -608,7 +608,7 @@ final class ProjectFlipUITests: XCTestCase {
         let field = app.textFields["offerAmount"]
         tap(field, in: app)
         let value = field.value as? String ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count) + (turkish ? "1680" : "35"))
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count) + (turkish ? "1400" : "35"))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(send, in: app)
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 10))
@@ -973,7 +973,7 @@ final class ProjectFlipUITests: XCTestCase {
         let field = app.textFields["offerAmount"]
         tap(field, in: app)
         let initial = field.value as? String ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: initial.count) + (turkish ? "1680" : "35"))
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: initial.count) + (turkish ? "1400" : "35"))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(app.buttons["sendOffer"], in: app)
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 5))
@@ -1431,7 +1431,7 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(cash.label.contains(language == "tr" ? "1.000" : "40,000"))
         app.buttons["gameTab.4"].tap()
         tap(app.buttons["marketSettings"], in: app)
-        XCTAssertTrue(app.staticTexts[language == "tr" ? "Türkiye pazarı" : "United States market"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Ortak pazar" : "Shared market"].exists)
         XCTAssertTrue(app.buttons["displayCurrency"].label.contains(language == "tr" ? "USD" : "TRY"))
     }
 

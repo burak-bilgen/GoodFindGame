@@ -14,7 +14,7 @@ struct MarketSettingsView: View {
     var body: some View {
         GameList {
             Section("region.title") {
-                Text(GameText.string("region.\(store.snapshot.marketConfiguration.region.rawValue)", locale: locale)).font(.headline)
+                Text("region.shared").font(.headline)
                 Text("region.fixed").font(.caption).foregroundStyle(.secondary)
                 Picker("region.currency", selection: Binding(get: { store.snapshot.marketConfiguration.currency }, set: { currency in
                     store.perform { var next = store.snapshot; next.marketConfiguration.currency = currency; try store.commit(next) }
@@ -22,6 +22,12 @@ struct MarketSettingsView: View {
                     ForEach(GameCurrency.allCases, id: \.self) { Text($0.rawValue).tag($0) }
                 }.accessibilityIdentifier("displayCurrency")
                 Text("region.fx").font(.caption).foregroundStyle(.secondary)
+            }
+            if store.snapshot.sharedMarketMigrationNotice {
+                Section("region.migrationTitle") {
+                    Text("region.sharedMigration")
+                    Button("action.ok") { store.perform { var next = store.snapshot; next.sharedMarketMigrationNotice = false; try store.commit(next) } }
+                }
             }
             if store.snapshot.economyMigrationNotice {
                 Section("region.migrationTitle") {

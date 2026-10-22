@@ -25,12 +25,13 @@ struct GameSnapshot: Codable, Equatable {
     var inspectionKnowledge = InspectionKnowledge()
     var marketConfiguration = MarketConfiguration.us
     var economyMigrationNotice = false
+    var sharedMarketMigrationNotice = false
     var career = CareerRecord()
     var clients = ClientProgress()
     var collections = CollectionProgress()
     var recovery = RecoveryProgress()
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice, career, clients, collections, recovery }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice, sharedMarketMigrationNotice, career, clients, collections, recovery }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -64,6 +65,7 @@ struct GameSnapshot: Codable, Equatable {
         if !values.contains(.career) { career.legacyAgreements = Set(conversations.filter { !$0.closed && ($0.agreedPrice != nil || $0.counterPrice != nil) }.map(\.listingID)) }
         marketConfiguration = try values.decodeIfPresent(MarketConfiguration.self, forKey: .marketConfiguration) ?? .us
         economyMigrationNotice = try values.decodeIfPresent(Bool.self, forKey: .economyMigrationNotice) ?? false
+        sharedMarketMigrationNotice = try values.decodeIfPresent(Bool.self, forKey: .sharedMarketMigrationNotice) ?? false
         notificationPreferences = try values.decodeIfPresent(NotificationPreferences.self, forKey: .notificationPreferences) ?? NotificationPreferences()
     }
 
@@ -103,6 +105,16 @@ struct SaveRepository {
             object = rebase(object) as? [String: Any] ?? [:]
             object["marketConfiguration"] = ["version": 1, "region": "unitedStates", "currency": "USD"]
             object["economyMigrationNotice"] = true
+        }
+        if var configuration = object["marketConfiguration"] as? [String: Any], configuration["version"] as? Int == 1 {
+            // Keep every actual amount and commitment. Only future market pricing becomes shared.
+            // Earlier regional prices already paid/agreed are historical facts, not currency to rebase.
+            let backup = url.appendingPathExtension("pre-shared-market-v3.json")
+            if !FileManager.default.fileExists(atPath: backup.path) { try original.write(to: backup, options: .atomic) }
+            object["sharedMarketMigrationNotice"] = configuration["region"] as? String == "turkey"
+            configuration["version"] = 2
+            configuration["region"] = "unitedStates" // Legacy storage tag; not a visible country choice.
+            object["marketConfiguration"] = configuration
         }
         let state = try JSONDecoder().decode(GameSnapshot.self, from: JSONSerialization.data(withJSONObject: object))
         try state.marketConfiguration.validate()
