@@ -1,5 +1,9 @@
 import Foundation
 
+enum BuyerCounterDecision: Equatable {
+    case accept, counter(Money), withdraw
+}
+
 struct BuyerEngine {
     func generateOffer(listingID: ListingID, state: GameSnapshot, definitions: [ItemDefinition], now: Date? = nil) throws -> GameSnapshot {
         let index = try activeIndex(listingID, in: state)
@@ -54,16 +58,48 @@ struct BuyerEngine {
         let index = try activeIndex(listingID, in: state)
         guard let offerIndex = state.playerListings[index].offers.indices.last,
               [.pending, .countered].contains(state.playerListings[index].offers[offerIndex].status) else { throw TradingError.closed }
-        let offer = state.playerListings[index].offers[offerIndex]
-        if amount <= offer.willingness { return try settle(index: index, amount: amount, state: state, now: now) }
+        let decision = try counterDecision(listingID: listingID, amount: amount, state: state)
+        if decision == .accept { return try settle(index: index, amount: amount, state: state, now: now) }
         var next = state
-        let maximumCounter = try offer.willingness.scaled(byBasisPoints: 12_000)
-        let withdraw = offer.counterAttempts >= 1 || amount > maximumCounter
-        next.playerListings[index].offers[offerIndex].status = withdraw ? .withdrawn : .countered
+        let revised: Money? = if case .counter(let value) = decision { value } else { nil }
+        next.playerListings[index].offers[offerIndex].status = revised == nil ? .withdrawn : .countered
         next.playerListings[index].offers[offerIndex].counterAttempts += 1
-        next.playerListings[index].offers[offerIndex].amount = offer.willingness
-        next.playerListings[index].messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(next.playerListings[index].messages.count)", intent: withdraw ? "buyer.withdraw" : "buyer.counter", fromPlayer: false, amount: withdraw ? nil : offer.willingness))
+        // A withdrawn buyer never exposes their unused private budget.
+        if let revised { next.playerListings[index].offers[offerIndex].amount = revised }
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(next.playerListings[index].messages.count)", intent: revised == nil ? "buyer.withdraw" : "buyer.counter", fromPlayer: false, amount: revised))
         return next
+    }
+
+    /// The persisted identity/attempt fixes the response. Reloading or offline
+    /// catch-up cannot reroll it; notifications use this same decision.
+    func counterDecision(listingID: ListingID, amount: Money, state: GameSnapshot) throws -> BuyerCounterDecision {
+        guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
+        let index = try activeIndex(listingID, in: state)
+        let listing = state.playerListings[index]
+        guard let offer = listing.offers.last, [.pending, .countered].contains(offer.status) else { throw TradingError.closed }
+        // Taking an already-held price is always safe. First-trade teaching keeps
+        // its original approachable buyer; subsequent buyers defend their offer.
+        if amount <= offer.amount { return .accept }
+        let introduction = state.playerListings.first?.id == listingID && listing.offers.count == 1 && offer.counterAttempts == 0
+        if introduction && amount <= offer.willingness { return .accept }
+        if amount > (try offer.willingness.scaled(byBasisPoints: 12_000)) || offer.counterAttempts >= 2 { return .withdraw }
+        var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-reply-\(state.simulationID)-\(listingID.rawValue)-\(offer.id.rawValue)-\(offer.counterAttempts)"))
+        let firmness: Int = switch offer.archetype {
+        case .lowballer: 25
+        case .reseller: 22
+        case .bargainHunter: 17
+        case .cautious: 10
+        case .impatient: 12
+        case .collector: 6
+        }
+        let uplift = Int(100 * Double(amount.minorUnits - offer.amount.minorUnits) / Double(max(1, offer.amount.minorUnits)))
+        let walkChance = min(85, firmness + uplift / 2 + offer.counterAttempts * 18)
+        if random.integer(in: 0...99) < walkChance && !introduction { return .withdraw }
+        if amount <= offer.willingness { return .accept }
+        let gap = try offer.willingness.subtracting(offer.amount)
+        guard gap > .zero else { return .withdraw }
+        let step = max(Money(minorUnits: 1), try gap.scaled(byBasisPoints: Int64(random.integer(in: 3_000...7_000))))
+        return .counter(min(offer.willingness, try offer.amount.adding(step)))
     }
 
     func changePrice(listingID: ListingID, amount: Money, state: GameSnapshot) throws -> GameSnapshot {

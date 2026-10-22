@@ -51,7 +51,27 @@ struct ListingGenerator {
                 bias = range.0 + roll * (range.1 - range.0) / 5_000
             }
             let asking = try perceived.scaled(byBasisPoints: Int64(bias))
-            let reservation = min(asking, try sellerBelief.scaled(byBasisPoints: Int64(8_000 - urgency * 20)))
+            let reservation: Money
+            if starterFriendly && index == 0 {
+                reservation = min(asking, try sellerBelief.scaled(byBasisPoints: Int64(8_000 - urgency * 20)))
+            } else {
+                // An independent stream preserves every existing item/price draw.
+                // A professional protects margin; urgency and ignorance can still
+                // create opportunities. No seller receives an automatic 20–40% cut.
+                var floorRandom = SeededRandom(seed: SeededRandom.seed(for: "seller-floor-\(seed)-\(definition.id)"))
+                let floorRange: ClosedRange<Int> = switch archetype {
+                case .professional: 9_400...10_400
+                case .stubborn: 10_200...12_000
+                case .collector: 9_800...11_500
+                case .urgent: 7_800...9_300
+                case .friendly: 8_800...9_800
+                case .casual: 8_800...10_300
+                case .clueless: 8_500...10_000
+                case .manipulative: 8_800...10_000
+                }
+                let basis = archetype == .clueless || archetype == .manipulative ? asking : sellerBelief
+                reservation = min(asking, try basis.scaled(byBasisPoints: Int64(floorRandom.integer(in: floorRange))))
+            }
             return MarketplaceListing(id: ListingID("listing-\(seed)-\(index)"), item: item, seller: seller, askingPrice: asking, reservationPrice: reservation, claimedCondition: honesty < 40 ? min(100, condition + 18) : condition, descriptionIntent: starterLesson ? "listing.description.starter" : honesty < 40 ? "listing.description.evasive" : (knowledge < 40 ? "listing.description.uncertain" : "listing.description.careful"), createdAt: now.addingTimeInterval(-TimeInterval(index * 180)))
         }
     }

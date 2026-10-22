@@ -1,6 +1,6 @@
 # Project status
 
-Current milestone: **Generated product photography and app-icon replacement** (22 October 2026), following the authorized living-marketplace UX/game-feel checkpoint. See PRODUCT_ART.md for the current art record.
+Current milestone: **Trading challenge tuning from human feedback** (22 October 2026). The owner reported several predictable/easy trading decisions. See TRADING_CHALLENGE.md for reproduction and verification; PRODUCT_ART.md records the committed photography and icon checkpoint.
 Broader V1 feature work remains paused. Do not resume progression expansion,
 collections, rare variants, client requests, bankruptcy recovery, category unlocks,
 Game Center, monetization or analytics infrastructure before human observations
@@ -23,10 +23,10 @@ work and verification are recorded in LIVING_MARKETPLACE.md. Automated checks an
 simulator captures do not establish human enjoyment or retention. Physical-device,
 iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
 
-Current scoped validation (22 October 2026): Debug/Release builds pass; 107 unit
-and 53 UI tests pass with zero recorded runtime warnings. All 489 EN/TR keys
-validate. A production-paced UI journey confirms four parallel trade processes
-while browsing continues. See LIVING_MARKETPLACE.md for evidence and limitations.
+Current scoped validation (22 October 2026): Debug/Release builds pass; 115 unit
+and all 53 UI tests pass with zero recorded runtime warnings. All 489 EN/TR keys
+validate. TRADING_CHALLENGE.md records the observed issue, red/green samples and
+full verification. Human difficulty and enjoyment acceptance remain open.
 
 ## Historical milestone verification
 

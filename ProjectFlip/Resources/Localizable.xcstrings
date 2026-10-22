@@ -2480,13 +2480,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "That’s a little high. This is my limit."
+            "value": "I can move to this. Does that work for you?"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Biraz yüksek oldu. En fazla bu kadar çıkabilirim."
+            "value": "Bu tutara çıkabilirim. Sana uyar mı?"
           }
         }
       }
@@ -8054,13 +8054,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "They’ve named their limit. Pushing again could lose the sale."
+            "value": "That is a revised offer. Another push could lose the sale."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alıcı sınırını söyledi. Zorlarsan satış kaçabilir."
+            "value": "Bu, yenilenen teklif. Tekrar zorlarsan alıcı vazgeçebilir."
           }
         }
       }
@@ -8756,13 +8756,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "I need some room for my own costs. This is my offer."
+            "value": "I need margin for my own costs. There is not much room above this."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kendi giderlerim için pay bırakmam gerekiyor. Teklifim bu."
+            "value": "Kendi giderlerim için pay bırakmam gerekiyor. Bu rakamın çok üstüne çıkamam."
           }
         }
       }
@@ -8774,13 +8774,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Would you take this? I can pay now."
+            "value": "I would take it at this price. Otherwise I will keep looking."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu rakam olur mu? Hemen ödeyebilirim."
+            "value": "Bu rakama alırım. Olmazsa başka ilanlara bakacağım."
           }
         }
       }

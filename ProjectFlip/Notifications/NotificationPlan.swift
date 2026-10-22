@@ -119,7 +119,7 @@ struct NotificationPlanner {
                     guard reply.status == .pending, reply.resolveAt < event.resolveAt,
                           case .buyerReply(let target, let offerID, let amount, _) = reply.payload, target == id,
                           let offer = state.playerListings.first(where: { $0.id == id })?.offers.last else { return false }
-                    return offer.id == offerID && amount <= offer.willingness
+                    return offer.id == offerID && (try? BuyerEngine().counterDecision(listingID: id, amount: amount, state: state)) == .accept
                 }
                 if settlesEarlier { continue }
                 guard let listing = state.playerListings.first(where: { $0.id == id }), let item = state.player.inventory.first(where: { $0.id == listing.itemID }), let name = itemName(item) else { continue }

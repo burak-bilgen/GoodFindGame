@@ -806,10 +806,10 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[turkish ? "Alıcıdan karşı teklif" : "Buyer counteroffer"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.textFields["buyerCounterAmount"].exists)
         XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
-        XCTAssertTrue(app.staticTexts[turkish ? "Alıcı sınırını söyledi. Zorlarsan satış kaçabilir." : "They’ve named their limit. Pushing again could lose the sale."].exists)
+        XCTAssertTrue(app.staticTexts[turkish ? "Bu, yenilenen teklif. Tekrar zorlarsan alıcı vazgeçebilir." : "That is a revised offer. Another push could lose the sale."].exists)
         let counter = amount.label
         XCTAssertFalse(counter.isEmpty)
-        capture("buyer limit decision: \(language)", app: app)
+        capture("buyer revised-offer decision: \(language)", app: app)
         app.terminate()
         app.launch()
         tap(app.buttons["marketBuyerOffer"], in: app)

@@ -64,8 +64,12 @@ struct NegotiationEngine {
             next.append(next.closed ? "seller.closed" : "seller.reject.\(variant)")
         } else {
             next.patience = max(0, next.patience - 10)
-            let gap = try listing.askingPrice.subtracting(minimum)
-            let counter = try minimum.adding(gap.scaled(byBasisPoints: 5_000))
+            let ceiling = min(listing.askingPrice, current.counterPrice ?? listing.askingPrice)
+            let gap = try max(minimum, ceiling).subtracting(minimum)
+            var random = SeededRandom(seed: SeededRandom.seed(for: "seller-counter-\(listing.id.rawValue)-\(current.offers.count)"))
+            let retained = listing.descriptionIntent == "listing.description.starter" ? 5_000 :
+                min(8_800, max(3_500, random.integer(in: 4_500...8_000) + listing.seller.bargainingSkill * 8 - listing.seller.urgency * 10))
+            let counter = try minimum.adding(gap.scaled(byBasisPoints: Int64(retained)))
             next.counterPrice = counter
             offer.status = .countered
             next.append("seller.counter.\(variant)", amount: counter)

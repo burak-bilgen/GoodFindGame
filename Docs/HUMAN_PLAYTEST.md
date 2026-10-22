@@ -19,6 +19,21 @@ working behavior; the answers below must come from a person playing freely.
 - The facilitator observes without explaining prices, hidden condition or an
   optimal strategy. Record confusion and stalled moments before offering help.
 
+## Current observation to retest
+
+The owner reported that several parts of trading felt too predictable/easy.
+The targeted response is recorded in TRADING_CHALLENGE.md: stronger personality-
+dependent floors for newly generated stock, variable seller concessions and
+buyer raises that can lose the buyer instead of revealing a free exact maximum.
+A standing offer remains safe to accept. Previously saved prices and seller
+floors are preserved; use a fresh evaluation save or naturally arriving stock to
+judge the new floors. Never reset or regenerate stock during the observed session.
+
+Record whether bargaining now rewards judgment, whether ordinary purchases can
+lose money, whether asking for more is a real choice, and whether lost buyers
+feel understandable rather than arbitrary. Do not require a particular win/loss
+rate or reveal private budgets during play.
+
 ## Play freely
 
 Browse and choose your own listings. Aim for at least five completed trades across
