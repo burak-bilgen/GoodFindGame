@@ -1,3 +1,5 @@
+Current status — 2026-10-22: Game Center / Weekly Flip / 12 achievements are implemented locally, with isolated saves and optional sign-in. User requested one shared market with localized names/places and currency presentation; that simplification and backed-up migration are implemented. Debug + Release builds and the final 14 targeted checks passed. Full final-suite rerun was explicitly curtailed at the user's request. Live Game Center still needs owner-account App Store Connect setup and signed sandbox verification. See GAME_CENTER_QA.md and GAME_CENTER_SETUP.md. Additional language research/translation is queued in LOCALIZATION_BACKLOG.md; monetization is still deferred. Historical entries below describe earlier milestones.
+
 # Project status
 
 Current milestone: **Credible trading game implementation completed; human acceptance remains open** (22 October 2026). The latest owner instruction authorizes the economy, art, game-feel, progression and identity milestone and supersedes the earlier pause. See [the implementation audit/plan](CREDIBLE_GAME_MILESTONE.md) and [verification report](CREDIBLE_GAME_QA.md).
