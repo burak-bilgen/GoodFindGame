@@ -499,6 +499,15 @@ final class ProjectFlipUITests: XCTestCase {
         app.buttons["inventory.item-42-0"].tap()
         tap(app.buttons["basicInspect"], in: app)
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
+        // Review the finished reveal, rather than capturing its initial fade.
+        RunLoop.current.run(until: Date().addingTimeInterval(2))
+        let comparison = app.segmentedControls["inspectionPhotoComparison"]
+        let advertised = comparison.buttons[language == "tr" ? "İlan fotoğrafı" : "Seller photo"]
+        let actual = comparison.buttons[language == "tr" ? "Gerçek ürün" : "Actual item"]
+        tap(advertised, in: app)
+        XCTAssertTrue(advertised.isSelected)
+        tap(actual, in: app)
+        XCTAssertTrue(actual.isSelected)
         capture("inspection: \(language)", app: app)
         tap(app.buttons["createListing"], in: app)
         capture("resale price: \(language)", app: app)
@@ -599,7 +608,7 @@ final class ProjectFlipUITests: XCTestCase {
         let field = app.textFields["offerAmount"]
         tap(field, in: app)
         let value = field.value as? String ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count) + "1600")
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: value.count) + (turkish ? "1680" : "35"))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(send, in: app)
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 10))
@@ -676,6 +685,7 @@ final class ProjectFlipUITests: XCTestCase {
         let turkish = language == "tr"
         app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", turkish ? "tr_TR" : "en_US",
                                "--uitest-save", UUID().uuidString, "--uitest-instant"]
+        if spendFirst { app.launchArguments.append("--uitest-recovery-fixture") }
         app.launch()
         let initialCash = app.staticTexts["marketCash"].label
         func amount(_ label: String) -> Decimal {
@@ -690,25 +700,6 @@ final class ProjectFlipUITests: XCTestCase {
                 app.swipeDown()
             }
             return app.staticTexts["marketCash"].label
-        }
-        if spendFirst {
-            tap(app.buttons["listing.listing-42-0"], in: app)
-            let targetCost = amount(app.staticTexts["listingAskingAmount"].label)
-            app.navigationBars.buttons.firstMatch.tap()
-            // Spend through actual affordable deals; seller prices may evolve independently of this test.
-            for slot in [1, 3, 5, 4, 6, 2, 7, 8, 9] {
-                if amount(cashLabel()) < targetCost { break }
-                tap(app.buttons["listing.listing-42-\(slot)"], in: app)
-                tap(app.buttons["openConversation"], in: app)
-                tap(app.buttons["sendOffer"], in: app)
-                if app.buttons["confirmPurchase"].isEnabled { tap(app.buttons["confirmPurchase"], in: app) }
-                app.navigationBars.buttons.firstMatch.tap()
-                app.navigationBars.buttons.firstMatch.tap()
-            }
-            for _ in 0..<5 {
-                if app.buttons["listing.listing-42-0"].isHittable { break }
-                app.swipeDown()
-            }
         }
         let cashBeforeDecision = cashLabel()
         tap(app.buttons["listing.listing-42-0"], in: app)
@@ -982,7 +973,7 @@ final class ProjectFlipUITests: XCTestCase {
         let field = app.textFields["offerAmount"]
         tap(field, in: app)
         let initial = field.value as? String ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: initial.count) + "1600")
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: initial.count) + (turkish ? "1680" : "35"))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(app.buttons["sendOffer"], in: app)
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 5))
@@ -1107,7 +1098,7 @@ final class ProjectFlipUITests: XCTestCase {
         let asking = app.textFields["askingPrice"]
         tap(asking, in: app)
         let old = asking.value as? String ?? ""
-        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + (repair ? "2200" : "100"))
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + (repair ? (turkish ? "2400" : "50") : (turkish ? "480" : "10")))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(app.buttons["publishListing"], in: app)
         tap(app.buttons["followPlayerListing"], in: app)
@@ -1170,7 +1161,7 @@ final class ProjectFlipUITests: XCTestCase {
         let asking = app.textFields["askingPrice"]
         tap(asking, in: app)
         let current = asking.value as? String ?? ""
-        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: current.count) + "100")
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: current.count) + (turkish ? "480" : "10"))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(app.buttons["publishListing"], in: app)
         tap(app.buttons["followPlayerListing"], in: app)
@@ -1420,6 +1411,28 @@ final class ProjectFlipUITests: XCTestCase {
         let cash = app.staticTexts["marketCash"]
         XCTAssertTrue(cash.waitForExistence(timeout: 5))
         XCTAssertTrue((cash.value as? String ?? "").contains(language == "tr" ? "600" : "15"))
+    }
+
+    @MainActor func testCurrencySettingsEnglish() { verifyCurrencySettings(language: "en") }
+    @MainActor func testCurrencySettingsTurkish() { verifyCurrencySettings(language: "tr") }
+    @MainActor private func verifyCurrencySettings(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
+        app.launch()
+        app.buttons["gameTab.4"].tap()
+        tap(app.buttons["marketSettings"], in: app)
+        tap(app.buttons["displayCurrency"], in: app)
+        app.buttons[language == "tr" ? "USD" : "TRY"].tap()
+        capture("independent market currency: \(language)", app: app)
+        app.terminate(); app.launch()
+        let cash = app.staticTexts["marketCash"]
+        XCTAssertTrue(cash.waitForExistence(timeout: 5))
+        XCTAssertTrue(cash.label.contains(language == "tr" ? "1.000" : "40,000"))
+        app.buttons["gameTab.4"].tap()
+        tap(app.buttons["marketSettings"], in: app)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Türkiye pazarı" : "United States market"].exists)
+        XCTAssertTrue(app.buttons["displayCurrency"].label.contains(language == "tr" ? "USD" : "TRY"))
     }
 
 }
