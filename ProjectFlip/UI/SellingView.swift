@@ -128,6 +128,7 @@ struct SaleListingView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 18) {
+                        Color.clear.frame(height: 1).id("saleTop").accessibilityHidden(true)
                         if listing.status != .sold, let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
                             HStack(spacing: 14) {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 80)
@@ -139,12 +140,6 @@ struct SaleListingView: View {
                             switch Result(catching: { try TradeRecord(listing: listing) }) {
                             case .success(let record):
                                 TradePayoff(record: record, item: listing.itemSnapshot).id("saleOutcome")
-                                if let item = listing.itemSnapshot, let definition = store.definition(for: item) {
-                                    HStack(spacing: 14) {
-                                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 88, height: 88)
-                                        Text(definition.displayName(locale: locale)).font(.title3.bold())
-                                    }
-                                }
                                 HuntButton()
                                 NavigationLink("trade.receipt") { TradeReceiptView(record: record, item: listing.itemSnapshot) }
                             case .failure: Text("trade.unavailable")
@@ -274,7 +269,7 @@ struct SaleListingView: View {
                     }
                     .onChange(of: listing.status) { _, status in
                         if status == .sold {
-                            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo("saleOutcome", anchor: .top) }
+                            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo("saleTop", anchor: .top) }
                             switch Result(catching: { try TradeRecord(listing: listing) }) {
                             case .success(let record): GameFeel.play(record.netProfit >= .zero ? .profit : .loss)
                             case .failure: break // The unavailable-result message remains visible in the view.
@@ -291,23 +286,37 @@ struct TradePayoff: View {
     var item: ItemInstance?
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
+    @Environment(\.dynamicTypeSize) private var typeSize
     @GameReduceMotion private var reduceMotion
     @ScaledMetric(relativeTo: .largeTitle) private var payoffSize = 46
     @State private var appeared = false
     private var outcome: TradeOutcomePresentation { TradeOutcomePresentation(record: record, item: item) }
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            if let item, let definition = try? SeedContent.load().items.first(where: { $0.id == item.definitionID }) {
+    @ViewBuilder private var objectHero: some View {
+        if let item, let definition = try? SeedContent.load().items.first(where: { $0.id == item.definitionID }) {
+            if typeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 90, height: 90)
+                        Spacer(minLength: 0)
+                        DealSeal(successful: record.netProfit >= .zero)
+                    }
+                    Text(definition.displayName(locale: locale)).font(.headline).fixedSize(horizontal: false, vertical: true)
+                }
+            } else {
                 HStack(spacing: 14) {
                     DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 90, height: 90)
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(definition.displayName(locale: locale)).font(.headline)
-                        Label("journey.tradeFinished", systemImage: "tag.fill").font(.caption.bold()).foregroundStyle(GameStyle.amber)
-                    }
-                    Spacer(minLength: 0)
+                        Text(definition.displayName(locale: locale)).font(.headline).fixedSize(horizontal: false, vertical: true)
+                        Label("selling.sold", systemImage: "tag.fill").font(.caption.bold()).foregroundStyle(GameStyle.amber)
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                     DealSeal(successful: record.netProfit >= .zero)
                 }
             }
+        }
+    }
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            if !typeSize.isAccessibilitySize { objectHero }
             HStack(spacing: 12) {
                 Image(systemName: record.netProfit > .zero ? "trophy.fill" : record.netProfit < .zero ? "arrow.uturn.down.circle.fill" : "equal.circle.fill")
                     .font(.system(size: 30, weight: .bold)).foregroundStyle(GameStyle.amber)
@@ -317,15 +326,16 @@ struct TradePayoff: View {
             }
             if record.kind == .consignment { Text("recovery.receipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
             if record.kind == .liquidation { Text("recovery.liquidationReceipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
-            Text(record.netProfit.formatted(locale: locale, market: market, signed: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
+            Text(record.netProfit.formatted(locale: locale, market: market, signed: true, precise: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
                 .lineLimit(1).minimumScaleFactor(0.45)
                 .foregroundStyle(record.netProfit < .zero ? Color(red: 1, green: 0.57, blue: 0.53) : GameStyle.light(.gaming))
                 .contentTransition(.numericText()).accessibilityIdentifier("tradePayoff")
                 .offset(y: appeared || reduceMotion ? 0 : 8).opacity(appeared || reduceMotion ? 1 : 0)
+            if typeSize.isAccessibilitySize { objectHero }
             if record.inspectionCost > .zero || record.repairCost > .zero {
                 Text("result.afterCosts").font(.caption).foregroundStyle(.white.opacity(0.74))
             }
-            Text(GameText.format("result.route", locale: locale, record.acquiredFor.formatted(locale: locale, market: market), record.soldFor.formatted(locale: locale, market: market))).font(.subheadline)
+            Text(GameText.format("result.route", locale: locale, record.acquiredFor.formatted(locale: locale, market: market, precise: true), record.soldFor.formatted(locale: locale, market: market, precise: true))).font(.subheadline)
             if record.totalCost > .zero {
                 LabeledContent("result.roi") {
                     Text((Decimal(record.netProfit.minorUnits) / Decimal(record.totalCost.minorUnits)).formatted(.percent.precision(.fractionLength(1)).locale(locale))).bold()
