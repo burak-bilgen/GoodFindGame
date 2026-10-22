@@ -12240,6 +12240,132 @@
           }
         }
       }
+    },
+    "collections.hero": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A collection with your signature."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İmzanı taşıyan bir koleksiyon."
+          }
+        }
+      }
+    },
+    "collections.about": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About keeping your finds"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bulduklarını saklamak hakkında"
+          }
+        }
+      }
+    },
+    "collections.curator": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curator — a collection assembled"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Küratör — bir koleksiyon tamamlandı"
+          }
+        }
+      }
+    },
+    "clients.confidant": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collector’s confidant"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyoncunun sırdaşı"
+          }
+        }
+      }
+    },
+    "clients.preferred": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photographer’s preferred dealer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğrafçının tercih ettiği satıcı"
+          }
+        }
+      }
+    },
+    "art.sellerPhoto": {
+      "comment": "Short inspection photo comparison control; full evidence context is displayed below.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seller photo"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fotoğrafı"
+          }
+        }
+      }
+    },
+    "art.actualItem": {
+      "comment": "Short inspection photo comparison control; full evidence context is displayed below.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actual item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçek ürün"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

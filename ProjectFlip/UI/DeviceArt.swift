@@ -22,15 +22,19 @@ struct DeviceArt: View {
                         Image(systemName: "camera.viewfinder").font(.caption).padding(7).background(.black.opacity(0.55), in: Circle()).padding(8)
                     }
                 }
-                .overlay(alignment: .bottomLeading) {
-                    if let appearance, !appearance.visibleFindings.isEmpty {
+                .overlay {
+                    GeometryReader { geometry in
+                        if geometry.size.width >= 180, let appearance, !appearance.visibleFindings.isEmpty {
                         VStack(alignment: .leading, spacing: 3) {
                             ForEach(Array(appearance.visibleFindings).sorted { $0.rawValue < $1.rawValue }, id: \.self) { finding in
                                 Label(GameText.string(finding.key, locale: locale), systemImage: "viewfinder")
-                                    .font(.caption2.bold()).padding(.horizontal, 7).padding(.vertical, 4)
+                                    .font(.caption2.bold()).lineLimit(1).minimumScaleFactor(0.8)
+                                    .padding(.horizontal, 7).padding(.vertical, 4)
                                     .background(.black.opacity(0.8), in: RoundedRectangle(cornerRadius: 5))
                             }
                         }.foregroundStyle(GameStyle.amber).padding(8)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                        }
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 18))

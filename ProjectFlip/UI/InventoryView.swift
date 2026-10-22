@@ -160,8 +160,8 @@ struct InspectionReveal: View {
             Group {
                 if let listing = store.snapshot.market.first(where: { $0.item.id == item.id }) {
                     Picker("art.compare", selection: $sellerPhoto) {
-                        Text("art.sellerPresentation").tag(true)
-                        Text("art.inspected").tag(false)
+                        Text("art.sellerPhoto").tag(true)
+                        Text("art.actualItem").tag(false)
                     }.pickerStyle(.segmented).accessibilityIdentifier("inspectionPhotoComparison")
                     DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: sellerPhoto ? .advertised(listing) : .owned(item))
                         .aspectRatio(1, contentMode: .fit)
@@ -169,7 +169,7 @@ struct InspectionReveal: View {
                 } else {
                     DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
                 }
-                Text("art.inspected").font(.caption).foregroundStyle(.secondary)
+                Text(sellerPhoto ? "art.sellerPresentation" : "art.inspected").font(.caption).foregroundStyle(.secondary)
                 if item.knownActiveDefects.isEmpty {
                     Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")
                         .font(.subheadline).foregroundStyle(GameStyle.gain)

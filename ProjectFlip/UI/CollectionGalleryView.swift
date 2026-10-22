@@ -7,8 +7,15 @@ struct CollectionGalleryView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                GameStageBanner(titleKey: "collections.title", eyebrowKey: "collections.eyebrow", symbol: "sparkles", color: GameStyle.amber)
-                Text("collections.intro").font(.subheadline).foregroundStyle(.secondary)
+                HStack(spacing: 14) {
+                    VStack(alignment: .leading, spacing: 7) {
+                        GameEyebrow(key: "collections.eyebrow")
+                        Text("collections.hero").font(.system(.title2, design: .serif, weight: .bold))
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "sparkles").font(.largeTitle).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
+                }.gameCard(accent: GameStyle.amber)
+                DisclosureGroup("collections.about") { Text("collections.intro").font(.subheadline).foregroundStyle(.secondary) }
                 ForEach(CollectionDefinition.all) { collection in
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
@@ -24,7 +31,7 @@ struct CollectionGalleryView: View {
                                     VStack(alignment: .leading, spacing: 8) {
                                         ZStack {
                                             DeviceArt(symbol: definition.artSymbol, identity: model, appearance: item.map { .owned($0) })
-                                                .saturation(item == nil ? 0 : 1).brightness(item == nil ? -0.35 : 0).opacity(item == nil ? 0.55 : 1)
+                                                .saturation(item == nil ? 0 : 1).brightness(item == nil ? -0.20 : 0).opacity(item == nil ? 0.75 : 1)
                                             if item == nil {
                                                 Image(systemName: "questionmark.diamond.fill").font(.title).foregroundStyle(GameStyle.amber).shadow(color: .black, radius: 5)
                                             }
@@ -56,6 +63,6 @@ struct CollectionGalleryView: View {
                     }.gameCard(accent: GameStyle.amber)
                 }
             }.padding(16)
-        }.gameScreen().navigationTitle("collections.title")
+        }.gameScreen().navigationTitle("collections.title").navigationBarTitleDisplayMode(.inline)
     }
 }
