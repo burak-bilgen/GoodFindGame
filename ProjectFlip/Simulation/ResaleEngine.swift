@@ -4,6 +4,7 @@ struct ResaleEngine {
     func create(itemID: ItemID, askingPrice: Money, state: GameSnapshot, definitions: [ItemDefinition], now: Date) throws -> GameSnapshot {
         guard askingPrice > .zero, askingPrice.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         guard let item = state.player.inventory.first(where: { $0.id == itemID }), let _ = definitions.first(where: { $0.id == item.definitionID }) else { throw TradingError.unavailable }
+        guard !state.collections.displayed.contains(itemID) else { throw TradingError.itemDisplayed }
         guard item.inspected else { throw TradingError.inspectFirst }
         guard !state.playerListings.contains(where: { $0.itemID == itemID && $0.status == .active }) else { throw TradingError.alreadyDone }
         var next = state

@@ -15,3 +15,9 @@ Two contacts remember three authored steps each: Rowan/Ece (retro) and Jules/Bar
 Delivery requires a full earned expert report, the stated observed condition, no unresolved faults, and original packaging/parts evidence when requested. The engine never rejects an item for hidden truth while accepting inadequate evidence. It refuses items committed to a live sale or report. Matching definitions have explicit substitutes. Leads reference actual current stock; requests never inject a cheap matching listing.
 
 Payout is 102% of observed current regional fair value, independent of acquisition cost/trust. It replaces ordinary sale proceeds; there is no extra quest purse. Settlement records one immutable client sale, removes the item once, credits trust and advances the remembered chapter atomically. Completed chains award recognition/story, not permanent income perks. The six requests form a finite initial career arc; additional months of content are not claimed.
+
+## Two owned collections
+
+Chapter Generations and The Focal Trio each contain three existing models with dedicated product masters. The gallery presents dimmed missing objects, stories, current pieces and a chosen hunt carried back to the marketplace. It is not a daily checklist. Worn inspected examples qualify: a collection is about ownership and story, not requiring every item to be pristine.
+
+Displayed items stay in the eight-slot inventory and retain committed capital. They cannot be sold, serviced or delivered to a client until explicitly returned to trading. This avoids free warehouse overflow and makes collecting a real opportunity cost. Completion requires three different currently owned model identities. A historical Curator distinction persists after selling; the active display becomes incomplete. Reassembly grants no cash, trust or repeated economic reward. No functional cosmetics, passive income or rare variants are introduced.

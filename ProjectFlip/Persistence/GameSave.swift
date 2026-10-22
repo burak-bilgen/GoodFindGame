@@ -27,8 +27,9 @@ struct GameSnapshot: Codable, Equatable {
     var economyMigrationNotice = false
     var career = CareerRecord()
     var clients = ClientProgress()
+    var collections = CollectionProgress()
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice, career, clients }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice, career, clients, collections }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -55,6 +56,7 @@ struct GameSnapshot: Codable, Equatable {
         marketTrends = try values.decodeIfPresent([MarketTrend].self, forKey: .marketTrends) ?? []
         watchedListingIDs = try values.decodeIfPresent(Set<ListingID>.self, forKey: .watchedListingIDs) ?? []
         inspectionKnowledge = try values.decodeIfPresent(InspectionKnowledge.self, forKey: .inspectionKnowledge) ?? InspectionKnowledge()
+        collections = try values.decodeIfPresent(CollectionProgress.self, forKey: .collections) ?? CollectionProgress()
         clients = try values.decodeIfPresent(ClientProgress.self, forKey: .clients) ?? ClientProgress()
         career = try values.decodeIfPresent(CareerRecord.self, forKey: .career) ?? CareerRecord()
         marketConfiguration = try values.decodeIfPresent(MarketConfiguration.self, forKey: .marketConfiguration) ?? .us
@@ -126,6 +128,7 @@ struct SaveRepository {
         for item in items { try item.validateFacts() }
         try state.inspectionKnowledge.validate()
         try state.clients.validate()
+        try CollectionEngine.validate(state)
         if let calendar = state.marketCalendar {
             try calendar.validate()
             guard (state.lastMarketCycle ?? -1) >= -1, (state.lastMarketCycle ?? -1) < Int.max - 1 else { throw SaveError.invalidSave }

@@ -1385,4 +1385,22 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Ece" : "Rowan"].exists)
     }
 
+    @MainActor func testCollectionHuntEnglish() { verifyCollectionHunt(language: "en") }
+    @MainActor func testCollectionHuntTurkish() { verifyCollectionHunt(language: "tr") }
+    @MainActor private func verifyCollectionHunt(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
+        app.launch()
+        app.buttons["gameTab.4"].tap()
+        tap(app.buttons["openCollections"], in: app)
+        capture("collection desire: \(language)", app: app)
+        tap(app.buttons["focusCollection.chapter"], in: app)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Seçtiğin hedef" : "Your chosen hunt"].exists)
+        app.terminate(); app.launch()
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Chapter Nesilleri" : "Chapter Generations"].exists)
+        tap(app.buttons["careerHunt"], in: app)
+        XCTAssertFalse(app.buttons["focusCollection.chapter"].exists)
+    }
+
 }

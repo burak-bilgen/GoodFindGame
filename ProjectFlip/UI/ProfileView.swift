@@ -20,6 +20,7 @@ struct ProfileView: View {
                 }.gameCard()
                 NavigationLink { TraderCareerView(store: store) } label: { GameMenuRow(titleKey: "career.title", symbol: "seal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openCareer")
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("profileClients")
+                NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain).accessibilityIdentifier("openCollections")
                 NavigationLink { KnowledgeView(store: store) } label: { GameMenuRow(titleKey: "knowledge.title", symbol: "wrench.and.screwdriver.fill") }.buttonStyle(.plain).accessibilityIdentifier("openKnowledge")
                 NavigationLink { TradeHistoryView(store: store) } label: { GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openTradeHistory")
                 NavigationLink { MarketSettingsView(store: store) } label: { GameMenuRow(titleKey: "region.title", symbol: "globe") }.buttonStyle(.plain).accessibilityIdentifier("marketSettings")

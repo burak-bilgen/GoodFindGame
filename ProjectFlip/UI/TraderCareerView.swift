@@ -3,13 +3,22 @@ import SwiftUI
 struct CareerHuntPrompt: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    private var focused: CollectionDefinition? { CollectionDefinition.all.first { $0.id == store.snapshot.collections.focus } }
+    @ViewBuilder private var ambitionDestination: some View {
+        if focused != nil { CollectionGalleryView(store: store) }
+        else if store.snapshot.clients.active != nil { ClientBookView(store: store) }
+        else { TraderCareerView(store: store) }
+    }
     var body: some View {
-        NavigationLink { TraderCareerView(store: store) } label: {
+        NavigationLink { ambitionDestination } label: {
             HStack(spacing: 12) {
                 Image(systemName: "seal.fill").foregroundStyle(GameStyle.amber)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(GameText.string(store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key, locale: locale)).font(.headline)
-                    Text("career.nextHunt").font(.caption).foregroundStyle(.secondary)
+                    Text(GameText.string(focused?.titleKey ?? (store.snapshot.clients.active != nil ? "clients.accepted" : store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key), locale: locale)).font(.headline)
+                    Group {
+                        if let focused { Text(GameText.format("collections.progress", locale: locale, focused.count(in: store.snapshot), focused.models.count)) }
+                        else { Text("career.nextHunt") }
+                    }.font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer(minLength: 0)
                 Image(systemName: "arrow.up.right").foregroundStyle(GameStyle.amber)
@@ -33,6 +42,7 @@ struct TraderCareerView: View {
                     }
                 }.gameCard(accent: GameStyle.amber)
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("careerClients")
+                NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain)
                 Text("career.principle").font(.subheadline).foregroundStyle(.secondary)
                 ForEach(CareerTier.allCases, id: \.self) { tier in
                     let earned = store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue >= tier.rawValue

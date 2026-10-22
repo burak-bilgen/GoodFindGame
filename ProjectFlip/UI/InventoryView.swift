@@ -55,6 +55,16 @@ struct OwnedItemView: View {
                         DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).aspectRatio(1, contentMode: .fit)
                     }
                     Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
+                    if item.inspected && CollectionDefinition.all.contains(where: { $0.models.contains(item.definitionID) }) {
+                        Button(store.snapshot.collections.displayed.contains(item.id) ? "collections.release" : "collections.display") {
+                            store.perform {
+                                let completed = store.snapshot.collections.completedBefore.count
+                                try store.toggleDisplay(item.id)
+                                GameFeel.play(store.snapshot.collections.completedBefore.count > completed ? .profit : .reveal)
+                            }
+                        }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("toggleDisplay")
+                        if store.snapshot.collections.displayed.contains(item.id) { Text("collections.lockedCapital").font(.caption).foregroundStyle(GameStyle.amber) }
+                    }
                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(.secondary)
                     if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
                         Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
@@ -64,7 +74,7 @@ struct OwnedItemView: View {
                     if item.inspected {
                         InspectionReveal(store: store, item: item, definition: definition)
                             .id(InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID).taskID)
-                        if !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                        if !store.snapshot.collections.displayed.contains(item.id) && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
                             ForEach(item.knownActiveDefects, id: \.self) { defect in
                                 RepairDecision(store: store, item: item, definition: definition, defect: defect)
                             }

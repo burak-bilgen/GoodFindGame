@@ -11610,6 +11610,330 @@
           }
         }
       }
+    },
+    "collections.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The personal collection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kişisel koleksiyon"
+          }
+        }
+      }
+    },
+    "collections.eyebrow": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SOME FINDS ARE YOURS"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BAZI PARÇALAR SENİNDİR"
+          }
+        }
+      }
+    },
+    "collections.intro": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the pieces that tell your story. Displays use your existing inventory space and tie up real trading capital. Worn pieces can still belong."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hikâyeni anlatan parçaları sakla. Sergilenen ürünler envanterde yer tutar ve ticaret sermayeni bağlar. Aşınmış parçaların da yeri vardır."
+          }
+        }
+      }
+    },
+    "collection.chapter.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Generations"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter Nesilleri"
+          }
+        }
+      }
+    },
+    "collection.chapter.story": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From the brass direction disc to the color era: three experiments in how people played. Keep their lineage together."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pirinç yön diskinden renkli ekran çağına: oyun oynamanın üç farklı yorumu. Bu ürün ailesini bir arada tut."
+          }
+        }
+      }
+    },
+    "collection.focal.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Focal Trio"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focal Üçlüsü"
+          }
+        }
+      }
+    },
+    "collection.focal.story": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide scenes, everyday stories, intimate portraits. Three different pieces of glass; one way of seeing."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geniş manzaralar, günlük hikâyeler, yakın portreler. Üç farklı cam; bir bakış açısı."
+          }
+        }
+      }
+    },
+    "collections.progress": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld pieces displayed — your next hunt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld parça sergileniyor — sıradaki avın"
+          }
+        }
+      }
+    },
+    "collections.missing": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still out there"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hâlâ bir yerde"
+          }
+        }
+      }
+    },
+    "collections.owned": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In your display"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serginde"
+          }
+        }
+      }
+    },
+    "collections.complete": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A complete collection — Curator distinction earned"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyon tamamlandı — Küratör unvanı kazanıldı"
+          }
+        }
+      }
+    },
+    "collections.completedBefore": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assembled before. Find the missing pieces to display it again."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha önce tamamlandı. Yeniden sergilemek için eksik parçaları bul."
+          }
+        }
+      }
+    },
+    "collections.focus": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make this my next hunt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıradaki hedefim bu olsun"
+          }
+        }
+      }
+    },
+    "collections.focused": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your chosen hunt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçtiğin hedef"
+          }
+        }
+      }
+    },
+    "collections.display": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep in my display"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyonumda sergile"
+          }
+        }
+      }
+    },
+    "collections.release": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return to trading inventory"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ticaret envanterine geri al"
+          }
+        }
+      }
+    },
+    "collections.lockedCapital": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kept for your collection. Return it to trading before selling, servicing or supplying a client."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyonun için saklanıyor. Satmak, onarmak veya müşteriye vermek için önce ticarete geri al."
+          }
+        }
+      }
+    },
+    "error.itemDisplayed": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This item is in your display. Return it to trading before selling or servicing it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürün koleksiyonunda sergileniyor. Satmak veya onarmak için önce ticarete geri al."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
