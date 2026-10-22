@@ -33,7 +33,6 @@ struct TraderCareerView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                GameStageBanner(titleKey: "career.title", eyebrowKey: "career.passport", symbol: "seal.fill", color: GameStyle.amber)
                 HStack(spacing: 16) {
                     TraderPortrait(identity: 0, size: 72)
                     VStack(alignment: .leading, spacing: 6) {

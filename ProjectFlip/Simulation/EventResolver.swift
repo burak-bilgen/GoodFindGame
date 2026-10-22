@@ -208,6 +208,8 @@ struct EventResolver {
                 reply.counterExpiresAt = expiresAt
                 try state.enqueue(.sellerOfferExpired(listingID: id, expiresAt: expiresAt), createdAt: event.resolveAt, resolveAt: expiresAt)
             }
+            reply.lastReadMessageID = state.conversations[index].lastReadMessageID
+            reply.lastActivityAt = event.resolveAt
             state.conversations[index] = reply
             return .sellerReply
         case .sellerOfferExpired(let id, let expiresAt):

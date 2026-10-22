@@ -1,41 +1,62 @@
 import SwiftUI
 
+enum StockFilter: String, CaseIterable {
+    case all, transit, inspect, ready, listed, collection
+    var key: String { "inventory.filter.\(rawValue)" }
+}
 struct InventoryView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
+    @State private var filter = StockFilter.all
+    private func state(for item: ItemInstance) -> StockFilter {
+        if store.snapshot.collections.displayed.contains(item.id) { return .collection }
+        if store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) { return .listed }
+        return item.inspected ? .ready : .inspect
+    }
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 16) {
-                GameStageBanner(titleKey: "inventory.title", eyebrowKey: "game.workbench", symbol: "shippingbox.fill", color: GameStyle.amber)
-                if store.snapshot.player.inventory.isEmpty && !store.snapshot.shipments.contains(where: { $0.status == .pending }) {
-                    Text("inventory.empty").foregroundStyle(.secondary)
-                    HuntButton()
+            LazyVStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text(GameText.format("inventory.capacity", locale: locale, store.snapshot.player.inventory.count + store.snapshot.shipments.filter { $0.status == .pending }.count, store.snapshot.player.inventoryCapacity)).font(.subheadline).foregroundStyle(.secondary)
+                    Spacer()
+                    Picker("inventory.filter", selection: $filter) {
+                        ForEach(StockFilter.allCases, id: \.self) { value in Text(GameText.string(value.key, locale: locale)).tag(value) }
+                    }.accessibilityIdentifier("stockFilter")
                 }
-                ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
-                    VStack(alignment: .leading, spacing: 8) {
-                        if let definition = store.definition(for: shipment.item) {
-                            DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: shipment.item)).aspectRatio(1, contentMode: .fit)
-                            Text(definition.displayName(locale: locale)).font(.headline)
-                        }
-                        Text("living.standardDelivery").font(.caption).foregroundStyle(.secondary)
-                        DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
-                        HuntButton()
-                    }.gameCard(accent: GameStyle.gain).accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
+                if filter == .all || filter == .transit {
+                    ForEach(store.snapshot.shipments.filter { $0.status == .pending }) { shipment in
+                        HStack(alignment: .top, spacing: 12) {
+                            if let definition = store.definition(for: shipment.item) {
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: shipment.item)).frame(width: 72, height: 72)
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(definition.displayName(locale: locale)).font(.headline)
+                                    DeadlineView(store: store, target: shipment.arrivesAt, titleKey: "shipping.inTransit")
+                                }
+                            }
+                        }.frame(maxWidth: .infinity, alignment: .leading).gameCard().accessibilityIdentifier("shipment.\(shipment.item.id.rawValue)")
+                    }
                 }
-                ForEach(store.snapshot.player.inventory) { item in
+                let items = store.snapshot.player.inventory.filter { filter == .all || state(for: $0) == filter }
+                ForEach(items) { item in
                     if let definition = store.definition(for: item) {
                         NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
-                            HStack(spacing: 14) {
-                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 90, height: 90)
-                                VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 12) {
+                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 72, height: 72)
+                                VStack(alignment: .leading, spacing: 6) {
                                     Text(definition.displayName(locale: locale)).font(.headline)
-                                    Text(item.purchasePrice.formatted(locale: locale, market: market)).foregroundStyle(.secondary)
-                                    Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.caption)
+                                    Text(item.purchasePrice.formatted(locale: locale, market: market)).font(.subheadline).foregroundStyle(.secondary)
+                                    Text(GameText.string(state(for: item).key, locale: locale)).font(.caption).foregroundStyle(GameStyle.gain)
                                 }
+                                Spacer(minLength: 0)
+                                Image(systemName: "chevron.right").font(.caption).foregroundStyle(.secondary)
                             }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
                         }.buttonStyle(.plain).accessibilityIdentifier("inventory.\(item.id.rawValue)")
                     }
+                }
+                if items.isEmpty && !((filter == .all || filter == .transit) && store.snapshot.shipments.contains { $0.status == .pending }) {
+                    Text(filter == .all ? "inventory.empty" : "inventory.noMatches").foregroundStyle(.secondary)
+                    if filter == .all { HuntButton() }
                 }
             }.padding(16)
         }.gameScreen().navigationTitle("inventory.title")
@@ -125,7 +146,6 @@ struct InspectionReveal: View {
     @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @State private var step = 0
-    @State private var sellerPhoto = false
     private var presentation: InspectionReportPresentation {
         InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID)
     }
@@ -158,18 +178,8 @@ struct InspectionReveal: View {
                 Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
-                if let listing = store.snapshot.market.first(where: { $0.item.id == item.id }) {
-                    Picker("art.compare", selection: $sellerPhoto) {
-                        Text("art.sellerPhoto").tag(true)
-                        Text("art.actualItem").tag(false)
-                    }.pickerStyle(.segmented).accessibilityIdentifier("inspectionPhotoComparison")
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: sellerPhoto ? .advertised(listing) : .owned(item))
-                        .aspectRatio(1, contentMode: .fit)
-                        .animation(reduceMotion ? nil : .easeInOut(duration: 0.25), value: sellerPhoto)
-                } else {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
-                }
-                Text(sellerPhoto ? "art.sellerPresentation" : "art.inspected").font(.caption).foregroundStyle(.secondary)
+                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
+                Text("art.referencePhoto").font(.caption).foregroundStyle(.secondary)
                 if item.knownActiveDefects.isEmpty {
                     Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")
                         .font(.subheadline).foregroundStyle(GameStyle.gain)

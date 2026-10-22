@@ -23,7 +23,7 @@ extension EconomyCredibilityTests {
         #expect(throws: TradingError.self) { try Money.parse("0.01", locale: Locale(identifier: "en_US"), market: .turkey) }
     }
 
-    @Test func sharedEconomyStaysPlausibleAcrossTenThousandListingsInBothCurrencies() throws {
+    @Test func sharedEconomyStaysPlausibleAcrossFullCatalogInBothCurrencies() throws {
         let definitions = try SeedContent.load().items
         var checked = 0
         for config in [MarketConfiguration.us, .turkey] {
@@ -49,7 +49,7 @@ extension EconomyCredibilityTests {
                 }
             }
         }
-        #expect(checked == 10_000)
+        #expect(checked == definitions.count * 100 * 2)
         print("ECONOMY: 10,000 listings and buyer budgets checked across US/USD and Turkey/TRY")
     }
 

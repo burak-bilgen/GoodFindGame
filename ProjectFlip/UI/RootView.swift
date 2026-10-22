@@ -7,7 +7,7 @@ struct RootView: View {
     @State private var competition: CompetitionStore?
     @State private var selectedTab = 0
     @State private var keyboardVisible = false
-    @State private var marketRoot = UUID()
+    @State private var tabRoots = (0..<5).map { _ in UUID() }
     @State private var notificationService = LocalNotificationService.shared
     @State private var inbox = NotificationInbox.shared
     @State private var notificationRoute: GameRoute?
@@ -36,71 +36,35 @@ struct RootView: View {
                     } else { ProgressView() }
 
                 }
-                .id(marketRoot)
+                .id(tabRoots[0])
                 .tabItem { Label("market.title", systemImage: "square.grid.2x2") }.tag(0)
                 NavigationStack {
-                    if let store {
-                        ScrollView {
-                            LazyVStack(alignment: .leading, spacing: 16) {
-                                GameStageBanner(titleKey: "messages.title", eyebrowKey: "game.inbox", symbol: "bubble.left.and.bubble.right.fill")
-                                NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("openClients")
-                                if store.snapshot.conversations.isEmpty {
-                                    VStack(alignment: .leading, spacing: 16) {
-                                        Image(systemName: "bubble.left.and.bubble.right.fill").font(.largeTitle).foregroundStyle(GameStyle.gain).accessibilityHidden(true)
-                                        Text("messages.empty").font(.title3.bold())
-                                        HuntButton()
-                                    }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
-                                }
-                                ForEach(store.snapshot.conversations) { conversation in
-                                    NavigationLink {
-                                        ConversationView(store: store, listingID: conversation.listingID)
-                                    } label: {
-                                        if let listing = store.snapshot.market.first(where: { $0.id == conversation.listingID }), let definition = store.definition(for: listing.item) {
-                                            HStack(spacing: 12) {
-                                                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
-                                                VStack(alignment: .leading, spacing: 6) {
-                                                    Text(definition.displayName(locale: locale)).font(.headline)
-                                                    Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.subheadline)
-                                                    if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
-                                                        if resale.status == .sold {
-                                                            Label("selling.sold", systemImage: "checkmark.seal.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                                            if let amount = resale.soldPrice { Text(amount.formatted(locale: locale, market: market)).font(.caption.bold()) }
-                                                        } else {
-                                                            Label(resale.offers.last.map { [.pending, .countered].contains($0.status) } == true ? "journey.offerWaiting" : "selling.live", systemImage: "tag.fill")
-                                                                .font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                                        }
-                                                    } else if conversation.pendingReplyEventID != nil {
-                                                        Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
-                                                    } else if let last = conversation.messages.last {
-                                                        Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
-                                                        if let amount = last.amount { Text(amount.formatted(locale: locale, market: market)).font(.caption.bold()) }
-                                                    }
-                                                }
-                                            }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
-                                        }
-                                    }.buttonStyle(.plain).accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")
-                                }
-                            }.padding(16)
-                        }.gameScreen().navigationTitle("messages.title")
-                    }
+                    if let store { MessagesView(store: store) }
                 }
+                .id(tabRoots[1])
                 .tabItem { Label("messages.title", systemImage: "bubble.left.and.bubble.right") }.tag(1)
                 NavigationStack {
                     if let store { InventoryView(store: store) }
                 }
+                .id(tabRoots[2])
                 .tabItem { Label("inventory.title", systemImage: "shippingbox") }.tag(2)
                 NavigationStack {
-                    if let store { SellingView(store: store) }
+                    if let store { ShopView(store: store) }
                 }
-                .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
+                .id(tabRoots[3])
+                .tabItem { Label("shop.title", systemImage: "storefront") }.badge(waitingBuyerCount).tag(3)
                 NavigationStack {
                     if let store { ProfileView(store: store, competition: competition, retryCompetition: loadCompetition) }
                 }
+                .id(tabRoots[4])
                 .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
             }
             .id(store?.snapshot.marketConfiguration.currency)
             .toolbar(.hidden, for: .tabBar)
-            if !keyboardVisible { GameDock(selection: $selectedTab, waitingBuyers: waitingBuyerCount) }
+            if !keyboardVisible { GameDock(selection: $selectedTab, waitingBuyers: waitingBuyerCount) { index in
+                notificationRoute = nil
+                tabRoots[index] = UUID()
+            } }
         }
         .background(GameStyle.ink)
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in keyboardVisible = true }
@@ -108,7 +72,7 @@ struct RootView: View {
         .environment(\.returnToHunt, {
             notificationRoute = nil
             store?.perform { try store?.acknowledgeAwayReport() }
-            marketRoot = UUID()
+            tabRoots[0] = UUID()
             selectedTab = 0
         })
         .onChange(of: store?.snapshot.playerListings.reduce(0, { $0 + $1.offers.count })) { old, new in
@@ -182,6 +146,10 @@ struct RootView: View {
             store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
             #if DEBUG
             if competitionFixture { try store?.debugSeedCompetitionOnboarding() }
+            if isolated, let index = arguments.firstIndex(of: "--uitest-advance"), arguments.indices.contains(index + 1),
+               let seconds = TimeInterval(arguments[index + 1]), seconds.isFinite, (1...604_800).contains(seconds) {
+                try store?.debugAdvanceTime(by: seconds)
+            }
             if recoveryFixture, let store { var fixture = store.snapshot; fixture.player.cash = .zero; try store.commit(fixture) }
             #endif
             failed = false

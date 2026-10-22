@@ -54,6 +54,9 @@ struct MarketView: View {
                         }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
                     }.buttonStyle(.plain)
                 }
+                if store.competitionPeriod == nil {
+                    NavigationLink { ShopView(store: store) } label: { GameMenuRow(titleKey: "shop.title", symbol: "storefront.fill") }.buttonStyle(.plain)
+                }
                 CareerHuntPrompt(store: store)
                 if store.competitionPeriod == nil && (store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil) {
                     NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("marketRecovery")
@@ -71,7 +74,7 @@ struct MarketView: View {
                     if filtersExpanded {
                         Picker("market.category", selection: $category) {
                             Text("market.allCategories").tag(Optional<ItemCategory>.none)
-                            ForEach(ItemCategory.allCases, id: \.self) { value in
+                            ForEach(ItemCategory.allCases.filter { category in MarketCatalog.active(store.definitions).contains { $0.category == category } }, id: \.self) { value in
                                 Text(GameText.string("category.\(value.rawValue)", locale: locale)).tag(Optional(value))
                             }
                         }.accessibilityIdentifier("marketCategory")

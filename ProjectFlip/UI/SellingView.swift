@@ -89,7 +89,6 @@ struct SellingView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
-                GameStageBanner(titleKey: "selling.title", eyebrowKey: "game.stall", symbol: "tag.fill")
                 if store.snapshot.playerListings.isEmpty { Text("selling.empty").foregroundStyle(.secondary) }
                 ForEach(store.snapshot.playerListings.reversed()) { listing in
                     NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: {

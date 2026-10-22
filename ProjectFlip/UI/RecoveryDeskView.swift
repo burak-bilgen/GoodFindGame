@@ -8,7 +8,6 @@ struct RecoveryDeskView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                GameStageBanner(titleKey: "recovery.title", eyebrowKey: "recovery.eyebrow", symbol: "arrow.uturn.up.circle.fill", color: GameStyle.amber)
                 Text("recovery.principle").font(.subheadline)
                 if let id = store.snapshot.recovery.itemID, let item = store.snapshot.player.inventory.first(where: { $0.id == id }) {
                     VStack(alignment: .leading, spacing: 12) {

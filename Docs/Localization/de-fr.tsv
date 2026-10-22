@@ -1,0 +1,335 @@
+market.title	Markt	Marché
+market.empty	Hier beginnt deine nächste Entdeckung.	Ta prochaine trouvaille commence ici.
+messages.title	Nachrichten	Messages
+messages.empty	Öffne ein Angebot und sprich mit dem Verkäufer. Ein Hinweis kann den ganzen Handel verändern.	Ouvre une annonce et discute avec le vendeur. Un seul indice peut changer la donne.
+inventory.title	Inventar	Inventaire
+inventory.empty	Finde deinen ersten Artikel auf dem Markt.	Trouve ton premier objet sur le marché.
+selling.title	Verkauf	Ventes
+selling.empty	Stelle einen Artikel aus deinem Inventar zum Verkauf ein.	Mets un objet de ton inventaire en vente pour commencer.
+profile.title	Profil	Profil
+profile.intro	Jeder Handel erzählt eine Geschichte. Mach deine besonders.	Chaque affaire a son histoire. À toi d’écrire la tienne.
+market.heading	Entdecke, was andere übersehen.	Repère ce que les autres ont manqué.
+market.subtitle	Schau genauer hin. Frag nach. Entscheide selbst.	Observe. Pose des questions. À toi de jouer.
+wallet.cash	Verfügbares Geld	Argent disponible
+category.gaming	Gaming & Elektronik	Jeux vidéo et électronique
+market.newest	Neueste zuerst	Les plus récentes
+listing.title	Angebot	Annonce
+listing.hint.inspect	Der Zustand ist nur eine Behauptung. Achte auf Hinweise.	L’état annoncé n’est qu’une promesse. Cherche les indices.
+save.error.title	Dein Spielstand braucht Aufmerksamkeit	Un problème avec ta sauvegarde
+save.error.load	Dein Spiel konnte nicht geladen werden. Dein bisheriger Spielstand wurde behalten. Versuch es erneut.	Impossible de charger ta partie. Ta sauvegarde a été conservée. Réessaie.
+action.retry	Erneut versuchen	Réessayer
+listing.asking	Angebotspreis	Prix demandé
+listing.claimedCondition	Zustand laut Verkäufer / 100	État selon le vendeur / 100
+listing.claimWarning	Verkäuferangaben können unvollständig sein. Eine Prüfung kann mehr zeigen.	Les indications du vendeur peuvent être incomplètes. Une inspection peut en révéler davantage.
+listing.description	Vom Verkäufer	Le mot du vendeur
+listing.description.careful	Regelmäßig benutzt. Ich beantworte gern Fragen, bevor du dich entscheidest.	Utilisé régulièrement. Je réponds volontiers à tes questions avant que tu te décides.
+listing.description.uncertain	Ich räume alte Sachen aus. Damit kenne ich mich nicht besonders aus.	Je fais du tri dans mon vieux matériel. Je ne connais pas très bien cet objet.
+listing.description.evasive	Sieht super aus. Günstig abzugeben, also bitte nicht zu viele Fragen.	Il présente très bien. À ce prix-là, merci d’aller à l’essentiel.
+seller.title	Verkäufer	Vendeur
+seller.rating %@	Bewertung: %@ von 5	Note : %@ sur 5
+seller.history.empty	Mit diesem Verkäufer hast du noch nicht gehandelt.	Tu n’as encore rien acheté à ce vendeur.
+offer.start	Nachricht & Preisvorschlag	Discuter et faire une offre
+negotiation.intro	Frag nach dem Artikel, bevor du dein Geld fest zusagst.	Renseigne-toi sur l’objet avant d’engager ton argent.
+listing.unavailable	Angebot nicht verfügbar	Annonce indisponible
+error.title	Das hat nicht geklappt	L’action n’a pas abouti
+action.ok	OK	OK
+save.error.write	Deine Änderung konnte nicht gespeichert werden. Es wurde nichts abgebucht. Versuch es erneut.	Ta modification n’a pas pu être enregistrée. Rien n’a été débité. Réessaie.
+error.invalidAmount	Gib einen positiven Betrag mit höchstens zwei Nachkommastellen ein.	Saisis un montant positif avec deux décimales au maximum.
+error.unavailable	Dieses Angebot ist nicht mehr verfügbar.	Cette annonce n’est plus disponible.
+error.closed	Diese Verhandlung ist beendet.	Cette négociation est terminée.
+error.insufficientCash	Du hast nicht genug verfügbares Geld.	Tu n’as pas assez d’argent disponible.
+error.inventoryFull	Dein Inventar ist voll. Verkaufe etwas, um Platz zu schaffen.	Ton inventaire est plein. Vends un objet pour libérer une place.
+error.inspectFirst	Prüfe diesen Artikel, bevor du ihn zum Verkauf einstellst.	Inspecte cet objet avant de le mettre en vente.
+error.alreadyDone	Diese Aktion wurde bereits ausgeführt.	Cette action a déjà été effectuée.
+question.issues	Gibt es Probleme, die ich kennen sollte?	Il y a des problèmes à signaler ?
+offer.amount	Dein Preisvorschlag	Montant de l’offre
+offer.modifier	Deine Verhandlungsstrategie	Ton approche
+offer.send	Preis vorschlagen	Envoyer l’offre
+offer.acceptCounter	Gegenvorschlag annehmen	Accepter la contre-offre
+offer.halfway	In der Mitte treffen	Couper la poire en deux
+offer.walkAway	Verhandlung verlassen	Renoncer
+offer.agreed	Preis vereinbart	Prix convenu
+modifier.none	Nur der Preisvorschlag	L’offre seule
+modifier.buyToday	Ich kann es heute abholen.	Je peux venir le chercher aujourd’hui.
+modifier.knownIssues	Der bekannte Mangel beeinflusst mein Angebot.	Le défaut signalé compte dans mon offre.
+player.offer	Das wäre mein Angebot.	Voici mon offre.
+player.question	Gibt es Probleme, die ich kennen sollte?	Il y a des problèmes à signaler ?
+player.accept	Damit bin ich einverstanden.	Ça me convient.
+player.walkAway	Dann lieber nicht. Viel Erfolg beim Verkauf.	Je passe mon tour. Bonne vente !
+seller.accept.0	Abgemacht. Zu dem Preis gehört es dir.	Marché conclu. À ce prix, il est à toi.
+seller.accept.1	Das passt. Machen wir den Handel fest.	Ça me va. On conclut ?
+seller.counter.0	Das ist mir etwas zu wenig. So weit könnte ich runtergehen.	C’est un peu bas pour moi. Voilà ce que je peux proposer.
+seller.counter.1	Könntest du auf diesen Preis gehen?	Tu pourrais monter jusqu’à ce prix ?
+seller.reject.0	Das ist zu weit weg. Ich lehne ab.	On est trop loin du compte. Je refuse.
+seller.reject.1	Ich suche ein ernst gemeintes Angebot.	J’attends une offre sérieuse.
+seller.closed	Wir liegen zu weit auseinander. Ich beende das Gespräch.	On ne tombera pas d’accord. J’arrête la négociation.
+seller.evasive.0	Für mich sieht alles gut aus. Schau dir die Fotos an.	Pour moi, tout va bien. Tu as les photos.
+seller.evasive.1	Bei dem Preis würde ich es gern unkompliziert halten.	À ce prix, je préfère faire simple.
+seller.uncertain.0	Ich habe nicht alles getestet. Es lag eine Weile in einer Schublade.	Je n’ai pas tout testé. Il traînait dans un tiroir.
+seller.uncertain.1	Ehrlich gesagt weiß ich nicht, was man da prüfen muss.	Franchement, je ne sais pas trop quoi vérifier sur ces appareils.
+seller.defect.0	Eine Sache solltest du wissen.	Il y a quelque chose que tu dois savoir.
+seller.defect.1	Dieses Problem ist mir beim Benutzen aufgefallen.	J’ai remarqué ce problème en l’utilisant.
+seller.clean.0	Bei normaler Nutzung ist mir nichts aufgefallen.	Je n’ai rien remarqué à l’usage.
+seller.clean.1	Bei mir funktioniert es, aber du kannst es gern prüfen.	Il fonctionne chez moi, mais tu peux l’inspecter.
+defect.drift	Stick-Drift	Dérive du joystick
+defect.overheating	Überhitzung	Surchauffe
+defect.noisyFan	Lauter Lüfter	Ventilateur bruyant
+defect.damagedPort	Beschädigter Anschluss	Port endommagé
+defect.storageFailure	Speicherfehler	Défaillance du stockage
+purchase.confirm	Kauf bestätigen	Confirmer l’achat
+purchase.completed	Kauf bestätigt. Verfolge die Lieferung im Inventar.	Achat confirmé. Suis la livraison dans l’inventaire.
+purchase.cost	Kaufpreis	Prix d’achat
+inspection.pendingBasic	Noch nicht geprüft	Pas encore inspecté
+inspection.basicComplete	Basisprüfung abgeschlossen	Inspection de base terminée
+inspection.basic	Selbst prüfen – kostenlos	Inspecter moi-même — gratuit
+inspection.condition	Geprüfter Zustand / 100	État constaté / 100
+inspection.estimatedValue	Geschätzte Wertspanne	Fourchette de valeur estimée
+inspection.estimateWarning	Eine Schätzung auf Basis deines Wissens. Unentdeckte Mängel können den Wert senken.	Une estimation fondée sur tes connaissances. Des défauts encore cachés peuvent réduire la valeur.
+inspection.professionalClean	Die vollständige Prüfung hat keine Mängel ergeben.	L’inspection complète n’a révélé aucun défaut.
+inspection.noObviousFault	Keine offensichtlichen Mängel gefunden. Bei dieser Basisprüfung können verborgene Probleme unentdeckt bleiben.	Aucun défaut évident détecté. Cette inspection de base peut laisser passer des problèmes cachés.
+inspection.professional	Fachprüfung	Expertise professionnelle
+inspection.professionalDescription	Bezahle mit Spielgeld für einen gründlichen Zustandsbericht.	Paie avec l’argent du jeu pour obtenir un rapport d’état approfondi.
+inspection.professionalStart	Bezahlen & prüfen lassen	Payer l’expertise
+listing.referenceValue	Üblicher Wert in ausgezeichnetem Zustand	Valeur habituelle en excellent état
+inspection.valueUnavailable	Für diesen Artikel ist keine Schätzung verfügbar.	Aucune estimation n’est disponible pour cet objet.
+selling.create	Verkaufsangebot erstellen	Créer une annonce de revente
+selling.alreadyListed	Dieser Artikel steht bereits zum Verkauf.	Cet objet est déjà en vente.
+selling.asking	Dein Verkaufspreis	Ton prix demandé
+selling.publish	Angebot veröffentlichen	Publier l’annonce
+selling.live	Dein Angebot ist online	Ton annonce est en ligne
+selling.noOffers	Noch keine Kaufangebote.	Pas encore d’offre d’achat.
+selling.views	Aufrufe	Vues
+selling.favorites	Merkliste-Einträge	Favoris
+selling.active	Aktiv	En cours
+selling.sold	Verkauft	Vendu
+selling.cancelled	Zurückgezogen	Retirée
+selling.priceHint	Ein höherer Preis kann weniger Interessenten bedeuten. Vergleiche deinen Preis mit dem, was du bei der Prüfung erfahren hast.	Un prix plus élevé peut attirer moins d’acheteurs. Compare ton prix aux informations recueillies lors de l’inspection.
+buyer.title	Kaufangebot	Offre d’achat
+buyer.accept	Annehmen & verkaufen	Accepter et vendre
+buyer.reject	Angebot ablehnen	Refuser l’offre
+buyer.counterAmount	Dein Gegenvorschlag	Ta contre-offre
+buyer.sendCounter	Gegenvorschlag senden	Envoyer la contre-offre
+buyer.find	Anderen Käufer suchen	Chercher un autre acheteur
+selling.updatePrice	Verkaufspreis ändern	Modifier le prix demandé
+buyer.offer.0	Ich habe mir den Zustand angesehen. Würdest du diesen Preis annehmen?	J’ai regardé son état. Tu accepterais ce prix ?
+buyer.offer.1	Ich bin interessiert. Das könnte ich anbieten.	Ça m’intéresse. Voilà ce que je peux offrir.
+buyer.counter	Das ist mein letztes Angebot. Werden wir uns einig?	C’est ma dernière offre. On se met d’accord ?
+buyer.withdraw	Danke, aber ich suche weiter.	Merci, mais je vais continuer à chercher.
+buyer.accepted	Abgemacht. Das Geld ist unterwegs.	Marché conclu. Le paiement est envoyé.
+player.rejectBuyer	Ich warte auf ein besseres Angebot.	J’attends une meilleure offre.
+profile.inventoryCapacity	Inventarplätze	Capacité de l’inventaire
+trade.history	Handelsverlauf	Historique des affaires
+trade.totalRealized	Realisierter Gewinn / Verlust	Bénéfice ou perte réalisés
+trade.unavailable	Die Belege dieses Handels konnten nicht gelesen werden. Dein Spielstand wurde behalten.	Impossible de lire les données de cette affaire. Ta sauvegarde a été conservée.
+trade.inspectionCost	Prüfkosten	Frais d’inspection
+trade.repairCost	Reparaturkosten	Frais de réparation
+trade.totalCost	Gesamtkosten	Coût total
+trade.soldFor	Verkaufserlös	Produit de la vente
+trade.netProfit	Nettogewinn / -verlust	Bénéfice ou perte nets
+trade.receipt	Handelsabrechnung	Détail de l’affaire
+trade.explanation	Nettoergebnis = Erlös − Kaufpreis − Prüfkosten − Reparaturen. Zustand, Angebotspreis und die Einschätzung des Käufers beeinflussen den Verkauf.	Résultat net = vente − achat − inspection − réparations. L’état, le prix demandé et l’estimation de l’acheteur influencent la vente.
+debug.title	Entwicklerwerkzeuge	Outils de développement
+debug.economy	Spielstand & Wirtschaft	Sauvegarde et économie
+debug.addCash	Geld hinzufügen	Ajouter de l’argent
+debug.regenerate	Markt neu erstellen	Régénérer le marché
+debug.reset	Spielstand zurücksetzen	Réinitialiser la sauvegarde
+debug.negotiation	Antwortsteuerung	Contrôle des réponses
+debug.listing	Marktangebot	Annonce du marché
+debug.chooseListing	Angebot wählen	Choisir une annonce
+debug.forceSeller	Gegenvorschlag des Verkäufers erzwingen	Forcer une contre-offre du vendeur
+debug.forceBuyer	Nächstes Kaufangebot erzwingen	Forcer la prochaine offre d’achat
+debug.showTruth	Verborgene Artikeleigenschaften zeigen	Révéler les caractéristiques cachées
+debug.resetConfirm	Den gesamten Fortschritt dieses Spielstands zurücksetzen?	Effacer toute la progression de cette sauvegarde ?
+action.cancel	Abbrechen	Annuler
+debug.condition %lld	Tatsächlicher Zustand: %lld / 100	État réel : %lld / 100
+debug.noDefects	Keine verborgenen Mängel	Aucun défaut caché
+seller.offerExpired	Das Angebot ist abgelaufen. Der Verkäufer hält den Preis nicht länger frei.	L’offre a expiré. Le vendeur ne garantit plus ce prix.
+buyer.expired	Der Käufer hat sich anderweitig entschieden. Das Angebot ist abgelaufen.	L’acheteur est passé à autre chose. Cette offre a expiré.
+seller.replyUnavailable	Dieses Gespräch ist nicht mehr aktiv.	Cette conversation n’est plus active.
+seller.awaitingReply	Warte auf die Antwort des Verkäufers	En attente de la réponse du vendeur
+offer.expires	Angebot läuft ab in	L’offre expire dans
+shipping.inTransit	Dein Artikel ist unterwegs	Ton objet est en route
+inspection.pendingReport	Fachbericht wird erstellt	Expertise en cours
+buyer.awaitingInterest	Warte auf Kaufinteresse	En attente d’acheteurs intéressés
+time.unavailable	Keine Zeitschätzung verfügbar	Durée estimée indisponible
+away.title	Während du weg warst	Pendant ton absence
+away.sellerReply	Verkäuferantworten	Réponses des vendeurs
+away.shipment	Angekommene Artikel	Objets livrés
+away.inspection	Abgeschlossene Prüfungen	Inspections terminées
+away.buyerOffer	Käuferaktivität	Activité des acheteurs
+away.offerExpired	Abgelaufene Angebote	Offres expirées
+away.alreadyHandled	Dieses Ereignis ist bereits erledigt. Schau in dein Inventar oder deinen Handelsverlauf.	Cet événement a déjà été traité. Consulte ton inventaire ou l’historique des affaires.
+action.done	Fertig	Terminé
+notifications.title	Project Flip	Project Flip
+notifications.settings	Mitteilungen	Notifications
+notifications.enable	Mitteilungen aktivieren	Activer les notifications
+notifications.explanation	Möchtest du erfahren, wenn Verkäufer antworten oder Angebote eintreffen? Wir melden nur Ereignisse aus deinem Markt.	Envie de savoir quand un vendeur répond ou qu’une offre arrive ? Les alertes concernent uniquement les événements de ton marché.
+notifications.afterFirstEvent	Beginne erst ein Gespräch oder eine Lieferung. Danach kannst du über Mitteilungen entscheiden.	Commence par une conversation ou une livraison, puis décide si tu veux recevoir des alertes.
+notifications.later	Vielleicht später	Plus tard
+notifications.openSettings	Mitteilungseinstellungen öffnen	Ouvrir les réglages des notifications
+notifications.categories	Worüber möchtest du informiert werden?	Quelles alertes recevoir ?
+notifications.category.offers	Angebote & Verhandlungen	Offres et négociations
+notifications.category.logistics	Lieferungen & Prüfungen	Livraisons et inspections
+notifications.category.auctions	Auktionen	Enchères
+notifications.category.market	Marktereignisse	Événements du marché
+notifications.category.requests	Kundenaufträge	Demandes des clients
+notifications.status.unknown	Mitteilungsberechtigung wird geprüft …	Vérification de l’autorisation…
+notifications.status.notDetermined	Mitteilungen sind freiwillig.	Les notifications sont facultatives.
+notifications.status.denied	Mitteilungen sind in den Systemeinstellungen deaktiviert. Das Spiel funktioniert trotzdem wie gewohnt.	Les notifications sont désactivées dans les réglages système. Le jeu reste entièrement jouable.
+notifications.status.allowed	Mitteilungen sind aktiviert.	Les notifications sont activées.
+notifications.error	Einige Mitteilungen konnten nicht geplant werden. Dein Spiel ist gespeichert. Versuch es später erneut.	Certaines alertes n’ont pas pu être programmées. Ta partie est sauvegardée. Réessaie plus tard.
+notifications.sellerCounter	%1$@ schlägt %2$@ vor. Gültig bis %3$@.	%1$@ propose %2$@. L’offre expire à %3$@.
+notifications.sellerAccepted	%1$@ nimmt %2$@ an. Der Preis gilt bis %3$@.	%1$@ accepte %2$@. Prix garanti jusqu’à %3$@.
+notifications.sellerReply	%@ hat auf deine Nachricht geantwortet.	%@ a répondu à ton message.
+notifications.shipment	%@ ist angekommen. Zeit für einen genaueren Blick?	%@ est arrivé. Prêt à l’examiner de plus près ?
+notifications.inspection	Dein Prüfbericht für %@ ist fertig.	Le rapport d’expertise de ton objet %@ est prêt.
+notifications.buyerOffer	Neues Kaufangebot: %1$@. Gültig bis %2$@.	Nouvelle offre d’achat : %1$@. Elle expire à %2$@.
+action.close	Schließen	Fermer
+debug.time	Simulationszeit	Temps de simulation
+debug.advance30Minutes	30 Minuten vorspulen	Avancer de 30 minutes
+debug.advanceDay	Einen Tag vorspulen	Avancer d’un jour
+market.watchedOnly	Merkliste	Favoris
+market.watched	Gemerkt	En favori
+market.watch	Angebot merken	Suivre l’annonce
+market.unwatch	Nicht mehr merken	Ne plus suivre
+market.filters	Filter	Filtres
+market.category	Kategorie	Catégorie
+market.allCategories	Alle Kategorien	Toutes les catégories
+market.minimumPrice	Mindestpreis	Prix minimum
+market.maximumPrice	Höchstpreis	Prix maximum
+market.clearFilters	Filter zurücksetzen	Effacer les filtres
+market.invalidPriceRange	Gib gültige Preise ein. Der Mindestpreis darf nicht über dem Höchstpreis liegen.	Saisis des prix valides : le minimum ne doit pas dépasser le maximum.
+market.watchlistEmpty	Keine gemerkten Angebote passen zu diesen Filtern.	Aucune annonce suivie ne correspond à ces filtres.
+market.noResults	Keine Angebote passen zu diesen Filtern.	Aucune annonce ne correspond à ces filtres.
+market.search	Produktnamen suchen	Rechercher un produit
+market.expanded	Ausgeklappt	Développé
+market.collapsed	Eingeklappt	Réduit
+trend.title	Markttrends	Tendances du marché
+trend.heading	Verstehe den Markt	Décrypte le marché
+trend.explanation	Nachfrageänderungen beeinflussen Schätzwerte und neue Angebote. Der Zustand zählt weiterhin. Bereits vereinbarte Preise bleiben bestehen.	Les variations de la demande influencent les estimations et les nouvelles offres. L’état reste déterminant et les prix déjà convenus sont conservés.
+trend.unlock	Schließe deinen ersten Verkauf ab, um Markttrends zu verfolgen.	Réalise ta première vente pour suivre les tendances du marché.
+trend.stable	Gerade gibt es keine Nachfrageverschiebung. Behalte den Markt im Blick.	La demande est stable pour le moment. Garde un œil sur le marché.
+trend.scopeUnavailable	Archiviertes Produkt	Produit archivé
+trend.active	Aktiv	En cours
+trend.ended	Beendet	Terminée
+trend.starts	Beginn	Début
+trend.ends	Ende	Fin
+trend.remaining	Verbleibende Zeit	Temps restant
+trend.reason.creatorSpotlight	Die Präsentation eines fiktiven Creators hat Sammler auf dieses Modell aufmerksam gemacht.	La présentation d’un créateur fictif a attiré les collectionneurs vers ce modèle.
+trend.reason.newModelLaunch	Ein neues fiktives Modell hat die Nachfrage nach diesem Modell gesenkt.	L’arrivée d’un nouveau modèle fictif a détourné la demande de celui-ci.
+trend.reason.seasonalDemand	Saisonales Interesse bringt mehr Käufer in diese Kategorie.	Un regain d’intérêt saisonnier attire davantage d’acheteurs dans cette catégorie.
+trend.reason.coolingDemand	Das Kaufinteresse in dieser Kategorie hat vorerst nachgelassen.	L’intérêt des acheteurs pour cette catégorie s’est tassé pour le moment.
+away.marketTrend	Marktbewegungen	Évolutions du marché
+notifications.marketTrend	%1$@: Nachfrageänderung %2$@. %3$@	%1$@ : variation de la demande de %2$@. %3$@
+listing.status.expired	Angebot abgelaufen	Annonce expirée
+listing.status.competitor	Von einem anderen Händler gekauft	Acheté par un autre revendeur
+listing.status.purchased	Du hast diesen Artikel gekauft	Tu as acheté cet objet
+listing.status.withdrawn	Angebot zurückgezogen	Annonce retirée
+listing.priceDrop	Preis gesenkt	Prix en baisse
+listing.expires	Angebot endet in	Fin de l'annonce dans
+listing.competitorBuyer	%@ hat den Kauf abgeschlossen.	%@ a acheté cet objet.
+seller.listingTaken	Ein anderer Käufer hat den Kauf abgeschlossen. Der Artikel ist nicht mehr verfügbar.	Un autre acheteur a conclu l'achat. Cet objet n'est plus disponible.
+seller.listingExpired	Ich habe die Anzeige vorerst zurückgezogen.	J'ai retiré l'annonce pour le moment.
+away.priceDrop	Preissenkungen	Baisses de prix
+away.listingClosed	Nicht mehr verfügbare Angebote	Annonces indisponibles
+notifications.priceDrop	%1$@ kostet jetzt %2$@.	%1$@ est maintenant à %2$@.
+market.nextRefresh	Neue Angebote in	Nouvelles annonces dans
+category.cameras	Kameras	Photo
+category.retro	Retro & Sammlerstücke	Rétro et collection
+category.gaming	Gaming & Elektronik	Jeux et électronique
+defect.batteryWear	Abgenutzter Akku	Batterie usée
+defect.screenBurnIn	Eingebrannte Bildreste	Marquage de l'écran
+defect.wirelessFault	Instabile Funkverbindung	Connexion sans fil instable
+defect.sensorDamage	Beschädigter Bildsensor	Capteur endommagé
+defect.lensFungus	Pilzbefall im Objektiv	Champignons dans l'objectif
+defect.lensScratch	Verkratzte Linse	Lentille rayée
+defect.autofocusFault	Autofokusfehler	Autofocus défaillant
+defect.shutterWear	Stark abgenutzter Verschluss	Obturateur très usé
+defect.apertureStuck	Klemmende Blendenlamellen	Lamelles du diaphragme bloquées
+defect.stabilizationFault	Fehlerhafte Bildstabilisierung	Stabilisation défaillante
+defect.cameraBatteryWear	Abgenutzter Kameraakku	Batterie de l'appareil usée
+defect.replacementParts	Nicht originale Ersatzteile	Pièces de remplacement non d'origine
+defect.missingManual	Originalanleitung fehlt	Notice d'origine manquante
+defect.boxWear	Beschädigte Originalverpackung	Emballage d'origine abîmé
+defect.regionMismatch	Inkompatible Regionalversion	Version régionale incompatible
+defect.counterfeitBoard	Nicht originale Platine	Circuit imprimé non authentique
+defect.labelDamage	Beschädigtes Originaletikett	Étiquette d'origine abîmée
+defect.corrosion	Korrodierte Kontakte	Contacts oxydés
+defect.incompleteSet	Unvollständiges Sammlerset	Collection incomplète
+knowledge.title	Fachwissen	Expertise
+knowledge.open	Wissen und Werkzeug	Connaissances et outils
+knowledge.explanation	Lerne durch die Prüfung verschiedener Artikel: +1 Erfahrung bei der ersten Eigenprüfung, +2 beim Eingang eines Expertenberichts. Die Stufen werden je Kategorie bei 3, 8 und 16 Erfahrung freigeschaltet. Erneutes Prüfen desselben Artikels bringt keine zusätzliche Erfahrung.	Apprends en examinant différents objets : +1 point d'expérience à la première inspection personnelle, +2 à la réception d'un rapport d'expert. Chaque catégorie progresse à 3, 8 et 16 points. Réexaminer un même objet ne rapporte pas d'expérience supplémentaire.
+knowledge.level	Wissensstand	Niveau
+knowledge.experience	Erfahrung	Expérience
+knowledge.level.0	Anfänger	Débutant
+knowledge.level.1	Geübt	Initié
+knowledge.level.2	Versiert	Confirmé
+knowledge.level.3	Experte	Expert
+knowledge.clues.gaming	Achte auf Lüftergeräusche und Anschlüsse. Drift, Hitze und Akkuverschleiß erfordern Übung und Werkzeug. Speicher- und Funkfehler brauchen mehr Erfahrung.	Écoute le ventilateur et vérifie les ports. Le drift, la surchauffe et l'usure de la batterie demandent de la pratique et des outils. Les pannes de stockage et de connexion exigent plus d'expérience.
+knowledge.clues.cameras	Beginne mit Kratzern auf dem Objektiv. Akkutests brauchen Übung; Autofokus und Verschlussverschleiß mehr Wissen. Sensor, Pilzbefall und Stabilisierung erfordern Expertenwissen und Werkzeug.	Commence par les rayures de l'objectif. Les tests de batterie demandent de la pratique ; l'autofocus et l'obturateur, davantage de connaissances. Le capteur, les champignons et la stabilisation nécessitent une expertise et des outils.
+knowledge.clues.retro	Prüfe zuerst Verpackung, Etiketten, Anleitung und fehlende Teile. Ersatzteile brauchen genauere Tests. Regionalversionen erfordern Erfahrung, gefälschte Platinen Expertenwissen und Werkzeug.	Vérifie d'abord la boîte, les étiquettes, la notice et les pièces manquantes. Les pièces remplacées demandent des tests poussés. Les régions exigent de l'expérience ; les circuits contrefaits, une expertise et des outils.
+knowledge.tools.gaming	Elektronik-Set: Controller-Tester, Lastprüfer und Anschlussprüfer. Einmaliger Kauf für diese Kategorie; Fachwissen bleibt nötig.	Kit électronique : testeur de manette, testeur de charge et sondes de ports. Achat définitif pour cette catégorie ; les connaissances restent nécessaires.
+knowledge.tools.cameras	Kamera-Set: Testbild, Sensorleuchte und Akkutester. Einmaliger Kauf für diese Kategorie; Fachwissen bleibt nötig.	Kit photo : mire, éclairage du capteur et testeur de batterie. Achat définitif pour cette catégorie ; les connaissances restent nécessaires.
+knowledge.tools.retro	Sammler-Set: Lupe, Platinenprüfer und Regionaltester. Einmaliger Kauf für diese Kategorie; Fachwissen bleibt nötig.	Kit collection : loupe, sondes de circuit et testeur de région. Achat définitif pour cette catégorie ; les connaissances restent nécessaires.
+knowledge.toolsOwned	Diagnose-Set vorhanden	Kit de diagnostic acquis
+knowledge.toolCost	Einmaliger Preis	Prix d'achat unique
+knowledge.buyTools	Diagnose-Set kaufen	Acheter le kit
+knowledge.reinspect	Mit neuem Wissen oder Werkzeug prüfen	Réexaminer avec tes nouveaux moyens
+knowledge.inspectionLimit	Bei der Eigenprüfung können Fehler unentdeckt bleiben. Neues Wissen oder Werkzeug ermöglicht eine kostenlose Nachprüfung; ein Expertenbericht ist gründlicher.	Une inspection personnelle peut manquer des défauts. De nouvelles connaissances ou de nouveaux outils permettent un réexamen gratuit ; un rapport d'expert est plus approfondi.
+facts.title	Prüfergebnisse	Résultats de l'inspection
+facts.explanation	Diese Ergebnisse gehören zu diesem konkreten Artikel. Ein gesperrtes Feld wurde nicht geprüft und bedeutet nicht, dass alles in Ordnung ist. Verbessere Wissen und Werkzeug, prüfe erneut oder beauftrage einen Experten.	Ces résultats concernent cet objet précis. Un champ verrouillé n'a pas été vérifié : cela ne signifie pas que le test est réussi. Améliore tes connaissances et tes outils, puis réexamine l'objet ou demande un rapport d'expert.
+facts.notChecked	Nicht geprüft	Non vérifié
+facts.requiresBasic	Wird durch eine kostenlose Eigenprüfung aufgedeckt.	Révélé par une inspection personnelle gratuite.
+facts.requiresSkills	Erfordert den Wissensstand %@ und das Kategorie-Set oder einen Expertenbericht.	Nécessite le niveau %@ et le kit de la catégorie, ou un rapport d'expert.
+facts.legacyUnavailable	Für diesen älteren Artikel wurden keine Messwerte gespeichert. Zustand und Fehlerhistorie sind weiterhin verfügbar. Neue Artikel enthalten Messwerte.	Cet ancien objet ne possède pas de mesures enregistrées. Son état et son historique de défauts restent disponibles. Les nouveaux objets auront des mesures.
+facts.regionGuide	Dieser Markt nutzt Region A. Artikel aus Region B benötigen eventuell kompatible Geräte. Regionsfreie Artikel funktionieren in beiden Regionen.	Ce marché utilise la région A. Les objets de région B peuvent nécessiter du matériel compatible ; les objets multizones fonctionnent dans les deux régions.
+facts.valueGuide	Messwerte erklären den Zustand, garantieren aber keinen Verkaufspreis. Bestätigte Fehler fließen auch in die Fehlerübersicht und Schätzung ein.	Les mesures expliquent l'état sans garantir un prix de vente. Les défauts confirmés figurent aussi dans le récapitulatif et dans l'estimation.
+facts.score	%@ / 100	%@ / 100
+facts.field.cosmeticScore	Äußerer Zustand	État esthétique
+facts.field.shutterCount	Auslösungen	Nombre de déclenchements
+facts.field.batteryHealth	Akkuzustand	État de la batterie
+facts.field.optics	Optische Prüfung	Inspection optique
+facts.field.sensor	Sensortest	Test du capteur
+facts.field.autofocus	Autofokustest	Test de l'autofocus
+facts.field.aperture	Blendentest	Test du diaphragme
+facts.field.stabilization	Stabilisierungstest	Test de stabilisation
+facts.field.region	Kompatibilitätsregion	Région de compatibilité
+facts.field.completeness	Vollständigkeit	Éléments présents
+facts.field.packaging	Verpackung	Emballage
+facts.field.originalParts	Originalteile	Pièces d'origine
+facts.field.authenticity	Echtheit	Authenticité
+facts.field.edition	Edition	Édition
+facts.term.passed	Bestanden	Test réussi
+facts.term.failed	Fehler erkannt	Défaut détecté
+facts.term.clear	Keine Kratzer oder Pilze erkannt	Aucune rayure ni champignon détecté
+facts.term.scratched	Kratzer erkannt	Rayures détectées
+facts.term.fungus	Pilzbefall erkannt	Champignons détectés
+facts.term.scratchedAndFungus	Kratzer und Pilzbefall erkannt	Rayures et champignons détectés
+facts.term.regionA	Region A	Région A
+facts.term.regionB	Region B	Région B
+facts.term.regionFree	Regionsfrei	Multizone
+facts.term.complete	Vollständig mit Anleitung	Complet avec notice
+facts.term.missingManual	Anleitung fehlt	Notice manquante
+facts.term.missingPieces	Teile fehlen	Pièces manquantes
+facts.term.missingManualAndPieces	Anleitung und Teile fehlen	Notice et pièces manquantes
+facts.term.originalBox	Originalverpackung	Boîte d'origine
+facts.term.wornOriginalBox	Abgenutzte Originalverpackung	Boîte d'origine usée
+facts.term.originalParts	Originalteile	Pièces d'origine
+facts.term.replacedParts	Ersatzteile erkannt	Pièces remplacées détectées
+facts.term.authentic	Originalartikel	Objet authentique
+facts.term.reproduction	Nachgefertigte Platine erkannt	Circuit de reproduction détecté
+facts.term.standardEdition	Standardedition	Édition standard
+hunt.eyebrow	DER NÄCHSTE FUND	LA PROCHAINE TROUVAILLE
+hunt.followSale	Sieh nach deinem Angebot	Suis ton annonce
+hunt.sell	Lege den Preis fest und biete den Artikel an	Fixe ton prix et mets l'objet en vente
+hunt.inspect	Dein Artikel ist da. Was hast du wirklich gekauft?	Ton objet est arrivé. Qu'as-tu vraiment acheté ?
+hunt.delivery	Lieferung verfolgen	Suivre la livraison
+hunt.next	Den nächsten Fund suchen	Chercher la prochaine trouvaille
+buyer.activity	Marktreaktion	Réactions du marché
+buyer.net	Dein Ergebnis bei Annahme	Ton résultat si tu acceptes
+buyer.new	EIN ANGEBOT IST DA	UNE OFFRE EST ARRIVÉE
+facts.originalReport	Dies sind die ursprünglichen Prüfergebnisse. Reparierte Fehler sind auf der Artikelseite markiert.	Voici les résultats de l'inspection initiale. Les défauts réparés sont indiqués sur la fiche de l'objet.
+feel.sounds	Spielklänge	Sons du jeu
+feel.soundsHint	Kurze Signale für Antworten, Entdeckungen und abgeschlossene Verkäufe. Beachtet den Lautlosmodus.	De brefs sons pour les réponses, découvertes et ventes conclues. Respecte le mode silencieux.
+journey.bought	Er gehört dir. Jetzt kommt die Wahrheit ans Licht.	Il est à toi. Place à la vérité.
+journey.commit	Der Preis steht fest. Der Zustand bleibt ein Risiko.	Le prix est fixé. L'état reste un risque.

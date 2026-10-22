@@ -2,7 +2,7 @@
 
 Original offline-first iPhone trading game. Internal codename; final branding requires clearance.
 
-Open `ProjectFlip.xcodeproj`. Requires Xcode with Swift 6 support; deployment target iOS 17, portrait iPhone. No external dependencies or signing team is stored. Select your personal team locally for device builds.
+Open `ProjectFlip.xcodeproj`. Requires Xcode with Swift 6 support; deployment target iOS 26, portrait iPhone. No external dependencies or signing team is stored. Select your personal team locally for device builds.
 
 ```sh
 python3 Scripts/check_localization.py
@@ -15,7 +15,7 @@ runtime warnings even when XCTest reports a passing interaction.
 
 Previous milestone: **Credible trading game** — canonical/regional economy, product art, game shell, career, clients, collections and recovery implemented; final regression/visual review is recorded in [the milestone QA report](Docs/CREDIBLE_GAME_QA.md). See [the ordered plan](Docs/CREDIBLE_GAME_MILESTONE.md). Findrove is the [recommended working brand](Docs/PRODUCT_NAMING.md), awaiting review; production identifiers remain Project Flip.
 
-The game remains offline-first, portrait iPhone, iOS 17+, with first-class English/Turkish. Optional Game Center competition and achievements are implemented. No external dependencies, ads, payment system, auctions or custom backend are present. Keep simulation independent of UI and locale. Automated correctness does not establish human enjoyment or retention.
+The game remains offline-first, portrait iPhone, iOS 26+, with first-class English/Turkish. Optional Game Center competition and achievements are implemented. No external dependencies, ads, payment system, auctions or custom backend are present. Keep simulation independent of UI and locale. Automated correctness does not establish human enjoyment or retention.
 
 ## Play the game
 

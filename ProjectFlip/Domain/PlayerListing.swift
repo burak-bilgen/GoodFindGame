@@ -15,9 +15,10 @@ struct PlayerListing: Codable, Identifiable, Equatable {
     var itemSnapshot: ItemInstance?
     var soldPrice: Money?
     var soldAt: Date?
+    var lastActivityAt: Date?
     var expiresAt: Date?
     var saleKind: SaleKind?
-    enum CodingKeys: String, CodingKey { case id, itemID, askingPrice, createdAt, status, views, favorites, offers, messages, itemSnapshot, soldPrice, soldAt, expiresAt, saleKind }
+    enum CodingKeys: String, CodingKey { case id, itemID, askingPrice, createdAt, status, views, favorites, offers, messages, itemSnapshot, soldPrice, soldAt, expiresAt, saleKind, lastActivityAt }
 }
 
 extension PlayerListing {
@@ -34,6 +35,7 @@ extension PlayerListing {
         messages = try values.decodeIfPresent([DialogueMessage].self, forKey: .messages) ?? []
         itemSnapshot = try values.decodeIfPresent(ItemInstance.self, forKey: .itemSnapshot)
         soldPrice = try values.decodeIfPresent(Money.self, forKey: .soldPrice)
+        lastActivityAt = try values.decodeIfPresent(Date.self, forKey: .lastActivityAt)
         soldAt = try values.decodeIfPresent(Date.self, forKey: .soldAt)
         saleKind = try values.decodeIfPresent(SaleKind.self, forKey: .saleKind)
         expiresAt = try values.decodeIfPresent(Date.self, forKey: .expiresAt)

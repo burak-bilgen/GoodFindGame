@@ -27,7 +27,7 @@ final class GameStore {
 
     func definition(for item: ItemInstance) -> ItemDefinition? { definitions.first { $0.id == item.definitionID } }
 
-    /// Keep the seller's picture until inspection replaces it with earned evidence.
+    /// Condition facts are earned through inspection; the product photo stays fixed.
     func appearance(for item: ItemInstance) -> ItemAppearance {
         if item.inspected { return .owned(item) }
         return snapshot.market.first(where: { $0.item.id == item.id }).map(ItemAppearance.advertised) ?? .owned(item)
@@ -40,10 +40,12 @@ final class GameStore {
                 guard period.contains(.now), competitionCanCommit?() ?? true, next.simulationID == period.id,
                       next.marketConfiguration.region == .unitedStates,
                       next.recovery.sequence == 0, next.recovery.commissionsEarned == .zero,
-                      next.clients == ClientProgress(), next.collections == CollectionProgress() else { throw TradingError.unavailable }
+                      next.clients == ClientProgress(), next.collections == CollectionProgress(), next.shop == TraderShop() else { throw TradingError.unavailable }
             }
             var finalized = next
+            InboxOrder.recordChanges(from: snapshot, in: &finalized, now: .now)
             CareerEngine.refresh(&finalized)
+            ShopEngine.refresh(&finalized)
             try repository.save(finalized)
             snapshot = finalized
             onSnapshotCommitted?(finalized)

@@ -160,6 +160,7 @@ struct ConversationView: View {
                     }
                 }
             }
+            .task(id: conversation.messages.last?.id) { store.perform { try store.markConversationRead(listingID) } }
             .navigationTitle("messages.title").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
             .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale, market: market) } }

@@ -15,17 +15,23 @@ typealias SellerID = EntityID<SellerTag>
 typealias ListingID = EntityID<ListingTag>
 typealias OfferID = EntityID<OfferTag>
 
-enum ItemCategory: String, Codable, CaseIterable, Sendable { case gaming, cameras, retro }
+enum ItemCategory: String, Codable, CaseIterable, Sendable { case gaming, cameras, retro, home, furniture, everyday }
 enum Defect: String, Codable, CaseIterable, Sendable {
     case drift, overheating, noisyFan, damagedPort, storageFailure, batteryWear, screenBurnIn, wirelessFault
     case sensorDamage, lensFungus, lensScratch, autofocusFault, shutterWear, apertureStuck, stabilizationFault, cameraBatteryWear
     case replacementParts, missingManual, boxWear, regionMismatch, counterfeitBoard, labelDamage, corrosion, incompleteSet
+    case leakingSeal, heatingFault, weakMotor, missingAccessory
+    case looseJoint, surfaceDamage, fabricWear, missingHardware
+    case fastenerFault, wheelWear, materialDamage, mechanismFault
 
     var category: ItemCategory {
         switch self {
         case .drift, .overheating, .noisyFan, .damagedPort, .storageFailure, .batteryWear, .screenBurnIn, .wirelessFault: .gaming
         case .sensorDamage, .lensFungus, .lensScratch, .autofocusFault, .shutterWear, .apertureStuck, .stabilizationFault, .cameraBatteryWear: .cameras
         case .replacementParts, .missingManual, .boxWear, .regionMismatch, .counterfeitBoard, .labelDamage, .corrosion, .incompleteSet: .retro
+        case .leakingSeal, .heatingFault, .weakMotor, .missingAccessory: .home
+        case .looseJoint, .surfaceDamage, .fabricWear, .missingHardware: .furniture
+        case .fastenerFault, .wheelWear, .materialDamage, .mechanismFault: .everyday
         }
     }
     var valuePenaltyBasisPoints: Int64 {
@@ -41,6 +47,9 @@ enum Defect: String, Codable, CaseIterable, Sendable {
         case .boxWear: 1_000
         case .regionMismatch, .labelDamage: 1_500
         case .counterfeitBoard: 6_000
+        case .leakingSeal, .heatingFault, .weakMotor, .mechanismFault: 3_000
+        case .missingAccessory, .surfaceDamage, .missingHardware: 1_500
+        case .looseJoint, .fabricWear, .fastenerFault, .wheelWear, .materialDamage: 2_500
         }
     }
     var key: String { "defect.\(rawValue)" }

@@ -6,7 +6,6 @@ struct ClientBookView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                GameStageBanner(titleKey: "clients.title", eyebrowKey: "clients.eyebrow", symbol: "person.2.fill", color: GameStyle.amber)
                 Text("clients.principle").font(.subheadline).foregroundStyle(.secondary)
                 ForEach(ClientDefinition.all) { client in ClientChapterView(store: store, client: client) }
             }.padding(16)

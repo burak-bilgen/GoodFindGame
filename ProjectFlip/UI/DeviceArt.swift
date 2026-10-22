@@ -8,10 +8,7 @@ struct DeviceArt: View {
     @Environment(\.locale) private var locale
 
     var body: some View {
-        if let family = ProductPhoto.family(identity: identity, symbol: symbol) {
-            let scene = ProductPhoto.scene(family: family, identity: appearance?.identity ?? identity)
-            let master = ProductPhoto.dedicatedMaster(for: identity) ?? family
-            let photo = ProductPhoto.asset(family: master, wear: appearance?.wear ?? .unverified, scene: master == family ? scene : 0)
+        if let photo = ProductPhoto.asset(identity: identity, symbol: symbol) {
             Image(photo).resizable()
                 .aspectRatio(1, contentMode: .fit)
                 .rotationEffect(.degrees(appearance?.photoStyle == .careless ? 1 : appearance?.photoStyle == .evasive ? -1.5 : 0))
@@ -39,6 +36,15 @@ struct DeviceArt: View {
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .accessibilityHidden(true)
+        } else if identity.hasPrefix("home-") || identity.hasPrefix("furniture-") || identity.hasPrefix("everyday-") {
+            // Do not depict an unrelated electronic device as a household item.
+            // These honest illustrations are replaced as model-specific photos ship.
+            GeometryReader { geometry in
+                Image(systemName: symbol).resizable().scaledToFit().padding(geometry.size.width * 0.22)
+                    .foregroundStyle(GameStyle.amber)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 18))
+            }.aspectRatio(1, contentMode: .fit).accessibilityHidden(true)
         } else {
             IllustratedDeviceArt(symbol: symbol, identity: identity, appearance: appearance)
         }

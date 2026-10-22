@@ -1,9 +1,12 @@
 import Foundation
 
-/// Family-level photographs. Model names/prices remain distinct; hidden truth is
+/// One fixed photograph per product mapping. Model names/prices remain distinct; hidden truth is
 /// deliberately absent from this interface. New item types can retain illustration.
 enum ProductPhoto {
+    static let photographedHouseholdModels = Set((0..<10).map { "home-\($0)" } + (0..<3).map { "furniture-\($0)" })
+
     static func family(identity: String, symbol: String) -> String? {
+        if photographedHouseholdModels.contains(identity) { return "model-" + identity }
         if identity.hasPrefix("cameras-") {
             return symbol == "camera.aperture" ? "lens" : "camera"
         }
@@ -35,26 +38,10 @@ enum ProductPhoto {
     }
     static let dedicatedModels: Set<String> = ["retro-0", "retro-2", "retro-8", "cameras-0", "cameras-8", "cameras-9", "cameras-10"]
 
-    static func sceneCount(family: String) -> Int {
-        ["camera", "handheld"].contains(family) ? 2 : 1
-    }
-
-    /// The item's public identity keeps its seller setting stable through purchase
-    /// and inspection. Condition and hidden faults never choose the setting.
-    static func scene(family: String, identity: String) -> Int {
-        Int(SeededRandom.seed(for: identity) % UInt64(sceneCount(family: family)))
-    }
-
-    static func asset(family: String, wear: ItemAppearance.Wear, scene: Int = 0) -> String {
-        // An uninspected item has no earned condition. Its neutral image never
-        // reads hidden faults; normal purchases retain the seller's claimed image.
-        let condition: String = switch wear {
-        case .excellent: "excellent"
-        case .good, .unverified: "good"
-        case .fair: "fair"
-        case .poor: "poor"
-        }
-        let setting = scene == 1 && sceneCount(family: family) > 1 ? "-alt" : ""
-        return "Product-\(family)\(setting)-\(condition)"
+    /// A product has one fixed photograph. Cosmetic grades and seller presentation
+    /// never choose another asset; condition belongs to text and inspection facts.
+    static func asset(identity: String, symbol: String) -> String? {
+        guard let family = family(identity: identity, symbol: symbol) else { return nil }
+        return "Product-" + (dedicatedMaster(for: identity) ?? family)
     }
 }

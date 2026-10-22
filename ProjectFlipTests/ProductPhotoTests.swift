@@ -3,28 +3,22 @@ import UIKit
 @testable import ProjectFlip
 
 struct ProductPhotoTests {
-    @Test @MainActor func catalogHasPackagedPhotographsForEveryCondition() throws {
+    @Test @MainActor func photographedProductsHaveOnePackagedAsset() throws {
         let definitions = try SeedContent.load().items
-        let families = try Set(definitions.map { definition in
-            try #require(ProductPhoto.family(identity: definition.id, symbol: definition.artSymbol))
-        })
-        for family in families.union(ProductPhoto.dedicatedModels.map { "model-" + $0 }) {
-            for scene in 0..<ProductPhoto.sceneCount(family: family) {
-                var encoded: Set<Data> = []
-                for wear in [ItemAppearance.Wear.excellent, .good, .fair, .poor] {
-                    let name = ProductPhoto.asset(family: family, wear: wear, scene: scene)
-                    let image = try #require(UIImage(named: name), "Missing packaged photograph: \(name)")
-                    #expect(image.size.width >= 500 && image.size.height >= 500)
-                    encoded.insert(try #require(image.pngData()))
-                }
-                #expect(encoded.count == 4, "Cosmetic conditions must have distinct photographs")
+        for definition in MarketCatalog.active(definitions) {
+            guard let name = ProductPhoto.asset(identity: definition.id, symbol: definition.artSymbol) else {
+                // Ordinary goods are explicitly illustrated until their own photo is authored.
+                #expect([ItemCategory.home, .furniture, .everyday].contains(definition.category))
+                continue
             }
+            let image = try #require(UIImage(named: name), "Missing photograph: \(name)")
+            #expect(image.size.width >= 500 && image.size.height >= 500)
+            #expect(!name.hasSuffix("-excellent") && !name.hasSuffix("-poor"))
         }
     }
-
-    @Test func neutralPresentationDoesNotChooseWorstHiddenCondition() {
-        #expect(ProductPhoto.asset(family: "camera", wear: .unverified) == ProductPhoto.asset(family: "camera", wear: .good))
-        #expect(ProductPhoto.family(identity: "future-0", symbol: "future") == nil)
+    @Test func onlyProductIdentitySelectsThePhoto() {
+        #expect(ProductPhoto.asset(identity: "future-0", symbol: "future") == nil)
+        #expect(ProductPhoto.asset(identity: "furniture-0", symbol: "chair") == "Product-model-furniture-0")
         #expect(ProductPhoto.family(identity: "gaming-15", symbol: "gamecontroller") == "handheld")
     }
 }

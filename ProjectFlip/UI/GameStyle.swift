@@ -24,6 +24,9 @@ enum GameStyle {
         case .gaming: Color("GamingCategory")
         case .cameras: Color("CameraCategory")
         case .retro: Color("RetroCategory")
+        case .home: Color(red: 0.96, green: 0.62, blue: 0.38)
+        case .furniture: Color(red: 0.72, green: 0.78, blue: 0.49)
+        case .everyday: Color(red: 0.44, green: 0.72, blue: 0.93)
         }
     }
     /// Display lighting is decorative; it never represents price, rarity or truth.
@@ -32,6 +35,9 @@ enum GameStyle {
         case .gaming: Color(red: 0.36, green: 0.83, blue: 0.80)
         case .cameras: Color(red: 0.72, green: 0.62, blue: 1)
         case .retro: amber
+        case .home: Color(red: 0.96, green: 0.62, blue: 0.38)
+        case .furniture: Color(red: 0.72, green: 0.78, blue: 0.49)
+        case .everyday: Color(red: 0.44, green: 0.72, blue: 0.93)
         }
     }
 }

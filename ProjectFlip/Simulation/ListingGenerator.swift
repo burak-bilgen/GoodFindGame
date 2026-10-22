@@ -80,7 +80,7 @@ struct ListingGenerator {
                 let basis = archetype == .clueless || archetype == .manipulative ? asking : sellerBelief
                 reservation = min(asking, try basis.scaled(byBasisPoints: Int64(floorRandom.integer(in: floorRange))))
             }
-            return MarketplaceListing(id: ListingID("listing-\(seed)-\(index)"), item: item, seller: seller, askingPrice: asking, reservationPrice: reservation, claimedCondition: honesty < 40 ? min(100, condition + 18) : condition, descriptionIntent: starterLesson ? "listing.description.starter" : honesty < 40 ? "listing.description.evasive" : (knowledge < 40 ? "listing.description.uncertain" : "listing.description.careful"), createdAt: now.addingTimeInterval(-TimeInterval(index * 180)))
+            return MarketplaceListing(id: ListingID("listing-\(seed)-\(index)"), item: item, seller: seller, askingPrice: asking, reservationPrice: reservation, claimedCondition: honesty < 40 ? min(100, condition + 18) : condition, descriptionIntent: starterLesson ? "listing.description.starter" : ListingVoice.key(archetype: archetype, identity: item.id.rawValue), createdAt: now.addingTimeInterval(-TimeInterval(index * 180)))
         }
     }
 }

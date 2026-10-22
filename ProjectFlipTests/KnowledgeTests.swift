@@ -12,11 +12,12 @@ struct KnowledgeTests {
     }
 
     @Test func categoryExperienceAndToolsGateSubtleFaultsWithoutChangingTruth() throws {
-        for category in ItemCategory.allCases {
+        for category in [ItemCategory.gaming, .cameras, .retro] {
             let faults: [Defect] = switch category {
             case .gaming: [.damagedPort, .drift, .storageFailure]
             case .cameras: [.lensScratch, .cameraBatteryWear, .sensorDamage]
             case .retro: [.boxWear, .replacementParts, .counterfeitBoard]
+            case .home, .furniture, .everyday: [] // Covered by EverydayCatalogTests.
             }
             var state = try state(category: category, defects: faults)
             let id = state.player.inventory[0].id

@@ -1,18 +1,27 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @AppStorage("playerDisplayName") private var displayName = ""
+    @AppStorage("playerAvatar") private var avatar = 0
+    @AppStorage("playerTitle") private var title = -1
+    @State private var editingProfile = false
     let store: GameStore
     var competition: CompetitionStore? = nil
     var retryCompetition: () -> Void = {}
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
-    @AppStorage("gameSoundEnabled") private var sounds = false
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 16) {
-                    TraderPortrait(identity: 0, size: 64)
-                    Text(GameText.string(store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key, locale: locale)).font(.system(.title3, design: .rounded, weight: .heavy))
+                    TraderPortrait(identity: avatar, size: 64)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(displayName.isEmpty ? GameText.string("profile.defaultName", locale: locale) : displayName).font(.title2.bold())
+                        if let tier = CareerTier(rawValue: title), tier.rawValue <= store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue {
+                            Text(GameText.string(tier.key, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                        }
+                        Button("profile.edit") { editingProfile = true }.font(.subheadline).accessibilityIdentifier("editProfile")
+                    }
                 }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
                 if !store.snapshot.collections.completedBefore.isEmpty {
                     Label("collections.curator", systemImage: "seal.fill").font(.headline).foregroundStyle(GameStyle.amber).gameCard(accent: GameStyle.amber)
@@ -41,17 +50,10 @@ struct ProfileView: View {
                 NavigationLink { KnowledgeView(store: store) } label: { GameMenuRow(titleKey: "knowledge.title", symbol: "wrench.and.screwdriver.fill") }.buttonStyle(.plain).accessibilityIdentifier("openKnowledge")
                 NavigationLink { TradeHistoryView(store: store) } label: { GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openTradeHistory")
                 NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("openRecovery")
-                NavigationLink { MarketSettingsView(store: store) } label: { GameMenuRow(titleKey: "region.title", symbol: "globe") }.buttonStyle(.plain).accessibilityIdentifier("marketSettings")
-                NavigationLink { NotificationSettingsView(store: store) } label: { GameMenuRow(titleKey: "notifications.settings", symbol: "bell.badge.fill") }.buttonStyle(.plain).accessibilityIdentifier("notificationSettings")
-                VStack(alignment: .leading, spacing: 10) {
-                    Toggle("feel.sounds", isOn: $sounds)
-                    Text("feel.soundsHint").font(.caption).foregroundStyle(.secondary)
-                }.gameCard()
-                #if DEBUG
-                NavigationLink { DeveloperToolsView(store: store) } label: { GameMenuRow(titleKey: "debug.title", symbol: "hammer.fill") }.buttonStyle(.plain).accessibilityIdentifier("developerTools")
-                #endif
+                NavigationLink { SettingsView(store: store) } label: { GameMenuRow(titleKey: "settings.title", symbol: "gearshape.fill") }.buttonStyle(.plain).accessibilityIdentifier("openSettings")
             }.padding(16)
         }.gameScreen().navigationTitle("profile.title")
+            .sheet(isPresented: $editingProfile) { NavigationStack { EditProfileView(store: store) } }
     }
 }
 

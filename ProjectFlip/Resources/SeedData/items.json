@@ -829,6 +829,486 @@
       "artSymbol": "gamecontroller",
       "valueTier": "collector",
       "positioning": "archive"
+    },
+    {
+      "id": "home-0",
+      "brand": "Hearth",
+      "model": "Coffee Maker",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 12000
+      },
+      "possibleDefects": [
+        "leakingSeal",
+        "heatingFault"
+      ],
+      "artSymbol": "cup.and.saucer",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-1",
+      "brand": "Borough",
+      "model": "Vacuum Cleaner",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 14000
+      },
+      "possibleDefects": [
+        "weakMotor",
+        "missingAccessory"
+      ],
+      "artSymbol": "sparkles",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-2",
+      "brand": "Morrow",
+      "model": "Kettle",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 3500
+      },
+      "possibleDefects": [
+        "heatingFault",
+        "leakingSeal"
+      ],
+      "artSymbol": "mug",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-3",
+      "brand": "Hearth",
+      "model": "Toaster",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 4000
+      },
+      "possibleDefects": [
+        "heatingFault",
+        "missingAccessory"
+      ],
+      "artSymbol": "oven",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-4",
+      "brand": "Borough",
+      "model": "Stand Fan",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 5500
+      },
+      "possibleDefects": [
+        "weakMotor",
+        "missingAccessory"
+      ],
+      "artSymbol": "fan",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-5",
+      "brand": "Morrow",
+      "model": "Blender",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 6500
+      },
+      "possibleDefects": [
+        "weakMotor",
+        "leakingSeal"
+      ],
+      "artSymbol": "carrot",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-6",
+      "brand": "Hearth",
+      "model": "Steam Iron",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 4500
+      },
+      "possibleDefects": [
+        "heatingFault",
+        "leakingSeal"
+      ],
+      "artSymbol": "tshirt",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-7",
+      "brand": "Borough",
+      "model": "Sewing Machine",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 18000
+      },
+      "possibleDefects": [
+        "weakMotor",
+        "missingAccessory"
+      ],
+      "artSymbol": "scissors",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-8",
+      "brand": "Morrow",
+      "model": "Air Fryer",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 9500
+      },
+      "possibleDefects": [
+        "heatingFault",
+        "missingAccessory"
+      ],
+      "artSymbol": "oven",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "home-9",
+      "brand": "Hearth",
+      "model": "Espresso Machine",
+      "category": "home",
+      "baseValue": {
+        "minorUnits": 24000
+      },
+      "possibleDefects": [
+        "leakingSeal",
+        "heatingFault"
+      ],
+      "artSymbol": "cup.and.saucer",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-0",
+      "brand": "Nook",
+      "model": "Dining Chair",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 5500
+      },
+      "possibleDefects": [
+        "looseJoint",
+        "surfaceDamage"
+      ],
+      "artSymbol": "chair",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-1",
+      "brand": "Linden",
+      "model": "Side Table",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 3500
+      },
+      "possibleDefects": [
+        "looseJoint",
+        "surfaceDamage"
+      ],
+      "artSymbol": "table.furniture",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-2",
+      "brand": "Nook",
+      "model": "Two-Seat Sofa",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 18000
+      },
+      "possibleDefects": [
+        "fabricWear",
+        "looseJoint"
+      ],
+      "artSymbol": "sofa",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-3",
+      "brand": "Linden",
+      "model": "Bookshelf",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 7500
+      },
+      "possibleDefects": [
+        "surfaceDamage",
+        "missingHardware"
+      ],
+      "artSymbol": "books.vertical",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-4",
+      "brand": "Nook",
+      "model": "Writing Desk",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 12000
+      },
+      "possibleDefects": [
+        "looseJoint",
+        "missingHardware"
+      ],
+      "artSymbol": "table.furniture",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-5",
+      "brand": "Linden",
+      "model": "Armchair",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 9000
+      },
+      "possibleDefects": [
+        "fabricWear",
+        "looseJoint"
+      ],
+      "artSymbol": "chair.lounge",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-6",
+      "brand": "Nook",
+      "model": "Office Chair",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 11000
+      },
+      "possibleDefects": [
+        "fabricWear",
+        "missingHardware"
+      ],
+      "artSymbol": "chair",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-7",
+      "brand": "Linden",
+      "model": "Storage Cabinet",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 9500
+      },
+      "possibleDefects": [
+        "surfaceDamage",
+        "missingHardware"
+      ],
+      "artSymbol": "cabinet",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-8",
+      "brand": "Nook",
+      "model": "Dining Table",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 13000
+      },
+      "possibleDefects": [
+        "surfaceDamage",
+        "looseJoint"
+      ],
+      "artSymbol": "table.furniture",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "furniture-9",
+      "brand": "Linden",
+      "model": "Wooden Stool",
+      "category": "furniture",
+      "baseValue": {
+        "minorUnits": 2500
+      },
+      "possibleDefects": [
+        "surfaceDamage",
+        "looseJoint"
+      ],
+      "artSymbol": "chair",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-0",
+      "brand": "Wayfarer",
+      "model": "Backpack",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 4500
+      },
+      "possibleDefects": [
+        "fastenerFault",
+        "materialDamage"
+      ],
+      "artSymbol": "backpack",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-1",
+      "brand": "Wayfarer",
+      "model": "Suitcase",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 7500
+      },
+      "possibleDefects": [
+        "wheelWear",
+        "fastenerFault"
+      ],
+      "artSymbol": "suitcase.rolling",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-2",
+      "brand": "Common",
+      "model": "City Bicycle",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 18000
+      },
+      "possibleDefects": [
+        "mechanismFault",
+        "wheelWear"
+      ],
+      "artSymbol": "bicycle",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-3",
+      "brand": "Common",
+      "model": "Pushchair",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 13000
+      },
+      "possibleDefects": [
+        "mechanismFault",
+        "materialDamage"
+      ],
+      "artSymbol": "figure.child",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-4",
+      "brand": "Forge",
+      "model": "Cordless Drill",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 8500
+      },
+      "possibleDefects": [
+        "mechanismFault",
+        "fastenerFault"
+      ],
+      "artSymbol": "screwdriver",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-5",
+      "brand": "Forge",
+      "model": "Tool Case",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 3500
+      },
+      "possibleDefects": [
+        "fastenerFault",
+        "materialDamage"
+      ],
+      "artSymbol": "wrench.and.screwdriver",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-6",
+      "brand": "Wayfarer",
+      "model": "Roller Skates",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 5500
+      },
+      "possibleDefects": [
+        "wheelWear",
+        "fastenerFault"
+      ],
+      "artSymbol": "figure.skating",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-7",
+      "brand": "Common",
+      "model": "Folding Trolley",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 4000
+      },
+      "possibleDefects": [
+        "wheelWear",
+        "mechanismFault"
+      ],
+      "artSymbol": "cart",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-8",
+      "brand": "Wayfarer",
+      "model": "Sports Bag",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 2500
+      },
+      "possibleDefects": [
+        "fastenerFault",
+        "materialDamage"
+      ],
+      "artSymbol": "bag",
+      "valueTier": "budget",
+      "positioning": "everyday"
+    },
+    {
+      "id": "everyday-9",
+      "brand": "Forge",
+      "model": "Hand Tool Set",
+      "category": "everyday",
+      "baseValue": {
+        "minorUnits": 6500
+      },
+      "possibleDefects": [
+        "mechanismFault",
+        "materialDamage"
+      ],
+      "artSymbol": "hammer",
+      "valueTier": "budget",
+      "positioning": "everyday"
     }
   ]
 }

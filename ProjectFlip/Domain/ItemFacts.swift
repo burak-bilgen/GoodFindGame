@@ -3,13 +3,14 @@ import Foundation
 enum ItemFactKey: String, Codable, CaseIterable, Sendable {
     case cosmeticScore, shutterCount, batteryHealth, optics, sensor, autofocus, aperture, stabilization
     case region, completeness, packaging, originalParts, authenticity, edition
+    case functionCheck, assemblyCheck, mechanismCheck
 
     var requiredLevel: Int {
         switch self {
         case .cosmeticScore, .completeness, .packaging, .edition: 0
         case .batteryHealth, .originalParts: 1
         case .shutterCount, .autofocus, .region: 2
-        case .optics, .sensor, .aperture, .stabilization, .authenticity: 3
+        case .optics, .sensor, .aperture, .stabilization, .authenticity, .functionCheck, .assemblyCheck, .mechanismCheck: 3
         }
     }
     var requiresTools: Bool { requiredLevel > 0 }
@@ -28,6 +29,9 @@ enum ItemFactKey: String, Codable, CaseIterable, Sendable {
         case .originalParts: [.replacementParts]
         case .authenticity: [.counterfeitBoard]
         case .cosmeticScore, .edition: []
+        case .functionCheck: [.leakingSeal, .heatingFault, .weakMotor, .missingAccessory]
+        case .assemblyCheck: [.looseJoint, .surfaceDamage, .fabricWear, .missingHardware]
+        case .mechanismCheck: [.fastenerFault, .wheelWear, .materialDamage, .mechanismFault]
         }
     }
 }
@@ -92,6 +96,9 @@ struct ItemFacts: Codable, Equatable, Sendable {
             term(.authenticity, defects.contains(.counterfeitBoard) ? .reproduction : .authentic)
             // Rare editions are introduced by the later variant system, not randomly asserted here.
             term(.edition, .standardEdition)
+        case .home: term(.functionCheck, defects.isEmpty ? .passed : .failed)
+        case .furniture: term(.assemblyCheck, defects.isEmpty ? .passed : .failed)
+        case .everyday: term(.mechanismCheck, defects.isEmpty ? .passed : .failed)
         }
         return Self(version: 1, category: definition.category, values: values)
     }
@@ -103,6 +110,9 @@ struct ItemFacts: Codable, Equatable, Sendable {
         case .gaming: [.cosmeticScore, .batteryHealth]
         case .cameras: [.cosmeticScore, .shutterCount, .batteryHealth, .optics, .sensor, .autofocus, .aperture, .stabilization]
         case .retro: [.cosmeticScore, .region, .completeness, .packaging, .originalParts, .authenticity, .edition]
+        case .home: [.cosmeticScore, .functionCheck]
+        case .furniture: [.cosmeticScore, .assemblyCheck]
+        case .everyday: [.cosmeticScore, .mechanismCheck]
         }
         for fact in values {
             guard allowed.contains(fact.key) else { throw SaveError.invalidSave }
@@ -112,6 +122,7 @@ struct ItemFacts: Codable, Equatable, Sendable {
             case (.shutterCount, .number(let n)): valid = (0...1_000_000).contains(n)
             case (.optics, .term(let term)): valid = [.clear, .scratched, .fungus, .scratchedAndFungus].contains(term)
             case (.sensor, .term(let term)), (.autofocus, .term(let term)), (.aperture, .term(let term)), (.stabilization, .term(let term)): valid = [.passed, .failed].contains(term)
+            case (.functionCheck, .term(let term)), (.assemblyCheck, .term(let term)), (.mechanismCheck, .term(let term)): valid = [.passed, .failed].contains(term)
             case (.region, .term(let term)): valid = [.regionA, .regionB, .regionFree].contains(term)
             case (.completeness, .term(let term)): valid = [.complete, .missingManual, .missingPieces, .missingManualAndPieces].contains(term)
             case (.packaging, .term(let term)): valid = [.originalBox, .wornOriginalBox].contains(term)

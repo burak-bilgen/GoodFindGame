@@ -36,7 +36,7 @@ enum TraderScore {
         guard state.simulationID == period.id, state.marketConfiguration.region == .unitedStates,
               state.player.cash >= .zero, state.player.cash.minorUnits <= 100_000_000_000_000,
               state.recovery.sequence == 0, state.recovery.commissionsEarned == .zero,
-              state.collections.displayed.isEmpty,
+              state.collections.displayed.isEmpty, state.shop == TraderShop(),
               Set(state.playerListings.map(\.id)).count == state.playerListings.count else { throw SaveError.invalidSave }
         let records = try TradeLedger.records(from: state)
         guard Set(state.playerListings.filter { $0.status == .sold }.map(\.itemID)).count == records.count,

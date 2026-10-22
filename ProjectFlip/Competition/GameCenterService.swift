@@ -115,12 +115,18 @@ final class GameCenterService: CompetitionService {
     }
     func showLeaderboard(friends: Bool = false) {
         guard playerID != nil else { return }
-        presentation = GameCenterPresentation(controller: GKGameCenterViewController(leaderboardID: CompetitionIDs.weekly, playerScope: friends ? .friendsOnly : .global, timeScope: .allTime))
+        let access = GKAccessPoint.shared
+        guard !access.isPresentingGameCenter else { return }
+        access.isActive = false
+        access.trigger(leaderboardID: CompetitionIDs.weekly, playerScope: friends ? .friendsOnly : .global, timeScope: .allTime, handler: nil)
         CompetitionAnalytics.record(.leaderboardOpened)
     }
     func showAchievements() {
         guard playerID != nil else { return }
-        presentation = GameCenterPresentation(controller: GKGameCenterViewController(state: .achievements))
+        let access = GKAccessPoint.shared
+        guard !access.isPresentingGameCenter else { return }
+        access.isActive = false
+        access.trigger(state: .achievements, handler: {})
     }
     func debugFailure(_ error: any Error) {
         #if DEBUG
@@ -136,18 +142,8 @@ struct GameCenterPresentation: Identifiable {
 }
 struct GameCenterSheet: UIViewControllerRepresentable {
     let presentation: GameCenterPresentation
-    @Environment(\.dismiss) private var dismiss
-    func makeCoordinator() -> Coordinator { Coordinator(dismiss: { dismiss() }) }
-    func makeUIViewController(context: Context) -> UIViewController {
-        if let controller = presentation.controller as? GKGameCenterViewController { controller.gameCenterDelegate = context.coordinator }
-        return presentation.controller
-    }
+    func makeUIViewController(context: Context) -> UIViewController { presentation.controller }
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-    final class Coordinator: NSObject, GKGameCenterControllerDelegate {
-        let dismiss: () -> Void
-        init(dismiss: @escaping () -> Void) { self.dismiss = dismiss }
-        func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) { dismiss() }
-    }
 }
 
 enum CompetitionAnalytics {

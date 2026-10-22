@@ -21,6 +21,8 @@ struct NegotiationState: Codable, Identifiable, Equatable, Sendable {
     var closed = false
     var pendingReplyEventID: String?
     var counterExpiresAt: Date?
+    var lastActivityAt: Date?
+    var lastReadMessageID: String?
 
     mutating func append(_ intent: String, player: Bool = false, amount: Money? = nil, defect: Defect? = nil) {
         messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(messages.count)", intent: intent, fromPlayer: player, amount: amount, defect: defect))

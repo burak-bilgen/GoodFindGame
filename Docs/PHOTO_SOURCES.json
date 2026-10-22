@@ -1,0 +1,62 @@
+[
+  {
+    "id": "home-0",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-99d34f92-b358-4385-b02f-d3c108e5fcda.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-0.imageset/photo.jpg"
+  },
+  {
+    "id": "home-1",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-25815ed8-e091-4596-9970-c42e95cfdf28.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-1.imageset/photo.jpg"
+  },
+  {
+    "id": "home-2",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-8a736315-5b39-487e-b080-392956e324ef.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-2.imageset/photo.jpg"
+  },
+  {
+    "id": "home-3",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-73b7a9bd-a384-4c48-a123-b12e6caae1f1.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-3.imageset/photo.jpg"
+  },
+  {
+    "id": "home-4",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-814bc0e1-f23b-4299-8520-2b3dad67814f.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-4.imageset/photo.jpg"
+  },
+  {
+    "id": "home-5",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-e073e239-abd4-4231-ad60-63c3d4de91ff.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-5.imageset/photo.jpg"
+  },
+  {
+    "id": "home-6",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-a0a4bb53-50da-45e3-981e-c547775e5918.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-6.imageset/photo.jpg"
+  },
+  {
+    "id": "home-7",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-713cda1f-4ca1-45f9-ab72-577a4d9eecc0.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-7.imageset/photo.jpg"
+  },
+  {
+    "id": "home-8",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-ff454b5b-21df-4a60-9b92-1f78dad4ec8b.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-8.imageset/photo.jpg"
+  },
+  {
+    "id": "home-9",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-68bc4727-ff65-41d7-b5f3-d71ebd7188cc.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-home-9.imageset/photo.jpg"
+  },
+  {
+    "id": "furniture-1",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-cda82a85-9143-47ef-b1bf-33c3a6fcf9c5.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-1.imageset/photo.jpg"
+  },
+  {
+    "id": "furniture-2",
+    "source": "/Users/burak/.codex/generated_images/01a16403-1ca0-77a3-ac4d-1ecf0121d583/exec-206e4ae0-d418-4c7b-ad1d-b39e8e6c3dd7.png",
+    "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-2.imageset/photo.jpg"
+  }
+]

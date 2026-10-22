@@ -10,7 +10,7 @@ struct TradingDeskHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Label(GameText.string("region.\(market.region.rawValue)", locale: locale), systemImage: "location.fill")
+                Label("region.shared", systemImage: "location.fill")
                     .font(.caption2.bold()).foregroundStyle(GameStyle.amber)
                 Spacer(minLength: 4)
                 Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true))

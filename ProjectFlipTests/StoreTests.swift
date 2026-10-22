@@ -29,7 +29,7 @@ struct StoreTests {
         #expect(store.snapshot.player.cash > GameBalanceConfig.current.startingCash)
         try store.debugRegenerateMarket()
         #expect(store.snapshot.conversations[0].closed)
-        #expect(store.snapshot.market.filter(\.available).count == 10)
+        #expect(store.snapshot.market.filter(\.available).count == 16)
         #expect(try repository.load() == store.snapshot)
         try store.commit(BuyerTests.offeredState())
         #expect(store.previousTradeCount(with: store.snapshot.market[0].seller.id) == 1)

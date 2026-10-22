@@ -5,11 +5,11 @@ import Testing
 struct ContentTests {
     @Test func launchCatalogCoversThreeCategoriesAndEveryLocalizedDefect() throws {
         let content = try SeedContent.load()
-        #expect(content.items.count == 50)
+        #expect(content.items.count == 80)
         #expect(content.items.filter { $0.category == .gaming }.count == 20)
         #expect(content.items.filter { $0.category == .cameras }.count == 15)
         #expect(content.items.filter { $0.category == .retro }.count == 15)
-        #expect(Defect.allCases.count == 24)
+        #expect(Defect.allCases.count == 36)
         #expect(Set(content.items.flatMap(\.possibleDefects)) == Set(Defect.allCases))
         for language in ["tr_TR", "en_US"] {
             let locale = Locale(identifier: language)
@@ -28,16 +28,16 @@ struct ContentTests {
     @Test func feedStaysSmallAndDiverseWhileLiveRotationReachesTheWholeCatalog() throws {
         let definitions = try SeedContent.load().items
         let fresh = try GameSnapshot.fresh(definitions: definitions)
-        #expect(fresh.market.count == 10)
+        #expect(fresh.market.count == 14)
         #expect(fresh.market.prefix(5).map { $0.item.definitionID } == (0..<5).map { "gaming-\($0)" })
         #expect(fresh.market[0].askingPrice == Money(minorUnits: 3_670))
         let categories = Set(fresh.market.compactMap { listing in definitions.first { $0.id == listing.item.definitionID }?.category })
-        #expect(categories == Set(ItemCategory.allCases))
+        #expect(categories == Set(MarketCatalog.active(definitions).map(\.category)))
         var encountered = Set<String>()
         for seed in 0..<60 {
             let selected = MarketCatalog.liveFeed(from: definitions, count: 10, seed: UInt64(seed))
             #expect(selected.count == 10 && Set(selected.map(\.id)).count == 10)
-            #expect(Set(selected.map(\.category)) == Set(ItemCategory.allCases))
+            #expect(Set(selected.map(\.category)) == Set(MarketCatalog.active(definitions).map(\.category)))
             encountered.formUnion(selected.map(\.id))
             let generated = try ListingGenerator().generate(definitions: selected, seed: UInt64(seed), now: .distantPast, starterFriendly: false)
             for listing in generated {
@@ -45,7 +45,7 @@ struct ContentTests {
                 #expect(listing.item.hiddenDefects.allSatisfy { $0.category == definition.category })
             }
         }
-        #expect(encountered == Set(definitions.map(\.id)))
+        #expect(encountered == Set(MarketCatalog.active(definitions).map(\.id)))
         #expect(MarketCatalog.liveFeed(from: [], count: 10, seed: 0).isEmpty)
     }
 
@@ -86,13 +86,13 @@ struct ContentTests {
         try migrated.validate()
         #expect(migrated.scopeEpochs.count == 1 && migrated.scopeEpochs[0].firstCycle == 4)
         for index in 0...3 { #expect(try migrated.trend(at: index) == old.trend(at: index)) }
-        #expect(migrated.scopeEpochs[0].models.count == 50)
-        #expect(Set(migrated.scopeEpochs[0].categories) == Set(ItemCategory.allCases))
+        #expect(migrated.scopeEpochs[0].models.count == 80)
+        #expect(Set(migrated.scopeEpochs[0].categories) == Set(MarketCatalog.active(definitions).map(\.category)))
         var newCategories = Set<ItemCategory>()
         for index in 4..<104 {
             if case .category(let category) = try migrated.trend(at: index).scope { newCategories.insert(category) }
         }
-        #expect(newCategories == Set(ItemCategory.allCases))
+        #expect(newCategories == Set(MarketCatalog.active(definitions).map(\.category)))
         let unchanged = migrated
         try migrated.includeNewContent(definitions, after: 2)
         #expect(migrated == unchanged)

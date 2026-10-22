@@ -54,6 +54,12 @@ extension Defect {
             level >= 2 && hasTools
         case .storageFailure, .sensorDamage, .lensFungus, .apertureStuck, .stabilizationFault, .counterfeitBoard:
             level >= 3 && hasTools
+        case .surfaceDamage, .fabricWear, .materialDamage, .missingAccessory, .missingHardware:
+            condition < 80 || level >= 1
+        case .looseJoint, .fastenerFault, .wheelWear:
+            level >= 1 && hasTools
+        case .leakingSeal, .heatingFault, .weakMotor, .mechanismFault:
+            level >= 2 && hasTools
         }
     }
 }

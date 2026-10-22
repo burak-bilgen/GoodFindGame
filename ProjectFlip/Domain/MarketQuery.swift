@@ -14,6 +14,7 @@ struct MarketQuery {
         let byID = Dictionary(uniqueKeysWithValues: definitions.map { ($0.id, $0) })
         return state.market.filter { listing in
             guard let definition = byID[listing.item.definitionID],
+                  ProductPhoto.asset(identity: definition.id, symbol: definition.artSymbol) != nil,
                   watchedOnly ? state.watchedListingIDs.contains(listing.id) : listing.available,
                   category == nil || definition.category == category,
                   minimumPrice.map({ listing.askingPrice >= $0 }) ?? true,

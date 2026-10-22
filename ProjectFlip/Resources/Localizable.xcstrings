@@ -3002,7 +3002,7 @@
       }
     },
     "action.cancel": {
-      "comment": "DEBUG developer controls: action.cancel. This screen is absent from release builds.",
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -3015,6 +3015,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vazgeç"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
           }
         }
       }
@@ -13317,6 +13329,2982 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kariyerin artık ortak pazarı kullanıyor. Nakdin, ürünlerin, maliyetlerin ve mevcut tekliflerin korundu. Yeni ilanlarda herkes için aynı fiyat kuralları geçerli. Önceki kaydın yedeklendi."
+          }
+        }
+      }
+    },
+    "shop.title": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My shop"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkânım"
+          }
+        }
+      }
+    },
+    "shop.eyebrow": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A NAME OF YOUR OWN"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SENİN ADINI TAŞIYAN BİR YER"
+          }
+        }
+      }
+    },
+    "shop.intro": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build a place worth coming back to."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Müşterinin yeniden gelmek isteyeceği bir yer kur."
+          }
+        }
+      }
+    },
+    "shop.openingStory": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start with one window spot. Choose what you sell and who you want to attract. Opening and expansion use your trading cash; there is no rent while you are away."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tek bir vitrin yeriyle başla. Ne satacağına, kimi çekeceğine karar ver. Açılış ve büyüme al-sat sermayenden karşılanır; oyunda değilken kira birikmez."
+          }
+        }
+      }
+    },
+    "shop.name": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shop name"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkân adı"
+          }
+        }
+      }
+    },
+    "shop.openingCost": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening investment"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açılış yatırımı"
+          }
+        }
+      }
+    },
+    "shop.open": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open my shop"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkânımı aç"
+          }
+        }
+      }
+    },
+    "shop.unlock": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete three trades to open your first shop. Your online selling continues as usual."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk dükkânını açmak için üç al-sat tamamla. O zamana kadar çevrimiçi satışa devam edebilirsin."
+          }
+        }
+      }
+    },
+    "shop.style.bargains": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bargain counter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hesaplı ürün tezgâhı"
+          }
+        }
+      }
+    },
+    "shop.style.bargains.detail": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offer at or below your inspected estimate. Faster interest, but bargain hunters and resellers protect their margins."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İnceleme tahmininin üzerinde fiyat isteme. İlgi daha hızlı gelir; pazarlıkçılar ve al-satçılar kendi kârını da düşünür."
+          }
+        }
+      }
+    },
+    "shop.style.tested": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tested & trusted"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontrollü, güvenilir ürünler"
+          }
+        }
+      }
+    },
+    "shop.style.tested.detail": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feature fully inspected goods with no known unresolved faults. Pay for the evidence; attract cautious customers. Their budgets stay their own."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam ekspertizli, bilinen arızası giderilmiş ürünleri sergile. İncelemeye yatırım yap; temkinli müşterilere hitap et. Bütçelerini yine onlar belirler."
+          }
+        }
+      }
+    },
+    "shop.style.collector": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collector’s corner"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyon köşesi"
+          }
+        }
+      }
+    },
+    "shop.style.collector.detail": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build a retro window. More collectors, but a slower audience. Condition and price still decide the deal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrinini retro ürünlerle kur. Koleksiyoncular daha çok gelir, ama daha seyrek uğrar. Son sözü yine ürünün durumu ve fiyatı söyler."
+          }
+        }
+      }
+    },
+    "shop.changeStyle": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change shop direction"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkânın yönünü değiştir"
+          }
+        }
+      }
+    },
+    "shop.clearWindow": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear the window before changing direction. Existing buyer offers keep their promises."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yön değiştirmeden önce vitrini boşalt. Mevcut alıcı teklifleri geçerliliğini korur."
+          }
+        }
+      }
+    },
+    "shop.windowCount": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of %lld window spots used"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld vitrin yeri dolu"
+          }
+        }
+      }
+    },
+    "shop.windowEmpty": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An empty window. What will your first customers see?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrin boş. İlk müşterilerin ne görecek?"
+          }
+        }
+      }
+    },
+    "shop.salesCount": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sales from your window"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrininden %lld satış"
+          }
+        }
+      }
+    },
+    "shop.chooseStock": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curate your window"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrinini seç"
+          }
+        }
+      }
+    },
+    "shop.stockHint": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose from your active sale listings. A window spot changes the audience for future interest, not an offer already on the table."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif satış ilanlarından seç. Vitrin, bundan sonra gelecek ilgiyi etkiler; elindeki teklifi değiştirmez."
+          }
+        }
+      }
+    },
+    "shop.noStock": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No active listings. Inspect something you own and put it up for sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif ilanın yok. Elindeki bir ürünü inceleyip satışa çıkar."
+          }
+        }
+      }
+    },
+    "shop.feature": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Put in the window"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrine koy"
+          }
+        }
+      }
+    },
+    "shop.remove": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take out of the window"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vitrinden çıkar"
+          }
+        }
+      }
+    },
+    "shop.notFit": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This listing does not fit your current shop direction. Review the price, inspection or category."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ilan dükkânının yönüne uymuyor. Fiyatı, incelemeyi veya ürün kategorisini gözden geçir."
+          }
+        }
+      }
+    },
+    "shop.growth": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Room to grow"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Büyüyecek yer var"
+          }
+        }
+      }
+    },
+    "shop.invested": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invested in the shop"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkâna yatırılan"
+          }
+        }
+      }
+    },
+    "shop.expandHint": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make %lld window sales to unlock the next spot."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni yer açmak için vitrinden %lld satış yap."
+          }
+        }
+      }
+    },
+    "shop.expand": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a window spot"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir vitrin yeri daha aç"
+          }
+        }
+      }
+    },
+    "shop.fullyExpanded": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All five window spots are open"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beş vitrin yerinin hepsi açık"
+          }
+        }
+      }
+    },
+    "shop.capitalChoice": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spend on more space or keep the cash for your next find. Expansion does not raise buyer budgets or guarantee profit."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alanı büyüt ya da nakdi yeni bir fırsat için ayır. Büyümek alıcının bütçesini artırmaz, kârı garanti etmez."
+          }
+        }
+      }
+    },
+    "shop.onlineSales": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All sale listings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm satış ilanları"
+          }
+        }
+      }
+    },
+    "shop.offline": {
+      "comment": "Player-owned shop: finite window space, real capital investment, distinct customer audiences. No automatic profits.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your listings work while you are away. Sales still need your decision. No automatic sales, rent debt or offline cash grants."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sen yokken ilanlarına ilgi gelebilir. Satış için yine senin kararın gerekir. Otomatik satış, biriken kira borcu veya çevrimdışı nakit ödülü yok."
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar"
+          }
+        }
+      }
+    },
+    "settings.eyebrow": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAKE YOURSELF AT HOME"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OYUNU KENDİNE GÖRE AYARLA"
+          }
+        }
+      }
+    },
+    "settings.experience": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound & accessibility"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ses ve erişilebilirlik"
+          }
+        }
+      }
+    },
+    "settings.accessibility": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text size, VoiceOver and Reduce Motion follow your iPhone’s accessibility settings."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazı boyutu, VoiceOver ve Hareketi Azalt seçenekleri iPhone’un erişilebilirlik ayarlarını izler."
+          }
+        }
+      }
+    },
+    "settings.language": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App language"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oyun dili"
+          }
+        }
+      }
+    },
+    "settings.changeLanguage": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change in iPhone Settings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iPhone Ayarları’ndan değiştir"
+          }
+        }
+      }
+    },
+    "settings.localSave": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your game saves on this device. Trading works offline; Game Center is optional."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oyunun bu cihazda kaydedilir. Al-sat çevrimdışı çalışır; Game Center isteğe bağlıdır."
+          }
+        }
+      }
+    },
+    "settings.version": {
+      "comment": "Unified player settings; no developer controls. Platform accessibility and per-app language settings remain authoritative.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm"
+          }
+        }
+      }
+    },
+    "product.name.home-0": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Coffee Maker"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Kahve Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.home-1": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Vacuum Cleaner"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Elektrikli Süpürge"
+          }
+        }
+      }
+    },
+    "product.name.home-2": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Kettle"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Su Isıtıcısı"
+          }
+        }
+      }
+    },
+    "product.name.home-3": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Toaster"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Ekmek Kızartma Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.home-4": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Stand Fan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Ayaklı Vantilatör"
+          }
+        }
+      }
+    },
+    "product.name.home-5": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Blender"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Blender"
+          }
+        }
+      }
+    },
+    "product.name.home-6": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Steam Iron"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Buharlı Ütü"
+          }
+        }
+      }
+    },
+    "product.name.home-7": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Sewing Machine"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Borough Dikiş Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.home-8": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Air Fryer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morrow Sıcak Hava Fritözü"
+          }
+        }
+      }
+    },
+    "product.name.home-9": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Espresso Machine"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hearth Espresso Makinesi"
+          }
+        }
+      }
+    },
+    "product.name.furniture-0": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Dining Chair"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Yemek Sandalyesi"
+          }
+        }
+      }
+    },
+    "product.name.furniture-1": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Side Table"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Yan Sehpa"
+          }
+        }
+      }
+    },
+    "product.name.furniture-2": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Two-Seat Sofa"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook İkili Kanepe"
+          }
+        }
+      }
+    },
+    "product.name.furniture-3": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Bookshelf"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Kitaplık"
+          }
+        }
+      }
+    },
+    "product.name.furniture-4": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Writing Desk"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Çalışma Masası"
+          }
+        }
+      }
+    },
+    "product.name.furniture-5": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Armchair"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Berjer"
+          }
+        }
+      }
+    },
+    "product.name.furniture-6": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Office Chair"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Ofis Sandalyesi"
+          }
+        }
+      }
+    },
+    "product.name.furniture-7": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Storage Cabinet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Dolap"
+          }
+        }
+      }
+    },
+    "product.name.furniture-8": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Dining Table"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nook Yemek Masası"
+          }
+        }
+      }
+    },
+    "product.name.furniture-9": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Wooden Stool"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linden Ahşap Tabure"
+          }
+        }
+      }
+    },
+    "product.name.everyday-0": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Backpack"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Sırt Çantası"
+          }
+        }
+      }
+    },
+    "product.name.everyday-1": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Suitcase"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Bavul"
+          }
+        }
+      }
+    },
+    "product.name.everyday-2": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common City Bicycle"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common Şehir Bisikleti"
+          }
+        }
+      }
+    },
+    "product.name.everyday-3": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common Pushchair"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common Bebek Arabası"
+          }
+        }
+      }
+    },
+    "product.name.everyday-4": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge Cordless Drill"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge Akülü Matkap"
+          }
+        }
+      }
+    },
+    "product.name.everyday-5": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge Tool Case"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge Alet Çantası"
+          }
+        }
+      }
+    },
+    "product.name.everyday-6": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Roller Skates"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Paten"
+          }
+        }
+      }
+    },
+    "product.name.everyday-7": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common Folding Trolley"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common Katlanır El Arabası"
+          }
+        }
+      }
+    },
+    "product.name.everyday-8": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Sports Bag"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wayfarer Spor Çantası"
+          }
+        }
+      }
+    },
+    "product.name.everyday-9": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge Hand Tool Set"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forge El Aleti Seti"
+          }
+        }
+      }
+    },
+    "category.home": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Home appliances"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ev aletleri"
+          }
+        }
+      }
+    },
+    "category.furniture": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Furniture"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mobilya"
+          }
+        }
+      }
+    },
+    "category.everyday": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyday goods"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gündelik eşyalar"
+          }
+        }
+      }
+    },
+    "defect.leakingSeal": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leaking seal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sızdıran conta"
+          }
+        }
+      }
+    },
+    "defect.heatingFault": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heating fault"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isıtma arızası"
+          }
+        }
+      }
+    },
+    "defect.weakMotor": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weak or noisy motor"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zayıflamış veya sesli motor"
+          }
+        }
+      }
+    },
+    "defect.missingAccessory": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essential accessory missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerekli aksesuar eksik"
+          }
+        }
+      }
+    },
+    "defect.looseJoint": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loose structural joint"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gevşek taşıyıcı bağlantı"
+          }
+        }
+      }
+    },
+    "defect.surfaceDamage": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damaged surface finish"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasarlı yüzey kaplaması"
+          }
+        }
+      }
+    },
+    "defect.fabricWear": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn upholstery"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yıpranmış döşeme"
+          }
+        }
+      }
+    },
+    "defect.missingHardware": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assembly hardware missing"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Montaj parçası eksik"
+          }
+        }
+      }
+    },
+    "defect.fastenerFault": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broken zip or fastening"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bozuk fermuar veya kilit"
+          }
+        }
+      }
+    },
+    "defect.wheelWear": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worn wheels or bearings"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aşınmış tekerlek veya rulman"
+          }
+        }
+      }
+    },
+    "defect.materialDamage": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torn or damaged material"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yırtık veya hasarlı malzeme"
+          }
+        }
+      }
+    },
+    "defect.mechanismFault": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sticking or faulty mechanism"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takılan veya arızalı mekanizma"
+          }
+        }
+      }
+    },
+    "facts.field.functionCheck": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full appliance check"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam cihaz kontrolü"
+          }
+        }
+      }
+    },
+    "facts.field.assemblyCheck": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Structure and finish check"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taşıyıcı yapı ve yüzey kontrolü"
+          }
+        }
+      }
+    },
+    "facts.field.mechanismCheck": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mechanism and material check"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mekanizma ve malzeme kontrolü"
+          }
+        }
+      }
+    },
+    "knowledge.clues.home": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look for missing accessories first. Leaks, heating and motor problems need testing; a clean casing is not proof that it works."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önce eksik aksesuarlara bak. Kaçak, ısıtma ve motor sorunları test ister; temiz dış yüzey, çalıştığının kanıtı değildir."
+          }
+        }
+      }
+    },
+    "knowledge.clues.furniture": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspect the finish and upholstery. Loose joints and missing fixings can change whether a cheap piece is worth restoring."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzeyi ve döşemeyi incele. Gevşek bağlantılar ve eksik montaj parçaları, ucuz bir eşyanın onarmaya değip değmediğini değiştirebilir."
+          }
+        }
+      }
+    },
+    "knowledge.clues.everyday": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check zips, contact points, wheels and moving parts. A bag, bicycle and hand tool need different kinds of attention."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermuarları, temas yerlerini, tekerlekleri ve hareketli parçaları kontrol et. Çanta, bisiklet ve el aleti farklı dikkat ister."
+          }
+        }
+      }
+    },
+    "knowledge.tools.home": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appliance kit: leak tray, temperature probe and load tester. Permanent category tools; expertise is still needed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ev aleti seti: sızıntı tepsisi, sıcaklık probu ve yük test cihazı. Bu kategoride kalıcıdır; yine de uzmanlık gerekir."
+          }
+        }
+      }
+    },
+    "knowledge.tools.furniture": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Furniture kit: joint gauges, inspection light and fastener tools. Permanent category tools; expertise is still needed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mobilya seti: bağlantı ölçerler, inceleme lambası ve montaj aletleri. Bu kategoride kalıcıdır; yine de uzmanlık gerekir."
+          }
+        }
+      }
+    },
+    "knowledge.tools.everyday": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everyday-goods kit: material loupe, bearing gauges and mechanism tools. Permanent category tools; expertise is still needed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gündelik eşya seti: malzeme büyüteci, rulman ölçerler ve mekanizma aletleri. Bu kategoride kalıcıdır; yine de uzmanlık gerekir."
+          }
+        }
+      }
+    },
+    "living.audience.home": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practical household buyers; function and total cost matter."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlev ve toplam maliyeti önemseyen ev kullanıcıları."
+          }
+        }
+      }
+    },
+    "living.audience.furniture": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Furniture buyers look at condition and value; interest is not guaranteed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mobilya alıcısı duruma ve değere bakar; ilgi garanti değildir."
+          }
+        }
+      }
+    },
+    "living.audience.everyday": {
+      "comment": "Everyday second-hand goods. Original fictional brands; genuine product-specific risks, never a country economy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A broad audience with different budgets and needs."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Farklı ihtiyaçları ve bütçeleri olan geniş bir kitle."
+          }
+        }
+      }
+    },
+    "listing.voice.casual.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Making some room at home. I can send a closer photo if there is something you want to see."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evde yer açıyorum. Merak ettiğin bir yer varsa yakından fotoğrafını da gönderebilirim."
+          }
+        }
+      }
+    },
+    "listing.voice.casual.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It has been sitting in the spare room. I would rather someone used it than keep moving it out of the way."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boş odada durup duruyor. Sürekli yerini değiştireceğime kullanacak birine gitsin istedim."
+          }
+        }
+      }
+    },
+    "listing.voice.casual.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We are changing things around at home, so this is going. Have a look and ask before deciding."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evde biraz değişiklik yapıyoruz, bu da satılacaklar arasında. Karar vermeden bak, aklına takılanı sor."
+          }
+        }
+      }
+    },
+    "listing.voice.clueless.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helping a relative clear some things out. I have not checked every detail, so please ask rather than assume."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir yakınımın eşyalarını elden çıkarmasına yardım ediyorum. Her ayrıntısını kontrol etmedim; varsaymak yerine sor lütfen."
+          }
+        }
+      }
+    },
+    "listing.voice.clueless.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I know what it is, but I am not the person to ask about the technical bits. Photos are of the actual item."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne olduğunu biliyorum ama teknik ayrıntılarından pek anlamam. Fotoğraflar satılan eşyanın kendisine ait."
+          }
+        }
+      }
+    },
+    "listing.voice.clueless.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found this while sorting the house. I cannot give a detailed condition report; the price reflects that uncertainty."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evi toparlarken çıktı. Ayrıntılı durum raporu verecek bilgim yok; fiyatı da o belirsizliği düşünerek koydum."
+          }
+        }
+      }
+    },
+    "listing.voice.urgent.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moving this week. Collection soon matters more to me than a long back-and-forth over the last few notes."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu hafta taşınıyorum. Son birkaç kuruş için günlerce yazışmaktansa çabuk alınması daha önemli."
+          }
+        }
+      }
+    },
+    "listing.voice.urgent.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Need the space back. If you are seriously interested, send a clear offer and we can sort it out."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapladığı yere ihtiyacım var. Ciddi düşünüyorsan net bir teklif gönder, konuşalım."
+          }
+        }
+      }
+    },
+    "listing.voice.urgent.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One of the last things left to clear. I would like a straightforward sale, not days of reserved promises."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elden çıkarılacak son eşyalardan biri. Günlerce ayırmamı istemektense net bir satış olsun istiyorum."
+          }
+        }
+      }
+    },
+    "listing.voice.professional.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Available from my current stock. Please specify which detail you want checked; I prefer clear questions to guesses."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevcut stoktan satılıktır. Hangi ayrıntıyı kontrol etmemi istediğini belirt; tahmin yürütmektense net sorularla ilerleyelim."
+          }
+        }
+      }
+    },
+    "listing.voice.professional.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The asking price is for this exact example. Condition, included parts and a clear agreement matter more than the headline."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlan fiyatı bu ürün içindir. Başlıktan çok durumu, yanında verilen parçalar ve net bir anlaşma önemlidir."
+          }
+        }
+      }
+    },
+    "listing.voice.professional.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I handle these regularly. Ask about the condition before offering so we do not talk past each other."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu tür eşyalarla düzenli ilgileniyorum. Tekliften önce durumunu sorarsan birbirimizi yanlış anlamayız."
+          }
+        }
+      }
+    },
+    "listing.voice.stubborn.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I am in no hurry. If the price does not work for you, that is fine, but please do not open with half of it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acelem yok. Fiyat sana uymayabilir, sorun değil; ama yarısını teklif ederek başlamayalım lütfen."
+          }
+        }
+      }
+    },
+    "listing.voice.stubborn.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listed at the price I am willing to discuss. Comparing it with an unseen bargain elsewhere will not help much."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konuşmaya değer bulduğum fiyattan koydum. Başka yerde görmediğimiz bir fırsatla kıyaslamak pek yardımcı olmuyor."
+          }
+        }
+      }
+    },
+    "listing.voice.stubborn.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still available. Sensible questions are welcome; I am not looking to get rid of it at any price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hâlâ satılık. Mantıklı sorulara açığım; yeter ki gitsin diye her fiyata bırakmayı düşünmüyorum."
+          }
+        }
+      }
+    },
+    "listing.voice.friendly.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I would like this to go to someone who has a use for it. Happy to talk through the details."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşine yarayacak birine gitsin istiyorum. Ayrıntılarını birlikte konuşabiliriz."
+          }
+        }
+      }
+    },
+    "listing.voice.friendly.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No rush to decide from one photo. Tell me what you need to know and I will answer what I can."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tek fotoğraftan hemen karar vermek zorunda değilsin. Merak ettiğini söyle, bildiğim kadarıyla cevaplayayım."
+          }
+        }
+      }
+    },
+    "listing.voice.friendly.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bit of a clear-out, not a shop. Be fair with me and I will be fair with you."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dükkân değil, evden birkaç eşya satıyorum. Karşılıklı makul davranırsak anlaşırız."
+          }
+        }
+      }
+    },
+    "listing.voice.manipulative.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looks the part. There has been interest, so I would rather keep this quick than go through a long checklist."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duruşu yerinde. İlgilenenler var; uzun kontrol listelerine girmeden hızlıca halletsek iyi olur."
+          }
+        }
+      }
+    },
+    "listing.voice.manipulative.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priced to get your attention. The photos should tell you enough for a first offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dikkat çeksin diye bu fiyattan koydum. İlk teklif için fotoğraflar yeterince fikir veriyordur."
+          }
+        }
+      }
+    },
+    "listing.voice.manipulative.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A good-looking find for somebody. I cannot hold it while every tiny mark gets discussed."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birinin hoşuna gidecek bir parça. Her küçük izi konuşurken günlerce ayıramam."
+          }
+        }
+      }
+    },
+    "listing.voice.collector.0": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have a reason for keeping things, and a reason for letting them go. This one is ready for a new owner."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşyaları saklamamın da elden çıkarmamın da bir nedeni var. Bu artık yeni sahibine gitmeye hazır."
+          }
+        }
+      }
+    },
+    "listing.voice.collector.1": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small details matter to me. Ask about what is actually here; I will not invent a story to make it sound rare."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Küçük ayrıntıları önemserim. Eşyanın kendisini sor; nadirmiş gibi göstermek için hikâye uydurmam."
+          }
+        }
+      }
+    },
+    "listing.voice.collector.2": {
+      "comment": "Complete authored marketplace seller voice. Vary length, phrasing and motivation; no added mechanical fact or guaranteed condition. Kept stable per listing.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More interested in a thoughtful buyer than the fastest message. We can talk about the details before the price."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En hızlı mesajdan çok ne aldığını bilen biri ilgimi çeker. Fiyattan önce ayrıntıları konuşabiliriz."
+          }
+        }
+      }
+    },
+    "inventory.capacity": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d / %d spaces used"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d / %d alan dolu"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d / %d Plätze belegt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d / %d places occupées"
+          }
+        }
+      }
+    },
+    "inventory.filter": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stock filter"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stok filtresi"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestand filtern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtrer le stock"
+          }
+        }
+      }
+    },
+    "inventory.filter.all": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All stock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tüm stok"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamter Bestand"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le stock"
+          }
+        }
+      }
+    },
+    "inventory.filter.transit": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In transit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kargoda"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterwegs"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En livraison"
+          }
+        }
+      }
+    },
+    "inventory.filter.inspect": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To inspect"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenecek"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu prüfen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À examiner"
+          }
+        }
+      }
+    },
+    "inventory.filter.ready": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready to sell"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satışa hazır"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkaufsbereit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt à vendre"
+          }
+        }
+      }
+    },
+    "inventory.filter.listed": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listed"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlanda"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inseriert"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En vente"
+          }
+        }
+      }
+    },
+    "inventory.filter.collection": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koleksiyonda"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sammlung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collection"
+          }
+        }
+      }
+    },
+    "inventory.noMatches": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No items in this group."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu grupta ürün yok."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Artikel in dieser Gruppe."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun objet dans cette catégorie."
+          }
+        }
+      }
+    },
+    "art.referencePhoto": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reference photo for this model. Read the inspection findings for this item's condition."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu modelin temsili fotoğrafı. Ürünün durumu için inceleme bulgularını oku."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beispielfoto dieses Modells. Den Zustand dieses Artikels findest du im Prüfbericht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo de référence du modèle. Consulte le rapport d'inspection pour connaître l'état de cet objet."
+          }
+        }
+      }
+    },
+    "messages.buyersWaiting": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyer offers to review"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yanıt bekleyen alıcı teklifleri"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offene Käuferangebote"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offres d'achat à examiner"
+          }
+        }
+      }
+    },
+    "messages.filter": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görüşmeler"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gespräche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conversations"
+          }
+        }
+      }
+    },
+    "messages.active": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cours"
+          }
+        }
+      }
+    },
+    "messages.archive": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arşiv"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archiv"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives"
+          }
+        }
+      }
+    },
+    "messages.archiveEmpty": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Completed conversations will appear here."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan görüşmeler burada görünecek."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgeschlossene Gespräche erscheinen hier."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les conversations terminées apparaîtront ici."
+          }
+        }
+      }
+    },
+    "messages.unread": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unread reply"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okunmamış yanıt"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ungelesene Antwort"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponse non lue"
+          }
+        }
+      }
+    },
+    "messages.yourTurn": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your decision"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karar sende"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist dran"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À toi de décider"
+          }
+        }
+      }
+    },
+    "profile.name": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display name"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görünen ad"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anzeigename"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nom affiché"
+          }
+        }
+      }
+    },
+    "profile.avatar": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar"
+          }
+        }
+      }
+    },
+    "profile.avatarNumber": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar %d"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar %d"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar %d"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avatar %d"
+          }
+        }
+      }
+    },
+    "profile.displayTitle": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Display title"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görünen unvan"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angezeigter Titel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titre affiché"
+          }
+        }
+      }
+    },
+    "profile.noTitle": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No title"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unvan yok"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Titel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun titre"
+          }
+        }
+      }
+    },
+    "profile.identityHint": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a title you've earned. Your shop name and Game Center profile stay separate."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kazandığın unvanlardan birini seç. Dükkân adın ve Game Center profilin ayrıdır."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle einen verdienten Titel. Dein Ladenname und dein Game-Center-Profil bleiben unabhängig."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis un titre que tu as obtenu. Le nom de ta boutique et ton profil Game Center restent distincts."
+          }
+        }
+      }
+    },
+    "profile.edit": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit profile"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profili düzenle"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil bearbeiten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier le profil"
+          }
+        }
+      }
+    },
+    "profile.defaultName": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your profile"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profilin"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Profil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton profil"
+          }
+        }
+      }
+    },
+    "action.save": {
+      "comment": "Player-facing navigation, stock status or editable local profile. Preserve format placeholders.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydet"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speichern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer"
           }
         }
       }
