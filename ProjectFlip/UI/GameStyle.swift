@@ -115,6 +115,7 @@ struct GamePriceFieldStyle: TextFieldStyle {
 struct GameEyebrow: View {
     let key: String
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         Text(GameText.string(key, locale: locale)).font(.caption2.weight(.heavy)).tracking(1.5).foregroundStyle(GameStyle.gain)
     }
@@ -126,6 +127,7 @@ struct GameStamp: View {
     let symbol: String
     var color: Color = GameStyle.gain
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     var body: some View {
         Label(GameText.string(key, locale: locale), systemImage: symbol)

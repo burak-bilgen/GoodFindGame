@@ -4,6 +4,7 @@ struct ConversationView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @State private var amount = ""
     @State private var modifier: OfferModifier = .none
@@ -24,7 +25,7 @@ struct ConversationView: View {
                             HStack {
                                 TraderPortrait(identity: listing.seller.identityIndex, size: 54)
                                 VStack(alignment: .leading, spacing: 3) {
-                                    Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.headline)
+                                    Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.headline)
                                     if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.subheadline).foregroundStyle(.secondary) }
                                 }
                                 Spacer()
@@ -63,7 +64,7 @@ struct ConversationView: View {
                                     }
                                     Text("game.boughtFor").font(.caption).foregroundStyle(.white.opacity(0.75))
                                     if let price = conversation.agreedPrice {
-                                        Text(price.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).foregroundStyle(.white)
+                                        Text(price.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .black)).foregroundStyle(.white)
                                     }
                                     Text(ownedItem?.inspected == true ? "journey.inspectedOwned" : "game.purchaseRisk").font(.subheadline).foregroundStyle(.white.opacity(0.8))
                                 }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
@@ -108,7 +109,7 @@ struct ConversationView: View {
                                 }
                                 if let counter = conversation.counterPrice {
                                     GameEyebrow(key: "offer.counterHeading")
-                                    Text(counter.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
+                                    Text(counter.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
                                     Button("offer.acceptCounter") { store.perform { try store.acceptSellerCounter(listingID: listing.id) } }
                                         .buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("acceptSellerCounter")
                                     Text("offer.pushRisk").font(.caption).foregroundStyle(.secondary)
@@ -117,7 +118,7 @@ struct ConversationView: View {
                                             Button("offer.halfway") {
                                                 store.perform {
                                                     let last = conversation.offers.last?.amount ?? counter
-                                                    amount = try counter.adding(last).scaled(byBasisPoints: 5_000).inputText(locale: locale)
+                                                    amount = try counter.adding(last).scaled(byBasisPoints: 5_000).inputText(locale: locale, market: market)
                                                 }
                                             }.buttonStyle(.bordered).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("offerHalfway")
                                             offerEntry(listing: listing, conversation: conversation)
@@ -161,7 +162,7 @@ struct ConversationView: View {
             }
             .navigationTitle("messages.title").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
-            .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale) } }
+            .onAppear { if amount.isEmpty { amount = listing.askingPrice.inputText(locale: locale, market: market) } }
         }
     }
     private func offerEntry(listing: MarketplaceListing, conversation: NegotiationState) -> some View {
@@ -182,26 +183,27 @@ struct ConversationView: View {
             Button("offer.send") {
                 editing = false
                 store.perform {
-                    try store.sendOffer(listingID: listing.id, amount: Money.parse(amount, locale: locale), modifier: modifier)
+                    try store.sendOffer(listingID: listing.id, amount: Money.parse(amount, locale: locale, market: market), modifier: modifier)
                     GameFeel.play(.submitted)
                 }
             }.buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("sendOffer")
         }
     }
     private func setOffer(_ asking: Money, factor: Int64) {
-        store.perform { amount = try asking.scaled(byBasisPoints: factor).inputText(locale: locale) }
+        store.perform { amount = try asking.scaled(byBasisPoints: factor).inputText(locale: locale, market: market) }
     }
 }
 
 struct DialogueBubble: View {
     let message: DialogueMessage
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         HStack {
             if message.fromPlayer { Spacer(minLength: 32) }
             VStack(alignment: .leading, spacing: 8) {
                 Text(GameText.string(message.intent, locale: locale))
-                if let amount = message.amount { Text(amount.formatted(locale: locale)).font(.title3.bold()).monospacedDigit() }
+                if let amount = message.amount { Text(amount.formatted(locale: locale, market: market)).font(.title3.bold()).monospacedDigit() }
                 if let defect = message.defect { Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill").font(.subheadline.bold()).foregroundStyle(GameStyle.loss) }
             }.padding(16)
                 .background(message.fromPlayer ? GameStyle.gain.opacity(0.16) : GameStyle.panel, in: RoundedRectangle(cornerRadius: 18))

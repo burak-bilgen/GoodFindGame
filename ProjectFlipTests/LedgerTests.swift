@@ -14,7 +14,7 @@ struct LedgerTests {
             let listing = state.market[index]
             state.conversations.append(try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience), reputation: 50))
             state = try PurchaseEngine().buy(listingID: listing.id, state: state, now: .distantPast)
-            state = try InspectionEngine().inspect(itemID: listing.item.id, professionally: index % 2 == 0, state: state)
+            state = try InspectionEngine().inspect(itemID: listing.item.id, professionally: index % 2 == 1, state: state)
             let value = try PricingEngine.fairValue(of: listing.item, definition: definitions[index])
             state = try ResaleEngine().create(itemID: listing.item.id, askingPrice: value, state: state, definitions: definitions, now: .distantPast)
             let resale = try #require(state.playerListings.last)

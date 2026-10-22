@@ -7,6 +7,7 @@ struct GameDock: View {
     @Namespace private var highlight
     @GameReduceMotion private var reduceMotion
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.dynamicTypeSize) private var typeSize
     private let tabs = [("market.title", "square.grid.2x2.fill"), ("messages.title", "bubble.left.and.bubble.right.fill"), ("inventory.title", "shippingbox.fill"), ("selling.title", "tag.fill"), ("profile.title", "person.crop.circle.fill")]
     var body: some View {

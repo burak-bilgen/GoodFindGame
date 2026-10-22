@@ -26,7 +26,7 @@ struct RepairTests {
         #expect(throws: TradingError.self) { try RepairEngine().repair(itemID: item.id, defect: .drift, state: repaired, definitions: definitions) }
         try item.validateFacts()
         #expect(try JSONDecoder().decode(GameSnapshot.self, from: JSONEncoder().encode(repaired)) == repaired)
-        let listed = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 200_000), state: repaired, definitions: definitions, now: .now)
+        let listed = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 4_300), state: repaired, definitions: definitions, now: .now)
         let offered = try BuyerEngine().generateOffer(listingID: listed.playerListings[0].id, state: listed, definitions: definitions)
         let settled = try BuyerEngine().accept(listingID: listed.playerListings[0].id, state: offered, now: .now)
         let record = try TradeRecord(listing: settled.playerListings[0])
@@ -66,7 +66,7 @@ struct RepairTests {
         state.player.cash = .zero
         #expect(throws: TradingError.self) { try RepairEngine().repair(itemID: original.id, defect: .drift, state: state, definitions: definitions) }
         state.player.cash = Money(minorUnits: 1_000_000)
-        state = try ResaleEngine().create(itemID: original.id, askingPrice: Money(minorUnits: 200_000), state: state, definitions: definitions, now: .now)
+        state = try ResaleEngine().create(itemID: original.id, askingPrice: Money(minorUnits: 4_300), state: state, definitions: definitions, now: .now)
         #expect(throws: TradingError.self) { try RepairEngine().repair(itemID: original.id, defect: .drift, state: state, definitions: definitions) }
         state.player.inventory[0].repairedDefects = [.damagedPort]
         #expect(throws: SaveError.self) { try state.player.inventory[0].validateFacts() }

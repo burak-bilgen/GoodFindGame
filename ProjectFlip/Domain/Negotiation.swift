@@ -48,7 +48,7 @@ struct NegotiationEngine {
         if modifier != .none { next.append(modifier.key, player: true) }
         // Patience limits repeated lowballs; it must not raise the seller's floor
         // while the player improves a bid toward a previously acceptable price.
-        var adjustment = 10_000 + listing.seller.bargainingSkill * 2 - max(0, reputation - 50) * 5
+        var adjustment = 10_000 + listing.seller.bargainingSkill * 2
         if modifier == .buyToday { adjustment -= listing.seller.urgency * 8 }
         if modifier == .knownIssues && !next.knownDefects.isEmpty { adjustment -= 600 }
         let minimum = min(listing.askingPrice, try listing.reservationPrice.scaled(byBasisPoints: Int64(adjustment)))

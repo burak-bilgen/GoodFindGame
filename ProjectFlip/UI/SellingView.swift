@@ -4,6 +4,7 @@ struct CreateListingView: View {
     let store: GameStore
     let itemID: ItemID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @State private var price = ""
     @State private var publishedID: ListingID?
     @FocusState private var editing: Bool
@@ -35,7 +36,7 @@ struct CreateListingView: View {
                         Button("selling.publish") {
                             editing = false
                             store.perform {
-                                try store.publish(itemID: itemID, askingPrice: Money.parse(price, locale: locale))
+                                try store.publish(itemID: itemID, askingPrice: Money.parse(price, locale: locale, market: market))
                                 publishedID = store.snapshot.playerListings.last(where: { $0.itemID == itemID })?.id
                                 GameFeel.play(.submitted)
                             }
@@ -48,7 +49,7 @@ struct CreateListingView: View {
             .onAppear {
                 if price.isEmpty, let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
                     switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                    case .success(let estimate): price = estimate.midpoint.inputText(locale: locale)
+                    case .success(let estimate): price = estimate.midpoint.inputText(locale: locale, market: market)
                     case .failure: store.errorKey = "inspection.valueUnavailable"
                     }
                 }
@@ -61,10 +62,11 @@ struct InvestmentContext: View {
     let item: ItemInstance
     let definition: ItemDefinition
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             switch Result(catching: { try item.purchasePrice.adding(item.inspectionCost).adding(item.repairCost) }) {
-            case .success(let invested): LabeledContent("selling.invested") { Text(invested.formatted(locale: locale)).bold().foregroundStyle(.primary) }
+            case .success(let invested): LabeledContent("selling.invested") { Text(invested.formatted(locale: locale, market: market)).bold().foregroundStyle(.primary) }
             case .failure: Text("trade.unavailable")
             }
             switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
@@ -83,6 +85,7 @@ struct InvestmentContext: View {
 struct SellingView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
@@ -95,7 +98,7 @@ struct SellingView: View {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 80)
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(definition.displayName(locale: locale)).font(.headline)
-                                    Text(listing.askingPrice.formatted(locale: locale)).bold()
+                                    Text(listing.askingPrice.formatted(locale: locale, market: market)).bold()
                                     if listing.status == .active && listing.offers.contains(where: { [.pending, .countered].contains($0.status) }) {
                                         Label("buyer.new", systemImage: "bubble.left.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
                                     } else { Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary) }
@@ -113,6 +116,7 @@ struct SaleListingView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.dynamicTypeSize) private var typeSize
     @GameReduceMotion private var reduceMotion
     @State private var counterAmount = ""
@@ -146,7 +150,7 @@ struct SaleListingView: View {
                             case .failure: Text("trade.unavailable")
                             }
                         } else {
-                            LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale)).font(.title2.bold()) }
+                            LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale, market: market)).font(.title2.bold()) }
                             HStack {
                                 Label(listing.views.formatted(.number.locale(locale)), systemImage: "eye")
                                 Text("selling.views").font(.caption)
@@ -165,10 +169,10 @@ struct SaleListingView: View {
                                     }
                                     HStack(spacing: 10) {
                                         TraderPortrait(identity: offer.identityIndex)
-                                        Text(GameText.string("npc.name.\(offer.identityIndex % 10)", locale: locale)).font(.headline)
+                                        Text(GameText.marketPerson("name", index: offer.identityIndex, market: market, locale: locale)).font(.headline)
                                     }
                                     GameEyebrow(key: awaitingReply ? "living.previousOffer" : "buyer.offeredPrice")
-                                    Text(offer.amount.formatted(locale: locale)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
+                                    Text(offer.amount.formatted(locale: locale, market: market)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
                                     if let message = listing.messages.last { Text(GameText.string(message.intent, locale: locale)).font(.subheadline) }
                                     if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
                                         switch Result(catching: { try offer.amount.subtracting(item.purchasePrice).subtracting(item.inspectionCost).subtracting(item.repairCost) }) {
@@ -204,7 +208,7 @@ struct SaleListingView: View {
                                             Button("buyer.sendCounter") {
                                                 editing = false
                                                 store.perform {
-                                                    try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale))
+                                                    try store.counterBuyer(listingID: listing.id, amount: Money.parse(counterAmount, locale: locale, market: market))
                                                     counterComposerExpanded = false
                                                     GameFeel.play(.submitted)
                                                 }
@@ -248,7 +252,7 @@ struct SaleListingView: View {
                                         TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(GamePriceFieldStyle()).accessibilityIdentifier("salePrice")
                                         Button("selling.updatePrice") {
                                             editing = false
-                                            store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale)) }
+                                            store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale, market: market)) }
                                         }.accessibilityIdentifier("updateSalePrice")
                                     }.padding(.top, 12)
                                 }.gameCard()
@@ -260,7 +264,7 @@ struct SaleListingView: View {
                         .animation(reduceMotion ? nil : .easeOut(duration: 0.2), value: listing.messages.count)
                 }.gameScreen().navigationTitle("selling.title").navigationBarTitleDisplayMode(.inline)
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { if editing { Button("action.done") { editing = false } } } }
-                    .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
+                    .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale, market: market); counterAmount = newPrice } }
                     .onChange(of: listing.messages.last?.id) { _, _ in
                         counterComposerExpanded = false
                         if ["buyer.counter", "buyer.hold"].contains(listing.messages.last?.intent ?? "") {
@@ -286,6 +290,7 @@ struct TradePayoff: View {
     let record: TradeRecord
     var item: ItemInstance?
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @ScaledMetric(relativeTo: .largeTitle) private var payoffSize = 46
     @State private var appeared = false
@@ -299,7 +304,7 @@ struct TradePayoff: View {
                 Text(GameText.string(record.netProfit > .zero ? "result.win" : record.netProfit < .zero ? "result.loss" : "result.even", locale: locale))
                     .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
             }
-            Text(record.netProfit.formatted(locale: locale, signed: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
+            Text(record.netProfit.formatted(locale: locale, market: market, signed: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
                 .lineLimit(1).minimumScaleFactor(0.45)
                 .foregroundStyle(record.netProfit < .zero ? Color(red: 1, green: 0.57, blue: 0.53) : GameStyle.light(.gaming))
                 .contentTransition(.numericText()).accessibilityIdentifier("tradePayoff")
@@ -307,7 +312,7 @@ struct TradePayoff: View {
             if record.inspectionCost > .zero || record.repairCost > .zero {
                 Text("result.afterCosts").font(.caption).foregroundStyle(.white.opacity(0.74))
             }
-            Text(GameText.format("result.route", locale: locale, record.acquiredFor.formatted(locale: locale), record.soldFor.formatted(locale: locale))).font(.subheadline)
+            Text(GameText.format("result.route", locale: locale, record.acquiredFor.formatted(locale: locale, market: market), record.soldFor.formatted(locale: locale, market: market))).font(.subheadline)
             if record.totalCost > .zero {
                 LabeledContent("result.roi") {
                     Text((Decimal(record.netProfit.minorUnits) / Decimal(record.totalCost.minorUnits)).formatted(.percent.precision(.fractionLength(1)).locale(locale))).bold()
@@ -339,6 +344,7 @@ private struct PriceSuggestions: View {
     let definition: ItemDefinition
     @Binding var price: String
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
         switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
@@ -356,15 +362,15 @@ private struct PriceSuggestions: View {
             let suggested = [estimate.lower, estimate.midpoint, estimate.upper][index]
             Group {
                 Button {
-                    price = suggested.inputText(locale: locale)
+                    price = suggested.inputText(locale: locale, market: market)
                 } label: {
                     VStack(alignment: .leading, spacing: 8) {
                         Image(systemName: ["hare", "scope", "hourglass"][index]).font(.title3)
                         Text(GameText.string(["game.price.fast", "game.price.balanced", "game.price.patient"][index], locale: locale)).font(.caption2.bold())
-                        Text(suggested.formatted(locale: locale)).font(.caption.bold()).lineLimit(1).minimumScaleFactor(0.5)
+                        Text(suggested.formatted(locale: locale, market: market)).font(.caption.bold()).lineLimit(1).minimumScaleFactor(0.5)
                     }.frame(maxWidth: .infinity, alignment: .leading).padding(10)
-                        .background(GameStyle.gain.opacity(price == suggested.inputText(locale: locale) ? 0.18 : 0.06), in: RoundedRectangle(cornerRadius: 12))
-                        .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.gain.opacity(price == suggested.inputText(locale: locale) ? 0.65 : 0.12), lineWidth: 1))
+                        .background(GameStyle.gain.opacity(price == suggested.inputText(locale: locale, market: market) ? 0.18 : 0.06), in: RoundedRectangle(cornerRadius: 12))
+                        .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.gain.opacity(price == suggested.inputText(locale: locale, market: market) ? 0.65 : 0.12), lineWidth: 1))
                 }.buttonStyle(.plain).foregroundStyle(GameStyle.gain).accessibilityIdentifier("priceSuggestion.\(index)")
             }
         }

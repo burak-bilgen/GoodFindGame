@@ -5,6 +5,7 @@ struct NotificationSettingsView: View {
     let store: GameStore
     @State private var service = LocalNotificationService.shared
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.openURL) private var openURL
     @State private var requesting = false
 

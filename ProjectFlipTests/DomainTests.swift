@@ -24,11 +24,11 @@ struct DomainTests {
 
     @Test func moneyFormatting() {
         let value = Money(minorUnits: 123_450)
-        #expect(value.formatted(locale: Locale(identifier: "tr_TR")).contains("1.234,50"))
-        #expect(value.formatted(locale: Locale(identifier: "en_US")).contains("1,234.50"))
+        #expect(value.formatted(locale: Locale(identifier: "tr_TR")).contains("1.235"))
+        #expect(value.formatted(locale: Locale(identifier: "en_US")).contains("1,235"))
         #expect(value.formatted(locale: Locale(identifier: "en_US")).contains("$"))
         #expect(value.formatted(locale: Locale(identifier: "en_GB")).contains("$"))
-        #expect(value.formatted(locale: Locale(identifier: "tr_TR")).contains("₺"))
+        #expect(value.formatted(locale: Locale(identifier: "tr_TR"), market: .turkey).contains("₺"))
         #expect(value.formatted(locale: Locale(identifier: "en_US"), signed: true).contains("+$"))
     }
 }

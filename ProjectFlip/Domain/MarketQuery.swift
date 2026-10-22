@@ -25,11 +25,11 @@ struct MarketQuery {
         }
     }
 
-    static func priceBound(_ text: String, locale: Locale) throws -> Money? {
+    static func priceBound(_ text: String, locale: Locale, market: MarketConfiguration = .us) throws -> Money? {
         let value = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if value.isEmpty { return nil }
         // A filter can include zero; transaction amounts deliberately cannot.
         if ["0", "0\(locale.decimalSeparator ?? ".")0", "0\(locale.decimalSeparator ?? ".")00"].contains(value) { return .zero }
-        return try Money.parse(value, locale: locale)
+        return try Money.parse(value, locale: locale, market: market)
     }
 }

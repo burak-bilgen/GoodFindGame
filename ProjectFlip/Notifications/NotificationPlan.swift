@@ -70,7 +70,7 @@ struct NotificationPlanner {
                       let lifecycle = state.marketListingStates.first(where: { $0.id == id && $0.priceDroppedAt == nil }),
                       let price = lifecycle.reducedPrice else { continue }
                 category = .market
-                body = GameText.format("notifications.priceDrop", locale: locale, name, price.formatted(locale: locale))
+                body = GameText.format("notifications.priceDrop", locale: locale, name, price.formatted(locale: locale, market: state.marketConfiguration))
                 route = .listing(id)
             case .marketCycle(let index):
                 guard let calendar = state.marketCalendar else { continue }
@@ -87,9 +87,9 @@ struct NotificationPlanner {
                 let name = GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)
                 let expiry = projected(expiresAt).formatted(.dateTime.hour().minute().locale(locale))
                 if let price = reply.counterPrice {
-                    body = GameText.format("notifications.sellerCounter", locale: locale, name, price.formatted(locale: locale), expiry)
+                    body = GameText.format("notifications.sellerCounter", locale: locale, name, price.formatted(locale: locale, market: state.marketConfiguration), expiry)
                 } else if let price = reply.agreedPrice {
-                    body = GameText.format("notifications.sellerAccepted", locale: locale, name, price.formatted(locale: locale), expiry)
+                    body = GameText.format("notifications.sellerAccepted", locale: locale, name, price.formatted(locale: locale, market: state.marketConfiguration), expiry)
                 } else {
                     body = GameText.format("notifications.sellerReply", locale: locale, name)
                 }
@@ -107,7 +107,7 @@ struct NotificationPlanner {
             case .buyerOffer(let id, _, let offer, _, let expiresAt):
                 category = .offers
                 let expiry = projected(expiresAt).formatted(.dateTime.hour().minute().locale(locale))
-                body = GameText.format("notifications.buyerOffer", locale: locale, offer.amount.formatted(locale: locale), expiry)
+                body = GameText.format("notifications.buyerOffer", locale: locale, offer.amount.formatted(locale: locale, market: state.marketConfiguration), expiry)
                 route = .sale(id)
             case .buyerReply(let id, _, _, _):
                 category = .offers

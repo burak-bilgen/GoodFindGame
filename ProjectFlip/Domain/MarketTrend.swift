@@ -130,7 +130,8 @@ struct MarketCalendar: Codable, Equatable {
 
 extension GameSnapshot {
     func marketMultiplier(for definition: ItemDefinition, at date: Date? = nil) throws -> Int64 {
-        guard let marketCalendar else { return 10_000 }
-        return try marketCalendar.multiplier(for: definition, at: date ?? lastSimulationAt ?? marketCalendar.anchor)
+        let regional = marketConfiguration.multiplier(for: definition.category)
+        guard let marketCalendar else { return regional }
+        return try marketCalendar.multiplier(for: definition, at: date ?? lastSimulationAt ?? marketCalendar.anchor) * regional / 10_000
     }
 }

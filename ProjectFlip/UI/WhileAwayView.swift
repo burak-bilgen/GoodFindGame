@@ -5,6 +5,7 @@ struct DeadlineView: View {
     let target: Date
     let titleKey: String
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 8) {
@@ -20,6 +21,7 @@ struct DeadlineView: View {
 struct WhileAwayView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         NavigationStack {
             ScrollView {

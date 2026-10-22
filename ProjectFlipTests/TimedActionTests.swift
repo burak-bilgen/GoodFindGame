@@ -51,16 +51,16 @@ struct TimedActionTests {
         let definitions = try SeedContent.load().items
         let original = try ResaleTests.inspectedState()
         let actions = SimulationActions(timing: .debug)
-        var listed = try actions.publish(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 280_000), state: original, definitions: definitions, now: now)
+        var listed = try actions.publish(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 6_000), state: original, definitions: definitions, now: now)
         let listing = try #require(listed.playerListings.first)
         #expect(listing.offers.isEmpty)
         let eventID = try #require(listed.events.first?.id)
-        listed = try actions.changePrice(listingID: listing.id, amount: Money(minorUnits: 200_000), state: listed, definitions: definitions, now: now)
+        listed = try actions.changePrice(listingID: listing.id, amount: Money(minorUnits: 4_000), state: listed, definitions: definitions, now: now)
         #expect(listed.events.first(where: { $0.id == eventID })?.status == .cancelled)
         #expect(listed.events.filter { $0.status == .pending && $0.payload.generatesBuyerInterest }.count == 1)
         let delivered = try EventResolver(timing: .debug).resolve(listed, now: now.addingTimeInterval(10), definitions: definitions).state
         #expect(delivered.playerListings[0].offers.count == 1)
-        #expect(try #require(delivered.playerListings[0].offers.first).amount <= Money(minorUnits: 200_000))
+        #expect(try #require(delivered.playerListings[0].offers.first).amount <= Money(minorUnits: 4_000))
     }
 
     @MainActor @Test func launchCatchesUpAndRetainsReturnReportUntilAcknowledged() throws {

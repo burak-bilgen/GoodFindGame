@@ -3,20 +3,21 @@ import SwiftUI
 struct ValueRangeView: View {
     let estimate: ValueEstimate
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 6) {
-                Text(estimate.lower.formatted(locale: locale)).fixedSize()
+                Text(estimate.lower.formatted(locale: locale, market: market)).fixedSize()
                 Text(verbatim: "–")
-                Text(estimate.upper.formatted(locale: locale)).fixedSize()
+                Text(estimate.upper.formatted(locale: locale, market: market)).fixedSize()
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(estimate.lower.formatted(locale: locale)).fixedSize()
+                Text(estimate.lower.formatted(locale: locale, market: market)).fixedSize()
                 Text(verbatim: "–")
-                Text(estimate.upper.formatted(locale: locale)).fixedSize()
+                Text(estimate.upper.formatted(locale: locale, market: market)).fixedSize()
             }
         }.font(.system(.title3, design: .rounded, weight: .bold)).monospacedDigit()
-            .accessibilityElement(children: .ignore).accessibilityLabel(Text(estimate.formatted(locale: locale)))
+            .accessibilityElement(children: .ignore).accessibilityLabel(Text(estimate.formatted(locale: locale, market: market)))
     }
 }
 
@@ -24,8 +25,9 @@ struct MarketAudienceView: View {
     let store: GameStore
     let definition: ItemDefinition
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
-        let demand = try? store.snapshot.marketMultiplier(for: definition)
+        let demand = try? store.snapshot.marketCalendar?.multiplier(for: definition, at: store.snapshot.lastSimulationAt ?? .now) ?? 10_000
         VStack(alignment: .leading, spacing: 6) {
             if let demand {
                 Label(GameText.string(demand > 10_000 ? "living.demandRising" : demand < 10_000 ? "living.demandCooling" : "living.demandSteady", locale: locale), systemImage: "chart.line.uptrend.xyaxis")
@@ -39,6 +41,7 @@ struct MarketAudienceView: View {
 struct OpenTradesView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         let sellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID != nil }
         let shipping = store.snapshot.shipments.filter { $0.status == .pending }
@@ -83,8 +86,9 @@ struct AskingResultView: View {
     let item: ItemInstance
     let askingPrice: String
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
-        if let ask = try? Money.parse(askingPrice, locale: locale), let total = try? item.purchasePrice.adding(item.inspectionCost).adding(item.repairCost), let result = try? ask.subtracting(total) {
+        if let ask = try? Money.parse(askingPrice, locale: locale, market: market), let total = try? item.purchasePrice.adding(item.inspectionCost).adding(item.repairCost), let result = try? ask.subtracting(total) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("living.ifSoldAtAsk").font(.caption).foregroundStyle(.secondary)
                 ProfitAmount(amount: result).bold()

@@ -6,7 +6,7 @@ struct BuyerTests {
     static func offeredState() throws -> GameSnapshot {
         let state = try ResaleTests.inspectedState()
         let definitions = try SeedContent.load().items
-        let listed = try ResaleEngine().create(itemID: state.player.inventory[0].id, askingPrice: Money(minorUnits: 280_000), state: state, definitions: definitions, now: .distantPast)
+        let listed = try ResaleEngine().create(itemID: state.player.inventory[0].id, askingPrice: Money(minorUnits: 6_000), state: state, definitions: definitions, now: .distantPast)
         return try BuyerEngine().generateOffer(listingID: listed.playerListings[0].id, state: listed, definitions: definitions)
     }
 

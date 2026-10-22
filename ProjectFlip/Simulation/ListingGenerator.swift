@@ -2,6 +2,7 @@ import Foundation
 
 struct PricingEngine {
     static func fairValue(of item: ItemInstance, definition: ItemDefinition, marketBasisPoints: Int64 = 10_000) throws -> Money {
+        guard (0...100).contains(item.condition), (1...30_000).contains(marketBasisPoints) else { throw TradingError.invalidAmount }
         let conditioned = try definition.baseValue.scaled(byBasisPoints: Int64(4_000 + item.condition * 60))
         let penalty = item.activeDefects.reduce(Int64(0)) { $0 + $1.valuePenaltyBasisPoints }
         let defective = try conditioned.scaled(byBasisPoints: max(2_000, 10_000 - penalty))

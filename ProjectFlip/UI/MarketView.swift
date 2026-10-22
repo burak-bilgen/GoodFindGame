@@ -3,6 +3,7 @@ import SwiftUI
 struct MarketView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @FocusState private var priceInputFocused: Bool
     @Environment(\.dynamicTypeSize) private var typeSize
@@ -16,8 +17,8 @@ struct MarketView: View {
 
     private var query: MarketQuery? {
         do {
-            let minimum = try MarketQuery.priceBound(minimumPrice, locale: locale)
-            let maximum = try MarketQuery.priceBound(maximumPrice, locale: locale)
+            let minimum = try MarketQuery.priceBound(minimumPrice, locale: locale, market: market)
+            let maximum = try MarketQuery.priceBound(maximumPrice, locale: locale, market: market)
             if let minimum, let maximum, minimum > maximum { return nil }
             return MarketQuery(search: search, category: category, minimumPrice: minimum, maximumPrice: maximum,
                                watchedOnly: watchedOnly, newestFirst: newestFirst)
@@ -53,7 +54,7 @@ struct MarketView: View {
                         .padding(12).background(GameStyle.amber.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
                     VStack(alignment: .leading, spacing: 4) {
                         Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
-                        Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .black)).monospacedDigit().accessibilityIdentifier("marketCash")
+                        Text(store.snapshot.player.cash.formatted(locale: locale, market: market)).font(.system(.title2, design: .rounded, weight: .black)).monospacedDigit().accessibilityIdentifier("marketCash")
                             .lineLimit(1).minimumScaleFactor(0.5)
                             .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
                     }
@@ -129,6 +130,7 @@ struct ListingCard: View {
     var watched = false
     var lifecycle: MarketListingState?
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
     var body: some View {
@@ -151,13 +153,13 @@ struct ListingCard: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(minHeight: typeSize.isAccessibilitySize ? 0 : 42, alignment: .topLeading)
-                Text(listing.askingPrice.formatted(locale: locale))
+                Text(listing.askingPrice.formatted(locale: locale, market: market))
                     .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.primary)
                     .lineLimit(1).minimumScaleFactor(0.65)
                     .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
                 if lifecycle?.priceDroppedAt != nil {
                     Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption2.bold()).foregroundStyle(GameStyle.gain)
-                    if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale)).strikethrough().font(.caption2).foregroundStyle(.secondary) }
+                    if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale, market: market)).strikethrough().font(.caption2).foregroundStyle(.secondary) }
                 }
                 Text(GameText.string(listing.descriptionIntent, locale: locale))
                     .font(.caption).foregroundStyle(.secondary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
@@ -165,7 +167,7 @@ struct ListingCard: View {
                 Divider()
                 HStack(spacing: 6) {
                     TraderPortrait(identity: listing.seller.identityIndex, size: 24)
-                    Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.caption2.weight(.semibold)).foregroundStyle(.primary)
+                    Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.caption2.weight(.semibold)).foregroundStyle(.primary)
                     Spacer(minLength: 0)
                 }
                 Text(listing.createdAt, style: .relative).font(.caption2).foregroundStyle(.secondary)
@@ -184,6 +186,7 @@ struct ListingCard: View {
 
 struct TradeContinuationPrompt: View {
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     let store: GameStore
     var body: some View {
         if let sale = store.snapshot.playerListings.reversed().first(where: { listing in
@@ -197,7 +200,7 @@ struct TradeContinuationPrompt: View {
                         if let item = store.snapshot.player.inventory.first(where: { $0.id == sale.itemID }), let definition = store.definition(for: item) {
                             Text(definition.displayName(locale: locale)).font(.headline).foregroundStyle(.primary)
                         }
-                        Text(offer.amount.formatted(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
+                        Text(offer.amount.formatted(locale: locale, market: market)).font(.system(.title2, design: .rounded, weight: .heavy)).foregroundStyle(.primary)
                     }
                     Spacer(minLength: 0)
                     Image(systemName: "arrow.up.right").foregroundStyle(GameStyle.gain).accessibilityHidden(true)

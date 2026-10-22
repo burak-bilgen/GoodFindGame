@@ -4,6 +4,7 @@ import SwiftUI
 struct DeveloperToolsView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @State private var showTruth = false
     @State private var confirmReset = false
     @State private var selectedListing = ""
@@ -11,14 +12,14 @@ struct DeveloperToolsView: View {
     var body: some View {
         GameForm {
             Section("debug.economy") {
-                Text(store.snapshot.player.cash.formatted(locale: locale)).monospacedDigit()
+                Text(store.snapshot.player.cash.formatted(locale: locale, market: market)).monospacedDigit()
                 Button {
                     store.perform { try store.debugAddCash() }
                 } label: {
                     HStack {
                         Text("debug.addCash")
                         Spacer()
-                        Text(GameBalanceConfig.debugCashGrant.formatted(locale: locale))
+                        Text(GameBalanceConfig.debugCashGrant.formatted(locale: locale, market: market))
                     }
                 }.accessibilityIdentifier("debugAddCash")
                 Button("debug.regenerate") { store.perform { try store.debugRegenerateMarket(); selectedListing = "" } }.accessibilityIdentifier("debugRegenerate")
@@ -64,7 +65,7 @@ struct DeveloperToolsView: View {
                 Text(definition.displayName(locale: locale)).bold()
                 Text("debug.condition \(item.condition)")
                 switch Result(catching: { try PricingEngine.fairValue(of: item, definition: definition, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                case .success(let value): Text(value.formatted(locale: locale))
+                case .success(let value): Text(value.formatted(locale: locale, market: market))
                 case .failure: Text("inspection.valueUnavailable")
                 }
             }

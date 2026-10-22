@@ -4,6 +4,7 @@ struct ItemFactsView: View {
     let store: GameStore
     let itemID: ItemID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
 
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }) {
@@ -43,6 +44,7 @@ struct ItemFactsView: View {
 struct FactValueText: View {
     let fact: ItemFact
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         switch fact.value {
         case .number(let number):

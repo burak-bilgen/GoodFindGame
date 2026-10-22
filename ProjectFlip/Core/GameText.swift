@@ -14,6 +14,9 @@ enum GameText {
         Logger(subsystem: "ProjectFlip", category: "Localization").error("Missing content key: \(key, privacy: .public)")
         return "…"
     }
+    static func marketPerson(_ kind: String, index: Int, market: MarketConfiguration, locale: Locale) -> String {
+        string("people.\(market.region.rawValue).\(kind).\(index % 10)", locale: locale)
+    }
     static func format(_ key: String, locale: Locale, _ arguments: CVarArg...) -> String {
         String(format: string(key, locale: locale), locale: locale, arguments: arguments)
     }

@@ -16,7 +16,7 @@ final class GameStore {
         self.repository = repository
         self.timing = timing
         self.definitions = definitions
-        snapshot = try repository.load() ?? GameSnapshot.fresh(definitions: definitions)
+        snapshot = try repository.load() ?? GameSnapshot.fresh(definitions: definitions, marketConfiguration: .initial(locale: .current))
         // Never replace an unreadable save with a fresh game.
         if !FileManager.default.fileExists(atPath: repository.url.path) { try repository.save(snapshot) }
         try catchUp(now: now, showSummary: true)

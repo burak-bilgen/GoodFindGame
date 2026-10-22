@@ -3,6 +3,7 @@ import SwiftUI
 struct KnowledgeView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
 
     var body: some View {
         GameList {
@@ -16,7 +17,7 @@ struct KnowledgeView: View {
                         Label("knowledge.toolsOwned", systemImage: "checkmark.seal.fill")
                             .accessibilityIdentifier("toolsOwned.\(category.rawValue)")
                     } else {
-                        LabeledContent("knowledge.toolCost") { Text(InspectionKnowledge.toolCost(for: category).formatted(locale: locale)) }
+                        LabeledContent("knowledge.toolCost") { Text(InspectionKnowledge.toolCost(for: category).formatted(locale: locale, market: market)) }
                         Button("knowledge.buyTools") {
                             store.perform { try store.buyInspectionTools(for: category) }
                         }.accessibilityIdentifier("buyTools.\(category.rawValue)")
@@ -31,6 +32,7 @@ struct KnowledgeSummary: View {
     let knowledge: InspectionKnowledge
     let category: ItemCategory
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
 
     var body: some View {
         LabeledContent("knowledge.level") {

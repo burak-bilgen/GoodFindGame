@@ -58,7 +58,7 @@ struct TradeOutcomePresentationTests {
         var item = ItemInstance(id: ItemID("outcome"), definitionID: definitions[0].id, condition: 79, hiddenDefects: [.drift, .damagedPort], revealedDefects: [.damagedPort], inspected: true, purchasePrice: Money(minorUnits: 100_000))
         item.facts = ItemFacts.generate(for: item, definition: definitions[0])
         state.player.inventory = [item]
-        state = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 50_000), state: state, definitions: definitions, now: .distantPast)
+        state = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 2_000), state: state, definitions: definitions, now: .distantPast)
         let listingID = try #require(state.playerListings.first?.id)
         state = try BuyerEngine().generateOffer(listingID: listingID, state: state, definitions: definitions)
         state = try BuyerEngine().accept(listingID: listingID, state: state, now: .distantPast)

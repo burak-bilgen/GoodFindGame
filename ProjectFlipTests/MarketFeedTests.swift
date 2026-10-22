@@ -84,7 +84,7 @@ struct MarketFeedTests {
         let tr = try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "tr_TR"), now: now)
         #expect(en.count == 2 && tr.count == 2 && en[0].body != tr[0].body)
         #expect(en[1].body.contains("expired") && tr[1].body.contains("sona erdi"))
-        #expect(tr[0].body.contains("₺"))
+        #expect(tr[0].body.contains("US$") || tr[0].body.contains("$"))
         state.watchedListingIDs = []
         #expect(try planner.makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now).isEmpty)
         state.watchedListingIDs = [state.market[0].id]

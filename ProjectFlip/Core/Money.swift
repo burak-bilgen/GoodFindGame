@@ -1,6 +1,6 @@
 import Foundation
 
-/// One economy unit has 100 minor units. Currency display does not convert value.
+/// One economy unit has 100 minor units. Canonical USD cents; regional pricing and display conversion are independent.
 struct Money: Codable, Hashable, Comparable, Sendable {
     let minorUnits: Int64
     static let zero = Money(minorUnits: 0)
@@ -28,22 +28,24 @@ struct Money: Codable, Hashable, Comparable, Sendable {
         return Money(minorUnits: product / 10_000)
     }
 
-    func formatted(locale: Locale, signed: Bool = false) -> String {
+    func formatted(locale: Locale, market: MarketConfiguration = .us, signed: Bool = false) -> String {
         let formatter = NumberFormatter()
         formatter.locale = locale
         formatter.numberStyle = .currency
-        // Display the owner's chosen language currency without changing saved units.
-        formatter.currencyCode = locale.language.languageCode?.identifier == "tr" ? "TRY" : "USD"
-        formatter.currencySymbol = locale.language.languageCode?.identifier == "tr" ? "₺" : "$"
+        formatter.currencyCode = market.currency.rawValue
+        formatter.roundingMode = .halfUp
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
         if signed && minorUnits > 0 { formatter.positivePrefix = "+" + formatter.positivePrefix }
-        return formatter.string(from: NSDecimalNumber(decimal: Decimal(minorUnits) / 100)) ?? NSDecimalNumber(value: minorUnits).stringValue
+        guard let display = try? market.display(self) else { return "—" }
+        return formatter.string(from: NSDecimalNumber(decimal: Decimal(display.minorUnits) / 100)) ?? "—"
     }
 }
 
 enum MoneyError: Error { case overflow }
 
 extension Money {
-    static func parse(_ text: String, locale: Locale) throws -> Self {
+    static func parse(_ text: String, locale: Locale, market: MarketConfiguration = .us) throws -> Self {
         let separator = locale.decimalSeparator ?? "."
         let pieces = text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: separator)
         guard pieces.count <= 2, let wholeText = pieces.first, !wholeText.isEmpty,
@@ -55,11 +57,14 @@ extension Money {
         let (units, overflow) = whole.multipliedReportingOverflow(by: 100)
         let (value, extraOverflow) = units.addingReportingOverflow(minor)
         guard !overflow, !extraOverflow, value > 0, value <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
-        return Self(minorUnits: value)
+        let canonical = try market.canonical(Self(minorUnits: value))
+        guard canonical > .zero else { throw TradingError.invalidAmount }
+        return canonical
     }
 
-    func inputText(locale: Locale) -> String {
-        let fraction = minorUnits % 100
-        return "\(minorUnits / 100)\(locale.decimalSeparator ?? ".")\(fraction < 10 ? "0" : "")\(fraction)"
+    func inputText(locale: Locale, market: MarketConfiguration = .us) -> String {
+        guard let display = try? market.display(self) else { return "" }
+        let fraction = display.minorUnits % 100
+        return "\(display.minorUnits / 100)\(locale.decimalSeparator ?? ".")\(fraction < 10 ? "0" : "")\(fraction)"
     }
 }

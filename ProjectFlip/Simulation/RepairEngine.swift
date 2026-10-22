@@ -20,7 +20,7 @@ struct RepairQuote: Equatable {
         let neutralBefore = try engine.estimatedValue(item: item, definition: definition)
         let neutralAfter = try engine.estimatedValue(item: repaired, definition: definition)
         let serviceBasis = max(.zero, try neutralAfter.subtracting(neutralBefore))
-        cost = try serviceBasis.scaled(byBasisPoints: labor).adding(Money(minorUnits: 8_000))
+        cost = try serviceBasis.scaled(byBasisPoints: labor).adding(Money(minorUnits: 400))
     }
 }
 

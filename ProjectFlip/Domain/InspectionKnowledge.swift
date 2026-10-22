@@ -20,7 +20,7 @@ struct InspectionKnowledge: Codable, Equatable, Sendable {
         experience[category.rawValue] = min(1_000_000, self.points(in: category) + points)
     }
     static func toolCost(for category: ItemCategory) -> Money {
-        Money(minorUnits: category == .cameras ? 50_000 : category == .retro ? 40_000 : 35_000)
+        Money(minorUnits: category == .cameras ? 2_500 : category == .retro ? 2_000 : 1_750)
     }
     func canInspect(_ item: ItemInstance, category: ItemCategory) -> Bool {
         !item.professionallyInspected && (!item.inspected || capability(in: category) > selfInspectionCapabilities[item.id.rawValue, default: 0])

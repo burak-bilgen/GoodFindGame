@@ -6,13 +6,15 @@
       "model": "Arc 2",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 320000
+        "minorUnits": 7000
       },
       "possibleDefects": [
         "drift",
         "damagedPort"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-1",
@@ -20,13 +22,15 @@
       "model": "Arc 4",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 780000
+        "minorUnits": 32000
       },
       "possibleDefects": [
         "overheating",
         "storageFailure"
       ],
-      "artSymbol": "gamecontroller.fill"
+      "artSymbol": "gamecontroller.fill",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-2",
@@ -34,13 +38,15 @@
       "model": "Pebble",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 240000
+        "minorUnits": 4500
       },
       "possibleDefects": [
         "drift",
         "damagedPort"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-3",
@@ -48,13 +54,15 @@
       "model": "Vista",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 520000
+        "minorUnits": 12000
       },
       "possibleDefects": [
         "damagedPort",
         "overheating"
       ],
-      "artSymbol": "display"
+      "artSymbol": "display",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-4",
@@ -62,13 +70,15 @@
       "model": "Echo",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 160000
+        "minorUnits": 4000
       },
       "possibleDefects": [
         "damagedPort",
         "wirelessFault"
       ],
-      "artSymbol": "headphones"
+      "artSymbol": "headphones",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-5",
@@ -76,13 +86,15 @@
       "model": "Pulse",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 210000
+        "minorUnits": 8500
       },
       "possibleDefects": [
         "damagedPort",
         "overheating"
       ],
-      "artSymbol": "hifispeaker"
+      "artSymbol": "hifispeaker",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-6",
@@ -90,13 +102,15 @@
       "model": "Dock 3",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 180000
+        "minorUnits": 5500
       },
       "possibleDefects": [
         "storageFailure",
         "damagedPort"
       ],
-      "artSymbol": "externaldrive"
+      "artSymbol": "externaldrive",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-7",
@@ -104,13 +118,15 @@
       "model": "Cove",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 640000
+        "minorUnits": 24000
       },
       "possibleDefects": [
         "noisyFan",
         "storageFailure"
       ],
-      "artSymbol": "desktopcomputer"
+      "artSymbol": "desktopcomputer",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-8",
@@ -118,13 +134,15 @@
       "model": "Arc Mini",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 410000
+        "minorUnits": 14000
       },
       "possibleDefects": [
         "drift",
         "overheating"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-9",
@@ -132,13 +150,15 @@
       "model": "Vista Pro",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 920000
+        "minorUnits": 28000
       },
       "possibleDefects": [
         "overheating",
         "damagedPort"
       ],
-      "artSymbol": "display"
+      "artSymbol": "display",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-10",
@@ -146,13 +166,15 @@
       "model": "Glide S",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 290000
+        "minorUnits": 6000
       },
       "possibleDefects": [
         "drift",
         "batteryWear"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-11",
@@ -160,13 +182,15 @@
       "model": "Trace 80",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 560000
+        "minorUnits": 32000
       },
       "possibleDefects": [
         "screenBurnIn",
         "damagedPort"
       ],
-      "artSymbol": "display"
+      "artSymbol": "display",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-12",
@@ -174,13 +198,15 @@
       "model": "Relay",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 190000
+        "minorUnits": 4500
       },
       "possibleDefects": [
         "wirelessFault",
         "overheating"
       ],
-      "artSymbol": "hifispeaker"
+      "artSymbol": "hifispeaker",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-13",
@@ -188,13 +214,15 @@
       "model": "Wisp",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 330000
+        "minorUnits": 11000
       },
       "possibleDefects": [
         "batteryWear",
         "wirelessFault"
       ],
-      "artSymbol": "headphones"
+      "artSymbol": "headphones",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-14",
@@ -202,13 +230,15 @@
       "model": "Breeze",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 720000
+        "minorUnits": 45000
       },
       "possibleDefects": [
         "noisyFan",
         "storageFailure"
       ],
-      "artSymbol": "desktopcomputer"
+      "artSymbol": "desktopcomputer",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "gaming-15",
@@ -216,13 +246,15 @@
       "model": "Coda",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 380000
+        "minorUnits": 19000
       },
       "possibleDefects": [
         "screenBurnIn",
         "batteryWear"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-16",
@@ -230,13 +262,15 @@
       "model": "Stave",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 260000
+        "minorUnits": 7500
       },
       "possibleDefects": [
         "storageFailure",
         "damagedPort"
       ],
-      "artSymbol": "externaldrive"
+      "artSymbol": "externaldrive",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-17",
@@ -244,13 +278,15 @@
       "model": "Driftwood",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 480000
+        "minorUnits": 16000
       },
       "possibleDefects": [
         "drift",
         "wirelessFault"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "gaming-18",
@@ -258,13 +294,15 @@
       "model": "Arc Desk",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 850000
+        "minorUnits": 52000
       },
       "possibleDefects": [
         "overheating",
         "noisyFan"
       ],
-      "artSymbol": "desktopcomputer"
+      "artSymbol": "desktopcomputer",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "gaming-19",
@@ -272,13 +310,15 @@
       "model": "Trace Studio",
       "category": "gaming",
       "baseValue": {
-        "minorUnits": 1150000
+        "minorUnits": 82000
       },
       "possibleDefects": [
         "screenBurnIn",
         "damagedPort"
       ],
-      "artSymbol": "display"
+      "artSymbol": "display",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "cameras-0",
@@ -286,14 +326,16 @@
       "model": "Luma 3",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 490000
+        "minorUnits": 24000
       },
       "possibleDefects": [
         "shutterWear",
         "sensorDamage",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-1",
@@ -301,14 +343,16 @@
       "model": "Roam 2",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 340000
+        "minorUnits": 17000
       },
       "possibleDefects": [
         "lensScratch",
         "autofocusFault",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera.fill"
+      "artSymbol": "camera.fill",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-2",
@@ -316,14 +360,16 @@
       "model": "Luma 8",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 980000
+        "minorUnits": 65000
       },
       "possibleDefects": [
         "sensorDamage",
         "shutterWear",
         "stabilizationFault"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "cameras-3",
@@ -331,14 +377,16 @@
       "model": "Crest 7",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 1220000
+        "minorUnits": 98000
       },
       "possibleDefects": [
         "sensorDamage",
         "autofocusFault",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera.fill"
+      "artSymbol": "camera.fill",
+      "valueTier": "premium",
+      "positioning": "professional"
     },
     {
       "id": "cameras-4",
@@ -346,14 +394,16 @@
       "model": "Field S",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 610000
+        "minorUnits": 38000
       },
       "possibleDefects": [
         "shutterWear",
         "lensFungus",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-5",
@@ -361,14 +411,16 @@
       "model": "Studio R",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 1680000
+        "minorUnits": 145000
       },
       "possibleDefects": [
         "sensorDamage",
         "apertureStuck",
         "stabilizationFault"
       ],
-      "artSymbol": "camera.fill"
+      "artSymbol": "camera.fill",
+      "valueTier": "premium",
+      "positioning": "professional"
     },
     {
       "id": "cameras-6",
@@ -376,14 +428,16 @@
       "model": "Dawn 4",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 420000
+        "minorUnits": 21000
       },
       "possibleDefects": [
         "lensScratch",
         "shutterWear",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-7",
@@ -391,14 +445,16 @@
       "model": "Roam Pocket",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 270000
+        "minorUnits": 13000
       },
       "possibleDefects": [
         "lensScratch",
         "autofocusFault",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera.fill"
+      "artSymbol": "camera.fill",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-8",
@@ -406,14 +462,16 @@
       "model": "Focal 35",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 320000
+        "minorUnits": 14000
       },
       "possibleDefects": [
         "lensFungus",
         "lensScratch",
         "apertureStuck"
       ],
-      "artSymbol": "camera.aperture"
+      "artSymbol": "camera.aperture",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-9",
@@ -421,14 +479,16 @@
       "model": "Focal 80",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 570000
+        "minorUnits": 26000
       },
       "possibleDefects": [
         "autofocusFault",
         "stabilizationFault",
         "lensScratch"
       ],
-      "artSymbol": "camera.aperture"
+      "artSymbol": "camera.aperture",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-10",
@@ -436,14 +496,16 @@
       "model": "Focal 24",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 240000
+        "minorUnits": 11000
       },
       "possibleDefects": [
         "lensFungus",
         "apertureStuck",
         "lensScratch"
       ],
-      "artSymbol": "camera.aperture"
+      "artSymbol": "camera.aperture",
+      "valueTier": "budget",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-11",
@@ -451,14 +513,16 @@
       "model": "Field Zoom",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 760000
+        "minorUnits": 45000
       },
       "possibleDefects": [
         "stabilizationFault",
         "autofocusFault",
         "lensFungus"
       ],
-      "artSymbol": "camera.aperture"
+      "artSymbol": "camera.aperture",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "cameras-12",
@@ -466,14 +530,16 @@
       "model": "Crest Mono",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 870000
+        "minorUnits": 62000
       },
       "possibleDefects": [
         "sensorDamage",
         "shutterWear",
         "cameraBatteryWear"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "enthusiast",
+      "positioning": "enthusiast"
     },
     {
       "id": "cameras-13",
@@ -481,14 +547,16 @@
       "model": "Dawn Travel",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 530000
+        "minorUnits": 28000
       },
       "possibleDefects": [
         "lensScratch",
         "cameraBatteryWear",
         "autofocusFault"
       ],
-      "artSymbol": "camera.fill"
+      "artSymbol": "camera.fill",
+      "valueTier": "mainstream",
+      "positioning": "everyday"
     },
     {
       "id": "cameras-14",
@@ -496,14 +564,16 @@
       "model": "Luma Studio",
       "category": "cameras",
       "baseValue": {
-        "minorUnits": 1490000
+        "minorUnits": 125000
       },
       "possibleDefects": [
         "shutterWear",
         "sensorDamage",
         "stabilizationFault"
       ],
-      "artSymbol": "camera"
+      "artSymbol": "camera",
+      "valueTier": "premium",
+      "positioning": "professional"
     },
     {
       "id": "retro-0",
@@ -511,14 +581,16 @@
       "model": "Chapter 8",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 260000
+        "minorUnits": 11000
       },
       "possibleDefects": [
         "replacementParts",
         "regionMismatch",
         "corrosion"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-1",
@@ -526,14 +598,16 @@
       "model": "Ember Pocket",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 390000
+        "minorUnits": 18000
       },
       "possibleDefects": [
         "replacementParts",
         "labelDamage",
         "corrosion"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-2",
@@ -541,14 +615,16 @@
       "model": "Chapter 16",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 620000
+        "minorUnits": 24000
       },
       "possibleDefects": [
         "counterfeitBoard",
         "regionMismatch",
         "boxWear"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-3",
@@ -556,14 +632,16 @@
       "model": "Tile Runner",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 170000
+        "minorUnits": 3500
       },
       "possibleDefects": [
         "missingManual",
         "labelDamage",
         "counterfeitBoard"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-4",
@@ -571,14 +649,16 @@
       "model": "Cloud Caravan",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 240000
+        "minorUnits": 5500
       },
       "possibleDefects": [
         "missingManual",
         "regionMismatch",
         "boxWear"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-5",
@@ -586,14 +666,16 @@
       "model": "Silver Orchard",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 440000
+        "minorUnits": 9500
       },
       "possibleDefects": [
         "incompleteSet",
         "replacementParts",
         "boxWear"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-6",
@@ -601,14 +683,16 @@
       "model": "Lullaby Tape",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 150000
+        "minorUnits": 3000
       },
       "possibleDefects": [
         "labelDamage",
         "boxWear",
         "incompleteSet"
       ],
-      "artSymbol": "radio"
+      "artSymbol": "radio",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-7",
@@ -616,14 +700,16 @@
       "model": "Daylight Volume",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 210000
+        "minorUnits": 4500
       },
       "possibleDefects": [
         "missingManual",
         "labelDamage",
         "boxWear"
       ],
-      "artSymbol": "opticaldisc"
+      "artSymbol": "opticaldisc",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-8",
@@ -631,14 +717,16 @@
       "model": "Chapter Color",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 780000
+        "minorUnits": 36000
       },
       "possibleDefects": [
         "replacementParts",
         "corrosion",
         "regionMismatch"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-9",
@@ -646,14 +734,16 @@
       "model": "Ember Desk",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 540000
+        "minorUnits": 26000
       },
       "possibleDefects": [
         "counterfeitBoard",
         "corrosion",
         "replacementParts"
       ],
-      "artSymbol": "tv"
+      "artSymbol": "tv",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-10",
@@ -661,14 +751,16 @@
       "model": "Harbor Tales",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 310000
+        "minorUnits": 7000
       },
       "possibleDefects": [
         "missingManual",
         "incompleteSet",
         "boxWear"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "budget",
+      "positioning": "archive"
     },
     {
       "id": "retro-11",
@@ -676,14 +768,16 @@
       "model": "Clockwork Garden",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 680000
+        "minorUnits": 14000
       },
       "possibleDefects": [
         "counterfeitBoard",
         "incompleteSet",
         "labelDamage"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-12",
@@ -691,14 +785,16 @@
       "model": "Chapter Archive",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 980000
+        "minorUnits": 48000
       },
       "possibleDefects": [
         "replacementParts",
         "regionMismatch",
         "boxWear"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-13",
@@ -706,14 +802,16 @@
       "model": "Paper Lantern Set",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 520000
+        "minorUnits": 12000
       },
       "possibleDefects": [
         "incompleteSet",
         "labelDamage",
         "missingManual"
       ],
-      "artSymbol": "rectangle.stack"
+      "artSymbol": "rectangle.stack",
+      "valueTier": "collector",
+      "positioning": "archive"
     },
     {
       "id": "retro-14",
@@ -721,14 +819,16 @@
       "model": "Ember Heritage",
       "category": "retro",
       "baseValue": {
-        "minorUnits": 1230000
+        "minorUnits": 68000
       },
       "possibleDefects": [
         "counterfeitBoard",
         "replacementParts",
         "corrosion"
       ],
-      "artSymbol": "gamecontroller"
+      "artSymbol": "gamecontroller",
+      "valueTier": "collector",
+      "positioning": "archive"
     }
   ]
 }

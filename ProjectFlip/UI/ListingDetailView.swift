@@ -4,6 +4,7 @@ struct ListingDetailView: View {
     let store: GameStore
     let listingID: ListingID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
@@ -17,7 +18,7 @@ struct ListingDetailView: View {
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
                         Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
                         HStack(alignment: .firstTextBaseline) {
-                            Text(listing.askingPrice.formatted(locale: locale)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
+                            Text(listing.askingPrice.formatted(locale: locale, market: market)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
                             Spacer(minLength: 0)
                             Image(systemName: "tag.fill").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
                         }
@@ -25,7 +26,7 @@ struct ListingDetailView: View {
                             if lifecycle.priceDroppedAt != nil {
                                 HStack {
                                     Label("listing.priceDrop", systemImage: "arrow.down.right").foregroundStyle(GameStyle.gain)
-                                    Text(lifecycle.initialAskingPrice.formatted(locale: locale)).strikethrough().foregroundStyle(.secondary)
+                                    Text(lifecycle.initialAskingPrice.formatted(locale: locale, market: market)).strikethrough().foregroundStyle(.secondary)
                                 }.font(.subheadline)
                             }
                             if listing.available { DeadlineView(store: store, target: lifecycle.expiresAt, titleKey: "listing.expires") }
@@ -117,17 +118,18 @@ struct SellerSummary: View {
     let seller: SellerProfile
     var playerTradeCount = 0
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
                 TraderPortrait(identity: seller.identityIndex)
-                Text(GameText.string("npc.name.\(seller.identityIndex % 10)", locale: locale)).font(.headline)
+                Text(GameText.marketPerson("name", index: seller.identityIndex, market: market, locale: locale)).font(.headline)
                 Spacer()
                 Label((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)), systemImage: "star.fill").font(.caption.bold())
                     .accessibilityLabel(Text("seller.rating \((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)))"))
             }
             Text("seller.trades \(seller.tradeCount)").font(.caption).foregroundStyle(.secondary)
-            Text(GameText.string("npc.city.\(seller.identityIndex % 10)", locale: locale)).font(.caption).foregroundStyle(.secondary)
+            Text(GameText.marketPerson("city", index: seller.identityIndex, market: market, locale: locale)).font(.caption).foregroundStyle(.secondary)
             if playerTradeCount > 0 { Text("seller.history.trades \(playerTradeCount)").font(.caption).foregroundStyle(.secondary) }
         }
     }

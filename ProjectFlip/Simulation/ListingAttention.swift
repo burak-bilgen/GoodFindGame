@@ -21,7 +21,7 @@ struct ListingAttention {
         let fraction = upper.price > lower.price ? (ratio - lower.price) / (upper.price - lower.price) : 0
         let priceFactor = lower.delay + fraction * (upper.delay - lower.delay)
         let audienceFactor = definition.category == .gaming ? 0.9 : definition.category == .cameras ? 1.15 : 1.35
-        delayFactor = priceFactor * audienceFactor * max(0.8, 1 - Double(state.player.reputation - 50) / 250)
+        delayFactor = priceFactor * audienceFactor
         offerChance = Int((lower.chance + fraction * (upper.chance - lower.chance)).rounded())
         views = max(0, Int(Double(random.integer(in: 5...22)) / (priceFactor * audienceFactor)))
         let favoriteDivisor = 3 + 4 * min(1, max(0, (ratio - 1.1) / 0.3))

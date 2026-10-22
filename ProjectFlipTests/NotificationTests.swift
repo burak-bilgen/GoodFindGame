@@ -21,7 +21,7 @@ struct NotificationTests {
         #expect(en[0].route == .conversation(state.market[0].id))
         #expect(en[0].body.contains("Alex accepted"))
         #expect(tr[0].body.contains("Deniz"))
-        #expect(tr[0].body.contains("₺"))
+        #expect(tr[0].body.contains("US$") || tr[0].body.contains("$"))
         #expect(en[0].body != tr[0].body)
         #expect(try en == NotificationPlanner().makePlan(state: state, definitions: definitions, locale: Locale(identifier: "en_US"), now: now.addingTimeInterval(1)))
     }

@@ -11,6 +11,7 @@ struct RootView: View {
     @State private var inbox = NotificationInbox.shared
     @State private var notificationRoute: GameRoute?
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @Environment(\.scenePhase) private var scenePhase
 
     private var waitingBuyerCount: Int {
@@ -57,11 +58,11 @@ struct RootView: View {
                                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
                                                 VStack(alignment: .leading, spacing: 6) {
                                                     Text(definition.displayName(locale: locale)).font(.headline)
-                                                    Text(GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)).font(.subheadline)
+                                                    Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.subheadline)
                                                     if let resale = store.snapshot.playerListings.last(where: { $0.itemID == listing.item.id && [.active, .sold].contains($0.status) }) {
                                                         if resale.status == .sold {
                                                             Label("selling.sold", systemImage: "checkmark.seal.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                                            if let amount = resale.soldPrice { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                            if let amount = resale.soldPrice { Text(amount.formatted(locale: locale, market: market)).font(.caption.bold()) }
                                                         } else {
                                                             Label(resale.offers.last.map { [.pending, .countered].contains($0.status) } == true ? "journey.offerWaiting" : "selling.live", systemImage: "tag.fill")
                                                                 .font(.caption.bold()).foregroundStyle(GameStyle.gain)
@@ -70,7 +71,7 @@ struct RootView: View {
                                                         Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
                                                     } else if let last = conversation.messages.last {
                                                         Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2)
-                                                        if let amount = last.amount { Text(amount.formatted(locale: locale)).font(.caption.bold()) }
+                                                        if let amount = last.amount { Text(amount.formatted(locale: locale, market: market)).font(.caption.bold()) }
                                                     }
                                                 }
                                             }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
@@ -95,6 +96,7 @@ struct RootView: View {
                 }
                 .tabItem { Label("profile.title", systemImage: "person.crop.circle") }.tag(4)
             }
+            .id(store?.snapshot.marketConfiguration.currency)
             .toolbar(.hidden, for: .tabBar)
             if !keyboardVisible { GameDock(selection: $selectedTab, waitingBuyers: waitingBuyerCount) }
         }
@@ -148,6 +150,7 @@ struct RootView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase != .active { store?.perform { try store?.catchUp() } }
         }
+        .environment(\.marketConfiguration, store?.snapshot.marketConfiguration ?? .us)
         .font(.system(.body, design: .rounded))
     }
     private func load() {

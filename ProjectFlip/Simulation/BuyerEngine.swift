@@ -16,7 +16,7 @@ struct BuyerEngine {
         let introduction = state.playerListings.first?.id == listing.id && listing.offers.isEmpty
         var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-\(state.simulationID)-\(listing.id.rawValue)-\(listing.offers.count)-\(state.nextEventSequence)"))
         let archetype = introduction ? BuyerArchetype.cautious : BuyerArchetype.allCases[random.integer(in: 0...(BuyerArchetype.allCases.count - 1))]
-        let reputationFactor = Int64(10_000 + (state.player.reputation - 50) * 10)
+        let reputationFactor = Int64(10_000)
         let premium: Int64 = archetype == .collector && item.condition >= 90 ? 1_100 : 0
         let variation = introduction ? 0 : Int64(random.integer(in: -500...900))
         let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints + variation + premium).scaled(byBasisPoints: reputationFactor)

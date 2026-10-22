@@ -3,6 +3,7 @@ import SwiftUI
 struct InventoryView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
@@ -29,7 +30,7 @@ struct InventoryView: View {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 90, height: 90)
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(definition.displayName(locale: locale)).font(.headline)
-                                    Text(item.purchasePrice.formatted(locale: locale)).foregroundStyle(.secondary)
+                                    Text(item.purchasePrice.formatted(locale: locale, market: market)).foregroundStyle(.secondary)
                                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.caption)
                                 }
                             }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
@@ -45,6 +46,7 @@ struct OwnedItemView: View {
     let store: GameStore
     let itemID: ItemID
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
             ScrollView {
@@ -81,7 +83,7 @@ struct OwnedItemView: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("inspection.professional").font(.headline)
                             Text("inspection.professionalDescription").font(.subheadline).foregroundStyle(.secondary)
-                            Text(InspectionEngine().professionalCost.formatted(locale: locale)).bold()
+                            Text(InspectionEngine().professionalCost.formatted(locale: locale, market: market)).bold()
                             Button("inspection.professionalStart") { store.perform { try store.inspect(itemID: item.id, professionally: true) } }
                                 .buttonStyle(.bordered).accessibilityIdentifier("professionalInspect")
                         }.gameCard()
@@ -89,7 +91,7 @@ struct OwnedItemView: View {
                     NavigationLink("facts.title") { ItemFactsView(store: store, itemID: item.id) }.accessibilityIdentifier("openItemFacts")
                     DisclosureGroup("reveal.details") {
                         VStack(alignment: .leading, spacing: 12) {
-                            LabeledContent("purchase.cost") { Text(item.purchasePrice.formatted(locale: locale)) }
+                            LabeledContent("purchase.cost") { Text(item.purchasePrice.formatted(locale: locale, market: market)) }
                             KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: definition.category)
                             Text("knowledge.inspectionLimit").font(.caption).foregroundStyle(.secondary)
                             NavigationLink("knowledge.open") { KnowledgeView(store: store) }
@@ -106,6 +108,7 @@ struct InspectionReveal: View {
     let item: ItemInstance
     let definition: ItemDefinition
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @GameReduceMotion private var reduceMotion
     @State private var step = 0
     private var presentation: InspectionReportPresentation {
@@ -196,6 +199,7 @@ struct RepairDecision: View {
     let definition: ItemDefinition
     let defect: Defect
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     private var awaitingInspection: Bool {
         store.snapshot.inspectionJobs.contains { $0.itemID == item.id && $0.status == .pending }
     }
@@ -209,12 +213,12 @@ struct RepairDecision: View {
             Text("game.repairChoice").font(.subheadline).foregroundStyle(.secondary)
             switch Result(catching: { try RepairQuote(item: item, definition: definition, defect: defect, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let quote):
-                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale)).bold().foregroundStyle(.primary) }
-                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale, signed: true)).foregroundStyle(.primary) }
+                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale, market: market)).bold().foregroundStyle(.primary) }
+                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale, market: market, signed: true)).foregroundStyle(.primary) }
                 if let difference = try? quote.estimatedRecovery.subtracting(quote.cost) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("repair.marginEstimate").font(.subheadline.weight(.semibold))
-                        Text(difference.formatted(locale: locale, signed: true))
+                        Text(difference.formatted(locale: locale, market: market, signed: true))
                             .font(.system(.largeTitle, design: .rounded, weight: .heavy)).monospacedDigit()
                             .foregroundStyle(difference < .zero ? GameStyle.loss : GameStyle.gain)
                             .accessibilityIdentifier("repairMargin.\(defect.rawValue)")

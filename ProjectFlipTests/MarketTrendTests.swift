@@ -73,7 +73,7 @@ struct MarketTrendTests {
         state.marketCalendar = MarketCalendar(anchor: now, seed: 42, definitions: [definition])
         let calendar = try #require(state.marketCalendar)
         let trend = try calendar.trend(at: 0)
-        let listed = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 280_000), state: state, definitions: definitions, now: now)
+        let listed = try ResaleEngine().create(itemID: item.id, askingPrice: Money(minorUnits: 6_000), state: state, definitions: definitions, now: now)
         let id = listed.playerListings[0].id
         let baseline = try BuyerEngine().generateOffer(listingID: id, state: listed, definitions: definitions, now: now)
         let shifted = try BuyerEngine().generateOffer(listingID: id, state: listed, definitions: definitions, now: trend.startsAt)

@@ -23,8 +23,10 @@ struct GameSnapshot: Codable, Equatable {
     var watchedListingIDs: Set<ListingID> = []
     var notificationPreferences = NotificationPreferences()
     var inspectionKnowledge = InspectionKnowledge()
+    var marketConfiguration = MarketConfiguration.us
+    var economyMigrationNotice = false
 
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge }
+    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice }
     init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
         self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
     }
@@ -51,11 +53,16 @@ struct GameSnapshot: Codable, Equatable {
         marketTrends = try values.decodeIfPresent([MarketTrend].self, forKey: .marketTrends) ?? []
         watchedListingIDs = try values.decodeIfPresent(Set<ListingID>.self, forKey: .watchedListingIDs) ?? []
         inspectionKnowledge = try values.decodeIfPresent(InspectionKnowledge.self, forKey: .inspectionKnowledge) ?? InspectionKnowledge()
+        marketConfiguration = try values.decodeIfPresent(MarketConfiguration.self, forKey: .marketConfiguration) ?? .us
+        economyMigrationNotice = try values.decodeIfPresent(Bool.self, forKey: .economyMigrationNotice) ?? false
         notificationPreferences = try values.decodeIfPresent(NotificationPreferences.self, forKey: .notificationPreferences) ?? NotificationPreferences()
     }
 
-    static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now) throws -> Self {
-        Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now), generation: seed)
+    static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now, marketConfiguration: MarketConfiguration = .us) throws -> Self {
+        var state = Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now), generation: seed)
+        state.marketConfiguration = marketConfiguration
+        state.market = try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now, market: state)
+        return state
     }
 }
 
@@ -69,7 +76,27 @@ struct SaveRepository {
 
     func load() throws -> GameSnapshot? {
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
-        let state = try JSONDecoder().decode(GameSnapshot.self, from: Data(contentsOf: url))
+        let original = try Data(contentsOf: url)
+        var object = try JSONSerialization.jsonObject(with: original) as? [String: Any] ?? [:]
+        if object["marketConfiguration"] == nil {
+            // One explicit rebase from legacy arbitrary credits. Preserve relative cash,
+            // commitments and receipt arithmetic; keep the complete original save.
+            let backup = url.appendingPathExtension("pre-economy-v2.json")
+            if !FileManager.default.fileExists(atPath: backup.path) { try original.write(to: backup, options: .atomic) }
+            func rebase(_ value: Any) -> Any {
+                if let dict = value as? [String: Any] {
+                    if dict.count == 1, let units = dict["minorUnits"] as? NSNumber { return ["minorUnits": units.int64Value / 20] }
+                    return dict.mapValues(rebase)
+                }
+                if let array = value as? [Any] { return array.map(rebase) }
+                return value
+            }
+            object = rebase(object) as? [String: Any] ?? [:]
+            object["marketConfiguration"] = ["version": 1, "region": "unitedStates", "currency": "USD"]
+            object["economyMigrationNotice"] = true
+        }
+        let state = try JSONDecoder().decode(GameSnapshot.self, from: JSONSerialization.data(withJSONObject: object))
+        try state.marketConfiguration.validate()
         guard state.schemaVersion == 1, state.player.cash >= .zero,
               Set(state.market.map(\.id)).count == state.market.count,
               Set(state.events.map(\.id)).count == state.events.count,

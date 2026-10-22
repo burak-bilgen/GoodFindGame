@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     @AppStorage("gameSoundEnabled") private var sounds = false
     var body: some View {
         ScrollView {
@@ -13,12 +14,13 @@ struct ProfileView: View {
                 }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
                 VStack(alignment: .leading, spacing: 14) {
                     Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
-                    Text(store.snapshot.player.cash.formatted(locale: locale)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
+                    Text(store.snapshot.player.cash.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
                     Divider().overlay(GameStyle.line)
                     LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
                 }.gameCard()
                 NavigationLink { KnowledgeView(store: store) } label: { GameMenuRow(titleKey: "knowledge.title", symbol: "wrench.and.screwdriver.fill") }.buttonStyle(.plain).accessibilityIdentifier("openKnowledge")
                 NavigationLink { TradeHistoryView(store: store) } label: { GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openTradeHistory")
+                NavigationLink { MarketSettingsView(store: store) } label: { GameMenuRow(titleKey: "region.title", symbol: "globe") }.buttonStyle(.plain).accessibilityIdentifier("marketSettings")
                 NavigationLink { NotificationSettingsView(store: store) } label: { GameMenuRow(titleKey: "notifications.settings", symbol: "bell.badge.fill") }.buttonStyle(.plain).accessibilityIdentifier("notificationSettings")
                 VStack(alignment: .leading, spacing: 10) {
                     Toggle("feel.sounds", isOn: $sounds)
@@ -35,6 +37,7 @@ struct ProfileView: View {
 struct TradeHistoryView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         GameList {
             switch Result(catching: { try TradeLedger.records(from: store.snapshot) }) {
@@ -66,8 +69,9 @@ struct TradeHistoryView: View {
 struct ProfitAmount: View {
     let amount: Money
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
-        Label(amount.formatted(locale: locale, signed: true), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
+        Label(amount.formatted(locale: locale, market: market, signed: true), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
             .foregroundStyle(amount >= .zero ? Color("AccentColor") : Color("LossColor")).monospacedDigit()
     }
 }
@@ -76,16 +80,17 @@ struct TradeReceiptView: View {
     let record: TradeRecord
     var item: ItemInstance?
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 TradePayoff(record: record, item: item)
                 DisclosureGroup("result.costs") {
                     VStack(spacing: 12) {
-                        LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale)) }
-                        LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale)) }
-                        LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale)) }
-                        LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale)) }
+                        LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale, market: market)) }
+                        LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale, market: market)) }
+                        LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale, market: market)) }
+                        LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale, market: market)) }
                         Text("trade.explanation").font(.caption).foregroundStyle(.secondary)
                     }.padding(.top, 12)
                 }.gameCard()

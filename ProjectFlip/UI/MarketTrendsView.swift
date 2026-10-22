@@ -3,6 +3,7 @@ import SwiftUI
 struct MarketTrendsView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     private var now: Date { store.snapshot.lastSimulationAt ?? .now }
     var body: some View {
         GameList {
@@ -37,6 +38,7 @@ struct MarketTrendDetailView: View {
     let store: GameStore
     let trend: MarketTrend
     @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
     var body: some View {
         GameList {
             Section {

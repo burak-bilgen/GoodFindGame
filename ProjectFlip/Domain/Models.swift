@@ -54,6 +54,8 @@ struct ItemDefinition: Codable, Identifiable, Equatable, Sendable {
     let baseValue: Money
     let possibleDefects: [Defect]
     let artSymbol: String
+    var valueTier: ValueTier? = nil
+    var positioning: String? = nil
     var name: String { "\(brand) \(model)" }
 }
 
@@ -134,6 +136,7 @@ struct SeedContent: Codable, Sendable {
               ItemCategory.allCases.allSatisfy({ category in items.contains { $0.category == category } }),
               items.allSatisfy({ item in
                   !item.id.isEmpty && !item.brand.isEmpty && !item.model.isEmpty && !item.artSymbol.isEmpty &&
+                  (item.valueTier?.contains(item.baseValue) ?? true) &&
                   item.baseValue > .zero && item.baseValue <= GameBalanceConfig.current.maximumTransactionAmount &&
                   !item.possibleDefects.isEmpty && Set(item.possibleDefects).count == item.possibleDefects.count &&
                   item.possibleDefects.allSatisfy { $0.category == item.category }

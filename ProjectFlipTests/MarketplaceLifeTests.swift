@@ -13,7 +13,7 @@ struct MarketplaceLifeTests {
     @Test func aNewListingStartsWithoutInventedTraffic() throws {
         let definitions = try SeedContent.load().items
         let original = try ResaleTests.inspectedState()
-        let state = try ResaleEngine().create(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 180_000), state: original, definitions: definitions, now: now)
+        let state = try ResaleEngine().create(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 3_900), state: original, definitions: definitions, now: now)
         #expect(state.playerListings[0].views == 0)
         #expect(state.playerListings[0].favorites == 0)
         #expect(state.playerListings[0].offers.isEmpty)
@@ -25,7 +25,7 @@ extension MarketplaceLifeTests {
         let definitions = try SeedContent.load().items
         let original = try ResaleTests.inspectedState()
         let actions = SimulationActions(timing: .production)
-        let state = try actions.publish(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 180_000), state: original, definitions: definitions, now: now)
+        let state = try actions.publish(itemID: original.player.inventory[0].id, askingPrice: Money(minorUnits: 3_900), state: original, definitions: definitions, now: now)
         #expect(state.playerListings[0].views == 0 && state.playerListings[0].offers.isEmpty)
         let resolver = EventResolver(timing: .production)
         let before = try resolver.resolve(state, now: now.addingTimeInterval(0.5), definitions: definitions).state
@@ -153,7 +153,7 @@ extension MarketplaceLifeTests {
         let expert = try ValueEstimate(item: item, definition: definition, knowledge: knowledge)
         #expect(expert.lower < expert.upper)
         #expect(expert.upper.minorUnits - expert.lower.minorUnits < novice.upper.minorUnits - novice.lower.minorUnits)
-        #expect(expert.lower.minorUnits % 5_000 == 0 && expert.upper.minorUnits % 5_000 == 0)
+        #expect(expert.lower.minorUnits % 500 == 0 && expert.upper.minorUnits % 500 == 0)
     }
 }
 
