@@ -11106,6 +11106,510 @@
           }
         }
       }
+    },
+    "clients.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "People who know your name"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adını bilenler"
+          }
+        }
+      }
+    },
+    "clients.eyebrow": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR CONTACTS"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BAĞLANTILARIN"
+          }
+        }
+      }
+    },
+    "clients.principle": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two buyers. A shared history. Hunt at your own pace; requests have no offline expiry. One accepted request at a time."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İki alıcı. Ortak bir geçmiş. Kendi hızında ara; talepler çevrimdışıyken sona ermez. Aynı anda bir talep kabul edebilirsin."
+          }
+        }
+      }
+    },
+    "clients.condition": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observed condition: at least %lld / 100"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İncelenen kondisyon: en az %lld / 100"
+          }
+        }
+      }
+    },
+    "clients.reportRequired": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full expert report required, with no unresolved faults. Payment replaces a normal sale; no extra cash bonus."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giderilmemiş kusuru olmayan, tam uzman raporlu ürün gerekir. Ödeme normal satışın yerini alır; ek nakit bonusu yoktur."
+          }
+        }
+      }
+    },
+    "clients.originalBox": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Original packaging required; honest wear is welcome."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal kutu gerekir; olağan aşınma kabul edilir."
+          }
+        }
+      }
+    },
+    "clients.originalParts": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verified original parts and authentic board required."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orijinal parçalar ve özgün kart doğrulanmış olmalı."
+          }
+        }
+      }
+    },
+    "clients.accepted": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are sourcing this request"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu talep için ürün arıyorsun"
+          }
+        }
+      }
+    },
+    "clients.supplyFor": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supply for %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ karşılığında teslim et"
+          }
+        }
+      }
+    },
+    "clients.noMatch": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing ready yet. Investigate a suitable item, inspect it fully, and decide whether the margin works."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz hazır ürün yok. Uygun ürünü araştır, tam incelet ve kazanç payını değerlendir."
+          }
+        }
+      }
+    },
+    "clients.pause": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause this search"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu aramayı duraklat"
+          }
+        }
+      }
+    },
+    "clients.accept": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take the request"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Talebi kabul et"
+          }
+        }
+      }
+    },
+    "clients.models": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suitable models and substitutes"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygun modeller ve alternatifler"
+          }
+        }
+      }
+    },
+    "clients.complete": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A trusted connection"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenilir bir bağ"
+          }
+        }
+      }
+    },
+    "client.rowan.role": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retro collector"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retro koleksiyoncusu"
+          }
+        }
+      }
+    },
+    "client.jules.role": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photographer & lens enthusiast"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotoğrafçı ve objektif meraklısı"
+          }
+        }
+      }
+    },
+    "client.rowan.name.unitedStates": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rowan"
+          }
+        }
+      }
+    },
+    "client.rowan.name.turkey": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ece"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ece"
+          }
+        }
+      }
+    },
+    "client.jules.name.unitedStates": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jules"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jules"
+          }
+        }
+      }
+    },
+    "client.jules.name.turkey": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baran"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baran"
+          }
+        }
+      }
+    },
+    "client.rowan.story.0": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I want a handheld I can actually enjoy. Find a checked, clean example—not a sealed trophy."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerçekten oynayabileceğim bir el konsolu istiyorum. Kapalı kutu bir gösteriş ürünü değil, incelenmiş temiz bir örnek bul."
+          }
+        }
+      }
+    },
+    "client.rowan.story.1": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That first find earned its place. Now I want the original box too; the little details tell its story."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlk bulduğun ürün yerini hak etti. Şimdi orijinal kutusunu da istiyorum; küçük ayrıntılar onun hikâyesini anlatıyor."
+          }
+        }
+      }
+    },
+    "client.rowan.story.2": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You know what I collect now. Find an exceptional original Chapter example for the centerpiece. No invented rarity—just the right piece."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artık ne topladığımı biliyorsun. Koleksiyonun merkezi için çok temiz, özgün bir Chapter bul. Uydurma nadirlik değil, doğru parça."
+          }
+        }
+      }
+    },
+    "client.jules.story.0": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My backup camera needs replacing. Find an inspected body with plenty of life left."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedek fotoğraf makinemi değiştirmem gerekiyor. İncelenmiş, hâlâ iyi durumda bir gövde bul."
+          }
+        }
+      }
+    },
+    "client.jules.story.1": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The camera worked out. This time I need clean optics; a good deal means nothing if the glass is wrong."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Makine işimi gördü. Bu kez temiz optik lazım; camda sorun varsa iyi fiyatın anlamı kalmaz."
+          }
+        }
+      }
+    },
+    "client.jules.story.2": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I trust your eye for equipment. Source a premium body for a demanding shoot, with a full report."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekipman konusundaki gözüne güveniyorum. Zorlu bir çekim için tam raporlu, üst düzey bir gövde bul."
+          }
+        }
+      }
+    },
+    "client.rowan.ending": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You helped build a collection with a history. Collector’s confidant is now part of your story."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçmişi olan bir koleksiyon kurmama yardım ettin. Artık bir koleksiyoncunun sırdaşısın."
+          }
+        }
+      }
+    },
+    "client.jules.ending": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You became the dealer I call before an important job. That is worth more than one good sale."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önemli bir iş öncesinde aradığım satıcı oldun. Bunun değeri tek bir iyi satıştan büyük."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

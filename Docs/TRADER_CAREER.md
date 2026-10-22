@@ -7,3 +7,11 @@ Budget/mainstream and affordable collector stock form the local market; enthusia
 Original knowledge ranks remain earned at 0/3/8/16. A fourth specialist endorsement requires rank 3 plus six distinct studied models and three diagnosed fault types in that category. Rechecks add no repeat XP. The casebook records only earned findings, including expert reports; repeating cheap clean items cannot satisfy diagnostic breadth. The endorsement narrows uncertain appraisal and public reference ranges; it never reveals a seller's hidden truth. Old saves keep acquired capabilities; optional casebooks default empty, not fabricated retroactive diagnoses. Maximum capability expands to eight to represent rank four plus tools.
 
 Client chains, display ownership and recovery are implemented in subsequent focused commits of this milestone. Game Center, ads, auctions and variant expansion remain deferred.
+
+## Recurring clients
+
+Two contacts remember three authored steps each: Rowan/Ece (retro) and Jules/Baran (cameras). Their names follow the saved market, not language changes. One request can be accepted at a time. Requests do not expire offline; pausing yields no reward or punishment. Later chapters require Known/Trusted status. Final retro request asks for a pristine verified original standard edition, not an unimplemented rare variant.
+
+Delivery requires a full earned expert report, the stated observed condition, no unresolved faults, and original packaging/parts evidence when requested. The engine never rejects an item for hidden truth while accepting inadequate evidence. It refuses items committed to a live sale or report. Matching definitions have explicit substitutes. Leads reference actual current stock; requests never inject a cheap matching listing.
+
+Payout is 102% of observed current regional fair value, independent of acquisition cost/trust. It replaces ordinary sale proceeds; there is no extra quest purse. Settlement records one immutable client sale, removes the item once, credits trust and advances the remembered chapter atomically. Completed chains award recognition/story, not permanent income perks. The six requests form a finite initial career arc; additional months of content are not claimed.

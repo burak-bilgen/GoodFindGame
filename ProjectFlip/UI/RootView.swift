@@ -42,6 +42,7 @@ struct RootView: View {
                         ScrollView {
                             LazyVStack(alignment: .leading, spacing: 16) {
                                 GameStageBanner(titleKey: "messages.title", eyebrowKey: "game.inbox", symbol: "bubble.left.and.bubble.right.fill")
+                                NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("openClients")
                                 if store.snapshot.conversations.isEmpty {
                                     VStack(alignment: .leading, spacing: 16) {
                                         Image(systemName: "bubble.left.and.bubble.right.fill").font(.largeTitle).foregroundStyle(GameStyle.gain).accessibilityHidden(true)

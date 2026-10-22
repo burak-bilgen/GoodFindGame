@@ -133,6 +133,7 @@ struct BuyerEngine {
         next.playerListings[index].offers[offerIndex].amount = amount
         next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.accepted", fromPlayer: false, amount: amount))
         next.player.inventory.remove(at: itemIndex)
+        CareerEngine.refresh(&next)
         return next
     }
 }

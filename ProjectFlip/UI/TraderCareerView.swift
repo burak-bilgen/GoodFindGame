@@ -32,6 +32,7 @@ struct TraderCareerView: View {
                         Text(GameText.format("career.trust", locale: locale, store.snapshot.player.reputation)).font(.subheadline)
                     }
                 }.gameCard(accent: GameStyle.amber)
+                NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("careerClients")
                 Text("career.principle").font(.subheadline).foregroundStyle(.secondary)
                 ForEach(CareerTier.allCases, id: \.self) { tier in
                     let earned = store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue >= tier.rawValue

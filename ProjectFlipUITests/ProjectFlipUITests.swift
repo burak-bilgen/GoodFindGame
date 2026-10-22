@@ -1365,4 +1365,24 @@ final class ProjectFlipUITests: XCTestCase {
         element.tap()
     }
 
+    @MainActor func testRecurringClientEnglish() { verifyClientContinuity(language: "en") }
+    @MainActor func testRecurringClientTurkish() { verifyClientContinuity(language: "tr") }
+
+    @MainActor private func verifyClientContinuity(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
+        app.launch()
+        app.buttons["gameTab.1"].tap()
+        tap(app.buttons["openClients"], in: app)
+        tap(app.buttons["acceptClient.rowan"], in: app)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Bu talep için ürün arıyorsun" : "You are sourcing this request"].exists)
+        capture("recurring client: \(language)", app: app)
+        app.terminate(); app.launch()
+        app.buttons["gameTab.1"].tap()
+        tap(app.buttons["openClients"], in: app)
+        XCTAssertFalse(app.buttons["acceptClient.rowan"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Ece" : "Rowan"].exists)
+    }
+
 }
