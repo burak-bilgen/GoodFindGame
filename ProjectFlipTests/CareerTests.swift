@@ -41,4 +41,19 @@ struct CareerTests {
         #expect(knowledge.level(in: .gaming) == 0)
         try knowledge.validate()
     }
+    @Test func existingFirmAgreementSurvivesTheNewCareerGate() throws {
+        let definitions = try SeedContent.load().items
+        var original = try GameSnapshot.fresh(definitions: definitions)
+        let listing = original.market[7]
+        var agreement = NegotiationState(listingID: listing.id, patience: 100)
+        agreement.agreedPrice = listing.askingPrice
+        original.conversations = [agreement]
+        var raw = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(original)) as? [String: Any])
+        raw.removeValue(forKey: "career")
+        let legacy = try JSONDecoder().decode(GameSnapshot.self, from: JSONSerialization.data(withJSONObject: raw))
+        #expect(legacy.career.legacyAgreements?.contains(listing.id) == true)
+        let purchased = try SimulationActions(timing: .instant).purchase(listingID: listing.id, state: legacy, now: .now)
+        #expect(purchased.shipments.count == 1)
+    }
+
 }

@@ -37,7 +37,7 @@ struct ClientDefinition: Identifiable {
 
 enum ItemTransfer {
     static func available(_ id: ItemID, state: GameSnapshot) -> Bool {
-        !state.collections.displayed.contains(id) &&
+        state.recovery.itemID != id && !state.collections.displayed.contains(id) &&
         !state.playerListings.contains { $0.itemID == id && $0.status == .active } &&
         !state.inspectionJobs.contains { $0.itemID == id && $0.status == .pending }
     }

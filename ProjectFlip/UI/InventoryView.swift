@@ -55,6 +55,10 @@ struct OwnedItemView: View {
                         DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).aspectRatio(1, contentMode: .fit)
                     }
                     Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
+                    if item.id == store.snapshot.recovery.itemID {
+                        Text("recovery.consigned").font(.headline).foregroundStyle(GameStyle.amber)
+                        if item.inspected { NavigationLink("recovery.finish") { RecoveryDeskView(store: store) }.buttonStyle(GameButton()) }
+                    }
                     if item.inspected && CollectionDefinition.all.contains(where: { $0.models.contains(item.definitionID) }) {
                         Button(store.snapshot.collections.displayed.contains(item.id) ? "collections.release" : "collections.display") {
                             store.perform {
@@ -74,7 +78,7 @@ struct OwnedItemView: View {
                     if item.inspected {
                         InspectionReveal(store: store, item: item, definition: definition)
                             .id(InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID).taskID)
-                        if !store.snapshot.collections.displayed.contains(item.id) && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                        if store.snapshot.recovery.itemID != item.id && !store.snapshot.collections.displayed.contains(item.id) && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
                             ForEach(item.knownActiveDefects, id: \.self) { defect in
                                 RepairDecision(store: store, item: item, definition: definition, defect: defect)
                             }

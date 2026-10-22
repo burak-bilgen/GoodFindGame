@@ -9,6 +9,7 @@ struct CareerRecord: Codable, Equatable {
     var creditedItems: Set<ItemID> = []
     var tradedModels: Set<String> = []
     var clientJobs = 0
+    var legacyAgreements: Set<ListingID>?
     func tier(knowledge: InspectionKnowledge) -> CareerTier {
         let rank = ItemCategory.allCases.map { knowledge.level(in: $0) }.max() ?? 0
         if creditedItems.count >= 16 && rank >= 3 && (clientJobs >= 3 || creditedItems.count >= 24) { return .trusted }

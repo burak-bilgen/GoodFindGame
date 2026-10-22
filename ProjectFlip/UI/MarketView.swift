@@ -39,6 +39,9 @@ struct MarketView: View {
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
                 TradingDeskHeader(store: store)
                 CareerHuntPrompt(store: store)
+                if store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil {
+                    NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("marketRecovery")
+                }
                 OpenTradesView(store: store)
                 TradeContinuationPrompt(store: store)
                 VStack(alignment: .leading, spacing: 12) {

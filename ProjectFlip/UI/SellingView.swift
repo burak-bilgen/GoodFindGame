@@ -315,6 +315,8 @@ struct TradePayoff: View {
                 Text(GameText.string(record.netProfit > .zero ? "result.win" : record.netProfit < .zero ? "result.loss" : "result.even", locale: locale))
                     .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
             }
+            if record.kind == .consignment { Text("recovery.receipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
+            if record.kind == .liquidation { Text("recovery.liquidationReceipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
             Text(record.netProfit.formatted(locale: locale, market: market, signed: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
                 .lineLimit(1).minimumScaleFactor(0.45)
                 .foregroundStyle(record.netProfit < .zero ? Color(red: 1, green: 0.57, blue: 0.53) : GameStyle.light(.gaming))

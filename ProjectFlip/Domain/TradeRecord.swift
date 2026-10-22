@@ -10,9 +10,11 @@ struct TradeRecord: Identifiable, Equatable {
     let soldAt: Date
     let totalCost: Money
     let netProfit: Money
+    let kind: SaleKind
 
     init(listing: PlayerListing) throws {
         guard listing.status == .sold, let item = listing.itemSnapshot, let sale = listing.soldPrice, let date = listing.soldAt else { throw LedgerError.incompleteTrade }
+        kind = listing.saleKind ?? .market
         id = listing.id; definitionID = item.definitionID
         acquiredFor = item.purchasePrice; inspectionCost = item.inspectionCost; repairCost = item.repairCost
         soldFor = sale; soldAt = date

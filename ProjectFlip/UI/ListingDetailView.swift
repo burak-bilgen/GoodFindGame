@@ -72,7 +72,11 @@ struct ListingDetailView: View {
                 }.padding(16)
             }.gameScreen()
             .safeAreaInset(edge: .bottom) {
-                if listing.available || store.snapshot.conversations.contains(where: { $0.listingID == listing.id }) {
+                if listing.available && !CareerEngine.canAccess(definition, state: store.snapshot) && store.snapshot.career.legacyAgreements?.contains(listing.id) != true {
+                    NavigationLink { TraderCareerView(store: store) } label: {
+                        Label(GameText.string(CareerEngine.requiredTier(for: definition).key, locale: locale), systemImage: "lock.fill")
+                    }.buttonStyle(GameButton(secondary: true)).padding(16).background(GameStyle.ink)
+                } else if listing.available || store.snapshot.conversations.contains(where: { $0.listingID == listing.id }) {
                         NavigationLink {
                             ConversationView(store: store, listingID: listing.id)
                         } label: {

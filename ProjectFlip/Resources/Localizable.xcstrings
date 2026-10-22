@@ -11934,6 +11934,312 @@
           }
         }
       }
+    },
+    "recovery.title": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back in the market"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pazara geri dön"
+          }
+        }
+      }
+    },
+    "recovery.eyebrow": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A WAY FORWARD"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YENİDEN BAŞLAMAK İÇİN"
+          }
+        }
+      }
+    },
+    "recovery.principle": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bad trades have a cost. Keep your knowledge and career; recover working capital through a small service job or accept a clear liquidation loss."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kötü ticaretin bedeli olur. Bilgini ve kariyerini koru; küçük bir hizmet işiyle sermaye topla ya da açık bir tasfiye zararını kabul et."
+          }
+        }
+      }
+    },
+    "recovery.consigned": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigned goods — not your stock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emanet ürün — sana ait değil"
+          }
+        }
+      }
+    },
+    "recovery.task": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A local dealer needs a basic exterior check on a supplied controller. Inspect and return it for a modest service fee. It cannot be sold or collected and earns no expertise or trust."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yerel bir satıcı, verdiği kumandanın dış kontrolünü istiyor. İncele ve küçük bir hizmet ücreti karşılığında geri ver. Ürün satılamaz, koleksiyona eklenemez; uzmanlık veya güven kazandırmaz."
+          }
+        }
+      }
+    },
+    "recovery.finish": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return the consigned item"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emanet ürünü geri ver"
+          }
+        }
+      }
+    },
+    "recovery.returnFor": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return for a %@ service fee"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ hizmet ücreti karşılığında geri ver"
+          }
+        }
+      }
+    },
+    "recovery.limit": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only below %@ cash, with no trading stock or deliveries left. Fees stop at that cash floor. Your displayed collection can stay yours."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca nakit %@ altındayken, ticaret stoku veya teslimat kalmamışsa kullanılabilir. Nakit bu sınıra ulaşınca ücretler durur. Koleksiyon parçaların sende kalabilir."
+          }
+        }
+      }
+    },
+    "recovery.begin": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take the service job"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hizmet işini al"
+          }
+        }
+      }
+    },
+    "recovery.notEligible": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No recovery job is needed now. Resolve incoming or held trading stock first. Active listings can be withdrawn from Selling."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şu anda kurtarma işi gerekmiyor. Önce gelecek ürünleri veya ticaret stokunu değerlendir. Aktif ilanları Satışlar ekranından geri çekebilirsin."
+          }
+        }
+      }
+    },
+    "recovery.liquidation": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear held stock"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eldeki stoku tasfiye et"
+          }
+        }
+      }
+    },
+    "recovery.liquidationWarning": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wholesale quotes are below your paid cost. You give up upside for immediate cash. Return displayed pieces to trading and withdraw live listings first."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toptan alım teklifleri ödediğin maliyetin altındadır. Anında nakit için olası kazançtan vazgeçersin. Önce sergilenen parçaları ticarete geri al ve aktif ilanları geri çek."
+          }
+        }
+      }
+    },
+    "recovery.liquidate": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accept liquidation loss"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasfiye zararını kabul et"
+          }
+        }
+      }
+    },
+    "recovery.confirm": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell this item immediately at the shown wholesale quote?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürünü gösterilen toptan alım teklifiyle hemen satmak istiyor musun?"
+          }
+        }
+      }
+    },
+    "recovery.receipt": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service commission only. The consigned item's value was never yours."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca hizmet komisyonu. Emanet ürünün değeri sana ait değildi."
+          }
+        }
+      }
+    },
+    "recovery.liquidationReceipt": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wholesale liquidation. This loss freed capital and inventory space."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toptan tasfiye. Bu zarar sermaye ve envanter alanı açtı."
+          }
+        }
+      }
+    },
+    "error.consignedItem": {
+      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This item belongs to the dealer. Inspect and return it from Back in the market."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ürün satıcıya ait. Pazara geri dön ekranından inceleyip geri ver."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -1403,4 +1403,23 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertFalse(app.buttons["focusCollection.chapter"].exists)
     }
 
+    @MainActor func testRecoveryEnglish() { verifyRecovery(language: "en") }
+    @MainActor func testRecoveryTurkish() { verifyRecovery(language: "tr") }
+    @MainActor private func verifyRecovery(language: String) {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion", "--uitest-recovery-fixture"]
+        app.launch()
+        tap(app.buttons["marketRecovery"], in: app)
+        tap(app.buttons["beginRecovery"], in: app)
+        tap(app.buttons["inspectRecovery"], in: app)
+        capture("recovering from zero cash: \(language)", app: app)
+        tap(app.buttons["completeRecovery"], in: app)
+        XCTAssertTrue(app.buttons["beginRecovery"].exists)
+        app.terminate(); app.launch()
+        let cash = app.staticTexts["marketCash"]
+        XCTAssertTrue(cash.waitForExistence(timeout: 5))
+        XCTAssertTrue((cash.value as? String ?? "").contains(language == "tr" ? "600" : "15"))
+    }
+
 }

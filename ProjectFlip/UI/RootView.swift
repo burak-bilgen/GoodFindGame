@@ -169,7 +169,13 @@ struct RootView: View {
             #else
             let timing = SimulationTiming.current
             #endif
+            #if DEBUG
+            let recoveryFixture = isolated && arguments.contains("--uitest-recovery-fixture") && !FileManager.default.fileExists(atPath: repository.url.path)
+            #endif
             store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
+            #if DEBUG
+            if recoveryFixture, let store { var fixture = store.snapshot; fixture.player.cash = .zero; try store.commit(fixture) }
+            #endif
             failed = false
             configureNotifications()
             #if DEBUG

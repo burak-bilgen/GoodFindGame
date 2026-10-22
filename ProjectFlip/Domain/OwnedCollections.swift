@@ -33,7 +33,8 @@ enum CollectionEngine {
     static func validate(_ state: GameSnapshot) throws {
         let ids = Set(state.player.inventory.map(\.id))
         let sets = Set(CollectionDefinition.all.map(\.id))
-        guard state.collections.displayed.isSubset(of: ids), state.collections.completedBefore.isSubset(of: sets),
+        guard state.player.inventory.filter({ state.collections.displayed.contains($0.id) }).allSatisfy({ item in item.inspected && CollectionDefinition.all.contains(where: { collection in collection.models.contains(item.definitionID) }) }),
+              state.collections.displayed.isSubset(of: ids), state.collections.completedBefore.isSubset(of: sets),
               state.collections.focus.map({ sets.contains($0) }) ?? true,
               !state.playerListings.contains(where: { $0.status == .active && state.collections.displayed.contains($0.itemID) }) else { throw SaveError.invalidSave }
     }
