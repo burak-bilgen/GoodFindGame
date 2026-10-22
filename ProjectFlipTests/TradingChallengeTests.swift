@@ -124,3 +124,29 @@ extension TradingChallengeTests {
         #expect(bargains > 0 && overpriced > 0)
     }
 }
+
+extension TradingChallengeTests {
+    @Test func singleListingRefillsDoNotAlwaysReuseTheSameSellerTypeAndFace() throws {
+        let definitions = try SeedContent.load().items
+        let now = Date(timeIntervalSince1970: 100_000)
+        let original = try GameSnapshot.fresh(definitions: definitions, now: now)
+        var archetypes: Set<SellerArchetype> = [], identities: Set<Int> = []
+        for seed in 0..<40 {
+            var state = original
+            state.generation = UInt64(seed)
+            state.market = Array(state.market.prefix(9))
+            try MarketFeedEngine(timing: .production).replenish(&state, now: now, definitions: definitions)
+            let incoming = try #require(state.market.last)
+            archetypes.insert(incoming.seller.archetype)
+            identities.insert(incoming.seller.identityIndex)
+            var replay = original
+            replay.generation = UInt64(seed)
+            replay.market = Array(replay.market.prefix(9))
+            try MarketFeedEngine(timing: .production).replenish(&replay, now: now, definitions: definitions)
+            #expect(state == replay)
+            #expect(Array(state.market.prefix(9)) == Array(original.market.prefix(9)))
+        }
+        print("CHALLENGE singleton refills: \(archetypes.count) seller types, \(identities.count) identities / 40")
+        #expect(archetypes.count > 1 && identities.count > 1, "Single-item refill batches currently always generate casual seller 0")
+    }
+}

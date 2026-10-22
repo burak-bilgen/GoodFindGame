@@ -84,3 +84,42 @@ source-proof.json, release.log and gallery.html under the artifact directory.
 The counters now describe a revised offer in both languages rather than claiming
 it is an exact maximum. Targeted correctness is established; ideal difficulty
 and enjoyment need another unscripted human session.
+
+## Follow-up: single-item refill variety
+
+Review found a second reproducible source of sameness: the live market commonly
+replaces one sold/retired listing at a time, but the generator chose personality
+and display identity from batch position. Across 40 one-item replenishments, every
+arriving seller was casual/NPC 0. The regression fails on c16ff80; the initial
+method-only test filter selected no tests and is explicitly not reproduction
+proof. refill-red-confirmed.xcresult contains the actual failing seven-test run.
+
+Live replenishment now opts into an independent seeded profile selection over the
+existing seller personalities and portrait/name identities. Ordinary initial
+stock and the introductory lesson keep their existing generation path. Only new
+unseen arrivals receive the varied profiles: previously materialized listings,
+items, prices, floors and saved agreements remain unchanged. The refill regression
+also compares replay equality and checks all nine retained listings for exact domain
+equality. No new NPC/relationship system or asset library is introduced.
+
+The 4,000-listing equivalence proof above applies to the default generation path
+at the main tuning checkpoint. Newly created live arrivals deliberately use varied
+profiles after this follow-up; their not-yet-materialized attributes can therefore
+differ from the preceding implementation. Existing saves are not regenerated.
+
+Final follow-up verification: all 116 unit tests plus four relevant UI journeys
+pass (120 cases), with zero failures/skips/recorded runtime warnings. The UI
+journeys cover live market feed in English and Turkish, five consecutive trades
+and normal production-paced concurrent trades. The 40-refill sample now includes
+all eight seller types and nine display identities. Debug test build and Release
+build pass; all 489 localization keys still validate. No build/test inputs changed
+during the targeted run. refill-final.xcresult, refill-summary.json,
+refill-source-proof.json, refill-release.log and refill-gallery.html record the
+final-head evidence. The earlier complete.xcresult covers all 53 UI tests at
+c16ff80; only the four relevant UI journeys were rerun after this small refill
+follow-up. No claim of a second full 53-test run on the follow-up is made.
+
+Human follow-up should judge whether bargaining now rewards reading the seller,
+whether pushing for more feels fair, and whether arriving stock feels less samey.
+These changes remove reproduced predictability; they do not prove ideal balance
+or enjoyable long-term retention.

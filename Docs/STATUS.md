@@ -26,7 +26,9 @@ iOS 17 runtime, real audio/haptics and unscripted human validation remain open.
 Current scoped validation (22 October 2026): Debug/Release builds pass; 115 unit
 and all 53 UI tests pass with zero recorded runtime warnings. All 489 EN/TR keys
 validate. TRADING_CHALLENGE.md records the observed issue, red/green samples and
-full verification. Human difficulty and enjoyment acceptance remain open.
+full verification. The refill follow-up passes all 116 units plus four affected
+UI journeys; new arrivals now vary seller profiles. Human difficulty and enjoyment
+acceptance remain open.
 
 ## Historical milestone verification
 

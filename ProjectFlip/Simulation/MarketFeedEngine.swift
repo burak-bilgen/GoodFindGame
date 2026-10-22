@@ -46,7 +46,7 @@ struct MarketFeedEngine {
             guard !definitions.isEmpty, state.generation < UInt64.max else { throw SaveError.invalidSave }
             state.generation += 1
             let selected = MarketCatalog.liveFeed(from: definitions, count: needed, seed: state.generation)
-            state.market += try ListingGenerator().generate(definitions: selected, seed: state.generation, now: now, market: state, starterFriendly: false)
+            state.market += try ListingGenerator().generate(definitions: selected, seed: state.generation, now: now, market: state, starterFriendly: false, variedSellers: true)
             try bookLifetimes(&state, now: now, definitions: definitions)
         }
         try state.enqueue(.marketRefresh, createdAt: now, resolveAt: now.addingTimeInterval(timing.refresh))

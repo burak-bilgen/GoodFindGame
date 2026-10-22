@@ -10,15 +10,19 @@ struct PricingEngine {
 }
 
 struct ListingGenerator {
-    func generate(definitions: [ItemDefinition], seed: UInt64, now: Date, marketBasisPoints: Int64 = 10_000, market: GameSnapshot? = nil, starterFriendly: Bool = true) throws -> [MarketplaceListing] {
+    func generate(definitions: [ItemDefinition], seed: UInt64, now: Date, marketBasisPoints: Int64 = 10_000, market: GameSnapshot? = nil, starterFriendly: Bool = true, variedSellers: Bool = false) throws -> [MarketplaceListing] {
         var random = SeededRandom(seed: seed)
         return try definitions.enumerated().map { index, definition in
             let marketBasisPoints = try market?.marketMultiplier(for: definition, at: now) ?? marketBasisPoints
-            let archetype = SellerArchetype.allCases[index % SellerArchetype.allCases.count]
+            // A refill often contains one item, so batch position cannot choose
+            // the seller: that would make every arriving seller casual/NPC 0.
+            var profileRandom = SeededRandom(seed: SeededRandom.seed(for: "seller-profile-\(seed)-\(definition.id)-\(index)"))
+            let archetype = variedSellers ? SellerArchetype.allCases[profileRandom.integer(in: 0...(SellerArchetype.allCases.count - 1))] : SellerArchetype.allCases[index % SellerArchetype.allCases.count]
+            let identityIndex = variedSellers ? profileRandom.integer(in: 0...9) : index
             let knowledge = archetype == .clueless ? 20 : (archetype == .professional ? 95 : random.integer(in: 35...80))
             let honesty = archetype == .manipulative ? 15 : random.integer(in: 65...100)
             let urgency = archetype == .urgent ? 95 : random.integer(in: 10...70)
-            let seller = SellerProfile(id: SellerID("seller-\(seed)-\(index)"), identityIndex: index, archetype: archetype, knowledge: knowledge, honesty: honesty, urgency: urgency, bargainingSkill: random.integer(in: 30...90), patience: random.integer(in: 45...90), tradeCount: random.integer(in: 1...140), ratingTenths: random.integer(in: 35...50))
+            let seller = SellerProfile(id: SellerID("seller-\(seed)-\(index)"), identityIndex: identityIndex, archetype: archetype, knowledge: knowledge, honesty: honesty, urgency: urgency, bargainingSkill: random.integer(in: 30...90), patience: random.integer(in: 45...90), tradeCount: random.integer(in: 1...140), ratingTenths: random.integer(in: 35...50))
             // One existing, novice-detectable fault teaches the first repair-or-sell choice.
             // No additional random draw: all later stock keeps its existing stream.
             let starterLesson = starterFriendly && index == 0 && definition.possibleDefects.contains(.damagedPort)
