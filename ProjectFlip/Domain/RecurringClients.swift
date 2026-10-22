@@ -22,7 +22,7 @@ struct ClientDefinition: Identifiable {
     let portrait: Int
     let requests: [ClientRequest]
     static let all = [
-        Self(id: "rowan", portrait: 7, requests: [
+        Self(id: "rowan", portrait: 2, requests: [
             ClientRequest(models: ["retro-0", "retro-1", "retro-8"], minimumCondition: 65, career: .newcomer),
             ClientRequest(models: ["retro-0", "retro-1", "retro-2", "retro-8"], minimumCondition: 75, career: .known, originalBox: true),
             ClientRequest(models: ["retro-0", "retro-2", "retro-8"], minimumCondition: 90, career: .trusted, originalBox: true, originalParts: true)

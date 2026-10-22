@@ -31,3 +31,5 @@ With cash below $75 canonical, no ordinary trading stock or pending delivery, an
 Reward cadence follows actions: useful evidence and ordinary results frequently, a changed client chapter/career capability over several sessions, collection completion and major rank distinctions less often. Selecting a hunt or opening a profile is not an economic reward. No streak, daily mission, premium currency, reward multiplier or timed login obligation exists.
 
 Pre-career saves retain a narrow grandfather set of already-agreed/countered listings. Existing firm agreements can still be purchased within their real validity window; new negotiations use career access rules. Locked opportunity details route to the actual requirements before asking the player to negotiate.
+
+Final presentation review gives the two recurring clients distinct portrait families, and exposes the legacy economy notice directly from the market so existing players can review their conversion without hunting through settings.

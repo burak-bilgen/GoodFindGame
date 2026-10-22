@@ -10,11 +10,20 @@ struct ProfileView: View {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 16) {
                     TraderPortrait(identity: 0, size: 64)
-                    Text("profile.intro").font(.system(.title3, design: .rounded, weight: .heavy))
+                    Text(GameText.string(store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key, locale: locale)).font(.system(.title3, design: .rounded, weight: .heavy))
                 }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
+                if !store.snapshot.collections.completedBefore.isEmpty {
+                    Label("collections.curator", systemImage: "seal.fill").font(.headline).foregroundStyle(GameStyle.amber).gameCard(accent: GameStyle.amber)
+                }
+                if store.snapshot.clients.completed["rowan", default: 0] == 3 {
+                    Label("clients.confidant", systemImage: "person.crop.circle.badge.checkmark").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
+                }
+                if store.snapshot.clients.completed["jules", default: 0] == 3 {
+                    Label("clients.preferred", systemImage: "camera.badge.ellipsis").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
+                }
                 VStack(alignment: .leading, spacing: 14) {
                     Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
-                    Text(store.snapshot.player.cash.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
+                    Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
                     Divider().overlay(GameStyle.line)
                     LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
                 }.gameCard()
@@ -75,7 +84,7 @@ struct ProfitAmount: View {
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
     var body: some View {
-        Label(amount.formatted(locale: locale, market: market, signed: true), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
+        Label(amount.formatted(locale: locale, market: market, signed: true, precise: true), systemImage: amount >= .zero ? "arrow.up.right" : "arrow.down.right")
             .foregroundStyle(amount >= .zero ? Color("AccentColor") : Color("LossColor")).monospacedDigit()
     }
 }
@@ -91,10 +100,10 @@ struct TradeReceiptView: View {
                 TradePayoff(record: record, item: item)
                 DisclosureGroup("result.costs") {
                     VStack(spacing: 12) {
-                        LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale, market: market)) }
-                        LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale, market: market)) }
-                        LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale, market: market)) }
-                        LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale, market: market)) }
+                        LabeledContent("purchase.cost") { Text(record.acquiredFor.formatted(locale: locale, market: market, precise: true)) }
+                        LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale, market: market, precise: true)) }
+                        LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale, market: market, precise: true)) }
+                        LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale, market: market, precise: true)) }
                         Text("trade.explanation").font(.caption).foregroundStyle(.secondary)
                     }.padding(.top, 12)
                 }.gameCard()

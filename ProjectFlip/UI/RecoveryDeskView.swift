@@ -43,7 +43,7 @@ struct RecoveryDeskView: View {
                     }
                 }
             }.padding(16)
-        }.gameScreen().navigationTitle("recovery.title")
+        }.gameScreen().navigationTitle("recovery.title").navigationBarTitleDisplayMode(.inline)
             .confirmationDialog("recovery.confirm", isPresented: Binding(get: { liquidation != nil }, set: { if !$0 { liquidation = nil } }), titleVisibility: .visible) {
                 Button("recovery.liquidate", role: .destructive) { if let id = liquidation { store.perform { try store.liquidate(id); GameFeel.play(.loss) } }; liquidation = nil }
                 Button("action.cancel", role: .cancel) { liquidation = nil }

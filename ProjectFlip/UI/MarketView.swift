@@ -38,6 +38,11 @@ struct MarketView: View {
                 }.padding(14).background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 12))
                     .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.line, lineWidth: 1))
                 TradingDeskHeader(store: store)
+                if store.snapshot.economyMigrationNotice {
+                    NavigationLink { MarketSettingsView(store: store) } label: {
+                        GameMenuRow(titleKey: "region.migrationTitle", symbol: "info.circle.fill")
+                    }.buttonStyle(.plain).accessibilityIdentifier("economyMigrationNotice")
+                }
                 CareerHuntPrompt(store: store)
                 if store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil {
                     NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("marketRecovery")

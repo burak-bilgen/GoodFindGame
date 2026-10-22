@@ -55,6 +55,6 @@ struct TraderCareerView: View {
                 Text(GameText.format("career.record", locale: locale, store.snapshot.career.creditedItems.count, store.snapshot.career.clientJobs)).font(.caption)
                 NavigationLink("knowledge.open") { KnowledgeView(store: store) }.buttonStyle(GameButton(secondary: true))
             }.padding(16)
-        }.gameScreen().navigationTitle("career.title")
+        }.gameScreen().navigationTitle("career.title").navigationBarTitleDisplayMode(.inline)
     }
 }

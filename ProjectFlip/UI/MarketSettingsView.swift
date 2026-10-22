@@ -29,6 +29,6 @@ struct MarketSettingsView: View {
                     Button("action.ok") { store.perform { var next = store.snapshot; next.economyMigrationNotice = false; try store.commit(next) } }
                 }
             }
-        }.gameScreen().navigationTitle("region.title")
+        }.gameScreen().navigationTitle("region.title").navigationBarTitleDisplayMode(.inline)
     }
 }

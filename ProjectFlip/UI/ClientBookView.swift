@@ -10,7 +10,7 @@ struct ClientBookView: View {
                 Text("clients.principle").font(.subheadline).foregroundStyle(.secondary)
                 ForEach(ClientDefinition.all) { client in ClientChapterView(store: store, client: client) }
             }.padding(16)
-        }.gameScreen().navigationTitle("clients.title")
+        }.gameScreen().navigationTitle("clients.title").navigationBarTitleDisplayMode(.inline)
     }
 }
 
