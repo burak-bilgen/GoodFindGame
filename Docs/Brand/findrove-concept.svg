@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="Findrove preliminary working brand: tag and discovery glint, midnight copper mint palette">
+<defs><linearGradient id="tag" x2="1" y2="1"><stop stop-color="#F1B85B"/><stop offset="1" stop-color="#BD7540"/></linearGradient></defs>
+<rect width="1440" height="900" fill="#101923"/>
+<text x="80" y="82" font-family="system-ui,sans-serif" font-size="18" letter-spacing="4" fill="#7ED6C4">WORKING BRAND • FOR REVIEW</text>
+<rect x="82" y="148" width="300" height="300" rx="68" fill="#1D2D38" stroke="#354852" stroke-width="2"/>
+<g transform="translate(145 205) rotate(-12 85 90)"><path d="M8 52 L71 0 H172 V180 H8Z" fill="url(#tag)"/><path d="M8 52 H71 V0" fill="#FFE2AA" opacity=".6"/><circle cx="130" cy="38" r="11" fill="#101923"/><path d="M87 70 L96 94 L120 103 L96 112 L87 136 L78 112 L54 103 L78 94Z" fill="#101923"/><circle cx="138" cy="139" r="5" fill="#7ED6C4"/></g>
+<text x="438" y="277" font-family="system-ui,sans-serif" font-size="100" font-weight="800" letter-spacing="-5" fill="#F2E4CA">Findrove</text>
+<text x="446" y="341" font-family="system-ui,sans-serif" font-size="30" fill="#7ED6C4">Find value. Build your name.</text>
+<text x="446" y="389" font-family="system-ui,sans-serif" font-size="25" fill="#C1B9AA">Değeri keşfet. Adını duyur.</text>
+<path d="M82 508 H1358" stroke="#354852"/>
+<text x="82" y="561" font-family="Georgia,serif" font-size="36" fill="#F2E4CA">A sharp eye. An object with a story. A name people remember.</text>
+<g font-family="system-ui,sans-serif" font-size="19">
+<rect x="82" y="624" width="232" height="100" rx="16" fill="#1D2D38" stroke="#354852"/><text x="101" y="764" fill="#AAAFAE">MIDNIGHT · #101923</text>
+<rect x="343" y="624" width="232" height="100" rx="16" fill="#D28A4C"/><text x="355" y="764" fill="#AAAFAE">COPPER · #D28A4C</text>
+<rect x="604" y="624" width="232" height="100" rx="16" fill="#F1B85B"/><text x="616" y="764" fill="#AAAFAE">AMBER · #F1B85B</text>
+<rect x="865" y="624" width="232" height="100" rx="16" fill="#7ED6C4"/><text x="877" y="764" fill="#AAAFAE">SEA GLASS · #7ED6C4</text>
+<rect x="1126" y="624" width="232" height="100" rx="16" fill="#F2E4CA"/><text x="1138" y="764" fill="#AAAFAE">PARCHMENT · #F2E4CA</text>
+</g>
+<text x="82" y="840" font-family="system-ui,sans-serif" font-size="18" fill="#879598">Preliminary concept. Name clearance pending. No production identifiers or icon replaced.</text>
+</svg>
