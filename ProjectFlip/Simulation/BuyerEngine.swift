@@ -66,7 +66,8 @@ struct BuyerEngine {
         next.playerListings[index].offers[offerIndex].counterAttempts += 1
         // A withdrawn buyer never exposes their unused private budget.
         if let revised { next.playerListings[index].offers[offerIndex].amount = revised }
-        next.playerListings[index].messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(next.playerListings[index].messages.count)", intent: revised == nil ? "buyer.withdraw" : "buyer.counter", fromPlayer: false, amount: revised))
+        let intent = revised == nil ? "buyer.withdraw" : revised == state.playerListings[index].offers[offerIndex].amount ? "buyer.hold" : "buyer.counter"
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(next.playerListings[index].messages.count)", intent: intent, fromPlayer: false, amount: revised))
         return next
     }
 
@@ -82,22 +83,23 @@ struct BuyerEngine {
         if amount <= offer.amount { return .accept }
         let introduction = state.playerListings.first?.id == listingID && listing.offers.count == 1 && offer.counterAttempts == 0
         if introduction && amount <= offer.willingness { return .accept }
-        if amount > (try offer.willingness.scaled(byBasisPoints: 12_000)) || offer.counterAttempts >= 2 { return .withdraw }
+        // The first response can be firm without arbitrarily ending the deal.
+        // After that response the UI calls it final; pushing again can end talks.
+        let overreach = max(try listing.askingPrice.scaled(byBasisPoints: 12_500), try offer.amount.scaled(byBasisPoints: 15_000))
+        if amount > overreach || offer.counterAttempts >= 1 { return .withdraw }
         var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-reply-\(state.simulationID)-\(listingID.rawValue)-\(offer.id.rawValue)-\(offer.counterAttempts)"))
-        let firmness: Int = switch offer.archetype {
-        case .lowballer: 25
-        case .reseller: 22
-        case .bargainHunter: 17
-        case .cautious: 10
-        case .impatient: 12
-        case .collector: 6
+        let concession: ClosedRange<Int> = switch offer.archetype {
+        case .lowballer: 0...0
+        case .reseller: 100...300
+        case .bargainHunter: 200...500
+        case .cautious: 400...700
+        case .impatient: 200...500
+        case .collector: 800...1_200
         }
-        let uplift = Int(100 * Double(amount.minorUnits - offer.amount.minorUnits) / Double(max(1, offer.amount.minorUnits)))
-        let walkChance = min(85, firmness + uplift / 2 + offer.counterAttempts * 18)
-        if random.integer(in: 0...99) < walkChance && !introduction { return .withdraw }
-        if amount <= offer.willingness { return .accept }
-        let gap = try offer.willingness.subtracting(offer.amount)
-        guard gap > .zero else { return .withdraw }
+        let ceiling = introduction ? offer.willingness : min(offer.willingness, try offer.amount.scaled(byBasisPoints: Int64(10_000 + random.integer(in: concession))))
+        if amount <= ceiling { return .accept }
+        let gap = try ceiling.subtracting(offer.amount)
+        guard gap > .zero else { return .counter(offer.amount) }
         let step = max(Money(minorUnits: 1), try gap.scaled(byBasisPoints: Int64(random.integer(in: 3_000...7_000))))
         return .counter(min(offer.willingness, try offer.amount.adding(step)))
     }

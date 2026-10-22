@@ -25,13 +25,14 @@ struct TradingChallengeTests {
         var state = try BuyerTests.offeredState()
         let previous = PlayerListing(id: ListingID("completed"), itemID: state.playerListings[0].itemID, askingPrice: Money(minorUnits: 10_000), createdAt: .distantPast, status: .sold, views: 0, favorites: 0)
         state.playerListings.insert(previous, at: 0)
+        state.playerListings[1].askingPrice = Money(minorUnits: 10_000)
         state.simulationID = "challenge-\(seed)"
         state.playerListings[1].offers = [BuyerOffer(id: OfferID("sample"), archetype: archetype, identityIndex: seed % 10, willingness: Money(minorUnits: 10_000), amount: Money(minorUnits: 9_000))]
         return state
     }
 
     @Test func raisingEveryFirstBuyerOfferIsNotAFreeDominantStrategy() throws {
-        var walked = 0, improved = 0
+        var walked = 0, improved = 0, firm = 0
         for seed in 0..<96 {
             let state = try repeatBuyer(seed: seed, archetype: BuyerArchetype.allCases[seed % BuyerArchetype.allCases.count])
             let id = state.playerListings[1].id
@@ -39,9 +40,10 @@ struct TradingChallengeTests {
             #expect(try result == BuyerEngine().counter(listingID: id, amount: Money(minorUnits: 9_900), state: state, now: .distantPast))
             if result.playerListings[1].offers.last?.status == .withdrawn { walked += 1; #expect(result.player.cash == state.player.cash) }
             if result.playerListings[1].status == .sold { improved += 1 }
+            if result.playerListings[1].offers.last?.status == .countered { firm += 1 }
         }
         print("CHALLENGE first buyer raises: \(improved) sold, \(walked) walked / 96")
-        #expect(walked > 0 && improved > 0, "Always countering currently improves the price without risking the buyer")
+        #expect(walked == 0 && improved > 0 && firm > 0, "Different buyers should accept or defend their price without a first-counter coin flip")
     }
 
     @Test func firstBuyerConcessionDoesNotRevealTheEntirePrivateBudget() throws {
@@ -61,6 +63,55 @@ struct TradingChallengeTests {
 }
 
 extension TradingChallengeTests {
+    @Test func aReasonableFirstBuyerCounterDoesNotRandomlyEndTheConversation() throws {
+        var walked = 0
+        for seed in 0..<96 {
+            let state = try repeatBuyer(seed: seed, archetype: BuyerArchetype.allCases[seed % BuyerArchetype.allCases.count])
+            let reply = try BuyerEngine().counterDecision(listingID: state.playerListings[1].id, amount: Money(minorUnits: 9_090), state: state)
+            if reply == .withdraw { walked += 1 }
+        }
+        print("FAIRNESS modest first counter walks: \(walked)/96")
+        #expect(walked == 0, "A one-percent first counter should receive acceptance, a concession or a firm offer, not an unexplained walk")
+    }
+
+    @Test func aTinyPriceChangeDoesNotCreateAnAttentionCliff() throws {
+        let definitions = try SeedContent.load().items
+        let state = try BuyerTests.offeredState()
+        let item = try #require(state.player.inventory.first)
+        let definition = try #require(definitions.first { $0.id == item.definitionID })
+        let fair = try PricingEngine.fairValue(of: item, definition: definition)
+        var listing = state.playerListings[0]
+        listing.askingPrice = try fair.scaled(byBasisPoints: 11_000)
+        let before = try ListingAttention(listing: listing, item: item, definition: definition, state: state, at: .distantPast, seed: 12)
+        listing.askingPrice = try fair.scaled(byBasisPoints: 11_010)
+        let after = try ListingAttention(listing: listing, item: item, definition: definition, state: state, at: .distantPast, seed: 12)
+        print("FAIRNESS tiny price change: delay \(before.delayFactor)→\(after.delayFactor), chance \(before.offerChance)→\(after.offerChance)")
+        #expect(after.delayFactor - before.delayFactor < 0.02)
+        #expect(before.offerChance - after.offerChance <= 1)
+    }
+
+    @Test func normalConversationRepliesHaveAnInteractiveTimeBudget() {
+        #expect(SimulationTiming.production.sellerReply.upperBound <= 90)
+        #expect(SimulationTiming.production.sellerReply.lowerBound >= 15)
+        #expect(SimulationTiming.production.buyerInterest.upperBound <= 180)
+        #expect(SimulationTiming.production.shipping > 0 && SimulationTiming.production.inspection > 0)
+    }
+
+    @Test func sellerFatigueDoesNotMoveTheMinimumAboveAPreviouslyAcceptableBid() throws {
+        let listings = try ListingGenerator().generate(definitions: SeedContent.load().items, seed: 108, now: .distantPast, starterFriendly: false)
+        var samples = 0
+        for listing in listings where listing.seller.patience > 35 {
+            let minimum = min(listing.askingPrice, try listing.reservationPrice.scaled(byBasisPoints: Int64(10_000 + listing.seller.bargainingSkill * 2)))
+            guard minimum < listing.askingPrice else { continue }
+            var current = NegotiationState(listingID: listing.id, patience: listing.seller.patience - 10)
+            current.offers = [Offer(id: OfferID("previous"), listingID: listing.id, amount: try minimum.scaled(byBasisPoints: 8_000), status: .countered)]
+            let result = try NegotiationEngine().offer(minimum, modifier: .none, listing: listing, current: current, reputation: 50)
+            samples += 1
+            #expect(result.agreedPrice == minimum)
+        }
+        #expect(samples > 10)
+    }
+
     @Test func aStandingOfferRemainsSafeEvenAfterRepeatedNegotiation() throws {
         for seed in 0..<24 {
             var state = try repeatBuyer(seed: seed, archetype: BuyerArchetype.allCases[seed % BuyerArchetype.allCases.count])
@@ -76,14 +127,14 @@ extension TradingChallengeTests {
     @Test func counterForecastMatchesOfflineSettlementAndKeepsExpiryWhenBuyerWalks() throws {
         let definitions = try SeedContent.load().items
         let now = Date(timeIntervalSince1970: 100_000)
-        var accepted = 0, walked = 0
+        var accepted = 0, walked = 0, countered = 0
         for seed in 0..<24 {
-            var state = try repeatBuyer(seed: seed, archetype: .reseller)
+            var state = try repeatBuyer(seed: seed, archetype: seed % 3 == 1 ? .lowballer : .reseller)
             state.events = []
             let id = state.playerListings[1].id
             state.playerListings[1].expiresAt = now.addingTimeInterval(2_700)
             let offer = try #require(state.playerListings[1].offers.last)
-            let amount = Money(minorUnits: 9_900)
+            let amount = Money(minorUnits: seed % 3 == 0 ? 9_090 : seed % 3 == 1 ? 9_900 : 16_000)
             let decision = try BuyerEngine().counterDecision(listingID: id, amount: amount, state: state)
             try state.enqueue(.buyerReply(listingID: id, offerID: offer.id, amount: amount, expectedAttempts: 0), createdAt: now, resolveAt: now.addingTimeInterval(60))
             try state.enqueue(.playerListingExpired(listingID: id), createdAt: now, resolveAt: now.addingTimeInterval(2_700))
@@ -97,14 +148,23 @@ extension TradingChallengeTests {
                 accepted += 1
                 #expect(resolved.playerListings[1].status == .sold)
                 #expect(try resolved.player.cash == state.player.cash.adding(amount))
-            } else {
+            } else if decision == .withdraw {
                 walked += 1
                 #expect(resolved.playerListings[1].status == .active)
                 #expect(resolved.playerListings[1].offers[0].status == .withdrawn)
                 #expect(resolved.player.cash == state.player.cash)
+            } else {
+                countered += 1
+                #expect(resolved.playerListings[1].offers[0].status == .countered)
+                #expect(resolved.playerListings[1].messages.last?.intent == "buyer.hold")
+                #expect(resolved.player.cash == state.player.cash)
+                let pushed = try BuyerEngine().counter(listingID: id, amount: amount, state: resolved, now: now.addingTimeInterval(62))
+                #expect(pushed.playerListings[1].offers[0].status == .withdrawn)
+                let taken = try BuyerEngine().accept(listingID: id, state: resolved, now: now.addingTimeInterval(62))
+                #expect(taken.playerListings[1].status == .sold)
             }
         }
-        #expect(accepted > 0 && walked > 0)
+        #expect(accepted > 0 && walked > 0 && countered > 0)
     }
 
     @Test func newStockStillContainsBargainsAndLossRisksAcrossTheSameMarket() throws {

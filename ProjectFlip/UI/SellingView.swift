@@ -263,10 +263,10 @@ struct SaleListingView: View {
                     .onAppear { if newPrice.isEmpty { newPrice = listing.askingPrice.inputText(locale: locale); counterAmount = newPrice } }
                     .onChange(of: listing.messages.last?.id) { _, _ in
                         counterComposerExpanded = false
-                        if listing.messages.last?.intent == "buyer.counter" {
+                        if ["buyer.counter", "buyer.hold"].contains(listing.messages.last?.intent ?? "") {
                             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { proxy.scrollTo("buyerDecision", anchor: .top) }
                         }
-                        if let last = listing.messages.last, ["buyer.counter", "buyer.withdraw", "buyer.expired"].contains(last.intent) { GameFeel.play(.reply) }
+                        if let last = listing.messages.last, ["buyer.counter", "buyer.hold", "buyer.withdraw", "buyer.expired"].contains(last.intent) { GameFeel.play(.reply) }
                     }
                     .onChange(of: listing.status) { _, status in
                         if status == .sold {

@@ -46,7 +46,9 @@ struct NegotiationEngine {
         let variant = (listing.seller.identityIndex + current.offers.count) % 2
         next.append("player.offer", player: true, amount: amount)
         if modifier != .none { next.append(modifier.key, player: true) }
-        var adjustment = 10_000 + max(0, listing.seller.patience - next.patience) * 10 + listing.seller.bargainingSkill * 2 - max(0, reputation - 50) * 5
+        // Patience limits repeated lowballs; it must not raise the seller's floor
+        // while the player improves a bid toward a previously acceptable price.
+        var adjustment = 10_000 + listing.seller.bargainingSkill * 2 - max(0, reputation - 50) * 5
         if modifier == .buyToday { adjustment -= listing.seller.urgency * 8 }
         if modifier == .knownIssues && !next.knownDefects.isEmpty { adjustment -= 600 }
         let minimum = min(listing.askingPrice, try listing.reservationPrice.scaled(byBasisPoints: Int64(adjustment)))

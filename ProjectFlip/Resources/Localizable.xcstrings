@@ -2480,13 +2480,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "I can move to this. Does that work for you?"
+            "value": "That is my final offer. Can we agree on this?"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu tutara çıkabilirim. Sana uyar mı?"
+            "value": "Son teklifim bu. Bu tutarda anlaşalım mı?"
           }
         }
       }
@@ -8036,13 +8036,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Countering could earn more, but the buyer may walk."
+            "value": "A modest counter can get a better or firm offer. A large jump may end the conversation."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Karşı teklifle daha çok kazanabilirsin ama alıcı vazgeçebilir."
+            "value": "Makul bir karşı teklif fiyatı iyileştirebilir; alıcı fiyatında da kalabilir. Büyük bir artış görüşmeyi bitirebilir."
           }
         }
       }
@@ -8054,13 +8054,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "That is a revised offer. Another push could lose the sale."
+            "value": "This is their final offer. Accept it or pass; asking for more ends the conversation."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bu, yenilenen teklif. Tekrar zorlarsan alıcı vazgeçebilir."
+            "value": "Bu, alıcının son teklifi. Kabul et ya da geç; daha fazlasını istemek görüşmeyi bitirir."
           }
         }
       }
@@ -9771,6 +9771,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ember Heritage El Konsolu"
+          }
+        }
+      }
+    },
+    "buyer.hold": {
+      "comment": "Buyer holds an existing public offer; no private budget is revealed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I am staying at this price. That is my final offer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu fiyatta kalıyorum. Son teklifim bu."
           }
         }
       }
