@@ -8,12 +8,12 @@ working behavior; the answers below must come from a person playing freely.
 
 - Record the checkpoint commit, device/iOS, language, build configuration and
   session start/end time. Normal Debug and Release builds now share production
-  pacing; Release keeps developer tools out of the player interface. Isolated UI
+  pacing; neither exposes developer tools in the player interface. Isolated UI
   tests explicitly opt into accelerated/instant timing and are not pacing evidence.
 - Use a fresh save for a first-session evaluation. Keep a continuing save for
   return sessions. A fresh install on a dedicated test device is suitable; do not
-  erase someone else's save. DEBUG Profile → Developer tools offers a confirmed
-  reset when needed before the session.
+  erase someone else's save. There is no player-facing reset/developer screen;
+  prepare a separate test installation rather than modifying a continuing career.
 - Do not use cash grants, forced replies, regeneration, virtual time or hidden
   truth during play. Leave sound and notification consent to the player.
 - The facilitator observes without explaining prices, hidden condition or an
@@ -21,18 +21,18 @@ working behavior; the answers below must come from a person playing freely.
 
 ## Current observation to retest
 
-The owner reported that several parts of trading felt too predictable/easy.
-The targeted response is recorded in TRADING_CHALLENGE.md: stronger personality-
-dependent floors for newly generated stock, variable seller concessions and
-buyer raises that can lose the buyer instead of revealing a free exact maximum.
-A standing offer remains safe to accept. Previously saved prices and seller
-floors are preserved; use a fresh evaluation save or naturally arriving stock to
-judge the new floors. Never reset or regenerate stock during the observed session.
+The latest quality pass addresses systematically weak ordinary resale exits,
+unclear pre-purchase risk and the post-introduction pacing cliff. See
+[the measured audit](QUALITY_PASS_2026_10_23.md). New ordinary seller margins and
+buyer audiences are tuned; existing agreements, hidden truth and saved deadlines
+are preserved. Use a fresh dedicated test career or naturally arriving stock to
+judge the new rules without resetting the player's own save.
 
-Record whether bargaining now rewards judgment, whether ordinary purchases can
-lose money, whether asking for more is a real choice, and whether lost buyers
-feel understandable rather than arbitrary. Do not require a particular win/loss
-rate or reveal private budgets during play.
+Record whether the player understands the uncertain resale/margin range before
+buying, notices disclosed faults, compares repair cost with possible recovered
+value, and can explain a win or loss. Observe whether the next career milestone
+and fresh listings create a voluntary reason for one more trade. Do not reveal
+private budgets or require a particular win/loss rate during play.
 
 ## Play freely
 
@@ -41,14 +41,19 @@ sessions, then decide whether you actually want another. Ask questions, bargain,
 hold or sell as-is as you wish. A loss is a useful observation, not a failed test.
 Do not require every scenario or teach a strategy in the first session.
 
-After the accelerated introduction, seller replies vary with urgency and take
-minutes. Standard delivery takes roughly 3–7 minutes and is included in the agreed
-price; expert inspection takes 15 minutes. Attention develops over time, with
-price and audience affecting pace and no guaranteed buyer. Buyer counter replies
-are also delayed. A sale listing has a 45-minute window and can end without a
-sale; revising the price does not reset that window. Plan short return sessions
-as well as continuous play. Record whether these waits help or hurt; do not use
-accelerated test launches to decide whether normal play is too slow.
+After the brief introduction, new seller replies sample 15–35 seconds before
+urgency scaling. New delivery takes roughly 36–84 seconds and is included in the
+agreed price; expert reports take 90 seconds. Existing booked deadlines remain
+unchanged. Repairs remain immediate quoted decisions. Buyer observations sample
+15–45 seconds before liquidity/category scaling; interest and a sale are never
+guaranteed. A sale listing has a 45-minute window, and revising its price does not
+reset that window. Offers retain their 18-minute response window.
+
+While work is pending, follow a ready handoff or browse elsewhere. The market
+admits fresh stock every 90 seconds while there is room below its 16-listing
+shelf, without deleting live/watched listings to make space. Record whether the
+player finds useful choices during waits. Accelerated test saves are not pacing
+evidence. Start with a 20-minute free session and allow short return sessions.
 
 At a natural seller reply, delivery, expert inspection or buyer wait, leave the app
 and return later. If you consented to notifications, try returning through one

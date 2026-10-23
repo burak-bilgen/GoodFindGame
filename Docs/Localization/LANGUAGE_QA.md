@@ -1,6 +1,6 @@
 # German / French delivery — 2026-10-23
 
-All 884 catalog keys now have English, Turkish, German and French translations. German/French are registered in the Xcode project and the dynamic GameText resolver; unsupported languages fall back to English. Locale variants such as fr-CA resolve the French catalog. Currency remains an independent saved preference, and translations do not change prices, stock, difficulty or the saved fictional identities.
+All 895 catalog keys now have English, Turkish, German and French translations. German/French are registered in the Xcode project and the dynamic GameText resolver; unsupported languages fall back to English. Locale variants such as fr-CA resolve the French catalog. Currency remains an independent saved preference, and translations do not change prices, stock, difficulty or the saved fictional identities.
 
 ## Editorial conventions
 
@@ -12,7 +12,23 @@ All 884 catalog keys now have English, Turkish, German and French translations. 
 
 The shipping source of truth is `ProjectFlip/Resources/Localizable.xcstrings`. `de-fr.tsv` is an editorial snapshot of the non-plural entries; plural variants live in the catalog. `game-center-metadata.tsv` is a copy worksheet for the owner, not an upload script or a claim that live Game Center is configured.
 
-## Focused verification
+## Quality-pass and agent follow-up
+
+The current catalog has **895 keys** across all four languages. Complete trade
+replays, signed results and persisted receipts passed in German/French during
+the [quality pass](../QUALITY_PASS_2026_10_23.md). Follow-up replays also use
+accessibility size 3 and Reduce Motion, alongside the existing large Turkish
+journey. They verify the actual localized buyer-attention accessibility value;
+English/Turkish verify that it clears after settlement.
+
+A screenshot review caught the French views count splitting its digits at large
+text size. The corrected attention rows preserve each number and adapt to a
+vertical layout when the localized content cannot fit. This is layout and
+exposed-semantics acceptance, not a claim of native-speaker editorial approval or
+full physical-device VoiceOver acceptance. Recorded final follow-up results are
+in the quality report. The delivery checkpoint below is historical.
+
+## Original delivery checkpoint (before the quality pass)
 
 - Catalog checker: all 884 keys complete in all four languages; translator context, manual extraction and format arguments verified.
 - `/tmp/ProjectFlip-languages-23.xcresult`: 2 selected tests passed, no failures or recorded runtime warnings. One runtime test covers German/French dynamic content, localized people/places/product names, notification placeholders, locale variants and unsupported-language fallback. One UI scenario launches both languages, navigates Market → Profile → Settings and captures screenshots.

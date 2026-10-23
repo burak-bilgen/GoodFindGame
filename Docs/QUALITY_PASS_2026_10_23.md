@@ -71,3 +71,43 @@ Fees/cost audit: there is no transaction commission or extra shipping charge to 
 The trading puzzle has a stronger repeatable decision loop: read a claim, allow for uncertainty, bargain or pass, discover evidence, compare repair with an exit, and judge the signed result. Progression already supplies expertise, new inventory tiers, a shop, specific clients, voluntary collections and an optional fresh-bankroll weekly mode. More currencies, crafting layers, repair timers or animated flourishes would weaken this pass.
 
 Automated and visually reviewed simulator play establishes interaction, economic and pacing behavior, not enjoyment, retention, physical-device sound/haptic feel or native-language editorial acceptance. Broader long-term content and individual recurring seller identity remain potential follow-up research, not new features added here. Minimum-iOS runtime acceptance and live signed Game Center remain external checks already recorded by the project. Existing saves retain item truth, cash, agreements, investments and booked deadlines; new content and newly booked work use the tuned rules. The owner's local signing-project change is preserved and excluded from all commits.
+
+
+## Agent-side accessibility and backlog follow-up
+
+The owner asked to focus on work that can be completed locally. No optional AI,
+new languages, photography or Apple-account configuration was added.
+
+- Buyer attention now has a localized accessibility value on the Shop tab, instead
+  of relying on a visual badge. The visual count is decorative to screen readers;
+  the actionable waiting-offer state is announced and clears after settlement.
+  English/Turkish full trades check both transitions; German/French large-text
+  trades check the actual localized announcement.
+- Extended the native hit-region audit through inspection service controls,
+  pricing suggestions and live buyer decisions. The existing controls passed;
+  no service or economy change was justified by that check.
+- Replayed German/French complete trades at accessibility size 3 with Reduce
+  Motion and persistent receipts. Visual review caught a French views count
+  splitting “16” into two lines. Attention stats now preserve each number and
+  choose horizontal or vertical layout based on actual available width. Each
+  stat exposes its localized label and count as static readable content.
+- The first stats regression exposed inherited container identifiers and native
+  hit-region complaints about the newly grouped information. Added an explicit
+  containing accessibility group, static-text traits and 44-point rows. Final
+  checks verify readable values, number-line height, viewport bounds and native
+  touch regions; no scanner issue is ignored.
+- Updated the active backlog, current status, localization scope and human
+  playtest guide. Removed obsolete developer-reset instructions and 3–7-minute
+  delivery/15-minute report guidance. Historical checkpoint counts remain dated.
+
+Verification: the five focused scenarios before the stats correction passed with
+zero failures/skips and no recorded runtime warnings
+(`/tmp/Findrove-agent-closeout.xcresult`). The final affected two-scenario checkpoint passed: **2 passed, zero failed,
+zero skipped, no recorded runtime warnings**
+(`/tmp/Findrove-attention-acceptance.xcresult`). Final Release compilation passed
+(`/tmp/Findrove-agent-final-release.log`); all 895 four-language keys validate.
+Original before/after screenshots and summaries are preserved in
+`../Artifacts/AccessibilityCloseout-2026-10-23` relative to this repository. This follow-up
+does not rerun the unchanged 163-test domain suite. The iOS 26 minimum compiles;
+only iOS 27.2 simulator runtimes are installed, so minimum-runtime and physical
+VoiceOver/audio/haptic acceptance are still open.
