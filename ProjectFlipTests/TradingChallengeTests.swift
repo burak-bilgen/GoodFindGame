@@ -91,10 +91,12 @@ extension TradingChallengeTests {
     }
 
     @Test func normalConversationRepliesHaveAnInteractiveTimeBudget() {
-        #expect(SimulationTiming.production.sellerReply.upperBound <= 90)
+        #expect(SimulationTiming.production.sellerReply.upperBound <= 35)
         #expect(SimulationTiming.production.sellerReply.lowerBound >= 15)
-        #expect(SimulationTiming.production.buyerInterest.upperBound <= 180)
-        #expect(SimulationTiming.production.shipping > 0 && SimulationTiming.production.inspection > 0)
+        #expect(SimulationTiming.production.buyerInterest.upperBound <= 45)
+        #expect((30...90).contains(SimulationTiming.production.shipping))
+        #expect((30...120).contains(SimulationTiming.production.inspection))
+        #expect(MarketFeedTiming.production.refresh <= 120)
     }
 
     @Test func sellerFatigueDoesNotMoveTheMinimumAboveAPreviouslyAcceptableBid() throws {

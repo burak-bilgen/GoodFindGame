@@ -192,7 +192,7 @@ extension MarketplaceLifeTests {
 }
 
 extension MarketplaceLifeTests {
-    @Test func introductionIsFastButRepeatAcquisitionWaitsMinutes() throws {
+    @Test func introductionIsFastAndRepeatAcquisitionFitsAnActiveSession() throws {
         let first = try PurchaseTests.agreedState()
         let firstBought = try SimulationActions(timing: .production).purchase(listingID: first.market[0].id, state: first, now: now)
         #expect(firstBought.player.inventory.isEmpty)
@@ -202,8 +202,8 @@ extension MarketplaceLifeTests {
         later.conversations.append(NegotiationState(listingID: listing.id, patience: listing.seller.patience, agreedPrice: listing.askingPrice))
         let bought = try SimulationActions(timing: .production).purchase(listingID: listing.id, state: later, now: now)
         let shipment = try #require(bought.shipments.last)
-        #expect(shipment.arrivesAt.timeIntervalSince(now) >= 179.99)
-        #expect(shipment.arrivesAt.timeIntervalSince(now) <= 480)
+        #expect(shipment.arrivesAt.timeIntervalSince(now) >= 35.99)
+        #expect(shipment.arrivesAt.timeIntervalSince(now) <= 84.01)
         #expect(!bought.player.inventory.contains { $0.id == listing.item.id })
     }
 
@@ -225,7 +225,7 @@ extension MarketplaceLifeTests {
         var (state, definitions) = try repeatListing(4, price: 10_000)
         let id = state.playerListings[1].id
         let liveNow = Date.now
-        state.playerListings[1].expiresAt = liveNow.addingTimeInterval(30)
+        state.playerListings[1].expiresAt = liveNow.addingTimeInterval(5)
         state = try BuyerEngine().generateOffer(listingID: id, state: state, definitions: definitions, now: liveNow)
         let offer = try #require(state.playerListings[1].offers.last)
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)

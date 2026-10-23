@@ -104,8 +104,12 @@ struct MarketFeedTests {
         let sold = try BuyerEngine().accept(listingID: offered.playerListings[0].id, state: offered, now: now)
         let resolver = EventResolver(timing: .production)
         var state = try resolver.resolve(sold, now: now, definitions: definitions).state
-        #expect(state.market.filter(\.available).count == 10)
-        #expect(state.generation == sold.generation + 1)
+        // The expanded introductory feed is preserved until it naturally closes;
+        // replenishment fills holes, it must not delete live listings to hit a cap.
+        let initialAvailable = sold.market.filter(\.available).count
+        #expect(state.market.filter(\.available).count == max(MarketFeedEngine.targetCount, initialAvailable))
+        let initialGeneration = state.generation
+        #expect(initialGeneration == sold.generation + (initialAvailable < MarketFeedEngine.targetCount ? 1 : 0))
         let watched = state.market[1].id
         state.watchedListingIDs = [watched]
         for day in 1...30 {
@@ -115,7 +119,7 @@ struct MarketFeedTests {
             #expect(state.events.count <= 250)
             #expect(state.market.contains { $0.id == watched })
         }
-        #expect(state.generation == sold.generation + 31)
+        #expect(state.generation == initialGeneration + 30)
         #expect(state.player.cash == sold.player.cash)
         #expect(state.playerListings == sold.playerListings)
         #expect(state.market.first { $0.id == watched }?.available == false)

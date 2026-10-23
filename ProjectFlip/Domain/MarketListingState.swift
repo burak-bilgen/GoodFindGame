@@ -22,6 +22,6 @@ struct MarketFeedTiming: Sendable {
     let remainingLifetime: ClosedRange<TimeInterval>
     let competitorDelay: ClosedRange<TimeInterval>
     let priceDropDelay: ClosedRange<TimeInterval>
-    static let production = Self(refresh: 1_800, remainingLifetime: 7_200...21_600, competitorDelay: 600...5_400, priceDropDelay: 1_800...5_400)
+    static let production = Self(refresh: 90, remainingLifetime: 1_800...5_400, competitorDelay: 180...900, priceDropDelay: 240...900)
     static let debug = Self(refresh: 90, remainingLifetime: 300...540, competitorDelay: 50...180, priceDropDelay: 35...90)
 }
