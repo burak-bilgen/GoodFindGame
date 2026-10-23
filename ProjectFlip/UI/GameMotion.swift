@@ -77,7 +77,6 @@ struct GameActivityLights: View {
 
 /// Short payoff particles stay inside the outcome panel. No invented rewards.
 struct GamePayoffBurst: View {
-    var positive: Bool
     @GameReduceMotion private var reduceMotion
     @State private var progress: CGFloat = 0
     var body: some View {
@@ -88,7 +87,7 @@ struct GamePayoffBurst: View {
                         let angle = Double(index) * .pi * 2 / 18
                         let distance = CGFloat(index % 3 + 2) * 22 * progress
                         RoundedRectangle(cornerRadius: 1)
-                            .fill(positive ? (index % 3 == 0 ? GameStyle.gain : GameStyle.amber) : GameStyle.loss)
+                            .fill(index % 3 == 0 ? GameStyle.gain : GameStyle.amber)
                             .frame(width: 4, height: index % 2 == 0 ? 8 : 4)
                             .rotationEffect(.degrees(Double(index * 23) + Double(progress) * 120))
                             .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.35)

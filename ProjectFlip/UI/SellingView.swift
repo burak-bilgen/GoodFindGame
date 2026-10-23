@@ -359,7 +359,7 @@ struct TradePayoff: View {
         .padding(22).frame(maxWidth: .infinity, alignment: .leading).foregroundStyle(.white)
         .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 26))
         .overlay(RoundedRectangle(cornerRadius: 26).strokeBorder(GameStyle.amber.opacity(0.35), lineWidth: 1))
-        .overlay { if record.netProfit != .zero { GamePayoffBurst(positive: record.netProfit > .zero) } }
+        .overlay { if record.netProfit > .zero { GamePayoffBurst() } }
         .onAppear { withAnimation(reduceMotion ? nil : .easeOut(duration: 0.4)) { appeared = true } }
     }
 }
