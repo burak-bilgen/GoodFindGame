@@ -109,6 +109,7 @@ extension RegionalTradingSimulationTests {
         var winRates: [Double] = []
         for strategy in 0...2 {
             var wins = 0, losses = 0, profit: Int64 = 0, invested: Int64 = 0
+            var largeRiskWins = 0, largeRiskLosses = 0
             for sample in 0..<600 {
                 var state = try GameSnapshot.fresh(definitions: definitions)
                 state.simulationID = "quality-\(sample)"
@@ -164,13 +165,22 @@ extension RegionalTradingSimulationTests {
                 let record = try TradeRecord(listing: #require(state.playerListings.last))
                 if record.netProfit > .zero { wins += 1 } else if record.netProfit < .zero { losses += 1 }
                 profit += record.netProfit.minorUnits; invested += record.totalCost.minorUnits
+                if listing.seller.archetype == .clueless || listing.seller.archetype == .manipulative {
+                    let tradeROI = Double(record.netProfit.minorUnits) / Double(max(1, record.totalCost.minorUnits))
+                    if tradeROI >= 0.30 { largeRiskWins += 1 }
+                    if tradeROI <= -0.30 { largeRiskLosses += 1 }
+                }
             }
             let count = wins + losses
             let winRate = Double(wins) / Double(max(1, count))
             let roi = Double(profit) / Double(max(1, invested))
             print("QUALITY strategy=\(strategy) trades=\(count) wins=\(wins) losses=\(losses) ROI=\(roi)")
             #expect(count >= 60)
-            if strategy == 0 { #expect(winRate < 0.5 && roi < 0) }
+            if strategy == 0 {
+                #expect(winRate < 0.5 && roi < 0)
+                #expect(largeRiskWins >= 5 && largeRiskLosses >= 5, "Risky sellers must retain both substantial upside and meaningful losses")
+                print("QUALITY risky trades: \(largeRiskWins) above +30% ROI, \(largeRiskLosses) below -30% ROI")
+            }
             if strategy == 1 { #expect(winRate >= 0.50 && winRate <= 0.75 && roi >= 0 && roi < 0.15) }
             if strategy == 2 { #expect(winRate >= 0.80 && winRate < 0.97 && roi >= 0.12) }
             winRates.append(winRate)

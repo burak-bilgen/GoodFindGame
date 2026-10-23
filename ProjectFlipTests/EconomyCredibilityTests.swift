@@ -50,7 +50,7 @@ extension EconomyCredibilityTests {
             }
         }
         #expect(checked == definitions.count * 100 * 2)
-        print("ECONOMY: 10,000 listings and buyer budgets checked across US/USD and Turkey/TRY")
+        print("ECONOMY: \(checked) listings and buyer budgets checked across USD and TRY display currencies")
     }
 
     @Test func legacyMigrationBacksUpAndRebasesEveryMoneyFieldOnce() throws {

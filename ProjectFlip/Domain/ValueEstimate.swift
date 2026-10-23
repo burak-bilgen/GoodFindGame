@@ -17,7 +17,7 @@ struct ValueEstimate: Equatable {
     init(center: Money, spread: Int64) throws {
         let low = try center.scaled(byBasisPoints: max(0, 10_000 - spread))
         let high = try center.scaled(byBasisPoints: 10_000 + spread)
-        // Round outward to 50 economy units, not misleading cent-level precision.
+        // Round outward to five canonical dollars, not misleading cent-level precision.
         let step: Int64 = 500
         lower = Money(minorUnits: max(100, low.minorUnits / step * step))
         upper = Money(minorUnits: max(lower.minorUnits + step, ((high.minorUnits + step - 1) / step) * step))
