@@ -15,7 +15,7 @@ struct BuyerEngine {
         guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)) else { return state }
         let introduction = state.playerListings.first?.id == listing.id && listing.offers.isEmpty
         var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-\(state.simulationID)-\(listing.id.rawValue)-\(listing.offers.count)-\(state.nextEventSequence)"))
-        let audience = ShopEngine.audience(for: listing, state: state, definitions: definitions) ?? BuyerArchetype.allCases
+        let audience = ShopEngine.audience(for: listing, state: state, definitions: definitions) ?? BuyerArchetype.marketAudience
         let archetype = introduction ? BuyerArchetype.cautious : audience[random.integer(in: 0...(audience.count - 1))]
         let reputationFactor = Int64(10_000)
         let premium: Int64 = archetype == .collector && item.condition >= 90 ? 1_100 : 0
@@ -25,7 +25,7 @@ struct BuyerEngine {
         case .lowballer: 5_000...7_000
         case .bargainHunter: 7_000...8_500
         case .reseller: 7_800...9_200
-        case .cautious: 9_000...9_700
+        case .cautious: 9_300...10_000
         case .impatient: 9_700...10_300
         case .collector: 9_300...10_300
         }

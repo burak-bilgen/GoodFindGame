@@ -76,7 +76,7 @@ enum ShopEngine {
     static func audience(for listing: PlayerListing, state: GameSnapshot, definitions: [ItemDefinition]) -> [BuyerArchetype]? {
         guard state.shop.featured.contains(listing.id), fits(listing, state: state, definitions: definitions) else { return nil }
         return switch state.shop.style {
-        case .bargains: [.bargainHunter, .reseller, .impatient]
+        case .bargains: [.bargainHunter, .impatient, .impatient, .cautious]
         case .tested: [.cautious, .cautious, .impatient]
         case .collector: [.collector, .collector, .cautious]
         }

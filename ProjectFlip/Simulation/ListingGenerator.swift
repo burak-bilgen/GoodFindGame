@@ -71,9 +71,9 @@ struct ListingGenerator {
                 case .professional: 9_400...10_400
                 case .stubborn: 10_200...12_000
                 case .collector: 9_800...11_500
-                case .urgent: 7_800...9_300
-                case .friendly: 8_800...9_800
-                case .casual: 8_800...10_300
+                case .urgent: 7_200...8_800
+                case .friendly: 8_000...9_300
+                case .casual: 8_200...9_700
                 case .clueless: 8_500...10_000
                 case .manipulative: 8_800...10_000
                 }

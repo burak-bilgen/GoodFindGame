@@ -22,7 +22,10 @@ struct ShopTests {
         shop.playerListings[0].askingPrice = Money(minorUnits: 1_000)
         #expect(ShopEngine.audience(for: shop.playerListings[0], state: shop, definitions: definitions) == nil)
         shop = try ShopEngine.toggle(id, state: shop, definitions: definitions)
-        #expect(ShopEngine.audience(for: shop.playerListings[0], state: shop, definitions: definitions) == [.bargainHunter, .reseller, .impatient])
+        let audience = try #require(ShopEngine.audience(for: shop.playerListings[0], state: shop, definitions: definitions))
+        let windowBudget = audience.reduce(Int64(0)) { $0 + $1.valueBasisPoints } / Int64(audience.count)
+        let marketBudget = BuyerArchetype.marketAudience.reduce(Int64(0)) { $0 + $1.valueBasisPoints } / Int64(BuyerArchetype.marketAudience.count)
+        #expect(windowBudget >= marketBudget, "Paying for a matching shop window must not replace ordinary buyers with mostly reseller lowballs")
         #expect(throws: TradingError.self) { try ShopEngine.changeStyle(.tested, state: shop) }
         let held = shop.playerListings[0].offers
         shop = try ShopEngine.toggle(id, state: shop, definitions: definitions)

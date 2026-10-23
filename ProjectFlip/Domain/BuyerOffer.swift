@@ -2,6 +2,10 @@ import Foundation
 
 enum BuyerArchetype: String, Codable, CaseIterable {
     case cautious, bargainHunter, collector, impatient, reseller, lowballer
+    // Ordinary end users are the main audience. Lowballers and other traders
+    // still exist, but should not dominate every otherwise sound resale.
+    static let marketAudience: [Self] = [.cautious, .cautious, .cautious, .impatient, .impatient, .impatient,
+                                         .collector, .bargainHunter, .reseller, .lowballer]
     var valueBasisPoints: Int64 {
         switch self {
         case .cautious: 9_500
