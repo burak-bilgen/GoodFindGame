@@ -17756,7 +17756,7 @@
       }
     },
     "client.rowan.name.unitedStates": {
-      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "comment": "Shared-world client display name localized by language; the legacy region suffix no longer controls the economy or the displayed identity.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -17768,7 +17768,7 @@
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rowan"
+            "value": "Ece"
           }
         },
         "de": {
@@ -17816,7 +17816,7 @@
       }
     },
     "client.jules.name.unitedStates": {
-      "comment": "Trading career milestone; player-facing progression and market-world copy.",
+      "comment": "Shared-world client display name localized by language; the legacy region suffix no longer controls the economy or the displayed identity.",
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -17828,7 +17828,7 @@
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jules"
+            "value": "Baran"
           }
         },
         "de": {
