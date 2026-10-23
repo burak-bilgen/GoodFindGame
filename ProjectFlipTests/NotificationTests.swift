@@ -79,3 +79,19 @@ struct NotificationTests {
         #expect(!decoded.notificationPreferences.permissionPrompted)
     }
 }
+
+extension NotificationTests {
+    @Test func sellerNotificationUsesTheSameLocalizedIdentityAsTheConversation() throws {
+        let definitions = try SeedContent.load().items
+        let original = try GameSnapshot.fresh(definitions: definitions)
+        let listing = original.market[1] // Jana/Julien, not legacy English Jordan.
+        let state = try SimulationActions(timing: .production).offer(listingID: listing.id, amount: listing.askingPrice, modifier: .none, state: original, now: now)
+        for language in GameText.supportedLanguages {
+            let locale = Locale(identifier: language)
+            let name = GameText.marketPerson("name", index: listing.seller.identityIndex, market: state.marketConfiguration, locale: locale)
+            let plan = try NotificationPlanner().makePlan(state: state, definitions: definitions, locale: locale, now: now)
+            #expect(plan.count == 1)
+            #expect(plan[0].body.contains(name))
+        }
+    }
+}

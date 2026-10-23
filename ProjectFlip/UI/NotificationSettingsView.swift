@@ -32,7 +32,7 @@ struct NotificationSettingsView: View {
                 }
             }
             Section("notifications.categories") {
-                ForEach(LocalNotificationCategory.allCases, id: \.self) { category in
+                ForEach(LocalNotificationCategory.available, id: \.self) { category in
                     Toggle(isOn: Binding(get: { store.snapshot.notificationPreferences.enabledCategories.contains(category) }, set: { enabled in
                         store.perform { try store.setNotificationCategory(category, enabled: enabled) }
                     })) { Text(GameText.string(category.key, locale: locale)) }

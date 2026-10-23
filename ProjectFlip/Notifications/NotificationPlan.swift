@@ -3,6 +3,8 @@ import Foundation
 enum LocalNotificationCategory: String, Codable, CaseIterable, Sendable {
     case offers, logistics, auctions, market, requests
     var key: String { "notifications.category.\(rawValue)" }
+    // Keep retired/future raw values decodable without offering inert toggles.
+    static let available: [Self] = [.offers, .logistics, .market]
 }
 
 struct NotificationPreferences: Codable, Equatable {
@@ -84,7 +86,7 @@ struct NotificationPlanner {
                 guard let listing = state.market.first(where: { $0.id == id }),
                       MarketFeedEngine.remainsAvailable(listingID: id, at: event.resolveAt, sequence: event.sequence, state: state) else { continue }
                 category = .offers
-                let name = GameText.string("npc.name.\(listing.seller.identityIndex % 10)", locale: locale)
+                let name = GameText.marketPerson("name", index: listing.seller.identityIndex, market: state.marketConfiguration, locale: locale)
                 let expiry = projected(expiresAt).formatted(.dateTime.hour().minute().locale(locale))
                 if let price = reply.counterPrice {
                     body = GameText.format("notifications.sellerCounter", locale: locale, name, price.formatted(locale: locale, market: state.marketConfiguration), expiry)
