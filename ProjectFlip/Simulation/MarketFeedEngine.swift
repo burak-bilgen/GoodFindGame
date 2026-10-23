@@ -3,6 +3,7 @@ import Foundation
 struct MarketFeedEngine {
     let timing: MarketFeedTiming
     static let targetCount = 10
+    static let maximumBrowsingCount = 16
 
     func prepare(_ state: inout GameSnapshot, now: Date, definitions: [ItemDefinition]) throws {
         guard state.playerListings.contains(where: { $0.status == .sold }) else { return }
@@ -41,7 +42,15 @@ struct MarketFeedEngine {
     }
 
     func replenish(_ state: inout GameSnapshot, now: Date, definitions: [ItemDefinition]) throws {
-        let needed = max(0, Self.targetCount - state.market.filter(\.available).count)
+        let available = state.market.filter(\.available).count
+        let refill = max(0, Self.targetCount - available)
+        // Browsing must reveal new opportunities even if the player correctly
+        // passes on bad stock. Admit one arrival per refresh with bounded shelf
+        // space; never retire a watched listing or firm quote to manufacture room.
+        // The initial prepare keeps its introductory stock, and offline catch-up
+        // still replenishes only once rather than replaying hours of arrivals.
+        let discovery = available < Self.maximumBrowsingCount && state.marketFeedStartedAt.map { now > $0 } == true ? 1 : 0
+        let needed = max(refill, discovery)
         if needed > 0 {
             guard !definitions.isEmpty, state.generation < UInt64.max else { throw SaveError.invalidSave }
             state.generation += 1

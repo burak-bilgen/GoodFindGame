@@ -164,3 +164,26 @@ struct MarketFeedTests {
     }
 
 }
+
+
+extension MarketFeedTests {
+    @Test func passingOnStockStillBringsNewOpportunitiesWithoutRemovingLiveListings() throws {
+        let offered = try BuyerTests.offeredState()
+        let sold = try BuyerEngine().accept(listingID: offered.playerListings[0].id, state: offered, now: now)
+        let resolver = EventResolver(timing: .production)
+        let start = try resolver.resolve(sold, now: now, definitions: definitions).state
+        let originals = Set(start.market.filter(\.available).map(\.id))
+        let refreshed = try resolver.resolve(start, now: now.addingTimeInterval(MarketFeedTiming.production.refresh), definitions: definitions).state
+        let available = Set(refreshed.market.filter(\.available).map(\.id))
+        #expect(originals.isSubset(of: available))
+        #expect(available.count == originals.count + 1)
+        #expect(refreshed.generation == start.generation + 1)
+        #expect(refreshed.player.cash == start.player.cash)
+        #expect(try resolver.resolve(refreshed, now: now.addingTimeInterval(MarketFeedTiming.production.refresh), definitions: definitions).state == refreshed)
+        var full = refreshed
+        full.market = try ListingGenerator().generate(definitions: Array(MarketCatalog.active(definitions).prefix(MarketFeedEngine.maximumBrowsingCount)), seed: 987, now: now, starterFriendly: false)
+        let before = full.market
+        try MarketFeedEngine(timing: .production).replenish(&full, now: now.addingTimeInterval(180), definitions: definitions)
+        #expect(full.market == before, "A full browsing shelf must not grow without bound")
+    }
+}

@@ -100,3 +100,27 @@ struct TimedActionTests {
         #expect(store.projectedDeadline(now.addingTimeInterval(86_410), now: now) == now.addingTimeInterval(10))
     }
 }
+
+extension TimedActionTests {
+    @Test func pacingUpdateHonorsAnAlreadyPaidLegacyReportDeadline() throws {
+        let definitions = try SeedContent.load().items
+        let now = Date(timeIntervalSince1970: 100_000)
+        let offered = try BuyerTests.offeredState()
+        var state = try BuyerEngine().accept(listingID: offered.playerListings[0].id, state: offered, now: now)
+        let listing = state.market[1]
+        state.conversations.append(NegotiationState(listingID: listing.id, patience: 60, agreedPrice: listing.askingPrice))
+        state = try PurchaseEngine().buy(listingID: listing.id, state: state, now: now)
+        state.lastKnownWallClock = now; state.lastSimulationAt = now
+        let legacy = SimulationTiming(sellerReply: 30...90, shipping: 300, inspection: 900, buyerInterest: 60...180, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12)
+        state = try SimulationActions(timing: legacy).inspect(itemID: listing.item.id, professionally: true, state: state, now: now, definitions: definitions)
+        let paidCash = state.player.cash
+        let saved = try JSONDecoder().decode(GameSnapshot.self, from: JSONEncoder().encode(state))
+        let pending = try EventResolver(timing: .production).resolve(saved, now: now.addingTimeInterval(100), definitions: definitions).state
+        #expect(pending.inspectionJobs[0].status == .pending)
+        #expect(pending.inspectionJobs[0].completesAt == now.addingTimeInterval(900))
+        #expect(!pending.player.inventory[0].professionallyInspected)
+        let completed = try EventResolver(timing: .production).resolve(pending, now: now.addingTimeInterval(901), definitions: definitions).state
+        #expect(completed.player.inventory[0].professionallyInspected)
+        #expect(completed.player.cash == paidCash)
+    }
+}
