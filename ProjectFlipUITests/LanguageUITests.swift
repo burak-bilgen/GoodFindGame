@@ -21,11 +21,19 @@ import XCTest
     }
 
     func testCompleteTradeGermanAndFrench() {
+        completeTrade()
+    }
+
+    func testLargeTextTradeGermanAndFrench() {
+        completeTrade(flags: ["--uitest-large-type"])
+    }
+
+    private func completeTrade(flags: [String] = []) {
         continueAfterFailure = false
         for (code, locale) in [("de", "de_DE"), ("fr", "fr_FR")] {
             let app = XCUIApplication()
             app.launchArguments = ["-AppleLanguages", "(\(code))", "-AppleLocale", locale,
-                                   "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
+                                   "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"] + flags
             app.launch()
             XCTAssertTrue(app.buttons["listing.listing-42-0"].waitForExistence(timeout: 10))
             tap(app.buttons["listing.listing-42-0"], in: app)
@@ -45,6 +53,19 @@ import XCTest
             tap(app.buttons["publishListing"], in: app)
             tap(app.buttons["followPlayerListing"], in: app)
             XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 5))
+            XCTAssertEqual(app.buttons["gameTab.3"].value as? String, code == "de" ? "Ein Käufer wartet" : "Un acheteur attend")
+            if !flags.isEmpty {
+                let views = app.descendants(matching: .any)["listingViewsStat"].firstMatch
+                let favorites = app.descendants(matching: .any)["listingFavoritesStat"].firstMatch
+                XCTAssertTrue(views.exists && favorites.exists)
+                XCTAssertFalse((views.value as? String ?? "").isEmpty)
+                XCTAssertLessThanOrEqual(views.frame.height, favorites.frame.height * 1.2, "The views count must not wrap its digits")
+                XCTAssertLessThanOrEqual(favorites.frame.height, views.frame.height * 1.2, "The favorite count must not wrap its digits")
+                for stat in [views, favorites] {
+                    XCTAssertGreaterThanOrEqual(stat.frame.minX, 0)
+                    XCTAssertLessThanOrEqual(stat.frame.maxX, app.frame.width)
+                }
+            }
             capture("Buyer decision \(code)", app: app)
             tap(app.buttons["acceptBuyerOffer"], in: app)
             XCTAssertTrue(app.staticTexts["tradePayoff"].waitForExistence(timeout: 5))

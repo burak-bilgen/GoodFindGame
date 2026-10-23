@@ -1,5 +1,39 @@
 import SwiftUI
 
+/// Keep each count intact; long translations choose rows instead of splitting digits.
+private struct ListingAttentionStats: View {
+    let views: Int
+    let favorites: Int
+    @Environment(\.locale) private var locale
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 16) {
+                stat(views, key: "selling.views", symbol: "eye", id: "listingViewsStat")
+                Spacer(minLength: 0)
+                stat(favorites, key: "selling.favorites", symbol: "heart", id: "listingFavoritesStat")
+            }
+            VStack(alignment: .leading, spacing: 10) {
+                stat(views, key: "selling.views", symbol: "eye", id: "listingViewsStat")
+                stat(favorites, key: "selling.favorites", symbol: "heart", id: "listingFavoritesStat")
+            }
+        }.accessibilityElement(children: .contain).accessibilityIdentifier("listingAttention")
+    }
+
+    private func stat(_ count: Int, key: String, symbol: String, id: String) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: symbol).accessibilityHidden(true)
+            Text(count, format: .number.locale(locale)).monospacedDigit().fixedSize()
+            Text(GameText.string(key, locale: locale)).font(.caption).fixedSize()
+        }.font(.subheadline).frame(minHeight: 44, alignment: .leading)
+            .accessibilityElement(children: .ignore)
+            .accessibilityAddTraits(.isStaticText)
+            .accessibilityLabel(Text(GameText.string(key, locale: locale)))
+            .accessibilityValue(Text(count, format: .number.locale(locale)))
+            .accessibilityIdentifier(id)
+    }
+}
+
 struct CreateListingView: View {
     let store: GameStore
     let itemID: ItemID
@@ -146,13 +180,7 @@ struct SaleListingView: View {
                             }
                         } else {
                             LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale, market: market)).font(.title2.bold()) }
-                            HStack {
-                                Label(listing.views.formatted(.number.locale(locale)), systemImage: "eye")
-                                Text("selling.views").font(.caption)
-                                Spacer()
-                                Label(listing.favorites.formatted(.number.locale(locale)), systemImage: "heart")
-                                Text("selling.favorites").font(.caption)
-                            }.font(.subheadline).accessibilityIdentifier("listingAttention")
+                            ListingAttentionStats(views: listing.views, favorites: listing.favorites)
                             if listing.views == 0 && listing.status == .active { Text("living.justListed").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                             let awaitingReply = store.snapshot.hasBuyerReply(for: listing.id)
                             if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
