@@ -3,8 +3,10 @@ import OSLog
 
 /// Content keys are plain Strings, preventing SwiftUI from treating key indices as format arguments.
 enum GameText {
+    static let supportedLanguages = ["en", "tr", "de", "fr"]
     static func string(_ key: String, locale: Locale) -> String {
-        let language = locale.language.languageCode?.identifier == "tr" ? "tr" : "en"
+        let requested = locale.language.languageCode?.identifier ?? "en"
+        let language = supportedLanguages.contains(requested) ? requested : "en"
         for candidate in [language, "en"] {
             if let path = Bundle.main.path(forResource: candidate, ofType: "lproj"), let bundle = Bundle(path: path) {
                 let value = bundle.localizedString(forKey: key, value: nil, table: "Localizable")

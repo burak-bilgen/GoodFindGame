@@ -8,6 +8,8 @@
     "development": "en",
     "supported": [
       "tr",
+      "de",
+      "fr",
     ],
   },
   "files": [

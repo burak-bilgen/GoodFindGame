@@ -15,11 +15,11 @@ runtime warnings even when XCTest reports a passing interaction.
 
 Previous milestone: **Credible trading game** — canonical/regional economy, product art, game shell, career, clients, collections and recovery implemented; final regression/visual review is recorded in [the milestone QA report](Docs/CREDIBLE_GAME_QA.md). See [the ordered plan](Docs/CREDIBLE_GAME_MILESTONE.md). Findrove is the [recommended working brand](Docs/PRODUCT_NAMING.md), awaiting review; production identifiers remain Project Flip.
 
-The game remains offline-first, portrait iPhone, iOS 26+, with first-class English/Turkish. Optional Game Center competition and achievements are implemented. No external dependencies, ads, payment system, auctions or custom backend are present. Keep simulation independent of UI and locale. Automated correctness does not establish human enjoyment or retention.
+The game remains offline-first, portrait iPhone, iOS 26+, with English, Turkish, German and French. Optional Game Center competition and achievements are implemented. No external dependencies, ads, payment system, auctions or custom backend are present. Keep simulation independent of UI and locale. Automated correctness does not establish human enjoyment or retention.
 
 ## Current delivery
 
-Paid shop opening and window growth, 63 active photographed products, varied listing copy, compact stock filters, activity-ordered messages/archive, editable profile and consolidated settings. Reselect an active tab to return to its root. Seventeen unphotographed products are paused; their definitions remain compatible with existing saves. Photo generation is stopped and German/French translations remain drafts. See [delivery/backlog](Docs/ACTIVE_BACKLOG.md) and [focused verification](Docs/CLOSEOUT_QA.md).
+Paid shop opening and window growth, 63 active photographed products, varied listing copy, compact stock filters, activity-ordered messages/archive, editable profile and consolidated settings. Reselect an active tab to return to its root. Seventeen unphotographed products are paused; their definitions remain compatible with existing saves. Photo generation is stopped. German/French translations are complete and enabled alongside English/Turkish. See [delivery/backlog](Docs/ACTIVE_BACKLOG.md) and [focused verification](Docs/CLOSEOUT_QA.md).
 
 ## Play the game
 

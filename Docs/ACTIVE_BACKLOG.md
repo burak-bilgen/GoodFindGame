@@ -16,9 +16,9 @@ Updated 2026-10-23. Current scope follows the owner's request to stop generating
 - [x] Local profile name, four avatar choices and earned display-title selection. Persisted independently of career/weekly save files and Game Center; shop name and earned rank remain distinct.
 - [x] Language and Apple AI research captured in `LANGUAGE_PRIORITIES.md` and `APPLE_AI_FEASIBILITY.md`.
 
-## Intentionally deferred / needs external acceptance
+## Language delivery and external acceptance
 
-- [ ] German/French translation completion and linguistic review. Partial authored work is preserved in `Localization/de-fr.tsv`; neither language is enabled. Further language expansion was held during the owner's quota constraint. Japanese/Chinese are research priorities, not delivered support; Arabic/ Hindi remain evaluated candidates.
+- [x] German/French completed and enabled: all 884 keys, plural forms, notifications, product descriptions, fictional people/places and Game Center metadata. English/Turkish remain complete. Native-player acceptance and broader accessibility review remain external acceptance; Japanese/Chinese/Arabic/Hindi are not enabled. See `Localization/LANGUAGE_QA.md`.
 - [ ] Live Game Center: owner-account App Store Connect resources and signed sandbox verification. Local optional authentication, leaderboard, weekly saves and achievements are implemented. Setup instructions are in `GAME_CENTER_SETUP.md`.
 - [ ] Human playtest of shop decisions and pacing. Automated checks do not establish enjoyment or long-term retention.
 - [ ] Optional Apple on-device text integration is researched, not implemented. No AI model download, hidden economy changes or online photo generation is part of the game.

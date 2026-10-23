@@ -11,7 +11,7 @@ profile.intro	Jeder Handel erzählt eine Geschichte. Mach deine besonders.	Chaqu
 market.heading	Entdecke, was andere übersehen.	Repère ce que les autres ont manqué.
 market.subtitle	Schau genauer hin. Frag nach. Entscheide selbst.	Observe. Pose des questions. À toi de jouer.
 wallet.cash	Verfügbares Geld	Argent disponible
-category.gaming	Gaming & Elektronik	Jeux vidéo et électronique
+category.gaming	Gaming & Elektronik	Jeux et électronique
 market.newest	Neueste zuerst	Les plus récentes
 listing.title	Angebot	Annonce
 listing.hint.inspect	Der Zustand ist nur eine Behauptung. Achte auf Hinweise.	L’état annoncé n’est qu’une promesse. Cherche les indices.
@@ -236,7 +236,6 @@ notifications.priceDrop	%1$@ kostet jetzt %2$@.	%1$@ est maintenant à %2$@.
 market.nextRefresh	Neue Angebote in	Nouvelles annonces dans
 category.cameras	Kameras	Photo
 category.retro	Retro & Sammlerstücke	Rétro et collection
-category.gaming	Gaming & Elektronik	Jeux et électronique
 defect.batteryWear	Abgenutzter Akku	Batterie usée
 defect.screenBurnIn	Eingebrannte Bildreste	Marquage de l'écran
 defect.wirelessFault	Instabile Funkverbindung	Connexion sans fil instable
@@ -359,3 +358,524 @@ profile.identityHint	Wähle einen verdienten Titel. Dein Ladenname und dein Game
 profile.edit	Profil bearbeiten	Modifier le profil
 profile.defaultName	Dein Profil	Ton profil
 action.save	Speichern	Enregistrer
+listing.referenceCaution	Referenzpreis für ein einwandfreies Exemplar, keine Zusage für diesen Artikel.	Prix de référence d'un exemplaire en bon état, sans garantie pour cet objet.
+offer.counterHeading	SEIN GEGENANGEBOT	SA CONTRE-OFFRE
+offer.smallDiscount	Um einen kleinen Nachlass bitten	Demander une petite remise
+offer.testWaters	Ein niedrigeres Angebot versuchen	Tenter une offre plus basse
+offer.tryLess	Der Preis ist ein Ausgangspunkt. Wie weit kommt man dir entgegen?	Le prix affiché est un point de départ. Jusqu'où ira la négociation ?
+repair.action	Diesen Fehler reparieren	Réparer ce défaut
+repair.asIs	Im Istzustand verkaufen	Vendre en l'état
+repair.cost	Reparaturkosten	Coût de réparation
+repair.immediate	Sofortiger Service. Schätzungen garantieren keinen Verkauf.	Service immédiat. Une estimation ne garantit pas une vente.
+repair.recovery	Geschätzter Wertzuwachs	Valeur récupérée estimée
+repair.title	Lohnt sich die Reparatur?	La réparation vaut-elle le coup ?
+result.costs	Was die Marge aufgezehrt hat	Ce qui a absorbé la marge
+result.even	KOSTEN GEDECKT	À L'ÉQUILIBRE
+result.lesson.costs	Der Verkauf deckte den Kaufpreis, doch Prüfung und Reparatur haben die Marge aufgezehrt.	La vente a couvert l'achat, mais l'inspection et la réparation ont absorbé la marge.
+result.lesson.even	Du hast deinen Einsatz zurück. Ein niedrigerer Einkaufspreis hätte Raum für Gewinn gelassen.	Tu as récupéré ta mise. Un prix d'achat plus bas aurait pu laisser une marge.
+result.lesson.fault	Der Artikel wurde mit bekannten Fehlern verkauft. Wäge beim nächsten Mal die Reparaturkosten gegen den möglichen Wertzuwachs ab.	L'objet a été vendu avec ses défauts connus. La prochaine fois, compare le coût de réparation à la valeur qu'elle pourrait récupérer.
+result.lesson.price	Der Erlös hat deinen Einsatz nicht gedeckt. Lass mehr Abstand zwischen Einkaufspreis und erwartetem Verkaufspreis.	La vente n'a pas couvert ta mise. Prévois plus d'écart entre le prix d'achat et le prix de revente espéré.
+result.lesson.win	Du hast Spielraum im Preis erkannt und daraus Gewinn gemacht. Was wartet als Nächstes?	Tu as repéré une marge possible et tu l'as concrétisée. Quelle sera la prochaine trouvaille ?
+result.loss	SCHLECHTES GESCHÄFT	MAUVAISE AFFAIRE
+result.roi	Rendite auf deinen Einsatz	Rendement de ta mise
+result.route	Für %@ gekauft → für %@ verkauft	Acheté %@ → vendu %@
+result.win	GELUNGENER WEITERVERKAUF	BELLE REVENTE
+reveal.condition	Das lässt sich erkennen.	Voici ce que tu peux observer.
+reveal.continue	Nächstes Ergebnis aufdecken	Révéler le résultat suivant
+reveal.details	Details & Fachwissen	Détails et expertise
+reveal.estimate	DEIN NÄCHSTER SCHRITT	À TOI DE JOUER
+reveal.heading	DIE STUNDE DER WAHRHEIT	L'HEURE DE VÉRITÉ
+reveal.repaired	Repariert	Réparé
+seller.mood.firm	Die Gegenseite bleibt standhaft.	Le vendeur tient bon.
+seller.mood.last	Noch mehr Druck könnte das Gespräch beenden.	Insister encore pourrait mettre fin à l'échange.
+seller.mood.open	Es gibt Verhandlungsspielraum.	Il y a de la place pour négocier.
+seller.voice.casual	„Ich mache Platz für etwas Neues.“	« Je fais de la place pour du neuf. »
+seller.voice.clueless	„Es gehörte jemandem aus der Familie. Ich kenne mich damit nicht aus.“	« C'était à quelqu'un de la famille. Je ne m'y connais pas. »
+seller.voice.collector	„Ich habe gut darauf aufgepasst. Lieber warte ich, als es zu verschenken.“	« J'en ai pris soin. Je préfère attendre plutôt que le brader. »
+seller.voice.friendly	„Frag ruhig. Schön wäre, wenn es wieder genutzt wird.“	« N'hésite pas à poser des questions. J'aimerais qu'il serve à quelqu'un. »
+seller.voice.manipulative	„Das hält noch lange. Machen wir es kurz.“	« Il a encore de beaux jours devant lui. Faisons vite. »
+seller.voice.professional	„Ich kenne dieses Modell gut. Konkrete Fragen beantworte ich gern.“	« Je connais bien ce modèle. Je réponds volontiers aux questions précises. »
+seller.voice.stubborn	„Der Preis ist fair. Bitte bleib realistisch.“	« Le prix est juste. Merci de rester réaliste. »
+seller.voice.urgent	„Es soll heute noch weg. Mach mir ein Angebot.“	« J'aimerais qu'il parte aujourd'hui. Fais-moi une offre. »
+selling.follow	Dein aktives Angebot ansehen	Voir ton annonce en ligne
+selling.invested	Dein bisheriger Einsatz	Ta mise totale
+selling.stakes	Ein höherer Preis lässt mehr Verhandlungsspielraum, kann Käufer aber abschrecken.	Un prix élevé laisse plus de marge pour négocier, mais peut décourager les acheteurs.
+listing.claim.excellent	Laut Verkäufer: ausgezeichnet	Selon le vendeur : excellent état
+listing.claim.good	Laut Verkäufer: gut	Selon le vendeur : bon état
+listing.claim.worn	Laut Verkäufer: abgenutzt	Selon le vendeur : usé
+listing.description.starter	Es geht an. Die Anschlüsse habe ich in letzter Zeit nicht alle geprüft.	Il s'allume. Je n'ai pas vérifié toutes les connexions récemment.
+inspection.repairedClear	Alle bekannten Fehler sind repariert. Der ursprüngliche Prüfbericht bleibt unten erhalten.	Tous les défauts connus ont été réparés. Le rapport initial est conservé ci-dessous.
+result.afterCosts	Nach allen Kosten	Après tous les frais
+game.unknown	Noch unbekannt	Encore inconnu
+game.truth	Die Wahrheit steckt im Detail.	La vérité reste à découvrir.
+game.truthHint	Frag den Verkäufer. Prüfe nach der Lieferung. Du musst das Risiko einschätzen.	Interroge le vendeur. Inspecte après livraison. À toi d'évaluer le risque.
+game.conditionUnknown	Tatsächlicher Zustand	État réel
+game.faultUnknown	Versteckte Fehler	Défauts cachés
+game.dealClosed	GESCHÄFT ABGESCHLOSSEN	AFFAIRE CONCLUE
+game.boughtFor	Gekauft für	Acheté pour
+game.purchaseRisk	Jetzt gehört es dir. Was wird die Prüfung zeigen?	Il est à toi. Que révélera l'inspection ?
+game.diagnostic	BEFUNDE PRÜFEN	EXAMEN DES INDICES
+game.step.condition	Äußeres	Aspect extérieur
+game.step.findings	Befunde	Résultats
+game.step.value	Wert	Valeur
+game.repairChoice	Etwas mehr investieren. Mehr herausholen?	Investir un peu plus. Pour gagner davantage ?
+game.sellingStage	DEIN NÄCHSTER SCHRITT	À TOI DE JOUER
+game.price.fast	Niedriger Preis	Prix bas
+game.price.balanced	Mittlerer Preis	Prix intermédiaire
+game.price.patient	Hoher Preis	Prix élevé
+game.price.hint	Ein niedriger Preis kann schneller Interesse wecken. Ein hoher braucht Geduld. Garantiert ist nichts.	Un prix bas peut attirer plus vite. Un prix élevé demande de la patience. Rien n'est garanti.
+game.return	DIE WELT HAT SICH WEITERGEDREHT	LE MARCHÉ A CONTINUÉ À VIVRE
+game.returnHint	Dein nächster Schritt wartet unten.	Ta prochaine décision t'attend ci-dessous.
+game.workbench	AUF DEINER WERKBANK	SUR TON ÉTABLI
+game.inbox	AM VERHANDLUNGSTISCH	À LA TABLE DES NÉGOCIATIONS
+game.stall	DEIN SCHAUFENSTER	TA VITRINE
+game.conversationHistory	Gesprächsverlauf	Historique de la conversation
+journey.offerWaiting	Ein Käufer wartet	Un acheteur attend
+journey.tradeFinished	Dieses Geschäft ist abgeschlossen. Sieh dir das Ergebnis an oder suche den nächsten Fund.	Cette affaire est terminée. Consulte le résultat ou pars à la recherche du prochain objet.
+journey.inspectedOwned	Die Prüfung ist da. Du entscheidest, wie es weitergeht.	L'inspection est terminée. À toi de décider de la suite.
+journey.reviewItem	Artikel ansehen	Examiner ton objet
+offer.keepBargaining	Weiterverhandeln	Continuer à négocier
+offer.pushRisk	Mehr Druck kann die Geduld strapazieren.	Insister peut mettre sa patience à l'épreuve.
+repair.marginEstimate	Geschätzte Differenz zum Verkauf im Istzustand	Écart estimé par rapport à une vente en l'état
+repair.marginPositive	Der Wertzuwachs könnte die Reparatur decken und mehr Marge lassen.	La valeur ajoutée pourrait couvrir la réparation et dégager plus de marge.
+repair.marginNegative	Die Reparatur könnte mehr kosten, als sie an Wert bringt.	La réparation pourrait coûter plus que la valeur qu'elle ajoute.
+repair.marginEven	Der geschätzte Wertzuwachs deckt nur die Reparaturkosten.	La valeur ajoutée estimée couvre seulement la réparation.
+repair.awaitInspection	Reparaturen sind nach Abschluss der Expertenprüfung möglich.	La réparation sera disponible à la fin de l'inspection par l'expert.
+buyer.counterHeading	Gegenangebot des Käufers	Contre-offre de l'acheteur
+buyer.offeredPrice	Käufer bietet	L'acheteur propose
+buyer.pushRisk	Ein maßvolles Gegenangebot kann ein besseres oder festes Angebot bringen. Ein großer Sprung kann das Gespräch beenden.	Une contre-offre modérée peut améliorer l'offre ou confirmer son dernier prix. Une forte hausse peut mettre fin à l'échange.
+buyer.pushAgainRisk	Das ist das letzte Angebot. Annehmen oder ablehnen; mehr zu fordern beendet das Gespräch.	C'est sa dernière offre. Accepte ou refuse ; demander davantage met fin à l'échange.
+buyer.counterCommitment	Bei Annahme wird der Artikel zu deinem Gegenangebot verkauft.	S'il accepte, l'objet est vendu au prix de ta contre-offre.
+selling.keepHunting	Dein Angebot bleibt aktiv, während du nach dem nächsten Geschäft suchst.	Ton annonce reste en ligne pendant que tu cherches une autre affaire.
+result.knownIssues	Bekannte Fehler beim Verkauf	Défauts connus lors de la vente
+result.lesson.inspection	Der Verkauf deckte den Kaufpreis, doch die Prüfgebühr hat die Marge aufgezehrt.	La vente a couvert l'achat, mais les frais d'inspection ont absorbé la marge.
+result.lesson.repair	Der Verkauf deckte den Kaufpreis, doch die Reparatur hat die Marge aufgezehrt.	La vente a couvert l'achat, mais la réparation a absorbé la marge.
+purchase.cashAfter	Bargeld nach dem Kauf	Argent restant après l'achat
+purchase.cashNeeded	Noch benötigtes Bargeld	Argent supplémentaire nécessaire
+art.sellerPresentation	Verkäuferdarstellung · tatsächlicher Zustand ungeprüft	Présentation du vendeur · état réel non vérifié
+art.inspected	Beobachteter Zustand · nur entdeckte Fehler angezeigt	État observé · seuls les défauts découverts sont affichés
+living.buyerReplyNotification	Ein Käufer hat auf dein Gegenangebot geantwortet.	Un acheteur a répondu à ta contre-offre.
+living.expiredNotification	Dein Angebot für %1$@ ist abgelaufen. Prüfe den Preis oder stelle es erneut ein.	Ton annonce pour %1$@ a expiré. Revois le prix ou remets l'objet en vente.
+selling.expired	Angebot abgelaufen · Artikel bleibt in deinem Besitz	Annonce expirée · l'objet reste à toi
+away.saleClosed	Beendete Verkaufsangebote	Annonces de vente terminées
+living.estimateRange	Geschätzte Marktpreisspanne	Fourchette de prix estimée
+living.ifSoldAtAsk	Mögliches Ergebnis beim Verkauf zum Wunschpreis	Résultat possible au prix affiché
+living.notGuaranteed	Nach deinen erfassten Kosten. Kein zugesagter Verkauf und kein bereits erzielter Gewinn.	Après tes frais enregistrés. Ce n'est ni une vente promise ni un bénéfice réalisé.
+living.demandRising	Die Nachfrage steigt	La demande augmente
+living.demandCooling	Die Nachfrage sinkt	La demande ralentit
+living.demandSteady	Keine aktuelle Nachfrageänderung	Aucune évolution de la demande en cours
+living.audience.gaming	Breites Elektronikpublikum; der Preis bleibt entscheidend.	Un public courant pour l'électronique ; le prix reste déterminant.
+living.audience.cameras	Ein Fachpublikum; ein hoher Wert braucht eventuell mehr Zeit.	Un public spécialisé ; un objet de valeur peut demander plus de temps pour se vendre.
+living.audience.retro	Sammlerpublikum; das Interesse kann schwanken.	Un public de collectionneurs ; l'intérêt peut être irrégulier.
+living.justListed	Gerade eingestellt · noch keine Aufmerksamkeit	Annonce récente · pas encore de visites
+living.buyerConsidering	Der Käufer prüft dein Gegenangebot. Suche ruhig weiter.	L'acheteur étudie ta contre-offre. Continue tes recherches.
+living.interestUncertain	Interesse entsteht mit der Zeit. Ein Angebot ist nicht garantiert.	L'intérêt se développe avec le temps. Rien ne garantit une offre.
+living.relist	Prüfen und erneut einstellen	Revoir et remettre en vente
+living.listingEnds	Verbleibende Angebotsdauer	Temps restant de l'annonce
+living.withdraw	Angebot zurückziehen	Retirer l'annonce
+living.standardDelivery	Standardlieferung · im vereinbarten Preis enthalten	Livraison standard · comprise dans le prix convenu
+living.inMotion	ES GEHT WEITER · SUCHE DEN NÄCHSTEN FUND	ÇA BOUGE · CONTINUE TES RECHERCHES
+living.sellers	Ausstehende Verkäuferantworten · %lld	Réponses de vendeurs en attente · %lld
+living.shipping	Unterwegs · %lld	En livraison · %lld
+living.inspections	Ausstehende Expertenberichte · %lld	Rapports d'expert en attente · %lld
+living.sales	Aktive Verkaufsangebote · %lld	Annonces de vente actives · %lld
+buyer.offer.cautious	Ich müsste noch ein paar Dinge prüfen, aber das könnte ich bieten.	J'ai encore quelques points à vérifier, mais je pourrais proposer ceci.
+buyer.offer.bargainHunter	Ich vergleiche gerade mehrere Angebote. Würde das passen?	Je compare plusieurs annonces. Est-ce que ça pourrait convenir ?
+buyer.offer.collector	Das würde in meine Sammlung passen. Hier mein Angebot.	Ça irait bien dans ma collection. Voici mon offre.
+buyer.offer.impatient	Wenn wir uns darauf einigen, können wir schnell abschließen.	Si on s'entend sur ce prix, je peux conclure rapidement.
+buyer.offer.reseller	Ich brauche Spielraum für meine eigenen Kosten. Viel mehr geht nicht.	Il me faut une marge pour mes propres frais. Je ne peux pas monter beaucoup plus.
+buyer.offer.lowballer	Zu diesem Preis würde ich es nehmen. Sonst suche ich weiter.	À ce prix, je le prends. Sinon, je continue à chercher.
+living.replyPending	Warten auf den Käufer	En attente de l'acheteur
+living.previousOffer	Vorheriges Angebot	Offre précédente
+error.replyWindowTooShort	Für eine Gegenantwort bleibt nicht genug Zeit. Du kannst das aktuelle Angebot noch annehmen.	Il ne reste pas assez de temps pour une réponse. Tu peux encore accepter l'offre actuelle.
+living.watchedSold	Ein anderer Händler hat %1$@ von deiner Merkliste gekauft.	Un autre marchand a acheté %1$@ que tu suivais.
+living.watchedExpired	Das gemerkte Angebot für %1$@ ist abgelaufen.	L'annonce suivie pour %1$@ a expiré.
+buyer.hold	Ich bleibe bei diesem Preis. Das ist mein letztes Angebot.	Je reste sur ce prix. C'est ma dernière offre.
+region.title	Währung & Sprache	Devise et langue
+region.fixed	Ein Markt für alle Sprachen. Die Währung ändert nur die Preisanzeige, nie Wert, Angebot oder Schwierigkeit. Die Sprache folgt der App-Sprache deines iPhones.	Un seul marché pour toutes les langues. La devise change l'affichage des prix, jamais la valeur, l'offre ou la difficulté. La langue suit le réglage de l'app sur ton iPhone.
+region.currency	Anzeigewährung	Devise affichée
+region.fx	Offline-Spielkurs: 1 USD = 40 TRY. Fiktive Spieleinstellungen, keine aktuellen Wechselkurse.	Taux du jeu hors ligne : 1 USD = 40 TRY. Ce sont des paramètres fictifs, pas des taux de change réels.
+region.migrationTitle	Wirtschaft aktualisiert	Économie mise à jour
+region.migration	Alte Guthaben wurden im Verhältnis 20:1 in den einheitlichen Wert umgerechnet. Bargeld, Kosten und offene Angebote wurden gemeinsam angepasst. Produktwerte nutzen jetzt plausible Preisspannen. Dein ursprünglicher Spielstand wurde gesichert.	Les anciens crédits ont été convertis à 20:1 en valeur commune. Argent, coûts et offres en cours ont été convertis ensemble. Les objets utilisent désormais des fourchettes de prix plausibles. Ta sauvegarde d'origine a été conservée.
+art.compare	Fotovergleich	Comparaison des photos
+desk.headline	Entdecke das Übersehene.	Repère ce qui échappe aux autres.
+desk.subtitle	Schätze den Verkäufer ein. Vertraue deinem Urteil.	Cerne le vendeur. Fais confiance à ton jugement.
+career.title	Händlerkarriere	Carrière de marchand
+career.passport	DEIN NAME AUF DEM MARKT	TON NOM SUR LE MARCHÉ
+career.tier.0	Selbstständiger Händler	Marchand indépendant
+career.tier.1	Bekannter Händler	Marchand reconnu
+career.tier.2	Fachhändler	Marchand spécialisé
+career.tier.3	Vertrauenshändler	Marchand de confiance
+career.trust	Vertrauen: %lld / 100	Confiance : %lld / 100
+career.nextHunt	Mach dir einen Namen. Wähle dein nächstes Ziel.	Fais-toi un nom. Choisis ton prochain objectif.
+career.principle	Vertrauen öffnet Türen. Es erhöht weder Preise noch garantiert es Gewinne. Auch ein dokumentierter Verlust zählt als Erfahrung.	La confiance ouvre des portes. Elle n'augmente pas tes prix et ne garantit aucun bénéfice. Une perte documentée compte aussi comme expérience.
+career.requirement.0	Starte mit kleinem Kapital und lerne, gewöhnliche Angebote einzuschätzen.	Commence avec un petit capital et apprends à évaluer les annonces ordinaires.
+career.requirement.1	Schließe 3 Geschäfte mit geprüften Artikeln ab oder beliefere deinen ersten Stammkunden.	Conclus 3 transactions avec des objets inspectés, ou livre ton premier client régulier.
+career.requirement.2	Schließe 8 Geschäfte mit geprüften Artikeln ab und erreiche Stufe 2 in einer Kategorie.	Conclus 8 transactions avec des objets inspectés et atteins le niveau 2 dans une catégorie.
+career.requirement.3	Schließe 16 Geschäfte mit geprüften Artikeln ab, erreiche Stufe 3 und erfülle 3 Kundenaufträge. Alternativ: 24 geprüfte Geschäfte bei Stufe 3.	Conclus 16 transactions avec des objets inspectés, atteins le niveau 3 et remplis 3 demandes de clients. Ou conclus 24 transactions inspectées au niveau 3.
+career.access.0	Günstige lokale Waren. Du kannst in jeder Kategorie lernen.	Des objets locaux abordables. Toutes les catégories sont ouvertes à l'apprentissage.
+career.access.1	Ausrüstung für Fortgeschrittene und anspruchsvollere Suchaufträge.	Du matériel pour passionnés et des demandes plus exigeantes.
+career.access.2	Premiumausrüstung, Aufträge mit Vollprüfung und fachliche Anerkennung.	Du matériel haut de gamme, des missions avec rapport complet et une reconnaissance spécialisée.
+career.access.3	Vertrauensstatus und die letzten privaten Kundenaufträge.	Le statut de confiance et les dernières commandes privées.
+career.record	%lld dokumentierte Geschäfte · %lld erfüllte Kundenaufträge	%lld transactions documentées · %lld demandes de clients remplies
+error.marketLocked	Baue deine Karriere aus, um diesen Markt zu erschließen. Die Voraussetzungen stehen unter Händlerkarriere.	Progresse dans ta carrière pour accéder à ce marché. Consulte les conditions dans Carrière de marchand.
+knowledge.level.4	Anerkannter Spezialist	Spécialiste reconnu
+knowledge.casebook	%lld Modelle untersucht · %lld Fehlertypen verstanden	%lld modèles étudiés · %lld types de défauts compris
+knowledge.endorsement	Nach Stufe 3: Untersuche 6 verschiedene Modelle und diagnostiziere 3 Fehlertypen für fachliche Anerkennung und genauere Schätzungen.	Après le niveau 3 : étudie 6 modèles différents et diagnostique 3 types de défauts pour être reconnu et affiner tes estimations.
+clients.title	Deine Stammkunden	Tes habitués
+clients.eyebrow	DEINE KONTAKTE	TES CONTACTS
+clients.principle	Zwei Käufer. Eine gemeinsame Geschichte. Suche in deinem Tempo; Aufträge laufen offline nicht ab. Nur ein angenommener Auftrag gleichzeitig.	Deux acheteurs. Une histoire commune. Cherche à ton rythme : les demandes n'expirent pas hors ligne. Une seule demande acceptée à la fois.
+clients.condition	Beobachteter Zustand: mindestens %lld / 100	État observé : au moins %lld / 100
+clients.reportRequired	Vollständiger Expertenbericht ohne ungelöste Fehler erforderlich. Die Zahlung ersetzt einen normalen Verkauf; kein zusätzlicher Geldbonus.	Rapport d'expert complet exigé, sans défaut non réparé. Le paiement remplace une vente normale, sans bonus d'argent.
+clients.originalBox	Originalverpackung erforderlich; ehrliche Gebrauchsspuren sind willkommen.	Emballage d'origine exigé ; les traces d'usage sont acceptées.
+clients.originalParts	Bestätigte Originalteile und echte Platine erforderlich.	Pièces d'origine vérifiées et circuit authentique exigés.
+clients.accepted	Du suchst für diesen Auftrag	Tu recherches cet objet
+clients.supplyFor	Für %@ liefern	Fournir pour %@
+clients.noMatch	Noch nichts Passendes bereit. Finde einen geeigneten Artikel, prüfe ihn vollständig und entscheide, ob die Marge stimmt.	Rien de prêt pour le moment. Trouve un objet adapté, fais-le inspecter entièrement et vérifie si la marge te convient.
+clients.pause	Suche pausieren	Mettre cette recherche en pause
+clients.accept	Auftrag annehmen	Accepter la demande
+clients.models	Passende Modelle und Alternativen	Modèles adaptés et alternatives
+clients.complete	Eine verlässliche Verbindung	Une relation de confiance
+client.rowan.role	Retro-Sammler	Collectionneur rétro
+client.jules.role	Fotograf & Objektivliebhaber	Photographe et passionné d'objectifs
+client.rowan.name.unitedStates	Robin	Camille
+client.rowan.name.turkey	Robin	Camille
+client.jules.name.unitedStates	Julius	Jules
+client.jules.name.turkey	Julius	Jules
+client.rowan.story.0	Ich suche einen Handheld, mit dem ich wirklich spielen kann. Finde ein geprüftes, sauberes Exemplar, keine versiegelte Trophäe.	Je veux une console portable dont je puisse vraiment profiter. Trouve un exemplaire propre et vérifié, pas un trophée sous blister.
+client.rowan.story.1	Der erste Fund hat seinen Platz verdient. Jetzt möchte ich auch die Originalverpackung; die kleinen Details erzählen seine Geschichte.	La première trouvaille a gagné sa place. Cette fois, je veux aussi la boîte d'origine : les petits détails racontent son histoire.
+client.rowan.story.2	Du kennst meine Sammlung inzwischen. Finde ein außergewöhnliches Original von Chapter als Herzstück. Keine erfundene Seltenheit, einfach das richtige Stück.	Tu connais maintenant ma collection. Trouve un exemplaire original exceptionnel de Chapter pour en faire la pièce maîtresse. Pas de rareté inventée, juste la bonne pièce.
+client.jules.story.0	Meine Ersatzkamera muss ersetzt werden. Finde ein geprüftes Gehäuse, das noch lange hält.	Je dois remplacer mon appareil de secours. Trouve un boîtier inspecté qui a encore de beaux jours devant lui.
+client.jules.story.1	Die Kamera hat sich bewährt. Jetzt brauche ich saubere Optik; ein Schnäppchen bringt nichts, wenn das Glas nicht stimmt.	L'appareil a fait ses preuves. Cette fois, il me faut une optique impeccable : une bonne affaire ne vaut rien si le verre ne suit pas.
+client.jules.story.2	Ich vertraue deinem Blick für Ausrüstung. Besorge ein Premiumgehäuse für einen anspruchsvollen Auftrag, mit vollständigem Bericht.	J'ai confiance en ton jugement. Trouve un boîtier haut de gamme pour une séance exigeante, avec un rapport complet.
+client.rowan.ending	Du hast eine Sammlung mit Geschichte mit aufgebaut. Als Vertrauter eines Sammlers hast du dir einen Namen gemacht.	Tu as aidé à bâtir une collection qui a une histoire. Tu es désormais une personne de confiance pour les collectionneurs.
+client.jules.ending	Du bist der Händler geworden, den ich vor einem wichtigen Auftrag anrufe. Das ist mehr wert als ein einzelner guter Verkauf.	Tu es devenu le marchand que j'appelle avant une mission importante. Ça vaut plus qu'une seule bonne vente.
+collections.title	Die persönliche Sammlung	La collection personnelle
+collections.eyebrow	MANCHE FUNDE BLEIBEN BEI DIR	CERTAINES TROUVAILLES SONT POUR TOI
+collections.intro	Behalte Stücke, die deine Geschichte erzählen. Ausgestellte Artikel belegen Lagerplätze und binden echtes Handelskapital. Auch abgenutzte Stücke haben ihren Platz.	Garde les pièces qui racontent ton histoire. Les objets exposés occupent ton stock et immobilisent du capital. Même les pièces usées ont leur place.
+collection.chapter.title	Chapter-Generationen	Les générations Chapter
+collection.chapter.story	Von der Messing-Steuerscheibe bis zur Farbära: drei Experimente des Spielens. Bewahre ihre gemeinsame Geschichte.	Du disque de commande en laiton à l'ère de la couleur : trois façons d'explorer le jeu. Réunis leur histoire.
+collection.focal.title	Das Focal-Trio	Le trio Focal
+collection.focal.story	Weite Landschaften, Alltagsszenen, intime Porträts. Drei verschiedene Optiken, ein Blick auf die Welt.	Grands paysages, récits du quotidien, portraits intimes. Trois optiques différentes, un regard sur le monde.
+collections.progress	%lld / %lld Stücke ausgestellt — dein nächster Fund	%lld / %lld pièces exposées — ta prochaine recherche
+collections.missing	Noch zu finden	À trouver
+collections.owned	In deiner Ausstellung	Dans ta collection
+collections.complete	Sammlung vollständig — Auszeichnung als Kurator verdient	Collection complète — distinction de conservateur obtenue
+collections.completedBefore	Schon einmal zusammengestellt. Finde die fehlenden Stücke, um sie erneut auszustellen.	Déjà réunie auparavant. Retrouve les pièces manquantes pour l'exposer à nouveau.
+collections.focus	Als nächstes Suchziel wählen	En faire ma prochaine recherche
+collections.focused	Dein gewähltes Suchziel	Ta recherche choisie
+collections.display	In meiner Ausstellung behalten	Garder dans ma collection
+collections.release	Zurück in den Handelsbestand	Remettre dans le stock à vendre
+collections.lockedCapital	Für deine Sammlung reserviert. Gib den Artikel zum Handel frei, bevor du ihn verkaufst, warten lässt oder einem Kunden lieferst.	Gardé pour ta collection. Remets-le dans le stock avant de le vendre, de le faire réparer ou de le fournir à un client.
+error.itemDisplayed	Dieser Artikel steht in deiner Ausstellung. Gib ihn vor Verkauf oder Wartung zum Handel frei.	Cet objet est exposé. Remets-le dans le stock avant de le vendre ou de le faire réparer.
+recovery.title	Zurück ins Geschäft	Rebondir sur le marché
+recovery.eyebrow	EIN WEG NACH VORN	UNE ISSUE POUR AVANCER
+recovery.principle	Schlechte Geschäfte haben ihren Preis. Wissen und Karriere bleiben erhalten. Gewinne Betriebskapital durch einen kleinen Serviceauftrag zurück oder nimm einen klaren Verlust beim Abverkauf in Kauf.	Les mauvaises affaires ont un coût. Tu conserves tes connaissances et ta carrière. Récupère du capital par un petit service ou accepte une perte claire lors d'une liquidation.
+recovery.consigned	Anvertraute Ware — nicht dein Bestand	Objet confié — il ne t'appartient pas
+recovery.task	Ein Händler braucht eine einfache äußere Prüfung eines bereitgestellten Controllers. Prüfe ihn und gib ihn gegen eine kleine Gebühr zurück. Er kann weder verkauft noch gesammelt werden und bringt weder Wissen noch Vertrauen.	Un marchand te confie une manette pour une vérification extérieure simple. Inspecte-la et rends-la contre une petite rémunération. Elle ne peut être ni vendue ni collectionnée et ne rapporte ni expertise ni confiance.
+recovery.finish	Anvertrauten Artikel zurückgeben	Rendre l'objet confié
+recovery.returnFor	Für eine Servicegebühr von %@ zurückgeben	Rendre contre une rémunération de %@
+recovery.limit	Nur unter %@ Bargeld, ohne übrigen Handelsbestand oder Lieferungen. Bei dieser Bargeldgrenze enden die Gebühren. Deine ausgestellte Sammlung kannst du behalten.	Disponible uniquement sous %@, sans stock à vendre ni livraison en cours. Les rémunérations s'arrêtent à ce seuil. Tu peux garder ta collection exposée.
+recovery.begin	Serviceauftrag annehmen	Accepter le travail
+recovery.notEligible	Derzeit ist kein Überbrückungsauftrag nötig. Kümmere dich zuerst um Lieferungen oder vorhandene Handelsware. Aktive Angebote kannst du unter Verkauf zurückziehen.	Tu n'as pas besoin de ce travail pour l'instant. Occupe-toi d'abord des livraisons ou du stock restant. Tu peux retirer les annonces actives depuis Ventes.
+recovery.liquidation	Bestand abverkaufen	Liquider le stock
+recovery.liquidationWarning	Großhandelsangebote liegen unter deinen bezahlten Kosten. Du verzichtest auf mögliche Gewinne für sofortiges Bargeld. Gib Sammlungsstücke zuerst frei und ziehe aktive Angebote zurück.	Les offres de gros sont inférieures à tes coûts. Tu renonces à un gain possible contre de l'argent immédiat. Libère d'abord les objets exposés et retire les annonces actives.
+recovery.liquidate	Verlust beim Abverkauf akzeptieren	Accepter la perte de liquidation
+recovery.confirm	Diesen Artikel sofort zum angezeigten Großhandelspreis verkaufen?	Vendre cet objet immédiatement au prix de gros affiché ?
+recovery.receipt	Nur die Servicegebühr zählt. Der Wert des anvertrauten Artikels gehörte dir nie.	Seule la rémunération compte. La valeur de l'objet confié ne t'a jamais appartenu.
+recovery.liquidationReceipt	Großhandelsabverkauf. Dieser Verlust hat Kapital und Lagerplatz freigesetzt.	Liquidation en gros. Cette perte a libéré du capital et de la place.
+error.consignedItem	Dieser Artikel gehört dem Händler. Prüfe ihn und gib ihn unter Zurück ins Geschäft zurück.	Cet objet appartient au marchand. Inspecte-le et rends-le dans Rebondir sur le marché.
+collections.hero	Eine Sammlung mit deiner Handschrift.	Une collection qui te ressemble.
+collections.about	Über das Behalten deiner Funde	À propos de tes trouvailles conservées
+collections.curator	Kurator — eine Sammlung zusammengestellt	Conservateur — une collection réunie
+clients.confidant	Vertrauter des Sammlers	Confident du collectionneur
+clients.preferred	Bevorzugter Händler des Fotografen	Marchand préféré du photographe
+art.sellerPhoto	Verkäuferfoto	Photo du vendeur
+art.actualItem	Tatsächlicher Artikel	Objet réel
+competition.title	Wettbewerb	Compétition
+competition.weekly	Wochenhandel	Défi revente hebdomadaire
+competition.leaderboard	Händler der Woche	Marchand de la semaine
+competition.offline	Spiele offline. Verbinde dich, um Punkte zu vergleichen.	Joue hors ligne. Connecte-toi pour comparer les scores.
+competition.connecting	Verbindung mit Game Center wird hergestellt…	Connexion à Game Center…
+competition.connected	Mit Game Center verbunden	Connecté à Game Center
+competition.signInSettings	Melde dich in den Einstellungen bei Game Center an und kehre dann zurück.	Connecte-toi à Game Center dans Réglages, puis reviens ici.
+competition.connect	Mit Game Center verbinden	Se connecter à Game Center
+competition.fairness	Alle starten mit einem Gegenwert von 1.000 USD, demselben Markt und ohne Fachwissen. Die Anzeigewährung ändert nur die Zahlen, nicht deine Kaufkraft. Dein Karrierevermögen bleibt in deiner Karriere.	Tout le monde commence avec une valeur de 1 000 USD, le même marché et sans expertise. La devise affichée change les chiffres, pas ton pouvoir d'achat. La fortune de ta carrière reste dans ta carrière.
+competition.start	Wochenaufgabe starten	Commencer le défi de la semaine
+competition.resume	Zum Wochenhandel zurückkehren	Reprendre le défi hebdomadaire
+competition.finish	Mein Ergebnis abschließen	Valider mon résultat
+competition.finishHint	Mit dem Abschluss endet dein Handel für diese Woche. Unverkaufte Artikel bringen keine Punkte. Du kannst dein Ergebnis bis zum Ende dieser Woche einreichen.	Valider met fin à tes échanges pour cette semaine. Les objets invendus ne rapportent aucun point. Tu peux envoyer ton résultat tant que la semaine est en cours.
+competition.confirmFinish	Diese Woche abschließen?	Terminer cette semaine ?
+competition.cancel	Weiterhandeln	Continuer à échanger
+competition.score	TraderScore	TraderScore
+competition.scoreRules	Punkte v1: realisierter Nettogewinn im Verhältnis zum Startkapital, Gesamtrendite und ein begrenzter Bonus für geprüfte, gewinnbringende Verkäufe verschiedener Modelle. Verluste senken den Gewinn. Wiederholte Modelle bringen keinen weiteren Qualitätsbonus. Maximum: 1.000.000.	Score v1 : bénéfice net réalisé rapporté au capital initial, rendement global et bonus plafonné pour les ventes bénéficiaires de modèles différents inspectés. Les pertes réduisent le bénéfice. Répéter un modèle n'ajoute pas de bonus de qualité. Maximum : 1 000 000.
+competition.globalRank	Weltrang	Classement mondial
+competition.friendsRank	Unter Freunden	Parmi tes amis
+competition.unranked	Noch nicht platziert	Pas encore classé
+competition.ranksUnavailable	Rang nicht verfügbar. Dein lokaler Fortschritt ist sicher.	Classement indisponible. Ta progression locale est conservée.
+competition.timeLeft	Verbleibende Zeit	Temps restant
+competition.bankroll	Aufgabenkapital	Capital du défi
+competition.profit	Realisierter Gewinn	Bénéfice réalisé
+competition.trades	Abgeschlossene Geschäfte	Transactions terminées
+competition.achievements	Erfolge	Succès
+competition.global	Weltrangliste	Classement mondial
+competition.friends	Freundesrangliste	Classement des amis
+competition.submit	Einreichen / synchronisieren	Envoyer / synchroniser
+competition.saved	Auf diesem Gerät gespeichert	Enregistré sur cet appareil
+competition.synced	Ergebnis eingereicht	Résultat envoyé
+competition.pending	Noch nicht eingereicht. Verbinde dich vor Ende dieser Woche erneut.	Envoi en attente. Reconnecte-toi avant la fin de la semaine.
+competition.expired	Woche beendet. Ergebnis auf diesem Gerät gespeichert.	Semaine terminée. Résultat conservé sur cet appareil.
+competition.error	Der Wettbewerb konnte nicht gespeichert werden. Versuche es erneut; deine Karriere ist sicher.	Impossible d'enregistrer la compétition. Réessaie ; ta carrière est conservée.
+competition.finalized	Das Wochenergebnis steht fest	Le résultat de cette semaine est définitif
+competition.previous	Frühere Ergebnisse	Résultats précédents
+competition.finisher	Aufgabe abgeschlossen	Défi terminé
+competition.prestige	Ein Abzeichen als Erinnerung an deine Woche. Keine Geld- oder Handelsboni.	Un badge en souvenir de ta semaine. Aucun bonus d'argent ou de commerce.
+competition.introLocked	Schließe drei Karrieregeschäfte ab, um deine erste Wochenaufgabe zu starten.	Conclus trois transactions en carrière pour accéder à ton premier défi hebdomadaire.
+competition.invite	Eine neue Aufgabe wartet. Alle starten gleich.	Un nouveau défi t'attend. Tout le monde part à égalité.
+competition.challengeContext	Wochenhandel · Eigenes Kapital	Défi hebdomadaire · Capital séparé
+competition.market	Suche	Recherche
+competition.inventory	Deine Funde	Tes trouvailles
+competition.selling	Deine Verkäufe	Tes ventes
+competition.back	Zurück zum Wettbewerb	Retour à la compétition
+competition.integrity	Offline-Wettbewerb auf Gerätebasis. Punkte werden lokal geprüft; der Wettbewerb wird nicht serverseitig verifiziert.	Compétition hors ligne fondée sur l'appareil. Les scores sont contrôlés localement, sans validation par un serveur.
+competition.accountMismatch	Dieses Ergebnis gehört zu einem anderen Game-Center-Konto. Wechsle zurück, um es einzureichen.	Ce résultat appartient à un autre compte Game Center. Reviens sur ce compte pour l'envoyer.
+competition.clock	Die Gerätezeit wurde geändert. Ranglisten sind für diesen Lauf pausiert; du kannst offline weiterspielen.	L'horloge de l'appareil a changé. Le classement est suspendu pour cette partie ; tu peux continuer hors ligne.
+competition.earned	Verdient	Obtenu
+achievement.firstFlip.title	Erster Gewinn	Première revente rentable
+achievement.firstFlip.detail	Schließe dein erstes gewinnbringendes Geschäft ab.	Conclus ta première transaction bénéficiaire.
+achievement.naturalTrader.title	Handelstalent	Le commerce dans le sang
+achievement.naturalTrader.detail	Erziele mindestens 100 % Rendite bei einem Geschäft mit Kosten ab 10 USD.	Obtiens au moins 100 % de rendement sur une transaction ayant coûté au moins 10 USD.
+achievement.thatHurt.title	Das tat weh	Ça fait mal
+achievement.thatHurt.detail	Verliere mindestens 10 USD bei einem Geschäft mit Kosten ab 50 USD.	Perds au moins 10 USD sur une transaction ayant coûté au moins 50 USD.
+achievement.detective.title	Detektiv	Détective
+achievement.detective.detail	Entdecke vor dem Kauf einen versteckten Fehler in fünf verschiedenen Angeboten.	Découvre un défaut caché dans cinq annonces différentes avant d'acheter.
+achievement.negotiator.title	Verhandlungsprofi	As de la négociation
+achievement.negotiator.detail	Kaufe einen Artikel mindestens 20 % unter dem Angebotspreis des Verkäufers.	Achète un objet au moins 20 % sous le prix demandé par le vendeur.
+achievement.collector.title	Sammler	Collectionneur
+achievement.collector.detail	Vervollständige deine erste Sammlung.	Termine ta première collection.
+achievement.trustedTrader.title	Verlässlicher Händler	Marchand fiable
+achievement.trustedTrader.detail	Schließe zehn Geschäfte mit geprüften Artikeln in deiner Karriere ab.	Conclus dix transactions avec des objets inspectés dans ta carrière.
+achievement.specialist.title	Spezialist	Spécialiste
+achievement.specialist.detail	Erreiche Wissensstufe 3 in einer Kategorie.	Atteins le niveau d'expertise 3 dans une catégorie.
+achievement.bigLeague.title	Ganz oben	Dans la cour des grands
+achievement.bigLeague.detail	Erreiche die höchste Karrierestufe.	Atteins le plus haut rang de carrière.
+achievement.comeback.title	Comeback	Retour en force
+achievement.comeback.detail	Nutze Überbrückungsaufträge und baue dein Bargeld wieder auf 75 USD auf.	Utilise les missions de reprise et remonte ton argent disponible à 75 USD.
+achievement.versatile.title	Vielseitiger Händler	Marchand polyvalent
+achievement.versatile.detail	Erziele Gewinn mit fünf verschiedenen Produktmodellen.	Réalise un bénéfice sur cinq modèles d'objets différents.
+achievement.weeklyFinisher.title	Aufgabe abgeschlossen	Défi terminé
+achievement.weeklyFinisher.detail	Schließe eine Wochenaufgabe mit mindestens einem abgeschlossenen Geschäft ab.	Valide un défi hebdomadaire avec au moins une transaction terminée.
+region.shared	Gemeinsamer Markt	Marché commun
+region.sharedMigration	Deine Karriere nutzt jetzt den gemeinsamen Markt. Bargeld, Artikel, Kosten und bestehende Angebote bleiben unverändert. Neue Angebote folgen für alle denselben Preisregeln. Dein vorheriger Spielstand wurde gesichert.	Ta carrière utilise désormais le marché commun. Ton argent, tes objets, tes coûts et tes offres existantes restent inchangés. Les nouvelles annonces suivent les mêmes règles de prix pour tous. Ta sauvegarde précédente a été conservée.
+shop.title	Mein Laden	Ma boutique
+shop.eyebrow	DEIN EIGENER NAME	UN NOM BIEN À TOI
+shop.intro	Baue einen Laden auf, zu dem man gern zurückkommt.	Crée un endroit où l'on aime revenir.
+shop.openingStory	Beginne mit einem Schaufensterplatz. Wähle deine Waren und dein Publikum. Eröffnung und Ausbau kosten Handelskapital; während deiner Abwesenheit fällt keine Miete an.	Commence avec une place en vitrine. Choisis tes objets et le public que tu veux attirer. L'ouverture et l'agrandissement utilisent ton capital ; aucun loyer ne court en ton absence.
+shop.name	Ladenname	Nom de la boutique
+shop.openingCost	Startinvestition	Investissement initial
+shop.open	Meinen Laden eröffnen	Ouvrir ma boutique
+shop.unlock	Schließe drei Geschäfte ab, um deinen ersten Laden zu eröffnen. Dein Onlineverkauf läuft wie gewohnt weiter.	Conclus trois transactions pour ouvrir ta première boutique. Tes ventes en ligne continuent normalement.
+shop.style.bargains	Schnäppchentheke	Le coin des bonnes affaires
+shop.style.bargains.detail	Biete höchstens zum Wert deiner Prüfschätzung an. Interesse kommt schneller, doch Schnäppchenjäger und Wiederverkäufer achten auf ihre Marge.	Propose un prix au plus égal à ton estimation après inspection. L'intérêt arrive plus vite, mais les chasseurs de bonnes affaires et les revendeurs protègent leur marge.
+shop.style.tested	Geprüft & verlässlich	Testé et approuvé
+shop.style.tested.detail	Zeige vollständig geprüfte Ware ohne bekannte ungelöste Fehler. Bezahle für verlässliche Befunde und gewinne vorsichtige Kunden. Ihre Budgets bleiben unverändert.	Expose des objets entièrement inspectés, sans défaut connu non réparé. Finance les vérifications pour attirer des clients prudents. Leurs budgets restent inchangés.
+shop.style.collector	Sammlerecke	Le coin des collectionneurs
+shop.style.collector.detail	Gestalte ein Retro-Schaufenster. Mehr Sammler, aber ein langsameres Publikum. Zustand und Preis entscheiden weiterhin über das Geschäft.	Crée une vitrine rétro. Davantage de collectionneurs, mais un public plus lent à se décider. L'état et le prix restent décisifs.
+shop.changeStyle	Ladenausrichtung ändern	Changer d'orientation
+shop.clearWindow	Leere das Schaufenster vor einem Richtungswechsel. Bestehende Käuferangebote bleiben verbindlich.	Vide la vitrine avant de changer d'orientation. Les offres des acheteurs déjà reçues restent valables.
+shop.windowCount	%lld von %lld Schaufensterplätzen belegt	%lld places occupées sur %lld en vitrine
+shop.windowEmpty	Ein leeres Schaufenster. Was sollen deine ersten Kunden sehen?	La vitrine est vide. Que verront tes premiers clients ?
+shop.salesCount	%lld Verkäufe aus deinem Schaufenster	%lld ventes depuis ta vitrine
+shop.chooseStock	Dein Schaufenster bestücken	Composer ta vitrine
+shop.stockHint	Wähle aus deinen aktiven Verkaufsangeboten. Ein Schaufensterplatz ändert das Publikum für zukünftiges Interesse, nicht ein bereits vorliegendes Angebot.	Choisis parmi tes annonces actives. Une place en vitrine change le public des futures visites, pas une offre déjà reçue.
+shop.noStock	Keine aktiven Angebote. Prüfe einen eigenen Artikel und biete ihn zum Verkauf an.	Aucune annonce active. Inspecte un objet de ton stock et mets-le en vente.
+shop.feature	Ins Schaufenster stellen	Mettre en vitrine
+shop.remove	Aus dem Schaufenster nehmen	Retirer de la vitrine
+shop.notFit	Dieses Angebot passt nicht zur aktuellen Ausrichtung. Prüfe Preis, Untersuchung oder Kategorie.	Cette annonce ne correspond pas à l'orientation actuelle. Vérifie son prix, son inspection ou sa catégorie.
+shop.growth	Platz zum Wachsen	De la place pour grandir
+shop.invested	In den Laden investiert	Investi dans la boutique
+shop.expandHint	Erziele %lld Schaufensterverkäufe, um den nächsten Platz freizuschalten.	Réalise %lld ventes en vitrine pour débloquer la place suivante.
+shop.expand	Schaufensterplatz hinzufügen	Ajouter une place en vitrine
+shop.fullyExpanded	Alle fünf Schaufensterplätze sind offen	Les cinq places en vitrine sont ouvertes
+shop.capitalChoice	Investiere in mehr Platz oder behalte das Geld für den nächsten Fund. Ein Ausbau erhöht keine Käuferbudgets und garantiert keinen Gewinn.	Agrandis la boutique ou garde l'argent pour ta prochaine trouvaille. L'agrandissement n'augmente pas les budgets des acheteurs et ne garantit aucun bénéfice.
+shop.onlineSales	Alle Verkaufsangebote	Toutes les annonces de vente
+shop.offline	Deine Angebote bleiben während deiner Abwesenheit aktiv. Verkäufe brauchen weiterhin deine Entscheidung. Keine automatischen Verkäufe, Mietschulden oder Offline-Geldgeschenke.	Tes annonces restent actives en ton absence. Les ventes nécessitent toujours ta décision. Aucune vente automatique, dette de loyer ou prime d'argent hors ligne.
+settings.title	Einstellungen	Réglages
+settings.eyebrow	MACH ES DIR GEMÜTLICH	INSTALLE-TOI
+settings.experience	Ton & Bedienungshilfen	Son et accessibilité
+settings.accessibility	Textgröße, VoiceOver und reduzierte Bewegung folgen den Bedienungshilfen deines iPhones.	La taille du texte, VoiceOver et Réduire les animations suivent les réglages d'accessibilité de ton iPhone.
+settings.language	App-Sprache	Langue de l'app
+settings.changeLanguage	In den iPhone-Einstellungen ändern	Modifier dans les réglages de l'iPhone
+settings.localSave	Dein Spiel wird auf diesem Gerät gespeichert. Der Handel funktioniert offline; Game Center ist optional.	Ta partie est enregistrée sur cet appareil. Le commerce fonctionne hors ligne ; Game Center est facultatif.
+settings.version	Version	Version
+category.home	Haushaltsgeräte	Électroménager
+category.furniture	Möbel	Meubles
+category.everyday	Alltagsgegenstände	Objets du quotidien
+defect.leakingSeal	Undichte Dichtung	Joint qui fuit
+defect.heatingFault	Heizungsfehler	Défaut de chauffe
+defect.weakMotor	Schwacher oder lauter Motor	Moteur faible ou bruyant
+defect.missingAccessory	Wichtiges Zubehör fehlt	Accessoire essentiel manquant
+defect.looseJoint	Lockere tragende Verbindung	Assemblage structurel desserré
+defect.surfaceDamage	Beschädigte Oberfläche	Finition abîmée
+defect.fabricWear	Abgenutzter Polsterbezug	Revêtement usé
+defect.missingHardware	Montageteile fehlen	Pièces de fixation manquantes
+defect.fastenerFault	Defekter Reißverschluss oder Verschluss	Fermeture cassée
+defect.wheelWear	Abgenutzte Rollen oder Lager	Roues ou roulements usés
+defect.materialDamage	Gerissenes oder beschädigtes Material	Matériau déchiré ou abîmé
+defect.mechanismFault	Klemmender oder defekter Mechanismus	Mécanisme grippé ou défaillant
+facts.field.functionCheck	Vollständige Geräteprüfung	Vérification complète de l'appareil
+facts.field.assemblyCheck	Prüfung von Struktur und Oberfläche	Vérification de la structure et de la finition
+facts.field.mechanismCheck	Prüfung von Mechanik und Material	Vérification du mécanisme et du matériau
+knowledge.clues.home	Achte zuerst auf fehlendes Zubehör. Lecks, Heizung und Motor brauchen Tests; ein sauberes Gehäuse beweist keine Funktion.	Repère d'abord les accessoires manquants. Les fuites, la chauffe et le moteur demandent des tests ; une coque propre ne prouve pas le bon fonctionnement.
+knowledge.clues.furniture	Prüfe Oberfläche und Polster. Lockere Verbindungen und fehlende Befestigungen können entscheiden, ob sich ein günstiges Möbelstück restaurieren lässt.	Examine la finition et le revêtement. Des assemblages lâches ou des fixations manquantes peuvent changer l'intérêt d'une restauration.
+knowledge.clues.everyday	Prüfe Verschlüsse, Kontaktstellen, Rollen und bewegliche Teile. Tasche, Fahrrad und Handwerkzeug erfordern unterschiedliche Aufmerksamkeit.	Vérifie les fermetures, les points de contact, les roues et les pièces mobiles. Un sac, un vélo et un outil demandent des vérifications différentes.
+knowledge.tools.home	Haushaltsgeräte-Set: Auffangwanne, Temperaturfühler und Lastprüfer. Dauerhaftes Kategoriewerkzeug; Fachwissen bleibt nötig.	Kit électroménager : bac de détection des fuites, sonde de température et testeur de charge. Outils permanents ; l'expertise reste nécessaire.
+knowledge.tools.furniture	Möbel-Set: Verbindungslehren, Prüfleuchte und Befestigungswerkzeug. Dauerhaftes Kategoriewerkzeug; Fachwissen bleibt nötig.	Kit meubles : jauges d'assemblage, lampe d'inspection et outils de fixation. Outils permanents ; l'expertise reste nécessaire.
+knowledge.tools.everyday	Alltags-Set: Materiallupe, Lagerlehren und Mechanikwerkzeug. Dauerhaftes Kategoriewerkzeug; Fachwissen bleibt nötig.	Kit objets du quotidien : loupe, jauges de roulements et outils de mécanisme. Outils permanents ; l'expertise reste nécessaire.
+living.audience.home	Praktische Haushaltskäufer; Funktion und Gesamtkosten zählen.	Des acheteurs pragmatiques ; le fonctionnement et le coût total comptent.
+living.audience.furniture	Möbelkäufer achten auf Zustand und Wert; Interesse ist nicht garantiert.	Les acheteurs de meubles regardent l'état et la valeur ; l'intérêt n'est pas garanti.
+living.audience.everyday	Ein breites Publikum mit verschiedenen Budgets und Bedürfnissen.	Un large public aux budgets et besoins variés.
+listing.voice.casual.0	Ich mache zu Hause etwas Platz. Wenn dich ein Detail interessiert, kann ich genauer hinsehen.	Je fais un peu de place chez moi. Si un détail t'intéresse, je peux y regarder de plus près.
+listing.voice.casual.1	Es stand die ganze Zeit im Gästezimmer. Lieber nutzt es jemand, als dass ich es ständig zur Seite räume.	Il traîne dans la chambre d'amis. Je préfère qu'il serve à quelqu'un plutôt que de le déplacer sans arrêt.
+listing.voice.casual.2	Wir richten uns zu Hause neu ein, deshalb darf es weiterziehen. Schau es dir an und frag, bevor du dich entscheidest.	On change un peu l'aménagement, alors je m'en sépare. Regarde et pose tes questions avant de décider.
+listing.voice.clueless.0	Ich helfe einem Verwandten beim Ausräumen. Ich habe nicht jedes Detail geprüft, also frag lieber nach.	J'aide un proche à faire du tri. Je n'ai pas tout vérifié, alors mieux vaut poser des questions.
+listing.voice.clueless.1	Ich weiß, was es ist, aber für technische Details bin ich nicht die richtige Person. Sag mir, was dir wichtig ist.	Je sais ce que c'est, mais la technique, ce n'est pas mon domaine. Dis-moi quel détail compte pour toi.
+listing.voice.clueless.2	Beim Aufräumen gefunden. Einen ausführlichen Zustandsbericht kann ich nicht geben; der Preis berücksichtigt diese Unsicherheit.	Retrouvé en rangeant la maison. Je ne peux pas fournir un bilan détaillé ; le prix tient compte de cette incertitude.
+listing.voice.urgent.0	Ich ziehe diese Woche um. Eine schnelle Abholung ist mir wichtiger als langes Feilschen um die letzten Scheine.	Je déménage cette semaine. Un départ rapide compte plus pour moi que de longues négociations pour quelques billets.
+listing.voice.urgent.1	Ich brauche den Platz. Bei ernsthaftem Interesse schick ein klares Angebot, dann werden wir uns einig.	J'ai besoin de récupérer la place. Si tu es vraiment intéressé, fais une offre claire et on s'arrange.
+listing.voice.urgent.2	Eines der letzten Dinge, die noch wegmüssen. Ich möchte einen unkomplizierten Verkauf, keine tagelangen Reservierungsversprechen.	C'est l'une des dernières choses à faire partir. Je veux une vente simple, pas des promesses de réservation qui durent des jours.
+listing.voice.professional.0	Aus meinem aktuellen Bestand. Sag bitte genau, welches Detail ich prüfen soll; klare Fragen sind besser als Vermutungen.	Disponible dans mon stock actuel. Précise ce que tu veux faire vérifier ; je préfère les questions claires aux suppositions.
+listing.voice.professional.1	Der Preis gilt für genau dieses Exemplar. Zustand, Zubehör und klare Absprachen zählen mehr als die Überschrift.	Le prix concerne cet exemplaire précis. L'état, les pièces fournies et un accord clair comptent plus que le titre de l'annonce.
+listing.voice.professional.2	Ich handle regelmäßig damit. Frag vor deinem Angebot nach dem Zustand, damit wir nicht aneinander vorbeireden.	J'en vends régulièrement. Renseigne-toi sur l'état avant de proposer un prix, pour qu'on se comprenne bien.
+listing.voice.stubborn.0	Ich habe es nicht eilig. Wenn der Preis nicht passt, ist das okay. Aber bitte nicht gleich mit der Hälfte anfangen.	Je ne suis pas pressé. Si le prix ne te convient pas, aucun souci, mais évite de commencer à la moitié.
+listing.voice.stubborn.1	Über den angegebenen Preis kann man reden. Ein angebliches Schnäppchen anderswo ist kein gutes Argument.	Le prix affiché se discute. Le comparer à une affaire introuvable ailleurs ne fera pas beaucoup avancer les choses.
+listing.voice.stubborn.2	Noch verfügbar. Vernünftige Fragen sind willkommen, aber ich gebe es nicht um jeden Preis ab.	Toujours disponible. Les questions sérieuses sont bienvenues, mais je ne m'en débarrasse pas à n'importe quel prix.
+listing.voice.friendly.0	Es soll zu jemandem, der etwas damit anfangen kann. Über die Einzelheiten rede ich gern.	J'aimerais qu'il aille à quelqu'un qui en a l'usage. Je réponds volontiers aux questions.
+listing.voice.friendly.1	Entscheide nicht nur nach einem Foto. Sag mir, was du wissen möchtest, und ich antworte, soweit ich kann.	Pas besoin de décider sur une seule photo. Dis-moi ce que tu veux savoir, je répondrai de mon mieux.
+listing.voice.friendly.2	Ich räume nur etwas auf, ich bin kein Laden. Wenn du fair bist, bin ich es auch.	Je fais juste du tri, je ne suis pas une boutique. Sois correct avec moi, je le serai avec toi.
+listing.voice.manipulative.0	Macht einen guten Eindruck. Es gibt schon Interesse, also lieber kurz und knapp statt langer Prüflisten.	Il présente bien. J'ai déjà des intéressés, alors je préfère aller vite plutôt que parcourir une longue liste de vérifications.
+listing.voice.manipulative.1	Der Preis soll auffallen. Die Fotos sollten für ein erstes Angebot reichen.	Un prix fait pour attirer l'attention. Les photos devraient suffire pour une première offre.
+listing.voice.manipulative.2	Ein hübscher Fund für jemanden. Ich kann es nicht reservieren, während jede kleine Spur besprochen wird.	Une jolie trouvaille pour quelqu'un. Je ne peux pas le réserver pendant qu'on discute de chaque petite marque.
+listing.voice.collector.0	Ich habe Gründe, Dinge zu behalten, und Gründe, sie weiterzugeben. Dieses Stück ist bereit für einen neuen Besitzer.	J'ai mes raisons de garder les choses et mes raisons de les céder. Celle-ci est prête pour un nouveau propriétaire.
+listing.voice.collector.1	Die kleinen Details sind mir wichtig. Frag nach dem, was wirklich da ist. Ich erfinde keine Geschichte, um es selten wirken zu lassen.	Les petits détails comptent pour moi. Demande ce qui est réellement présent ; je n'inventerai pas une histoire pour le faire paraître rare.
+listing.voice.collector.2	Mir ist ein aufmerksamer Käufer lieber als die schnellste Nachricht. Über Details können wir vor dem Preis reden.	Je préfère un acheteur attentif au message le plus rapide. On peut parler des détails avant du prix.
+people.name.0	Alex	Alex
+people.name.1	Jana	Julien
+people.name.2	Sam	Sam
+people.name.3	Mara	Manon
+people.name.4	Kim	Camille
+people.name.5	Lea	Léa
+people.name.6	Toni	Thomas
+people.name.7	Jan	Jeanne
+people.name.8	Robin	Robin
+people.name.9	Nico	Nicolas
+people.city.0	Altstadt	Vieille Ville
+people.city.1	Flussufer	Les Berges
+people.city.2	Nordviertel	Quartier Nord
+people.city.3	Bahnhofsviertel	Quartier de la Gare
+people.city.4	Hafenviertel	Quartier du Port
+people.city.5	Ahornplatz	Place des Érables
+people.city.6	Westviertel	Quartier Ouest
+people.city.7	Höhenviertel	Les Hauts
+people.city.8	Werkstattgasse	Rue des Ateliers
+people.city.9	Zentralpassage	Passage Central
+product.name.home-0	Hearth Kaffeemaschine	Cafetière Hearth
+product.name.home-1	Borough Staubsauger	Aspirateur Borough
+product.name.home-2	Morrow Wasserkocher	Bouilloire Morrow
+product.name.home-3	Hearth Toaster	Grille-pain Hearth
+product.name.home-4	Borough Standventilator	Ventilateur sur pied Borough
+product.name.home-5	Morrow Standmixer	Blender Morrow
+product.name.home-6	Hearth Dampfbügeleisen	Fer à vapeur Hearth
+product.name.home-7	Borough Nähmaschine	Machine à coudre Borough
+product.name.home-8	Morrow Heißluftfritteuse	Friteuse à air Morrow
+product.name.home-9	Hearth Espressomaschine	Machine à expresso Hearth
+product.name.furniture-0	Nook Esszimmerstuhl	Chaise de salle à manger Nook
+product.name.furniture-1	Linden Beistelltisch	Table d'appoint Linden
+product.name.furniture-2	Nook Zweisitzer	Canapé deux places Nook
+product.name.furniture-3	Linden Bücherregal	Bibliothèque Linden
+product.name.furniture-4	Nook Schreibtisch	Bureau Nook
+product.name.furniture-5	Linden Sessel	Fauteuil Linden
+product.name.furniture-6	Nook Bürostuhl	Chaise de bureau Nook
+product.name.furniture-7	Linden Schrank	Armoire de rangement Linden
+product.name.furniture-8	Nook Esstisch	Table de salle à manger Nook
+product.name.furniture-9	Linden Holzhocker	Tabouret en bois Linden
+product.name.everyday-0	Wayfarer Rucksack	Sac à dos Wayfarer
+product.name.everyday-1	Wayfarer Koffer	Valise Wayfarer
+product.name.everyday-2	Common Stadtrad	Vélo de ville Common
+product.name.everyday-3	Common Kinderwagen	Poussette Common
+product.name.everyday-4	Forge Akkubohrer	Perceuse sans fil Forge
+product.name.everyday-5	Forge Werkzeugkoffer	Mallette à outils Forge
+product.name.everyday-6	Wayfarer Rollschuhe	Patins à roulettes Wayfarer
+product.name.everyday-7	Common Einkaufstrolley	Chariot de courses pliant Common
+product.name.everyday-8	Wayfarer Sporttasche	Sac de sport Wayfarer
+product.name.everyday-9	Forge Handwerkzeug-Set	Jeu d'outils à main Forge
+npc.name.0	Alex	Alex
+npc.name.1	Jordan	Jordan
+npc.name.2	Sam	Sam
+npc.name.3	Morgan	Morgan
+npc.name.4	Casey	Casey
+npc.name.5	Riley	Riley
+npc.name.6	Taylor	Taylor
+npc.name.7	Jamie	Jamie
+npc.name.8	Robin	Robin
+npc.name.9	Drew	Drew
+npc.city.0	Portland	Portland
+npc.city.1	Austin	Austin
+npc.city.2	Seattle	Seattle
+npc.city.3	Denver	Denver
+npc.city.4	Boston	Boston
+npc.city.5	Chicago	Chicago
+npc.city.6	Phoenix	Phoenix
+npc.city.7	Atlanta	Atlanta
+npc.city.8	San Diego	San Diego
+npc.city.9	Raleigh	Raleigh
+product.name.gaming-0	Arc Wireless Controller	Arc Wireless Controller
+product.name.gaming-1	Arc Home Console	Arc Home Console
+product.name.gaming-2	Pebble Mini Controller	Pebble Mini Controller
+product.name.gaming-3	Vista Monitor	Vista Monitor
+product.name.gaming-4	Echo Gaming Headset	Echo Gaming Headset
+product.name.gaming-5	Pulse Desktop Speaker	Pulse Desktop Speaker
+product.name.gaming-6	Dock Portable Drive	Dock Portable Drive
+product.name.gaming-7	Cove Mini PC	Cove Mini PC
+product.name.gaming-8	Arc Mini Controller	Arc Mini Controller
+product.name.gaming-9	Vista Pro Monitor	Vista Pro Monitor
+product.name.gaming-10	Glide Gamepad	Glide Gamepad
+product.name.gaming-11	Trace Studio Monitor	Trace Studio Monitor
+product.name.gaming-12	Relay Compact Speaker	Relay Compact Speaker
+product.name.gaming-13	Wisp Wireless Headset	Wisp Wireless Headset
+product.name.gaming-14	Breeze Mini PC	Breeze Mini PC
+product.name.gaming-15	Coda Handheld Console	Coda Handheld Console
+product.name.gaming-16	Stave Slim Drive	Stave Slim Drive
+product.name.gaming-17	Arc Travel Controller	Arc Travel Controller
+product.name.gaming-18	Arc Gaming PC	Arc Gaming PC
+product.name.gaming-19	Trace Pro Monitor	Trace Pro Monitor
+product.name.cameras-0	Luma 3 Camera	Luma 3 Camera
+product.name.cameras-1	Roam Compact Camera	Roam Compact Camera
+product.name.cameras-2	Luma 8 Camera	Luma 8 Camera
+product.name.cameras-3	Crest Mirrorless Camera	Crest Mirrorless Camera
+product.name.cameras-4	Field Outdoor Camera	Field Outdoor Camera
+product.name.cameras-5	Studio Camera	Studio Camera
+product.name.cameras-6	Dawn Camera	Dawn Camera
+product.name.cameras-7	Roam Pocket Camera	Roam Pocket Camera
+product.name.cameras-8	Focal Standard Lens	Focal Standard Lens
+product.name.cameras-9	Focal Portrait Lens	Focal Portrait Lens
+product.name.cameras-10	Focal Wide Lens	Focal Wide Lens
+product.name.cameras-11	Field Zoom Lens	Field Zoom Lens
+product.name.cameras-12	Crest Mono Camera	Crest Mono Camera
+product.name.cameras-13	Dawn Travel Camera	Dawn Travel Camera
+product.name.cameras-14	Luma Studio Camera	Luma Studio Camera
+product.name.retro-0	Chapter 8 Handheld	Chapter 8 Handheld
+product.name.retro-1	Ember Pocket Handheld	Ember Pocket Handheld
+product.name.retro-2	Chapter 16 Handheld	Chapter 16 Handheld
+product.name.retro-3	Tile Runner Game	Tile Runner Game
+product.name.retro-4	Cloud Caravan Game	Cloud Caravan Game
+product.name.retro-5	Silver Orchard Game	Silver Orchard Game
+product.name.retro-6	Lullaby Cassette Player	Lullaby Cassette Player
+product.name.retro-7	Daylight Game Disc	Daylight Game Disc
+product.name.retro-8	Chapter Color Handheld	Chapter Color Handheld
+product.name.retro-9	Ember Desktop Console	Ember Desktop Console
+product.name.retro-10	Harbor Tales Game	Harbor Tales Game
+product.name.retro-11	Clockwork Garden Game	Clockwork Garden Game
+product.name.retro-12	Chapter Archive Handheld	Chapter Archive Handheld
+product.name.retro-13	Paper Lantern Game Set	Paper Lantern Game Set
+product.name.retro-14	Ember Heritage Handheld	Ember Heritage Handheld

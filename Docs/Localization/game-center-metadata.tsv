@@ -1,0 +1,53 @@
+identifier	language	display_name	description
+trading.weekly.v1	en	Weekly Trader	Play offline. Connect to compare scores.
+trading.achievement.firstFlip.v1	en	First Flip	Complete your first profitable trade.
+trading.achievement.naturalTrader.v1	en	Natural Trader	Earn at least 100% return on a trade costing $10 or more.
+trading.achievement.thatHurt.v1	en	That Hurt	Lose at least $10 on a trade costing $50 or more.
+trading.achievement.detective.v1	en	Detective	Discover a hidden defect in five different listings before buying.
+trading.achievement.negotiator.v1	en	Negotiator	Buy an item for at least 20% below the seller’s asking price.
+trading.achievement.collector.v1	en	Collector	Complete your first collection.
+trading.achievement.trustedTrader.v1	en	Trusted Trader	Complete ten inspected trades in your career.
+trading.achievement.specialist.v1	en	Specialist	Reach expertise level 3 in one category.
+trading.achievement.bigLeague.v1	en	Big League	Reach the highest career stage.
+trading.achievement.comeback.v1	en	Comeback	Use recovery commissions and rebuild your cash to $75.
+trading.achievement.versatile.v1	en	Versatile Trader	Profit from five different product models.
+trading.achievement.weeklyFinisher.v1	en	Challenge Finisher	Finalize a weekly challenge with at least one completed trade.
+trading.weekly.v1	tr	Haftanın Tüccarı	Çevrimdışı oyna. Puanları karşılaştırmak için bağlan.
+trading.achievement.firstFlip.v1	tr	İlk Kârlı Satış	İlk kârlı al-satını tamamla.
+trading.achievement.naturalTrader.v1	tr	Doğuştan Tüccar	En az 10 $ maliyetli bir al-satta %100 veya daha fazla getiri kazan.
+trading.achievement.thatHurt.v1	tr	Bu Biraz Acıttı	En az 50 $ maliyetli bir al-satta en az 10 $ zarar et.
+trading.achievement.detective.v1	tr	Dedektif	Beş farklı ilanda satın almadan önce gizli bir kusur öğren.
+trading.achievement.negotiator.v1	tr	Pazarlık Ustası	Bir ürünü satıcının ilan fiyatından en az %20 ucuza al.
+trading.achievement.collector.v1	tr	Koleksiyoncu	İlk koleksiyonunu tamamla.
+trading.achievement.trustedTrader.v1	tr	Güvenilir Tüccar	Kariyerinde incelemesini yaptığın on ürünü sat.
+trading.achievement.specialist.v1	tr	İşin Uzmanı	Bir kategoride 3. uzmanlık seviyesine ulaş.
+trading.achievement.bigLeague.v1	tr	Büyük Lig	En yüksek kariyer aşamasına ulaş.
+trading.achievement.comeback.v1	tr	Yeniden Ayağa Kalk	Toparlanma işlerinden gelir kazanarak nakdini yeniden 75 $ seviyesine çıkar.
+trading.achievement.versatile.v1	tr	Çok Yönlü Tüccar	Beş farklı ürün modelini kârla sat.
+trading.achievement.weeklyFinisher.v1	tr	Mücadele Tamamlayıcısı	En az bir al-sat tamamladığın haftalık mücadelenin sonucunu kesinleştir.
+trading.weekly.v1	de	Händler der Woche	Spiele offline. Verbinde dich, um Punkte zu vergleichen.
+trading.achievement.firstFlip.v1	de	Erster Gewinn	Schließe dein erstes gewinnbringendes Geschäft ab.
+trading.achievement.naturalTrader.v1	de	Handelstalent	Erziele mindestens 100 % Rendite bei einem Geschäft mit Kosten ab 10 USD.
+trading.achievement.thatHurt.v1	de	Das tat weh	Verliere mindestens 10 USD bei einem Geschäft mit Kosten ab 50 USD.
+trading.achievement.detective.v1	de	Detektiv	Entdecke vor dem Kauf einen versteckten Fehler in fünf verschiedenen Angeboten.
+trading.achievement.negotiator.v1	de	Verhandlungsprofi	Kaufe einen Artikel mindestens 20 % unter dem Angebotspreis des Verkäufers.
+trading.achievement.collector.v1	de	Sammler	Vervollständige deine erste Sammlung.
+trading.achievement.trustedTrader.v1	de	Verlässlicher Händler	Schließe zehn Geschäfte mit geprüften Artikeln in deiner Karriere ab.
+trading.achievement.specialist.v1	de	Spezialist	Erreiche Wissensstufe 3 in einer Kategorie.
+trading.achievement.bigLeague.v1	de	Ganz oben	Erreiche die höchste Karrierestufe.
+trading.achievement.comeback.v1	de	Comeback	Nutze Überbrückungsaufträge und baue dein Bargeld wieder auf 75 USD auf.
+trading.achievement.versatile.v1	de	Vielseitiger Händler	Erziele Gewinn mit fünf verschiedenen Produktmodellen.
+trading.achievement.weeklyFinisher.v1	de	Aufgabe abgeschlossen	Schließe eine Wochenaufgabe mit mindestens einem abgeschlossenen Geschäft ab.
+trading.weekly.v1	fr	Marchand de la semaine	Joue hors ligne. Connecte-toi pour comparer les scores.
+trading.achievement.firstFlip.v1	fr	Première revente rentable	Conclus ta première transaction bénéficiaire.
+trading.achievement.naturalTrader.v1	fr	Le commerce dans le sang	Obtiens au moins 100 % de rendement sur une transaction ayant coûté au moins 10 USD.
+trading.achievement.thatHurt.v1	fr	Ça fait mal	Perds au moins 10 USD sur une transaction ayant coûté au moins 50 USD.
+trading.achievement.detective.v1	fr	Détective	Découvre un défaut caché dans cinq annonces différentes avant d'acheter.
+trading.achievement.negotiator.v1	fr	As de la négociation	Achète un objet au moins 20 % sous le prix demandé par le vendeur.
+trading.achievement.collector.v1	fr	Collectionneur	Termine ta première collection.
+trading.achievement.trustedTrader.v1	fr	Marchand fiable	Conclus dix transactions avec des objets inspectés dans ta carrière.
+trading.achievement.specialist.v1	fr	Spécialiste	Atteins le niveau d'expertise 3 dans une catégorie.
+trading.achievement.bigLeague.v1	fr	Dans la cour des grands	Atteins le plus haut rang de carrière.
+trading.achievement.comeback.v1	fr	Retour en force	Utilise les missions de reprise et remonte ton argent disponible à 75 USD.
+trading.achievement.versatile.v1	fr	Marchand polyvalent	Réalise un bénéfice sur cinq modèles d'objets différents.
+trading.achievement.weeklyFinisher.v1	fr	Défi terminé	Valide un défi hebdomadaire avec au moins une transaction terminée.

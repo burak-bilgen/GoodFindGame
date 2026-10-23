@@ -60,7 +60,7 @@ Achievement percentages are derived from persisted career facts and merge monoto
 
 ## Deferred integrations
 
-Direct friend challenges and Game Center Activities are deferred in V1 to keep iOS 17 support and scope focused. `CompetitionRoute.activity(identifier:)` recognizes the reserved future identifier `trading.activity.weekly.v1`; it is an internal adapter seam, not a registered activity or URL scheme. No Camera/Retro activity is advertised. A future authenticated GameKit listener can map a verified supported activity to this route and present its challenge context, with availability guards and matching App Store Connect configuration. Do not treat unrecognized activities as permission to enter a different economy.
+Direct friend challenges and Game Center Activities are deferred in V1 to keep the initial competition scope focused. `CompetitionRoute.activity(identifier:)` recognizes the reserved future identifier `trading.activity.weekly.v1`; it is an internal adapter seam, not a registered activity or URL scheme. No Camera/Retro activity is advertised. A future authenticated GameKit listener can map a verified supported activity to this route and present its challenge context, with availability guards and matching App Store Connect configuration. Do not treat unrecognized activities as permission to enter a different economy.
 
 ## Apple references
 
@@ -73,3 +73,5 @@ Direct friend challenges and Game Center Activities are deferred in V1 to keep i
 Implementation compiles against the installed SDK with iOS 26 deployment. Runtime API usage is limited to APIs available on that target; newer Challenge/Activity APIs are not called.
 
 Current presentation (2026-10-23): leaderboard and achievement screens use GKAccessPoint triggers. The authentication controller remains an optional sign-in sheet. Selecting a signing team in Xcode does not configure App Store Connect resources or verify a live leaderboard.
+
+German/French release copy is now complete alongside English/Turkish. `Localization/game-center-metadata.tsv` contains all four display names/descriptions for the weekly leaderboard and 12 achievements, mapped to their actual stable IDs. It is a copy worksheet, not an App Store Connect import format; resources have not been uploaded or remotely verified.
