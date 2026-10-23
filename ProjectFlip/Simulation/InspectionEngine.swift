@@ -51,6 +51,7 @@ struct InspectionEngine {
     }
 
     func chargeProfessional(itemID: ItemID, state: GameSnapshot) throws -> GameSnapshot {
+        guard !state.playerListings.contains(where: { $0.itemID == itemID && $0.status == .active }) else { throw TradingError.itemListed }
         guard let index = state.player.inventory.firstIndex(where: { $0.id == itemID }) else { throw TradingError.unavailable }
         guard !state.player.inventory[index].professionallyInspected,
               !state.inspectionJobs.contains(where: { $0.itemID == itemID && $0.status == .pending }) else { throw TradingError.alreadyDone }

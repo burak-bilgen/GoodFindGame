@@ -44,10 +44,14 @@ struct OpenTradesView: View {
     @Environment(\.marketConfiguration) private var market
     var body: some View {
         let sellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID != nil }
+        let readySellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID == nil && ($0.counterPrice != nil || $0.agreedPrice != nil) }
+        let idleStock = store.snapshot.player.inventory.filter { ItemTransfer.available($0.id, state: store.snapshot) }
+        let readyToInspect = idleStock.filter { !$0.inspected }
+        let readyToPrice = idleStock.filter(\.inspected)
         let shipping = store.snapshot.shipments.filter { $0.status == .pending }
         let inspections = store.snapshot.inspectionJobs.filter { $0.status == .pending }
         let sales = store.snapshot.playerListings.filter { $0.status == .active }
-        if !sellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty {
+        if !sellers.isEmpty || !readySellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty || !idleStock.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 8) {
                     GameActivityLights()
@@ -55,6 +59,21 @@ struct OpenTradesView: View {
                 }
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 14) {
+                if let seller = readySellers.first {
+                    NavigationLink { ConversationView(store: store, listingID: seller.listingID) } label: {
+                        Label(GameText.format("living.sellerReady", locale: locale, readySellers.count), systemImage: "bubble.left.and.bubble.right.fill")
+                    }
+                }
+                if let item = readyToInspect.first {
+                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
+                        Label(GameText.format("living.inspectReady", locale: locale, readyToInspect.count), systemImage: "viewfinder")
+                    }
+                }
+                if let item = readyToPrice.first {
+                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
+                        Label(GameText.format("living.priceReady", locale: locale, readyToPrice.count), systemImage: "tag.fill")
+                    }
+                }
                 if let seller = sellers.first {
                     NavigationLink { ConversationView(store: store, listingID: seller.listingID) } label: {
                         Label(GameText.format("living.sellers", locale: locale, Int64(sellers.count)), systemImage: "bubble.left.and.bubble.right")

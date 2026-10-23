@@ -54,6 +54,7 @@ struct InventoryView: View {
                         }.buttonStyle(.plain).accessibilityIdentifier("inventory.\(item.id.rawValue)")
                     }
                 }
+                if store.snapshot.shipments.contains(where: { $0.status == .pending }) { HuntButton() }
                 if items.isEmpty && !((filter == .all || filter == .transit) && store.snapshot.shipments.contains { $0.status == .pending }) {
                     Text(filter == .all ? "inventory.empty" : "inventory.noMatches").foregroundStyle(.secondary)
                     if filter == .all { HuntButton() }
@@ -68,6 +69,12 @@ struct OwnedItemView: View {
     let itemID: ItemID
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
+    private var hasPendingReport: Bool {
+        store.snapshot.inspectionJobs.contains { $0.itemID == itemID && $0.status == .pending }
+    }
+    private var isListed: Bool {
+        store.snapshot.playerListings.contains { $0.itemID == itemID && $0.status == .active }
+    }
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
             ScrollView {
@@ -106,6 +113,8 @@ struct OwnedItemView: View {
                             NavigationLink { CreateListingView(store: store, itemID: item.id) } label: {
                                 Text(item.knownActiveDefects.isEmpty ? "selling.create" : "repair.asIs")
                             }.buttonStyle(GameButton(secondary: !item.knownActiveDefects.isEmpty)).accessibilityIdentifier("createListing")
+                                .disabled(hasPendingReport)
+                            if hasPendingReport { Text("error.inspectionPending").font(.caption).foregroundStyle(.secondary) }
                         } else if let sale = store.snapshot.playerListings.first(where: { $0.itemID == item.id && $0.status == .active }) {
                             NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                                 Label("selling.follow", systemImage: "tag.fill")
@@ -114,13 +123,15 @@ struct OwnedItemView: View {
                     }
                     if let job = store.snapshot.inspectionJobs.first(where: { $0.itemID == item.id && $0.status == .pending }) {
                         DeadlineView(store: store, target: job.completesAt, titleKey: "inspection.pendingReport")
+                        HuntButton()
                     } else if !item.professionallyInspected {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("inspection.professional").font(.headline)
                             Text("inspection.professionalDescription").font(.subheadline).foregroundStyle(.secondary)
                             Text(InspectionEngine().professionalCost.formatted(locale: locale, market: market)).bold()
                             Button("inspection.professionalStart") { store.perform { try store.inspect(itemID: item.id, professionally: true) } }
-                                .buttonStyle(.bordered).accessibilityIdentifier("professionalInspect")
+                                .buttonStyle(.bordered).accessibilityIdentifier("professionalInspect").disabled(isListed)
+                            if isListed { Text("error.itemListed").font(.caption).foregroundStyle(.secondary) }
                         }.gameCard()
                     }
                     NavigationLink("facts.title") { ItemFactsView(store: store, itemID: item.id) }.accessibilityIdentifier("openItemFacts")
