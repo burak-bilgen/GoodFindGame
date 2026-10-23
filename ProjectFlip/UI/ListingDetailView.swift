@@ -11,7 +11,7 @@ struct ListingDetailView: View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).aspectRatio(1, contentMode: .fit)
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(maxWidth: 180).frame(maxWidth: .infinity)
                     Text("art.sellerPresentation").font(.caption).foregroundStyle(.secondary)
                     VStack(alignment: .leading, spacing: 10) {
                         Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
@@ -33,41 +33,17 @@ struct ListingDetailView: View {
                             else { Text(GameText.string(lifecycle.closureReason?.key ?? "listing.unavailable", locale: locale)).bold() }
                         }
                     }
+                    TradeReadView(store: store, listing: listing, price: listing.askingPrice)
+                        .gameCard(accent: GameStyle.amber)
                     VStack(alignment: .leading, spacing: 12) {
                         GameStamp(key: "listing.description", symbol: "quote.bubble.fill")
                         Text(GameText.string(listing.descriptionIntent, locale: locale)).font(.title3)
                         LabeledContent("listing.claimedCondition") { Text(listing.claimedCondition, format: .number).bold() }
                         Text("listing.claimWarning").font(.caption).foregroundStyle(.secondary)
                     }.gameCard()
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "shippingbox.fill").font(.title).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("game.truth").font(.headline).foregroundStyle(.white)
-                                Text("game.unknown").font(.caption).foregroundStyle(GameStyle.amber)
-                            }
-                        }
-                        if typeSize.isAccessibilitySize {
-                            VStack(spacing: 12) { unknownStats }
-                        } else {
-                            HStack(alignment: .top, spacing: 12) { unknownStats }
-                        }
-                        Text("game.truthHint").font(.caption).foregroundStyle(.white.opacity(0.78))
-                    }.padding(18).frame(maxWidth: .infinity, alignment: .leading)
-                        .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 22))
                     VStack(alignment: .leading, spacing: 10) {
                         SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id))
                         Text(GameText.string("seller.voice.\(listing.seller.archetype.rawValue)", locale: locale)).font(.subheadline).foregroundStyle(.secondary)
-                    }.gameCard()
-                    DisclosureGroup("listing.referenceValue") {
-                        VStack(alignment: .leading, spacing: 8) {
-                            switch Result(catching: { try definition.baseValue.scaled(byBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
-                            case .success(let reference):
-                                if let range = try? ValueEstimate(center: reference, spread: Int64(max(1_800, 3_000 - store.snapshot.inspectionKnowledge.level(in: definition.category) * 300))) { ValueRangeView(estimate: range) }
-                            case .failure: Text("inspection.valueUnavailable")
-                            }
-                            Text("listing.referenceCaution").font(.caption).foregroundStyle(.secondary)
-                        }.padding(.top, 8)
                     }.gameCard()
                 }.padding(16)
             }.gameScreen()
@@ -103,19 +79,7 @@ struct ListingDetailView: View {
             ContentUnavailableView("listing.unavailable", systemImage: "tag.slash")
         }
     }
-    private var unknownStats: some View {
-        Group {
-            mysteryStat("game.conditionUnknown")
-            mysteryStat("game.faultUnknown")
-        }
-    }
-    private func mysteryStat(_ key: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text(verbatim: "?").font(.system(.title, design: .rounded, weight: .black)).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
-            Text(GameText.string(key, locale: locale)).font(.caption.bold()).foregroundStyle(.white)
-        }.frame(maxWidth: .infinity, alignment: .leading).padding(12)
-            .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: 12))
-    }
+
 }
 
 struct SellerSummary: View {

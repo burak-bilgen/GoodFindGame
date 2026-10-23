@@ -73,7 +73,7 @@ struct OwnedItemView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !item.inspected {
-                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).aspectRatio(1, contentMode: .fit)
+                        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(maxWidth: 220).frame(maxWidth: .infinity)
                     }
                     Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
                     if item.id == store.snapshot.recovery.itemID {
@@ -144,6 +144,7 @@ struct InspectionReveal: View {
     let definition: ItemDefinition
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
+    @Environment(\.dynamicTypeSize) private var typeSize
     @GameReduceMotion private var reduceMotion
     @State private var step = 0
     private var presentation: InspectionReportPresentation {
@@ -178,20 +179,19 @@ struct InspectionReveal: View {
                 Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
-                DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).aspectRatio(1, contentMode: .fit)
-                Text("art.referencePhoto").font(.caption).foregroundStyle(.secondary)
-                if item.knownActiveDefects.isEmpty {
-                    Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")
-                        .font(.subheadline).foregroundStyle(GameStyle.gain)
+                if typeSize.isAccessibilitySize {
+                    VStack(alignment: .leading, spacing: 12) {
+                        reportPhoto
+                        findings
+                    }
                 } else {
-                    ForEach(item.knownActiveDefects, id: \.self) { defect in
-                        Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill")
-                            .font(.title3.bold()).foregroundStyle(GameStyle.loss).accessibilityIdentifier("revealedDefect.\(defect.rawValue)")
+                    HStack(alignment: .center, spacing: 14) {
+                        reportPhoto
+                        VStack(alignment: .leading, spacing: 8) { findings }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                ForEach(item.repairedDefects ?? [], id: \.self) { defect in
-                    HStack { Text(GameText.string(defect.key, locale: locale)); Spacer(); Label("reveal.repaired", systemImage: "wrench.adjustable.fill") }.font(.caption).foregroundStyle(GameStyle.gain)
-                }
+                Text("art.referencePhoto").font(.caption2).foregroundStyle(.secondary)
             }.opacity(step >= 2 ? 1 : 0).accessibilityHidden(step < 2)
             Group {
                 Divider()
@@ -226,6 +226,26 @@ struct InspectionReveal: View {
             report.markRead(in: .standard)
         }
     }
+    private var reportPhoto: some View {
+        DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item))
+            .frame(width: 110, height: 110)
+    }
+    @ViewBuilder private var findings: some View {
+        if item.knownActiveDefects.isEmpty {
+            Label(!(item.repairedDefects ?? []).isEmpty ? "inspection.repairedClear" : item.professionallyInspected ? "inspection.professionalClean" : "inspection.noObviousFault", systemImage: "checkmark.circle")
+                .font(.subheadline).foregroundStyle(GameStyle.gain)
+        } else {
+            ForEach(item.knownActiveDefects, id: \.self) { defect in
+                Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill")
+                    .font(.headline).foregroundStyle(GameStyle.loss).accessibilityIdentifier("revealedDefect.\(defect.rawValue)")
+            }
+        }
+        ForEach(item.repairedDefects ?? [], id: \.self) { defect in
+            Label(GameText.string(defect.key, locale: locale), systemImage: "wrench.adjustable.fill")
+                .font(.caption).foregroundStyle(GameStyle.gain)
+        }
+    }
+
 }
 
 struct RepairDecision: View {

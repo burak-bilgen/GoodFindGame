@@ -8,7 +8,7 @@ struct KnowledgeView: View {
     var body: some View {
         GameList {
             Text("knowledge.explanation").foregroundStyle(.secondary)
-            ForEach(ItemCategory.allCases, id: \.self) { category in
+            ForEach(store.playableCategories, id: \.self) { category in
                 Section(GameText.string("category.\(category.rawValue)", locale: locale)) {
                     KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: category)
                     Text(GameText.string("knowledge.clues.\(category.rawValue)", locale: locale))

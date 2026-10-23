@@ -17,7 +17,13 @@ struct CareerHuntPrompt: View {
                     Text(GameText.string(focused?.titleKey ?? (store.snapshot.clients.active != nil ? "clients.accepted" : store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key), locale: locale)).font(.headline)
                     Group {
                         if let focused { Text(GameText.format("collections.progress", locale: locale, focused.count(in: store.snapshot), focused.models.count)) }
-                        else { Text("career.nextHunt") }
+                        else if let next = CareerTier(rawValue: store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue + 1) {
+                            Text(GameText.format("career.nextProgress", locale: locale, min(store.snapshot.career.creditedItems.count, next.requiredSales), next.requiredSales,
+                                                 GameText.string(next.key, locale: locale)))
+                            if next.requiredKnowledge > 0 {
+                                Text(GameText.string("career.requirement.\(next.rawValue)", locale: locale))
+                            }
+                        } else { Text("career.nextHunt") }
                     }.font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer(minLength: 0)

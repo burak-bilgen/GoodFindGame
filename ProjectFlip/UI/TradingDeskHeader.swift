@@ -23,12 +23,10 @@ struct TradingDeskHeader: View {
             }
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("hunt.eyebrow").font(.caption2.weight(.heavy)).tracking(2).foregroundStyle(GameStyle.amber)
-                    Text("desk.headline").font(.system(.title, design: .rounded, weight: .black))
-                    Text("desk.subtitle").font(.caption).foregroundStyle(.secondary)
+                    Text("desk.headline").font(.system(.title3, design: .rounded, weight: .black))
                 }
                 Spacer(minLength: 0)
-                if !typeSize.isAccessibilitySize { GameScanner(size: 58) }
+                if !typeSize.isAccessibilitySize { GameScanner(size: 36) }
             }
         }.gameCard(accent: GameStyle.amber)
     }

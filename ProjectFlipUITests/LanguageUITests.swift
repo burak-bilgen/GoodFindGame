@@ -19,4 +19,59 @@ import XCTest
             app.terminate()
         }
     }
+
+    func testCompleteTradeGermanAndFrench() {
+        continueAfterFailure = false
+        for (code, locale) in [("de", "de_DE"), ("fr", "fr_FR")] {
+            let app = XCUIApplication()
+            app.launchArguments = ["-AppleLanguages", "(\(code))", "-AppleLocale", locale,
+                                   "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
+            app.launch()
+            XCTAssertTrue(app.buttons["listing.listing-42-0"].waitForExistence(timeout: 10))
+            tap(app.buttons["listing.listing-42-0"], in: app)
+            app.swipeUp()
+            XCTAssertTrue(app.descendants(matching: .any)["tradeRead"].firstMatch.exists)
+            capture("Trade appraisal \(code)", app: app)
+            tap(app.buttons["openConversation"], in: app)
+            tap(app.buttons["askIssues"], in: app)
+            tap(app.buttons["sendOffer"], in: app)
+            tap(app.buttons["confirmPurchase"], in: app)
+            tap(app.buttons["continueToItem"], in: app)
+            tap(app.buttons["basicInspect"], in: app)
+            XCTAssertTrue(app.descendants(matching: .any)["revealedDefect.damagedPort"].firstMatch.waitForExistence(timeout: 5))
+            capture("Inspection decision \(code)", app: app)
+            if code == "fr" { tap(app.buttons["repair.damagedPort"], in: app) }
+            tap(app.buttons["createListing"], in: app)
+            tap(app.buttons["publishListing"], in: app)
+            tap(app.buttons["followPlayerListing"], in: app)
+            XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 5))
+            capture("Buyer decision \(code)", app: app)
+            tap(app.buttons["acceptBuyerOffer"], in: app)
+            XCTAssertTrue(app.staticTexts["tradePayoff"].waitForExistence(timeout: 5))
+            capture("Trade outcome \(code)", app: app)
+            tap(app.buttons["returnToHunt"], in: app)
+            XCTAssertTrue(app.buttons["listing.listing-42-1"].exists)
+            app.terminate()
+            app.launch()
+            tap(app.buttons["gameTab.4"], in: app)
+            tap(app.buttons["openTradeHistory"], in: app)
+            XCTAssertTrue(app.buttons["trade.resale-item-42-0-0"].waitForExistence(timeout: 5))
+            app.terminate()
+        }
+    }
+
+    private func tap(_ element: XCUIElement, in app: XCUIApplication) {
+        for _ in 0..<8 {
+            if element.exists && element.isHittable && element.isEnabled { break }
+            app.swipeUp()
+        }
+        XCTAssertTrue(element.exists)
+        element.tap()
+    }
+
+    private func capture(_ name: String, app: XCUIApplication) {
+        let image = XCTAttachment(screenshot: app.screenshot())
+        image.name = name; image.lifetime = .keepAlways; add(image)
+    }
+
 }

@@ -96,3 +96,41 @@ struct AskingResultView: View {
         }
     }
 }
+
+/// The bet is readable before committing cash; the range remains an estimate.
+struct TradeReadView: View {
+    let store: GameStore
+    let listing: MarketplaceListing
+    let price: Money
+    @Environment(\.locale) private var locale
+    @Environment(\.marketConfiguration) private var market
+    var body: some View {
+        if let definition = store.definition(for: listing.item) {
+            let disclosed = store.snapshot.conversations.first { $0.listingID == listing.id }?.knownDefects ?? []
+            if let read = try? PublicTradeAppraisal(listing: listing, disclosedDefects: disclosed, price: price,
+                                                   definition: definition, knowledge: store.snapshot.inspectionKnowledge,
+                                                   marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Label("tradeRead.title", systemImage: "scope").font(.caption.bold()).foregroundStyle(GameStyle.amber)
+                    ValueRangeView(estimate: read.estimate).accessibilityIdentifier("tradeReadRange")
+                    Text("tradeRead.margin").font(.caption).foregroundStyle(.secondary)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 6) { margin(read.lowerMargin); Text(verbatim: "…"); margin(read.upperMargin) }
+                        VStack(alignment: .leading, spacing: 4) { margin(read.lowerMargin); margin(read.upperMargin) }
+                    }.font(.system(.title3, design: .rounded, weight: .heavy)).monospacedDigit()
+                        .accessibilityIdentifier("tradeReadMargin")
+                    Text(disclosed.isEmpty ? "tradeRead.claim" : "tradeRead.disclosed").font(.caption).foregroundStyle(.secondary)
+                    ForEach(disclosed, id: \.self) { defect in
+                        Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill")
+                            .font(.caption.bold()).foregroundStyle(GameStyle.loss)
+                    }
+                    Text("tradeRead.caution").font(.caption).foregroundStyle(.secondary)
+                }.frame(maxWidth: .infinity, alignment: .leading).accessibilityIdentifier("tradeRead")
+            }
+        }
+    }
+    private func margin(_ amount: Money) -> some View {
+        Text(amount.formatted(locale: locale, market: market, signed: true))
+            .foregroundStyle(amount < .zero ? GameStyle.loss : GameStyle.gain).fixedSize()
+    }
+}

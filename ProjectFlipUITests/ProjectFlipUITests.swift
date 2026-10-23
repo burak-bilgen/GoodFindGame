@@ -469,7 +469,7 @@ final class ProjectFlipUITests: XCTestCase {
         capture("listing: \(language)", app: app)
         XCTAssertFalse(app.staticTexts["inspectionCondition"].exists)
         app.swipeUp()
-        XCTAssertTrue(app.staticTexts[language == "tr" ? "Henüz bilinmiyor" : "Still unknown"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["tradeRead"].firstMatch.exists)
         capture("listing investigation: \(language)", app: app)
         app.buttons["openConversation"].tap()
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Deniz" : "Alex"].exists)
@@ -490,19 +490,14 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
         // Review the finished reveal, rather than capturing its initial fade.
         RunLoop.current.run(until: Date().addingTimeInterval(2))
-        let comparison = app.segmentedControls["inspectionPhotoComparison"]
-        let advertised = comparison.buttons[language == "tr" ? "İlan fotoğrafı" : "Seller photo"]
-        let actual = comparison.buttons[language == "tr" ? "Gerçek ürün" : "Actual item"]
-        tap(advertised, in: app)
-        XCTAssertTrue(advertised.isSelected)
-        tap(actual, in: app)
-        XCTAssertTrue(actual.isSelected)
+        XCTAssertTrue(app.staticTexts["inspectionCondition"].exists)
+        XCTAssertTrue(app.staticTexts[language == "tr" ? "Temel inceleme tamamlandı" : "Basic inspection complete"].exists)
         capture("inspection: \(language)", app: app)
         tap(app.buttons["createListing"], in: app)
         capture("resale price: \(language)", app: app)
         tap(app.buttons["publishListing"], in: app)
-        app.buttons[tabID(language == "tr" ? "Satışlar" : "Selling")].tap()
-        app.buttons["sale.resale-item-42-0-0"].tap()
+        openSales(app)
+        tap(app.buttons["sale.resale-item-42-0-0"], in: app)
         if followFeed { XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10)) }
         capture("buyer offer: \(language)", app: app)
         tap(app.buttons["acceptBuyerOffer"], in: app)

@@ -3,6 +3,8 @@ import Foundation
 enum CareerTier: Int, Codable, CaseIterable, Sendable {
     case newcomer, known, specialist, trusted
     var key: String { "career.tier.\(rawValue)" }
+    var requiredSales: Int { [0, 3, 8, 16][rawValue] }
+    var requiredKnowledge: Int { [0, 0, 2, 3][rawValue] }
 }
 
 struct CareerRecord: Codable, Equatable {
@@ -12,9 +14,9 @@ struct CareerRecord: Codable, Equatable {
     var legacyAgreements: Set<ListingID>?
     func tier(knowledge: InspectionKnowledge) -> CareerTier {
         let rank = ItemCategory.allCases.map { knowledge.level(in: $0) }.max() ?? 0
-        if creditedItems.count >= 16 && rank >= 3 && (clientJobs >= 3 || creditedItems.count >= 24) { return .trusted }
-        if creditedItems.count >= 8 && rank >= 2 { return .specialist }
-        if creditedItems.count >= 3 || clientJobs >= 1 { return .known }
+        if creditedItems.count >= CareerTier.trusted.requiredSales && rank >= CareerTier.trusted.requiredKnowledge && (clientJobs >= 3 || creditedItems.count >= 24) { return .trusted }
+        if creditedItems.count >= CareerTier.specialist.requiredSales && rank >= CareerTier.specialist.requiredKnowledge { return .specialist }
+        if creditedItems.count >= CareerTier.known.requiredSales || clientJobs >= 1 { return .known }
         return .newcomer
     }
 }

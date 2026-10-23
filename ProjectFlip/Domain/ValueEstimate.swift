@@ -8,7 +8,9 @@ struct ValueEstimate: Equatable {
 
     init(item: ItemInstance, definition: ItemDefinition, knowledge: InspectionKnowledge, marketBasisPoints: Int64 = 10_000) throws {
         let center = try InspectionEngine().estimatedValue(item: item, definition: definition, marketBasisPoints: marketBasisPoints)
-        let spread = max(500, 2_500 - knowledge.level(in: definition.category) * 500 - (item.professionallyInspected ? 700 : 0))
+        // Expertise tightens an earned appraisal. An unseen seller claim still
+        // needs a wide band: knowing a model is not verifying this particular item.
+        let spread = max(item.inspected ? 500 : 2_000, 2_500 - knowledge.level(in: definition.category) * 500 - (item.professionallyInspected ? 700 : 0))
         try self.init(center: center, spread: Int64(spread))
     }
 
@@ -22,4 +24,22 @@ struct ValueEstimate: Equatable {
     }
 
     func formatted(locale: Locale, market: MarketConfiguration = .us) -> String { "\(lower.formatted(locale: locale, market: market)) – \(upper.formatted(locale: locale, market: market))" }
+}
+
+/// Appraises only the seller's claim and what they have disclosed. Never reads
+/// actual condition, hidden defects, reservation price or buyer budgets.
+struct PublicTradeAppraisal: Equatable {
+    let estimate: ValueEstimate
+    let lowerMargin: Money
+    let upperMargin: Money
+
+    init(listing: MarketplaceListing, disclosedDefects: [Defect], price: Money,
+         definition: ItemDefinition, knowledge: InspectionKnowledge, marketBasisPoints: Int64 = 10_000) throws {
+        var evidence = ItemInstance(id: listing.item.id, definitionID: definition.id,
+                                    condition: listing.claimedCondition, hiddenDefects: [])
+        evidence.revealedDefects = disclosedDefects
+        estimate = try ValueEstimate(item: evidence, definition: definition, knowledge: knowledge, marketBasisPoints: marketBasisPoints)
+        lowerMargin = try estimate.lower.subtracting(price)
+        upperMargin = try estimate.upper.subtracting(price)
+    }
 }

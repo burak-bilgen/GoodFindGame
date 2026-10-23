@@ -26664,6 +26664,186 @@
           }
         }
       }
+    },
+    "tradeRead.title": {
+      "comment": "Pre-purchase appraisal based only on public seller claims and disclosed faults; never a guarantee of profit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR TRADE READ"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SENİN TAHMİNİN"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DEINE EINSCHÄTZUNG"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TON ANALYSE"
+          }
+        }
+      }
+    },
+    "tradeRead.margin": {
+      "comment": "Pre-purchase appraisal based only on public seller claims and disclosed faults; never a guarantee of profit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potential margin before extra costs"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ek masraflar öncesi olası kâr / zarar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mögliche Marge vor Zusatzkosten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marge potentielle avant frais supplémentaires"
+          }
+        }
+      }
+    },
+    "tradeRead.claim": {
+      "comment": "Pre-purchase appraisal based only on public seller claims and disclosed faults; never a guarantee of profit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Based on the claimed condition. Faults are still unverified."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beyan edilen kondisyona göre. Kusurlar henüz doğrulanmadı."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgehend vom angegebenen Zustand. Mängel sind noch ungeprüft."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selon l’état annoncé. Les défauts restent à vérifier."
+          }
+        }
+      }
+    },
+    "tradeRead.disclosed": {
+      "comment": "Pre-purchase appraisal based only on public seller claims and disclosed faults; never a guarantee of profit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Includes the issues this seller disclosed. Other faults may remain."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satıcının açıkladığı kusurlar dahil. Başka kusurlar olabilir."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berücksichtigt die genannten Mängel. Weitere sind möglich."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tient compte des défauts signalés. D’autres peuvent subsister."
+          }
+        }
+      }
+    },
+    "tradeRead.caution": {
+      "comment": "Pre-purchase appraisal based only on public seller claims and disclosed faults; never a guarantee of profit.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buyers can offer less. Leave room for surprises, inspection and repairs."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcılar daha az önerebilir. Sürprizler, inceleme ve onarım için pay bırak."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Käufer können weniger bieten. Plane Spielraum für Überraschungen, Prüfung und Reparaturen ein."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les acheteurs peuvent proposer moins. Prévois une marge pour les imprévus, l’expertise et les réparations."
+          }
+        }
+      }
+    },
+    "career.nextProgress": {
+      "comment": "Hunt-screen career progress: inspected trades completed, minimum trades required, localized next career rank. Further expertise/client requirements appear below.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld trades toward %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld ticaret · sıradaki unvan: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld Geschäfte auf dem Weg zu %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld / %lld ventes vers le rang %@"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -26,7 +26,6 @@ struct PurchaseDecision: View {
             Text(price.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
                 .lineLimit(1).minimumScaleFactor(0.5)
             Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(.secondary)
-            Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
             VStack(alignment: .leading, spacing: 6) {
                 Text(hasCash ? "purchase.cashAfter" : "purchase.cashNeeded").font(.caption).foregroundStyle(.secondary)
                 switch Result(catching: {
@@ -46,6 +45,10 @@ struct PurchaseDecision: View {
             if !hasRoom {
                 Label("error.inventoryFull", systemImage: "shippingbox.fill").font(.caption).foregroundStyle(.secondary)
             }
+            if let listing = store.snapshot.market.first(where: { $0.id == listingID }) {
+                TradeReadView(store: store, listing: listing, price: price)
+            }
+            Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
             Button("purchase.confirm") {
                 store.perform { try store.purchase(listingID: listingID); GameFeel.play(.purchase) }
             }.buttonStyle(GameButton()).disabled(!hasCash || !hasRoom).accessibilityIdentifier("confirmPurchase")

@@ -37,6 +37,10 @@ struct ConversationView: View {
                             }
                             DisclosureGroup("seller.title") { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)).padding(.top, 8) }
                         }.gameCard()
+                        if listing.available && conversation.agreedPrice == nil {
+                            TradeReadView(store: store, listing: listing, price: conversation.counterPrice ?? listing.askingPrice)
+                                .gameCard(accent: GameStyle.amber)
+                        }
                         if !listing.available {
                             let reason = store.snapshot.marketListingStates.first { $0.id == listing.id }?.closureReason
                             let acquired = store.snapshot.shipments.contains(where: { $0.item.id == listing.item.id }) || store.snapshot.player.inventory.contains(where: { $0.id == listing.item.id })
@@ -57,7 +61,7 @@ struct ConversationView: View {
                                     HStack {
                                         Text("game.dealClosed").font(.caption.weight(.black)).tracking(2)
                                         Spacer()
-                                        Image(systemName: "checkmark.seal.fill").font(.title).accessibilityHidden(true)
+                                        DealSeal(successful: true)
                                     }.foregroundStyle(GameStyle.amber)
                                     if let definition = store.definition(for: listing.item) {
                                         Text(definition.displayName(locale: locale)).font(.title2.bold()).foregroundStyle(.white)

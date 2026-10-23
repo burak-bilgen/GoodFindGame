@@ -27,6 +27,17 @@ final class GameStore {
 
     func definition(for item: ItemInstance) -> ItemDefinition? { definitions.first { $0.id == item.definitionID } }
 
+    /// Paused categories cannot sell a new player a kit for nonexistent stock.
+    /// Historical holdings and earned knowledge remain accessible in old saves.
+    var playableCategories: [ItemCategory] {
+        var categories = Set(MarketCatalog.active(definitions).map(\.category))
+        let savedItems = snapshot.market.map(\.item) + snapshot.player.inventory + snapshot.shipments.map(\.item)
+        categories.formUnion(savedItems.compactMap { definition(for: $0)?.category })
+        categories.formUnion(snapshot.inspectionKnowledge.tools)
+        categories.formUnion(ItemCategory.allCases.filter { snapshot.inspectionKnowledge.points(in: $0) > 0 })
+        return ItemCategory.allCases.filter { categories.contains($0) }
+    }
+
     /// Condition facts are earned through inspection; the product photo stays fixed.
     func appearance(for item: ItemInstance) -> ItemAppearance {
         if item.inspected { return .owned(item) }

@@ -140,6 +140,7 @@ struct SaleListingView: View {
                             case .success(let record):
                                 TradePayoff(record: record, item: listing.itemSnapshot).id("saleOutcome")
                                 HuntButton()
+                                CareerHuntPrompt(store: store)
                                 NavigationLink("trade.receipt") { TradeReceiptView(record: record, item: listing.itemSnapshot) }
                             case .failure: Text("trade.unavailable")
                             }
