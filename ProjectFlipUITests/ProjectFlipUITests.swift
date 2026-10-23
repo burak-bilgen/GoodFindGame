@@ -631,6 +631,7 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["publishListing"], in: app)
         tap(app.buttons["followPlayerListing"], in: app)
         XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 10))
+        XCTAssertEqual(app.buttons["gameTab.3"].value as? String, turkish ? "Alıcı yanıt bekliyor" : "A buyer is waiting")
         tap(app.buttons[turkish ? "Karşı teklif gönder" : "Send counteroffer"].firstMatch, in: app)
         tap(app.buttons["sendBuyerCounter"], in: app)
         expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: app.buttons["acceptBuyerOffer"])
@@ -639,6 +640,7 @@ final class ProjectFlipUITests: XCTestCase {
         capture("buyer counter: \(language)", app: app)
         tap(app.buttons["acceptBuyerOffer"], in: app)
         XCTAssertTrue(app.staticTexts["tradePayoff"].isHittable)
+        XCTAssertEqual(app.buttons["gameTab.3"].value as? String ?? "", "")
         capture("connected payoff: \(language)", app: app)
         tap(app.buttons["returnToHunt"], in: app)
         XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
@@ -1437,6 +1439,38 @@ final class ProjectFlipUITests: XCTestCase {
 }
 
 extension ProjectFlipUITests {
+    @MainActor func testInspectionAndPricingTouchTargets() throws {
+        continueAfterFailure = true
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString,
+                               "--uitest-instant", "--uitest-reduce-motion"]
+        app.launch()
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        tap(app.buttons["openConversation"], in: app)
+        tap(app.buttons["askIssues"], in: app)
+        tap(app.buttons["sendOffer"], in: app)
+        tap(app.buttons["confirmPurchase"], in: app)
+        tap(app.buttons["continueToItem"], in: app)
+        tap(app.buttons["basicInspect"], in: app)
+        let facts = app.buttons["openItemFacts"]
+        for _ in 0..<8 { if facts.exists && facts.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(facts.isHittable)
+        capture("Inspection service controls", app: app)
+        try app.performAccessibilityAudit(for: .hitRegion)
+        // Bring the sale decision back into view without changing earned evidence.
+        app.swipeDown()
+        tap(app.buttons["createListing"], in: app)
+        let publish = app.buttons["publishListing"]
+        for _ in 0..<8 { if publish.exists && publish.isHittable { break }; app.swipeUp() }
+        capture("Pricing controls", app: app)
+        try app.performAccessibilityAudit(for: .hitRegion)
+        tap(publish, in: app)
+        tap(app.buttons["followPlayerListing"], in: app)
+        XCTAssertTrue(app.buttons["acceptBuyerOffer"].waitForExistence(timeout: 5))
+        capture("Buyer controls", app: app)
+        try app.performAccessibilityAudit(for: .hitRegion)
+    }
+
     @MainActor func testCoreTradingTouchTargetAudit() throws {
         continueAfterFailure = true
         let app = XCUIApplication()

@@ -40,11 +40,13 @@ struct GameDock: View {
                         if index == 3 && waitingBuyers > 0 {
                             Text(waitingBuyers, format: .number).font(.caption2.bold()).foregroundStyle(GameStyle.ink)
                                 .padding(4).background(GameStyle.amber, in: Circle()).offset(x: -2, y: -3)
+                                .accessibilityHidden(true)
                         }
                     }
                     .contentShape(Rectangle())
                 }.buttonStyle(.plain)
                     .accessibilityLabel(Text(GameText.string(tabs[index].0, locale: locale)))
+                    .accessibilityValue(index == 3 && waitingBuyers > 0 ? Text("journey.offerWaiting") : Text(verbatim: ""))
                     .accessibilityIdentifier("gameTab.\(index)")
                     .accessibilityAddTraits(selection == index ? .isSelected : [])
             }
