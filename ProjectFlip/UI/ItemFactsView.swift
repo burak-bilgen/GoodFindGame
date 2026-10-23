@@ -10,7 +10,7 @@ struct ItemFactsView: View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }) {
             GameList {
                 if let definition = store.definition(for: item) { Text(definition.displayName(locale: locale)).font(.headline) }
-                Text("facts.explanation").foregroundStyle(.secondary)
+                Text("facts.explanation").foregroundStyle(GameStyle.secondaryText)
                 if !(item.repairedDefects ?? []).isEmpty { Text("facts.originalReport").font(.subheadline).foregroundStyle(GameStyle.gain) }
                 if let facts = item.facts {
                     ForEach(facts.values) { fact in
@@ -22,18 +22,18 @@ struct ItemFactsView: View {
                                 Label("facts.notChecked", systemImage: "lock").accessibilityIdentifier("factLocked.\(fact.key.rawValue)")
                                 if fact.key.requiresTools {
                                     Text(GameText.format("facts.requiresSkills", locale: locale, GameText.string("knowledge.level.\(fact.key.requiredLevel)", locale: locale)))
-                                        .font(.caption).foregroundStyle(.secondary)
+                                        .font(.caption).foregroundStyle(GameStyle.secondaryText)
                                 } else {
-                                    Text("facts.requiresBasic").font(.caption).foregroundStyle(.secondary)
+                                    Text("facts.requiresBasic").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                 }
                             }
                         }
                     }
-                    if facts.category == .retro { Text("facts.regionGuide").font(.caption).foregroundStyle(.secondary) }
+                    if facts.category == .retro { Text("facts.regionGuide").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                 } else {
                     Text("facts.legacyUnavailable")
                 }
-                Text("facts.valueGuide").font(.caption).foregroundStyle(.secondary)
+                Text("facts.valueGuide").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }.gameScreen().navigationTitle("facts.title")
         } else {
             ContentUnavailableView("listing.unavailable", systemImage: "shippingbox")

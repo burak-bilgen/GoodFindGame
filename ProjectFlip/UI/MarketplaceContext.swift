@@ -32,12 +32,12 @@ struct MarketAudienceView: View {
             if let demand {
                 Label(GameText.string(demand > 10_000 ? "living.demandRising" : demand < 10_000 ? "living.demandCooling" : "living.demandSteady", locale: locale), systemImage: "chart.line.uptrend.xyaxis")
             } else { Text("inspection.valueUnavailable") }
-            Text(GameText.string("living.audience.\(definition.category.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary)
+            Text(GameText.string("living.audience.\(definition.category.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
         }
     }
 }
 
-/// Counts actual pending work; no forecast offers or hidden liquidity score reach the player.
+/// Surfaces actual pending work and ready handoffs, never forecast offers or hidden liquidity scores.
 struct OpenTradesView: View {
     let store: GameStore
     @Environment(\.locale) private var locale
@@ -51,11 +51,13 @@ struct OpenTradesView: View {
         let shipping = store.snapshot.shipments.filter { $0.status == .pending }
         let inspections = store.snapshot.inspectionJobs.filter { $0.status == .pending }
         let sales = store.snapshot.playerListings.filter { $0.status == .active }
-        if !sellers.isEmpty || !readySellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty || !idleStock.isEmpty {
+        let pendingWork = !sellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty
+        if pendingWork || !readySellers.isEmpty || !idleStock.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 8) {
-                    GameActivityLights()
-                    Text("living.inMotion").font(.caption.bold()).foregroundStyle(GameStyle.gain)
+                    if pendingWork { GameActivityLights() }
+                    else { Image(systemName: "checkmark.circle.fill").accessibilityHidden(true) }
+                    Text(pendingWork ? "living.inMotion" : "reveal.estimate").font(.caption.bold()).foregroundStyle(GameStyle.gain)
                 }
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 14) {
@@ -109,7 +111,7 @@ struct AskingResultView: View {
     var body: some View {
         if let ask = try? Money.parse(askingPrice, locale: locale, market: market), let total = try? item.purchasePrice.adding(item.inspectionCost).adding(item.repairCost), let result = try? ask.subtracting(total) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("living.ifSoldAtAsk").font(.caption).foregroundStyle(.secondary)
+                Text("living.ifSoldAtAsk").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 ProfitAmount(amount: result).bold()
             }.accessibilityHint(Text("living.notGuaranteed"))
         }
@@ -131,20 +133,22 @@ struct TradeReadView: View {
                                                    marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) {
                 VStack(alignment: .leading, spacing: 10) {
                     Label("tradeRead.title", systemImage: "scope").font(.caption.bold()).foregroundStyle(GameStyle.amber)
+                        .accessibilityAddTraits(.isHeader)
                     ValueRangeView(estimate: read.estimate).accessibilityIdentifier("tradeReadRange")
-                    Text("tradeRead.margin").font(.caption).foregroundStyle(.secondary)
+                    Text("tradeRead.margin").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     ViewThatFits(in: .horizontal) {
                         HStack(spacing: 6) { margin(read.lowerMargin); Text(verbatim: "…"); margin(read.upperMargin) }
                         VStack(alignment: .leading, spacing: 4) { margin(read.lowerMargin); margin(read.upperMargin) }
                     }.font(.system(.title3, design: .rounded, weight: .heavy)).monospacedDigit()
                         .accessibilityIdentifier("tradeReadMargin")
-                    Text(disclosed.isEmpty ? "tradeRead.claim" : "tradeRead.disclosed").font(.caption).foregroundStyle(.secondary)
+                    Text(disclosed.isEmpty ? "tradeRead.claim" : "tradeRead.disclosed").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     ForEach(disclosed, id: \.self) { defect in
                         Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill")
                             .font(.caption.bold()).foregroundStyle(GameStyle.loss)
                     }
-                    Text("tradeRead.caution").font(.caption).foregroundStyle(.secondary)
-                }.frame(maxWidth: .infinity, alignment: .leading).accessibilityIdentifier("tradeRead")
+                    Text("tradeRead.caution").font(.caption).foregroundStyle(GameStyle.secondaryText)
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .accessibilityElement(children: .contain).accessibilityIdentifier("tradeRead")
             }
         }
     }

@@ -12,7 +12,18 @@ struct ListingDetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(maxWidth: 180).frame(maxWidth: .infinity)
-                    Text("art.sellerPresentation").font(.caption).foregroundStyle(.secondary)
+                        .overlay(alignment: .topTrailing) {
+                            let watched = store.snapshot.watchedListingIDs.contains(listing.id)
+                            Button {
+                                store.perform { try store.toggleWatch(listingID: listing.id) }
+                            } label: {
+                                Label(watched ? "market.unwatch" : "market.watch", systemImage: watched ? "bookmark.fill" : "bookmark")
+                                    .labelStyle(.iconOnly).font(.title3)
+                                    .frame(width: 44, height: 44).contentShape(Rectangle())
+                                    .background(GameStyle.panel, in: RoundedRectangle(cornerRadius: 12))
+                            }.buttonStyle(.plain).foregroundStyle(GameStyle.gain).accessibilityIdentifier("toggleWatch")
+                        }
+                    Text("art.sellerPresentation").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     VStack(alignment: .leading, spacing: 10) {
                         Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
@@ -26,7 +37,7 @@ struct ListingDetailView: View {
                             if lifecycle.priceDroppedAt != nil {
                                 HStack {
                                     Label("listing.priceDrop", systemImage: "arrow.down.right").foregroundStyle(GameStyle.gain)
-                                    Text(lifecycle.initialAskingPrice.formatted(locale: locale, market: market)).strikethrough().foregroundStyle(.secondary)
+                                    Text(lifecycle.initialAskingPrice.formatted(locale: locale, market: market)).strikethrough().foregroundStyle(GameStyle.secondaryText)
                                 }.font(.subheadline)
                             }
                             if listing.available { DeadlineView(store: store, target: lifecycle.expiresAt, titleKey: "listing.expires") }
@@ -39,11 +50,11 @@ struct ListingDetailView: View {
                         GameStamp(key: "listing.description", symbol: "quote.bubble.fill")
                         Text(GameText.string(listing.descriptionIntent, locale: locale)).font(.title3)
                         LabeledContent("listing.claimedCondition") { Text(listing.claimedCondition, format: .number).bold() }
-                        Text("listing.claimWarning").font(.caption).foregroundStyle(.secondary)
+                        Text("listing.claimWarning").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     }.gameCard()
                     VStack(alignment: .leading, spacing: 10) {
                         SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id))
-                        Text(GameText.string("seller.voice.\(listing.seller.archetype.rawValue)", locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                        Text(GameText.string("seller.voice.\(listing.seller.archetype.rawValue)", locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                     }.gameCard()
                 }.padding(16)
             }.gameScreen()
@@ -61,16 +72,6 @@ struct ListingDetailView: View {
                         .buttonStyle(GameButton())
                         .accessibilityIdentifier("openConversation")
                         .padding().background(GameStyle.ink.opacity(0.98))
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    let watched = store.snapshot.watchedListingIDs.contains(listing.id)
-                    Button {
-                        store.perform { try store.toggleWatch(listingID: listing.id) }
-                    } label: {
-                        Label(watched ? "market.unwatch" : "market.watch", systemImage: watched ? "bookmark.fill" : "bookmark")
-                    }.accessibilityIdentifier("toggleWatch")
                 }
             }
             .navigationTitle("listing.title")
@@ -96,9 +97,9 @@ struct SellerSummary: View {
                 Label((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)), systemImage: "star.fill").font(.caption.bold())
                     .accessibilityLabel(Text("seller.rating \((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)))"))
             }
-            Text("seller.trades \(seller.tradeCount)").font(.caption).foregroundStyle(.secondary)
-            Text(GameText.marketPerson("city", index: seller.identityIndex, market: market, locale: locale)).font(.caption).foregroundStyle(.secondary)
-            if playerTradeCount > 0 { Text("seller.history.trades \(playerTradeCount)").font(.caption).foregroundStyle(.secondary) }
+            Text("seller.trades \(seller.tradeCount)").font(.caption).foregroundStyle(GameStyle.secondaryText)
+            Text(GameText.marketPerson("city", index: seller.identityIndex, market: market, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
+            if playerTradeCount > 0 { Text("seller.history.trades \(playerTradeCount)").font(.caption).foregroundStyle(GameStyle.secondaryText) }
         }
     }
 }

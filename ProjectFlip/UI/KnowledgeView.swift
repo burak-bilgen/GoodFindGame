@@ -7,12 +7,12 @@ struct KnowledgeView: View {
 
     var body: some View {
         GameList {
-            Text("knowledge.explanation").foregroundStyle(.secondary)
+            Text("knowledge.explanation").foregroundStyle(GameStyle.secondaryText)
             ForEach(store.playableCategories, id: \.self) { category in
                 Section(GameText.string("category.\(category.rawValue)", locale: locale)) {
                     KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: category)
                     Text(GameText.string("knowledge.clues.\(category.rawValue)", locale: locale))
-                    Text(GameText.string("knowledge.tools.\(category.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary)
+                    Text(GameText.string("knowledge.tools.\(category.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                     if store.snapshot.inspectionKnowledge.tools.contains(category) {
                         Label("knowledge.toolsOwned", systemImage: "checkmark.seal.fill")
                             .accessibilityIdentifier("toolsOwned.\(category.rawValue)")
@@ -38,8 +38,8 @@ struct KnowledgeSummary: View {
         LabeledContent("knowledge.level") {
             Text(GameText.string("knowledge.level.\(knowledge.level(in: category))", locale: locale))
         }
-        Text(GameText.format("knowledge.casebook", locale: locale, knowledge.modelCount(in: category), knowledge.diagnosticCount(in: category))).font(.caption).foregroundStyle(.secondary)
-        Text("knowledge.endorsement").font(.caption).foregroundStyle(.secondary)
+        Text(GameText.format("knowledge.casebook", locale: locale, knowledge.modelCount(in: category), knowledge.diagnosticCount(in: category))).font(.caption).foregroundStyle(GameStyle.secondaryText)
+        Text("knowledge.endorsement").font(.caption).foregroundStyle(GameStyle.secondaryText)
         LabeledContent("knowledge.experience") { Text(knowledge.points(in: category), format: .number).accessibilityIdentifier("knowledgePoints.\(category.rawValue)") }
     }
 }

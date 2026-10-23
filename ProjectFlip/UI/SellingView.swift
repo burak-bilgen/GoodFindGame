@@ -32,7 +32,7 @@ struct CreateListingView: View {
                             .accessibilityIdentifier("askingPrice")
                         AskingResultView(item: item, askingPrice: price)
                         PriceSuggestions(store: store, item: item, definition: definition, price: $price)
-                        Text("game.price.hint").font(.caption).foregroundStyle(.secondary)
+                        Text("game.price.hint").font(.caption).foregroundStyle(GameStyle.secondaryText)
                         Button("selling.publish") {
                             editing = false
                             store.perform {
@@ -71,11 +71,11 @@ struct InvestmentContext: View {
             }
             switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let estimate):
-                Text("living.estimateRange").font(.caption).foregroundStyle(.secondary)
+                Text("living.estimateRange").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 ValueRangeView(estimate: estimate)
             case .failure: Text("inspection.valueUnavailable")
             }
-            Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)
+            Text("inspection.estimateWarning").font(.caption).foregroundStyle(GameStyle.secondaryText)
             MarketAudienceView(store: store, definition: definition)
 
         }.gameCard()
@@ -89,7 +89,7 @@ struct SellingView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
-                if store.snapshot.playerListings.isEmpty { Text("selling.empty").foregroundStyle(.secondary) }
+                if store.snapshot.playerListings.isEmpty { Text("selling.empty").foregroundStyle(GameStyle.secondaryText) }
                 ForEach(store.snapshot.playerListings.reversed()) { listing in
                     NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: {
                         HStack(spacing: 12) {
@@ -100,7 +100,7 @@ struct SellingView: View {
                                     Text(listing.askingPrice.formatted(locale: locale, market: market)).bold()
                                     if listing.status == .active && listing.offers.contains(where: { [.pending, .countered].contains($0.status) }) {
                                         Label("buyer.new", systemImage: "bubble.left.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                                    } else { Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary) }
+                                    } else { Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText) }
                                 }
                             }
                         }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
@@ -153,13 +153,13 @@ struct SaleListingView: View {
                                 Label(listing.favorites.formatted(.number.locale(locale)), systemImage: "heart")
                                 Text("selling.favorites").font(.caption)
                             }.font(.subheadline).accessibilityIdentifier("listingAttention")
-                            if listing.views == 0 && listing.status == .active { Text("living.justListed").font(.caption).foregroundStyle(.secondary) }
+                            if listing.views == 0 && listing.status == .active { Text("living.justListed").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                             let awaitingReply = store.snapshot.hasBuyerReply(for: listing.id)
                             if let offer = listing.offers.last, [.pending, .countered].contains(offer.status) {
                                 VStack(alignment: .leading, spacing: 14) {
                                     GameStamp(key: awaitingReply ? "living.replyPending" : offer.status == .countered ? "buyer.counterHeading" : "buyer.new", symbol: awaitingReply ? "clock" : offer.status == .countered ? "arrow.left.arrow.right" : "bolt.fill").id("buyerDecision")
                                     if awaitingReply {
-                                        Text("living.buyerConsidering").font(.caption).foregroundStyle(.secondary)
+                                        Text("living.buyerConsidering").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                         HuntButton()
                                     }
                                     HStack(spacing: 10) {
@@ -190,7 +190,7 @@ struct SaleListingView: View {
                                     }) { DeadlineView(store: store, target: expiry.resolveAt, titleKey: "offer.expires") }
                                     Button("buyer.accept") { store.perform { try store.acceptBuyer(listingID: listing.id) } }.buttonStyle(GameButton()).disabled(awaitingReply).accessibilityIdentifier("acceptBuyerOffer")
                                     Text(offer.status == .countered ? "buyer.pushAgainRisk" : "buyer.pushRisk")
-                                        .font(.caption).foregroundStyle(.secondary)
+                                        .font(.caption).foregroundStyle(GameStyle.secondaryText)
                                     DisclosureGroup("buyer.sendCounter", isExpanded: $counterComposerExpanded) {
                                         VStack(alignment: .leading, spacing: 12) {
                                             Text("buyer.counterAmount").font(.subheadline.weight(.semibold))
@@ -199,7 +199,7 @@ struct SaleListingView: View {
                                                 .padding(12).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
                                                 .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.gain.opacity(0.35), lineWidth: 1))
                                                 .accessibilityIdentifier("buyerCounterAmount")
-                                            Text("buyer.counterCommitment").font(.caption).foregroundStyle(.secondary)
+                                            Text("buyer.counterCommitment").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                             Button("buyer.sendCounter") {
                                                 editing = false
                                                 store.perform {
@@ -217,15 +217,15 @@ struct SaleListingView: View {
                                     GameStamp(key: "selling.live", symbol: "antenna.radiowaves.left.and.right")
                                     Text("selling.noOffers").font(.headline)
                                     if let last = listing.messages.last, ["buyer.withdraw", "buyer.expired"].contains(last.intent) {
-                                        Text(GameText.string(last.intent, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                                        Text(GameText.string(last.intent, locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     }
                                     if store.snapshot.events.contains(where: { $0.status == .pending && $0.payload.generatesBuyerInterest && $0.payload.targetID == listing.id.rawValue }) {
-                                        Text("living.interestUncertain").font(.subheadline).foregroundStyle(.secondary)
+                                        Text("living.interestUncertain").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     } else {
                                         Button("buyer.find") { store.perform { try store.findBuyer(listingID: listing.id) } }
                                             .buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("findAnotherBuyer")
                                     }
-                                    Text("selling.keepHunting").font(.subheadline).foregroundStyle(.secondary)
+                                    Text("selling.keepHunting").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     HuntButton()
                                 }.gameCard()
                             }

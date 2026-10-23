@@ -1,4 +1,6 @@
 import Foundation
+import SwiftUI
+import UIKit
 import Testing
 @testable import ProjectFlip
 
@@ -30,5 +32,31 @@ struct DomainTests {
         #expect(value.formatted(locale: Locale(identifier: "en_GB")).contains("$"))
         #expect(value.formatted(locale: Locale(identifier: "tr_TR"), market: .turkey).contains("₺"))
         #expect(value.formatted(locale: Locale(identifier: "en_US"), signed: true).contains("+$"))
+    }
+}
+
+
+extension DomainTests {
+    /// The native contrast scanner misreports some custom-gradient labels even
+    /// above 9:1. Independently enforce the actual opaque text palette against
+    /// every panel endpoint, while native UI tests audit touch targets.
+    @MainActor @Test func gameTextPaletteKeepsNormalTextContrastAcrossDarkPanels() throws {
+        func luminance(_ color: Color) throws -> Double {
+            var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+            let resolved = UIColor(color).resolvedColor(with: UITraitCollection(userInterfaceStyle: .dark))
+            #expect(resolved.getRed(&red, green: &green, blue: &blue, alpha: &alpha))
+            #expect(alpha == 1)
+            func linear(_ channel: CGFloat) -> Double {
+                let value = Double(channel)
+                return value <= 0.04045 ? value / 12.92 : pow((value + 0.055) / 1.055, 2.4)
+            }
+            return 0.2126 * linear(red) + 0.7152 * linear(green) + 0.0722 * linear(blue)
+        }
+        for background in [GameStyle.ink, GameStyle.panel, GameStyle.panelTop] {
+            for foreground in [Color.white, GameStyle.secondaryText, GameStyle.amber, GameStyle.gain, GameStyle.loss] {
+                let a = try luminance(foreground), b = try luminance(background)
+                #expect((max(a, b) + 0.05) / (min(a, b) + 0.05) >= 4.5)
+            }
+        }
     }
 }

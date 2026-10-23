@@ -159,10 +159,10 @@ struct ListingCard: View {
                     .contentTransition(.numericText()).animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: listing.askingPrice)
                 if lifecycle?.priceDroppedAt != nil {
                     Label("listing.priceDrop", systemImage: "arrow.down.right").font(.caption2.bold()).foregroundStyle(GameStyle.gain)
-                    if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale, market: market)).strikethrough().font(.caption2).foregroundStyle(.secondary) }
+                    if let old = lifecycle?.initialAskingPrice { Text(old.formatted(locale: locale, market: market)).strikethrough().font(.caption2).foregroundStyle(GameStyle.secondaryText) }
                 }
                 Text(GameText.string(listing.descriptionIntent, locale: locale))
-                    .font(.caption).foregroundStyle(.secondary).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
+                    .font(.caption).foregroundStyle(GameStyle.secondaryText).lineLimit(typeSize.isAccessibilitySize ? nil : 2)
                     .frame(minHeight: typeSize.isAccessibilitySize ? 0 : 32, alignment: .topLeading)
                 Divider()
                 HStack(spacing: 6) {
@@ -170,9 +170,9 @@ struct ListingCard: View {
                     Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.caption2.weight(.semibold)).foregroundStyle(.primary)
                     Spacer(minLength: 0)
                 }
-                Text(listing.createdAt, style: .relative).font(.caption2).foregroundStyle(.secondary)
+                Text(listing.createdAt, style: .relative).font(.caption2).foregroundStyle(GameStyle.secondaryText)
                 if !listing.available {
-                    Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(.secondary)
+                    Text(GameText.string(lifecycle?.closureReason?.key ?? "listing.unavailable", locale: locale)).font(.caption.weight(.bold)).foregroundStyle(GameStyle.secondaryText)
                 }
             }.padding(.horizontal, 3)
         }

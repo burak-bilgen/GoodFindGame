@@ -1435,3 +1435,26 @@ final class ProjectFlipUITests: XCTestCase {
     }
 
 }
+
+extension ProjectFlipUITests {
+    @MainActor func testCoreTradingTouchTargetAudit() throws {
+        continueAfterFailure = true
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US", "--uitest-save", UUID().uuidString,
+                               "--uitest-instant", "--uitest-reduce-motion"]
+        app.launch()
+        XCTAssertTrue(app.buttons["listing.listing-42-0"].waitForExistence(timeout: 10))
+        try app.performAccessibilityAudit(for: .hitRegion)
+        tap(app.buttons["listing.listing-42-0"], in: app)
+        let watch = app.buttons["toggleWatch"]
+        XCTAssertTrue(watch.waitForExistence(timeout: 5))
+        XCTAssertTrue(watch.isHittable)
+        XCTAssertGreaterThanOrEqual(watch.frame.width, 44)
+        XCTAssertGreaterThanOrEqual(watch.frame.height, 44)
+        capture("audited listing controls", app: app)
+        try app.performAccessibilityAudit(for: .hitRegion)
+        tap(app.buttons["openConversation"], in: app)
+        app.swipeUp()
+        try app.performAccessibilityAudit(for: .hitRegion)
+    }
+}

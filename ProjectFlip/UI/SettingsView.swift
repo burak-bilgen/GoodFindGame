@@ -12,8 +12,8 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     Label("settings.experience", systemImage: "waveform").font(.headline)
                     Toggle("feel.sounds", isOn: $sounds).tint(GameStyle.gain).accessibilityIdentifier("soundSetting")
-                    Text("feel.soundsHint").font(.caption).foregroundStyle(.secondary)
-                    Text("settings.accessibility").font(.caption).foregroundStyle(.secondary)
+                    Text("feel.soundsHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
+                    Text("settings.accessibility").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }.gameCard()
                 VStack(alignment: .leading, spacing: 14) {
                     Label("region.title", systemImage: "globe").font(.headline)
@@ -22,12 +22,12 @@ struct SettingsView: View {
                     })) {
                         ForEach(GameCurrency.allCases, id: \.self) { Text($0.rawValue).tag($0) }
                     }.tint(GameStyle.gain).accessibilityIdentifier("displayCurrency")
-                    Text("region.fx").font(.caption).foregroundStyle(.secondary)
+                    Text("region.fx").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     LabeledContent("settings.language") { Text(locale.localizedString(forLanguageCode: locale.language.languageCode?.identifier ?? "en") ?? "English") }
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         Button("settings.changeLanguage") { openURL(url) }.buttonStyle(GameButton(secondary: true))
                     }
-                    Text("region.fixed").font(.caption).foregroundStyle(.secondary)
+                    Text("region.fixed").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }.gameCard()
                 NavigationLink { NotificationSettingsView(store: store) } label: { GameMenuRow(titleKey: "notifications.settings", symbol: "bell.badge.fill") }.buttonStyle(.plain).accessibilityIdentifier("notificationSettings")
                 if store.snapshot.sharedMarketMigrationNotice || store.snapshot.economyMigrationNotice {
@@ -35,7 +35,7 @@ struct SettingsView: View {
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text(verbatim: "Project Flip").font(.headline)
-                    Text("settings.localSave").font(.caption).foregroundStyle(.secondary)
+                    Text("settings.localSave").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     LabeledContent("settings.version") { Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") }
                 }.font(.caption).gameCard()
             }.padding(16)

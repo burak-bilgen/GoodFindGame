@@ -6,7 +6,7 @@ struct ClientBookView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Text("clients.principle").font(.subheadline).foregroundStyle(.secondary)
+                Text("clients.principle").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                 ForEach(ClientDefinition.all) { client in ClientChapterView(store: store, client: client) }
             }.padding(16)
         }.gameScreen().navigationTitle("clients.title").navigationBarTitleDisplayMode(.inline)
@@ -33,7 +33,7 @@ private struct ClientChapterView: View {
             if let request = ClientEngine.request(client.id, state: store.snapshot) {
                 Text(GameText.string("client.\(client.id).story.\(step)", locale: locale)).font(.headline)
                 Text(GameText.format("clients.condition", locale: locale, request.minimumCondition)).font(.caption)
-                Text("clients.reportRequired").font(.caption).foregroundStyle(.secondary)
+                Text("clients.reportRequired").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 if request.originalBox { Label("clients.originalBox", systemImage: "shippingbox").font(.caption) }
                 if request.originalParts { Label("clients.originalParts", systemImage: "checkmark.seal").font(.caption) }
                 if store.snapshot.clients.active == client.id {
@@ -50,7 +50,7 @@ private struct ClientChapterView: View {
                             }
                         }
                     }
-                    if matches.isEmpty { Text("clients.noMatch").font(.subheadline).foregroundStyle(.secondary) }
+                    if matches.isEmpty { Text("clients.noMatch").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                     Button("clients.pause") { store.perform { try store.pauseClient() } }.buttonStyle(GameButton(secondary: true))
                 } else if store.snapshot.clients.active == nil {
                     if store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue >= request.career.rawValue {

@@ -26,7 +26,7 @@ struct ConversationView: View {
                                 TraderPortrait(identity: listing.seller.identityIndex, size: 54)
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.headline)
-                                    if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.subheadline).foregroundStyle(.secondary) }
+                                    if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                                 }
                                 Spacer()
                             }
@@ -48,7 +48,7 @@ struct ConversationView: View {
                                 VStack(alignment: .leading, spacing: 12) {
                                     GameStamp(key: "selling.sold", symbol: "checkmark.seal.fill")
                                     if let definition = store.definition(for: listing.item) { Text(definition.displayName(locale: locale)).font(.title2.bold()) }
-                                    Text("journey.tradeFinished").font(.subheadline).foregroundStyle(.secondary)
+                                    Text("journey.tradeFinished").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                                         Label("trade.receipt", systemImage: "arrow.up.right")
                                     }.buttonStyle(GameButton()).accessibilityIdentifier("continueToTrade")
@@ -88,7 +88,7 @@ struct ConversationView: View {
                                 }
                             }
                         }
-                        if conversation.messages.isEmpty { Text("negotiation.intro").font(.subheadline).foregroundStyle(.secondary) }
+                        if conversation.messages.isEmpty { Text("negotiation.intro").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                         if listing.available {
                             ForEach(conversation.messages) { message in
                                 DialogueBubble(message: message).id(message.id)
@@ -102,7 +102,7 @@ struct ConversationView: View {
                             }.gameCard()
                         }
                         if conversation.pendingReplyEventID != nil {
-                            Label("seller.awaitingReply", systemImage: "ellipsis.bubble.fill").font(.subheadline).foregroundStyle(.secondary).padding(12)
+                            Label("seller.awaitingReply", systemImage: "ellipsis.bubble.fill").font(.subheadline).foregroundStyle(GameStyle.secondaryText).padding(12)
                             HuntButton()
                         }
                         if !conversation.closed && conversation.agreedPrice == nil && listing.available {
@@ -116,7 +116,7 @@ struct ConversationView: View {
                                     Text(counter.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
                                     Button("offer.acceptCounter") { store.perform { try store.acceptSellerCounter(listingID: listing.id) } }
                                         .buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("acceptSellerCounter")
-                                    Text("offer.pushRisk").font(.caption).foregroundStyle(.secondary)
+                                    Text("offer.pushRisk").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                     DisclosureGroup("offer.keepBargaining", isExpanded: $counterComposerExpanded) {
                                         VStack(alignment: .leading, spacing: 14) {
                                             Button("offer.halfway") {
@@ -130,7 +130,7 @@ struct ConversationView: View {
                                     }
                                 } else {
                                     if conversation.offers.isEmpty {
-                                        Text("offer.tryLess").font(.caption).foregroundStyle(.secondary)
+                                        Text("offer.tryLess").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                         HStack {
                                             Button("offer.testWaters") { setOffer(listing.askingPrice, factor: 8_500) }
                                             Spacer()
@@ -139,7 +139,11 @@ struct ConversationView: View {
                                     }
                                     offerEntry(listing: listing, conversation: conversation)
                                 }
-                                Button("offer.walkAway", role: .destructive) { store.perform { try store.walkAway(listingID: listing.id) } }.font(.subheadline)
+                                Button(role: .destructive) { store.perform { try store.walkAway(listingID: listing.id) } } label: {
+                                    Text("offer.walkAway").font(.subheadline)
+                                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                                        .contentShape(Rectangle())
+                                }
                             }.gameCard().id("composer")
                         } else if let price = conversation.agreedPrice, listing.available && !conversation.closed {
                             PurchaseDecision(store: store, listingID: listing.id, price: price).id("purchaseDecision")
@@ -173,7 +177,7 @@ struct ConversationView: View {
     private func offerEntry(listing: MarketplaceListing, conversation: NegotiationState) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 6) {
-                Text("offer.amount").font(.caption).foregroundStyle(.secondary)
+                Text("offer.amount").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 TextField("offer.amount", text: $amount).keyboardType(.decimalPad).focused($editing)
                     .font(.system(.title2, design: .rounded, weight: .heavy)).textFieldStyle(.plain)
                     .padding(14).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))

@@ -15,7 +15,7 @@ struct CollectionGalleryView: View {
                     Spacer(minLength: 0)
                     Image(systemName: "sparkles").font(.largeTitle).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
                 }.gameCard(accent: GameStyle.amber)
-                DisclosureGroup("collections.about") { Text("collections.intro").font(.subheadline).foregroundStyle(.secondary) }
+                DisclosureGroup("collections.about") { Text("collections.intro").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                 ForEach(CollectionDefinition.all) { collection in
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
@@ -23,7 +23,7 @@ struct CollectionGalleryView: View {
                             Spacer(minLength: 0)
                             Text(verbatim: "\(collection.count(in: store.snapshot))/\(collection.models.count)").font(.title2.bold()).foregroundStyle(GameStyle.amber)
                         }
-                        Text(GameText.string("collection.\(collection.id).story", locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                        Text(GameText.string("collection.\(collection.id).story", locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .top), count: typeSize.isAccessibilitySize ? 1 : 3), alignment: .leading, spacing: 10) {
                             ForEach(collection.models, id: \.self) { model in
                                 if let definition = store.definitions.first(where: { $0.id == model }) {
@@ -46,7 +46,7 @@ struct CollectionGalleryView: View {
                         if collection.count(in: store.snapshot) == collection.models.count {
                             Label("collections.complete", systemImage: "seal.fill").font(.headline).foregroundStyle(GameStyle.amber)
                         } else if store.snapshot.collections.completedBefore.contains(collection.id) {
-                            Label("collections.completedBefore", systemImage: "seal").font(.caption).foregroundStyle(.secondary)
+                            Label("collections.completedBefore", systemImage: "seal").font(.caption).foregroundStyle(GameStyle.secondaryText)
                         }
                         if store.snapshot.collections.focus == collection.id {
                             Label("collections.focused", systemImage: "bookmark.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)

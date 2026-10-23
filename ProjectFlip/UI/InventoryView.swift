@@ -18,7 +18,7 @@ struct InventoryView: View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text(GameText.format("inventory.capacity", locale: locale, store.snapshot.player.inventory.count + store.snapshot.shipments.filter { $0.status == .pending }.count, store.snapshot.player.inventoryCapacity)).font(.subheadline).foregroundStyle(.secondary)
+                    Text(GameText.format("inventory.capacity", locale: locale, store.snapshot.player.inventory.count + store.snapshot.shipments.filter { $0.status == .pending }.count, store.snapshot.player.inventoryCapacity)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                     Spacer()
                     Picker("inventory.filter", selection: $filter) {
                         ForEach(StockFilter.allCases, id: \.self) { value in Text(GameText.string(value.key, locale: locale)).tag(value) }
@@ -45,18 +45,18 @@ struct InventoryView: View {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(width: 72, height: 72)
                                 VStack(alignment: .leading, spacing: 6) {
                                     Text(definition.displayName(locale: locale)).font(.headline)
-                                    Text(item.purchasePrice.formatted(locale: locale, market: market)).font(.subheadline).foregroundStyle(.secondary)
+                                    Text(item.purchasePrice.formatted(locale: locale, market: market)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     Text(GameText.string(state(for: item).key, locale: locale)).font(.caption).foregroundStyle(GameStyle.gain)
                                 }
                                 Spacer(minLength: 0)
-                                Image(systemName: "chevron.right").font(.caption).foregroundStyle(.secondary)
+                                Image(systemName: "chevron.right").font(.caption).foregroundStyle(GameStyle.secondaryText)
                             }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
                         }.buttonStyle(.plain).accessibilityIdentifier("inventory.\(item.id.rawValue)")
                     }
                 }
                 if store.snapshot.shipments.contains(where: { $0.status == .pending }) { HuntButton() }
                 if items.isEmpty && !((filter == .all || filter == .transit) && store.snapshot.shipments.contains { $0.status == .pending }) {
-                    Text(filter == .all ? "inventory.empty" : "inventory.noMatches").foregroundStyle(.secondary)
+                    Text(filter == .all ? "inventory.empty" : "inventory.noMatches").foregroundStyle(GameStyle.secondaryText)
                     if filter == .all { HuntButton() }
                 }
             }.padding(16)
@@ -97,7 +97,7 @@ struct OwnedItemView: View {
                         }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("toggleDisplay")
                         if store.snapshot.collections.displayed.contains(item.id) { Text("collections.lockedCapital").font(.caption).foregroundStyle(GameStyle.amber) }
                     }
-                    Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(.secondary)
+                    Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                     if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
                         Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
                             store.perform { try store.inspect(itemID: item.id, professionally: false) }
@@ -114,7 +114,7 @@ struct OwnedItemView: View {
                                 Text(item.knownActiveDefects.isEmpty ? "selling.create" : "repair.asIs")
                             }.buttonStyle(GameButton(secondary: !item.knownActiveDefects.isEmpty)).accessibilityIdentifier("createListing")
                                 .disabled(hasPendingReport)
-                            if hasPendingReport { Text("error.inspectionPending").font(.caption).foregroundStyle(.secondary) }
+                            if hasPendingReport { Text("error.inspectionPending").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                         } else if let sale = store.snapshot.playerListings.first(where: { $0.itemID == item.id && $0.status == .active }) {
                             NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
                                 Label("selling.follow", systemImage: "tag.fill")
@@ -127,11 +127,11 @@ struct OwnedItemView: View {
                     } else if !item.professionallyInspected {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("inspection.professional").font(.headline)
-                            Text("inspection.professionalDescription").font(.subheadline).foregroundStyle(.secondary)
+                            Text("inspection.professionalDescription").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                             Text(InspectionEngine().professionalCost.formatted(locale: locale, market: market)).bold()
                             Button("inspection.professionalStart") { store.perform { try store.inspect(itemID: item.id, professionally: true) } }
                                 .buttonStyle(.bordered).accessibilityIdentifier("professionalInspect").disabled(isListed)
-                            if isListed { Text("error.itemListed").font(.caption).foregroundStyle(.secondary) }
+                            if isListed { Text("error.itemListed").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                         }.gameCard()
                     }
                     NavigationLink("facts.title") { ItemFactsView(store: store, itemID: item.id) }.accessibilityIdentifier("openItemFacts")
@@ -139,7 +139,7 @@ struct OwnedItemView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             LabeledContent("purchase.cost") { Text(item.purchasePrice.formatted(locale: locale, market: market)) }
                             KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: definition.category)
-                            Text("knowledge.inspectionLimit").font(.caption).foregroundStyle(.secondary)
+                            Text("knowledge.inspectionLimit").font(.caption).foregroundStyle(GameStyle.secondaryText)
                             NavigationLink("knowledge.open") { KnowledgeView(store: store) }
                         }.padding(.top, 10)
                     }.gameCard()
@@ -187,7 +187,7 @@ struct InspectionReveal: View {
                 .accessibilityValue(Text(min(step, 3), format: .number))
             Group {
                 LabeledContent("inspection.condition") { Text(item.condition, format: .number).font(.system(.largeTitle, design: .rounded, weight: .heavy)).accessibilityIdentifier("inspectionCondition") }
-                Text("reveal.condition").font(.subheadline).foregroundStyle(.secondary)
+                Text("reveal.condition").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
                 if typeSize.isAccessibilitySize {
@@ -202,7 +202,7 @@ struct InspectionReveal: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                Text("art.referencePhoto").font(.caption2).foregroundStyle(.secondary)
+                Text("art.referencePhoto").font(.caption2).foregroundStyle(GameStyle.secondaryText)
             }.opacity(step >= 2 ? 1 : 0).accessibilityHidden(step < 2)
             Group {
                 Divider()
@@ -212,7 +212,7 @@ struct InspectionReveal: View {
                 case .success(let estimate): ValueRangeView(estimate: estimate)
                 case .failure: Text("inspection.valueUnavailable")
                 }
-                Text("inspection.estimateWarning").font(.caption).foregroundStyle(.secondary)
+                Text("inspection.estimateWarning").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }.opacity(step >= 3 ? 1 : 0).accessibilityHidden(step < 3)
             Button("reveal.continue") { step = 3; presentation.markRead(in: .standard) }.font(.subheadline.bold()).accessibilityIdentifier("skipReveal")
                 .opacity(step < 3 ? 1 : 0).allowsHitTesting(step < 3).accessibilityHidden(step >= 3)
@@ -276,7 +276,7 @@ struct RepairDecision: View {
                 Spacer()
             }
             Text(GameText.string(defect.key, locale: locale)).font(.title3.bold())
-            Text("game.repairChoice").font(.subheadline).foregroundStyle(.secondary)
+            Text("game.repairChoice").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
             switch Result(catching: { try RepairQuote(item: item, definition: definition, defect: defect, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let quote):
                 LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale, market: market)).bold().foregroundStyle(.primary) }
@@ -289,18 +289,18 @@ struct RepairDecision: View {
                             .foregroundStyle(difference < .zero ? GameStyle.loss : GameStyle.gain)
                             .accessibilityIdentifier("repairMargin.\(defect.rawValue)")
                         Text(difference > .zero ? "repair.marginPositive" : difference < .zero ? "repair.marginNegative" : "repair.marginEven")
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.caption).foregroundStyle(GameStyle.secondaryText)
                     }.frame(maxWidth: .infinity, alignment: .leading).padding(12)
                         .background(.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 12))
                 }
-                Text("repair.immediate").font(.caption).foregroundStyle(.secondary)
+                Text("repair.immediate").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 Button("repair.action") { store.perform { try store.repair(itemID: item.id, defect: defect); GameFeel.play(.accepted) } }
                     .buttonStyle(GameButton()).accessibilityIdentifier("repair.\(defect.rawValue)")
                     .disabled(awaitingInspection || store.snapshot.player.cash < quote.cost)
                 if awaitingInspection {
-                    Label("repair.awaitInspection", systemImage: "hourglass").font(.caption).foregroundStyle(.secondary)
+                    Label("repair.awaitInspection", systemImage: "hourglass").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 } else if store.snapshot.player.cash < quote.cost {
-                    Label("error.insufficientCash", systemImage: "wallet.bifold").font(.caption).foregroundStyle(.secondary)
+                    Label("error.insufficientCash", systemImage: "wallet.bifold").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }
             case .failure: Text("inspection.valueUnavailable")
             }

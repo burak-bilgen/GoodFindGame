@@ -9,7 +9,7 @@ struct MarketTrendsView: View {
         GameList {
             Section {
                 Label("trend.heading", systemImage: "chart.line.uptrend.xyaxis").font(.title2.bold())
-                Text("trend.explanation").foregroundStyle(.secondary)
+                Text("trend.explanation").foregroundStyle(GameStyle.secondaryText)
             }
             if store.snapshot.marketCalendar == nil {
                 Text("trend.unlock").accessibilityIdentifier("marketTrendsLocked")
@@ -25,7 +25,7 @@ struct MarketTrendsView: View {
                             Text(trend.scope.displayName(definitions: store.definitions, locale: locale)).font(.headline)
                             Text(trend.formattedChange(locale: locale)).font(.title2.bold())
                             Text(GameText.string(trend.reason.key, locale: locale)).font(.subheadline)
-                            Text(trend.isActive(at: now) ? "trend.active" : "trend.ended").font(.caption).foregroundStyle(.secondary)
+                            Text(trend.isActive(at: now) ? "trend.active" : "trend.ended").font(.caption).foregroundStyle(GameStyle.secondaryText)
                         }.padding(.vertical, 8)
                     }.accessibilityIdentifier("marketTrend.\(trend.id)")
                 }
@@ -54,7 +54,7 @@ struct MarketTrendDetailView: View {
                     DeadlineView(store: store, target: trend.endsAt, titleKey: "trend.remaining")
                 }
             }
-            Text("trend.explanation").foregroundStyle(.secondary)
+            Text("trend.explanation").foregroundStyle(GameStyle.secondaryText)
         }.gameScreen().navigationTitle("trend.title")
     }
 }

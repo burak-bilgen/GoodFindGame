@@ -25,9 +25,9 @@ struct PurchaseDecision: View {
             }
             Text(price.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
                 .lineLimit(1).minimumScaleFactor(0.5)
-            Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(.secondary)
+            Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(GameStyle.secondaryText)
             VStack(alignment: .leading, spacing: 6) {
-                Text(hasCash ? "purchase.cashAfter" : "purchase.cashNeeded").font(.caption).foregroundStyle(.secondary)
+                Text(hasCash ? "purchase.cashAfter" : "purchase.cashNeeded").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 switch Result(catching: {
                     hasCash ? try store.snapshot.player.cash.subtracting(price) : try price.subtracting(store.snapshot.player.cash)
                 }) {
@@ -43,12 +43,12 @@ struct PurchaseDecision: View {
                 Label("error.insufficientCash", systemImage: "wallet.bifold").font(.caption).foregroundStyle(GameStyle.loss)
             }
             if !hasRoom {
-                Label("error.inventoryFull", systemImage: "shippingbox.fill").font(.caption).foregroundStyle(.secondary)
+                Label("error.inventoryFull", systemImage: "shippingbox.fill").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }
             if let listing = store.snapshot.market.first(where: { $0.id == listingID }) {
                 TradeReadView(store: store, listing: listing, price: price)
             }
-            Text("journey.commit").font(.subheadline).foregroundStyle(.secondary)
+            Text("journey.commit").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
             Button("purchase.confirm") {
                 store.perform { try store.purchase(listingID: listingID); GameFeel.play(.purchase) }
             }.buttonStyle(GameButton()).disabled(!hasCash || !hasRoom).accessibilityIdentifier("confirmPurchase")

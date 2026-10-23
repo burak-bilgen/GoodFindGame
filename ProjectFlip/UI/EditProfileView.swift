@@ -36,7 +36,7 @@ struct EditProfileView: View {
                         Text(GameText.string(tier.key, locale: locale)).tag(tier.rawValue)
                     }
                 }
-                Text("profile.identityHint").font(.caption).foregroundStyle(.secondary)
+                Text("profile.identityHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }
         }.gameScreen().navigationTitle("profile.edit").navigationBarTitleDisplayMode(.inline)
             .toolbar {

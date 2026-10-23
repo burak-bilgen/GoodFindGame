@@ -12,7 +12,7 @@ struct RecoveryDeskView: View {
                 if let id = store.snapshot.recovery.itemID, let item = store.snapshot.player.inventory.first(where: { $0.id == id }) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("recovery.consigned").font(.headline)
-                        Text("recovery.task").font(.subheadline).foregroundStyle(.secondary)
+                        Text("recovery.task").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                         if let definition = store.definition(for: item) { DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(height: 180) }
                         if item.inspected {
                             let fee = min(RecoveryEngine.serviceFee, max(.zero, (try? RecoveryEngine.capitalFloor.subtracting(store.snapshot.player.cash)) ?? .zero))
@@ -26,12 +26,12 @@ struct RecoveryDeskView: View {
                 } else if RecoveryEngine.canBegin(store.snapshot) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("recovery.task").font(.subheadline)
-                        Text(GameText.format("recovery.limit", locale: locale, RecoveryEngine.capitalFloor.formatted(locale: locale, market: market))).font(.caption).foregroundStyle(.secondary)
+                        Text(GameText.format("recovery.limit", locale: locale, RecoveryEngine.capitalFloor.formatted(locale: locale, market: market))).font(.caption).foregroundStyle(GameStyle.secondaryText)
                         Button("recovery.begin") { store.perform { try store.beginRecovery(); GameFeel.play(.submitted) } }.buttonStyle(GameButton()).accessibilityIdentifier("beginRecovery")
                     }.gameCard(accent: GameStyle.amber)
-                } else { Text("recovery.notEligible").font(.subheadline).foregroundStyle(.secondary) }
+                } else { Text("recovery.notEligible").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                 Text("recovery.liquidation").font(.title2.bold())
-                Text("recovery.liquidationWarning").font(.caption).foregroundStyle(.secondary)
+                Text("recovery.liquidationWarning").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 ForEach(store.snapshot.player.inventory) { item in
                     if let definition = store.definition(for: item), let quote = try? RecoveryEngine.liquidationQuote(item, definition: definition, state: store.snapshot), quote > .zero {
                         VStack(alignment: .leading, spacing: 10) {

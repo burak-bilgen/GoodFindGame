@@ -46,11 +46,11 @@ struct CompetitionView: View {
                             competition.perform { try competition.start(playerID: service.playerID, currency: career.snapshot.marketConfiguration.currency) }
                             showTrading = competition.weeklyStore != nil
                         }.buttonStyle(GameButton()).accessibilityIdentifier("startWeekly")
-                    } else { Text("competition.introLocked").font(.subheadline).foregroundStyle(.secondary) }
+                    } else { Text("competition.introLocked").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                 }
                 if run != nil && run?.finalized == false {
                     Button("competition.finish") { confirmFinish = true }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("finalizeWeekly")
-                    Text("competition.finishHint").font(.caption).foregroundStyle(.secondary)
+                    Text("competition.finishHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }
                 VStack(alignment: .leading, spacing: 12) {
                     Label(GameText.string(service.statusKey, locale: locale), systemImage: service.playerID == nil ? "network.slash" : "person.crop.circle.badge.checkmark")
@@ -65,7 +65,7 @@ struct CompetitionView: View {
                         Button("competition.friends") { service.showLeaderboard(friends: true) }.buttonStyle(GameButton(secondary: true))
                         Button("competition.submit") { Task { await competition.sync(using: service) } }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("syncCompetition")
                     }
-                    Text(GameText.string(run?.clockSuspect == true ? "competition.clock" : competition.syncKey, locale: locale)).font(.caption).foregroundStyle(.secondary)
+                    Text(GameText.string(run?.clockSuspect == true ? "competition.clock" : competition.syncKey, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }.gameCard()
                 if let error = competition.errorKey { Text(GameText.string(error, locale: locale)).foregroundStyle(GameStyle.loss).accessibilityIdentifier("competitionError") }
                 achievementPanel
@@ -78,14 +78,14 @@ struct CompetitionView: View {
                                 Text(result.period.start, format: .dateTime.day().month().year().locale(locale))
                                 Text(result.score, format: .number).font(.title2.bold())
                                 if result.finisher { Label("competition.finisher", systemImage: "medal.fill") }
-                                Text("competition.expired").font(.caption).foregroundStyle(.secondary)
+                                Text("competition.expired").font(.caption).foregroundStyle(GameStyle.secondaryText)
                             }.accessibilityElement(children: .combine)
                         }
                     }.gameCard(accent: GameStyle.amber)
                 }
                 DisclosureGroup("competition.score") { Text("competition.scoreRules").font(.subheadline).padding(.top, 8) }.gameCard()
-                Text("competition.prestige").font(.caption).foregroundStyle(.secondary)
-                Text("competition.integrity").font(.caption).foregroundStyle(.secondary)
+                Text("competition.prestige").font(.caption).foregroundStyle(GameStyle.secondaryText)
+                Text("competition.integrity").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }.padding(16)
         }.gameScreen().navigationTitle("competition.title").navigationBarTitleDisplayMode(.inline)
             .confirmationDialog("competition.confirmFinish", isPresented: $confirmFinish, titleVisibility: .visible) {
@@ -117,7 +117,7 @@ struct CompetitionView: View {
     }
     private func rankRow(_ key: String, rank: Int?) -> some View {
         LabeledContent(GameText.string(key, locale: locale)) {
-            if let rank { Text(rank, format: .number).bold() } else { Text("competition.unranked").foregroundStyle(.secondary) }
+            if let rank { Text(rank, format: .number).bold() } else { Text("competition.unranked").foregroundStyle(GameStyle.secondaryText) }
         }
     }
     private var achievementPanel: some View {
@@ -128,7 +128,7 @@ struct CompetitionView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Label(GameText.string(achievement.titleKey, locale: locale), systemImage: percent >= 100 ? "checkmark.seal.fill" : "seal")
                         .font(.headline).foregroundStyle(percent >= 100 ? GameStyle.amber : .primary)
-                    Text(GameText.string(achievement.detailKey, locale: locale)).font(.caption).foregroundStyle(.secondary)
+                    Text(GameText.string(achievement.detailKey, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                     ProgressView(value: percent, total: 100).tint(GameStyle.amber)
                         .accessibilityLabel(Text(GameText.string(achievement.titleKey, locale: locale)))
                         .accessibilityValue(Text(percent / 100, format: .percent.precision(.fractionLength(0))))

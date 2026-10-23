@@ -15,7 +15,7 @@ struct NotificationSettingsView: View {
                 Text("notifications.explanation")
                 Text(GameText.string("notifications.status.\(service.authorization.rawValue)", locale: locale))
                 if service.authorization == .notDetermined || service.authorization == .unknown {
-                    if !store.hasExperiencedAsyncEvent { Text("notifications.afterFirstEvent").font(.caption).foregroundStyle(.secondary) }
+                    if !store.hasExperiencedAsyncEvent { Text("notifications.afterFirstEvent").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                     Button("notifications.enable") {
                         store.perform { try store.markNotificationPrompted() }
                         guard store.errorKey == nil else { return }

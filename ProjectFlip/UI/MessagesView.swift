@@ -35,7 +35,7 @@ struct MessagesView: View {
                 }.pickerStyle(.segmented)
                 let conversations = InboxOrder.sorted(store.snapshot, archived: archived)
                 if conversations.isEmpty {
-                    Text(archived ? "messages.archiveEmpty" : "messages.empty").foregroundStyle(.secondary).padding(.vertical)
+                    Text(archived ? "messages.archiveEmpty" : "messages.empty").foregroundStyle(GameStyle.secondaryText).padding(.vertical)
                     if !archived { HuntButton() }
                 }
                 ForEach(conversations) { conversation in
@@ -50,12 +50,12 @@ struct MessagesView: View {
                                     }
                                     Text(GameText.marketPerson("name", index: listing.seller.identityIndex, market: market, locale: locale)).font(.subheadline)
                                     if conversation.pendingReplyEventID != nil {
-                                        Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(.secondary)
+                                        Label("seller.awaitingReply", systemImage: "clock").font(.caption).foregroundStyle(GameStyle.secondaryText)
                                     } else if InboxOrder.needsAction(conversation, state: store.snapshot) {
                                         Label("messages.yourTurn", systemImage: "arrow.turn.down.right").font(.caption).foregroundStyle(GameStyle.gain)
                                     }
-                                    if let last = conversation.messages.last { Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(.secondary).lineLimit(2) }
-                                    if let date = conversation.lastActivityAt { Text(date, style: .relative).font(.caption2).foregroundStyle(.secondary) }
+                                    if let last = conversation.messages.last { Text(GameText.string(last.intent, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText).lineLimit(2) }
+                                    if let date = conversation.lastActivityAt { Text(date, style: .relative).font(.caption2).foregroundStyle(GameStyle.secondaryText) }
                                 }
                             }.frame(maxWidth: .infinity, alignment: .leading).gameCard()
                         }.buttonStyle(.plain).accessibilityIdentifier("conversation.\(conversation.listingID.rawValue)")

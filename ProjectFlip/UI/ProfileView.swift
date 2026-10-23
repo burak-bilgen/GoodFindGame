@@ -18,7 +18,7 @@ struct ProfileView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(displayName.isEmpty ? GameText.string("profile.defaultName", locale: locale) : displayName).font(.title2.bold())
                         if let tier = CareerTier(rawValue: title), tier.rawValue <= store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue {
-                            Text(GameText.string(tier.key, locale: locale)).font(.subheadline).foregroundStyle(.secondary)
+                            Text(GameText.string(tier.key, locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                         }
                         Button("profile.edit") { editingProfile = true }.font(.subheadline).accessibilityIdentifier("editProfile")
                     }
@@ -33,7 +33,7 @@ struct ProfileView: View {
                     Label("clients.preferred", systemImage: "camera.badge.ellipsis").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("wallet.cash").font(.caption.bold()).foregroundStyle(.secondary)
+                    Text("wallet.cash").font(.caption.bold()).foregroundStyle(GameStyle.secondaryText)
                     Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
                     Divider().overlay(GameStyle.line)
                     LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
@@ -78,7 +78,7 @@ struct TradeHistoryView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             if let definition = store.definitions.first(where: { $0.id == record.definitionID }) { Text(definition.displayName(locale: locale)).font(.headline) }
                             ProfitAmount(amount: record.netProfit)
-                            Text(record.soldAt, format: .dateTime.day().month().year().locale(locale)).font(.caption).foregroundStyle(.secondary)
+                            Text(record.soldAt, format: .dateTime.day().month().year().locale(locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                         }
                     }.accessibilityIdentifier("trade.\(record.id.rawValue)")
                 }
@@ -114,7 +114,7 @@ struct TradeReceiptView: View {
                         LabeledContent("trade.inspectionCost") { Text(record.inspectionCost.formatted(locale: locale, market: market, precise: true)) }
                         LabeledContent("trade.repairCost") { Text(record.repairCost.formatted(locale: locale, market: market, precise: true)) }
                         LabeledContent("trade.totalCost") { Text(record.totalCost.formatted(locale: locale, market: market, precise: true)) }
-                        Text("trade.explanation").font(.caption).foregroundStyle(.secondary)
+                        Text("trade.explanation").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     }.padding(.top, 12)
                 }.gameCard()
                 HuntButton()

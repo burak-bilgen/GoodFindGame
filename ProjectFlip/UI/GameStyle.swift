@@ -15,6 +15,7 @@ enum GameStyle {
     static let ink = Color("LaunchBackground")
     static let panel = Color(red: 0.085, green: 0.13, blue: 0.19)
     static let panelTop = Color(red: 0.12, green: 0.19, blue: 0.26)
+    static let secondaryText = Color(red: 0.74, green: 0.80, blue: 0.86)
     static let line = Color(red: 0.25, green: 0.39, blue: 0.47)
     static let amber = Color(red: 1.0, green: 0.70, blue: 0.32)
     static let gain = Color("AccentColor")

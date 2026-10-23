@@ -18,7 +18,7 @@ struct ShopView: View {
                         Text(GameText.string(shop.style.key, locale: locale)).font(.title2.bold())
                         Text(GameText.string(shop.style.detailKey, locale: locale)).font(.subheadline)
                         Button("shop.changeStyle") { showStyle.toggle() }.buttonStyle(GameButton(secondary: true)).disabled(!shop.featured.isEmpty)
-                        if !shop.featured.isEmpty { Text("shop.clearWindow").font(.caption).foregroundStyle(.secondary) }
+                        if !shop.featured.isEmpty { Text("shop.clearWindow").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                         if showStyle && shop.featured.isEmpty {
                             ForEach(ShopStyle.allCases, id: \.self) { option in
                                 Button { store.perform { try store.changeShopStyle(option) }; showStyle = false } label: {
@@ -48,12 +48,12 @@ struct ShopView: View {
                             LabeledContent("shop.openingCost") { Text(ShopEngine.openingCost.formatted(locale: locale, market: market)) }
                             Button("shop.open") { store.perform { try store.openShop(name: name, style: style) } }.buttonStyle(GameButton())
                                 .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || store.snapshot.player.cash < ShopEngine.openingCost).accessibilityIdentifier("openShop")
-                        } else { Text("shop.unlock").font(.subheadline).foregroundStyle(.secondary) }
+                        } else { Text("shop.unlock").font(.subheadline).foregroundStyle(GameStyle.secondaryText) }
                     }.gameCard(accent: GameStyle.amber)
                 }
                 NavigationLink { SellingView(store: store) } label: { GameMenuRow(titleKey: "shop.onlineSales", symbol: "tag.fill") }.buttonStyle(.plain).accessibilityIdentifier("shopSales")
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain)
-                Text("shop.offline").font(.caption).foregroundStyle(.secondary)
+                Text("shop.offline").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }.padding(16)
         }.gameScreen().navigationTitle("shop.title").navigationBarTitleDisplayMode(.inline)
     }
@@ -69,14 +69,14 @@ struct ShopView: View {
             ForEach(store.snapshot.playerListings.filter { shop.featured.contains($0.id) }) { listing in
                 NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: { saleRow(listing) }.buttonStyle(.plain)
             }
-            if shop.featured.isEmpty { Text("shop.windowEmpty").foregroundStyle(.secondary) }
+            if shop.featured.isEmpty { Text("shop.windowEmpty").foregroundStyle(GameStyle.secondaryText) }
             Text(GameText.format("shop.salesCount", locale: locale, shop.completedSales.count)).font(.headline).foregroundStyle(GameStyle.gain)
         }.gameCard(accent: GameStyle.amber)
     }
     private var stock: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("shop.chooseStock").font(.title2.bold())
-            Text("shop.stockHint").font(.caption).foregroundStyle(.secondary)
+            Text("shop.stockHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
             let listings = store.snapshot.playerListings.filter { $0.status == .active }
             if listings.isEmpty {
                 Text("shop.noStock")
@@ -116,7 +116,7 @@ struct ShopView: View {
                 Button("shop.expand") { store.perform { try store.expandShop() } }.buttonStyle(GameButton())
                     .disabled(shop.completedSales.count < (shop.windowLevel + 1) * 2 || store.snapshot.player.cash < cost).accessibilityIdentifier("expandShop")
             } else { Label("shop.fullyExpanded", systemImage: "checkmark.seal.fill") }
-            Text("shop.capitalChoice").font(.caption).foregroundStyle(.secondary)
+            Text("shop.capitalChoice").font(.caption).foregroundStyle(GameStyle.secondaryText)
         }.gameCard(accent: GameStyle.amber)
     }
 }

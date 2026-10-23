@@ -14,7 +14,7 @@ struct DeadlineView: View {
             }
             if let projected = store.projectedDeadline(target) { Text(projected, style: .timer).monospacedDigit() }
             else { Text("time.unavailable") }
-        }.font(.subheadline).foregroundStyle(.secondary)
+        }.font(.subheadline).foregroundStyle(GameStyle.secondaryText)
     }
 }
 
@@ -47,10 +47,10 @@ struct WhileAwayView: View {
                                             Image(systemName: "arrow.up.right").font(.headline).foregroundStyle(GameStyle.gain)
                                             VStack(alignment: .leading, spacing: 6) {
                                                 Text(eventName(outcome)).font(.subheadline.bold()).foregroundStyle(.primary)
-                                                Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale)).font(.caption).foregroundStyle(.secondary)
+                                                Text(outcome.occurredAt, format: .dateTime.hour().minute().locale(locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                                             }
                                             Spacer()
-                                            Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(.secondary)
+                                            Image(systemName: "chevron.right").font(.caption.bold()).foregroundStyle(GameStyle.secondaryText)
                                         }.padding(.vertical, 6)
                                     }.buttonStyle(.plain).accessibilityIdentifier("awayEvent.\(outcome.id)")
                                 }

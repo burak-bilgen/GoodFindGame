@@ -24,7 +24,7 @@ struct CareerHuntPrompt: View {
                                 Text(GameText.string("career.requirement.\(next.rawValue)", locale: locale))
                             }
                         } else { Text("career.nextHunt") }
-                    }.font(.caption).foregroundStyle(.secondary)
+                    }.font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }
                 Spacer(minLength: 0)
                 Image(systemName: "arrow.up.right").foregroundStyle(GameStyle.amber)
@@ -50,13 +50,13 @@ struct TraderCareerView: View {
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("careerClients")
                 NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain)
                 }
-                Text("career.principle").font(.subheadline).foregroundStyle(.secondary)
+                Text("career.principle").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                 ForEach(CareerTier.allCases, id: \.self) { tier in
                     let earned = store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue >= tier.rawValue
                     VStack(alignment: .leading, spacing: 10) {
                         Label(GameText.string(tier.key, locale: locale), systemImage: earned ? "checkmark.seal.fill" : "lock.fill").font(.headline).foregroundStyle(earned ? GameStyle.gain : GameStyle.amber)
                         Text(GameText.string("career.requirement.\(tier.rawValue)", locale: locale)).font(.subheadline)
-                        Text(GameText.string("career.access.\(tier.rawValue)", locale: locale)).font(.caption).foregroundStyle(.secondary)
+                        Text(GameText.string("career.access.\(tier.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                     }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: earned ? GameStyle.gain : nil)
                 }
                 Text(GameText.format("career.record", locale: locale, store.snapshot.career.creditedItems.count, store.snapshot.career.clientJobs)).font(.caption)
