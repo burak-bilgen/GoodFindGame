@@ -1,3 +1,5 @@
+> Superseded policy, 2026-10-23: ship one fixed photo per product mapping, with no condition variants or seller/inspection photo switch. Condition lives in inspection facts and text. Unphotographed products are paused for new listings; do not generate more images without the owner's renewed request. PHOTO_SOURCES.json and CLOSEOUT_QA.md record the retained household photos. The historical atlas instructions below are not current production instructions.
+
 # Product art bible — believable fictional objects
 
 ## Target

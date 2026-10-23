@@ -333,3 +333,29 @@ feel.sounds	Spielklänge	Sons du jeu
 feel.soundsHint	Kurze Signale für Antworten, Entdeckungen und abgeschlossene Verkäufe. Beachtet den Lautlosmodus.	De brefs sons pour les réponses, découvertes et ventes conclues. Respecte le mode silencieux.
 journey.bought	Er gehört dir. Jetzt kommt die Wahrheit ans Licht.	Il est à toi. Place à la vérité.
 journey.commit	Der Preis steht fest. Der Zustand bleibt ein Risiko.	Le prix est fixé. L'état reste un risque.
+inventory.capacity	%d / %d Plätze belegt	%d / %d places occupées
+inventory.filter	Bestand filtern	Filtrer le stock
+inventory.filter.all	Gesamter Bestand	Tout le stock
+inventory.filter.transit	Unterwegs	En livraison
+inventory.filter.inspect	Zu prüfen	À examiner
+inventory.filter.ready	Verkaufsbereit	Prêt à vendre
+inventory.filter.listed	Inseriert	En vente
+inventory.filter.collection	Sammlung	Collection
+inventory.noMatches	Keine Artikel in dieser Gruppe.	Aucun objet dans cette catégorie.
+art.referencePhoto	Beispielfoto dieses Modells. Den Zustand dieses Artikels findest du im Prüfbericht.	Photo de référence du modèle. Consulte le rapport d'inspection pour connaître l'état de cet objet.
+messages.buyersWaiting	Offene Käuferangebote	Offres d'achat à examiner
+messages.filter	Gespräche	Conversations
+messages.active	Aktiv	En cours
+messages.archive	Archiv	Archives
+messages.archiveEmpty	Abgeschlossene Gespräche erscheinen hier.	Les conversations terminées apparaîtront ici.
+messages.unread	Ungelesene Antwort	Réponse non lue
+messages.yourTurn	Du bist dran	À toi de décider
+profile.name	Anzeigename	Nom affiché
+profile.avatar	Avatar	Avatar
+profile.avatarNumber	Avatar %d	Avatar %d
+profile.displayTitle	Angezeigter Titel	Titre affiché
+profile.noTitle	Kein Titel	Aucun titre
+profile.identityHint	Wähle einen verdienten Titel. Dein Ladenname und dein Game-Center-Profil bleiben unabhängig.	Choisis un titre que tu as obtenu. Le nom de ta boutique et ton profil Game Center restent distincts.
+profile.edit	Profil bearbeiten	Modifier le profil
+profile.defaultName	Dein Profil	Ton profil
+action.save	Speichern	Enregistrer

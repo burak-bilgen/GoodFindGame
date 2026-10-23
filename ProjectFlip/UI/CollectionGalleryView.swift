@@ -21,7 +21,7 @@ struct CollectionGalleryView: View {
                         HStack {
                             Text(GameText.string(collection.titleKey, locale: locale)).font(.system(.title2, design: .serif, weight: .bold))
                             Spacer(minLength: 0)
-                            Text("\(collection.count(in: store.snapshot))/\(collection.models.count)").font(.title2.bold()).foregroundStyle(GameStyle.amber)
+                            Text(verbatim: "\(collection.count(in: store.snapshot))/\(collection.models.count)").font(.title2.bold()).foregroundStyle(GameStyle.amber)
                         }
                         Text(GameText.string("collection.\(collection.id).story", locale: locale)).font(.subheadline).foregroundStyle(.secondary)
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .top), count: typeSize.isAccessibilitySize ? 1 : 3), alignment: .leading, spacing: 10) {

@@ -3016,18 +3016,6 @@
             "state": "translated",
             "value": "Vazgeç"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abbrechen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Annuler"
-          }
         }
       }
     },
@@ -15544,18 +15532,6 @@
             "state": "translated",
             "value": "%d / %d alan dolu"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%d / %d Plätze belegt"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%d / %d places occupées"
-          }
         }
       }
     },
@@ -15573,18 +15549,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stok filtresi"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bestand filtern"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filtrer le stock"
           }
         }
       }
@@ -15604,18 +15568,6 @@
             "state": "translated",
             "value": "Tüm stok"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gesamter Bestand"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout le stock"
-          }
         }
       }
     },
@@ -15633,18 +15585,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kargoda"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unterwegs"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En livraison"
           }
         }
       }
@@ -15664,18 +15604,6 @@
             "state": "translated",
             "value": "İncelenecek"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zu prüfen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À examiner"
-          }
         }
       }
     },
@@ -15693,18 +15621,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Satışa hazır"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verkaufsbereit"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prêt à vendre"
           }
         }
       }
@@ -15724,18 +15640,6 @@
             "state": "translated",
             "value": "İlanda"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inseriert"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En vente"
-          }
         }
       }
     },
@@ -15753,18 +15657,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Koleksiyonda"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sammlung"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Collection"
           }
         }
       }
@@ -15784,18 +15676,6 @@
             "state": "translated",
             "value": "Bu grupta ürün yok."
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keine Artikel in dieser Gruppe."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun objet dans cette catégorie."
-          }
         }
       }
     },
@@ -15813,18 +15693,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu modelin temsili fotoğrafı. Ürünün durumu için inceleme bulgularını oku."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beispielfoto dieses Modells. Den Zustand dieses Artikels findest du im Prüfbericht."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Photo de référence du modèle. Consulte le rapport d'inspection pour connaître l'état de cet objet."
           }
         }
       }
@@ -15844,18 +15712,6 @@
             "state": "translated",
             "value": "Yanıt bekleyen alıcı teklifleri"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Offene Käuferangebote"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Offres d'achat à examiner"
-          }
         }
       }
     },
@@ -15873,18 +15729,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Görüşmeler"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gespräche"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conversations"
           }
         }
       }
@@ -15904,18 +15748,6 @@
             "state": "translated",
             "value": "Aktif"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktiv"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours"
-          }
         }
       }
     },
@@ -15933,18 +15765,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Arşiv"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archiv"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archives"
           }
         }
       }
@@ -15964,18 +15784,6 @@
             "state": "translated",
             "value": "Tamamlanan görüşmeler burada görünecek."
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abgeschlossene Gespräche erscheinen hier."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les conversations terminées apparaîtront ici."
-          }
         }
       }
     },
@@ -15993,18 +15801,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Okunmamış yanıt"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ungelesene Antwort"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réponse non lue"
           }
         }
       }
@@ -16024,18 +15820,6 @@
             "state": "translated",
             "value": "Karar sende"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du bist dran"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À toi de décider"
-          }
         }
       }
     },
@@ -16054,18 +15838,6 @@
             "state": "translated",
             "value": "Görünen ad"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anzeigename"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom affiché"
-          }
         }
       }
     },
@@ -16080,18 +15852,6 @@
           }
         },
         "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avatar"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avatar"
-          }
-        },
-        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Avatar"
@@ -16114,18 +15874,6 @@
             "state": "translated",
             "value": "Avatar %d"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avatar %d"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avatar %d"
-          }
         }
       }
     },
@@ -16143,18 +15891,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Görünen unvan"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Angezeigter Titel"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Titre affiché"
           }
         }
       }
@@ -16174,18 +15910,6 @@
             "state": "translated",
             "value": "Unvan yok"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kein Titel"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun titre"
-          }
         }
       }
     },
@@ -16203,18 +15927,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kazandığın unvanlardan birini seç. Dükkân adın ve Game Center profilin ayrıdır."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle einen verdienten Titel. Dein Ladenname und dein Game-Center-Profil bleiben unabhängig."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis un titre que tu as obtenu. Le nom de ta boutique et ton profil Game Center restent distincts."
           }
         }
       }
@@ -16234,18 +15946,6 @@
             "state": "translated",
             "value": "Profili düzenle"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Profil bearbeiten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier le profil"
-          }
         }
       }
     },
@@ -16264,18 +15964,6 @@
             "state": "translated",
             "value": "Profilin"
           }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein Profil"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton profil"
-          }
         }
       }
     },
@@ -16293,18 +15981,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kaydet"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Speichern"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistrer"
           }
         }
       }

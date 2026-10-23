@@ -34,7 +34,7 @@ struct SettingsView: View {
                     NavigationLink { MarketSettingsView(store: store) } label: { GameMenuRow(titleKey: "region.migrationTitle", symbol: "info.circle") }.buttonStyle(.plain)
                 }
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Project Flip").font(.headline)
+                    Text(verbatim: "Project Flip").font(.headline)
                     Text("settings.localSave").font(.caption).foregroundStyle(.secondary)
                     LabeledContent("settings.version") { Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") }
                 }.font(.caption).gameCard()

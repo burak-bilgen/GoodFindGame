@@ -28,7 +28,7 @@ private struct ClientChapterView: View {
                     Text(GameText.string("client.\(client.id).role", locale: locale)).font(.caption).foregroundStyle(GameStyle.amber)
                 }
                 Spacer(minLength: 0)
-                Text("\(step)/3").font(.title2.bold()).monospacedDigit()
+                Text(verbatim: "\(step)/3").font(.title2.bold()).monospacedDigit()
             }
             if let request = ClientEngine.request(client.id, state: store.snapshot) {
                 Text(GameText.string("client.\(client.id).story.\(step)", locale: locale)).font(.headline)

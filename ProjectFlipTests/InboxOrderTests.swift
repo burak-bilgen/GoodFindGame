@@ -35,7 +35,8 @@ struct InboxOrderTests {
         let activity = store.snapshot.conversations[0].lastActivityAt
         #expect(activity != nil)
         try store.markConversationRead(listing.id)
-        let reopened = try #require(repository.load())
+        let loaded = try repository.load()
+        let reopened = try #require(loaded)
         #expect(!InboxOrder.isUnread(reopened.conversations[0]))
         #expect(reopened.conversations[0].lastActivityAt == activity)
     }

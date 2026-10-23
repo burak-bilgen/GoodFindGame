@@ -70,4 +70,6 @@ Direct friend challenges and Game Center Activities are deferred in V1 to keep i
 - [Rewarding players with achievements](https://developer.apple.com/documentation/gamekit/rewarding-players-with-achievements)
 - [Manage leaderboards in App Store Connect](https://developer.apple.com/help/app-store-connect/configure-game-center/manage-leaderboards/)
 
-Implementation compiles against the installed SDK with iOS 17 deployment. Runtime API usage is limited to APIs available on that target; newer Challenge/Activity APIs are not called.
+Implementation compiles against the installed SDK with iOS 26 deployment. Runtime API usage is limited to APIs available on that target; newer Challenge/Activity APIs are not called.
+
+Current presentation (2026-10-23): leaderboard and achievement screens use GKAccessPoint triggers. The authentication controller remains an optional sign-in sheet. Selecting a signing team in Xcode does not configure App Store Connect resources or verify a live leaderboard.

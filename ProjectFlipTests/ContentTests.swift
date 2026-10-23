@@ -87,12 +87,12 @@ struct ContentTests {
         #expect(migrated.scopeEpochs.count == 1 && migrated.scopeEpochs[0].firstCycle == 4)
         for index in 0...3 { #expect(try migrated.trend(at: index) == old.trend(at: index)) }
         #expect(migrated.scopeEpochs[0].models.count == 80)
-        #expect(Set(migrated.scopeEpochs[0].categories) == Set(MarketCatalog.active(definitions).map(\.category)))
+        #expect(Set(migrated.scopeEpochs[0].categories) == Set(ItemCategory.allCases))
         var newCategories = Set<ItemCategory>()
         for index in 4..<104 {
             if case .category(let category) = try migrated.trend(at: index).scope { newCategories.insert(category) }
         }
-        #expect(newCategories == Set(MarketCatalog.active(definitions).map(\.category)))
+        #expect(newCategories == Set(ItemCategory.allCases))
         let unchanged = migrated
         try migrated.includeNewContent(definitions, after: 2)
         #expect(migrated == unchanged)
