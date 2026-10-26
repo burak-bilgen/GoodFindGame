@@ -16,7 +16,7 @@ struct ValueRangeView: View {
                 Text(verbatim: "–")
                 Text(estimate.upper.formatted(locale: locale, market: market)).fixedSize()
             }
-        }.font(.system(.title3, design: .rounded, weight: .bold)).monospacedDigit()
+        }.font(.system(.title3, design: .default, weight: .semibold)).monospacedDigit()
             .accessibilityElement(children: .ignore).accessibilityLabel(Text(estimate.formatted(locale: locale, market: market)))
     }
 }
@@ -43,63 +43,59 @@ struct OpenTradesView: View {
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
     var body: some View {
-        let sellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID != nil }
-        let readySellers = store.snapshot.conversations.filter { !$0.closed && $0.pendingReplyEventID == nil && ($0.counterPrice != nil || $0.agreedPrice != nil) }
-        let idleStock = store.snapshot.player.inventory.filter { ItemTransfer.available($0.id, state: store.snapshot) }
-        let readyToInspect = idleStock.filter { !$0.inspected }
-        let readyToPrice = idleStock.filter(\.inspected)
-        let shipping = store.snapshot.shipments.filter { $0.status == .pending }
-        let inspections = store.snapshot.inspectionJobs.filter { $0.status == .pending }
-        let sales = store.snapshot.playerListings.filter { $0.status == .active }
-        let pendingWork = !sellers.isEmpty || !shipping.isEmpty || !inspections.isEmpty || !sales.isEmpty
-        if pendingWork || !readySellers.isEmpty || !idleStock.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(spacing: 8) {
-                    if pendingWork { GameActivityLights() }
-                    else { Image(systemName: "checkmark.circle.fill").accessibilityHidden(true) }
-                    Text(pendingWork ? "living.inMotion" : "reveal.estimate").font(.caption.bold()).foregroundStyle(GameStyle.gain)
-                }
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 14) {
-                if let seller = readySellers.first {
-                    NavigationLink { ConversationView(store: store, listingID: seller.listingID) } label: {
-                        Label(GameText.format("living.sellerReady", locale: locale, readySellers.count), systemImage: "bubble.left.and.bubble.right.fill")
-                    }
-                }
-                if let item = readyToInspect.first {
-                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
-                        Label(GameText.format("living.inspectReady", locale: locale, readyToInspect.count), systemImage: "viewfinder")
-                    }
-                }
-                if let item = readyToPrice.first {
-                    NavigationLink { OwnedItemView(store: store, itemID: item.id) } label: {
-                        Label(GameText.format("living.priceReady", locale: locale, readyToPrice.count), systemImage: "tag.fill")
-                    }
-                }
-                if let seller = sellers.first {
-                    NavigationLink { ConversationView(store: store, listingID: seller.listingID) } label: {
-                        Label(GameText.format("living.sellers", locale: locale, Int64(sellers.count)), systemImage: "bubble.left.and.bubble.right")
-                    }
-                }
-                if !shipping.isEmpty {
-                    NavigationLink { InventoryView(store: store) } label: {
-                        Label(GameText.format("living.shipping", locale: locale, Int64(shipping.count)), systemImage: "shippingbox")
-                    }
-                }
-                if let inspection = inspections.first {
-                    NavigationLink { OwnedItemView(store: store, itemID: inspection.itemID) } label: {
-                        Label(GameText.format("living.inspections", locale: locale, Int64(inspections.count)), systemImage: "viewfinder")
-                    }
-                }
-                if !sales.isEmpty {
-                    NavigationLink { SellingView(store: store) } label: {
-                        Label(GameText.format("living.sales", locale: locale, Int64(sales.count)), systemImage: "tag")
-                    }
-                }
-                    }
-                }
-            }.font(.caption).padding(.vertical, 4).accessibilityIdentifier("openTrades")
+        if let sale = store.snapshot.activeSales.first, store.snapshot.needsBuyerAction(sale) {
+            handoff(title: GameText.string("journey.offerWaiting", locale: locale), symbol: "bubble.left.fill", id: "marketBuyerOffer", deadline: store.snapshot.buyerActionDeadline(sale)) {
+                SaleListingView(store: store, listingID: sale.id)
+            }
+        } else if let seller = store.snapshot.readySellerConversations.first {
+            handoff(title: GameText.format("living.sellerReady", locale: locale, 1), symbol: "bubble.left.and.bubble.right.fill", id: "marketSellerReady", deadline: seller.counterExpiresAt) {
+                ConversationView(store: store, listingID: seller.listingID)
+            }
+        } else if let brief = ClientEngine.activeBrief(in: store.snapshot),
+                  let item = store.snapshot.player.inventory.first(where: { ClientEngine.qualifies($0, request: brief.request) && ItemTransfer.available($0.id, state: store.snapshot) }) {
+            let name = GameText.string("client.\(brief.client.id).name.\(market.region.rawValue)", locale: locale)
+            handoff(title: GameText.format("clients.ready", locale: locale, name), symbol: "person.crop.circle.badge.checkmark", id: "marketClientReady") {
+                OwnedItemView(store: store, itemID: item.id)
+            }
+        } else if let item = store.snapshot.player.inventory.first(where: { ItemTransfer.available($0.id, state: store.snapshot) }) {
+            handoff(title: GameText.string(item.inspected ? "hunt.sell" : "hunt.inspect", locale: locale), symbol: "shippingbox", id: "marketStockReady") {
+                OwnedItemView(store: store, itemID: item.id)
+            }
+        } else if let job = store.snapshot.inspectionJobs.first(where: { $0.status == .pending }) {
+            handoff(title: GameText.format("living.inspections", locale: locale, Int64(1)), symbol: "viewfinder", id: "marketReportPending") {
+                OwnedItemView(store: store, itemID: job.itemID)
+            }
+        } else if store.snapshot.shipments.contains(where: { $0.status == .pending }) {
+            handoff(title: GameText.string("hunt.delivery", locale: locale), symbol: "shippingbox", id: "marketDeliveryPending") {
+                InventoryView(store: store)
+            }
+        } else if let seller = store.snapshot.conversations.first(where: { !$0.closed && $0.pendingReplyEventID != nil }) {
+            handoff(title: GameText.string("seller.awaitingReply", locale: locale), symbol: "clock", id: "marketSellerPending") {
+                ConversationView(store: store, listingID: seller.listingID)
+            }
+        } else if let sale = store.snapshot.activeSales.first {
+            handoff(title: GameText.string("hunt.followSale", locale: locale), symbol: "tag", id: "marketSalePending") {
+                SaleListingView(store: store, listingID: sale.id)
+            }
         }
+    }
+    private func handoff<Destination: View>(title: String, symbol: String, id: String, deadline: Date? = nil, @ViewBuilder destination: () -> Destination) -> some View {
+        NavigationLink(destination: destination) {
+            HStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Label(title, systemImage: symbol).font(.subheadline.bold())
+                    if let deadline, let projected = store.projectedDeadline(deadline) {
+                        HStack(alignment: .firstTextBaseline, spacing: 4) {
+                            Text(GameText.string("offer.expires", locale: locale))
+                            Text(projected, style: .timer).monospacedDigit()
+                        }.font(.caption).foregroundStyle(GameStyle.secondaryText)
+                    }
+                }
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right").font(.caption)
+            }.foregroundStyle(GameStyle.gain).padding(12).frame(minHeight: 44)
+                .background(GameStyle.panel, in: RoundedRectangle(cornerRadius: 12))
+        }.buttonStyle(.plain).accessibilityIdentifier(id)
     }
 }
 
@@ -139,7 +135,7 @@ struct TradeReadView: View {
                     ViewThatFits(in: .horizontal) {
                         HStack(spacing: 6) { margin(read.lowerMargin); Text(verbatim: "…"); margin(read.upperMargin) }
                         VStack(alignment: .leading, spacing: 4) { margin(read.lowerMargin); margin(read.upperMargin) }
-                    }.font(.system(.title3, design: .rounded, weight: .heavy)).monospacedDigit()
+                    }.font(.system(.title3, design: .default, weight: .semibold)).monospacedDigit()
                         .accessibilityIdentifier("tradeReadMargin")
                     Text(disclosed.isEmpty ? "tradeRead.claim" : "tradeRead.disclosed").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     ForEach(disclosed, id: \.self) { defect in

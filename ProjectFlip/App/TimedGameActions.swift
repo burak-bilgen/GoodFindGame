@@ -1,7 +1,7 @@
 import Foundation
 
 extension GameStore {
-    private var actions: SimulationActions { SimulationActions(timing: timing) }
+    private var actions: SimulationActions { SimulationActions(timing: timing, definitions: definitions) }
 
     private func transact(now: Date = .now, _ action: (GameSnapshot, Date) throws -> GameSnapshot) throws {
         if let period = competitionPeriod, !period.contains(now) { throw TradingError.unavailable }
@@ -73,6 +73,9 @@ extension GameStore {
     }
     func repair(itemID: ItemID, defect: Defect) throws {
         try transact { state, _ in try RepairEngine().repair(itemID: itemID, defect: defect, state: state, definitions: definitions) }
+    }
+    func repair(itemID: ItemID, selection: Set<Defect>, expectedCost: Money) throws {
+        try transact { state, _ in try RepairEngine().apply(itemID: itemID, selection: selection, expectedCost: expectedCost, state: state, definitions: definitions) }
     }
     func publish(itemID: ItemID, askingPrice: Money) throws {
         try transact { try actions.publish(itemID: itemID, askingPrice: askingPrice, state: $0, definitions: definitions, now: $1) }

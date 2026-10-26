@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-25",
+  "tool": "built-in image_gen",
+  "mode": "edit",
+  "reviewedCatalogPhotos": 56,
+  "revisedFamilies": 5,
+  "prompts": [
+    "../Artifacts/DesignRefresh-2026-10-25/photo-prompts.json",
+    "../Artifacts/DesignRefresh-2026-10-25/photo-prompts-camera-lens.json"
+  ],
+  "assets": [
+    {
+      "family": "controller",
+      "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-32145bea-261b-4909-b360-3e4c00ddd6c3.png",
+      "masterSHA256": "313fbd6ef922278717c2796ce08890196cce14c67dec03b788d95928f2112ba4",
+      "previousSHA256": "d8dc3a13599c7fcdb7d470cabd742c2410ae302407365e29b2fd34a1970875b3",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-controller.imageset/photo.jpg",
+      "outputSHA256": "98d099a676738a0f02e70f0a2d7d9bfd750a2dc0bc61ba7d84bedde91d8dade8",
+      "master": "../Artifacts/DesignRefresh-2026-10-25/photos/controller-master.png",
+      "review": "Inspected full object, usable margins, material clarity, no real branding/text, consistent warm-grey daylight and thumbnail readability. Fixed art does not select hidden condition."
+    },
+    {
+      "family": "console",
+      "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-c5688982-b91a-482f-8edd-7ed1121c7f46.png",
+      "masterSHA256": "9b8e134990234b6af48bc51adad27f0bd1a8d412006d2d816a728d9af2fe3e6f",
+      "previousSHA256": "d063f3dcd07d61e336340abc158f72628d1f691c8215921a207a497a5a775eea",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-console.imageset/photo.jpg",
+      "outputSHA256": "0475712d5e2902a876f7480bbd058eb893119929f3453f8cf7229643b820547a",
+      "master": "../Artifacts/DesignRefresh-2026-10-25/photos/console-master.png",
+      "review": "Inspected full object, usable margins, material clarity, no real branding/text, consistent warm-grey daylight and thumbnail readability. Fixed art does not select hidden condition."
+    },
+    {
+      "family": "display",
+      "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-df21e180-2f95-4deb-9d6f-e3661e290fe2.png",
+      "masterSHA256": "15335ed9acdfcf6d029b601f86d16c594d38ae51519953b6fd4e5a32c9a85500",
+      "previousSHA256": "8b1a022b0b088f8e211536750201ccd0d3453754aa229da3329dd01680700ab1",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-display.imageset/photo.jpg",
+      "outputSHA256": "ba28928cce081eb20c90ddb3bb010a31fb0aef18e87786f6f01b5cd9333eba8c",
+      "master": "../Artifacts/DesignRefresh-2026-10-25/photos/display-master.png",
+      "review": "Inspected full object, usable margins, material clarity, no real branding/text, consistent warm-grey daylight and thumbnail readability. Fixed art does not select hidden condition."
+    },
+    {
+      "family": "camera",
+      "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-8e47bf5b-c9ce-45d8-9bf0-4e1d6842299a.png",
+      "masterSHA256": "9e245ecb7ba0883ba4085a9449aabd13817fba09f2f0d4d2e7a8608cfda7e5d4",
+      "previousSHA256": "715eca851a0206b715308f52a2b6560c27d036385767aecefffc243cee4aa93c",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-camera.imageset/photo.jpg",
+      "outputSHA256": "1665d63d3c2cf2537e9af63e1c1e9aa510a64f387a72df91e7abad896a6bb485",
+      "master": "../Artifacts/DesignRefresh-2026-10-25/photos/camera-master.png",
+      "review": "Inspected full object, usable margins, material clarity, no real branding/text, consistent warm-grey daylight and thumbnail readability. Fixed art does not select hidden condition."
+    },
+    {
+      "family": "lens",
+      "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-0f7f5550-8e02-4177-aead-a17ae2de9d35.png",
+      "masterSHA256": "8520a78c6d994c9536487e3dd9fce5543d189a27a6d67814273b5bfeb0d53f5d",
+      "previousSHA256": "01bfcf3fb17169b01d439845492d41ccb1002fe566be77131e81af9969b92877",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-lens.imageset/photo.jpg",
+      "outputSHA256": "0ad554f187d370528f154c125d9b5b901a3120ebd3c99f66b8a71edcc8f04ed6",
+      "master": "../Artifacts/DesignRefresh-2026-10-25/photos/lens-master.png",
+      "review": "Inspected full object, usable margins, material clarity, no real branding/text, consistent warm-grey daylight and thumbnail readability. Fixed art does not select hidden condition."
+    }
+  ]
+}

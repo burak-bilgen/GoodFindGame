@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum StockFilter: String, CaseIterable {
-    case all, transit, inspect, ready, listed, collection
+    case all, transit, inspect, ready, listed
     var key: String { "inventory.filter.\(rawValue)" }
 }
 struct InventoryView: View {
@@ -10,7 +10,6 @@ struct InventoryView: View {
     @Environment(\.marketConfiguration) private var market
     @State private var filter = StockFilter.all
     private func state(for item: ItemInstance) -> StockFilter {
-        if store.snapshot.collections.displayed.contains(item.id) { return .collection }
         if store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) { return .listed }
         return item.inspected ? .ready : .inspect
     }
@@ -69,6 +68,7 @@ struct OwnedItemView: View {
     let itemID: ItemID
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
+    @GameReduceMotion private var reduceMotion
     private var hasPendingReport: Bool {
         store.snapshot.inspectionJobs.contains { $0.itemID == itemID && $0.status == .pending }
     }
@@ -77,27 +77,19 @@ struct OwnedItemView: View {
     }
     var body: some View {
         if let item = store.snapshot.player.inventory.first(where: { $0.id == itemID }), let definition = store.definition(for: item) {
+            ScrollViewReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !item.inspected {
                         DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: store.appearance(for: item)).frame(maxWidth: 220).frame(maxWidth: .infinity)
                     }
-                    Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
+                    Text(definition.displayName(locale: locale)).font(.system(.title, design: .default, weight: .semibold))
                     if item.id == store.snapshot.recovery.itemID {
                         Text("recovery.consigned").font(.headline).foregroundStyle(GameStyle.amber)
                         if item.inspected { NavigationLink("recovery.finish") { RecoveryDeskView(store: store) }.buttonStyle(GameButton()) }
                     }
-                    if store.competitionPeriod == nil && item.inspected && CollectionDefinition.all.contains(where: { $0.models.contains(item.definitionID) }) {
-                        Button(store.snapshot.collections.displayed.contains(item.id) ? "collections.release" : "collections.display") {
-                            store.perform {
-                                let completed = store.snapshot.collections.completedBefore.count
-                                try store.toggleDisplay(item.id)
-                                GameFeel.play(store.snapshot.collections.completedBefore.count > completed ? .profit : .reveal)
-                            }
-                        }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("toggleDisplay")
-                        if store.snapshot.collections.displayed.contains(item.id) { Text("collections.lockedCapital").font(.caption).foregroundStyle(GameStyle.amber) }
-                    }
                     Text(item.inspected ? "inspection.basicComplete" : "inspection.pendingBasic").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
+                    ClientOwnedOpportunity(store: store, item: item, definition: definition)
                     if store.snapshot.inspectionKnowledge.canInspect(item, category: definition.category) {
                         Button(item.inspected ? "knowledge.reinspect" : "inspection.basic") {
                             store.perform { try store.inspect(itemID: item.id, professionally: false) }
@@ -106,14 +98,20 @@ struct OwnedItemView: View {
                     if item.inspected {
                         InspectionReveal(store: store, item: item, definition: definition)
                             .id(InspectionReportPresentation(item: item, simulationID: store.snapshot.simulationID).taskID)
-                        if store.snapshot.recovery.itemID != item.id && !store.snapshot.collections.displayed.contains(item.id) && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                        if store.snapshot.recovery.itemID != item.id && !store.snapshot.playerListings.contains(where: { $0.itemID == item.id && $0.status == .active }) {
+                            if !item.knownActiveDefects.isEmpty {
+                                NavigationLink { RepairPlanView(store: store, itemID: item.id) } label: {
+                                    Label("repair.plan.title", systemImage: "list.bullet.clipboard")
+                                }.buttonStyle(GameButton(secondary: true)).disabled(hasPendingReport).accessibilityIdentifier("openRepairPlan")
+                            }
                             ForEach(item.knownActiveDefects, id: \.self) { defect in
                                 RepairDecision(store: store, item: item, definition: definition, defect: defect)
+                                    .id("ownedRepair-" + defect.rawValue)
                             }
                             NavigationLink { CreateListingView(store: store, itemID: item.id) } label: {
                                 Text(item.knownActiveDefects.isEmpty ? "selling.create" : "repair.asIs")
                             }.buttonStyle(GameButton(secondary: !item.knownActiveDefects.isEmpty)).accessibilityIdentifier("createListing")
-                                .disabled(hasPendingReport)
+                                .id("ownedSaleDecision").disabled(hasPendingReport)
                             if hasPendingReport { Text("error.inspectionPending").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                         } else if let sale = store.snapshot.playerListings.first(where: { $0.itemID == item.id && $0.status == .active }) {
                             NavigationLink { SaleListingView(store: store, listingID: sale.id) } label: {
@@ -144,7 +142,22 @@ struct OwnedItemView: View {
                         }.padding(.top, 10)
                     }.gameCard()
                 }.padding(16)
-            }.gameScreen().navigationTitle("inventory.title").navigationBarTitleDisplayMode(.inline)
+            }.gameScreen()
+                .onChange(of: item.repairedDefects ?? []) { previous, repaired in
+                    guard repaired.count > previous.count else { return }
+                    // Removing a large repair card must not strand the next action
+                    // above the visible area, especially at accessibility text sizes.
+                    let target = item.knownActiveDefects.first.map { "ownedRepair-" + $0.rawValue } ?? "ownedSaleDecision"
+                    withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
+                        proxy.scrollTo(target, anchor: .center)
+                    }
+                }
+            }.navigationTitle("inventory.title").navigationBarTitleDisplayMode(.inline)
+        } else if let receipt = store.snapshot.playerListings.last(where: { $0.itemID == itemID && $0.status == .sold }) {
+            SaleListingView(store: store, listingID: receipt.id)
+        } else {
+            ContentUnavailableView("trade.unavailable", systemImage: "shippingbox")
+                .gameScreen().navigationTitle("inventory.title")
         }
     }
 }
@@ -186,7 +199,7 @@ struct InspectionReveal: View {
             }.accessibilityElement(children: .ignore).accessibilityLabel(Text("game.diagnostic"))
                 .accessibilityValue(Text(min(step, 3), format: .number))
             Group {
-                LabeledContent("inspection.condition") { Text(item.condition, format: .number).font(.system(.largeTitle, design: .rounded, weight: .heavy)).accessibilityIdentifier("inspectionCondition") }
+                LabeledContent("inspection.condition") { Text(item.condition, format: .number).font(.system(.largeTitle, design: .default, weight: .semibold)).accessibilityIdentifier("inspectionCondition") }
                 Text("reveal.condition").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
             }.opacity(step >= 1 ? 1 : 0).accessibilityHidden(step < 1)
             Group {
@@ -279,13 +292,13 @@ struct RepairDecision: View {
             Text("game.repairChoice").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
             switch Result(catching: { try RepairQuote(item: item, definition: definition, defect: defect, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let quote):
-                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale, market: market)).bold().foregroundStyle(.primary) }
-                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale, market: market, signed: true)).foregroundStyle(.primary) }
+                LabeledContent("repair.cost") { Text(quote.cost.formatted(locale: locale, market: market, precise: true)).bold().foregroundStyle(.primary) }
+                LabeledContent("repair.recovery") { Text(quote.estimatedRecovery.formatted(locale: locale, market: market, signed: true, precise: true)).foregroundStyle(.primary) }
                 if let difference = try? quote.estimatedRecovery.subtracting(quote.cost) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("repair.marginEstimate").font(.subheadline.weight(.semibold))
                         Text(difference.formatted(locale: locale, market: market, signed: true))
-                            .font(.system(.largeTitle, design: .rounded, weight: .heavy)).monospacedDigit()
+                            .font(.system(.largeTitle, design: .default, weight: .semibold)).monospacedDigit()
                             .foregroundStyle(difference < .zero ? GameStyle.loss : GameStyle.gain)
                             .accessibilityIdentifier("repairMargin.\(defect.rawValue)")
                         Text(difference > .zero ? "repair.marginPositive" : difference < .zero ? "repair.marginNegative" : "repair.marginEven")

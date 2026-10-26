@@ -7,9 +7,11 @@
   "localizations": {
     "development": "en",
     "supported": [
-      "tr",
       "de",
+      "es",
       "fr",
+      "it",
+      "tr",
     ],
   },
   "files": [
@@ -38,6 +40,7 @@
         "resources",
       ],
       "build-settings": {
+        "APP_BUNDLE_IDENTIFIER": "gameproject.bilgenworks.ProjectFlip",
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
         "CODE_SIGN_ENTITLEMENTS": "ProjectFlip/ProjectFlip.entitlements",
@@ -49,7 +52,9 @@
         "ENABLE_PREVIEWS": "YES",
         "ENABLE_USER_SELECTED_FILES": "readonly",
         "GENERATE_INFOPLIST_FILE": "YES",
-        "INFOPLIST_KEY_CFBundleDisplayName": "Project Flip",
+        "INFOPLIST_FILE": "Configuration/AppInfo.plist",
+        "INFOPLIST_KEY_CFBundleDisplayName": "Pazlume",
+        "INFOPLIST_KEY_ITSAppUsesNonExemptEncryption": "NO",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]": "YES",
         "INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]": "YES",
         "INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]": "YES",
@@ -62,7 +67,7 @@
         "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
         "LD_RUNPATH_SEARCH_PATHS": "@executable_path/Frameworks",
         "MARKETING_VERSION": "1.0",
-        "PRODUCT_BUNDLE_IDENTIFIER": "gameproject.bilgenworks.ProjectFlip",
+        "PRODUCT_BUNDLE_IDENTIFIER": "$(APP_BUNDLE_IDENTIFIER)",
         "PRODUCT_NAME": "$(TARGET_NAME)",
         "REGISTER_APP_GROUPS": "YES",
         "SDKROOT": "iphoneos",

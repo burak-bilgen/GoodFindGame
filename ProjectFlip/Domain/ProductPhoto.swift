@@ -3,7 +3,7 @@ import Foundation
 /// One fixed photograph per product mapping. Model names/prices remain distinct; hidden truth is
 /// deliberately absent from this interface. New item types can retain illustration.
 enum ProductPhoto {
-    static let photographedHouseholdModels = Set((0..<10).map { "home-\($0)" } + (0..<3).map { "furniture-\($0)" })
+    static let photographedHouseholdModels = Set(["home", "furniture", "everyday"].flatMap { category in (0..<10).map { "\(category)-\($0)" } })
 
     static func family(identity: String, symbol: String) -> String? {
         if photographedHouseholdModels.contains(identity) { return "model-" + identity }
@@ -36,7 +36,7 @@ enum ProductPhoto {
     static func dedicatedMaster(for identity: String) -> String? {
         dedicatedModels.contains(identity) ? "model-" + identity : nil
     }
-    static let dedicatedModels: Set<String> = ["retro-0", "retro-2", "retro-8", "cameras-0", "cameras-8", "cameras-9", "cameras-10"]
+    static let dedicatedModels: Set<String> = ["retro-0", "retro-2", "retro-8", "cameras-0", "cameras-8", "cameras-9", "cameras-10", "gaming-2", "gaming-15", "gaming-18", "gaming-19", "cameras-5"]
 
     /// A product has one fixed photograph. Cosmetic grades and seller presentation
     /// never choose another asset; condition belongs to text and inspection facts.

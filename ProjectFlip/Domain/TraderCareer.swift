@@ -11,6 +11,8 @@ struct CareerRecord: Codable, Equatable {
     var creditedItems: Set<ItemID> = []
     var tradedModels: Set<String> = []
     var clientJobs = 0
+    var accessVersion: Int? = 2
+    var legacyAccessTier: CareerTier?
     var legacyAgreements: Set<ListingID>?
     func tier(knowledge: InspectionKnowledge) -> CareerTier {
         let rank = ItemCategory.allCases.map { knowledge.level(in: $0) }.max() ?? 0
@@ -31,9 +33,28 @@ enum CareerEngine {
             state.career.tradedModels.insert(item.definitionID)
         }
         state.career.clientJobs = state.playerListings.filter { $0.status == .sold && $0.saleKind == .client }.count
-        state.player.reputation = min(100, state.career.creditedItems.count * 3)
     }
     static func requiredTier(for definition: ItemDefinition) -> CareerTier {
+        switch definition.valueTier {
+        case .premium: definition.baseValue >= Money(minorUnits: 120_000) ? .trusted : .specialist
+        case .enthusiast: .specialist
+        case .mainstream: ["gaming-1", "cameras-0", "cameras-1"].contains(definition.id) ? .newcomer : .known
+        case .collector:
+            if definition.baseValue >= Money(minorUnits: 60_000) { .trusted }
+            else if definition.baseValue >= Money(minorUnits: 35_000) { .specialist }
+            else if definition.baseValue > Money(minorUnits: 12_000) { .known }
+            else { .newcomer }
+        case .rare, .legendary: .trusted
+        default: .newcomer
+        }
+    }
+    static func canAccess(_ definition: ItemDefinition, state: GameSnapshot) -> Bool {
+        let tier = state.career.tier(knowledge: state.inspectionKnowledge)
+        if tier.rawValue >= requiredTier(for: definition).rawValue { return true }
+        guard let previous = state.career.legacyAccessTier else { return false }
+        return previous.rawValue >= legacyRequiredTier(for: definition).rawValue
+    }
+    private static func legacyRequiredTier(for definition: ItemDefinition) -> CareerTier {
         switch definition.valueTier {
         case .premium: .specialist
         case .enthusiast: .known
@@ -41,8 +62,5 @@ enum CareerEngine {
         case .rare, .legendary: .trusted
         default: .newcomer
         }
-    }
-    static func canAccess(_ definition: ItemDefinition, state: GameSnapshot) -> Bool {
-        state.career.tier(knowledge: state.inspectionKnowledge).rawValue >= requiredTier(for: definition).rawValue
     }
 }

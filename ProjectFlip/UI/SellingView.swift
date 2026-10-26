@@ -53,14 +53,14 @@ struct CreateListingView: View {
                         DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 96, height: 96)
                         VStack(alignment: .leading, spacing: 8) {
                             GameEyebrow(key: "game.sellingStage")
-                            Text(definition.displayName(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy))
+                            Text(definition.displayName(locale: locale)).font(.system(.title2, design: .default, weight: .semibold))
                         }
                     }
                     InvestmentContext(store: store, item: item, definition: definition)
                     VStack(alignment: .leading, spacing: 12) {
                         Text("selling.asking").font(.headline)
                         TextField("selling.asking", text: $price).keyboardType(.decimalPad).focused($editing)
-                            .font(.system(.largeTitle, design: .rounded, weight: .black)).textFieldStyle(.plain)
+                            .font(.system(.largeTitle, design: .default, weight: .bold)).textFieldStyle(.plain)
                             .padding(14).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
                             .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(GameStyle.gain.opacity(0.4), lineWidth: 1))
                             .accessibilityIdentifier("askingPrice")
@@ -103,6 +103,19 @@ struct InvestmentContext: View {
             case .success(let invested): LabeledContent("selling.invested") { Text(invested.formatted(locale: locale, market: market)).bold().foregroundStyle(.primary) }
             case .failure: Text("trade.unavailable")
             }
+            PriceEvidenceView(store: store, item: item, definition: definition)
+
+        }.gameCard()
+    }
+}
+
+private struct PriceEvidenceView: View {
+    let store: GameStore
+    let item: ItemInstance
+    let definition: ItemDefinition
+    @Environment(\.locale) private var locale
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
             switch Result(catching: { try ValueEstimate(item: item, definition: definition, knowledge: store.snapshot.inspectionKnowledge, marketBasisPoints: store.snapshot.marketMultiplier(for: definition)) }) {
             case .success(let estimate):
                 Text("living.estimateRange").font(.caption).foregroundStyle(GameStyle.secondaryText)
@@ -111,8 +124,8 @@ struct InvestmentContext: View {
             }
             Text("inspection.estimateWarning").font(.caption).foregroundStyle(GameStyle.secondaryText)
             MarketAudienceView(store: store, definition: definition)
-
-        }.gameCard()
+            PreviousMarketSaleView(store: store, definitionID: definition.id)
+        }
     }
 }
 
@@ -123,8 +136,18 @@ struct SellingView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
-                if store.snapshot.playerListings.isEmpty { Text("selling.empty").foregroundStyle(GameStyle.secondaryText) }
-                ForEach(store.snapshot.playerListings.reversed()) { listing in
+                NavigationLink { TradeHistoryView(store: store) } label: {
+                    GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill")
+                }.buttonStyle(.plain).accessibilityIdentifier("salesHistory")
+                if store.snapshot.activeSales.isEmpty {
+                    Text("selling.empty").foregroundStyle(GameStyle.secondaryText)
+                    if !store.snapshot.player.inventory.isEmpty {
+                        NavigationLink { InventoryView(store: store) } label: {
+                            GameMenuRow(titleKey: "inventory.title", symbol: "shippingbox")
+                        }.buttonStyle(.plain).accessibilityIdentifier("salesStock")
+                    }
+                }
+                ForEach(store.snapshot.activeSales) { listing in
                     NavigationLink { SaleListingView(store: store, listingID: listing.id) } label: {
                         HStack(spacing: 12) {
                             if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
@@ -132,7 +155,7 @@ struct SellingView: View {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(definition.displayName(locale: locale)).font(.headline)
                                     Text(listing.askingPrice.formatted(locale: locale, market: market)).bold()
-                                    if listing.status == .active && listing.offers.contains(where: { [.pending, .countered].contains($0.status) }) {
+                                    if store.snapshot.needsBuyerAction(listing) {
                                         Label("buyer.new", systemImage: "bubble.left.fill").font(.caption.bold()).foregroundStyle(GameStyle.gain)
                                     } else { Text(GameText.string("selling.\(listing.status.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText) }
                                 }
@@ -155,6 +178,7 @@ struct SaleListingView: View {
     @State private var counterAmount = ""
     @State private var counterComposerExpanded = false
     @State private var newPrice = ""
+    @State private var priceEditorExpanded = false
     @FocusState private var editing: Bool
     var body: some View {
         if let listing = store.snapshot.playerListings.first(where: { $0.id == listingID }) {
@@ -165,7 +189,7 @@ struct SaleListingView: View {
                         if listing.status != .sold, let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) ?? listing.itemSnapshot, let definition = store.definition(for: item) {
                             HStack(spacing: 14) {
                                 DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .owned(item)).frame(width: 80, height: 80)
-                                Text(definition.displayName(locale: locale)).font(.system(.title2, design: .rounded, weight: .heavy))
+                                Text(definition.displayName(locale: locale)).font(.system(.title2, design: .default, weight: .semibold))
                             }
                         }
                         if listing.status == .sold {
@@ -179,7 +203,7 @@ struct SaleListingView: View {
                             case .failure: Text("trade.unavailable")
                             }
                         } else {
-                            LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale, market: market)).font(.title2.bold()) }
+                            LabeledContent("selling.asking") { Text(listing.askingPrice.formatted(locale: locale, market: market, precise: true)).font(.title2.bold()).accessibilityIdentifier("saleAskingPrice") }
                             ListingAttentionStats(views: listing.views, favorites: listing.favorites)
                             if listing.views == 0 && listing.status == .active { Text("living.justListed").font(.caption).foregroundStyle(GameStyle.secondaryText) }
                             let awaitingReply = store.snapshot.hasBuyerReply(for: listing.id)
@@ -195,7 +219,7 @@ struct SaleListingView: View {
                                         Text(GameText.marketPerson("name", index: offer.identityIndex, market: market, locale: locale)).font(.headline)
                                     }
                                     GameEyebrow(key: awaitingReply ? "living.previousOffer" : "buyer.offeredPrice")
-                                    Text(offer.amount.formatted(locale: locale, market: market)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
+                                    Text(offer.amount.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("buyerOfferAmount").font(.system(.largeTitle, design: .default, weight: .semibold)).lineLimit(1).minimumScaleFactor(0.5).contentTransition(.numericText())
                                     if let message = listing.messages.last { Text(GameText.string(message.intent, locale: locale)).font(.subheadline) }
                                     if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
                                         switch Result(catching: { try offer.amount.subtracting(item.purchasePrice).subtracting(item.inspectionCost).subtracting(item.repairCost) }) {
@@ -223,7 +247,7 @@ struct SaleListingView: View {
                                         VStack(alignment: .leading, spacing: 12) {
                                             Text("buyer.counterAmount").font(.subheadline.weight(.semibold))
                                             TextField("buyer.counterAmount", text: $counterAmount).keyboardType(.decimalPad).focused($editing)
-                                                .font(.system(.title2, design: .rounded, weight: .bold)).textFieldStyle(.plain)
+                                                .font(.system(.title2, design: .default, weight: .semibold)).textFieldStyle(.plain)
                                                 .padding(12).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
                                                 .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(GameStyle.gain.opacity(0.35), lineWidth: 1))
                                                 .accessibilityIdentifier("buyerCounterAmount")
@@ -253,6 +277,11 @@ struct SaleListingView: View {
                                         Button("buyer.find") { store.perform { try store.findBuyer(listingID: listing.id) } }
                                             .buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("findAnotherBuyer")
                                     }
+                                    if listing.canReviewQuietPrice(at: store.snapshot.lastSimulationAt ?? listing.createdAt) {
+                                        Text("selling.quietHint").font(.subheadline).foregroundStyle(GameStyle.secondaryText).accessibilityIdentifier("quietListingHint")
+                                        Button("selling.reviewPrice") { priceEditorExpanded = true }
+                                            .buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("reviewQuietPrice")
+                                    }
                                     Text("selling.keepHunting").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                                     HuntButton()
                                 }.gameCard()
@@ -270,20 +299,25 @@ struct SaleListingView: View {
                                 }.padding(.top, 12)
                             }.gameCard()
                             if listing.status == .active {
-                                DisclosureGroup("selling.updatePrice") {
+                                DisclosureGroup("selling.updatePrice", isExpanded: $priceEditorExpanded) {
                                     VStack(spacing: 12) {
                                         TextField("selling.asking", text: $newPrice).keyboardType(.decimalPad).focused($editing).textFieldStyle(GamePriceFieldStyle()).accessibilityIdentifier("salePrice")
                                             .task {
                                                 await Task.yield()
                                                 proxy.scrollTo("salePriceEditor", anchor: .center)
                                             }
+                                        let proposedPrice = try? Money.parse(newPrice, locale: locale, market: market)
+                                        if let item = store.snapshot.player.inventory.first(where: { $0.id == listing.itemID }) {
+                                            if let definition = store.definition(for: item) { PriceEvidenceView(store: store, item: item, definition: definition) }
+                                            SalePriceRevisionPreview(item: item, listing: listing, proposedPrice: proposedPrice, draft: newPrice, awaitingReply: awaitingReply)
+                                        }
                                         Button("selling.updatePrice") {
                                             editing = false
                                             store.perform { try store.changePrice(listingID: listing.id, amount: Money.parse(newPrice, locale: locale, market: market)) }
-                                        }.accessibilityIdentifier("updateSalePrice")
+                                        }.buttonStyle(GameButton(secondary: true)).disabled(proposedPrice == nil || proposedPrice == listing.askingPrice).accessibilityIdentifier("updateSalePrice")
                                     }.padding(.top, 12).id("salePriceEditor")
                                 }.gameCard()
-                                Button("living.withdraw", role: .destructive) { store.perform { try store.withdrawListing(listingID: listing.id) } }.accessibilityIdentifier("withdrawListing")
+                                Button("living.withdraw", role: .destructive) { store.perform { try store.withdrawListing(listingID: listing.id) } }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("withdrawListing")
                             }
                         }
                     }.padding(16)
@@ -354,11 +388,11 @@ struct TradePayoff: View {
                     .font(.system(size: 30, weight: .bold)).foregroundStyle(GameStyle.amber)
                     .padding(14).background(GameStyle.amber.opacity(0.12), in: Circle()).accessibilityHidden(true)
                 Text(GameText.string(record.netProfit > .zero ? "result.win" : record.netProfit < .zero ? "result.loss" : "result.even", locale: locale))
-                    .font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
+                    .font(.system(.title2, design: .default, weight: .bold)).foregroundStyle(.white)
             }
             if record.kind == .consignment { Text("recovery.receipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
             if record.kind == .liquidation { Text("recovery.liquidationReceipt").font(.subheadline).foregroundStyle(GameStyle.amber) }
-            Text(record.netProfit.formatted(locale: locale, market: market, signed: true, precise: true)).font(.system(size: payoffSize, weight: .black, design: .rounded))
+            Text(record.netProfit.formatted(locale: locale, market: market, signed: true, precise: true)).font(.system(size: payoffSize, weight: .bold, design: .default))
                 .lineLimit(1).minimumScaleFactor(0.45)
                 .foregroundStyle(record.netProfit < .zero ? Color(red: 1, green: 0.57, blue: 0.53) : GameStyle.light(.gaming))
                 .contentTransition(.numericText()).accessibilityIdentifier("tradePayoff")

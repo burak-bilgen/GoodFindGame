@@ -1,0 +1,84 @@
+# Release readiness — 24 October 2026
+
+The latest public identity, design and final-source verification are tracked in [Pazlume 1.0 preparation](PAZLUME_V1_READINESS_2026_10_25.md). The integrated 271-pass checkpoint below predates that refresh.
+
+Presentation update: see the [25 October interface/photo refresh](DESIGN_REFRESH_2026_10_25.md) for the current design and its targeted verification. Archives and screenshots in the 24 October candidate preserve their earlier visual snapshot.
+
+This record supersedes earlier feature/timing/catalog status. Verification entries below distinguish completed checks from pending human/account work. A build that compiles is not automatically ready to upload.
+
+## Implemented release candidate
+
+- Compact Market cash/career row, no persistent slogan card or weekly invitation banner, and one prioritized handoff for current work.
+- Sales contains active work only, with actionable buyer offers first; settled receipts remain in History.
+- Career and category expertise/tools share one development destination. Product access is redistributed across all four stages. Existing careers retain their previously unlocked access and existing agreements remain valid.
+- Seller ratings and transaction-count decoration are removed. Real dialogue/evidence and the player's own history remain.
+- Seller replies use 3–7 seconds before urgency scaling. Existing booked deadlines are honored; delivery, expert reports and buyer liquidity retain their distinct pacing.
+- The bundled catalog loads once; live actions use the store's supplied definitions. Save migration transforms are isolated from repository I/O.
+- Atomic saves keep a verified prior backup. Recovery requires player confirmation, validates the backup first and preserves the damaged primary separately.
+- Shops, curated windows, collections, display restrictions and numeric reputation are removed with compatibility handling. Old shop investments are refunded once.
+- All 80 products across six categories have a packaged photo mapping. Seventeen formerly unavailable products have new model-specific photos; the controller family image was corrected to a square frame. Shared electronics/retro families remain intentionally shared. No claim of 80 distinct photographs is made.
+- Settings includes offline Privacy and Help & support. The app packages a required-reason privacy manifest for app-owned UserDefaults. No analytics, tracking, ads, developer backend or purchases are added.
+- Weekly Flip and eleven active achievements work locally. Online Game Center controls and its network monitor are disabled until account resources and signed sandbox verification exist. Shipping entitlements do not request Game Center.
+- One-command verification, image/icon validation, release metadata gates and a GitHub Actions definition are present. Remote CI execution requires pushing the changes and a compatible Xcode/iPhone runtime on the runner; no remote run is claimed here.
+- Six-language App Store metadata, review notes and static support/privacy pages are prepared under `Release/`.
+
+## Autonomous content expansion — automated acceptance passed
+
+The owner authorized further features, mechanics, UI/art improvements and additional languages without optional clarification stops. The current build expands the foundation with six contacts, eighteen client requests, public-model sourcing filters, direct owned-stock supply, cosmetic client honors, guarded client quotes, complete Spanish/Italian support and five further dedicated model photographs. Contact UI is compact; a completed owned-item supply opens its receipt instead of an empty screen. The four new clients publish budget caps; both supply entry points show net result after costs. Twelve additional localized buyer opening lines are selected by a stable speech-only hash; persisted messages and price randomness are unchanged.
+
+Core expansion checkpoint `/tmp/ProjectFlip-expansion-core26c-24.xcresult`: **175 passed, zero failures and no recorded runtime warnings**. This predates the final cosmetic-title addition. The extended iOS 26 run is in `/tmp/ProjectFlip-expansion-acceptance26-24.xcresult`: all **176 unit tests passed**. New English/Turkish client sourcing and standard Spanish/Italian trade replays passed. One initial direct-supply UI failure was traced to a container accessibility identifier overriding its child button; the widget now exposes its children explicitly. The corrected end-to-end delivery/title-persistence case passed on iOS 27 in `/tmp/ProjectFlip-client-finale27-24.xcresult` (**1 passed, no runtime warnings**). The later client-budget checkpoint `/tmp/ProjectFlip-client-budgets26-24.xcresult` passed **181 tests**. Final dialogue/core checkpoint `/tmp/ProjectFlip-dialogue-final26-24.xcresult` passed **180 tests** (178 unit plus two client UI journeys). No recorded runtime warnings. Six-language standard and large-text trade journeys passed in the expansion runs. The subsequent language/touch-target checkpoint `/tmp/ProjectFlip-polished-acceptance27-24.xcresult` passed **15 UI tests**, zero failures/skips/runtime warnings: four additional languages at standard and accessibility text sizes, six-language standard trades, sourcing/title persistence, core touch targets, save restore, offer focus and support. The later no-stock hint and final contact styling are separately covered by the 187-test iOS 26 checkpoint.
+
+The complete expanded checkpoint `/tmp/ProjectFlip-expanded-verification24/tests.xcresult` passed **256 tests** (176 then-current unit plus 80 UI), zero failures/skips/runtime warnings. `Scripts/verify.sh` also completed the current Release iPhone build. Its test snapshot predates final budget/copy/publisher changes; the 187-test current iOS 26 and 15-case iOS 27 checkpoints below cover those additions. Full broad evidence is retained under `../../Artifacts/ReleaseCandidate-2026-10-24/verification/broad-expanded27/`.
+
+A packaging gate exposed that arbitrary custom `INFOPLIST_KEY_*` build settings were omitted from the generated bundle. Custom metadata now comes from `Configuration/AppInfo.plist`, merged by Xcode. The rebuilt unsigned archive contains the confirmed support email and explicit offline-competition switch. `/tmp/ProjectFlip-publisher-client-final26-24.xcresult` passed **184 tests** (179 unit, two legacy-client journeys, save restore, offer focus and offline privacy/support with an actual reachable contact link), no recorded runtime warnings. The release gate now reports only the explicitly deferred public URLs and signature.
+
+Current-source iOS 26 checkpoint `/tmp/ProjectFlip-expanded-final26-24.xcresult` passed **187 tests** (179 unit plus eight UI journeys), with zero failures/skips/runtime warnings. It includes the client-search empty state, both supply paths, title persistence, legacy clients, save restore, offer focus and the 44pt support-contact target. Durable full evidence is in `../../Artifacts/ReleaseCandidate-2026-10-24/verification/final-core26/`.
+
+Six-language store capture `/tmp/ProjectFlip-store-capture-v2-24.xcresult` passed **7 tests**, no recorded runtime warnings. The later empty-state copy/layout refinement passed `/tmp/ProjectFlip-client-empty-layout26-24.xcresult` (1 passed, no runtime warnings). A frame assertion proves the complete regular-text hint stays above the dock on iPhone 16e; its actual screenshot was visually inspected.
+
+Thirty actual PNGs at 1206×2622 are exported under `../../Artifacts/ReleaseCandidate-2026-10-24/AppStore-Screenshots-v2/`, with source attachment IDs and hashes. The full contact sheet was visually inspected, including corrected German/French product names and unclipped listing captures.
+
+## Selective repair planning follow-up
+
+Owned inspected items now offer a selective repair plan. The player chooses known faults, compares the combined ordinary service bill with incremental estimated value recovery, and either applies the selected work in one commit or leaves the item as-is. Unknown faults never appear in the selection or affect the quote. Cosmetic condition, raw inspection evidence and unrepaired findings remain unchanged. The ordinary individual repair controls remain available. A stale amount, inadequate funds, live listing or pending report cannot produce a partially charged repair basket.
+
+`/tmp/ProjectFlip-repair-plan-core26.xcresult` passed **183 unit tests**, including four new plan tests. `/tmp/ProjectFlip-repair-plan-ui26.xcresult` passed **6 UI tests**: six-language selective work/persistence plus existing repair/loss/report-wait/touch-target regressions. `/tmp/ProjectFlip-repair-plan-accessibility27.xcresult` passed **1 UI test** with actual accessibility-size text and combined repair. All report zero recorded runtime warnings. Final `/tmp/ProjectFlip-repair-plan-final26.xcresult` passed **2 UI tests**, covering six-language exact minor-unit bills, partial-work persistence and combined work at actual accessibility text size. `/tmp/ProjectFlip-repair-billing26.xcresult` passed **2 UI tests** after the individual repair screen also gained precise amounts, including the full large Turkish repair/trade and touch-target audit. All seven planner captures were exported; the six-language contact sheet and full large-type action screenshot were visually inspected. The repair-planning archive packaged all **920 keys** in six languages. Its only release-gate failures remain the owner-deferred public URLs and signature. These follow the earlier 256/187/15 checkpoints; those older snapshots do not include the new planner.
+
+## Verification and correction checkpoints
+
+- Core checkpoint `/tmp/ProjectFlip-release-core-24.xcresult`: **170 passed, zero failures, zero recorded runtime warnings**. Predates final catalog activation and offline-competition switch.
+- Initial broad iOS 27.2 run: **225 passed / 19 failed**, no recorded runtime warnings. Failures were retained as diagnosis evidence, not counted as release acceptance.
+- Broad iOS 26.0 run: **233 passed / 12 failed**, no recorded runtime warnings. All 170 unit tests passed. This run confirmed corrected offer focus, touch targets, new-stock browsing, offline competition and damaged-save restore; remaining failures were corrected in the later green checkpoints.
+- Focused offer/layout correction on iOS 27.2: **4 passed / 0 failed**, no runtime warnings (`/tmp/ProjectFlip-focus-green2-24.xcresult`). Includes English/Turkish counter decisions, core touch-target audit and a regression proving the offer field is above the dock and accepts keyboard focus.
+- Corrected foundation iOS 26 checkpoint `/tmp/ProjectFlip-latest26-24.xcresult`: **188 passed, zero failures, no recorded runtime warnings**. Includes all 170 then-current unit tests, four-language trade/large-text cases, client continuation, core hit-region audit, withdrawal, save restore and Sales/Profile navigation.
+- Four-language/two-client full foundation run `/tmp/ProjectFlip-final-verification24/tests.xcresult`: **245 passed, zero failures, no runtime warnings**. `Scripts/verify.sh` also completed the Release iPhone build. Pre-expansion source hashes are preserved in the release artifact folder; this checkpoint does not certify the later content expansion.
+- The final scroll-content clearance keeps lower actions reachable above navigation chrome. Rejected root-container experiments were reverted; native tab stack persistence is retained.
+- Device Release archive compiled successfully at `../../Artifacts/ReleaseCandidate-2026-10-24/ProjectFlip.xcarchive`. Current source rebuilt successfully; unsigned. Rebuild/sign after applying the deferred verified public URLs.
+- **56 square packaged photographs, opaque 1024px icon and 926 six-language localization keys validated.** Full art contact sheet: `../../Artifacts/ReleaseCandidate-2026-10-24/art-review.png`.
+- Superseded intermediate bundles pruned with summaries, test trees and PNG evidence preserved; cleanup manifest `../../Artifacts/cleanup-2026-10-24.json`.
+
+The current Release simulator build also installed and launched normally on the isolated iPhone 18 Pro simulator with **no test arguments**. The process remained alive and the actual Turkish Market screen was visually inspected. Evidence: `../../Artifacts/ReleaseCandidate-2026-10-24/release-smoke.json` and `release-normal-launch.png`. This is a launch/render smoke check, not human free-play or physical-device acceptance.
+
+
+## Sale repricing follow-up
+
+Saving the unchanged numerical asking price now preserves pending offers, buyer replies, scheduled interest, sequence and expiry. Previously that action canceled negotiations and restarted the buyer search. Genuine edits still end an active negotiation and start a fresh search; the editor now explains that consequence, shows exact current/new amounts and potential net proceeds, and explicitly preserves expiry and existing traffic. Same-price/invalid saves are disabled. A real edit is recorded in the conversation, whose amounts now retain minor units. No buyer intent or guaranteed sale value is exposed.
+
+The regression was reproduced before the fix (three failing tests). All **186 unit tests** now pass in `verification/reprice-core26/`. Six iOS 26 UI cases pass in `verification/reprice-regressions26/`, covering English/Turkish repricing, counters, listing lifecycle and the large Turkish repair journey. The corrected actual-large-type Turkish repricing case passes in `verification/reprice-large27/`. All passing results have zero recorded runtime warnings. An earlier large-text test used the wrong Turkish keyboard-button label; the selector was corrected to “Tamam”, with no production toolbar change. Its diagnostic result is retained separately. Actual normal English/Turkish and corrected large-text captures were inspected. The current unsigned archive was rebuilt and its **926 keys** match all six compiled catalogs. Existing normal Release startup evidence predates repricing; no new startup timing or human acceptance is claimed.
+
+## Owner-deferred publication and acceptance gates
+
+- Owner selected GitHub Pages and confirmed `bilgenburak@outlook.com`; email is in the app and generated pages. Owner explicitly deferred publication. The isolated, public-pages-only ZIP and instructions are ready; no repo visibility or public site was changed. Actual public privacy/support URLs stay unconfigured until deployment is verified.
+- Owner explicitly deferred Apple account/signing work. Xcode has a local development certificate but no signed-in account/provisioning profiles. Physical iPhone 16e (iOS 27.0.1) acceptance could not start; no existing device app/data was changed.
+- A signed, Xcode-validated archive, current App Store Connect account fields/agreements, reachable public URLs and store submission remain required. No upload/submission has occurred.
+- Unassisted human enjoyment/pacing assessment and physical sound/haptic/VoiceOver acceptance remain unobserved. Playtest guide/session record are prepared; automated evidence is not human acceptance.
+
+Normal Release launch follow-up: an initial three-second capture after installation was black, while the process remained alive. A subsequent capture showed the normal Market; a fresh warm relaunch showed the normal Market at 3.69 seconds. The early frame is retained separately. This proves a working normal render, not a bounded cold-launch time or physical-device startup performance.
+
+## Integrated acceptance — 25 October 2026
+
+The unchanged current source passed `Scripts/verify.sh` test phase on iPhone 18 Pro / iOS 27.2: **271 tests (186 unit and 85 UI), zero failures, zero skips and no recorded runtime warnings**. This includes all current repair planning, price revision, six-language trades, actual large-text journeys, concurrent/repeated trading, loss/recovery, save restoration, notifications, client sourcing and navigation checks. Full durable evidence is in `verification/integrated-final27/` beside this candidate; the repository links to it under `../../Artifacts/ReleaseCandidate-2026-10-24/verification/integrated-final27/`. Earlier checkpoints overlap this result and must not be added to it. The prior temporary integration attempt was interrupted and is not counted as completed acceptance. Source hashes match the tested code.
+
+The test result establishes automated simulator acceptance, not unassisted human enjoyment or physical-device haptic/VoiceOver acceptance. GitHub Pages publication, Apple signing/provisioning and App Store account/submission gates remain open as documented.
+
+The same verification command also completed the generic unsigned device Release build successfully (`verification/integrated-final27/release.log`). The archive gate still validates all 926 keys and reports only the deferred public URLs and publisher signature. No production source change followed this integrated run.

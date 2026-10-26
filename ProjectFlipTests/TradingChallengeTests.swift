@@ -11,7 +11,7 @@ struct TradingChallengeTests {
             for listing in listings where listing.seller.archetype == .professional && listing.item.activeDefects.isEmpty {
                 let definition = try #require(definitions.first { $0.id == listing.item.definitionID })
                 let fair = try PricingEngine.fairValue(of: listing.item, definition: definition)
-                let reply = try NegotiationEngine().offer(fair.scaled(byBasisPoints: 8_000), modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience), reputation: 50)
+                let reply = try NegotiationEngine().offer(fair.scaled(byBasisPoints: 8_000), modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience))
                 samples += 1
                 if reply.agreedPrice != nil { accepted += 1 }
             }
@@ -91,8 +91,8 @@ extension TradingChallengeTests {
     }
 
     @Test func normalConversationRepliesHaveAnInteractiveTimeBudget() {
-        #expect(SimulationTiming.production.sellerReply.upperBound <= 35)
-        #expect(SimulationTiming.production.sellerReply.lowerBound >= 15)
+        #expect(SimulationTiming.production.sellerReply.upperBound <= 7)
+        #expect(SimulationTiming.production.sellerReply.lowerBound >= 2)
         #expect(SimulationTiming.production.buyerInterest.upperBound <= 45)
         #expect((30...90).contains(SimulationTiming.production.shipping))
         #expect((30...120).contains(SimulationTiming.production.inspection))
@@ -107,7 +107,7 @@ extension TradingChallengeTests {
             guard minimum < listing.askingPrice else { continue }
             var current = NegotiationState(listingID: listing.id, patience: listing.seller.patience - 10)
             current.offers = [Offer(id: OfferID("previous"), listingID: listing.id, amount: try minimum.scaled(byBasisPoints: 8_000), status: .countered)]
-            let result = try NegotiationEngine().offer(minimum, modifier: .none, listing: listing, current: current, reputation: 50)
+            let result = try NegotiationEngine().offer(minimum, modifier: .none, listing: listing, current: current)
             samples += 1
             #expect(result.agreedPrice == minimum)
         }

@@ -79,3 +79,31 @@ extension GameStore {
     }
 }
 #endif
+
+#if DEBUG
+extension GameStore {
+    /// Isolated UI scenario: real settled receipts, a repeat-model purchase, and
+    /// genuine queued traffic on an overpriced listing. No invented offer/count.
+    func debugSeedQuietSale() throws {
+        try debugSeedCompetitionOnboarding()
+        let now = Date.now
+        let began = now.addingTimeInterval(-1800)
+        guard let definition = definitions.first(where: { $0.id == "gaming-0" }) else { throw TradingError.unavailable }
+        var next = snapshot
+        let listing = try ListingGenerator().generate(definitions: [definition], seed: 9001, now: began, starterFriendly: false)[0]
+        next.market.append(listing)
+        var agreement = NegotiationState(listingID: listing.id, patience: 100)
+        agreement.agreedPrice = listing.askingPrice
+        next.conversations.append(agreement)
+        next = try PurchaseEngine().buy(listingID: listing.id, state: next, now: began)
+        next = try InspectionEngine().inspect(itemID: listing.item.id, professionally: false, state: next)
+        next = try ResaleEngine().create(itemID: listing.item.id, askingPrice: Money(minorUnits: 1_000_000), state: next, definitions: definitions, now: began)
+        guard let id = next.playerListings.last?.id else { throw TradingError.unavailable }
+        next.lastKnownWallClock = began; next.lastSimulationAt = began
+        let resolver = EventResolver(timing: .production)
+        try resolver.scheduleBuyer(listingID: id, state: &next, definitions: definitions, now: began)
+        next = try resolver.resolve(next, now: now, definitions: definitions).state
+        try commit(next)
+    }
+}
+#endif

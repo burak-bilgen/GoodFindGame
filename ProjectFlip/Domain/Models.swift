@@ -100,8 +100,6 @@ struct SellerProfile: Codable, Identifiable, Equatable, Sendable {
     let urgency: Int
     let bargainingSkill: Int
     var patience: Int
-    let tradeCount: Int
-    let ratingTenths: Int
 }
 
 struct MarketplaceListing: Codable, Identifiable, Equatable, Sendable {
@@ -127,13 +125,17 @@ struct Offer: Codable, Identifiable, Equatable, Sendable {
 struct PlayerState: Codable, Equatable, Sendable {
     var cash: Money
     var inventory: [ItemInstance] = []
-    var reputation = 0
     var inventoryCapacity = 8
 }
 
 struct SeedContent: Codable, Sendable {
     let items: [ItemDefinition]
+    private static let bundled: Result<SeedContent, Error> = Result { try read(bundle: .main) }
     static func load(bundle: Bundle = .main) throws -> SeedContent {
+        if bundle == .main { return try bundled.get() }
+        return try read(bundle: bundle)
+    }
+    private static func read(bundle: Bundle) throws -> SeedContent {
         guard let url = bundle.url(forResource: "items", withExtension: "json") else { throw ContentError.missingSeed }
         let result = try JSONDecoder().decode(Self.self, from: Data(contentsOf: url))
         try result.validate()

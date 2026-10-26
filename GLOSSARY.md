@@ -1,6 +1,6 @@
 # Project Flip trading
 
-The player trades fictional second-hand goods under incomplete information. English and Turkish terms describe the same economic concepts.
+The player trades fictional second-hand goods under incomplete information. English and Turkish terms describe the same trading concepts.
 
 ## Language
 
@@ -32,11 +32,29 @@ A proposed purchase or sale amount that the other participant can accept, reject
 **Counteroffer / Karşı teklif**:
 A new price proposed in response to an existing offer.
 
-**Reputation / İtibar**:
-The trust a trader has earned through their marketplace behavior.
+**Career / Kariyer**:
+The trader’s continuing record of completed trades and earned expertise, with stages that open access to more demanding products.
+_Avoid_: Reputation score, paid shop level
 
-**Collection / Koleksiyon**:
-A themed set of items retained for completion and prestige.
+**Expertise / Uzmanlık**:
+Knowledge earned by studying models and diagnosing faults within a product category.
+
+**Inventory / Envanter**:
+Goods the trader owns, including deliveries, stock under examination and items offered for sale.
+_Avoid_: Collection, display stock
+
+**Active sale / Aktif satış**:
+An owned item currently advertised to buyers; a completed, expired or withdrawn listing is no longer an active sale.
+
+**Trade history / Alım satım geçmişi**:
+Receipts for completed trades, showing proceeds, recorded costs and realized profit or loss.
+
+**Client request / Müşteri talebi**:
+A buyer’s brief for suitable models and verified condition. The client’s payment replaces ordinary sale proceeds; the trader can pause the search without a deadline.
+_Avoid_: Bonus quest, guaranteed profit
+
+**Weekly Flip / Haftanın Al-Satı**:
+A separate weekly trading challenge with a common starting bankroll and its own results, independent of the continuing career.
 
 **Market trend / Piyasa eğilimi**:
 A bounded change in demand or value over time.

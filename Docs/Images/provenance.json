@@ -1,0 +1,47 @@
+{
+  "policy": "Unmodified actual English iPhone simulator gameplay captures from passing store-and-flow.xcresult, 25 October 2026. No generated interface or fabricated outcomes.",
+  "captures": [
+    {
+      "file": "market.png",
+      "source": {
+        "path": "en-US/01-market.png",
+        "sourceAttachment": "market en_0_1F16A9E2-B90F-499E-A477-5D8397626DD4.png",
+        "device": "iPhone 18 Pro",
+        "pixels": [
+          1206,
+          2622
+        ],
+        "sha256": "272a9e2c5a7aeda97a4e5bb261f252dc72556fe7254fa1ec3cb8cad76aa22dd8"
+      },
+      "sha256": "272a9e2c5a7aeda97a4e5bb261f252dc72556fe7254fa1ec3cb8cad76aa22dd8"
+    },
+    {
+      "file": "inspection.png",
+      "source": {
+        "path": "en-US/03-inspection.png",
+        "sourceAttachment": "inspection en_0_B5BF7AAC-CA52-4040-A905-6BD66811C41A.png",
+        "device": "iPhone 18 Pro",
+        "pixels": [
+          1206,
+          2622
+        ],
+        "sha256": "1f8058fbd185d18984cd4028fd59d9348feb4ea2943282820281d4f12e509728"
+      },
+      "sha256": "1f8058fbd185d18984cd4028fd59d9348feb4ea2943282820281d4f12e509728"
+    },
+    {
+      "file": "negotiation.png",
+      "source": {
+        "path": "en-US/04-buyer.png",
+        "sourceAttachment": "buyer offer en_0_CBE88036-A0E8-4A3E-ADB9-F38B336954AE.png",
+        "device": "iPhone 18 Pro",
+        "pixels": [
+          1206,
+          2622
+        ],
+        "sha256": "9ca79d16e5384735316288a23ddb04d0b89610fd051f962da1b504a8f7779c0f"
+      },
+      "sha256": "9ca79d16e5384735316288a23ddb04d0b89610fd051f962da1b504a8f7779c0f"
+    }
+  ]
+}

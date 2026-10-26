@@ -35,12 +35,12 @@ enum OfferModifier: String, Codable, CaseIterable {
 }
 
 enum TradingError: String, Error {
-    case inspectionPending, itemListed, consignedItem, itemDisplayed, marketLocked, invalidAmount, unavailable, closed, insufficientCash, inventoryFull, inspectFirst, alreadyDone, replyWindowTooShort
+    case inspectionPending, itemListed, consignedItem, marketLocked, invalidAmount, unavailable, closed, insufficientCash, inventoryFull, inspectFirst, alreadyDone, replyWindowTooShort, quoteChanged
     var key: String { "error.\(rawValue)" }
 }
 
 struct NegotiationEngine {
-    func offer(_ amount: Money, modifier: OfferModifier, listing: MarketplaceListing, current: NegotiationState, reputation: Int) throws -> NegotiationState {
+    func offer(_ amount: Money, modifier: OfferModifier, listing: MarketplaceListing, current: NegotiationState) throws -> NegotiationState {
         guard listing.available else { throw TradingError.unavailable }
         guard !current.closed, current.agreedPrice == nil else { throw TradingError.closed }
         guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }

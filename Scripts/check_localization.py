@@ -19,7 +19,7 @@ for key, entry in data["strings"].items():
     # GameText resolves semantic intents dynamically; automatic extraction cannot see them.
     if entry.get("extractionState") != "manual":
         errors.append(f"{key}: use manual extraction so dynamic gameplay copy cannot become stale")
-    for language in ("en", "tr", "de", "fr"):
+    for language in ("en", "tr", "de", "fr", "es", "it"):
         translations = list(units(entry.get("localizations", {}).get(language, {})))
         reference_units = list(units(entry.get("localizations", {}).get("en", {})))
         reference = sorted(re.findall(r"%(?:[0-9]+\$)?(?:lld|ld|d|@|f)", reference_units[0]["value"])) if reference_units else []
@@ -30,4 +30,4 @@ for key, entry in data["strings"].items():
             errors.append(f"{key}: missing {language} translation")
 if errors:
     raise SystemExit("\n".join(errors))
-print(f"Validated {len(data['strings'])} keys in English, Turkish, German and French.")
+print(f"Validated {len(data['strings'])} keys in English, Turkish, German, French, Spanish and Italian.")

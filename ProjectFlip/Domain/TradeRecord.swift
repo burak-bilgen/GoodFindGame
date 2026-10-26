@@ -33,3 +33,13 @@ enum TradeLedger {
     }
 }
 enum LedgerError: Error { case incompleteTrade }
+
+extension TradeLedger {
+    /// Own settled market sales only; client budgets and clearance prices are not
+    /// comparable market receipts. This is a memory, not a new price estimate.
+    static func latestMarketSale(for definitionID: String, in records: [TradeRecord]) -> TradeRecord? {
+        records.filter { $0.definitionID == definitionID && $0.kind == .market }.sorted {
+            $0.soldAt == $1.soldAt ? $0.id.rawValue < $1.id.rawValue : $0.soldAt > $1.soldAt
+        }.first
+    }
+}

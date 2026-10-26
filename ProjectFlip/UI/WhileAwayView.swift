@@ -28,7 +28,7 @@ struct WhileAwayView: View {
                 LazyVStack(alignment: .leading, spacing: 18) {
                     VStack(alignment: .leading, spacing: 10) {
                         Image(systemName: "moon.stars.fill").font(.largeTitle).foregroundStyle(GameStyle.amber).accessibilityHidden(true)
-                        Text("game.return").font(.system(.title2, design: .rounded, weight: .black)).foregroundStyle(.white)
+                        Text("game.return").font(.system(.title2, design: .default, weight: .bold)).foregroundStyle(.white)
                         Text("game.returnHint").font(.subheadline).foregroundStyle(.white.opacity(0.75))
                     }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
                         .background(GameStyle.ink, in: RoundedRectangle(cornerRadius: 22))

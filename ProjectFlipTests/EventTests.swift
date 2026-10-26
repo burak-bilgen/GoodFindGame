@@ -36,7 +36,7 @@ struct EventTests {
         var state = try GameSnapshot.fresh(definitions: definitions)
         let listing = state.market[0]
         var pending = NegotiationState(listingID: listing.id, patience: listing.seller.patience)
-        let reply = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: pending, reputation: 50)
+        let reply = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: pending)
         let event = try state.enqueue(.sellerReply(listingID: listing.id, reply: reply, expiresAt: now.addingTimeInterval(30)), createdAt: now, resolveAt: now.addingTimeInterval(10))
         pending.pendingReplyEventID = event.id
         state.conversations = [pending]
@@ -130,7 +130,7 @@ struct EventTests {
         var state = try GameSnapshot.fresh(definitions: definitions)
         let listing = state.market[0]
         var conversation = NegotiationState(listingID: listing.id, patience: listing.seller.patience)
-        let reply = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: conversation, reputation: 50)
+        let reply = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: conversation)
         let event = try state.enqueue(.sellerReply(listingID: listing.id, reply: reply, expiresAt: now.addingTimeInterval(100)), createdAt: now, resolveAt: now.addingTimeInterval(10))
         conversation.pendingReplyEventID = event.id
         state.conversations = [conversation]

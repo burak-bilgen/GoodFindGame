@@ -38,8 +38,12 @@ struct ConversationView: View {
                             DisclosureGroup("seller.title") { SellerSummary(seller: listing.seller, playerTradeCount: store.previousTradeCount(with: listing.seller.id)).padding(.top, 8) }
                         }.gameCard()
                         if listing.available && conversation.agreedPrice == nil {
-                            TradeReadView(store: store, listing: listing, price: conversation.counterPrice ?? listing.askingPrice)
-                                .gameCard(accent: GameStyle.amber)
+                            DisclosureGroup {
+                                TradeReadView(store: store, listing: listing, price: conversation.counterPrice ?? listing.askingPrice).padding(.top, 8)
+                            } label: {
+                                Label("tradeRead.title", systemImage: "scope").font(.subheadline.bold())
+                                    .frame(minHeight: 44).contentShape(Rectangle())
+                            }.gameCard(accent: GameStyle.amber)
                         }
                         if !listing.available {
                             let reason = store.snapshot.marketListingStates.first { $0.id == listing.id }?.closureReason
@@ -68,7 +72,7 @@ struct ConversationView: View {
                                     }
                                     Text("game.boughtFor").font(.caption).foregroundStyle(.white.opacity(0.75))
                                     if let price = conversation.agreedPrice {
-                                        Text(price.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .black)).foregroundStyle(.white)
+                                        Text(price.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .default, weight: .bold)).foregroundStyle(.white)
                                     }
                                     Text(ownedItem?.inspected == true ? "journey.inspectedOwned" : "game.purchaseRisk").font(.subheadline).foregroundStyle(.white.opacity(0.8))
                                 }.padding(20).frame(maxWidth: .infinity, alignment: .leading)
@@ -113,7 +117,7 @@ struct ConversationView: View {
                                 }
                                 if let counter = conversation.counterPrice {
                                     GameEyebrow(key: "offer.counterHeading")
-                                    Text(counter.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .rounded, weight: .heavy)).contentTransition(.numericText())
+                                    Text(counter.formatted(locale: locale, market: market)).font(.system(.largeTitle, design: .default, weight: .semibold)).contentTransition(.numericText())
                                     Button("offer.acceptCounter") { store.perform { try store.acceptSellerCounter(listingID: listing.id) } }
                                         .buttonStyle(GameButton()).disabled(conversation.pendingReplyEventID != nil).accessibilityIdentifier("acceptSellerCounter")
                                     Text("offer.pushRisk").font(.caption).foregroundStyle(GameStyle.secondaryText)
@@ -154,6 +158,13 @@ struct ConversationView: View {
                     }.padding(16)
                     .animation(reduceMotion ? nil : .easeOut(duration: 0.22), value: conversation.messages.count)
                 }.gameScreen()
+                .task(id: conversation.agreedPrice) {
+                    if conversation.agreedPrice != nil && listing.available && !conversation.closed {
+                        // Wait for the newly inserted decision card to join the scroll layout.
+                        await Task.yield()
+                        proxy.scrollTo("purchaseDecision", anchor: .top)
+                    }
+                }
                 .onChange(of: conversation.messages.last?.id) { _, _ in
                     if let last = conversation.messages.last {
                         if !last.fromPlayer {
@@ -162,7 +173,6 @@ struct ConversationView: View {
                         }
                         withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) {
                             if last.intent == "purchase.completed" { proxy.scrollTo("purchaseCommitment", anchor: .top) }
-                            else if conversation.agreedPrice != nil && listing.available { proxy.scrollTo("purchaseDecision", anchor: .top) }
                             else if !last.fromPlayer { proxy.scrollTo(last.id, anchor: .center) }
                         }
                     }
@@ -179,7 +189,7 @@ struct ConversationView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text("offer.amount").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 TextField("offer.amount", text: $amount).keyboardType(.decimalPad).focused($editing)
-                    .font(.system(.title2, design: .rounded, weight: .heavy)).textFieldStyle(.plain)
+                    .font(.system(.title2, design: .default, weight: .semibold)).textFieldStyle(.plain)
                     .padding(14).background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
                     .overlay(RoundedRectangle(cornerRadius: 14).strokeBorder(GameStyle.gain.opacity(0.4), lineWidth: 1))
                     .accessibilityIdentifier("offerAmount")
@@ -212,7 +222,7 @@ struct DialogueBubble: View {
             if message.fromPlayer { Spacer(minLength: 32) }
             VStack(alignment: .leading, spacing: 8) {
                 Text(GameText.string(message.intent, locale: locale))
-                if let amount = message.amount { Text(amount.formatted(locale: locale, market: market)).font(.title3.bold()).monospacedDigit() }
+                if let amount = message.amount { Text(amount.formatted(locale: locale, market: market, precise: true)).font(.title3.bold()).monospacedDigit() }
                 if let defect = message.defect { Label(GameText.string(defect.key, locale: locale), systemImage: "exclamationmark.triangle.fill").font(.subheadline.bold()).foregroundStyle(GameStyle.loss) }
             }.padding(16)
                 .background(message.fromPlayer ? GameStyle.gain.opacity(0.16) : GameStyle.panel, in: RoundedRectangle(cornerRadius: 18))

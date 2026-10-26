@@ -17,28 +17,28 @@ struct PurchaseDecision: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             GameStamp(key: "offer.agreed", symbol: "checkmark.seal.fill")
-            if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
-                HStack(spacing: 12) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
-                    Text(definition.displayName(locale: locale)).font(.system(.headline, design: .rounded, weight: .heavy))
-                }
-            }
-            Text(price.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .rounded, weight: .heavy))
+            Text(price.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("purchaseAgreedAmount").font(.system(.largeTitle, design: .default, weight: .semibold))
                 .lineLimit(1).minimumScaleFactor(0.5)
-            Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(GameStyle.secondaryText)
             VStack(alignment: .leading, spacing: 6) {
                 Text(hasCash ? "purchase.cashAfter" : "purchase.cashNeeded").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 switch Result(catching: {
                     hasCash ? try store.snapshot.player.cash.subtracting(price) : try price.subtracting(store.snapshot.player.cash)
                 }) {
                 case .success(let difference):
-                    Text(difference.formatted(locale: locale, market: market, precise: true)).font(.system(.title3, design: .rounded, weight: .bold))
+                    Text(difference.formatted(locale: locale, market: market, precise: true)).font(.system(.title3, design: .default, weight: .semibold))
                         .foregroundStyle(hasCash ? Color.primary : GameStyle.loss)
                         .lineLimit(1).minimumScaleFactor(0.5).accessibilityIdentifier("purchaseBudgetAmount")
                 case .failure: Text("trade.unavailable")
                 }
             }.padding(12).frame(maxWidth: .infinity, alignment: .leading)
                 .background(GameStyle.gain.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
+            if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
+                HStack(spacing: 12) {
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(width: 64, height: 64)
+                    Text(definition.displayName(locale: locale)).font(.system(.headline, design: .default, weight: .semibold))
+                }
+            }
+            Label("living.standardDelivery", systemImage: "shippingbox").font(.caption).foregroundStyle(GameStyle.secondaryText)
             if !hasCash {
                 Label("error.insufficientCash", systemImage: "wallet.bifold").font(.caption).foregroundStyle(GameStyle.loss)
             }

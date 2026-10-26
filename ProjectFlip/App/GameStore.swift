@@ -51,12 +51,11 @@ final class GameStore {
                 guard period.contains(.now), competitionCanCommit?() ?? true, next.simulationID == period.id,
                       next.marketConfiguration.region == .unitedStates,
                       next.recovery.sequence == 0, next.recovery.commissionsEarned == .zero,
-                      next.clients == ClientProgress(), next.collections == CollectionProgress(), next.shop == TraderShop() else { throw TradingError.unavailable }
+                      next.clients == ClientProgress() else { throw TradingError.unavailable }
             }
             var finalized = next
             InboxOrder.recordChanges(from: snapshot, in: &finalized, now: .now)
             CareerEngine.refresh(&finalized)
-            ShopEngine.refresh(&finalized)
             try repository.save(finalized)
             snapshot = finalized
             onSnapshotCommitted?(finalized)

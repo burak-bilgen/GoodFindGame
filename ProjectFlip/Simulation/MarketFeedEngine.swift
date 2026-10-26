@@ -55,7 +55,8 @@ struct MarketFeedEngine {
             guard !definitions.isEmpty, state.generation < UInt64.max else { throw SaveError.invalidSave }
             state.generation += 1
             let accessible = definitions.filter { CareerEngine.canAccess($0, state: state) }
-            let selected = MarketCatalog.liveFeed(from: accessible, count: needed, seed: state.generation)
+            let selected = MarketCatalog.liveFeed(from: accessible, count: needed, seed: state.generation,
+                                                  requestedModels: ClientEngine.activeBrief(in: state)?.request.models ?? [])
             state.market += try ListingGenerator().generate(definitions: selected, seed: state.generation, now: now, market: state, starterFriendly: false, variedSellers: true)
             try bookLifetimes(&state, now: now, definitions: definitions)
         }

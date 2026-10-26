@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "intent": "new original app icon",
+  "source": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-02bfba30-3711-4f25-9f5e-a76f7e5a3cfb.png",
+  "master": "/Users/burak/Development/GameProject/Artifacts/Pazlume-v1-2026-10-25/pazlume-icon-master.png",
+  "masterSHA256": "1bc64730f6d107e1ffee442146dc5cba5610ef9ec47f7f439321035f72f3612d",
+  "prompt": "icon-prompt.txt",
+  "review": "Full-bleed opaque square; unbranded controller emerging from resale box, tag/return arrow, simple readable silhouette, no text/currency/real logos; inspected full size.",
+  "packagedAsset": "ProjectFlip/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png",
+  "packagedSHA256": "2455a2b6f07cc15f103733a07016c300bbc15afcb3e1e2aa862de84690060702",
+  "exactPrompt": "Use case: logo-brand. Asset: final iPhone game app icon for a fictional offline secondhand trading game named Pazlume. Create one striking premium stylized 3D game icon, no words or letters. Hero: a chunky warm honey-amber cardboard resale box, open at the top, with one beautiful sage-green unbranded video-game controller emerging diagonally from inside like a discovered secondhand treasure. The controller has a clear friendly silhouette, two dark thumbsticks, one directional cross and four small blank cream buttons, no real manufacturer branding. A single small ivory price tag hangs from the front-right box flap; it has one simple dark curved resale arrow embossed, no numbers or text. Strong unified silhouette, hero fills about 78% of the frame with comfortable margins. Large simple shapes that remain readable at 60px. Tactile matte clay-like materials, subtle cardboard edge detail, soft realistic depth, warm upper-left light, restrained contact shadow. Deep charcoal-forest green full-bleed background, gentle sage halo behind the object, one tiny four-point ivory glint near the top right to suggest a good find. Cozy, clever, playful and collectible, polished mobile game art. Palette: sage mint, honey amber, warm ivory and almost-black forest. Not a storefront, not a finance app, no money, coins, banknotes, currency symbols, casino objects, weapons, people or extra merchandise. No typography, watermark, border or rounded outer corners. Entire 1024x1024 square canvas must be opaque and full bleed; iOS will apply its own icon mask. Deliver a single finished app icon.\n",
+  "packaging": "sips: resize opaque square master to 1024x1024 PNG, no artistic alteration",
+  "homeScreenReview": "Actual optimized Release install on clean iPhone 18 Pro / iOS 27.2, name and small icon inspected; normal-release-home.png retained."
+}

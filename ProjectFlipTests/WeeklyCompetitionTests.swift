@@ -101,10 +101,10 @@ import Testing
         defer { try? FileManager.default.removeItem(at: root) }
         let definitions = try SeedContent.load().items
         var state = try Self.soldState(now: .now, definitions: definitions)
-        state.collections.completedBefore.insert("first")
+        state.inspectionKnowledge.learn(16, in: .cameras)
         let competition = try CompetitionStore(root: root, definitions: definitions)
         competition.observeCareer(state)
-        let id = CompetitionIDs.achievement(.collector)
+        let id = CompetitionIDs.achievement(.specialist)
         #expect(competition.saved.achievements.progress[id] == 100)
         let service = FakeCompetitionService(); service.playerID = nil
         await competition.sync(using: service)

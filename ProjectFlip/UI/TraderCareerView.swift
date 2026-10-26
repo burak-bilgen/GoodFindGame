@@ -3,10 +3,8 @@ import SwiftUI
 struct CareerHuntPrompt: View {
     let store: GameStore
     @Environment(\.locale) private var locale
-    private var focused: CollectionDefinition? { CollectionDefinition.all.first { $0.id == store.snapshot.collections.focus } }
     @ViewBuilder private var ambitionDestination: some View {
-        if focused != nil { CollectionGalleryView(store: store) }
-        else if store.snapshot.clients.active != nil { ClientBookView(store: store) }
+        if store.snapshot.clients.active != nil { ClientBookView(store: store) }
         else { TraderCareerView(store: store) }
     }
     var body: some View {
@@ -14,10 +12,9 @@ struct CareerHuntPrompt: View {
             HStack(spacing: 12) {
                 Image(systemName: "seal.fill").foregroundStyle(GameStyle.amber)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(GameText.string(focused?.titleKey ?? (store.snapshot.clients.active != nil ? "clients.accepted" : store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key), locale: locale)).font(.headline)
+                    Text(GameText.string(store.snapshot.clients.active != nil ? "clients.accepted" : store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key, locale: locale)).font(.headline)
                     Group {
-                        if let focused { Text(GameText.format("collections.progress", locale: locale, focused.count(in: store.snapshot), focused.models.count)) }
-                        else if let next = CareerTier(rawValue: store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue + 1) {
+                        if let next = CareerTier(rawValue: store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue + 1) {
                             Text(GameText.format("career.nextProgress", locale: locale, min(store.snapshot.career.creditedItems.count, next.requiredSales), next.requiredSales,
                                                  GameText.string(next.key, locale: locale)))
                             if next.requiredKnowledge > 0 {
@@ -43,12 +40,10 @@ struct TraderCareerView: View {
                     TraderPortrait(identity: 0, size: 72)
                     VStack(alignment: .leading, spacing: 6) {
                         Text(GameText.string(store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).key, locale: locale)).font(.title2.bold()).accessibilityIdentifier("careerRank")
-                        Text(GameText.format("career.trust", locale: locale, store.snapshot.player.reputation)).font(.subheadline)
                     }
                 }.gameCard(accent: GameStyle.amber)
                 if store.competitionPeriod == nil {
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("careerClients")
-                NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain)
                 }
                 Text("career.principle").font(.subheadline).foregroundStyle(GameStyle.secondaryText)
                 ForEach(CareerTier.allCases, id: \.self) { tier in
@@ -57,10 +52,12 @@ struct TraderCareerView: View {
                         Label(GameText.string(tier.key, locale: locale), systemImage: earned ? "checkmark.seal.fill" : "lock.fill").font(.headline).foregroundStyle(earned ? GameStyle.gain : GameStyle.amber)
                         Text(GameText.string("career.requirement.\(tier.rawValue)", locale: locale)).font(.subheadline)
                         Text(GameText.string("career.access.\(tier.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
+                        Text(GameText.format("career.catalogAccess", locale: locale, MarketCatalog.active(store.definitions).filter { CareerEngine.requiredTier(for: $0) == tier }.count)).font(.caption.bold())
                     }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: earned ? GameStyle.gain : nil)
                 }
                 Text(GameText.format("career.record", locale: locale, store.snapshot.career.creditedItems.count, store.snapshot.career.clientJobs)).font(.caption)
-                NavigationLink("knowledge.open") { KnowledgeView(store: store) }.buttonStyle(GameButton(secondary: true))
+                Text("knowledge.title").font(.title2.bold())
+                KnowledgeContent(store: store)
             }.padding(16)
         }.gameScreen().navigationTitle("career.title").navigationBarTitleDisplayMode(.inline)
     }

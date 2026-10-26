@@ -4,6 +4,9 @@ import OSLog
 struct RootView: View {
     @State private var store: GameStore?
     @State private var failed = false
+    @State private var failedRepository: SaveRepository?
+    @State private var canRestoreSave = false
+    @State private var confirmRestore = false
     @State private var competition: CompetitionStore?
     @State private var selectedTab = 0
     @State private var keyboardVisible = false
@@ -32,6 +35,7 @@ struct RootView: View {
                             Label("save.error.title", systemImage: "exclamationmark.triangle")
                         } description: { Text("save.error.load") } actions: {
                             Button("action.retry", action: load)
+                            if canRestoreSave { Button("save.restore") { confirmRestore = true }.accessibilityIdentifier("restoreBackup") }
                         }
                     } else { ProgressView() }
 
@@ -49,10 +53,10 @@ struct RootView: View {
                 .id(tabRoots[2])
                 .tabItem { Label("inventory.title", systemImage: "shippingbox") }.tag(2)
                 NavigationStack {
-                    if let store { ShopView(store: store) }
+                    if let store { SellingView(store: store) }
                 }
                 .id(tabRoots[3])
-                .tabItem { Label("shop.title", systemImage: "storefront") }.badge(waitingBuyerCount).tag(3)
+                .tabItem { Label("selling.title", systemImage: "tag") }.badge(waitingBuyerCount).tag(3)
                 NavigationStack {
                     if let store { ProfileView(store: store, competition: competition, retryCompetition: loadCompetition) }
                 }
@@ -67,6 +71,10 @@ struct RootView: View {
             } }
         }
         .background(GameStyle.ink)
+        .confirmationDialog("save.restore", isPresented: $confirmRestore, titleVisibility: .visible) {
+            Button("save.restore") { restoreSave() }.accessibilityIdentifier("confirmRestoreBackup")
+            Button("action.cancel", role: .cancel) {}
+        } message: { Text("save.restoreWarning") }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in keyboardVisible = true }
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in keyboardVisible = false }
         .environment(\.returnToHunt, {
@@ -122,7 +130,7 @@ struct RootView: View {
             if phase != .active { store?.perform { try store?.catchUp() } }
         }
         .environment(\.marketConfiguration, store?.snapshot.marketConfiguration ?? .us)
-        .font(.system(.body, design: .rounded))
+        .font(.system(.body, design: .default))
     }
     private func load() {
         do {
@@ -140,17 +148,55 @@ struct RootView: View {
             let timing = SimulationTiming.current
             #endif
             #if DEBUG
+            let quietSaleFixture = isolated && arguments.contains("--uitest-quiet-sale") && !FileManager.default.fileExists(atPath: repository.url.path)
             let competitionFixture = isolated && arguments.contains("--uitest-competition-fixture") && !FileManager.default.fileExists(atPath: repository.url.path)
             let recoveryFixture = isolated && arguments.contains("--uitest-recovery-fixture") && !FileManager.default.fileExists(atPath: repository.url.path)
+            let clientFinaleFixture = isolated && arguments.contains("--uitest-client-finale") && !FileManager.default.fileExists(atPath: repository.url.path)
+            let repairPlanFixture = isolated && arguments.contains("--uitest-repair-plan") && !FileManager.default.fileExists(atPath: repository.url.path)
             #endif
+            #if DEBUG
+            if isolated && arguments.contains("--uitest-corrupt-save") && !FileManager.default.fileExists(atPath: repository.url.path) {
+                let initial = try GameSnapshot.fresh(definitions: SeedContent.load().items, marketConfiguration: .initial(locale: locale))
+                try repository.save(initial)
+                var later = initial; later.player.cash = Money(minorUnits: 120_000)
+                try repository.save(later)
+                try Data("damaged test save".utf8).write(to: repository.url)
+            }
+            #endif
+            failedRepository = repository
             store = try GameStore(repository: repository, definitions: SeedContent.load().items, timing: timing)
             #if DEBUG
             if competitionFixture { try store?.debugSeedCompetitionOnboarding() }
+            if quietSaleFixture { try store?.debugSeedQuietSale() }
             if isolated, let index = arguments.firstIndex(of: "--uitest-advance"), arguments.indices.contains(index + 1),
                let seconds = TimeInterval(arguments[index + 1]), seconds.isFinite, (1...604_800).contains(seconds) {
                 try store?.debugAdvanceTime(by: seconds)
             }
             if recoveryFixture, let store { var fixture = store.snapshot; fixture.player.cash = .zero; try store.commit(fixture) }
+            if repairPlanFixture, let store {
+                var fixture = store.snapshot
+                guard let definition = store.definitions.first(where: { $0.id == "gaming-0" }) else { throw TradingError.unavailable }
+                var item = ItemInstance(id: ItemID("repair-plan-fixture"), definitionID: definition.id, condition: 85,
+                    hiddenDefects: [.drift, .damagedPort, .batteryWear], revealedDefects: [.drift, .damagedPort],
+                    inspected: true, purchasePrice: Money(minorUnits: 2_000))
+                item.facts = ItemFacts.generate(for: item, definition: definition)
+                fixture.player.inventory = [item]
+                try store.commit(fixture)
+            }
+            if clientFinaleFixture, let store {
+                var fixture = store.snapshot
+                fixture.clients.completed["mira"] = 2
+                fixture.clients.active = "mira"
+                fixture.career.creditedItems = Set((0..<8).map { ItemID("prior-client-trade-\($0)") })
+                fixture.inspectionKnowledge.learn(8, in: .home)
+                guard let definition = store.definitions.first(where: { $0.id == "home-0" }) else { throw TradingError.unavailable }
+                var item = ItemInstance(id: ItemID("client-finale-item"), definitionID: definition.id, condition: 95, hiddenDefects: [],
+                                        inspected: true, professionallyInspected: true, purchasePrice: Money(minorUnits: 2_000), inspectionCost: Money(minorUnits: 750))
+                item.facts = ItemFacts.generate(for: item, definition: definition)
+                item.revealFacts(knowledge: fixture.inspectionKnowledge, professionally: true)
+                fixture.player.inventory = [item]
+                try store.commit(fixture)
+            }
             #endif
             failed = false
             loadCompetition()
@@ -161,9 +207,19 @@ struct RootView: View {
             consumeNotificationRoute()
         } catch {
             failed = true
+            canRestoreSave = failedRepository?.canRestoreBackup == true
             #if DEBUG
             Logger(subsystem: "ProjectFlip", category: "Load").error("Load failed: \(String(describing: error), privacy: .public)")
             #endif
+        }
+    }
+    private func restoreSave() {
+        do {
+            try failedRepository?.restoreBackup()
+            load()
+        } catch {
+            failed = true
+            canRestoreSave = failedRepository?.canRestoreBackup == true
         }
     }
     private func loadCompetition() {

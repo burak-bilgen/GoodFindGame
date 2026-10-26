@@ -1,0 +1,23 @@
+# Review notes — Pazlume 1.0
+
+Pazlume is an original offline single-player trading game. Buyers, sellers, messages, products, cash and price estimates are fictional. Messages are authored/simulated gameplay, not communication with other users. There are no ads, in-app purchases, real-money trading, cash-out, betting, prizes, external accounts or developer backend. No login or demo credentials are needed.
+
+Start with the first controller listing in Market. Open the conversation, ask about issues and send an offer. When an agreement is reached, confirm the purchase. Delivery goes to Inventory. Basic inspection is free; optional expert inspection and repairs use fictional game cash. Inventory → owned item → Plan repairs lets the player select known faults, compare combined cost/value recovery and apply the work in one transaction. Estimates do not reveal undiscovered faults or guarantee a buyer. Publish the item for sale and respond to an actual buyer offer. The result shows acquisition, inspection and repair costs and the realized profit or loss. Passing on a poor deal is an intended action. The sale price editor previews the result and warns that an actual price change ends open buyer negotiations; saving the same price preserves offers, pending replies and search deadlines.
+
+New seller replies take approximately 3–7 seconds before urgency scaling. Delivery is roughly one minute; optional professional reports take 90 seconds. The introductory trade is faster. The game advances pending work after an offline interval, and notifications are optional.
+
+Profile → Trading career combines progression and category expertise/tools. Profile → Clients contains six recurring clients with three connected requests each. Accepting one request enables a model-only sourcing filter and public listing hints. Matching owned stock can be supplied after a full expert report and any required repairs; delivery replaces a normal sale. Four new clients have public budget limits. Completed storylines award cosmetic profile titles. Higher-value products and later requests unlock through career progress; no purchase is required to unlock them.
+
+After three completed career sales, Profile → Competition opens Weekly Flip using a separate fictional $1,000 bankroll and a new weekly market seed. Local results and achievements require no network or account. Online Game Center controls are disabled in this release; no leaderboard account setup is needed to review this build.
+
+Profile → Settings contains currency presentation, iOS language settings, optional notifications, Help & support and Privacy. USD/TRY presentation uses a fixed fictional conversion, and never changes the underlying game economy. All six shipping languages are complete: English, Turkish, German, French, Spanish and Italian.
+
+Career saves remain local. If a primary save becomes unreadable and a verified previous backup exists, the launch screen offers an explicit restore with confirmation and preserves the damaged file separately. No player's save is automatically reset.
+
+App targets portrait iPhone on iOS 26 or later. Game content is entirely available offline, apart from external publisher/Apple privacy links selected by the user.
+
+Sales → Trade history → Trade notebook shows category-level realized costs, proceeds and profit/loss from normal sales and client deliveries, with links to recent receipts. Recovery commissions and quick liquidations remain in the complete history but are excluded from these comparisons. Missing legacy catalog models are retained under Other saved products. This notebook uses only the player’s settled records, not hidden stock values or predicted returns.
+
+Create listing and the expanded sale-price editor show the current earned estimate, audience context and the player’s latest settled normal market sale of the same model, when one exists. Client/recovery prices are excluded from this memory. A listing with at least twelve observed views, two minutes elapsed and no open offer can show an optional Review price action. It expands the existing editor without changing the draft, cash, buyer or price. Past condition and demand can differ; history is not a guaranteed price.
+
+The live market starts after the first completed normal sale. Until then, an empty client-model filter explains how to turn the filter off and browse starter stock. After arrivals start, an active client request can prioritize one accessible requested model in an ordinary slot every third stock generation, subject to capacity. This does not spawn stock on demand, reveal condition, bypass career locks or guarantee a suitable deal. Ordinary category discovery continues alongside it.

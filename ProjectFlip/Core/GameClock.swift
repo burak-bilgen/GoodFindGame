@@ -34,7 +34,7 @@ struct SimulationTiming: Sendable {
     let buyerArrivalsPerCatchUp: Int
     var marketFeed: MarketFeedTiming? = nil
 
-    static let production = Self(sellerReply: 15...35, shipping: 60, inspection: 90, buyerInterest: 15...45, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12, marketFeed: .production)
+    static let production = Self(sellerReply: 3...7, shipping: 60, inspection: 90, buyerInterest: 15...45, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12, marketFeed: .production)
     static let debug = Self(sellerReply: 2...4, shipping: 4, inspection: 6, buyerInterest: 3...5, offerLifetime: 120, buyerArrivalsPerCatchUp: 12, marketFeed: .debug)
     static let instant = Self(sellerReply: 0...0, shipping: 0, inspection: 0, buyerInterest: 0...0, offerLifetime: 1_080, buyerArrivalsPerCatchUp: 12)
     /// Human play uses the same pacing in Debug and Release; tests opt in explicitly.

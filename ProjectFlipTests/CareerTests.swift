@@ -3,20 +3,19 @@ import Testing
 @testable import ProjectFlip
 
 struct CareerTests {
-    @Test func trustRecordsLossesExactlyOnceAndNeverRaisesBuyerBudgets() throws {
+    @Test func careerRecordsLossesExactlyOnceAndNeverRaisesBuyerBudgets() throws {
         let offered = try BuyerTests.offeredState()
         var sold = try BuyerEngine().accept(listingID: offered.playerListings[0].id, state: offered, now: .distantPast)
         sold.playerListings[0].itemSnapshot?.purchasePrice = Money(minorUnits: 100_000)
         CareerEngine.refresh(&sold)
         #expect(sold.career.creditedItems.count == 1)
-        #expect(sold.player.reputation == 3)
         #expect(try TradeRecord(listing: sold.playerListings[0]).netProfit < .zero)
         CareerEngine.refresh(&sold)
         #expect(sold.career.creditedItems.count == 1)
         var low = try ResaleTests.inspectedState()
         let definitions = try SeedContent.load().items
         low = try ResaleEngine().create(itemID: low.player.inventory[0].id, askingPrice: Money(minorUnits: 4_000), state: low, definitions: definitions, now: .distantPast)
-        var high = low; low.player.reputation = 0; high.player.reputation = 100
+        var high = low; high.career.creditedItems = Set((0..<24).map { ItemID("past-\($0)") })
         #expect(try BuyerEngine().generateOffer(listingID: low.playerListings[0].id, state: low, definitions: definitions).playerListings == BuyerEngine().generateOffer(listingID: high.playerListings[0].id, state: high, definitions: definitions).playerListings)
     }
 

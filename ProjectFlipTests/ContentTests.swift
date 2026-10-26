@@ -28,7 +28,7 @@ struct ContentTests {
     @Test func feedStaysSmallAndDiverseWhileLiveRotationReachesTheWholeCatalog() throws {
         let definitions = try SeedContent.load().items
         let fresh = try GameSnapshot.fresh(definitions: definitions)
-        #expect(fresh.market.count == 14)
+        #expect(fresh.market.count == 16)
         #expect(fresh.market.prefix(5).map { $0.item.definitionID } == (0..<5).map { "gaming-\($0)" })
         #expect(fresh.market[0].askingPrice == Money(minorUnits: 3_670))
         let categories = Set(fresh.market.compactMap { listing in definitions.first { $0.id == listing.item.definitionID }?.category })

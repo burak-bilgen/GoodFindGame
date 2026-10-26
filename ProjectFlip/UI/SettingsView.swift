@@ -27,14 +27,16 @@ struct SettingsView: View {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         Button("settings.changeLanguage") { openURL(url) }.buttonStyle(GameButton(secondary: true))
                     }
-                    Text("region.fixed").font(.caption).foregroundStyle(GameStyle.secondaryText)
+                    Text("region.fixed").font(.caption).foregroundStyle(GameStyle.secondaryText).accessibilityIdentifier("sharedMarketExplanation")
                 }.gameCard()
                 NavigationLink { NotificationSettingsView(store: store) } label: { GameMenuRow(titleKey: "notifications.settings", symbol: "bell.badge.fill") }.buttonStyle(.plain).accessibilityIdentifier("notificationSettings")
                 if store.snapshot.sharedMarketMigrationNotice || store.snapshot.economyMigrationNotice {
                     NavigationLink { MarketSettingsView(store: store) } label: { GameMenuRow(titleKey: "region.migrationTitle", symbol: "info.circle") }.buttonStyle(.plain)
                 }
+                NavigationLink { SupportView() } label: { GameMenuRow(titleKey: "support.title", symbol: "questionmark.circle") }.buttonStyle(.plain).accessibilityIdentifier("openSupport")
+                NavigationLink { PrivacyView() } label: { GameMenuRow(titleKey: "privacy.title", symbol: "hand.raised") }.buttonStyle(.plain).accessibilityIdentifier("openPrivacy")
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(verbatim: "Project Flip").font(.headline)
+                    Text("notifications.title").font(.headline)
                     Text("settings.localSave").font(.caption).foregroundStyle(GameStyle.secondaryText)
                     LabeledContent("settings.version") { Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") }
                 }.font(.caption).gameCard()

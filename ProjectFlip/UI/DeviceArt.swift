@@ -11,9 +11,6 @@ struct DeviceArt: View {
         if let photo = ProductPhoto.asset(identity: identity, symbol: symbol) {
             Image(photo).resizable()
                 .aspectRatio(1, contentMode: .fit)
-                .rotationEffect(.degrees(appearance?.photoStyle == .careless ? 1 : appearance?.photoStyle == .evasive ? -1.5 : 0))
-                .saturation(appearance?.photoStyle == .careless ? 0.82 : 1)
-                .overlay { if appearance?.photoStyle == .casual { Color.orange.opacity(0.035).allowsHitTesting(false) } }
                 .overlay(alignment: .topLeading) {
                     if appearance?.photoStyle == .professional {
                         Image(systemName: "camera.viewfinder").font(.caption).padding(7).background(.black.opacity(0.55), in: Circle()).padding(8)

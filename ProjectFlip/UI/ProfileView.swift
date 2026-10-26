@@ -17,24 +17,18 @@ struct ProfileView: View {
                     TraderPortrait(identity: avatar, size: 64)
                     VStack(alignment: .leading, spacing: 6) {
                         Text(displayName.isEmpty ? GameText.string("profile.defaultName", locale: locale) : displayName).font(.title2.bold())
-                        if let tier = CareerTier(rawValue: title), tier.rawValue <= store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue {
-                            Text(GameText.string(tier.key, locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText)
+                        if let earned = TraderTitle.earned(in: store.snapshot).first(where: { $0.id == title }) {
+                            Text(GameText.string(earned.key, locale: locale)).font(.subheadline).foregroundStyle(GameStyle.secondaryText).accessibilityIdentifier("playerDisplayTitle")
                         }
                         Button("profile.edit") { editingProfile = true }.font(.subheadline).accessibilityIdentifier("editProfile")
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading).gameCard(accent: GameStyle.amber)
-                if !store.snapshot.collections.completedBefore.isEmpty {
-                    Label("collections.curator", systemImage: "seal.fill").font(.headline).foregroundStyle(GameStyle.amber).gameCard(accent: GameStyle.amber)
-                }
-                if store.snapshot.clients.completed["rowan", default: 0] == 3 {
-                    Label("clients.confidant", systemImage: "person.crop.circle.badge.checkmark").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
-                }
-                if store.snapshot.clients.completed["jules", default: 0] == 3 {
-                    Label("clients.preferred", systemImage: "camera.badge.ellipsis").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
+                ForEach(TraderTitle.earned(in: store.snapshot).filter { $0.clientID != nil }) { earned in
+                    Label(GameText.string(earned.key, locale: locale), systemImage: "person.crop.circle.badge.checkmark").font(.subheadline.bold()).foregroundStyle(GameStyle.amber)
                 }
                 VStack(alignment: .leading, spacing: 14) {
                     Text("wallet.cash").font(.caption.bold()).foregroundStyle(GameStyle.secondaryText)
-                    Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true)).font(.system(.largeTitle, design: .rounded, weight: .black)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
+                    Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true)).font(.system(.largeTitle, design: .default, weight: .bold)).lineLimit(1).minimumScaleFactor(0.45).monospacedDigit()
                     Divider().overlay(GameStyle.line)
                     LabeledContent("profile.inventoryCapacity") { Text(store.snapshot.player.inventoryCapacity, format: .number).bold() }
                 }.gameCard()
@@ -46,10 +40,9 @@ struct ProfileView: View {
                 }
                 NavigationLink { TraderCareerView(store: store) } label: { GameMenuRow(titleKey: "career.title", symbol: "seal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openCareer")
                 NavigationLink { ClientBookView(store: store) } label: { GameMenuRow(titleKey: "clients.title", symbol: "person.2.fill") }.buttonStyle(.plain).accessibilityIdentifier("profileClients")
-                NavigationLink { CollectionGalleryView(store: store) } label: { GameMenuRow(titleKey: "collections.title", symbol: "square.grid.3x1.below.line.grid.1x2") }.buttonStyle(.plain).accessibilityIdentifier("openCollections")
-                NavigationLink { KnowledgeView(store: store) } label: { GameMenuRow(titleKey: "knowledge.title", symbol: "wrench.and.screwdriver.fill") }.buttonStyle(.plain).accessibilityIdentifier("openKnowledge")
-                NavigationLink { TradeHistoryView(store: store) } label: { GameMenuRow(titleKey: "trade.history", symbol: "chart.bar.doc.horizontal.fill") }.buttonStyle(.plain).accessibilityIdentifier("openTradeHistory")
-                NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("openRecovery")
+                if store.snapshot.player.cash < RecoveryEngine.capitalFloor || store.snapshot.recovery.itemID != nil {
+                    NavigationLink { RecoveryDeskView(store: store) } label: { GameMenuRow(titleKey: "recovery.title", symbol: "arrow.uturn.up.circle.fill") }.buttonStyle(.plain).accessibilityIdentifier("openRecovery")
+                }
                 NavigationLink { SettingsView(store: store) } label: { GameMenuRow(titleKey: "settings.title", symbol: "gearshape.fill") }.buttonStyle(.plain).accessibilityIdentifier("openSettings")
             }.padding(16)
         }.gameScreen().navigationTitle("profile.title")
@@ -66,6 +59,9 @@ struct TradeHistoryView: View {
             switch Result(catching: { try TradeLedger.records(from: store.snapshot) }) {
             case .success(let records):
                 Section {
+                    NavigationLink { TradeNotebookView(store: store) } label: {
+                        Label("notebook.title", systemImage: "book.closed")
+                    }.accessibilityIdentifier("openNotebook")
                     Text("trade.count \(records.count)")
                     switch Result(catching: { try TradeLedger.totalProfit(records) }) {
                     case .success(let total):

@@ -6,15 +6,15 @@ struct NegotiationTests {
     @Test func deterministicAcceptanceAndFatigue() throws {
         let listing = try ListingGenerator().generate(definitions: SeedContent.load().items, seed: 42, now: .distantPast)[0]
         let current = NegotiationState(listingID: listing.id, patience: listing.seller.patience)
-        let accepted = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: current, reputation: 50)
+        let accepted = try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: current)
         #expect(accepted.agreedPrice == listing.askingPrice)
-        #expect(try accepted == NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: current, reputation: 50))
+        #expect(try accepted == NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: current))
         var lowball = current
         for _ in 0..<4 where !lowball.closed {
-            lowball = try NegotiationEngine().offer(Money(minorUnits: 1), modifier: .none, listing: listing, current: lowball, reputation: 50)
+            lowball = try NegotiationEngine().offer(Money(minorUnits: 1), modifier: .none, listing: listing, current: lowball)
         }
         #expect(lowball.closed)
-        #expect(throws: TradingError.self) { try NegotiationEngine().offer(.zero, modifier: .none, listing: listing, current: current, reputation: 50) }
+        #expect(throws: TradingError.self) { try NegotiationEngine().offer(.zero, modifier: .none, listing: listing, current: current) }
     }
 
     @Test func decimalInputDoesNotAcceptJunkOrOverflow() throws {

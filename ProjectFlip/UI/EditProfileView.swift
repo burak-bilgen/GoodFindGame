@@ -32,10 +32,10 @@ struct EditProfileView: View {
             Section("profile.displayTitle") {
                 Picker("profile.displayTitle", selection: $title) {
                     Text("profile.noTitle").tag(-1)
-                    ForEach(CareerTier.allCases.filter { $0.rawValue <= store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue }, id: \.rawValue) { tier in
-                        Text(GameText.string(tier.key, locale: locale)).tag(tier.rawValue)
+                    ForEach(TraderTitle.earned(in: store.snapshot)) { earned in
+                        Text(GameText.string(earned.key, locale: locale)).tag(earned.id)
                     }
-                }
+                }.accessibilityIdentifier("displayTitle")
                 Text("profile.identityHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
             }
         }.gameScreen().navigationTitle("profile.edit").navigationBarTitleDisplayMode(.inline)
@@ -47,6 +47,6 @@ struct EditProfileView: View {
                     }.disabled(cleanName.isEmpty || cleanName.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) })).accessibilityIdentifier("saveProfile")
                 }
             }
-            .onAppear { name = savedName; avatar = min(3, max(0, savedAvatar)); title = savedTitle <= store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge).rawValue ? savedTitle : -1 }
+            .onAppear { name = savedName; avatar = min(3, max(0, savedAvatar)); title = TraderTitle.earned(in: store.snapshot).contains(where: { $0.id == savedTitle }) ? savedTitle : -1 }
     }
 }

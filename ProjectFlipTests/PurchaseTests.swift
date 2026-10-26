@@ -6,7 +6,7 @@ struct PurchaseTests {
     static func agreedState() throws -> GameSnapshot {
         var state = try GameSnapshot.fresh(definitions: SeedContent.load().items)
         let listing = state.market[0]
-        state.conversations = [try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience), reputation: 50)]
+        state.conversations = [try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience))]
         return state
     }
 

@@ -1,48 +1,75 @@
-# Project Flip
+<p align="center">
+  <img src="ProjectFlip/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="112" alt="Pazlume app icon: a game controller in a resale box">
+</p>
 
-Original offline-first iPhone trading game. Internal codename; final branding requires clearance.
+<h1 align="center">Pazlume</h1>
 
-Open `ProjectFlip.xcodeproj`. Requires Xcode with Swift 6 support; deployment target iOS 26, portrait iPhone. No external dependencies. Select your signing team locally for device builds.
+<p align="center"><strong>Find the overlooked. Inspect the risk. Make the next great trade.</strong></p>
+<p align="center">An offline secondhand trading game for iPhone, built with Swift and SwiftUI.</p>
+<p align="center">iOS 26+ · Swift 6 · Six languages · No ads or in-app purchases</p>
+
+<p align="center">
+  <img src="Docs/Images/market.png" width="220" alt="Market with secondhand electronics, seller listings and a watchlist">
+  <img src="Docs/Images/inspection.png" width="220" alt="Inspection revealing a damaged controller port and an estimated resale range">
+  <img src="Docs/Images/negotiation.png" width="220" alt="A buyer offer with its expiry and the realized result if accepted">
+</p>
+
+## Every bargain has a story
+
+A seller says it works. The photos look promising. The price leaves room for profit—or an expensive surprise.
+
+Browse the market, ask questions and negotiate a deal. Inspect what arrives, decide which repairs are worth the cost, and list it for resale. Read the buyer, watch the clock and learn from the receipt. An estimate is a clue; the final sale tells the story.
+
+## Play your own trading career
+
+- **Hunt for overlooked stock.** Discover 80 fictional products across six categories. Search, filter, bookmark and follow a changing market with competing traders and occasional price drops.
+- **Choose your repairs.** Uncover faults through inspection, compare repair plans and spend only where the decision makes sense.
+- **Make the deal.** Negotiate with sellers and buyers, review quiet listings and compare your own previous sales when setting a price.
+- **Build lasting contacts.** Six recurring clients offer eighteen connected requests with condition requirements, budgets and cosmetic honors.
+- **Learn your market.** Unlock products and diagnostic tools through career progress. A category trade notebook tracks actual costs, proceeds and profit or loss, with detailed receipts.
+- **Try a fresh challenge.** Weekly Flip uses a separate bankroll and market, with local scores and eleven local achievements.
+
+Pending deliveries, replies and offers advance when you return. Progress stays on device, with verified backups and an explicit recovery flow for damaged saves.
+
+## Built for offline play
+
+No login, developer backend, advertising, analytics or real-money economy. Products, conversations and cash are fictional. Notifications are optional. Weekly Flip and achievements work locally; online Game Center is currently disabled.
+
+Available in **English, Turkish, German, French, Spanish and Italian**, with support for Dynamic Type and Reduce Motion. The catalog uses 56 bundled photographs, with some shared product-family images; artwork provenance is documented in [the documentation index](Docs/INDEX.md).
+
+## Run locally
+
+1. Open `ProjectFlip.xcodeproj` in Xcode with an installed iOS 26 or later SDK and iPhone simulator.
+2. Select the **ProjectFlip** scheme and an iPhone simulator, then run.
+3. For a physical iPhone, configure your Apple development team and signing first.
+
+The public name is currently **Pazlume**. Internal target names, bundle identity and save paths retain **ProjectFlip** to preserve compatibility. New name candidates are tracked in [the naming shortlist](Docs/NAME_OPTIONS_2026_10_26.md).
+
+## Verify
 
 ```sh
-python3 Scripts/check_localization.py
-xcodebuild -project ProjectFlip.xcodeproj -scheme ProjectFlip -destination 'platform=iOS Simulator,name=iPhone 18 Pro' -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO -resultBundlePath /tmp/ProjectFlip-checkpoint.xcresult test
-python3 Scripts/check_test_result.py /tmp/ProjectFlip-checkpoint.xcresult
+bash Scripts/verify.sh
 ```
 
-Use an unused result-bundle path for each run. The result check rejects recorded
-runtime warnings even when XCTest reports a passing interaction.
+This validates all six localization catalogs and bundled assets, runs unit and UI tests, checks for recorded runtime warnings, then builds Release for iPhone. Set `TEST_DESTINATION` to choose a simulator and `RESULT_ROOT` to retain results in a specific directory. The [GitHub Actions workflow](.github/workflows/verify.yml) runs the same checks; no remote passing status is claimed here.
 
-Current quality pass: **Readable, sustainable trading** — public-evidence appraisals before committing cash, a healthier ordinary buyer audience, interactive session pacing, actionable handoffs and paid-report protection. Audit, ranked plan and measured balance evidence: [23 October quality pass](Docs/QUALITY_PASS_2026_10_23.md).
+The latest gameplay checkpoint passed **202 unit tests**, with focused native UI acceptance for six-language trading, trade history, price learning, client sourcing and large text. See [the exact verification scope](Docs/GAMEPLAY_EXPANSION_2026_10_25.md); overlapping checkpoints are not a new complete-suite result. Physical-device and unassisted human playtesting remain outstanding.
 
-Previous milestone: **Credible trading game** — canonical/regional economy, product art, game shell, career, clients, collections and recovery implemented; final regression/visual review is recorded in [the milestone QA report](Docs/CREDIBLE_GAME_QA.md). See [the ordered plan](Docs/CREDIBLE_GAME_MILESTONE.md). Findrove is the [recommended working brand](Docs/PRODUCT_NAMING.md), awaiting review; production identifiers remain Project Flip.
+## Explore the project
 
-The game remains offline-first, portrait iPhone, iOS 26+, with English, Turkish, German and French. Optional Game Center competition and achievements are implemented. No external dependencies, ads, payment system, auctions or custom backend are present. Keep simulation independent of UI and locale. Automated correctness does not establish human enjoyment or retention.
+| Area | Contents |
+| --- | --- |
+| [`ProjectFlip/Domain`](ProjectFlip/Domain) | Items, negotiations, career progression, clients and settled trade records |
+| [`ProjectFlip/Simulation`](ProjectFlip/Simulation) | Pricing, buyers, repairs, market arrivals and scheduled events |
+| [`ProjectFlip/Persistence`](ProjectFlip/Persistence) | Local saves, migrations, validated backups and recovery |
+| [`ProjectFlip/UI`](ProjectFlip/UI) | SwiftUI screens, adaptive layouts and game presentation |
+| [`ProjectFlipTests`](ProjectFlipTests) / [`ProjectFlipUITests`](ProjectFlipUITests) | Domain regressions and native gameplay journeys |
+| [`Release`](Release) | Six-language store copy, reviewer notes and static privacy/support pages |
 
-## Current delivery
+## Project status
 
-Paid shop opening and window growth, 63 active photographed products, varied listing copy, compact stock filters, activity-ordered messages/archive, editable profile and consolidated settings. Reselect an active tab to return to its root. Seventeen unphotographed products are paused; their definitions remain compatible with existing saves. Photo generation is stopped. German/French translations are complete and enabled alongside English/Turkish. See [delivery/backlog](Docs/ACTIVE_BACKLOG.md) and [focused verification](Docs/CLOSEOUT_QA.md).
+In development toward its first App Store release. A current unsigned device archive and store materials have been prepared locally. Public support/privacy deployment, Apple distribution signing and App Store submission are still pending.
 
-## Play the game
+[Documentation](Docs/INDEX.md) · [Development checklist](Docs/DEVELOPMENT_TODO.md) · [Release setup](Release/README.md) · [Playtest guide](Docs/HUMAN_PLAYTEST.md)
 
-Browse Market, read the seller’s clues and condition claim, then open a listing and ask about issues before offering. Accept a counter or negotiate, buy, and follow delivery straight to your item. A fresh save’s introductory listing has one discoverable existing fault and enough margin for either an as-is sale or a repair. Basic inspection is free; optional expert inspection uses game cash. A repair quote compares immediate service cost with estimated value recovered. Paid expert reports must finish before listing, and live listings must be withdrawn before booking a report. Publish at your chosen price, follow genuine traffic and possible buyer interest, accept/reject/counter a buyer, then see the signed profit/loss and return directly to the next hunt. Listings can expire or be withdrawn and relisted; a counter reply is asynchronous. Estimated ranges support pricing without certifying an exact value. Full costs remain in Trade history. Existing saves keep their original item truth.
-
-Market supports fictional product-name search, category and localized price filters, newest/oldest sorting and a persistent watchlist. Bookmark a listing from its detail screen; watched listings remain visible when unavailable. After the first sale, the trends screen tracks timed category/model demand changes that affect current estimates and new offers. After the first sale, live listings can expire, drop in price or sell to another trader; a periodic refresh brings in new stock. Firm quotes retain their promised window, and watched archives retain the actual outcome. See Docs/MARKET_SIMULATION.md for schedules and offline behavior.
-
-The catalog retains 80 fictional definitions across six categories and 36 category-specific faults; 63 photographed products across five categories are active for new stock. [Canonical USD-cent value, regional price profiles and display currency are separate](Docs/REGIONAL_ECONOMY.md). All languages now share one economy. A new career defaults to TRY for Turkish and USD otherwise; display currency can be selected independently in Profile → Currency & language. Fixed fictional FX is 1 USD = 40 TRY, never live FX. Language/currency never change supply, value or difficulty. Character names and fictional neighborhoods are localized by language. Existing regional saves receive a backup and keep every cash amount, item and outstanding agreement; new market content follows shared rules.
-
-[Career stages and expertise](Docs/TRADER_CAREER.md) unlock access without direct price, speed or fee bonuses. Existing inspection ranks remain; specialist endorsement requires varied studied models and diagnosed fault types. Messages/Profile link to two recurring clients with three connected requests each. Requests use full earned reports and actual market leads, with one accepted hunt and no offline expiry. Payments replace ordinary sale proceeds.
-
-Profile also opens two three-piece collections with dedicated fictional product masters, stories and a chosen hunt on the market. Displayed objects retain capital and occupy inventory; return them to trading before sale/service/client supply. Completion grants a persistent Curator distinction, not money or a profit multiplier. Low-cash recovery offers clearly loss-making liquidation and capped service commissions on supplied goods, with no expertise/trust farming. The source of every receipt is preserved.
-
-[The product art bible](Docs/PRODUCT_ART_BIBLE.md) separates model artwork, condition, seller presentation and earned findings; inspection can compare seller claims with observed reality. [Native motion rules](Docs/MOTION_DESIGN.md) coordinate short visual/audio/haptic feedback and respect Reduce Motion. Most products still use family photos; seven important collection/camera models have unique masters. Broader rare editions remain deferred.
-
-Seller questions/offers, delivery, expert inspection and buyer interest use persisted timers. Normal Debug and Release use production pacing; isolated UI-test saves opt into accelerated timing. New replies sample 15–35 seconds before urgency scaling; delivery roughly 36–84 seconds; expert reports 90 seconds; buyer-interest observations 15–45 seconds before price/category scaling. The first trade retains its brief introductory timings. Existing saved deadlines and firm offers are honored. Every 90 seconds the market fills shortages or admits one new opportunity up to a 16-listing browsing shelf, so passing on bad stock does not stop discovery. A 45-minute sale window does not guarantee a buyer. Offline catch-up and genuine event-derived notification routes remain in place.
-
-Profile → Competition opens **Weekly Flip** after three career sales. Everyone starts with the same $1,000 value, common weekly seed and fresh expertise, using the existing trading engines with a separate save. Monday 00:00 UTC resets archive previous results without touching career. A versioned, capped TraderScore measures realized performance; only finalized results submit to the matching recurring leaderboard. Play offline without signing in, earn 12 gameplay achievements locally, and connect deliberately to compare friends/world rank. Local finisher badges confer no economic reward. [Manual Apple setup and sandbox acceptance](Docs/GAME_CENTER_SETUP.md) are required before live Game Center can be verified. Direct friend challenges and Activities remain deferred; there is no monetization.
-
-[Additional language research and editorial translation](Docs/LOCALIZATION_BACKLOG.md) is queued after this milestone. It will expand the shared world, not introduce country-specific economies.
-
-Developer UI is absent. DEBUG-only helpers provide isolated test fixtures and timing controls; normal Debug and Release use production pacing. UI tests use separate saves. No signing team or personal Xcode data is committed.
-
-Continue unassisted human playtesting of the first session, returns, expertise, client continuity, collection desire, losses and recovery. Physical-device feedback, minimum-iOS runtime acceptance, legal naming/IP clearance and real retention remain open. Additional content and monetization should follow those observations, not passing tests alone.
+Support: [bilgenburak@outlook.com](mailto:bilgenburak@outlook.com)

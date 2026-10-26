@@ -1,86 +1,10 @@
 import Foundation
 
-struct GameSnapshot: Codable, Equatable {
-    let schemaVersion: Int
-    var player: PlayerState
-    var market: [MarketplaceListing]
-    var generation: UInt64
-    var conversations: [NegotiationState] = []
-    var playerListings: [PlayerListing] = []
-    var simulationID = UUID().uuidString
-    var nextEventSequence: UInt64 = 0
-    var events: [GameEvent] = []
-    var shipments: [Shipment] = []
-    var inspectionJobs: [InspectionJob] = []
-    var lastKnownWallClock: Date?
-    var lastSimulationAt: Date?
-    var awayReport: [ResolvedEvent] = []
-    var marketFeedStartedAt: Date?
-    var marketListingStates: [MarketListingState] = []
-    var marketCalendar: MarketCalendar?
-    var lastMarketCycle: Int?
-    var marketTrends: [MarketTrend] = []
-    var watchedListingIDs: Set<ListingID> = []
-    var notificationPreferences = NotificationPreferences()
-    var inspectionKnowledge = InspectionKnowledge()
-    var marketConfiguration = MarketConfiguration.us
-    var economyMigrationNotice = false
-    var sharedMarketMigrationNotice = false
-    var career = CareerRecord()
-    var shop = TraderShop()
-    var clients = ClientProgress()
-    var collections = CollectionProgress()
-    var recovery = RecoveryProgress()
-
-    enum CodingKeys: String, CodingKey { case schemaVersion, player, market, generation, conversations, playerListings, simulationID, nextEventSequence, events, shipments, inspectionJobs, lastKnownWallClock, lastSimulationAt, awayReport, notificationPreferences, watchedListingIDs, marketCalendar, lastMarketCycle, marketTrends, marketFeedStartedAt, marketListingStates, inspectionKnowledge, marketConfiguration, economyMigrationNotice, sharedMarketMigrationNotice, career, shop, clients, collections, recovery }
-    init(schemaVersion: Int, player: PlayerState, market: [MarketplaceListing], generation: UInt64) {
-        self.schemaVersion = schemaVersion; self.player = player; self.market = market; self.generation = generation
-    }
-    init(from decoder: any Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        schemaVersion = try values.decode(Int.self, forKey: .schemaVersion)
-        player = try values.decode(PlayerState.self, forKey: .player)
-        market = try values.decode([MarketplaceListing].self, forKey: .market)
-        generation = try values.decode(UInt64.self, forKey: .generation)
-        conversations = try values.decodeIfPresent([NegotiationState].self, forKey: .conversations) ?? []
-        playerListings = try values.decodeIfPresent([PlayerListing].self, forKey: .playerListings) ?? []
-        simulationID = try values.decodeIfPresent(String.self, forKey: .simulationID) ?? "legacy-\(generation)"
-        nextEventSequence = try values.decodeIfPresent(UInt64.self, forKey: .nextEventSequence) ?? 0
-        events = try values.decodeIfPresent([GameEvent].self, forKey: .events) ?? []
-        shipments = try values.decodeIfPresent([Shipment].self, forKey: .shipments) ?? []
-        inspectionJobs = try values.decodeIfPresent([InspectionJob].self, forKey: .inspectionJobs) ?? []
-        lastKnownWallClock = try values.decodeIfPresent(Date.self, forKey: .lastKnownWallClock)
-        lastSimulationAt = try values.decodeIfPresent(Date.self, forKey: .lastSimulationAt)
-        awayReport = try values.decodeIfPresent([ResolvedEvent].self, forKey: .awayReport) ?? []
-        marketFeedStartedAt = try values.decodeIfPresent(Date.self, forKey: .marketFeedStartedAt)
-        marketListingStates = try values.decodeIfPresent([MarketListingState].self, forKey: .marketListingStates) ?? []
-        marketCalendar = try values.decodeIfPresent(MarketCalendar.self, forKey: .marketCalendar)
-        lastMarketCycle = try values.decodeIfPresent(Int.self, forKey: .lastMarketCycle)
-        marketTrends = try values.decodeIfPresent([MarketTrend].self, forKey: .marketTrends) ?? []
-        watchedListingIDs = try values.decodeIfPresent(Set<ListingID>.self, forKey: .watchedListingIDs) ?? []
-        inspectionKnowledge = try values.decodeIfPresent(InspectionKnowledge.self, forKey: .inspectionKnowledge) ?? InspectionKnowledge()
-        recovery = try values.decodeIfPresent(RecoveryProgress.self, forKey: .recovery) ?? RecoveryProgress()
-        collections = try values.decodeIfPresent(CollectionProgress.self, forKey: .collections) ?? CollectionProgress()
-        clients = try values.decodeIfPresent(ClientProgress.self, forKey: .clients) ?? ClientProgress()
-        shop = try values.decodeIfPresent(TraderShop.self, forKey: .shop) ?? TraderShop()
-        career = try values.decodeIfPresent(CareerRecord.self, forKey: .career) ?? CareerRecord()
-        if !values.contains(.career) { career.legacyAgreements = Set(conversations.filter { !$0.closed && ($0.agreedPrice != nil || $0.counterPrice != nil) }.map(\.listingID)) }
-        marketConfiguration = try values.decodeIfPresent(MarketConfiguration.self, forKey: .marketConfiguration) ?? .us
-        economyMigrationNotice = try values.decodeIfPresent(Bool.self, forKey: .economyMigrationNotice) ?? false
-        sharedMarketMigrationNotice = try values.decodeIfPresent(Bool.self, forKey: .sharedMarketMigrationNotice) ?? false
-        notificationPreferences = try values.decodeIfPresent(NotificationPreferences.self, forKey: .notificationPreferences) ?? NotificationPreferences()
-    }
-
-    static func fresh(definitions: [ItemDefinition], seed: UInt64 = GameBalanceConfig.current.marketSeed, now: Date = .now, marketConfiguration: MarketConfiguration = .us) throws -> Self {
-        var state = Self(schemaVersion: 1, player: PlayerState(cash: GameBalanceConfig.current.startingCash, inventoryCapacity: GameBalanceConfig.current.inventorySlots), market: try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now), generation: seed)
-        state.marketConfiguration = marketConfiguration
-        state.market = try ListingGenerator().generate(definitions: MarketCatalog.starterFeed(from: definitions), seed: seed, now: now, market: state)
-        return state
-    }
-}
-
+/// Atomic primary writes, a verified previous save, and explicit recovery.
+/// Loading a damaged primary never silently replaces a player's career.
 struct SaveRepository {
     let url: URL
+    var backupURL: URL { url.appendingPathExtension("previous") }
 
     static func application() throws -> Self {
         let root = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -90,35 +14,47 @@ struct SaveRepository {
     func load() throws -> GameSnapshot? {
         guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         let original = try Data(contentsOf: url)
-        var object = try JSONSerialization.jsonObject(with: original) as? [String: Any] ?? [:]
-        if object["marketConfiguration"] == nil {
-            // One explicit rebase from legacy arbitrary credits. Preserve relative cash,
-            // commitments and receipt arithmetic; keep the complete original save.
-            let backup = url.appendingPathExtension("pre-economy-v2.json")
+        let decoded = try decode(original)
+        for suffix in decoded.migration.backupSuffixes {
+            let backup = url.appendingPathExtension(suffix)
             if !FileManager.default.fileExists(atPath: backup.path) { try original.write(to: backup, options: .atomic) }
-            func rebase(_ value: Any) -> Any {
-                if let dict = value as? [String: Any] {
-                    if dict.count == 1, let units = dict["minorUnits"] as? NSNumber { return ["minorUnits": units.int64Value / 20] }
-                    return dict.mapValues(rebase)
-                }
-                if let array = value as? [Any] { return array.map(rebase) }
-                return value
-            }
-            object = rebase(object) as? [String: Any] ?? [:]
-            object["marketConfiguration"] = ["version": 1, "region": "unitedStates", "currency": "USD"]
-            object["economyMigrationNotice"] = true
         }
-        if var configuration = object["marketConfiguration"] as? [String: Any], configuration["version"] as? Int == 1 {
-            // Keep every actual amount and commitment. Only future market pricing becomes shared.
-            // Earlier regional prices already paid/agreed are historical facts, not currency to rebase.
-            let backup = url.appendingPathExtension("pre-shared-market-v3.json")
-            if !FileManager.default.fileExists(atPath: backup.path) { try original.write(to: backup, options: .atomic) }
-            object["sharedMarketMigrationNotice"] = configuration["region"] as? String == "turkey"
-            configuration["version"] = 2
-            configuration["region"] = "unitedStates" // Legacy storage tag; not a visible country choice.
-            object["marketConfiguration"] = configuration
+        if decoded.migration.needsRewrite { try save(decoded.state) }
+        return decoded.state
+    }
+
+    var canRestoreBackup: Bool {
+        guard let data = try? Data(contentsOf: backupURL) else { return false }
+        return (try? decode(data)) != nil
+    }
+
+    @discardableResult
+    func restoreBackup() throws -> GameSnapshot {
+        let original = try Data(contentsOf: backupURL)
+        let restored = try decode(original).state
+        if FileManager.default.fileExists(atPath: url.path) {
+            let damaged = try Data(contentsOf: url)
+            let preserved = url.appendingPathExtension("before-restore-\(UUID().uuidString).json")
+            try damaged.write(to: preserved, options: .atomic)
         }
-        let state = try JSONDecoder().decode(GameSnapshot.self, from: JSONSerialization.data(withJSONObject: object))
+        // Do not rotate the damaged primary into the good backup.
+        try JSONEncoder().encode(restored).write(to: url, options: .atomic)
+        return restored
+    }
+
+    func save(_ state: GameSnapshot) throws {
+        let data = try JSONEncoder().encode(state)
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        if let previous = try? Data(contentsOf: url), previous != data,
+           (try? decode(previous)) != nil {
+            try previous.write(to: backupURL, options: .atomic)
+        }
+        try data.write(to: url, options: .atomic)
+    }
+
+    private func decode(_ original: Data) throws -> (state: GameSnapshot, migration: SaveMigrations.Prepared) {
+        let migration = try SaveMigrations.prepare(original)
+        let state = try JSONDecoder().decode(GameSnapshot.self, from: migration.data)
         try state.marketConfiguration.validate()
         guard state.schemaVersion == 1, state.player.cash >= .zero,
               Set(state.market.map(\.id)).count == state.market.count,
@@ -145,8 +81,6 @@ struct SaveRepository {
         for item in items { try item.validateFacts() }
         try state.inspectionKnowledge.validate()
         try state.clients.validate()
-        try ShopEngine.validate(state)
-        try CollectionEngine.validate(state)
         try RecoveryEngine.validate(state)
         if let calendar = state.marketCalendar {
             try calendar.validate()
@@ -154,13 +88,7 @@ struct SaveRepository {
         } else if state.lastMarketCycle != nil || !state.marketTrends.isEmpty { throw SaveError.invalidSave }
         guard Set(state.marketTrends.map(\.id)).count == state.marketTrends.count,
               state.marketTrends.allSatisfy({ $0.startsAt < $0.endsAt && (500...1_200).contains($0.changeBasisPoints.magnitude) }) else { throw SaveError.invalidSave }
-        return state
-    }
-
-    func save(_ state: GameSnapshot) throws {
-        let data = try JSONEncoder().encode(state)
-        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try data.write(to: url, options: .atomic)
+        return (state, migration)
     }
 }
 enum SaveError: Error { case invalidSave }

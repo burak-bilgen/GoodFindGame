@@ -8,27 +8,34 @@ struct TradingDeskHeader: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     @GameReduceMotion private var reduceMotion
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Label("region.shared", systemImage: "location.fill")
-                    .font(.caption2.bold()).foregroundStyle(GameStyle.amber)
-                Spacer(minLength: 4)
-                Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true))
-                    .font(.system(.headline, design: .rounded, weight: .black)).monospacedDigit()
-                    .lineLimit(1).minimumScaleFactor(0.6).accessibilityIdentifier("marketCash")
-                    .accessibilityHint(Text("wallet.cash"))
-                    .accessibilityValue(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true))
-                    .contentTransition(.numericText())
-                    .animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
-            }
-            HStack(spacing: 10) {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("desk.headline").font(.system(.title3, design: .rounded, weight: .black))
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 12) { career; Spacer(minLength: 8); cash }
+            VStack(alignment: .leading, spacing: 8) { cash; career }
+        }.padding(.vertical, 4)
+    }
+    private var cash: some View {
+        Text(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true))
+            .font(.system(.title3, design: .default, weight: .semibold)).monospacedDigit()
+            .lineLimit(1).minimumScaleFactor(0.6).accessibilityIdentifier("marketCash")
+            .accessibilityHint(Text("wallet.cash"))
+            .accessibilityValue(store.snapshot.player.cash.formatted(locale: locale, market: market, precise: true))
+            .contentTransition(.numericText())
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.3), value: store.snapshot.player.cash)
+    }
+    private var career: some View {
+        NavigationLink { TraderCareerView(store: store) } label: {
+            let tier = store.snapshot.career.tier(knowledge: store.snapshot.inspectionKnowledge)
+            HStack(spacing: 6) {
+                Image(systemName: "seal").foregroundStyle(GameStyle.amber)
+                Text(GameText.string(tier.key, locale: locale)).lineLimit(1)
+                if let next = CareerTier(rawValue: tier.rawValue + 1) {
+                    Text(verbatim: "\(min(store.snapshot.career.creditedItems.count, next.requiredSales))/\(next.requiredSales)")
+                        .monospacedDigit().foregroundStyle(GameStyle.secondaryText)
                 }
-                Spacer(minLength: 0)
-                if !typeSize.isAccessibilitySize { GameScanner(size: 36) }
-            }
-        }.gameCard(accent: GameStyle.amber)
+                Image(systemName: "chevron.right").font(.caption2)
+            }.font(.caption.weight(.medium)).frame(minHeight: 44).contentShape(Rectangle())
+        }.buttonStyle(.plain).frame(minHeight: 44).contentShape(Rectangle())
+            .accessibilityElement(children: .combine).accessibilityIdentifier("careerHunt")
     }
 }
 

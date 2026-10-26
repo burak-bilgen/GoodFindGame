@@ -1,0 +1,28 @@
+name: Verify game
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  game:
+    runs-on: macos-latest
+    timeout-minutes: 90
+    env:
+      RESULT_ROOT: ${{ runner.temp }}/ProjectFlip-verification
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify catalog, all tests and Release build
+        run: Scripts/verify.sh
+      - name: Keep verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ProjectFlip-verification
+          path: ${{ runner.temp }}/ProjectFlip-verification
+          retention-days: 7
+          if-no-files-found: warn

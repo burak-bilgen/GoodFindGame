@@ -4,8 +4,9 @@ import Foundation
 import ImageIO
 import UniformTypeIdentifiers
 let args = CommandLine.arguments
-guard args.count == 3 else { fatalError("Expected product identity and source image") }
-let root = URL(fileURLWithPath: "ProjectFlip/Resources/Assets.xcassets/Product-model-\(args[1]).imageset")
+guard (3...4).contains(args.count), args.count == 3 || args[3] == "--family" else { fatalError("Expected product identity, source image, optional --family") }
+let assetName = args.count == 4 ? "Product-\(args[1])" : "Product-model-\(args[1])"
+let root = URL(fileURLWithPath: "ProjectFlip/Resources/Assets.xcassets/\(assetName).imageset")
 let sourceURL = URL(fileURLWithPath: args[2])
 guard let source = CGImageSourceCreateWithURL(sourceURL as CFURL, nil), let image = CGImageSourceCreateThumbnailAtIndex(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways: true, kCGImageSourceThumbnailMaxPixelSize: 768, kCGImageSourceCreateThumbnailWithTransform: true] as CFDictionary) else { fatalError("Invalid source") }
 try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

@@ -71,7 +71,7 @@ extension RegionalTradingSimulationTests {
                 let publicItem = ItemInstance(id: listing.item.id, definitionID: definition.id, condition: listing.claimedCondition, hiddenDefects: conversation.knownDefects)
                 let publicEstimate = try PricingEngine.fairValue(of: publicItem, definition: definition, marketBasisPoints: state.marketMultiplier(for: definition))
                 let bid = try listing.askingPrice.scaled(byBasisPoints: 8_500)
-                conversation = try NegotiationEngine().offer(bid, modifier: .none, listing: listing, current: conversation, reputation: state.player.reputation)
+                conversation = try NegotiationEngine().offer(bid, modifier: .none, listing: listing, current: conversation)
                 guard let quote = conversation.agreedPrice ?? conversation.counterPrice else { rejected += 1; continue }
                 let ceiling = try publicEstimate.scaled(byBasisPoints: 8_500)
                 guard quote <= ceiling, state.player.cash >= (try quote.adding(InspectionEngine().professionalCost)) else { rejected += 1; continue }
@@ -123,7 +123,7 @@ extension RegionalTradingSimulationTests {
                 if strategy == 0 {
                     talk.agreedPrice = listing.askingPrice
                 } else {
-                    talk = try NegotiationEngine().offer(listing.askingPrice.scaled(byBasisPoints: 8_500), modifier: talk.knownDefects.isEmpty ? .buyToday : .knownIssues, listing: listing, current: talk, reputation: 0)
+                    talk = try NegotiationEngine().offer(listing.askingPrice.scaled(byBasisPoints: 8_500), modifier: talk.knownDefects.isEmpty ? .buyToday : .knownIssues, listing: listing, current: talk)
                     guard let quote = talk.agreedPrice ?? talk.counterPrice,
                           quote <= (try reference.scaled(byBasisPoints: strategy == 1 ? 10_000 : 8_500)) else { continue }
                     talk.agreedPrice = quote

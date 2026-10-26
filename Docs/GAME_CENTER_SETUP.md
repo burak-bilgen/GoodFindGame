@@ -1,13 +1,17 @@
-# Game Center V1 setup — Project Flip
+# Game Center future activation — Project Flip
+
+**Release status, 24 October 2026:** shipping is offline. `OnlineCompetitionEnabled` is false and the shipping entitlements contain no Game Center capability. The steps below describe future activation, not completed configuration. Local Weekly Flip and eleven active achievements remain available.
 
 The approved shipped display name remains **Project Flip**. Findrove is a working recommendation only. Production bundle ID is unchanged: `gameproject.bilgenworks.ProjectFlip`. Identifiers below are brand-neutral and centralized in `CompetitionIDs`.
 
+The collector achievement was retired with collections on 2026-10-24. Eleven goals remain active. Preserve its existing identifier and earned records for compatibility; it is no longer offered as a new gameplay objective.
+
 ## Apple configuration (manual, requires the app owner's account)
 
-1. Enable Game Center for the existing explicit App ID in Certificates, Identifiers & Profiles and for the app in App Store Connect. Regenerate signing profiles. The project includes `ProjectFlip/ProjectFlip.entitlements` with `com.apple.developer.game-center = true`; choose your signing team locally, never commit it.
+1. Enable Game Center for the existing explicit App ID in Certificates, Identifiers & Profiles and for the app in App Store Connect. Regenerate signing profiles. When activating online play, add `com.apple.developer.game-center = true` to the entitlements and enable `OnlineCompetitionEnabled` only after signed sandbox acceptance. Use the owner’s signing team.
 2. Create recurring leaderboard **Weekly Trader**, ID `trading.weekly.v1`. Use integer scores, descending/best score, range **0–1,000,000**, no currency. Start anchor **2024-01-01 00:00:00 UTC (Monday)**, duration **7 days (604800 seconds)**, restart interval **7 days**, no gaps. If the console requires a future start, use a Monday at 00:00 UTC; the code validates the loaded occurrence against its UTC week before submitting. Configure score suffixes naturally in each locale (EN: points, TR: puan).
 3. EN leaderboard display: **Weekly Trader**. TR: **Haftanın Tüccarı**. EN challenge: **Weekly Flip**. TR: **Haftanın Al-Satı**. Prepare leaderboard artwork, then submit Game Center resources with the app version as required by App Store Connect.
-4. Create the 12 non-repeatable achievements listed below. Assign **10 points each**, total **120**. Show all initially, no hidden spoiler metadata. Supply Game Center achievement artwork. Use the supplied descriptions for both locked and earned states where the console requires separate fields; rephrase the earned form naturally if desired without changing its threshold.
+4. Create the eleven active non-repeatable achievements listed below (exclude the retired collector goal). Assign **10 points each**, total **110**. Show all initially, no hidden spoiler metadata. Supply Game Center achievement artwork. Use the supplied descriptions for both locked and earned states where the console requires separate fields; rephrase the earned form naturally if desired without changing its threshold.
 5. Link the leaderboard and achievements to the app/version and complete any resource review requirements. There is no custom account service, Sign in with Apple integration, backend, ad SDK or economic rank prize.
 
 ## Runtime behavior and fairness

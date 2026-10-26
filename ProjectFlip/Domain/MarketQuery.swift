@@ -8,6 +8,7 @@ struct MarketQuery {
     var maximumPrice: Money?
     var watchedOnly = false
     var newestFirst = true
+    var modelIDs: Set<String>?
 
     func results(in state: GameSnapshot, definitions: [ItemDefinition], locale: Locale) -> [MarketplaceListing] {
         let query = search.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -17,6 +18,7 @@ struct MarketQuery {
                   ProductPhoto.asset(identity: definition.id, symbol: definition.artSymbol) != nil,
                   watchedOnly ? state.watchedListingIDs.contains(listing.id) : listing.available,
                   category == nil || definition.category == category,
+                  modelIDs.map({ $0.contains(definition.id) }) ?? true,
                   minimumPrice.map({ listing.askingPrice >= $0 }) ?? true,
                   maximumPrice.map({ listing.askingPrice <= $0 }) ?? true else { return false }
             return query.isEmpty || [definition.displayName(locale: locale), definition.name].contains { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive], locale: locale) != nil }

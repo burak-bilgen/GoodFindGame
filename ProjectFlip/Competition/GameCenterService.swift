@@ -4,7 +4,7 @@ import Observation
 import OSLog
 import Network
 
-/// Brand-neutral, versioned identifiers. Display branding remains Project Flip.
+/// Brand-neutral, versioned identifiers. Public branding is Pazlume; existing service identifiers remain compatible.
 enum CompetitionIDs {
     static let weekly = "trading.weekly.v1"
     static func achievement(_ value: TradingAchievement) -> String { "trading.achievement.\(value.rawValue).v1" }
@@ -29,6 +29,8 @@ enum CompetitionServiceError: Error { case unavailable, wrongOccurrence, account
 @Observable @MainActor
 final class GameCenterService: CompetitionService {
     static let shared = GameCenterService()
+    // Enable only after App Store Connect resources and signed sandbox checks pass.
+    let onlineEnabled = Bundle.main.object(forInfoDictionaryKey: "OnlineCompetitionEnabled") as? Bool ?? false
     var playerID: String?
     var statusKey = "competition.offline"
     var presentation: GameCenterPresentation?
@@ -44,10 +46,11 @@ final class GameCenterService: CompetitionService {
             guard path.status == .satisfied else { return }
             Task { @MainActor in self?.networkGeneration &+= 1 }
         }
-        networkMonitor.start(queue: DispatchQueue(label: "ProjectFlip.competition.network"))
+        if onlineEnabled { networkMonitor.start(queue: DispatchQueue(label: "ProjectFlip.competition.network")) }
     }
 
     func authenticate() {
+        guard onlineEnabled else { return }
         requestedUI = true
         if let pendingAuthentication {
             presentation = GameCenterPresentation(controller: pendingAuthentication, isAuthentication: true)

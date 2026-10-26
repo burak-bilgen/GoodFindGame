@@ -48,4 +48,26 @@ struct BuyerTests {
         #expect(state.player.inventory.count == 1)
     }
 
+    @Test func dialogueVariesWithoutRerollingAnOfferOrChangingSavedMessages() throws {
+        for archetype in BuyerArchetype.allCases {
+            let intents = Set((0..<60).map { BuyerSpeech.opening(archetype: archetype, offerID: OfferID("speech-test-\($0)")) })
+            #expect(intents.count == 3)
+            for intent in intents {
+                for language in GameText.supportedLanguages {
+                    let text = GameText.string(intent, locale: Locale(identifier: language))
+                    #expect(text != intent && text != "…")
+                }
+            }
+        }
+        let state = try Self.offeredState()
+        let reloaded = try JSONDecoder().decode(GameSnapshot.self, from: JSONEncoder().encode(state))
+        #expect(reloaded.playerListings[0].messages == state.playerListings[0].messages)
+        #expect(reloaded.playerListings[0].offers == state.playerListings[0].offers)
+        let offer = try #require(state.playerListings[0].offers.last)
+        // The teaching offer remains 95% of asking, capped by the buyer's budget.
+        #expect(offer.archetype == .cautious)
+        #expect(offer.amount == min(Money(minorUnits: 5_700), offer.willingness))
+        #expect(state.playerListings[0].messages.last?.intent == BuyerSpeech.opening(archetype: offer.archetype, offerID: offer.id))
+    }
+
 }

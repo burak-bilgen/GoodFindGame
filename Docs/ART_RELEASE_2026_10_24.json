@@ -1,0 +1,216 @@
+{
+  "date": "2026-10-24",
+  "tool": "built-in image_gen",
+  "policy": "One fixed product photograph. No condition variants. Packaged JPEGs retain the selected generated artwork; packaging changes file size only.",
+  "assets": [
+    {
+      "id": "furniture-3",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-be4fecf9-c0be-40cf-9601-6d0af5441df3.png",
+      "prompt": "Square photorealistic second-hand freestanding oak bookshelf with open shelves in a tidy apartment. Entire object, natural daylight, no people, branding, UI, severe damage or missing parts.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-3.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-3.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "ca54a46901bd3860c57a855cc172f59fd3eb454ecc55ad51661856b35160c8b1"
+    },
+    {
+      "id": "furniture-4",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-83b5761c-19ba-44dc-a919-c0611605090d.png",
+      "prompt": "Use case: photorealistic-natural. Asset: one square second-hand product listing photo for an offline trading game. Subject: a compact oak writing desk with a rectangular worktop, four straight wooden legs, one slim drawer and clear knee space. Full object visible, top and all legs included with generous 12% margin on all sides. Three-quarter view in a modest tidy apartment, cream wall and warm wood floor, natural soft daylight. Believable construction, candid phone-camera product photography, ordinary lightly used condition. Object is the clear dominant subject. No people, no branding, no text, no watermark, no UI, no collage, no severe damage or missing parts. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-4.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-4.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "9a991703449cf070c014794a41d8eefd1d42aab31b6cb6fb25f62af6e2c58a61"
+    },
+    {
+      "id": "furniture-5",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-08db8c92-ed1a-4d60-a074-49d5586d35be.png",
+      "prompt": "Use case: photorealistic-natural. Asset: one square second-hand product listing photo for an offline trading game. Subject: one comfortable dusty teal upholstered armchair with two armrests, separate seat and back cushions and four short wooden legs. Full object visible, top and all legs included with generous 12% margin on all sides. Three-quarter view in a modest tidy apartment, cream wall and warm wood floor, natural soft daylight. Believable construction, candid phone-camera product photography, ordinary lightly used condition. Object is the clear dominant subject. No people, no branding, no text, no watermark, no UI, no collage, no severe damage or missing parts. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-5.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-5.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "78dcb38e0ccce1733f866c06645bf323b9c8e1b856175ddfce4bb1c7d0c5203f"
+    },
+    {
+      "id": "furniture-6",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-c7d54677-45c4-4562-94fc-de5cc2a259bf.png",
+      "prompt": "Use case: photorealistic-natural. Asset: one square second-hand product listing photo for an offline trading game. Subject: one charcoal ergonomic office chair with mesh back, upholstered seat, two adjustable armrests, gas lift and a physically correct five-spoke wheeled base. Full object visible, top and all legs included with generous 12% margin on all sides. Three-quarter view in a modest tidy apartment, cream wall and warm wood floor, natural soft daylight. Believable construction, candid phone-camera product photography, ordinary lightly used condition. Object is the clear dominant subject. No people, no branding, no text, no watermark, no UI, no collage, no severe damage or missing parts. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-6.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-6.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "8be8f77749164e00f5cd2ad182de60b98cbdab4bf0119b39c1679547dfcf4b70"
+    },
+    {
+      "id": "furniture-7",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-5d1edd86-978e-4f3f-9630-6b0547942532.png",
+      "prompt": "Use case: photorealistic-natural. Asset: one square second-hand product listing photo for an offline trading game. Subject: one modest freestanding walnut storage cabinet, two closed wood doors, small simple metal handles, four short legs, no shelves or drawers outside. Full object visible, top and all legs included with generous 12% margin on all sides. Three-quarter view in a modest tidy apartment, cream wall and warm wood floor, natural soft daylight. Believable construction, candid phone-camera product photography, ordinary lightly used condition. Object is the clear dominant subject. No people, no branding, no text, no watermark, no UI, no collage, no severe damage or missing parts. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-7.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-7.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "3505223c36df594993c67cd187cda3012ae87c184814581202fbc1ae08a47026"
+    },
+    {
+      "id": "furniture-8",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-40baba76-7a3e-4267-9739-7d2d62a53fb4.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand product listing photo for an offline trading game. Subject: a modest rectangular oak dining table with four sturdy wooden legs, room for four people, no chairs obscuring the legs, no tablecloth or dinnerware. Entire object fully visible with generous 12% framing margin, three-quarter view, natural soft daylight in a modest tidy apartment with cream walls and warm wood floor, lightly used ordinary real materials, restrained candid phone photography. No people, logos, text, watermarks, UI, collage, severe damage or missing parts. One single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-8.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-8.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "8fcae9f2faba7ad008a8b0be709df55f215dce40e6565e73f1e4176589c6f7f4"
+    },
+    {
+      "id": "furniture-9",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-92ecc6bb-abc5-4867-a9ef-c22c7a427251.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand product listing photo for an offline trading game. Subject: one simple honey-oak wooden stool, round solid seat and four splayed legs joined by believable stretchers, no backrest. Entire object fully visible with generous 12% framing margin, three-quarter view, natural soft daylight in a modest tidy apartment with cream walls and warm wood floor, lightly used ordinary real materials, restrained candid phone photography. No people, logos, text, watermarks, UI, collage, severe damage or missing parts. One single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/furniture-9.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-furniture-9.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "d82999a86e8d730df79b1ad94832c8187a8bc5a7944f9bbb656c49ada4b00194"
+    },
+    {
+      "id": "everyday-0",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-93950613-fb2f-4296-a695-70579e0fc26f.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand product listing photograph. Show one unbranded forest-green everyday backpack, two shoulder straps, top handle, believable zippers and two front pockets, standing upright on a wooden chair, nothing inside visible. Full object entirely visible with 12% margin, realistic geometry and material details, natural window daylight in an ordinary tidy apartment, warm neutral palette, candid phone photography, mild ordinary wear only. Product dominates the composition. No people, logos, text, watermark, UI, collage, severe damage or missing parts. One square single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-0.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-0.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "91b8aafdbf2964092066249ac2d2f3ee7fb250ab2462ea193fb0f02c096c10a7"
+    },
+    {
+      "id": "everyday-1",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-da2d5428-f62d-4a97-9896-95a3c6fda1c2.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand product listing photograph. Show one unbranded charcoal medium-size rolling suitcase, rigid textured shell, four small caster wheels, an extended telescoping handle and a side carry handle, standing on a wood floor. Full object entirely visible with 12% margin, realistic geometry and material details, natural window daylight in an ordinary tidy apartment, warm neutral palette, candid phone photography, mild ordinary wear only. Product dominates the composition. No people, logos, text, watermark, UI, collage, severe damage or missing parts. One square single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-1.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-1.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "7e37a3db5a4567f8c4d4a764947de171ab69eb0aed497c488bef3a36a832e587"
+    },
+    {
+      "id": "everyday-2",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-b6352f53-33f5-4ebc-8959-ec3217f7cf41.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand listing product photograph in an offline trading game. Subject: one complete unbranded matte blue adult city bicycle in clean side three-quarter view: two equal round wheels, believable diamond frame, saddle, handlebars, two pedals, chain and fenders, leaning on a simple support in a tidy indoor hallway, both wheels fully inside the photograph. Full entire object with generous margin on all sides; realistic functional geometry is essential. Natural window daylight, ordinary cream-walled apartment or hallway, warm neutral palette, restrained candid phone photography, lightly used condition. No branding, text, watermark, UI, collage, people, severe damage or missing components. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-2.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-2.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "44f8d04629bf01d3ae25f21b8a7a60341651c931b9ad51e076bdb504a1c7a8ea"
+    },
+    {
+      "id": "everyday-3",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-16f776bb-1498-411f-8cf3-9e8af96baa29.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand listing product photograph in an offline trading game. Subject: one empty unbranded navy folding pushchair for a toddler, clearly visible upholstered seat with safety straps, sun canopy, handle, metal frame, and four correctly placed small wheels, standing open on a wood floor, absolutely no child, baby, doll or person. Full entire object with generous margin on all sides; realistic functional geometry is essential. Natural window daylight, ordinary cream-walled apartment or hallway, warm neutral palette, restrained candid phone photography, lightly used condition. No branding, text, watermark, UI, collage, people, severe damage or missing components. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-3.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-3.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "9f159a91e43f40ebcebaef8b3c52cf36f2e72fbd27a58802dbe17ff871c9a584"
+    },
+    {
+      "id": "everyday-4",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-1d1e05af-8f60-4b13-bdca-48a3c4eb73d8.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand product listing photo for an offline trading game. Subject: one complete unbranded compact cordless drill, muted orange and charcoal polymer body, battery pack attached at base, black keyless chuck holding a short plain drill bit, realistic trigger and grip, lying on a clean wooden workbench. Entire object fully visible with at least 10% margin, natural window light in a modest home workspace, warm neutral palette, realistic materials and honest mild wear, restrained candid phone photography. No people, logos, letters, numbers, text, watermark, UI, collage, extreme damage or missing components. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-4.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-4.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "2158e9d0cf05023202c9157ac43c144ef9d20570ac05ea2e85f6b025cccebfc8"
+    },
+    {
+      "id": "everyday-5",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-0306c29a-2021-42f0-8c84-ae6c82534d84.png",
+      "prompt": "Use case: photorealistic-natural. Asset: square second-hand product listing photo for an offline trading game. Subject: one open unbranded dark gray rigid tool case on a wooden workbench, molded compartments holding a coherent small set of pliers, spanners, screwdrivers and sockets, believable tool geometry, no drill or power tool. Entire object fully visible with at least 10% margin, natural window light in a modest home workspace, warm neutral palette, realistic materials and honest mild wear, restrained candid phone photography. No people, logos, letters, numbers, text, watermark, UI, collage, extreme damage or missing components. One single square photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-5.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-5.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "0675d8c70600ad5aea255c6c268de303635954767b31405beabd304934d60598"
+    },
+    {
+      "id": "everyday-6",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-8e7750b3-aae2-448a-99d5-3cbfba2a77fc.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand listing product photograph for an offline trading game. Subject: a matching pair of unbranded dark teal adult quad roller skates, four wheels per skate arranged as two axles, cream laces, realistic boot construction, neatly set together on a wood floor, full pair visible. Entire product with generous 12% framing margin, correct practical construction and realistic materials, natural window daylight in an ordinary tidy cream-walled apartment, restrained candid phone photography, mild ordinary signs of use only. No people, logos, text, watermark, UI, collage, severe damage or missing parts. One square single photograph.",
+      "rejectedPath": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-e266d674-9076-4dbf-80f7-c36f765ace15.png",
+      "editPrompt": "Use case: precise-object-edit. Edit target is this roller-skate photograph. Preserve the exact pair of skates, their geometry, positions, teal suede boots, cream laces, shadows, floor and apartment background. Remove all lettering, logos and embossed writing from every visible wheel sidewall so the rubber wheel sidewalls are completely plain dark teal. Do not add any new marks, text, wear, parts, wheels or objects. Keep the same square framing and natural photography.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-6.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-6.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "0e273032230b0652c9b28509f4cbbccd79a1fde9e22c7ff6dfc87d346cf6af0c"
+    },
+    {
+      "id": "everyday-7",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-d1d44c12-8310-47b5-bed7-6ec0ee1c1034.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand listing product photograph for an offline trading game. Subject: one unbranded folding shopping trolley, dark green fabric shopping bag mounted on a simple silver metal frame, two large wheels and a curved handle, upright on a wood floor, empty and without other shopping. Entire product with generous 12% framing margin, correct practical construction and realistic materials, natural window daylight in an ordinary tidy cream-walled apartment, restrained candid phone photography, mild ordinary signs of use only. No people, logos, text, watermark, UI, collage, severe damage or missing parts. One square single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-7.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-7.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "3e2b240268b1d80314e3bad1d0b34c2752bbe7c65b8e3d45266aa77eba495dae"
+    },
+    {
+      "id": "everyday-8",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-2076e725-d367-473e-aad2-58e29e525867.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand product listing photograph for an offline trading game. Subject: one unbranded burgundy fabric sports duffel bag, two short carry handles and one removable shoulder strap, realistic seams and zipper, neatly resting on a wooden bench. Entire set or object fully visible with generous framing margin, correct functional construction and realistic everyday materials, natural window daylight in a modest tidy home, warm neutral palette, candid phone photography, ordinary mild signs of use only. All surfaces are plain with no logos, readable writing or nonsense lettering. No people, branding, watermark, UI, collage, severe damage or missing components. One square single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-8.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-8.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "a5bc650416fdf24d26cda5a8eaf4a8f7969a104e21cb79e71f9436db4efbe746"
+    },
+    {
+      "id": "everyday-9",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-2d3e57ae-8111-407d-9466-a8e39d710045.png",
+      "prompt": "Use case: photorealistic-natural. Square second-hand product listing photograph for an offline trading game. Subject: a small coordinated unbranded hand tool set arranged neatly on a wooden workbench: one claw hammer, combination pliers, two screwdrivers, an adjustable wrench and a compact tape measure, all complete and physically plausible, no case and no power tools. Entire set or object fully visible with generous framing margin, correct functional construction and realistic everyday materials, natural window daylight in a modest tidy home, warm neutral palette, candid phone photography, ordinary mild signs of use only. All surfaces are plain with no logos, readable writing or nonsense lettering. No people, branding, watermark, UI, collage, severe damage or missing components. One square single photograph.",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/everyday-9.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-everyday-9.imageset/photo.jpg",
+      "review": "Inspected subject, complete object framing, plausible construction, no visible real brand, and thumbnail readability.",
+      "outputSHA256": "d4f58027558e1d623d67bd7a5f5508d439af1066646099a7852c10fc08411d45"
+    },
+    {
+      "id": "controller-family",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art/controller-square.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-controller.imageset/photo.jpg",
+      "prompt": "Preserve the existing black controller, its geometry, tabletop and lighting. Expand the original landscape photo to a square composition with the whole controller visible and no additional markings or defects.",
+      "tool": "built-in image_gen edit",
+      "review": "Full object preserved in square frame; original photograph retained as controller-before.jpg.",
+      "outputSHA256": "d8dc3a13599c7fcdb7d470cabd742c2410ae302407365e29b2fd34a1970875b3"
+    },
+    {
+      "id": "gaming-2",
+      "prompt": "Use case: photorealistic-natural. Project asset: a single square second-hand listing photograph for an offline fictional trading game. Subject: one compact pebble-shaped light gray wireless game controller, small smooth rounded shell, two symmetrically placed thumb sticks, a simple cross D-pad and four unmarked face buttons. Entire controller visible, no hand. Set on an ordinary oak desk in a tidy modest apartment, soft window daylight, subtle real surface texture, candid high quality phone photograph, not a studio advertisement. The item dominates the image with a generous 12 percent clear margin around its full silhouette and legible details at thumbnail size. Natural materials and plausible manufacture. No visible real brand, logos, lettering, numbers, watermark, UI, people, extra products, cables crossing the item, severe damage or missing parts. One cohesive photograph, square composition.",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-38102800-435c-47bd-b98b-29f3c6c547e1.png",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art-expansion/gaming-2.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-gaming-2.imageset/photo.jpg",
+      "review": "Inspected full object framing, coherent controls or construction, square layout, no visible real brand and thumbnail recognition. Dedicated model image replaces a shared family mapping.",
+      "outputSHA256": "0714f6c80e15c24f03ae8cd6f2ef6a267015d909ead6eb5e3390579618729d8d"
+    },
+    {
+      "id": "gaming-15",
+      "prompt": "Use case: photorealistic-natural. Project asset: a single square second-hand listing photograph for an offline fictional trading game. Subject: one slim modern handheld game console in muted burgundy, a wide black powered-off screen between integrated controls, two thumb sticks, a cross D-pad, four plain unmarked buttons, physically plausible symmetrical construction. Entire device visible. Set on an ordinary oak desk in a tidy modest apartment, soft window daylight, subtle real surface texture, candid high quality phone photograph, not a studio advertisement. The item dominates the image with a generous 12 percent clear margin around its full silhouette and legible details at thumbnail size. Natural materials and plausible manufacture. No visible real brand, logos, lettering, numbers, watermark, UI, people, extra products, cables crossing the item, severe damage or missing parts. One cohesive photograph, square composition.",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-32af3d61-e2e0-4ad8-a26c-10135d4d0dfe.png",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art-expansion/gaming-15.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-gaming-15.imageset/photo.jpg",
+      "review": "Inspected full object framing, coherent controls or construction, square layout, no visible real brand and thumbnail recognition. Dedicated model image replaces a shared family mapping.",
+      "outputSHA256": "eb6e540d89dec2e5b21b7b10d707f2795a2ca2dbe4fdf3248eda4319048f071c"
+    },
+    {
+      "id": "gaming-18",
+      "prompt": "Use case: photorealistic-natural. Project asset: a single square second-hand listing photograph for an offline fictional trading game. Subject: one premium charcoal gaming desktop PC tower, subtle vented front, transparent side panel with physically plausible motherboard, graphics card and two cooling fans clearly inside, unlit hardware, ordinary lightly used condition. Entire tower visible with all edges. Set on an ordinary oak desk in a tidy modest apartment, soft window daylight, subtle real surface texture, candid high quality phone photograph, not a studio advertisement. The item dominates the image with a generous 12 percent clear margin around its full silhouette and legible details at thumbnail size. Natural materials and plausible manufacture. No visible real brand, logos, lettering, numbers, watermark, UI, people, extra products, cables crossing the item, severe damage or missing parts. One cohesive photograph, square composition.",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-17f7f351-db50-40f1-9e5b-ac1103d5308a.png",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art-expansion/gaming-18.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-gaming-18.imageset/photo.jpg",
+      "review": "Inspected full object framing, coherent controls or construction, square layout, no visible real brand and thumbnail recognition. Dedicated model image replaces a shared family mapping.",
+      "outputSHA256": "d9edc268184dcf9a7cd5bfbd9ed7b98846983ec62b86ade88d548479e9cedf57"
+    },
+    {
+      "id": "cameras-5",
+      "prompt": "Use case: photorealistic-natural. Project asset: a single square second-hand listing photograph for an offline fictional trading game. Subject: one premium black full-frame style mirrorless camera body with a substantial standard zoom lens attached, textured grip, plain unbranded housing and lens barrel, screen not visible, physically coherent front three-quarter view. Entire camera and lens visible. Set on an ordinary oak desk in a tidy modest apartment, soft window daylight, subtle real surface texture, candid high quality phone photograph, not a studio advertisement. The item dominates the image with a generous 12 percent clear margin around its full silhouette and legible details at thumbnail size. Natural materials and plausible manufacture. No visible real brand, logos, lettering, numbers, watermark, UI, people, extra products, cables crossing the item, severe damage or missing parts. One cohesive photograph, square composition.",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-0d685844-d14f-4cd9-b59e-5adfdd7cf9e7.png",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art-expansion/cameras-5.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-cameras-5.imageset/photo.jpg",
+      "review": "Inspected full object framing, coherent controls or construction, square layout, no visible real brand and thumbnail recognition. Dedicated model image replaces a shared family mapping.",
+      "outputSHA256": "12440c05c20e1dae638ef60d0c1a33595b1681599d9a3bcda290a6dba99b8c61"
+    },
+    {
+      "id": "gaming-19",
+      "prompt": "Use case: photorealistic-natural. Project asset: a single square second-hand listing photograph for an offline fictional trading game. Subject: one professional wide flat computer monitor, black thin rectangular bezel, plain black powered-off 16:9 screen, stable silver central stand and wide flat base, no keyboard. Entire monitor and stand visible. Set on an ordinary oak desk in a tidy modest apartment, soft window daylight, subtle real surface texture, candid high quality phone photograph, not a studio advertisement. The item dominates the image with a generous 12 percent clear margin around its full silhouette and legible details at thumbnail size. Natural materials and plausible manufacture. No visible real brand, logos, lettering, numbers, watermark, UI, people, extra products, cables crossing the item, severe damage or missing parts. One cohesive photograph, square composition.",
+      "path": "/Users/burak/.codex/generated_images/01a16ad9-3665-7931-a89f-b6a1e432b783/exec-26a7be81-524d-43b3-862e-0e45d0f56e2c.png",
+      "source": "../Artifacts/ReleaseCandidate-2026-10-24/art-expansion/gaming-19.png",
+      "output": "ProjectFlip/Resources/Assets.xcassets/Product-model-gaming-19.imageset/photo.jpg",
+      "review": "Inspected full object framing, coherent controls or construction, square layout, no visible real brand and thumbnail recognition. Dedicated model image replaces a shared family mapping.",
+      "outputSHA256": "bcbd29c88c730e3c79fdbaa19bd9973fe54000c89423a295e0e6ae791b163e78"
+    }
+  ]
+}

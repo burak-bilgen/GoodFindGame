@@ -28,8 +28,7 @@ struct ListingAttention {
         case .furniture: 1.25
         case .everyday: 0.95
         }
-        let shopFactor = ShopEngine.delayFactor(for: listing, state: state, definitions: [definition])
-        delayFactor = priceFactor * audienceFactor * shopFactor
+        delayFactor = priceFactor * audienceFactor
         offerChance = Int((lower.chance + fraction * (upper.chance - lower.chance)).rounded())
         views = max(0, Int(Double(random.integer(in: 5...22)) / (priceFactor * audienceFactor)))
         let favoriteDivisor = 3 + 4 * min(1, max(0, (ratio - 1.1) / 0.3))

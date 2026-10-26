@@ -29,7 +29,6 @@ struct RepairEngine {
         guard let index = state.player.inventory.firstIndex(where: { $0.id == itemID }),
               let definition = definitions.first(where: { $0.id == state.player.inventory[index].definitionID }) else { throw TradingError.unavailable }
         guard state.recovery.itemID != itemID else { throw TradingError.consignedItem }
-        guard !state.collections.displayed.contains(itemID) else { throw TradingError.itemDisplayed }
         guard !state.playerListings.contains(where: { $0.itemID == itemID && $0.status == .active }),
               !state.inspectionJobs.contains(where: { $0.itemID == itemID && $0.status == .pending }) else { throw TradingError.alreadyDone }
         let item = state.player.inventory[index]

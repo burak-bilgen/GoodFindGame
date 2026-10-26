@@ -11,7 +11,7 @@ struct ListingDetailView: View {
         if let listing = store.snapshot.market.first(where: { $0.id == listingID }), let definition = store.definition(for: listing.item) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(maxWidth: 180).frame(maxWidth: .infinity)
+                    DeviceArt(symbol: definition.artSymbol, identity: definition.id, appearance: .advertised(listing)).frame(maxWidth: typeSize.isAccessibilitySize ? 240 : 320).frame(maxWidth: .infinity)
                         .overlay(alignment: .topTrailing) {
                             let watched = store.snapshot.watchedListingIDs.contains(listing.id)
                             Button {
@@ -27,9 +27,9 @@ struct ListingDetailView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(GameText.string("category.\(definition.category.rawValue)", locale: locale))
                             .font(.caption.weight(.bold)).foregroundStyle(GameStyle.category(definition.category)).accessibilityIdentifier("listingCategoryName")
-                        Text(definition.displayName(locale: locale)).font(.system(.title, design: .rounded, weight: .heavy))
+                        Text(definition.displayName(locale: locale)).font(.system(.title, design: .default, weight: .semibold))
                         HStack(alignment: .firstTextBaseline) {
-                            Text(listing.askingPrice.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .rounded, weight: .black)).minimumScaleFactor(0.65).lineLimit(1)
+                            Text(listing.askingPrice.formatted(locale: locale, market: market, precise: true)).accessibilityIdentifier("listingAskingAmount").font(.system(.largeTitle, design: .default, weight: .bold)).minimumScaleFactor(0.65).lineLimit(1)
                             Spacer(minLength: 0)
                             Image(systemName: "tag.fill").foregroundStyle(GameStyle.gain).accessibilityHidden(true)
                         }
@@ -44,6 +44,7 @@ struct ListingDetailView: View {
                             else { Text(GameText.string(lifecycle.closureReason?.key ?? "listing.unavailable", locale: locale)).bold() }
                         }
                     }
+                    if listing.available { ClientListingHint(store: store, definitionID: definition.id) }
                     TradeReadView(store: store, listing: listing, price: listing.askingPrice)
                         .gameCard(accent: GameStyle.amber)
                     VStack(alignment: .leading, spacing: 12) {
@@ -94,10 +95,8 @@ struct SellerSummary: View {
                 TraderPortrait(identity: seller.identityIndex)
                 Text(GameText.marketPerson("name", index: seller.identityIndex, market: market, locale: locale)).font(.headline)
                 Spacer()
-                Label((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)), systemImage: "star.fill").font(.caption.bold())
-                    .accessibilityLabel(Text("seller.rating \((Decimal(seller.ratingTenths) / 10).formatted(.number.locale(locale)))"))
+
             }
-            Text("seller.trades \(seller.tradeCount)").font(.caption).foregroundStyle(GameStyle.secondaryText)
             Text(GameText.marketPerson("city", index: seller.identityIndex, market: market, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
             if playerTradeCount > 0 { Text("seller.history.trades \(playerTradeCount)").font(.caption).foregroundStyle(GameStyle.secondaryText) }
         }

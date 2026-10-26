@@ -48,7 +48,16 @@ struct EventResolver {
             next.events[index].status = .completed
             if case .marketRefresh = event.payload { needsFeedRefresh = timing.marketFeed != nil; continue }
             if event.payload.generatesBuyerInterest {
-                if buyerArrivals >= timing.buyerArrivalsPerCatchUp {
+                // Bound historical retries without throwing away another listing's
+                // already-booked, still-actionable quote when the app returns.
+                let liveBookedOffer: Bool
+                if case .buyerOffer(let id, let expected, _, _, let end) = event.payload {
+                    liveBookedOffer = end > clock.effectiveNow && next.playerListings.contains {
+                        $0.id == id && $0.status == .active && $0.offers.count == expected &&
+                        !$0.offers.contains { [.pending, .countered].contains($0.status) }
+                    }
+                } else { liveBookedOffer = false }
+                if buyerArrivals >= timing.buyerArrivalsPerCatchUp && !liveBookedOffer {
                     next.events[index].status = .cancelled
                     try scheduleBuyer(listingID: ListingID(event.payload.targetID), state: &next, definitions: definitions, now: clock.effectiveNow, minimumDelay: 1)
                     continue

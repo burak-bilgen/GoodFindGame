@@ -95,7 +95,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         app.buttons[tabID(turkish ? "Profil" : "Profile")].tap()
         capture("profile desk: \(language)", app: app)
-        tap(app.buttons["openKnowledge"], in: app)
+        tap(app.buttons["openCareer"], in: app)
         capture("knowledge tools: \(language)", app: app)
         tap(app.buttons["buyTools.cameras"], in: app)
         XCTAssertTrue(app.descendants(matching: .any)["toolsOwned.cameras"].firstMatch.exists)
@@ -110,7 +110,7 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["inventory.item-42-0"], in: app)
         tap(app.buttons["basicInspect"], in: app)
         app.buttons[tabID(turkish ? "Profil" : "Profile")].tap()
-        tap(app.buttons["openKnowledge"], in: app)
+        tap(app.buttons["openCareer"], in: app)
         XCTAssertTrue(app.descendants(matching: .any)["knowledgePoints.gaming"].firstMatch.label.contains("1"))
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "\(language) category learning and permanent tools"
@@ -119,7 +119,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.terminate()
         app.launch()
         app.buttons[tabID(turkish ? "Profil" : "Profile")].tap()
-        tap(app.buttons["openKnowledge"], in: app)
+        tap(app.buttons["openCareer"], in: app)
         XCTAssertTrue(app.descendants(matching: .any)["knowledgePoints.gaming"].firstMatch.label.contains("1"))
         let owned = app.descendants(matching: .any)["toolsOwned.cameras"].firstMatch
         for _ in 0..<5 {
@@ -194,7 +194,8 @@ final class ProjectFlipUITests: XCTestCase {
         }
         app.launch()
         app.buttons[tabID("Profile")].tap()
-        tap(app.buttons["openTradeHistory"], in: app)
+        openSales(app)
+        tap(app.buttons["salesHistory"], in: app)
         XCTAssertTrue(app.staticTexts["5 completed trades"].exists)
     }
 
@@ -507,21 +508,23 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         app.buttons[tabID(inventory)].tap()
         XCTAssertTrue(app.staticTexts[language == "tr" ? "İlk ürününü pazarda bul." : "Find your first item in the market."].waitForExistence(timeout: 5))
-        app.buttons[tabID(language == "tr" ? "Profil" : "Profile")].tap()
-        app.buttons["openTradeHistory"].tap()
+        openSales(app)
+        app.buttons["salesHistory"].tap()
         XCTAssertTrue(app.buttons["trade.resale-item-42-0-0"].waitForExistence(timeout: 5))
         if followFeed {
             app.buttons[tabID(market)].tap()
             tap(app.buttons["listing.listing-42-1"], in: app)
             tap(app.buttons["toggleWatch"], in: app)
             app.navigationBars.buttons.firstMatch.tap()
-            app.buttons[tabID(language == "tr" ? "Profil" : "Profile")].tap()
+            app.buttons["gameTab.3"].tap()
             app.navigationBars.buttons.firstMatch.tap()
             advanceFixture(86_400, app: app)
             XCTAssertTrue(app.navigationBars[language == "tr" ? "Sen yokken" : "While you were away"].waitForExistence(timeout: 5))
             tap(app.buttons[language == "tr" ? "Tamam" : "Done"], in: app)
             app.buttons[tabID(market)].tap()
-            tap(app.buttons["listing.listing-44-0"], in: app)
+            // Catalog growth can change refill batch numbers; require genuinely new stock.
+            let freshListing = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@ AND NOT identifier BEGINSWITH %@", "listing.listing-", "listing.listing-42-")).firstMatch
+            tap(freshListing, in: app)
             XCTAssertTrue(app.buttons["openConversation"].exists)
             app.terminate()
             app.launch()
@@ -596,8 +599,8 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(app.buttons["acceptSellerCounter"].waitForExistence(timeout: 10))
         capture("seller counter: \(language)", app: app)
         tap(app.buttons["acceptSellerCounter"], in: app)
-        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].isHittable)
         capture("purchase cash decision: \(language)", app: app)
+        XCTAssertTrue(app.staticTexts["purchaseBudgetAmount"].isHittable)
         tap(app.buttons["confirmPurchase"], in: app)
         XCTAssertTrue(app.buttons["continueToItem"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts[turkish ? "İlan artık mevcut değil" : "Listing unavailable"].exists)
@@ -710,6 +713,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         XCTAssertEqual(app.staticTexts["marketCash"].label, unchangedCash)
         app.buttons[tabID(turkish ? "Mesajlar" : "Messages")].tap()
+        app.segmentedControls["messageFilter"].buttons.element(boundBy: 1).tap()
         tap(app.buttons["conversation.listing-42-0"], in: app)
         XCTAssertFalse(app.buttons["confirmPurchase"].exists)
         XCTAssertFalse(app.buttons["continueToItem"].exists)
@@ -745,28 +749,37 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
         XCTAssertTrue(app.otherElements["listingAttention"].exists || app.descendants(matching: .any)["listingAttention"].firstMatch.exists)
         tap(app.buttons["returnToHunt"], in: app)
-        XCTAssertTrue(app.otherElements["openTrades"].exists || app.descendants(matching: .any)["openTrades"].firstMatch.exists)
+        XCTAssertTrue(app.buttons["marketSalePending"].exists)
         tap(app.buttons["listing.listing-42-1"], in: app)
         XCTAssertTrue(app.buttons["openConversation"].exists)
         app.buttons[tabID(turkish ? "Profil" : "Profile")].tap()
         advanceFixture(86_400, app: app)
         XCTAssertTrue(app.navigationBars[turkish ? "Sen yokken" : "While you were away"].waitForExistence(timeout: 5))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
-        openSales(app)
-        tap(app.buttons["sale.resale-item-42-0-0"], in: app)
+        app.buttons["gameTab.2"].tap()
+        tap(app.buttons["inventory.item-42-0"], in: app)
         XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
-        tap(app.buttons["relistItem"], in: app)
+        tap(app.buttons["createListing"], in: app)
         capture("expired item ready to relist: \(language)", app: app)
         tap(app.buttons["publishListing"], in: app)
         tap(app.buttons["followPlayerListing"], in: app)
-        tap(app.buttons["withdrawListing"], in: app)
+        let withdraw = app.buttons["withdrawListing"]
+        for _ in 0..<8 {
+            if withdraw.exists && withdraw.isHittable && withdraw.frame.maxY <= app.buttons["gameTab.3"].frame.minY { break }
+            app.swipeUp()
+        }
+        XCTAssertGreaterThanOrEqual(withdraw.frame.height, 44)
+        XCTAssertLessThanOrEqual(withdraw.frame.maxY, app.buttons["gameTab.3"].frame.minY)
+        tap(withdraw, in: app)
         XCTAssertTrue(app.buttons["relistItem"].exists)
         capture("withdrawn listing retains item: \(language)", app: app)
         app.terminate()
         app.launch()
         openSales(app)
-        tap(app.buttons["sale.resale-item-42-0-1"], in: app)
-        XCTAssertTrue(app.buttons["relistItem"].exists)
+        XCTAssertFalse(app.buttons["sale.resale-item-42-0-1"].exists)
+        tap(app.buttons["salesStock"], in: app)
+        tap(app.buttons["inventory.item-42-0"], in: app)
+        XCTAssertTrue(app.buttons["createListing"].exists)
         XCTAssertFalse(app.buttons["acceptBuyerOffer"].exists)
     }
 
@@ -1016,6 +1029,7 @@ final class ProjectFlipUITests: XCTestCase {
                 tap(app.buttons["continueOwnedSale"], in: app)
                 XCTAssertTrue(app.buttons["acceptBuyerOffer"].exists)
                 app.buttons[tabID(turkish ? "Mesajlar" : "Messages")].tap()
+                app.segmentedControls["messageFilter"].buttons.element(boundBy: 1).tap()
                 tap(app.buttons["conversation.listing-42-\(slot)"], in: app)
                 XCTAssertFalse(app.buttons["followDelivery"].exists)
                 tap(app.buttons["continueConversationSale"], in: app)
@@ -1028,8 +1042,9 @@ final class ProjectFlipUITests: XCTestCase {
             XCTAssertTrue(app.navigationBars[turkish ? "Pazar" : "Market"].waitForExistence(timeout: 5))
             XCTAssertFalse(app.buttons["marketBuyerOffer"].exists)
             app.buttons[tabID(turkish ? "Mesajlar" : "Messages")].tap()
+            app.segmentedControls["messageFilter"].buttons.element(boundBy: 1).tap()
             let archivedRow = app.buttons["conversation.listing-42-\(slot)"]
-            XCTAssertTrue(archivedRow.staticTexts[turkish ? "Satıldı" : "Sold"].exists)
+            XCTAssertTrue(archivedRow.exists)
             capture("completed inbox: \(language)", app: app)
             tap(archivedRow, in: app)
             XCTAssertTrue(app.buttons["continueToTrade"].exists)
@@ -1081,7 +1096,7 @@ final class ProjectFlipUITests: XCTestCase {
         let asking = app.textFields["askingPrice"]
         tap(asking, in: app)
         let old = asking.value as? String ?? ""
-        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + (repair ? (turkish ? "2400" : "50") : (turkish ? "480" : "10")))
+        asking.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count) + (repair ? (turkish ? "2000" : "50") : (turkish ? "480" : "10")))
         app.buttons[turkish ? "Tamam" : "Done"].tap()
         tap(app.buttons["publishListing"], in: app)
         tap(app.buttons["followPlayerListing"], in: app)
@@ -1100,7 +1115,8 @@ final class ProjectFlipUITests: XCTestCase {
         app.terminate()
         app.launch()
         app.buttons[tabID(turkish ? "Profil" : "Profile")].tap()
-        tap(app.buttons["openTradeHistory"], in: app)
+        openSales(app)
+        tap(app.buttons["salesHistory"], in: app)
         tap(app.buttons["trade.resale-item-42-\(slot)-0"], in: app)
         XCTAssertEqual(app.staticTexts["tradeLesson"].label, lesson)
         XCTAssertEqual(app.staticTexts["tradeDefect.\(fault)"].exists, shownFault)
@@ -1275,26 +1291,17 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["openConversation"], in: app)
         tap(app.buttons["sendOffer"], in: app)
         marketRoot()
-        @MainActor func expectLoop(_ label: String) {
-            let button = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
-            if !button.exists {
-                let strip = app.descendants(matching: .any)["openTrades"].firstMatch
-                if strip.scrollViews.firstMatch.exists { strip.scrollViews.firstMatch.swipeLeft() }
-                else { strip.swipeLeft() }
-            }
-            XCTAssertTrue(button.exists)
-        }
-        let labels = ["Seller replies pending", "In transit", "Expert reports pending", "Live sale listings"]
-        for label in labels { expectLoop(label) }
-        capture("four concurrent production trade loops", app: app)
+        let handoffs = ["marketBuyerOffer", "marketSellerReady", "marketClientReady", "marketStockReady", "marketReportPending", "marketDeliveryPending", "marketSellerPending", "marketSalePending"]
+        XCTAssertEqual(handoffs.filter { app.buttons[$0].exists }.count, 1)
+        capture("one actionable handoff with concurrent production work", app: app)
         tap(app.buttons["listing.listing-42-5"], in: app)
         XCTAssertTrue(app.buttons["openConversation"].exists)
-        capture("still hunting with four processes pending", app: app)
+        capture("continuing the hunt with persisted trade work", app: app)
         app.terminate()
         app.launch()
         if !app.navigationBars["Market"].waitForExistence(timeout: 10), app.navigationBars["While you were away"].exists { app.buttons["Done"].tap() }
         XCTAssertTrue(app.navigationBars["Market"].exists)
-        for label in ["Expert reports pending", "Live sale listings"] { expectLoop(label) }
+        XCTAssertEqual(handoffs.filter { app.buttons[$0].exists }.count, 1)
     }
 
     @MainActor
@@ -1316,7 +1323,7 @@ final class ProjectFlipUITests: XCTestCase {
             app.buttons[tabID(label)].tap()
             capture("theme \(label): \(language)", app: app)
         }
-        for destination in ["openKnowledge", "openTradeHistory", "openSettings"] {
+        for destination in ["openCareer", "openSettings"] {
             tap(app.buttons[destination], in: app)
             capture("theme \(destination): \(language)", app: app)
             app.navigationBars.buttons.firstMatch.tap()
@@ -1339,7 +1346,6 @@ final class ProjectFlipUITests: XCTestCase {
     @MainActor
     private func openSales(_ app: XCUIApplication) {
         app.buttons["gameTab.3"].tap()
-        tap(app.buttons["shopSales"], in: app)
     }
     @MainActor
     private func openNotificationSettings(_ app: XCUIApplication) {
@@ -1352,6 +1358,10 @@ final class ProjectFlipUITests: XCTestCase {
         for _ in 0..<8 {
             if element.exists && element.isHittable && element.isEnabled { break }
             app.swipeUp()
+        }
+        if !element.exists {
+            capture("Unreachable control: \(element.identifier)", app: app)
+            print("UNREACHABLE CONTROL: \(element.identifier)\n\(app.debugDescription)")
         }
         XCTAssertTrue(element.exists)
         element.tap()
@@ -1367,6 +1377,7 @@ final class ProjectFlipUITests: XCTestCase {
         app.launch()
         app.buttons["gameTab.1"].tap()
         tap(app.buttons["openClients"], in: app)
+        tap(app.buttons["client.rowan"], in: app)
         tap(app.buttons["acceptClient.rowan"], in: app)
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Bu talep için ürün arıyorsun" : "You are sourcing this request"].exists)
         capture("recurring client: \(language)", app: app)
@@ -1375,24 +1386,6 @@ final class ProjectFlipUITests: XCTestCase {
         tap(app.buttons["openClients"], in: app)
         XCTAssertFalse(app.buttons["acceptClient.rowan"].exists)
         XCTAssertTrue(app.staticTexts[language == "tr" ? "Ece" : "Rowan"].exists)
-    }
-
-    @MainActor func testCollectionHuntEnglish() { verifyCollectionHunt(language: "en") }
-    @MainActor func testCollectionHuntTurkish() { verifyCollectionHunt(language: "tr") }
-    @MainActor private func verifyCollectionHunt(language: String) {
-        continueAfterFailure = false
-        let app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", language == "tr" ? "tr_TR" : "en_US", "--uitest-save", UUID().uuidString, "--uitest-instant", "--uitest-reduce-motion"]
-        app.launch()
-        app.buttons["gameTab.4"].tap()
-        tap(app.buttons["openCollections"], in: app)
-        capture("collection desire: \(language)", app: app)
-        tap(app.buttons["focusCollection.chapter"], in: app)
-        XCTAssertTrue(app.staticTexts[language == "tr" ? "Seçtiğin hedef" : "Your chosen hunt"].exists)
-        app.terminate(); app.launch()
-        XCTAssertTrue(app.staticTexts[language == "tr" ? "Chapter Nesilleri" : "Chapter Generations"].exists)
-        tap(app.buttons["careerHunt"], in: app)
-        XCTAssertFalse(app.buttons["focusCollection.chapter"].exists)
     }
 
     @MainActor func testRecoveryEnglish() { verifyRecovery(language: "en") }
@@ -1432,7 +1425,7 @@ final class ProjectFlipUITests: XCTestCase {
         XCTAssertTrue(cash.label.contains(language == "tr" ? "1.000" : "40,000"))
         app.buttons["gameTab.4"].tap()
         tap(app.buttons["openSettings"], in: app)
-        XCTAssertTrue(app.staticTexts[language == "tr" ? "Ortak pazar" : "Shared market"].exists)
+        XCTAssertTrue(app.staticTexts["sharedMarketExplanation"].exists)
         XCTAssertTrue(app.buttons["displayCurrency"].label.contains(language == "tr" ? "USD" : "TRY"))
     }
 

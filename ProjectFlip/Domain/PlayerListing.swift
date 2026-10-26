@@ -41,3 +41,14 @@ extension PlayerListing {
         expiresAt = try values.decodeIfPresent(Date.self, forKey: .expiresAt)
     }
 }
+
+
+extension PlayerListing {
+    /// A gentle review option based only on observed traffic and elapsed time.
+    /// Views do not diagnose the price or promise a future buyer.
+    func canReviewQuietPrice(at date: Date) -> Bool {
+        let elapsed = date.timeIntervalSince(createdAt)
+        return status == .active && views >= 12 && elapsed.isFinite && elapsed >= 120 &&
+            !offers.contains { [.pending, .countered].contains($0.status) }
+    }
+}

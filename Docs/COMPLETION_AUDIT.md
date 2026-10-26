@@ -1,25 +1,45 @@
-# V1 completion audit
+# Completion audit — 24 October 2026
 
-Current milestone override (21 October 2026): the owner-authorized living-marketplace UX follow-up extends the clean checkpoint; broader feature work remains paused. Category fidelity, progression, Game Center and monetization stay paused until the core loop is enjoyable. The rows below are historical long-term tracking, not authorization to expand this milestone. See LIVING_MARKETPLACE.md, HUMAN_PLAYTEST.md and the historical CLEAN_CHECKPOINT.md.
+Current-source update: [gameplay expansion](GAMEPLAY_EXPANSION_2026_10_25.md) supersedes the checkpoint counts below. It records the new notebook/price/client mechanics, 940 text keys, all 202 unit tests and focused UI evidence. The older complete-suite results remain historical.
 
-The objective remains the full master brief plus engineering/localization requirements. A finished Phase A is not a finished project. Evidence must cover each system, including failures, persistence and localized runtime behavior.
+The latest public identity, design and final-source verification are tracked in [Pazlume 1.0 preparation](PAZLUME_V1_READINESS_2026_10_25.md). The integrated 271-pass checkpoint below predates that refresh.
 
-| Requirement group | Current evidence | Remaining proof/work |
+**Overall objective: not complete.** The local candidate has passing engineering evidence. Publication/signing are explicitly owner-deferred, App Store account/submission work is not performed, and unassisted human enjoyment/physical-device acceptance is unobserved. Do not infer those outcomes from simulator tests.
+
+The owner's later removal of shops/collections/numeric reputation and authorization of new gameplay/content supersede the old paused milestone. The [21 October audit](History/COMPLETION_AUDIT_2026_10_21.md) is retained as history; its former feature list is not the shipping checklist. Current behavior and exact checkpoint boundaries are in [release readiness](RELEASE_READINESS.md).
+
+| Requirement | Current authoritative evidence | Assessment |
 | --- | --- | --- |
-| Original iPhone/iOS 17+ identity, dependency-light SwiftUI | Committed project; simulator Debug/Release builds; original seed content/art | Physical-device validation; final name clearance before shipping |
-| Phase A trading, stable hidden truth, exact currency, saves | Domain/unit tests; localized UI first trade/history; atomic save-failure test | Five-trade UI evaluation passed; ongoing gameplay/human enjoyment tuning remains |
-| Deterministic offline event queue and clocks | Live event integration and DEBUG time travel implemented; 44 unit tests plus timed Turkish relaunch/return-report UI tests | Continue broad physical-device/clock/background and long-session validation |
-| Notifications and routes | Implemented; 43 unit tests, actual native delivery/tap UI test and category/cold-route UI test | Extend event sources as later systems arrive; broader device, denied-permission and background validation before release |
-| Market depth | Persistent watchlist/V1 feed controls; saved dynamic demand; deterministic NPC competition, expiry, price drops, firm-quote protection, bounded refresh/archives, market alerts, timed player-listing attention and expiry/withdraw/relist flow | Human economic/fun tuning; broader device, long-session and localization/polish QA |
-| Content/category knowledge | Three categories; 50 definitions and 24 category-specific defects; balanced small feeds; stable old saves and future-only calendar scope migration; separate category expertise/tool progression, knowledge-limited inspection, persisted camera/retro measurements, and optional immediate repairs with explicit cost/recovery comparison | Deeper category fidelity and timed repairs remain paused; content and human balance QA |
-| Content template targets | Four localized market-trend reason templates; other scoped template groups not yet implemented | 15–20 market-event templates; 15–20 client-request templates; 10–15 rare variants; 3–5 collection sets, with localized runtime proof |
-| Progression/ethics | Fixed reputation and inventory capacity only | Category/capacity unlocks; truthful disclosure/disputes; reputation effects; collections/rare variants; client requests; bankruptcy recovery |
-| Retention and onboarding | Accelerated first loop and persistent grouped return summary | Guided first session; first-week pacing; recurring goals and retention validation |
-| Game Center | Not implemented | Optional authentication; 6–10 achievements; one recurring weekly leaderboard; separate standardized Weekly Market Challenge; integer/versioned/capped scores; unavailable/auth failure/idempotence tests; centralized identifiers; activity routing readiness |
-| Monetization | No SDKs or purchases | Optional rewarded ads, sparse transition-only interstitials, StoreKit 2 Remove Ads/restore; development IDs; offline failure behavior; consent/SDK privacy audit; no economic IAP advantages |
-| Analytics and economy balancing | Trade tests only | Privacy-conscious event instrumentation; headless multi-strategy simulations; exploit, bankruptcy, progression and category balance measurements |
-| Commercial localization/accessibility/polish | TR/EN String Catalog/context/plural checks; large Turkish UI, dark/reduced-motion journeys; original artwork/icon; staged reveals and optional sound/haptics | All future content localized; broader VoiceOver, physical audio/haptic, currency/time and empty/error-state QA |
-| Release readiness | Local simulator build only | Clean install/migrations, device/crash pass, purchase/notification validation, privacy policy/labels, SDK consent, TR/EN store/Game Center metadata, screenshots, legal/policy/name review, TestFlight and submission |
-| Exclusions/stretch discipline | No backend/accounts/multiplayer/real marketplace data/currency packs | Maintain exclusions. Auctions only after all required systems and polish are healthy and time remains; otherwise V1.1 |
+| A complete buy–negotiate–deliver–inspect–repair–sell loop with profit/loss | Current integrated 271-test result (186 unit / 85 UI), six-language trade replays and retained actual store captures | Automated acceptance passed; human enjoyment unobserved |
+| More reasons to play and meaningful decisions | Six contacts / eighteen requests, public budgets, model-only sourcing, guarded supply quotes, net after all costs, cosmetic profile titles; current client delivery/continuity tests | Implemented and tested; no profit guarantee or economic reward from titles |
+| Selective repair planning | 183-test repair checkpoint, six repair/language UI regressions and actual large-type combined repair; current unit suite now has 186 tests | Implemented; original findings, hidden faults and ordinary sale choices preserved |
+| Safe sale repricing | 186 unit tests; six iOS 26 UI regressions and corrected large Turkish iOS 27 case; exact amounts and consequence preview | Same-price saves preserve offers, replies and scheduled interest; real edits retain expiry and traffic |
+| Existing mechanics and navigation improved | Career/expertise consolidation, active Sales queue, prioritized handoffs, shorter seller replies, accessible lower actions, loss/recovery/offline-return regressions | Automated acceptance passed on iOS 26 and 27 |
+| Existing careers and saved truth preserved | Shop-refund/feature-cleanup migrations, atomic backup/confirmed restore tests, legacy career access and client continuity | Automated acceptance passed; no production save reset |
+| Missing/faulty visuals addressed | 80 catalog mappings / 56 packaged photographs; 17 new household models, five dedicated electronics/camera models, corrected controller; generation provenance and inspected contact sheet | Complete catalog photo coverage; family sharing is explicit, not 80 unique photos |
+| Existing languages reviewed and new languages added | Six enabled catalogs / 926 complete keys; German/French product-name corrections; English/Turkish copy review; Spanish/Italian authored throughout; standard and large-text journeys | Automated completeness/runtime passed; external native-speaker editorial acceptance unobserved |
+| Normal release configuration works | Current unsigned iPhone archive; Release simulator build installed/launched with no test arguments; actual Turkish Market screenshot | Build/launch/render passed; not physical acceptance |
+| Current packaged content matches source | Source/resource hashes rechecked with no differences; archive checker compares all 926 keys across all six compiled catalogs and rejects stale text | Passed; current archive contains support email and explicit offline switch |
+| Privacy, support and store materials prepared | Privacy manifest, offline screens, packaged contact link; six metadata locales, reviewer notes, 30 original gameplay PNGs and 15-file static Pages ZIP | Prepared and inspected |
+| Reachable public privacy/support URLs | Publisher.json still has null URLs; release checker rejects missing bundle URLs | Not complete — owner deferred publication |
+| Signed/provisioned physical release | Current archive fails signature gate; no signed device acceptance or upload is claimed | Not complete — owner deferred Apple account/signing |
+| App Store account fields, final naming/content-rights review, validation/submission | Publisher instructions and reviewer package exist; no authenticated App Store Connect evidence or submission exists | Not complete — requires publisher/account actions |
+| Fun, fairness and physical interaction | Headless strategies, repeated-trade/loss/repair UI journeys and human playtest guide exist | Human free play, physical sound/haptics/VoiceOver remain unobserved |
 
-The numbered master brief (0–56) remains authoritative; this index groups requirements for tracking and does not remove, narrow or replace them. App Store account/signing, final brand clearance and human enjoyment cannot be inferred from local green tests.
+## Evidence retained with the candidate
+
+- [Full broad checkpoint](../../Artifacts/ReleaseCandidate-2026-10-24/verification/broad-expanded27/summary.json): 256 passed, zero failures/skips/runtime warnings. Its test snapshot predates final budget/copy/publisher changes.
+- [Earlier core/client checkpoint](../../Artifacts/ReleaseCandidate-2026-10-24/verification/final-core26/summary.json): 187 passed, including all 179 then-current unit tests and eight UI journeys.
+- [Language/touch-target checkpoint](../../Artifacts/ReleaseCandidate-2026-10-24/verification/final-locales-and-touch27/summary.json): 15 passed.
+- [Final small-screen hint correction](../../Artifacts/ReleaseCandidate-2026-10-24/verification/final-client-layout26/summary.json): 1 passed; frame and actual screenshot inspected.
+- [Candidate package index](../../Artifacts/ReleaseCandidate-2026-10-24/README.md), [archive facts](../../Artifacts/ReleaseCandidate-2026-10-24/archive-review.json), [remaining release gates](../../Artifacts/ReleaseCandidate-2026-10-24/release-gates.txt).
+
+These overlapping checkpoints are not summed into a unique-test count. The failed release gate is expected while the explicit owner deferrals remain; bypassing it, inserting guessed URLs, signing with another identity, or claiming human acceptance would not complete the objective.
+
+## Integrated acceptance — 25 October 2026
+
+The unchanged current source passed `Scripts/verify.sh` test phase on iPhone 18 Pro / iOS 27.2: **271 tests (186 unit and 85 UI), zero failures, zero skips and no recorded runtime warnings**. This includes all current repair planning, price revision, six-language trades, actual large-text journeys, concurrent/repeated trading, loss/recovery, save restoration, notifications, client sourcing and navigation checks. Full durable evidence is in `verification/integrated-final27/` beside this candidate; the repository links to it under `../../Artifacts/ReleaseCandidate-2026-10-24/verification/integrated-final27/`. Earlier checkpoints overlap this result and must not be added to it. The prior temporary integration attempt was interrupted and is not counted as completed acceptance. Source hashes match the tested code.
+
+The test result establishes automated simulator acceptance, not unassisted human enjoyment or physical-device haptic/VoiceOver acceptance. GitHub Pages publication, Apple signing/provisioning and App Store account/submission gates remain open as documented.
+
+The same verification command also completed the generic unsigned device Release build successfully (`verification/integrated-final27/release.log`). The archive gate still validates all 926 keys and reports only the deferred public URLs and publisher signature. No production source change followed this integrated run.

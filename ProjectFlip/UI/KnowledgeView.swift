@@ -1,15 +1,16 @@
 import SwiftUI
 
-struct KnowledgeView: View {
+struct KnowledgeContent: View {
     let store: GameStore
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
 
     var body: some View {
-        GameList {
+        VStack(alignment: .leading, spacing: 16) {
             Text("knowledge.explanation").foregroundStyle(GameStyle.secondaryText)
             ForEach(store.playableCategories, id: \.self) { category in
-                Section(GameText.string("category.\(category.rawValue)", locale: locale)) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(GameText.string("category.\(category.rawValue)", locale: locale)).font(.headline)
                     KnowledgeSummary(knowledge: store.snapshot.inspectionKnowledge, category: category)
                     Text(GameText.string("knowledge.clues.\(category.rawValue)", locale: locale))
                     Text(GameText.string("knowledge.tools.\(category.rawValue)", locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
@@ -22,9 +23,9 @@ struct KnowledgeView: View {
                             store.perform { try store.buyInspectionTools(for: category) }
                         }.accessibilityIdentifier("buyTools.\(category.rawValue)")
                     }
-                }
+                }.gameCard()
             }
-        }.gameScreen().navigationTitle("knowledge.title")
+        }
     }
 }
 
@@ -42,4 +43,9 @@ struct KnowledgeSummary: View {
         Text("knowledge.endorsement").font(.caption).foregroundStyle(GameStyle.secondaryText)
         LabeledContent("knowledge.experience") { Text(knowledge.points(in: category), format: .number).accessibilityIdentifier("knowledgePoints.\(category.rawValue)") }
     }
+}
+
+struct KnowledgeView: View {
+    let store: GameStore
+    var body: some View { TraderCareerView(store: store) }
 }

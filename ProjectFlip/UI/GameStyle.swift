@@ -6,18 +6,20 @@ struct GameTheme: ViewModifier {
     func body(content: Content) -> some View {
         content.preferredColorScheme(.dark).environment(\.colorScheme, .dark)
             .tint(GameStyle.gain)
+            .foregroundStyle(GameStyle.paper)
             .background(GameStyle.ink)
     }
 }
 
-/// Midnight trading desk: deep blue panels, mint instruments and amber actions.
+/// A quiet charcoal surface, warm paper type and restrained sage accents.
 enum GameStyle {
     static let ink = Color("LaunchBackground")
-    static let panel = Color(red: 0.085, green: 0.13, blue: 0.19)
-    static let panelTop = Color(red: 0.12, green: 0.19, blue: 0.26)
-    static let secondaryText = Color(red: 0.74, green: 0.80, blue: 0.86)
-    static let line = Color(red: 0.25, green: 0.39, blue: 0.47)
-    static let amber = Color(red: 1.0, green: 0.70, blue: 0.32)
+    static let panel = Color(red: 0.105, green: 0.122, blue: 0.115)
+    static let panelTop = Color(red: 0.14, green: 0.16, blue: 0.145)
+    static let paper = Color(red: 0.95, green: 0.94, blue: 0.88)
+    static let secondaryText = Color(red: 0.71, green: 0.75, blue: 0.71)
+    static let line = Color(red: 0.28, green: 0.32, blue: 0.29)
+    static let amber = Color(red: 0.96, green: 0.75, blue: 0.46)
     static let gain = Color("AccentColor")
     static let loss = Color("LossColor")
     static func category(_ category: ItemCategory) -> Color {
@@ -53,13 +55,9 @@ extension View {
 private struct GameCardStyle: ViewModifier {
     var accent: Color?
     func body(content: Content) -> some View {
-        content.padding(16)
-            .background(LinearGradient(colors: [GameStyle.panelTop, GameStyle.panel], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 18))
-            .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(accent?.opacity(0.65) ?? GameStyle.line.opacity(0.65), lineWidth: 1))
-            .overlay(alignment: .topLeading) {
-                Capsule().fill(accent ?? GameStyle.gain.opacity(0.7)).frame(width: 28, height: 3).padding(.leading, 18)
-            }
-            .background(RoundedRectangle(cornerRadius: 18).fill(.black.opacity(0.45)).offset(y: 5))
+        content.padding(18)
+            .background(GameStyle.panel, in: RoundedRectangle(cornerRadius: 20))
+            .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(accent?.opacity(0.25) ?? GameStyle.line.opacity(0.45), lineWidth: 0.75))
             .gameEntrance()
     }
 }
@@ -67,6 +65,8 @@ private struct GameCardStyle: ViewModifier {
 private struct GameScreenStyle: ViewModifier {
     func body(content: Content) -> some View {
         content.scrollContentBackground(.hidden)
+            // Final actions must scroll above both the custom dock and native navigation chrome.
+            .contentMargins(.bottom, GameDock.scrollClearance, for: .scrollContent)
             .background { GameBackdrop().ignoresSafeArea() }
             .toolbarBackground(.hidden, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -74,22 +74,12 @@ private struct GameScreenStyle: ViewModifier {
     }
 }
 
-/// A static instrument grid gives screens a game-world surface, with no render timer.
+/// Static depth without a grid or per-frame rendering work.
 struct GameBackdrop: View {
     var body: some View {
-        ZStack {
-            LinearGradient(colors: [Color(red: 0.07, green: 0.13, blue: 0.20), GameStyle.ink], startPoint: .topLeading, endPoint: .bottomTrailing)
-            Canvas { context, size in
-                var grid = Path()
-                for x in stride(from: CGFloat(0), through: size.width, by: 36) { grid.move(to: CGPoint(x: x, y: 0)); grid.addLine(to: CGPoint(x: x, y: size.height)) }
-                for y in stride(from: CGFloat(0), through: size.height, by: 36) { grid.move(to: CGPoint(x: 0, y: y)); grid.addLine(to: CGPoint(x: size.width, y: y)) }
-                context.stroke(grid, with: .color(GameStyle.gain.opacity(0.035)), lineWidth: 0.5)
-                for index in 0..<18 {
-                    let x = CGFloat((index * 97 + 13) % 400) / 400 * size.width
-                    let y = CGFloat((index * 131 + 37) % 850) / 850 * size.height
-                    context.fill(Path(ellipseIn: CGRect(x: x, y: y, width: 2, height: 2)), with: .color(GameStyle.gain.opacity(0.16)))
-                }
-            }
+        ZStack(alignment: .topTrailing) {
+            GameStyle.ink
+            RadialGradient(colors: [GameStyle.gain.opacity(0.055), .clear], center: .topTrailing, startRadius: 0, endRadius: 500)
         }.accessibilityHidden(true).allowsHitTesting(false)
     }
 }
@@ -99,16 +89,14 @@ struct GameButton: ButtonStyle {
     @Environment(\.isEnabled) private var enabled
     @GameReduceMotion private var reduceMotion
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label.font(.system(.headline, design: .rounded, weight: .heavy))
-            .frame(maxWidth: .infinity).padding(.vertical, 16).padding(.horizontal, 12)
-            .foregroundStyle(secondary ? Color.primary : GameStyle.ink)
-            .background(LinearGradient(colors: secondary ? [Color.primary.opacity(0.05), Color.primary.opacity(0.08)] : [GameStyle.amber, Color(red: 0.98, green: 0.60, blue: 0.23)], startPoint: .top, endPoint: .bottom), in: RoundedRectangle(cornerRadius: 17))
-            .overlay(RoundedRectangle(cornerRadius: 17).strokeBorder(secondary ? Color.primary.opacity(0.22) : .white.opacity(0.35), lineWidth: 1))
-            .background(RoundedRectangle(cornerRadius: 17).fill(secondary ? Color.primary.opacity(0.12) : Color(red: 0.56, green: 0.28, blue: 0.08)).offset(y: configuration.isPressed ? 1 : 4))
-            .opacity(enabled ? 1 : 0.45)
-            .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .offset(y: configuration.isPressed ? 2 : 0)
-            .animation(reduceMotion ? nil : .spring(response: 0.24, dampingFraction: 0.6), value: configuration.isPressed)
+        configuration.label.font(.system(.headline, design: .default, weight: .semibold))
+            .frame(maxWidth: .infinity).padding(.vertical, 16).padding(.horizontal, 16)
+            .foregroundStyle(secondary ? GameStyle.paper : GameStyle.ink)
+            .background(secondary ? GameStyle.panelTop : GameStyle.gain, in: RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(secondary ? GameStyle.line.opacity(0.75) : .clear, lineWidth: 0.75))
+            .opacity(enabled ? 1 : 0.4)
+            .scaleEffect(configuration.isPressed ? 0.985 : 1)
+            .animation(reduceMotion ? nil : .easeOut(duration: 0.16), value: configuration.isPressed)
     }
 }
 
@@ -124,7 +112,7 @@ struct GameEyebrow: View {
     @Environment(\.locale) private var locale
     @Environment(\.marketConfiguration) private var market
     var body: some View {
-        Text(GameText.string(key, locale: locale)).font(.caption2.weight(.heavy)).tracking(1.5).foregroundStyle(GameStyle.gain)
+        Text(GameText.string(key, locale: locale)).font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(GameStyle.gain)
     }
 }
 
@@ -206,7 +194,7 @@ struct GameStageBanner: View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 7) {
                 GameEyebrow(key: eyebrowKey)
-                Text(LocalizedStringKey(titleKey)).font(.system(.title2, design: .rounded, weight: .black))
+                Text(LocalizedStringKey(titleKey)).font(.system(.title2, design: .default, weight: .bold))
             }
             Spacer(minLength: 0)
             Image(systemName: symbol).font(.system(size: 32, weight: .bold)).foregroundStyle(color)

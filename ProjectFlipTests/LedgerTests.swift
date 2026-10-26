@@ -12,7 +12,7 @@ struct LedgerTests {
         let repository = SaveRepository(url: root.appendingPathComponent("save.json"))
         for index in 0..<5 {
             let listing = state.market[index]
-            state.conversations.append(try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience), reputation: 50))
+            state.conversations.append(try NegotiationEngine().offer(listing.askingPrice, modifier: .none, listing: listing, current: NegotiationState(listingID: listing.id, patience: listing.seller.patience)))
             state = try PurchaseEngine().buy(listingID: listing.id, state: state, now: .distantPast)
             state = try InspectionEngine().inspect(itemID: listing.item.id, professionally: index % 2 == 1, state: state)
             let value = try PricingEngine.fairValue(of: listing.item, definition: definitions[index])

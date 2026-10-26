@@ -2,12 +2,13 @@ import Foundation
 
 struct SimulationActions {
     let timing: SimulationTiming
+    var definitions: [ItemDefinition]? = nil
 
     func offer(listingID: ListingID, amount: Money, modifier: OfferModifier, state: GameSnapshot, now: Date) throws -> GameSnapshot {
         let listing = try listing(listingID, in: state)
         let current = conversation(listing, in: state)
         guard current.pendingReplyEventID == nil else { throw TradingError.alreadyDone }
-        let reply = try NegotiationEngine().offer(amount, modifier: modifier, listing: listing, current: current, reputation: state.player.reputation)
+        let reply = try NegotiationEngine().offer(amount, modifier: modifier, listing: listing, current: current)
         return try bookReply(reply, current: current, state: state, now: now, seller: listing.seller)
     }
 
@@ -18,7 +19,10 @@ struct SimulationActions {
         return try bookReply(NegotiationEngine().askAboutIssues(listing: listing, current: current), current: current, state: state, now: now, seller: listing.seller)
     }
 
-    private func stateDefinition(_ id: String) -> ItemDefinition? { try? SeedContent.load().items.first { $0.id == id } }
+    private func stateDefinition(_ id: String) -> ItemDefinition? {
+        let catalog = definitions ?? (try? SeedContent.load().items) ?? []
+        return catalog.first { $0.id == id }
+    }
 
     func purchase(listingID: ListingID, state: GameSnapshot, now: Date) throws -> GameSnapshot {
         guard state.player.inventory.count + state.shipments.filter({ $0.status == .pending }).count < state.player.inventoryCapacity else { throw TradingError.inventoryFull }
@@ -63,6 +67,7 @@ struct SimulationActions {
 
     func changePrice(listingID: ListingID, amount: Money, state: GameSnapshot, definitions: [ItemDefinition], now: Date) throws -> GameSnapshot {
         var next = try BuyerEngine().changePrice(listingID: listingID, amount: amount, state: state)
+        guard next != state else { return state }
         for index in next.events.indices where next.events[index].status == .pending && next.events[index].payload.targetID == listingID.rawValue {
             next.events[index].status = .cancelled
         }

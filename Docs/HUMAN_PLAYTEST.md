@@ -1,7 +1,7 @@
 # Unscripted human playtest
 
 Purpose: find out whether the existing trading loop survives repetition. This
-session does not authorize any new V1 feature work. Automated scenarios establish
+session records the current release candidate. Automated scenarios establish
 working behavior; the answers below must come from a person playing freely.
 
 ## Prepare
@@ -41,7 +41,7 @@ sessions, then decide whether you actually want another. Ask questions, bargain,
 hold or sell as-is as you wish. A loss is a useful observation, not a failed test.
 Do not require every scenario or teach a strategy in the first session.
 
-After the brief introduction, new seller replies sample 15–35 seconds before
+After the brief introduction, new seller replies sample 3–7 seconds before
 urgency scaling. New delivery takes roughly 36–84 seconds and is included in the
 agreed price; expert reports take 90 seconds. Existing booked deadlines remain
 unchanged. Repairs remain immediate quoted decisions. Buyer observations sample
@@ -75,9 +75,12 @@ can be explored in later sessions without changing the economy or forcing outcom
 | Repeated browsing and multiple completed trades | | |
 | Several pending trade processes at once | | |
 | Traffic/favorites without an offer; expiry, repricing or withdrawal | | |
-| Seller picture versus earned inspection evidence | | |
+| Seller claims versus earned inspection evidence | | |
 | Offline return and catch-up report | | |
 | Actual notification return | | |
+| Client model search versus unverified seller condition | | |
+| Client budget versus purchase/report/repair costs and normal resale | | |
+| Finishing a client story and choosing a cosmetic title | | |
 
 ## Ask before revealing simulation state
 
@@ -103,12 +106,12 @@ observed” is a valid answer; do not replace it with an automated-test conclusi
 17. Could you keep making useful decisions while another trade was pending?
 18. Did views, favorites and buyer interest feel believable and responsive to price?
 19. Did the uncertain price range help your judgment without solving the decision?
-20. Did the listing picture and inspection picture communicate condition clearly?
+20. Could you distinguish the illustrative product photo from actual condition findings?
 
 ## Record only what is needed
 
 No analytics SDK or logging service is needed. Use the existing cash/inventory
-views and Profile → Trade history to record starting/ending cash, completed trade
+views and Sales → Trade history to record starting/ending cash, completed trade
 count, wins/losses, inspection/repair charges and net results. Cash change alone
 is not profit: unsold goods, incoming purchases and diagnostic-kit spending can
 account for the difference.
@@ -117,12 +120,11 @@ account for the difference.
 | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | |
 
-Existing DEBUG tools can reveal simulation truth after the interview. If using a
-Release session, retain its save for later developer inspection rather than
-changing builds or editing the save during play. Keep this material away from
+Retain the session save for developer inspection after the interview rather than
+changing builds or editing the save during play. Normal player builds expose no
+truth/debug tools. Keep this material away from
 the player until their unprompted answers are recorded. Do not grant money to
 rescue a stalled session; record the cause and stop if necessary.
 
 Report observations, help required, blockers and hypotheses separately. Decide
-the next change from actual observations. Progression, Game Center, monetization,
-collections, client requests and other new systems remain paused.
+the next change from actual observations. Online Game Center and monetization are outside this release candidate. The six shipping languages, career, eighteen client requests, cosmetic titles and local Weekly Flip are available to observe as they unlock.

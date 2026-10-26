@@ -18,10 +18,10 @@ struct CompetitionView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                GameStageBanner(titleKey: "competition.weekly", eyebrowKey: "competition.leaderboard", symbol: "trophy.fill", color: GameStyle.amber)
+                GameStageBanner(titleKey: "competition.weekly", eyebrowKey: "competition.challengeContext", symbol: "trophy.fill", color: GameStyle.amber)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("competition.score").font(.headline)
-                    Text((run?.score ?? Int64(0)).formatted(.number.locale(locale))).font(.system(.largeTitle, design: .rounded, weight: .black))
+                    Text((run?.score ?? Int64(0)).formatted(.number.locale(locale))).font(.system(.largeTitle, design: .default, weight: .bold))
                         .foregroundStyle(GameStyle.amber).accessibilityIdentifier("weeklyScore")
                     LabeledContent("competition.timeLeft") {
                         Text(Duration.seconds(max(0, period.end.timeIntervalSince(now))), format: .units(allowed: [.days, .hours, .minutes], width: .abbreviated))
@@ -52,6 +52,7 @@ struct CompetitionView: View {
                     Button("competition.finish") { confirmFinish = true }.buttonStyle(GameButton(secondary: true)).accessibilityIdentifier("finalizeWeekly")
                     Text("competition.finishHint").font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }
+                if service.onlineEnabled {
                 VStack(alignment: .leading, spacing: 12) {
                     Label(GameText.string(service.statusKey, locale: locale), systemImage: service.playerID == nil ? "network.slash" : "person.crop.circle.badge.checkmark")
                         .font(.subheadline)
@@ -67,6 +68,9 @@ struct CompetitionView: View {
                     }
                     Text(GameText.string(run?.clockSuspect == true ? "competition.clock" : competition.syncKey, locale: locale)).font(.caption).foregroundStyle(GameStyle.secondaryText)
                 }.gameCard()
+                } else {
+                    Text("competition.localOnly").font(.caption).foregroundStyle(GameStyle.secondaryText).gameCard().accessibilityIdentifier("localCompetition")
+                }
                 if let error = competition.errorKey { Text(GameText.string(error, locale: locale)).foregroundStyle(GameStyle.loss).accessibilityIdentifier("competitionError") }
                 achievementPanel
                 let previous = competition.saved.runs.filter { $0.period.index < period.index }.sorted { $0.period.index > $1.period.index }
@@ -123,7 +127,7 @@ struct CompetitionView: View {
     private var achievementPanel: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("competition.achievements").font(.title2.bold())
-            ForEach(TradingAchievement.allCases, id: \.rawValue) { achievement in
+            ForEach(TradingAchievement.available, id: \.rawValue) { achievement in
                 let percent = competition.saved.achievements.progress[CompetitionIDs.achievement(achievement), default: 0]
                 VStack(alignment: .leading, spacing: 8) {
                     Label(GameText.string(achievement.titleKey, locale: locale), systemImage: percent >= 100 ? "checkmark.seal.fill" : "seal")

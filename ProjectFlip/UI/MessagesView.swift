@@ -32,7 +32,7 @@ struct MessagesView: View {
                 Picker("messages.filter", selection: $archived) {
                     Text("messages.active").tag(false)
                     Text("messages.archive").tag(true)
-                }.pickerStyle(.segmented)
+                }.pickerStyle(.segmented).accessibilityIdentifier("messageFilter")
                 let conversations = InboxOrder.sorted(store.snapshot, archived: archived)
                 if conversations.isEmpty {
                     Text(archived ? "messages.archiveEmpty" : "messages.empty").foregroundStyle(GameStyle.secondaryText).padding(.vertical)

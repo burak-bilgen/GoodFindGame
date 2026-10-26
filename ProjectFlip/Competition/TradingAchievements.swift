@@ -2,8 +2,10 @@ import Foundation
 
 /// All eligibility comes from persisted gameplay facts; no ad, payment or permission goals.
 enum TradingAchievement: String, Codable, CaseIterable {
+    // collector remains decodable for historical achievement journals only.
     case firstFlip, naturalTrader, thatHurt, detective, negotiator, collector
     case trustedTrader, specialist, bigLeague, comeback, versatile, weeklyFinisher
+    static var available: [Self] { allCases.filter { $0 != .collector } }
     var titleKey: String { "achievement.\(rawValue).title" }
     var detailKey: String { "achievement.\(rawValue).detail" }
 }
@@ -26,7 +28,6 @@ enum AchievementEngine {
                   let threshold = try? listing.askingPrice.scaled(byBasisPoints: 8_000) else { return false }
             return item.purchasePrice <= threshold
         } ? 1 : 0)
-        add(.collector, state.collections.completedBefore.count)
         add(.trustedTrader, state.career.creditedItems.count, 10)
         add(.specialist, ItemCategory.allCases.map { state.inspectionKnowledge.level(in: $0) }.max() ?? 0, 3)
         add(.bigLeague, state.career.tier(knowledge: state.inspectionKnowledge) == .trusted ? 1 : 0)

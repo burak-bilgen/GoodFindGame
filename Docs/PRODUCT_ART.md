@@ -1,5 +1,9 @@
 # Generated marketplace photography
 
+> Current 25 October [visual refresh](DESIGN_REFRESH_2026_10_25.md) revises five shared photo families; its [provenance](ART_REFRESH_2026_10_25.json) supersedes those assets.
+
+> Historical 22 October checkpoint. The shipping game now uses one fixed photograph per mapped product, never a condition-dependent image. See [current artwork provenance](ART_RELEASE_2026_10_24.json) and [release readiness](RELEASE_READINESS.md). Package new photos with `Scripts/package_product_photo.swift`; the obsolete condition-atlas slicer has been removed to prevent reintroducing hidden-condition cues.
+
 The latest owner-requested correction is recorded in SELLER_PHOTO_CORRECTION.md.
 It replaces the uniform desk settings, adds stable alternate scenes, localizes
 short product-type names and uses square edge-to-edge photo frames. The following

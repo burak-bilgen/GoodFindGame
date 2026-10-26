@@ -23,7 +23,11 @@ struct ListingGenerator {
             let knowledge = archetype == .clueless ? 20 : (archetype == .professional ? 95 : random.integer(in: 35...80))
             let honesty = archetype == .manipulative ? 15 : random.integer(in: 65...100)
             let urgency = archetype == .urgent ? 95 : random.integer(in: 10...70)
-            let seller = SellerProfile(id: SellerID("seller-\(seed)-\(index)"), identityIndex: identityIndex, archetype: archetype, knowledge: knowledge, honesty: honesty, urgency: urgency, bargainingSkill: random.integer(in: 30...90), patience: random.integer(in: 45...90), tradeCount: random.integer(in: 1...140), ratingTenths: random.integer(in: 35...50))
+            let seller = SellerProfile(id: SellerID("seller-\(seed)-\(index)"), identityIndex: identityIndex, archetype: archetype, knowledge: knowledge, honesty: honesty, urgency: urgency, bargainingSkill: random.integer(in: 30...90), patience: random.integer(in: 45...90))
+            // Keep the established random stream for condition and hidden facts.
+            // Retired decorative seller metrics no longer appear in the model or UI.
+            _ = random.integer(in: 1...140)
+            _ = random.integer(in: 35...50)
             // One existing, novice-detectable fault teaches the first repair-or-sell choice.
             // No additional random draw: all later stock keeps its existing stream.
             let starterLesson = starterFriendly && index == 0 && definition.possibleDefects.contains(.damagedPort)

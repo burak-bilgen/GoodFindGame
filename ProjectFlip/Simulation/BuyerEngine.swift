@@ -15,12 +15,11 @@ struct BuyerEngine {
         guard listing.askingPrice <= (try fair.scaled(byBasisPoints: 25_000)) else { return state }
         let introduction = state.playerListings.first?.id == listing.id && listing.offers.isEmpty
         var random = SeededRandom(seed: SeededRandom.seed(for: "buyer-\(state.simulationID)-\(listing.id.rawValue)-\(listing.offers.count)-\(state.nextEventSequence)"))
-        let audience = ShopEngine.audience(for: listing, state: state, definitions: definitions) ?? BuyerArchetype.marketAudience
+        let audience = BuyerArchetype.marketAudience
         let archetype = introduction ? BuyerArchetype.cautious : audience[random.integer(in: 0...(audience.count - 1))]
-        let reputationFactor = Int64(10_000)
         let premium: Int64 = archetype == .collector && item.condition >= 90 ? 1_100 : 0
         let variation = introduction ? 0 : Int64(random.integer(in: -500...900))
-        let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints + variation + premium).scaled(byBasisPoints: reputationFactor)
+        let budget = try fair.scaled(byBasisPoints: archetype.valueBasisPoints + variation + premium)
         let opening: ClosedRange<Int> = switch archetype {
         case .lowballer: 5_000...7_000
         case .bargainHunter: 7_000...8_500
@@ -30,10 +29,11 @@ struct BuyerEngine {
         case .collector: 9_300...10_300
         }
         let proposed = min(try listing.askingPrice.scaled(byBasisPoints: introduction ? 9_500 : Int64(random.integer(in: opening))), budget)
+        let offerID = OfferID("\(listing.id.rawValue)-buyer-\(listing.offers.count)")
         var next = state
-        next.playerListings[index].offers.append(BuyerOffer(id: OfferID("\(listing.id.rawValue)-buyer-\(listing.offers.count)"), archetype: archetype, identityIndex: (listing.offers.count + 3) % 10, willingness: budget, amount: proposed))
+        next.playerListings[index].offers.append(BuyerOffer(id: offerID, archetype: archetype, identityIndex: introduction ? 3 : Int(SeededRandom.seed(for: "buyer-identity-\(state.simulationID)-\(offerID.rawValue)") % 10), willingness: budget, amount: proposed))
         next.playerListings[index].itemSnapshot = item
-        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: "buyer.offer.\(archetype.rawValue)", fromPlayer: false, amount: proposed))
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listing.id.rawValue)-\(listing.messages.count)", intent: BuyerSpeech.opening(archetype: archetype, offerID: offerID), fromPlayer: false, amount: proposed))
         next.playerListings[index].views += 3
         return next
     }
@@ -108,11 +108,13 @@ struct BuyerEngine {
     func changePrice(listingID: ListingID, amount: Money, state: GameSnapshot) throws -> GameSnapshot {
         guard amount > .zero, amount.minorUnits <= GameBalanceConfig.current.maximumTransactionAmount.minorUnits else { throw TradingError.invalidAmount }
         let index = try activeIndex(listingID, in: state)
+        guard state.playerListings[index].askingPrice != amount else { return state }
         var next = state
         next.playerListings[index].askingPrice = amount
         for offerIndex in next.playerListings[index].offers.indices where [.pending, .countered].contains(next.playerListings[index].offers[offerIndex].status) {
             next.playerListings[index].offers[offerIndex].status = .withdrawn
         }
+        next.playerListings[index].messages.append(DialogueMessage(id: "\(listingID.rawValue)-\(state.playerListings[index].messages.count)", intent: "player.changedPrice", fromPlayer: true, amount: amount))
         return next
     }
 
@@ -129,7 +131,6 @@ struct BuyerEngine {
         next.playerListings[index].itemSnapshot = state.player.inventory[itemIndex]
         next.playerListings[index].soldPrice = amount
         next.playerListings[index].soldAt = now
-        ShopEngine.recordSale(listing.id, state: &next)
         next.playerListings[index].status = .sold
         next.playerListings[index].offers[offerIndex].status = .accepted
         next.playerListings[index].offers[offerIndex].amount = amount

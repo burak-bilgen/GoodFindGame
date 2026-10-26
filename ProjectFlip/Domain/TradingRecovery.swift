@@ -13,7 +13,7 @@ enum RecoveryEngine {
     static func canBegin(_ state: GameSnapshot) -> Bool {
         state.player.cash < capitalFloor && state.recovery.itemID == nil &&
         !state.shipments.contains { $0.status == .pending } &&
-        state.player.inventory.allSatisfy { state.collections.displayed.contains($0.id) } &&
+        state.player.inventory.isEmpty &&
         state.player.inventory.count < state.player.inventoryCapacity
     }
     static func begin(state: GameSnapshot, definitions: [ItemDefinition], now: Date) throws -> GameSnapshot {
@@ -58,7 +58,7 @@ enum RecoveryEngine {
     }
     static func validate(_ state: GameSnapshot) throws {
         guard state.recovery.commissionsEarned >= .zero,
-              state.recovery.itemID.map({ id in state.player.inventory.contains { $0.id == id && $0.purchasePrice == .zero } && !state.collections.displayed.contains(id) && !state.playerListings.contains { $0.itemID == id && $0.status == .active } }) ?? true else { throw SaveError.invalidSave }
+              state.recovery.itemID.map({ id in state.player.inventory.contains { $0.id == id && $0.purchasePrice == .zero } && !state.playerListings.contains { $0.itemID == id && $0.status == .active } }) ?? true else { throw SaveError.invalidSave }
     }
 }
 

@@ -1,40 +1,43 @@
 # Delivery and remaining work
 
-Updated 2026-10-23 after the commercial quality pass. Current approved scope keeps photo generation stopped and unphotographed products paused. Implementation, external acceptance and optional expansions are separated below.
+Current-source update: [gameplay expansion](GAMEPLAY_EXPANSION_2026_10_25.md) supersedes the checkpoint counts below. It records the new notebook/price/client mechanics, 940 text keys, all 202 unit tests and focused UI evidence. The older complete-suite results remain historical.
+
+Updated 24 October 2026. The owner’s App Store preparation request supersedes earlier photo-generation pauses. Current evidence is maintained in [release readiness](RELEASE_READINESS.md); older test counts and feature lists describe their own checkpoints.
 
 ## Implemented
 
-- [x] Career shop: paid opening after three completed sales, three specializations, limited curated window, paid capacity growth earned through window sales. Existing buyer budgets and firm offers remain authoritative.
-- [x] Catalog: 80 definitions retained for save compatibility; 63 photographed products eligible for new listings. The remaining 17 are paused and copied as comments in `DEFERRED_PRODUCTS.jsonc`. They do not appear in new feeds or market search. Existing owned items and agreements remain usable.
-- [x] One fixed photo per product mapping. No cosmetic-condition image variants or inspection-photo comparison. Some older models share family photography. Twelve additional household photos packaged at 768px JPEG; no more generation authorized.
-- [x] Twenty-four authored seller voices; stable item facts and prices.
-- [x] Settings consolidated; player-facing Developer tools removed. Minimum deployment iOS 26 for all targets.
-- [x] Active-tab reselection returns that tab to its root/top; switching tabs preserves other tabs. Reselection recreates the selected root, so its local filters reset.
-- [x] Inbox: persisted activity/read state, actionable replies before recency, buyer offers needing attention at top, closed conversations in Archive. Legacy undated conversations retain their relative order and are not marked unread merely by migration.
-- [x] Inventory: compact shipment/stock rows, capacity and status filters. Large photos stay on detail screens.
-- [x] Removed duplicate title banners in Messages, Inventory, Shop, Settings, Career, Clients, Selling and Recovery. The weekly competition keeps its distinct challenge identity.
-- [x] Local profile name, four avatar choices and earned display-title selection. Persisted independently of career/weekly save files and Game Center; shop name and earned rank remain distinct.
-- [x] Language and Apple AI research captured in `LANGUAGE_PRIORITIES.md` and `APPLE_AI_FEASIBILITY.md`.
+- Compact Market balance/career header and one prioritized handoff; Sales contains active listings, with completed receipts in History. Owned expired/withdrawn stock can be listed again from Inventory.
+- Shop, paid display upgrades, collections and numeric reputation removed. Old investments are refunded once; owned goods and existing agreements remain intact. Save migrations and validated previous-save recovery protect continuing careers.
+- All 80 products across six categories active, using 56 packaged square photographs. Seventeen new model photographs, five further dedicated electronics/camera images and a corrected controller image are recorded in the art manifest.
+- Career and expertise/tools combined; product access distributed across four stages with legacy access preserved. Seller rating/count decoration removed.
+- Production seller replies shortened to 3–7 seconds; other persisted work retains its distinct pacing. Catalog loading cached and purchase actions use the store’s supplied definitions.
+- Six enabled languages, adaptive layout, accessibility identifiers and native touch-target checks. The offer input now stays above the dock in its initial layout and accepts keyboard focus.
+- Offline privacy/support screens, privacy manifest, six-language store metadata, review notes, static publisher website and fail-closed release validation.
+- Local Weekly Flip and eleven active achievements. Online Game Center controls, authentication and network monitoring disabled until signed acceptance.
+- Local verification command, asset checks and GitHub Actions workflow; no remote execution claimed before pushing.
+- Superseded intermediate test bundles pruned with summaries, test trees and PNG evidence preserved.
 
-## Current quality and agent verification
+## Autonomous expansion authorized by owner
 
-- [x] Sustainable routine trading: public-information strategy regression, ordinary seller bargaining room and end-user buyer audience; meaningful risky wins/losses remain. No guaranteed profit.
-- [x] Public-evidence appraisal, compact decision hierarchy, career milestone prompts, useful pending/ready handoffs and loss-appropriate feedback.
-- [x] New session-scale timers, bounded fresh arrivals, legacy-deadline compatibility and paid-report/listing conflict protection.
-- [x] Four shipping languages with 895 complete keys; complete trade replays in English/Turkish/German/French, large Turkish, reduced motion, recovery, clients, collections, shop and offline/concurrent checks. See [quality evidence](QUALITY_PASS_2026_10_23.md).
-- [x] Shared dark-text palette, explicit trading touch targets and native core-market touch audit. Additional inspection/pricing/buyer controls passed their native touch audit. Large German/French trade replays and four-language screen-reader offer attention are covered. Large-text attention counts now adapt to rows without splitting digits; see the quality report for final follow-up evidence.
+- Six recurring contacts and eighteen connected requests across all product categories; compact contact rows and a pinned active request.
+- Public-model sourcing filter and listing hints. Matches do not reveal condition or certify a suitable purchase. An empty request search explains filter clearing, checking future stock and pausing for another request.
+- Direct supply from owned stock, visible net result, a receipt after delivery and protection against a silently changed client quote.
+- Six cosmetic client honors selectable as profile titles, preserving existing career-title identifiers.
+- Public budgets for the four new client storylines create sourcing tradeoffs; all delivery entry points show net result after costs.
+- Twelve additional opening lines across six buyer personalities in six languages, chosen independently of economic randomness and saved with the offer.
+- Complete Spanish/Italian catalogs alongside an editorial pass for obsolete or ambiguous English/Turkish/German/French copy. Six-language website/store metadata prepared.
+- Expanded broad acceptance passed 256 tests; final current-core iOS 26 passed 187 and language/touch-target iOS 27 passed 15. A later empty-state layout correction passed its focused regression. See the readiness record for snapshot boundaries.
 
-## External acceptance
+- Selective repair plans compare combined costs/value recovery, preserve unrepaired findings and apply the chosen work atomically at the reviewed total. All six languages supported; individual repairs remain available.
 
-- [ ] Human free play across first-session, loss/recovery and shop progression. Use [the current playtest guide](HUMAN_PLAYTEST.md); automated outcomes do not prove enjoyment or retention.
-- [ ] Physical-device sound/haptics, sustained performance and full VoiceOver use. Simulator checks cover behavior, layout and exposed accessibility properties. Minimum-iOS 26 runtime acceptance also remains open: this machine currently has iOS 27.2 runtimes only; deployment-target compilation is verified.
-- [ ] Native-speaker editorial acceptance in the four shipping languages. Authored translations and automated validation are complete.
-- [ ] Live Game Center: owner-account App Store Connect resources and signed sandbox verification. Local offline competition, optional authentication, achievements, identifiers and four-language metadata are implemented. See [setup](GAME_CENTER_SETUP.md).
+## Remaining acceptance and publisher gates
 
-## Deliberately deferred, not required closeout work
+- Publication is owner-deferred. Support email is configured as bilgenburak@outlook.com; public HTTPS privacy/support URLs remain unset until the prepared GitHub Pages site is published and verified.
+- Apple account/signing is owner-deferred. When resumed, provision an isolated Acceptance installation, run physical-device checks and sign/validate the release archive.
+- Observe unassisted human free play, physical sound/haptics and VoiceOver; obtain native-speaker editorial acceptance. Use the current playtest guide and record actual observations.
+- Complete App Store Connect account/agreements, store screenshots and submission. No upload or submission has occurred.
+- Final comprehensive and targeted simulator evidence is retained with the release candidate; see the readiness record for exact scope and the owner-deferred gates.
 
-- Seventeen paused products and additional photography: resume only on explicit owner instruction. No new image generation is authorized.
-- Additional languages (Japanese, Chinese scripts, Arabic/RTL; Hindi only with stronger audience evidence): not enabled or promised in current scope.
-- Optional Apple on-device text: researched, not implemented. No model download or hidden economy changes belong to current gameplay.
+## Later candidates
 
-Current simulator evidence is in [the quality report](QUALITY_PASS_2026_10_23.md); [CLOSEOUT_QA.md](CLOSEOUT_QA.md) describes an earlier milestone. Test counts are scoped to their recorded checkpoints, not a claim that every UI test was run in one final batch.
+Additional languages, Apple on-device text and online Game Center remain optional future work. Their research/setup documents do not promise them in this release.
