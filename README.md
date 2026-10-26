@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="ProjectFlip/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="112" alt="Pazlume app icon: a game controller in a resale box">
+  <img src="ProjectFlip/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="112" alt="Good Find app icon: a game controller in a resale box">
 </p>
 
-<h1 align="center">Pazlume</h1>
+<h1 align="center">Good Find: Buy, Fix &amp; Sell</h1>
 
-<p align="center"><strong>Find the overlooked. Inspect the risk. Make the next great trade.</strong></p>
-<p align="center">An offline secondhand trading game for iPhone, built with Swift and SwiftUI.</p>
+<p align="center"><strong>A Secondhand Trading Simulation Game</strong></p>
+<p align="center">Find the overlooked. Inspect the risk. Make the next great trade.<br>An offline iPhone game built with Swift and SwiftUI.</p>
 <p align="center">iOS 26+ · Swift 6 · Six languages · No ads or in-app purchases</p>
 
 <p align="center">
@@ -43,7 +43,7 @@ Available in **English, Turkish, German, French, Spanish and Italian**, with sup
 2. Select the **ProjectFlip** scheme and an iPhone simulator, then run.
 3. For a physical iPhone, configure your Apple development team and signing first.
 
-The public name is currently **Pazlume**. Internal target names, bundle identity and save paths retain **ProjectFlip** to preserve compatibility. New name candidates are tracked in [the naming shortlist](Docs/NAME_OPTIONS_2026_10_26.md).
+The GitHub project is **Good Find: Buy, Fix & Sell**, with the repository name **`good-find`**. The current app build still uses the earlier **Pazlume** display name; its Xcode target, bundle identity and save paths retain **ProjectFlip**. Dated release records keep the names used at their checkpoints.
 
 ## Verify
 
@@ -68,7 +68,7 @@ The latest gameplay checkpoint passed **202 unit tests**, with focused native UI
 
 ## Project status
 
-In development toward its first App Store release. A current unsigned device archive and store materials have been prepared locally. Public support/privacy deployment, Apple distribution signing and App Store submission are still pending.
+A game in development, prepared for sharing on GitHub. Local release preparation includes an unsigned iPhone archive and store materials; there is no published App Store release. Public support/privacy deployment, Apple distribution signing and submission remain deferred.
 
 [Documentation](Docs/INDEX.md) · [Development checklist](Docs/DEVELOPMENT_TODO.md) · [Release setup](Release/README.md) · [Playtest guide](Docs/HUMAN_PLAYTEST.md)
 

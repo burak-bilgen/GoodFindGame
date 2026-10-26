@@ -1,5 +1,9 @@
 # Game name options — 26 October 2026
 
+**Decision:** the owner rejected the invented shortlist and selected **Good Find: Buy, Fix & Sell**, with **A Secondhand Trading Simulation Game** as its descriptive line and `good-find` as the requested GitHub repository name. This decision applies to the GitHub identity/README. The existing app display name, bundle identity and save paths have not been changed. The collision checks below describe earlier rejected options; they do not establish clearance or availability for Good Find.
+
+## Earlier exploration (superseded)
+
 The owner requested alternatives to Pazlume before choosing a new name. No alternative has been applied. Existing bundle identifiers, save paths, source folders and account settings remain unchanged.
 
 ## Shortlist
